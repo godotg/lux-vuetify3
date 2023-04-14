@@ -18,7 +18,8 @@ class MyWebsocket {
 }
 
 export const websocket = new MyWebsocket();
-websocket.wsUrl = "ws://127.0.0.1:19001/websocket";
+
+websocket.wsUrl = import.meta.env.VITE_API_BASE_URL;
 
 
 // 每30秒发送一次心跳包
