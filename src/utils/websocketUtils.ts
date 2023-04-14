@@ -1,85 +1,84 @@
 import ByteBuffer from '@/protocol/buffer/ByteBuffer';
+import SignalAttachment from '@/protocol/attachment/SignalAttachment';
 import ProtocolManager from '@/protocol/ProtocolManager.js';
 import Error from '@/protocol/common/Error.js';
 import Message from '@/protocol/common/Message.js';
 import Ping from '@/protocol/common/Ping';
 import Pong from '@/protocol/common/Pong';
-import _ from "lodash";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 
 const snackbarStore = useSnackbarStore();
 
 
-class MyWebsocket {
-  ws: WebSocket | null = null;
-  token: string | null = null;
-  wsUrl: string = "";
-  serverTime: number = new Date().getTime();
-}
+const wsUrl: string = import.meta.env.VITE_API_BASE_URL;
+let pingTime: number = 0;
+let ws: WebSocket = connect("init websocket");
+let uuid: number = 0;
 
-export const websocket = new MyWebsocket();
-
-websocket.wsUrl = import.meta.env.VITE_API_BASE_URL;
-
+const signalAttachmentMap: Map<number, EncodedPacketInfo> = new Map<number, EncodedPacketInfo>();
 
 // 每30秒发送一次心跳包
-setInterval(function () {
-  // 如果没有登录，则不需要发送心跳包
-  if (websocket.token == null) {
+setInterval(() => reconnect(), 10 * 1000);
+
+setInterval(() => send(new Ping()), 30 * 1000);
+
+// 如果服务器长时间没有回应，则重新连接
+function reconnect() {
+  if (new Date().getTime() - pingTime < 60 * 1000) {
     return;
   }
-
-  if (_.isEmpty(websocket.wsUrl)) {
-    return;
-  }
-
-  // 如果服务器长时间没有回应，则重新连接
-  if (new Date().getTime() - websocket.serverTime >= 3 * 60 * 1000) {
-    connect('服务器长时间没有相应，进行重连尝试');
-    return;
-  }
-
-  sendPacket(new Ping());
-}, 30000);
+  snackbarStore.showInfoMessage("正在连接服务器");
+  ws = connect("timeout and reconnect");
+}
 
 // readyState的状态码定义
 // 0 (CONNECTING)，正在链接中
 // 1 (OPEN)，已经链接并且可以通讯
 // 2 (CLOSING)，连接正在关闭
 // 3 (CLOSED)，连接已关闭或者没有链接成功
-export function connect(desc) {
+function connect(desc): WebSocket {
   console.log('start connect websocket: ' + desc);
 
-  closeWebsocket();
+  const webSocket = new WebSocket(wsUrl);
 
-  // const ws = new WebSocket('ws://127.0.0.1:9000/websocket');
-  const ws = new WebSocket(websocket.wsUrl);
-  websocket.ws = ws;
+  webSocket.binaryType = 'arraybuffer';
 
-  ws.binaryType = 'arraybuffer';
-
-  ws.onopen = function () {
+  webSocket.onopen = function () {
     console.log('websocket open success');
 
     // websocket连接成功过后，先发送ping同步服务器时间，再发送登录请求
-    sendPacket(new Ping());
+    send(new Ping());
 
     snackbarStore.showSuccessMessage("连接服务器成功");
-    websocket.serverTime = new Date().getTime();
+    pingTime = new Date().getTime();
   };
 
 
-  ws.onmessage = function (event) {
+  webSocket.onmessage = function (event) {
     const data = event.data;
 
-    const byteBuffer = new ByteBuffer();
-    byteBuffer.writeBytes(data);
-    byteBuffer.setReadOffset(4);
-    const packet = ProtocolManager.read(byteBuffer);
-    byteBuffer.readBoolean();
-    console.log('Websocket收到:', packet);
+    const buffer = new ByteBuffer();
+    buffer.writeBytes(data);
+    buffer.setReadOffset(4);
+    const packet = ProtocolManager.read(buffer);
+    let attachment: any = null;
+    if (buffer.isReadable() && buffer.readBoolean()) {
+      console.log("Websocket收到answer:", packet);
+      attachment = ProtocolManager.read(buffer);
+      const encodedPacketInfo = signalAttachmentMap.get(attachment.signalId);
+      if (encodedPacketInfo == undefined) {
+        throw "可能消息超时找不到对应的SignalAttachment:" + attachment;
+      }
+      encodedPacketInfo.promiseResolve(packet);
+      return;
+    }
+    console.log("Websocket收到send:", packet);
     if (packet.protocolId() == Pong.PROTOCOL_ID) {
-      websocket.serverTime = _.toNumber(packet.time);
+      if (Number.isInteger(packet.time)) {
+        pingTime = packet.time;
+      } else {
+        pingTime = Number.parseInt(packet.time);
+      }
     } else if (packet.protocolId() == Message.PROTOCOL_ID) {
       if (packet.code == 1) {
         snackbarStore.showSuccessMessage(packet.message);
@@ -95,69 +94,82 @@ export function connect(desc) {
     }
   };
 
-  ws.onerror = function (event) {
+  webSocket.onerror = function (event) {
+    pingTime = 0;
     console.log('websocket error');
     console.log(event);
   };
 
-  ws.onclose = function (event) {
+  webSocket.onclose = function (event) {
+    pingTime = 0;
     console.log('websocket close');
     console.log(event);
   };
+  return webSocket;
 }
 
-export function closeWebsocket() {
-  if (websocket.ws == null) {
-    return;
-  }
-  if (websocket.ws.readyState == 0 || websocket.ws.readyState == 1) {
-    websocket.ws.close();
-    return;
-  }
-  websocket.ws = null;
-}
-
-export function sendPacket(packet) {
-  console.log('Websocket发送:', packet);
-
-  if (_.isNil(websocket.ws)) {
-    connect('发送消息的时候ws是空的，重连ws');
-    return;
-  }
-
-  switch (websocket.ws.readyState) {
+export function send(packet: any, attachment: any = null) {
+  switch (ws.readyState) {
     case 0:
-      snackbarStore.showSuccessMessage("正在连接服务器");
+      snackbarStore.showWarningMessage("正在连接服务器");
       break;
     case 1:
-      // eslint-disable-next-line no-case-declarations
-      const byteBuffer = new ByteBuffer();
-      byteBuffer.setWriteOffset(4);
-      ProtocolManager.write(byteBuffer, packet);
-      byteBuffer.writeBoolean(false);
-      // eslint-disable-next-line no-case-declarations
-      const writeOffset = byteBuffer.writeOffset;
-      byteBuffer.setWriteOffset(0);
-      byteBuffer.writeRawInt(writeOffset - 4);
-      byteBuffer.setWriteOffset(writeOffset);
-      websocket.ws.send(byteBuffer.buffer);
+      const buffer = new ByteBuffer();
+      buffer.setWriteOffset(4);
+      ProtocolManager.write(buffer, packet);
+      if (attachment == null) {
+        buffer.writeBoolean(false);
+      } else {
+        buffer.writeBoolean(true);
+        ProtocolManager.write(buffer, attachment)
+      }
+      const writeOffset = buffer.writeOffset;
+      buffer.setWriteOffset(0);
+      buffer.writeRawInt(writeOffset - 4);
+      buffer.setWriteOffset(writeOffset);
+      ws.send(buffer.buffer);
       break;
     case 2:
-      snackbarStore.showErrorMessage("正在连接服务器");
-      connect('发送消息的时候ws正在关闭，进行重连尝试');
+      pingTime = 0;
+      console.log("2, ws is closing, trying to reconnect");
       break;
     case 3:
-      snackbarStore.showErrorMessage("正在连接服务器");
-      connect('发送消息的时候ws连接关闭，进行重连尝试');
+      pingTime = 0;
+      console.log("3, ws is closing, trying to reconnect");
       break;
     default:
-      snackbarStore.showErrorMessage("服务器异常");
+      snackbarStore.showErrorMessage("server error");
   }
 }
 
+class EncodedPacketInfo {
+  promiseResolve: any;
+  promiseReject: any;
+  attachment: SignalAttachment;
+}
 
-export function packetReceiver(protocol, receiverCallback) {
-  if (_.isNil(protocol.receiver)) {
-    protocol.receiver = receiverCallback;
+export async function asyncAsk(packet: any): Promise<any> {
+  const currentTime = new Date().getTime();
+  const attachment: SignalAttachment = new SignalAttachment();
+  uuid++;
+  const signalId = uuid;
+  attachment.timestamp = currentTime;
+  attachment.signalId = signalId;
+  attachment.client = true;
+  const encodedPacketInfo = new EncodedPacketInfo();
+  encodedPacketInfo.attachment = attachment;
+  const promise = new Promise((resolve, reject) => {
+    encodedPacketInfo.promiseResolve = resolve;
+    encodedPacketInfo.promiseReject = reject;
+  });
+  // 遍历删除旧的attachment
+  for (const key of signalAttachmentMap.keys()) {
+    const value = signalAttachmentMap.get(key);
+    if ((value != null) && (currentTime - value.attachment.timestamp > 60000)) {
+      signalAttachmentMap.delete(key);
+    }
   }
+  signalAttachmentMap.set(signalId, encodedPacketInfo);
+  send(packet, attachment);
+  return promise;
 }
