@@ -5,6 +5,22 @@
 </p>
 <br><br>
 
+<p align="center">
+  <a href="https://vuejs.org/">
+    <img src="https://img.shields.io/badge/vue-v3.2.47-brightgreen.svg" alt="vue">
+  </a>
+  <a href="https://vuetifyjs.com/">
+    <img src="https://img.shields.io/badge/vuetify-v3.1.13-blue.svg" alt="element-ui">
+  </a>
+    <a href="https://vitejs.dev/">
+    <img src="https://img.shields.io/badge/vite-v4.2.1-blueviolet.svg" alt="element-ui">
+  </a>
+  
+  <a href="https://github.com/yangjiakai/lux-admin-vuetify3/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
+  </a>
+</p>
+
 <h4 align='center'>
 <a href="https://lux.vuetify3.com/">在线 Demo</a>
 </h4>
@@ -19,25 +35,32 @@
 
 > 目标创造最优秀的 vuetify3 的 Admin 开源模板
 
-Vue2 时代开始,Vuetify 就一直是我最喜欢的一款 Vue 的 UI 框架。随着 Vue3.0 在 2020 年底发布,到 Vue3.2 大版本在 2022 年初逐渐稳定。两年之后,Vuetify 适配于 Vue3.x 的 Vuetify3 终于在 2022 年 11 月正式上线。Vue 作者尤雨溪也在表达了对 Vuetify3 的肯定。现阶段 Vuetify3 的文档依然大部分属于沿用 Vuetify2 的未更新状态,并且多语言版本依然遥遥无期。这种状态下初次接触 Vuetify 的开发者,以及从想要尽早拥抱 Vuetify3 的开发者,想必着手时会有许多困惑。一方面是自己对储备的前端知识和 Vuetify 框架的总结回顾。另一方面也希望可以可以通过自己的摸索给其他开发者带来帮助,所以在 2022 年 11 月 Vuetify3 正式一上线后便开始着手这个项目。预想主要偏向前端 UI 设计,自适应,组件开发,与常用插件的整合以及简单的逻辑。后续开发相应的 api 和业务逻辑依然待定(有余力再说)。
+在 Vuetify 精美的主题基础上，我们构建了一个清晰且高效的项目逻辑架构，整合了最新的技术框架。本项目旨在实现各种常见的技术需求和功能，同时融合了 AI 助手，以提供更智能化的体验。此外，我们确保所有页面在多种设备上均能自适应展示，实现优雅的跨平台兼容性。
 
 ## 特性
 
-- ⚡️ [Vue 3](https://github.com/vuejs/core)
-- ⚡️ [Vite](https://github.com/vitejs/vite)
-- ⚡️ UI Framework [Vuetify 3](https://next.vuetifyjs.com/en/)
-- ⚡️ TypeScript
+- 📖 [Vue 3.2](https://github.com/vuejs/core)
+- 📖 [Vite 4.x](https://github.com/vitejs/vite)
+- 📖 UI Framework [Vuetify 3](https://next.vuetifyjs.com/en/)
+- 📖 TypeScript
 - 📦 组件自动导入
 - 🍍 通过 [Pinia](https://pinia.vuejs.org/)进行状态管理
-- ⚡️ 使用新的 `<script setup>` 语法
-- ⚡️ 使用任意的图标集 [Iconify](https://icon-sets.iconify.design/)
-- ⚡️ 零配置部署在 Netlify
-- ⚡️ Echarts, ApexChart
-- ⚡️ Openai, Unsplash Api
-- ⚡️ i18n 多语言支持
-- ⚡️ virtual-scroller , vuedraggable , perfect-scrollbar
-- ⚡️ 富文本编辑器
-- ☁️ 响应式多平台自适应
+- 📔 使用新的 `<script setup>` 语法
+- 📚 使用任意的图标集 [Iconify](https://icon-sets.iconify.design/)
+- ☁️ 零配置部署在 Netlify
+- 🔑 Firebase 授权
+- 📈 Echarts, ApexChart
+- 🧭 Openai, Chatgpt 支持
+- 🌍 vue-i18n 多语言支持
+- 📚 virtual-scroller , vuedraggable , perfect-scrollbar
+- 📝 富文本编辑器
+- 📇 响应式多平台自适应
+
+## 联络我
+
+- 邮箱 <a href="mailto:yjkbako@gmail.com">yjkbako@gmail.com</a>
+- 推特 https://twitter.com/baibaixiang
+- 微信 <img  src='/src/assets/wechat-qrcode.png'  alt='DashBoard' width='300' />
 
 ## 预览
 
@@ -70,6 +93,7 @@ Vue2 时代开始,Vuetify 就一直是我最喜欢的一款 Vue 的 UI 框架。
 - [x] 明暗主题切换 -- 完成
 - [x] 主题色切换 -- 完成
 - [x] 中日英三语言切换-- 完成
+- [x] 整合 ChatGpt-- 完成
 
 ## 目标页面
 
@@ -83,9 +107,9 @@ Vue2 时代开始,Vuetify 就一直是我最喜欢的一款 Vue 的 UI 框架。
 ### 公共页面
 
 - [x] 404 -- 完成
-- [ ] 500 -- 施工中
-- [ ] 系统维护 -- 施工中
-- [ ] 常见问题 -- 施工中
+- [x] 500 -- 施工中
+- [x] 系统维护 -- 施工中
+- [x] 常见问题 -- 施工中
 
 ### UI 相关
 
