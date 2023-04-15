@@ -1,4 +1,7 @@
 export default {
+  jiucai: {
+    news: "情报"
+  },
   common: {
     add: "新增",
     cancel: "取消",

@@ -8,8 +8,10 @@ import PagesRoutes from "./pages.routes";
 import ChartsRoutes from "./charts.routes";
 import AppsRoutes from "./apps.routes";
 import DataRoutes from "./data.routes";
+import JiuCai from "./jiucai.routes";
 
 export const routes = [
+  ...JiuCai,
   {
     path: "/",
     redirect: "/dashboard",

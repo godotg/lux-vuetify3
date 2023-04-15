@@ -3,8 +3,8 @@
 class NewsRequest {
 
     query: string = '';
-    page: number = 0;
-    itemsPerPage: number = 0;
+    startId: number = 0;
+    endId: number = 0;
 
     static PROTOCOL_ID: number = 203;
 
@@ -16,9 +16,9 @@ class NewsRequest {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        buffer.writeInt(packet.itemsPerPage);
-        buffer.writeInt(packet.page);
+        buffer.writeLong(packet.endId);
         buffer.writeString(packet.query);
+        buffer.writeLong(packet.startId);
     }
 
     static read(buffer: any): NewsRequest | null {
@@ -26,12 +26,12 @@ class NewsRequest {
             return null;
         }
         const packet = new NewsRequest();
-        const result0 = buffer.readInt();
-        packet.itemsPerPage = result0;
-        const result1 = buffer.readInt();
-        packet.page = result1;
-        const result2 = buffer.readString();
-        packet.query = result2;
+        const result0 = buffer.readLong();
+        packet.endId = result0;
+        const result1 = buffer.readString();
+        packet.query = result1;
+        const result2 = buffer.readLong();
+        packet.startId = result2;
         return packet;
     }
 }

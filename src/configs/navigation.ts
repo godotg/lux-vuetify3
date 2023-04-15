@@ -11,6 +11,18 @@ export default {
       key: "",
       items: [
         {
+          key: "jiucai.news",
+          text: "News",
+          link: "/news",
+          icon: "mdi-sort-descending",
+        },
+      ],
+    },
+    {
+      text: "",
+      key: "",
+      items: [
+        {
           key: "menu.dashboard",
           text: "Dashboard",
           link: "/dashboard",
