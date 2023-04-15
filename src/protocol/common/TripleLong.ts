@@ -6,20 +6,16 @@ class TripleLong {
     middle: number = 0;
     right: number = 0;
 
-    static PROTOCOL_ID: number = 114
+    static PROTOCOL_ID: number = 114;
 
     protocolId(): number {
         return TripleLong.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: TripleLong | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeLong(packet.left);
         buffer.writeLong(packet.middle);
         buffer.writeLong(packet.right);

@@ -6,20 +6,16 @@ class Error {
     errorCode: number = 0;
     errorMessage: string = '';
 
-    static PROTOCOL_ID: number = 101
+    static PROTOCOL_ID: number = 101;
 
     protocolId(): number {
         return Error.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: Error | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeInt(packet.errorCode);
         buffer.writeString(packet.errorMessage);
         buffer.writeInt(packet.module);

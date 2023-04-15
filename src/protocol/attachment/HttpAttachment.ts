@@ -6,20 +6,16 @@ class HttpAttachment {
     useTaskExecutorHashParam: boolean = false;
     taskExecutorHashParam: number = 0;
 
-    static PROTOCOL_ID: number = 3
+    static PROTOCOL_ID: number = 4;
 
     protocolId(): number {
         return HttpAttachment.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: HttpAttachment | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeInt(packet.taskExecutorHashParam);
         buffer.writeLong(packet.uid);
         buffer.writeBoolean(packet.useTaskExecutorHashParam);

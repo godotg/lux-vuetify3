@@ -6,20 +6,16 @@ class TripleString {
     middle: string = '';
     right: string = '';
 
-    static PROTOCOL_ID: number = 115
+    static PROTOCOL_ID: number = 115;
 
     protocolId(): number {
         return TripleString.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: TripleString | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeString(packet.left);
         buffer.writeString(packet.middle);
         buffer.writeString(packet.right);

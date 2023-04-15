@@ -6,20 +6,16 @@ class AuthUidAsk {
     sid: number = 0;
     uid: number = 0;
 
-    static PROTOCOL_ID: number = 22
+    static PROTOCOL_ID: number = 22;
 
     protocolId(): number {
         return AuthUidAsk.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: AuthUidAsk | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeString(packet.gatewayHostAndPort);
         buffer.writeLong(packet.sid);
         buffer.writeLong(packet.uid);

@@ -4,20 +4,16 @@ class AuthUidToGatewayCheck {
 
     uid: number = 0;
 
-    static PROTOCOL_ID: number = 20
+    static PROTOCOL_ID: number = 20;
 
     protocolId(): number {
         return AuthUidToGatewayCheck.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: AuthUidToGatewayCheck | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeLong(packet.uid);
     }
 

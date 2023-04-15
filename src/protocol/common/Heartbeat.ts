@@ -4,20 +4,16 @@ class Heartbeat {
 
     
 
-    static PROTOCOL_ID: number = 102
+    static PROTOCOL_ID: number = 102;
 
     protocolId(): number {
         return Heartbeat.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: Heartbeat | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         
     }
 

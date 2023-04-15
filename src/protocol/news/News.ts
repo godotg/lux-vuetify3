@@ -9,24 +9,20 @@ class News {
     title: string = '';
     content: string = '';
     ctime: string = '';
-    stocks: Array<NewsStock> | null = null;
-    industries: Array<NewsIndustry> | null = null;
-    subjects: Array<string> | null = null;
+    stocks: Array<NewsStock> = [];
+    industries: Array<NewsIndustry> = [];
+    subjects: Array<string> = [];
 
-    static PROTOCOL_ID: number = 200
+    static PROTOCOL_ID: number = 200;
 
     protocolId(): number {
         return News.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: News | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeString(packet.content);
         buffer.writeString(packet.ctime);
         buffer.writeLong(packet.id);

@@ -4,20 +4,16 @@ class Pong {
 
     time: number = 0;
 
-    static PROTOCOL_ID: number = 104
+    static PROTOCOL_ID: number = 104;
 
     protocolId(): number {
         return Pong.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: Pong | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeLong(packet.time);
     }
 

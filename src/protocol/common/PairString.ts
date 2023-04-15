@@ -5,20 +5,16 @@ class PairString {
     key: string = '';
     value: string = '';
 
-    static PROTOCOL_ID: number = 112
+    static PROTOCOL_ID: number = 112;
 
     protocolId(): number {
         return PairString.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: PairString | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeString(packet.key);
         buffer.writeString(packet.value);
     }

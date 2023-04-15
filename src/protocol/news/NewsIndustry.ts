@@ -5,20 +5,16 @@ class NewsIndustry {
     name: string = '';
     rise: string = '';
 
-    static PROTOCOL_ID: number = 202
+    static PROTOCOL_ID: number = 202;
 
     protocolId(): number {
         return NewsIndustry.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: NewsIndustry | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeString(packet.name);
         buffer.writeString(packet.rise);
     }

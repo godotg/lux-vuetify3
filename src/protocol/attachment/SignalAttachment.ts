@@ -7,20 +7,16 @@ class SignalAttachment {
     client: boolean = false;
     timestamp: number = 0;
 
-    static PROTOCOL_ID: number = 0
+    static PROTOCOL_ID: number = 0;
 
     protocolId(): number {
         return SignalAttachment.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: SignalAttachment | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeBoolean(packet.client);
         buffer.writeInt(packet.signalId);
         buffer.writeInt(packet.taskExecutorHash);

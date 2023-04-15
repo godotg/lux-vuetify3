@@ -5,20 +5,16 @@ class PairIntLong {
     key: number = 0;
     value: number = 0;
 
-    static PROTOCOL_ID: number = 110
+    static PROTOCOL_ID: number = 110;
 
     protocolId(): number {
         return PairIntLong.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: PairIntLong | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeInt(packet.key);
         buffer.writeLong(packet.value);
     }

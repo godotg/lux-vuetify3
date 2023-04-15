@@ -4,20 +4,16 @@ class Ping {
 
     
 
-    static PROTOCOL_ID: number = 103
+    static PROTOCOL_ID: number = 103;
 
     protocolId(): number {
         return Ping.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: Ping | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         
     }
 

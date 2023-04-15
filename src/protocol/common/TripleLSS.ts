@@ -6,20 +6,16 @@ class TripleLSS {
     middle: string = '';
     right: string = '';
 
-    static PROTOCOL_ID: number = 116
+    static PROTOCOL_ID: number = 116;
 
     protocolId(): number {
         return TripleLSS.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: TripleLSS | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeLong(packet.left);
         buffer.writeString(packet.middle);
         buffer.writeString(packet.right);

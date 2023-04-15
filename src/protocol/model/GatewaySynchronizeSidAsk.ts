@@ -3,22 +3,18 @@
 class GatewaySynchronizeSidAsk {
 
     gatewayHostAndPort: string = '';
-    sidMap: Map<number, number> | null = null;
+    sidMap: Map<number, number> = new Map();
 
-    static PROTOCOL_ID: number = 24
+    static PROTOCOL_ID: number = 24;
 
     protocolId(): number {
         return GatewaySynchronizeSidAsk.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: GatewaySynchronizeSidAsk | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeString(packet.gatewayHostAndPort);
         buffer.writeLongLongMap(packet.sidMap);
     }

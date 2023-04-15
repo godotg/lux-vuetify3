@@ -6,20 +6,16 @@ class Message {
     code: number = 0;
     message: string = '';
 
-    static PROTOCOL_ID: number = 100
+    static PROTOCOL_ID: number = 100;
 
     protocolId(): number {
         return Message.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: Message | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeInt(packet.code);
         buffer.writeString(packet.message);
         buffer.writeByte(packet.module);

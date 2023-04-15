@@ -1,28 +1,22 @@
 import News from './News';
-import NewsStock from './NewsStock';
-import NewsIndustry from './NewsIndustry';
 
 
 class NewsResponse {
 
     page: number = 0;
     itemsPerPage: number = 0;
-    news: Array<News> | null = null;
+    news: Array<News> = [];
 
-    static PROTOCOL_ID: number = 204
+    static PROTOCOL_ID: number = 204;
 
     protocolId(): number {
         return NewsResponse.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: NewsResponse | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeInt(packet.itemsPerPage);
         buffer.writePacketList(packet.news, 200);
         buffer.writeInt(packet.page);

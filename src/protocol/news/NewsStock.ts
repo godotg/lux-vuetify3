@@ -6,20 +6,16 @@ class NewsStock {
     price: string = '';
     rise: string = '';
 
-    static PROTOCOL_ID: number = 201
+    static PROTOCOL_ID: number = 201;
 
     protocolId(): number {
         return NewsStock.PROTOCOL_ID;
     }
 
     static write(buffer: any, packet: NewsStock | null) {
-        if (buffer.writePacketFlag(packet)) {
+        if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        if (packet === null) {
-            return;
-        }
-
         buffer.writeString(packet.name);
         buffer.writeString(packet.price);
         buffer.writeString(packet.rise);

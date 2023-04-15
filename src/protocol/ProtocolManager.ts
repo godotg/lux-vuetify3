@@ -1,4 +1,5 @@
 import SignalAttachment from './attachment/SignalAttachment';
+import SignalOnlyAttachment from './attachment/SignalOnlyAttachment';
 import GatewayAttachment from './attachment/GatewayAttachment';
 import UdpAttachment from './attachment/UdpAttachment';
 import HttpAttachment from './attachment/HttpAttachment';
@@ -30,10 +31,11 @@ const protocols = new Map<number, any>();
 
 // initProtocol
 protocols.set(0, SignalAttachment);
-protocols.set(1, GatewayAttachment);
-protocols.set(2, UdpAttachment);
-protocols.set(3, HttpAttachment);
-protocols.set(4, NoAnswerAttachment);
+protocols.set(1, SignalOnlyAttachment);
+protocols.set(2, GatewayAttachment);
+protocols.set(3, UdpAttachment);
+protocols.set(4, HttpAttachment);
+protocols.set(5, NoAnswerAttachment);
 protocols.set(20, AuthUidToGatewayCheck);
 protocols.set(21, AuthUidToGatewayConfirm);
 protocols.set(22, AuthUidAsk);
