@@ -14,7 +14,7 @@ export default {
           key: "jiucai.news",
           text: "News",
           link: "/news",
-          icon: "mdi-sort-descending",
+          icon: "mdi-format-font-size-increase",
         },
       ],
     },

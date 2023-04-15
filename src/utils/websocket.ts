@@ -1,5 +1,5 @@
 import ByteBuffer from '@/protocol/buffer/ByteBuffer';
-import SignalAttachment from '@/protocol/attachment/SignalAttachment';
+import SignalOnlyAttachment from '@/protocol/attachment/SignalOnlyAttachment';
 import ProtocolManager from '@/protocol/ProtocolManager.js';
 import Error from '@/protocol/common/Error.js';
 import Message from '@/protocol/common/Message.js';
@@ -111,6 +111,7 @@ function connect(desc): WebSocket {
 export function send(packet: any, attachment: any = null) {
   switch (ws.readyState) {
     case 0:
+      console.log("0, connecting server");
       snackbarStore.showWarningMessage("正在连接服务器");
       break;
     case 1:
@@ -138,6 +139,7 @@ export function send(packet: any, attachment: any = null) {
       console.log("3, ws is closing, trying to reconnect");
       break;
     default:
+      console.log("4, server error");
       snackbarStore.showErrorMessage("server error");
   }
 }
@@ -145,17 +147,16 @@ export function send(packet: any, attachment: any = null) {
 class EncodedPacketInfo {
   promiseResolve: any;
   promiseReject: any;
-  attachment: SignalAttachment;
+  attachment: SignalOnlyAttachment;
 }
 
 export async function asyncAsk(packet: any): Promise<any> {
   const currentTime = new Date().getTime();
-  const attachment: SignalAttachment = new SignalAttachment();
+  const attachment: SignalOnlyAttachment = new SignalOnlyAttachment();
   uuid++;
   const signalId = uuid;
   attachment.timestamp = currentTime;
   attachment.signalId = signalId;
-  attachment.client = true;
   const encodedPacketInfo = new EncodedPacketInfo();
   encodedPacketInfo.attachment = attachment;
   const promise = new Promise((resolve, reject) => {

@@ -3,8 +3,6 @@ import News from './News';
 
 class NewsResponse {
 
-    page: number = 0;
-    itemsPerPage: number = 0;
     news: Array<News> = [];
 
     static PROTOCOL_ID: number = 204;
@@ -17,9 +15,7 @@ class NewsResponse {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        buffer.writeInt(packet.itemsPerPage);
         buffer.writePacketList(packet.news, 200);
-        buffer.writeInt(packet.page);
     }
 
     static read(buffer: any): NewsResponse | null {
@@ -27,12 +23,8 @@ class NewsResponse {
             return null;
         }
         const packet = new NewsResponse();
-        const result0 = buffer.readInt();
-        packet.itemsPerPage = result0;
-        const list1 = buffer.readPacketList(200);
-        packet.news = list1;
-        const result2 = buffer.readInt();
-        packet.page = result2;
+        const list0 = buffer.readPacketList(200);
+        packet.news = list0;
         return packet;
     }
 }
