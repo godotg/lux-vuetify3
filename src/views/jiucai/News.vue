@@ -68,7 +68,7 @@ async function doInitNews() {
   request.startId = -1;
   request.endId = -1;
   const response: NewsResponse = await asyncAsk(request)
-  console.log("init:" + response);
+  console.log("news init:" + response);
   updateNewsRef(response.news)
 }
 
@@ -81,7 +81,7 @@ async function requestNews() {
   request.startId = firstNews.id;
   request.endId = -1;
   const response: NewsResponse = await asyncAsk(request)
-  console.log("requestNews:" + response);
+  console.log("news request:" + response);
   updateNewsRef(response.news);
 }
 
@@ -97,7 +97,7 @@ async function loadMoreNews() {
   request.endId = lastNews.id;
   const response: NewsResponse = await asyncAsk(request)
   loadingRef.value = false;
-  console.log("loadMore:" + response);
+  console.log("news loadMore:" + response);
   updateNewsRef(response.news);
 }
 
