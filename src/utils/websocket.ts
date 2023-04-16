@@ -108,10 +108,14 @@ function connect(desc): WebSocket {
   return webSocket;
 }
 
+export function isWebsocketReady(): boolean {
+  return ws.readyState == 1;
+}
+
 export function send(packet: any, attachment: any = null) {
   switch (ws.readyState) {
     case 0:
-      console.log("0, connecting server");
+      console.log("0, ws connecting server");
       snackbarStore.showWarningMessage("正在连接服务器");
       break;
     case 1:

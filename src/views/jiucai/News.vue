@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {asyncAsk} from "@/utils/websocket";
+import {asyncAsk, isWebsocketReady} from "@/utils/websocket";
 import News from "@/protocol/news/News";
 import NewsRequest from "@/protocol/news/NewsRequest";
 import NewsResponse from "@/protocol/news/NewsResponse";
@@ -48,15 +48,22 @@ const levelMap = {
 
 onMounted(() => {
   console.log("news on mounted");
-  setTimeout(() => {
-    initNews();
-  }, 1000);
+  initNews();
   setInterval(() => {
     requestNews();
   }, 5000)
 });
 
-async function initNews() {
+function initNews() {
+  setTimeout(() => {
+    doInitNews();
+  }, 1000);
+}
+async function doInitNews() {
+  if (!isWebsocketReady()) {
+    initNews();
+    return;
+  }
   const request = new NewsRequest();
   request.startId = -1;
   request.endId = -1;
@@ -154,21 +161,23 @@ function copyNews(news: News) {
         </v-card-text>
         <v-card-actions
           v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
-          <template v-if="!_.isEmpty(newsEle.stocks)">
-            <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small">
-              {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
-            </v-chip>
-          </template>
-          <template v-if="!_.isEmpty(newsEle.industries)">
-            <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined">
-              {{ industry.name }} {{ industry.rise }}
-            </v-chip>
-          </template>
-          <template v-if="!_.isEmpty(newsEle.subjects)">
-            <v-chip v-for="subject in newsEle.subjects" size="x-small">
-              {{ subject }}
-            </v-chip>
-          </template>
+          <div>
+            <template v-if="!_.isEmpty(newsEle.stocks)">
+              <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small">
+                {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
+              </v-chip>
+            </template>
+            <template v-if="!_.isEmpty(newsEle.industries)">
+              <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined">
+                {{ industry.name }} {{ industry.rise }}
+              </v-chip>
+            </template>
+            <template v-if="!_.isEmpty(newsEle.subjects)">
+              <v-chip v-for="subject in newsEle.subjects" size="x-small">
+                {{ subject }}
+              </v-chip>
+            </template>
+          </div>
         </v-card-actions>
       </v-card>
     </template>
@@ -189,30 +198,31 @@ function copyNews(news: News) {
             <v-card-text>
               {{ newsEle.content }}
             </v-card-text>
-            <v-card-actions
-              v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
-              <template v-if="!_.isEmpty(newsEle.stocks)">
-                <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small">
-                  {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
-                </v-chip>
-              </template>
-              <template v-if="!_.isEmpty(newsEle.industries)">
-                <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined">
-                  {{ industry.name }} {{ industry.rise }}
-                </v-chip>
-              </template>
-              <template v-if="!_.isEmpty(newsEle.subjects)">
-                <v-chip v-for="subject in newsEle.subjects" size="x-small">
-                  {{ subject }}
-                </v-chip>
-              </template>
+            <v-card-actions v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
+              <div>
+                <template v-if="!_.isEmpty(newsEle.stocks)">
+                  <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small">
+                    {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
+                  </v-chip>
+                </template>
+                <template v-if="!_.isEmpty(newsEle.industries)">
+                  <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined">
+                    {{ industry.name }} {{ industry.rise }}
+                  </v-chip>
+                </template>
+                <template v-if="!_.isEmpty(newsEle.subjects)">
+                  <v-chip v-for="subject in newsEle.subjects" size="x-small">
+                    {{ subject }}
+                  </v-chip>
+                </template>
+              </div>
             </v-card-actions>
           </v-card>
         </v-timeline-item>
       </template>
     </v-timeline>
     <v-progress-linear v-if="loadingRef" indeterminate color="primary"></v-progress-linear>
-    <v-footer v-else v-ripple class="d-flex flex-column primary" @click="loadMoreNews">
+    <v-footer v-else v-ripple class="d-flex flex-column" color="primary" @click="loadMoreNews">
       更多
     </v-footer>
   </v-container>
