@@ -13,7 +13,7 @@ export default {
         {
           key: "jiucai.news",
           text: "News",
-          link: "/news",
+          link: "/",
           icon: "mdi-format-font-size-increase",
         },
       ],

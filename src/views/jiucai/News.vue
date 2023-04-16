@@ -212,7 +212,7 @@ function copyNews(news: News) {
       </template>
     </v-timeline>
     <v-progress-linear v-if="loadingRef" indeterminate color="primary"></v-progress-linear>
-    <v-footer v-else v-ripple class="d-flex flex-column bg-grey-lighten-1" @click="loadMoreNews">
+    <v-footer v-else v-ripple class="d-flex flex-column primary" @click="loadMoreNews">
       更多
     </v-footer>
   </v-container>

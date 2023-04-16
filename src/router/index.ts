@@ -13,11 +13,6 @@ import JiuCai from "./jiucai.routes";
 export const routes = [
   ...JiuCai,
   {
-    path: "/",
-    redirect: "/dashboard",
-    meta: {},
-  } as any,
-  {
     path: "/dashboard",
     meta: {
       requiresAuth: true,
