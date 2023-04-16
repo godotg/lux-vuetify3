@@ -7,6 +7,7 @@ import _ from "lodash";
 import {useClipboard} from "@vueuse/core";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useDisplay} from "vuetify";
+import {searchPhotosApi} from "@/api/unsplashApi";
 
 const {copy} = useClipboard();
 const snackbarStore = useSnackbarStore();
@@ -14,6 +15,10 @@ const {mobile} = useDisplay()
 
 
 const newsRef = ref<News[]>([]);
+const hasMore = ref(true);
+const loading = ref(false);
+const scrollBottom = ref(0);
+
 
 const levelMap = {
   "S": {
@@ -72,6 +77,32 @@ function updateNewsRef(news: Array<News>) {
   });
 }
 
+const loadMore = async () => {
+  loading.value = true;
+  console.log(hasMore.value);
+
+  if (!hasMore.value) {
+    loading.value = false;
+    snackbarStore.showMessage("没有更多了");
+    return;
+  }
+
+  // const photosResponse = await searchPhotosApi(queryOptions);
+  // const newList = photosResponse.data.results;
+  // hasMore.value = newList.length > 0;
+  // loading.value = false;
+};
+
+const onScroll = (e) => {
+  console.log("000000000000000000000000")
+  const target = e.target;
+  scrollBottom.value =
+    target.scrollHeight - target.scrollTop - target.clientHeight;
+  if (scrollBottom.value < 100) {
+    loadMore();
+  }
+};
+
 function copyNews(news: News) {
   let str = "";
   str = str + news.level + "级电报 " + news.ctime + "\n";
@@ -102,7 +133,7 @@ function copyNews(news: News) {
 
 
 <template>
-  <v-container>
+  <div style="max-height: 2000px; overflow-y: auto" v-scroll.self="onScroll">
     <template v-if="mobile">
       <v-card v-for="newsEle in newsRef" class="mt-3" v-ripple @click="copyNews(newsEle)">
         <v-card-title>
@@ -135,44 +166,46 @@ function copyNews(news: News) {
         </v-card-actions>
       </v-card>
     </template>
-    <v-timeline v-else density="compact" side="end">
-      <template v-for="newsEle in newsRef">
-        <v-timeline-item fill-dot :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
-          <template v-slot:icon>
-            <span>{{ newsEle.level }}</span>
-          </template>
-          <v-card v-ripple @click="copyNews(newsEle)">
-            <v-card-title>
-              <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
-              级电报 {{ newsEle.ctime }}
-            </v-card-title>
-            <v-card-subtitle>
-              {{ newsEle.title }}
-            </v-card-subtitle>
-            <v-card-text>
-              {{ newsEle.content }}
-            </v-card-text>
-            <v-card-actions
-              v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
-              <template v-if="!_.isEmpty(newsEle.stocks)">
-                <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small">
-                  {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
-                </v-chip>
-              </template>
-              <template v-if="!_.isEmpty(newsEle.industries)">
-                <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined">
-                  {{ industry.name }} {{ industry.rise }}
-                </v-chip>
-              </template>
-              <template v-if="!_.isEmpty(newsEle.subjects)">
-                <v-chip v-for="subject in newsEle.subjects" size="x-small">
-                  {{ subject }}
-                </v-chip>
-              </template>
-            </v-card-actions>
-          </v-card>
-        </v-timeline-item>
-      </template>
-    </v-timeline>
-  </v-container>
+    <v-container v-else>
+      <v-timeline density="compact" side="end">
+        <template v-for="newsEle in newsRef">
+          <v-timeline-item fill-dot :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
+            <template v-slot:icon>
+              <span>{{ newsEle.level }}</span>
+            </template>
+            <v-card v-ripple @click="copyNews(newsEle)">
+              <v-card-title>
+                <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
+                级电报 {{ newsEle.ctime }}
+              </v-card-title>
+              <v-card-subtitle>
+                {{ newsEle.title }}
+              </v-card-subtitle>
+              <v-card-text>
+                {{ newsEle.content }}
+              </v-card-text>
+              <v-card-actions
+                v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
+                <template v-if="!_.isEmpty(newsEle.stocks)">
+                  <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small">
+                    {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
+                  </v-chip>
+                </template>
+                <template v-if="!_.isEmpty(newsEle.industries)">
+                  <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined">
+                    {{ industry.name }} {{ industry.rise }}
+                  </v-chip>
+                </template>
+                <template v-if="!_.isEmpty(newsEle.subjects)">
+                  <v-chip v-for="subject in newsEle.subjects" size="x-small">
+                    {{ subject }}
+                  </v-chip>
+                </template>
+              </v-card-actions>
+            </v-card>
+          </v-timeline-item>
+        </template>
+      </v-timeline>
+    </v-container>
+  </div>
 </template>
