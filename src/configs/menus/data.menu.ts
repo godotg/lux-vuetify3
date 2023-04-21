@@ -28,10 +28,16 @@ export default [
     key: "menu.data.topicsDataPage",
   },
   // topic Photos Data
+  // {
+  //   icon: "mdi-table",
+  //   text: "Topic Photos Data",
+  //   link: "/data/topic-photos-data",
+  //   key: "menu.data.topicPhotosDataPage",
+  // },
   {
-    icon: "mdi-table",
-    text: "Topic Photos Data",
-    link: "/data/topic-photos-data",
-    key: "menu.data.topicPhotosDataPage",
+    icon: "mdi-image-multiple-outline",
+    text: "File Upload Preview",
+    link: "/data/file-upload-preview",
+    key: "menu.data.fileUploadPreview",
   },
 ];

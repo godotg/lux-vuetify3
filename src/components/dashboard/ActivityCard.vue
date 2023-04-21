@@ -36,7 +36,7 @@ const getPublicEvent = async () => {
       user: activity.actor.display_login,
       avatar: activity.actor.avatar_url,
       repo: activity.repo?.name,
-      content: getContent(activity.type),
+      content: getContent(activity),
       action:
         activity.type === "IssuesEvent" ? activity.payload.action : "Commit",
       created_at: activity.created_at,
@@ -49,12 +49,31 @@ const getPublicEvent = async () => {
 
 const getContent = (activity: any) => {
   if (activity.type === "PushEvent") {
-    return activity.content;
+    return convertToHtml(activity.payload.commits[0].message);
+  } else if (activity.type === "CreateEvent") {
+    return activity.payload.ref_type;
   } else if (activity.type === "IssuesEvent") {
-    return activity.content;
+    return activity.payload.issue.title;
   } else {
-    return "No Content";
+    return "";
   }
+};
+
+const convertToHtml = (text) => {
+  const lines = text.split("\n");
+  let html = "";
+
+  lines.forEach((line) => {
+    if (line.startsWith("- ")) {
+      html += `<div><span class='mr-1'>✅</span> ${line.slice(2)}</div>`;
+    } else if (line.trim() === "") {
+      html += "<br/>";
+    } else {
+      html += `<p>${line}</p>`;
+    }
+  });
+
+  return html;
 };
 
 const getTagColor = (activity: any) => {
@@ -81,7 +100,7 @@ onMounted(() => {
   </div>
   <div v-else>
     <h6 class="text-h6 pa-5 d-flex align-center">
-      <span class="flex-1 font-weight-bold">Activity</span>
+      <span class="flex-1 font-weight-bold">Github Activity</span>
       <v-menu location="bottom end" transition="slide-x-transition">
         <template v-slot:activator="{ props }">
           <v-btn
@@ -165,7 +184,7 @@ onMounted(() => {
               <span class="text-body-2">{{ activity.repo }}</span>
             </v-card-subtitle>
             <v-card-text>
-              <span class="text-body-2">{{ activity.content }}</span>
+              <div v-html="activity.content"></div>
             </v-card-text>
           </v-card>
         </v-timeline-item>

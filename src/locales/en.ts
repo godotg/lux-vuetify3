@@ -97,6 +97,7 @@ export default {
     dataTable: "Data Table",
     colors: "Colors",
     gradient: "Gradient",
+    lottieAnimation: "Lottie Animation",
     card: "Card",
     grids: "Grid",
     scrollbar: "Perfect Scrollbar",
@@ -117,7 +118,10 @@ export default {
       collectionsDataPage: "Collections Data",
       topicsDataPage: "Topics Data",
       topicPhotosDataPage: "Topic Photos Data",
+      fileUploadPreview: "File Upload Preview",
     },
+    chatbot_v1: "Chatbot v1",
+    chatbot_v2: "Chatbot v2",
   },
 
   dashboard: {
@@ -131,6 +135,29 @@ export default {
     customers: "Customers",
     tickets: "Support Tickets",
     viewReport: "View Report",
+  },
+
+  // toolbox
+  toolbox: {
+    apikey: {
+      title: "API Key",
+    },
+    chatAssistant: {
+      title: "Chat Assistant",
+    },
+    translationAssistant: {
+      title: "Translation Assistant",
+      targetLanguage: "Target Language",
+      translate: "Translate",
+      speech: "Speech",
+      read: "Read",
+    },
+    codeAssistant: {
+      title: "Code Assistant",
+    },
+    playGround: {
+      title: "Playground",
+    },
   },
 
   // Vuetify components translations

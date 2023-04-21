@@ -91,6 +91,7 @@ export default {
     footerPage: "フッターページ",
     dataTablePage: "データテーブルページ",
     colors: "カラー",
+    lottieAnimation: "Lottie Animation",
     gradient: "Gradient",
     card: "カード",
     grids: "グリッドレイアウト",
@@ -112,7 +113,10 @@ export default {
       collectionsDataPage: "コレクションデータ",
       topicsDataPage: "トピックデータ",
       topicPhotosDataPage: "トピック写真データ",
+      fileUploadPreview: "ファイルアップロードプレビュー",
     },
+    chatbot_v1: "Chatbot v1",
+    chatbot_v2: "Chatbot v2",
   },
   dashboard: {
     activity: "アクティビティ",
@@ -126,6 +130,29 @@ export default {
     tickets: "サポートチケット",
     viewReport: "レポートを見る",
   },
+  // toolbox
+  toolbox: {
+    apikey: {
+      title: "API Key",
+    },
+    chatAssistant: {
+      title: "チャットアシスタント",
+    },
+    translationAssistant: {
+      title: "翻訳アシスタント",
+      targetLanguage: "翻訳先の言語",
+      translate: "翻訳",
+      speech: "音声",
+      read: "読む",
+    },
+    codeAssistant: {
+      title: "コードアシスタント",
+    },
+    playGround: {
+      title: "プレイグラウンド",
+    },
+  },
+
   // コンポーネント
   $vuetify: {
     badge: "バッジ",

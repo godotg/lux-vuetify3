@@ -46,7 +46,7 @@ export default {
     others: "其他",
     email: "电子邮件",
     chat: "聊天室",
-    todo: "去做",
+    todo: "待办事项",
     nitori: "Nitori",
     booking: "Booking",
     unsplash: "Unsplash",
@@ -94,6 +94,7 @@ export default {
     footerPage: "页脚页面",
     dataTable: "复杂数据表",
     colors: "色彩",
+    lottieAnimation: "Lottie 动画",
     gradient: "渐变色",
     card: "卡片",
     grids: "网格",
@@ -115,7 +116,10 @@ export default {
       collectionsDataPage: "集合数据",
       topicsDataPage: "主题数据",
       topicPhotosDataPage: "主题照片数据",
+      fileUploadPreview: "文件上传预览",
     },
+    chatbot_v1: "Chatbot v1",
+    chatbot_v2: "Chatbot v2",
   },
   dashboard: {
     activity: "活动",
@@ -128,6 +132,28 @@ export default {
     customers: "顾客",
     tickets: "支持票",
     viewReport: "查看报告",
+  },
+  // toolbox
+  toolbox: {
+    apikey: {
+      title: "API Key",
+    },
+    chatAssistant: {
+      title: "聊天助手",
+    },
+    translationAssistant: {
+      title: "翻译助手",
+      targetLanguage: "目标语言",
+      translate: "翻译",
+      speech: "语音",
+      read: "朗读",
+    },
+    codeAssistant: {
+      title: "代码助手",
+    },
+    playGround: {
+      title: "PlayGround",
+    },
   },
   // Vuetify 组件内部翻译
   $vuetify: {

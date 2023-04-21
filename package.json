@@ -25,6 +25,7 @@
     "flag-icons": "^6.6.6",
     "focus-trap": "^7.4.0",
     "happy-dom": "^9.6.1",
+    "md-editor-v3": "^2.11.2",
     "moment": "^2.29.4",
     "openai": "^3.2.1",
     "pinia": "^2.0.34",
@@ -39,12 +40,14 @@
     "vue-virtual-scroller": "^2.0.0-beta.8",
     "vue-waterfall-plugin-next": "^2.2.0",
     "vue3-apexcharts": "^1.4.1",
+    "vue3-lottie": "^2.5.0",
     "vue3-perfect-scrollbar": "^1.6.1",
     "vuedraggable": "^4.1.0",
     "vuetify": "^3.1.13",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@iconify/vue": "^4.1.1",
     "@types/node": "^18.15.11",
