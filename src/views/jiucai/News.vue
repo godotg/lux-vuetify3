@@ -51,7 +51,7 @@ onMounted(() => {
   initNews();
   setInterval(() => {
     requestNews();
-  }, 5000)
+  }, 10000)
 });
 
 function initNews() {
@@ -73,15 +73,15 @@ async function doInitNews() {
 }
 
 async function requestNews() {
-  const firstNews = _.last(newsRef.value);
+  const firstNews = _.first(newsRef.value);
   if (_.isEmpty(firstNews)) {
     return;
   }
   const request = new NewsRequest();
-  request.startId = firstNews.id;
+  request.startId = firstNews.id + 1;
   request.endId = -1;
   const response: NewsResponse = await asyncAsk(request)
-  console.log("news request:" + response);
+  console.log("news request response:" + response);
   updateNewsRef(response.news);
 }
 
@@ -119,25 +119,27 @@ function updateNewsRef(news: Array<News>) {
 function copyNews(news: News) {
   let str = "";
   str = str + news.level + "级电报 " + news.ctime + "\n";
-  str = str + "💥" + news.title + "\n\n" + news.content;
+  str = str + "⚡" + news.title + "\n\n" + news.content;
   if (!_.isEmpty(news.stocks)) {
-    str = str + "\n\n💧股票:";
+    str = str + "\n\n🎯股票:";
     for (const stock of news.stocks) {
       str = str + " " + stock.name + "#" + stock.price + "(" + stock.rise + ")";
     }
   }
+  // 🐳
   if (!_.isEmpty(news.industries)) {
-    str = str + "\n💧概念:";
+    str = str + "\n🐠概念:";
     for (const industry of news.industries) {
       str = str + " " + industry.name + "(" + industry.rise + ")";
     }
   }
   if (!_.isEmpty(news.subjects)) {
-    str = str + "\n💧热词:";
+    str = str + "\n🐧热词:";
     for (const subject of news.subjects) {
       str = str + " " + subject;
     }
   }
+  str = str + "\n🌴快乐韭菜网：做一个快乐的韭菜， https://jiucai.fun";
   copy(str);
   snackbarStore.showSuccessMessage("复制成功");
 }
