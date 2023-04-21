@@ -95,6 +95,9 @@ async function loadMoreNews() {
   const request = new NewsRequest();
   request.startId = -1;
   request.endId = lastNews.id;
+  setTimeout(() => {
+    loadingRef.value = false;
+  }, 10000);
   const response: NewsResponse = await asyncAsk(request)
   loadingRef.value = false;
   console.log("news loadMore:" + response);
