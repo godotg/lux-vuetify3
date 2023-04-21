@@ -156,24 +156,26 @@ function copyNews(news: News) {
         <v-card-subtitle>
           {{ newsEle.title }}
         </v-card-subtitle>
-        <v-card-text>
+        <v-card-text class="text-pre-wrap">
           {{ newsEle.content }}
         </v-card-text>
         <v-card-actions
           v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
           <div>
             <template v-if="!_.isEmpty(newsEle.stocks)">
-              <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small">
+              <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small" class="mr-1">
                 {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
               </v-chip>
             </template>
             <template v-if="!_.isEmpty(newsEle.industries)">
-              <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined">
+              <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward" color="primary"></v-icon>
+              <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined" class="mr-1">
                 {{ industry.name }} {{ industry.rise }}
               </v-chip>
             </template>
             <template v-if="!_.isEmpty(newsEle.subjects)">
-              <v-chip v-for="subject in newsEle.subjects" size="x-small">
+              <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries)" icon="mdi-slash-forward" color="primary"></v-icon>
+              <v-chip v-for="subject in newsEle.subjects" size="x-small" class="mr-1">
                 {{ subject }}
               </v-chip>
             </template>
@@ -195,23 +197,25 @@ function copyNews(news: News) {
             <v-card-subtitle>
               {{ newsEle.title }}
             </v-card-subtitle>
-            <v-card-text>
+            <v-card-text class="text-pre-wrap">
               {{ newsEle.content }}
             </v-card-text>
             <v-card-actions v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
               <div>
                 <template v-if="!_.isEmpty(newsEle.stocks)">
-                  <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small">
+                  <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small" class="mr-1">
                     {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
                   </v-chip>
                 </template>
                 <template v-if="!_.isEmpty(newsEle.industries)">
-                  <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined">
+                  <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward" color="primary"></v-icon>
+                  <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined" class="mr-1">
                     {{ industry.name }} {{ industry.rise }}
                   </v-chip>
                 </template>
                 <template v-if="!_.isEmpty(newsEle.subjects)">
-                  <v-chip v-for="subject in newsEle.subjects" size="x-small">
+                  <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries)" icon="mdi-slash-forward" color="primary"></v-icon>
+                  <v-chip v-for="subject in newsEle.subjects" size="x-small" class="mr-1">
                     {{ subject }}
                   </v-chip>
                 </template>
