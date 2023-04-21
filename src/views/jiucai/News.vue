@@ -118,7 +118,7 @@ function updateNewsRef(news: Array<News>) {
 
 function copyNews(news: News) {
   let str = "";
-  str = str + news.level + "级电报 " + news.ctime + "\n";
+  str = str + news.level + "级情报 " + news.ctime + "\n";
   str = str + "⚡" + news.title + "\n\n" + news.content;
   if (!_.isEmpty(news.stocks)) {
     str = str + "\n\n🎯股票:";
@@ -153,7 +153,7 @@ function copyNews(news: News) {
       <v-card v-for="newsEle in newsRef" class="mt-3" v-ripple @click="copyNews(newsEle)">
         <v-card-title>
           <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
-          级电报 {{ newsEle.ctime }}
+          级情报 {{ newsEle.ctime }}
         </v-card-title>
         <v-card-subtitle>
           {{ newsEle.title }}
@@ -194,7 +194,7 @@ function copyNews(news: News) {
           <v-card v-ripple @click="copyNews(newsEle)" max-width="1100px">
             <v-card-title>
               <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
-              级电报 {{ newsEle.ctime }}
+              级情报 {{ newsEle.ctime }}
             </v-card-title>
             <v-card-subtitle>
               {{ newsEle.title }}
