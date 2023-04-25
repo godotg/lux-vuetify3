@@ -62,7 +62,7 @@ const filterdTodoList = computed(() => {
                 alt="alt"
               />
             </v-avatar>
-            <div class="flex-1 mx-5">
+            <div class="flex-fill mx-5">
               <div
                 class="font-weight-bold"
                 :class="todo.completed ? 'text-decoration-line-through' : ''"
@@ -102,7 +102,7 @@ const filterdTodoList = computed(() => {
 <style scoped lang="scss">
 .todo-list {
   height: 100%;
-  overflow: scroll;
+
   .todo-item {
     transition: all 0.3s;
     border-bottom: 1px solid #eee;

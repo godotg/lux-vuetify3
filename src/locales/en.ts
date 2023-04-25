@@ -105,6 +105,7 @@ export default {
     masonry: "Vue-Masonry-Wall ",
     virtualList: "Virtual List ",
     virtualScroller: "Virtual Scroller ",
+    fakerApiRef: "Faker API Reference",
     charts: "Charts ",
     echartLine: "Echart Line ",
     echartBar: "Echart Bar ",
@@ -119,9 +120,12 @@ export default {
       topicsDataPage: "Topics Data",
       topicPhotosDataPage: "Topic Photos Data",
       fileUploadPreview: "File Upload Preview",
+      dynamicFormRender: "Dynamic Form Render",
+      customFormGeneration: "Custom Form Generation",
     },
-    chatbot_v1: "Chatbot v1",
-    chatbot_v2: "Chatbot v2",
+    chatbot_v1: "ChatBot v1",
+    chatbot_v2: "ChatBot v2(Stream)",
+    voicebot: "VoiceBot",
   },
 
   dashboard: {

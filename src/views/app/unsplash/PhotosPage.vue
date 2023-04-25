@@ -200,7 +200,7 @@ const openPhotoDialog = (id: string) => {
       <v-spacer></v-spacer>
       <v-btn color="">Go</v-btn>
     </v-toolbar>
-    <v-row>
+    <v-row no-gutters>
       <v-col cols="12" xl="10">
         <v-card class="mt-2">
           <v-tabs v-model="tab" bg-color="primary">
@@ -429,7 +429,7 @@ const openPhotoDialog = (id: string) => {
                         >
                         </v-img>
 
-                        <div class="pa-2 flex-1">
+                        <div class="pa-2 flex-fill">
                           <v-card-title>
                             {{ item.title }}
                           </v-card-title>
@@ -518,7 +518,7 @@ const openPhotoDialog = (id: string) => {
                           <v-avatar class="mr-5" size="avatarSize">
                             <img :src="item.profile_image.small" alt="alt" />
                           </v-avatar>
-                          <div class="flex-1">
+                          <div class="flex-fill">
                             <h5>{{ item.name }}</h5>
                             <h5>{{ item.username }}</h5>
                           </div>
@@ -577,7 +577,6 @@ const openPhotoDialog = (id: string) => {
         <FavoriteCard />
       </v-col>
     </v-row>
-
     <!-- SnackBar -->
     <v-snackbar v-model="snackbar.isShow" :timeout="snackbar.timeout">
       {{ snackbar.text }}

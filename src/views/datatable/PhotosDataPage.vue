@@ -7,8 +7,6 @@
 import { searchPhotosApi } from "@/api/unsplashApi";
 import CopyLabel from "@/components/common/CopyLabel.vue";
 import moment from "moment";
-import { useSnackbarStore } from "@/stores/snackbarStore";
-const snackbarStore = useSnackbarStore();
 
 const loading = ref(true);
 const totalRows = ref(0);
@@ -47,7 +45,7 @@ const getPhotos = async () => {
       color: photo.color,
       size: photo.width + " x " + photo.height,
       alt_description: photo.alt_description,
-      thumb: photo.urls.thumb,
+      thumb: photo.urls,
       download: photo.links.download,
       likes: photo.likes,
       tags: photo.tags,
@@ -60,8 +58,10 @@ const getPhotos = async () => {
 };
 
 const onUpdateOptions = async (options) => {
-  queryOptions.per_page = options.itemsPerPage;
+  if (!queryOptions.query) return;
   queryOptions.page = options.page;
+  queryOptions.per_page = options.itemsPerPage;
+
   await getPhotos();
 };
 
@@ -77,6 +77,13 @@ const downloadPhoto = (photo) => {
   a.download = photo.id + ".jpg";
   a.click();
 };
+
+const imgOverlay = ref(false);
+const imgSrc = ref("");
+const previewImg = (url) => {
+  imgSrc.value = url;
+  imgOverlay.value = true;
+};
 </script>
 
 <template>
@@ -85,20 +92,22 @@ const downloadPhoto = (photo) => {
       <v-card-title class="font-weight-bold">
         <span> Unsplash Photos</span>
         <v-spacer></v-spacer>
-        <v-text-field
-          v-model="queryOptions.query"
-          variant="solo"
-          class="elevation-1"
-          append-icon="mdi-magnify"
-          @click:append="getPhotos"
-          label="Search"
-          single-line
-          hide-details
-          clearable
-        ></v-text-field>
+        <div class="w-25">
+          <v-text-field
+            v-model="queryOptions.query"
+            variant="solo"
+            prepend-inner-icon="mdi-magnify"
+            @click:append="getPhotos"
+            label="Search"
+            single-line
+            hide-details
+            clearable
+            density="compact"
+          ></v-text-field>
+        </div>
       </v-card-title>
-      <hr />
-      <v-card-text>
+      <v-divider />
+      <div>
         <v-data-table-server
           :headers="headers"
           :items="photosList"
@@ -130,12 +139,22 @@ const downloadPhoto = (photo) => {
 
               <td>{{ item.columns.alt_description }}</td>
               <td class="pa-2">
-                <v-img :src="item.columns.thumb" max-width="100px" />
+                <v-img
+                  :src="item.columns.thumb.thumb"
+                  height="100"
+                  width="160"
+                  cover
+                  class="rounded-lg v-card--link"
+                  @click="previewImg(item.columns.thumb.regular)"
+                />
               </td>
 
               <td>
-                <v-btn icon @click="downloadPhoto(item.columns)">
-                  <v-icon>mdi-download</v-icon>
+                <v-btn variant="flat" icon @click="downloadPhoto(item.columns)">
+                  <img
+                    width="26"
+                    src="https://img.icons8.com/fluency/48/null/down.png"
+                  />
                 </v-btn>
               </td>
               <td>
@@ -151,7 +170,7 @@ const downloadPhoto = (photo) => {
                 <v-chip
                   v-for="tag in item.columns.tags"
                   variant="outlined"
-                  color="primary"
+                  color="grey"
                   size="small"
                   class="font-weight-bold mr-1"
                 >
@@ -164,8 +183,20 @@ const downloadPhoto = (photo) => {
             </tr>
           </template>
         </v-data-table-server>
-      </v-card-text>
+      </div>
     </v-card>
+    <v-overlay
+      v-model="imgOverlay"
+      location-strategy="connected"
+      scroll-strategy="none"
+    >
+      <div
+        @click="imgOverlay = false"
+        class="w-screen h-screen d-flex align-center justify-center"
+      >
+        <v-img height="80%" :src="imgSrc" />
+      </div>
+    </v-overlay>
   </div>
 </template>
 

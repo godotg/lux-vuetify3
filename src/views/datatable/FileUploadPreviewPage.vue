@@ -180,10 +180,10 @@ const filterdFileInfos = computed(() => {
       v-if="fileInfos.length === 0"
     >
       <div class="text-center">
-        <h3 class="text-h3 font-weight-bold text-primary">
+        <h3 class="text-h5 text-md-h3 font-weight-bold text-primary">
           Upload Some Images
         </h3>
-        <AnimationUpload />
+        <AnimationUpload :size="300" />
       </div>
     </v-sheet>
     <v-sheet v-else>
@@ -212,7 +212,7 @@ const filterdFileInfos = computed(() => {
               </v-card-text>
               <v-divider></v-divider>
               <div class="d-flex align-center pa-3">
-                <div class="flex-1">
+                <div class="flex-fill">
                   <h5 class="text-h6 font-weight-bold">{{ fileInfo.name }}</h5>
                   <h6 class="text-grey">
                     {{ fileInfo.suffix }} {{ fileInfo.imageSize }}
@@ -281,8 +281,4 @@ const filterdFileInfos = computed(() => {
   </v-sheet>
 </template>
 
-<style scoped lang="scss">
-.view {
-  height: 800px;
-}
-</style>
+<style scoped lang="scss"></style>

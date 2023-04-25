@@ -31,13 +31,13 @@
 <a href="https://github.com/yangjiakai/jk-vuetify3-lux-admin/blob/main/README.md">English</a> | <a href="https://github.com/yangjiakai/jk-vuetify3-lux-admin/blob/main/README.zh-CN.md">简体中文</a>| <b >日本語</b>
 </p>
 
-## 序文
+## 📖 序文
 
 > 目標は、最も優れた Vuetify 3 の Admin オープンソーステンプレートを作成することです。
 
 Vuetify の洗練されたテーマを基盤に、明確で効率的なプロジェクト構造を構築し、最新の技術フレームワークを統合しています。このプロジェクトは、さまざまな一般的な技術要件や機能に対応することを目指し、AI アシスタントを組み込むことで、よりインテリジェントな体験を提供します。さらに、すべてのページが複数のデバイスで適応的に表示されるようにし、シームレスなクロスプラットフォーム互換性を実現しています。
 
-## 特徴
+## 📚 特徴
 
 - 📖 [Vue 3.2](https://github.com/vuejs/core)
 - 📖 [Vite 4.x](https://github.com/vitejs/vite)
@@ -56,13 +56,17 @@ Vuetify の洗練されたテーマを基盤に、明確で効率的なプロジ
 - 📝 Rich Text Editor
 - 📇 Responsive multi-platform adaptive
 
-## Contact Me
+## 📈 Project Activity
+
+![Alt](https://repobeats.axiom.co/api/embed/306361b2af1a8556f64a0a828e1726a94bff36f0.svg "Repobeats analytics image")
+
+## 💬 連絡
 
 - Email <a href="mailto:yjkbako@gmail.com">yjkbako@gmail.com</a>
 - Twitter https://twitter.com/baibaixiang
 - Wechat <img  src='/src/assets/wechat-qrcode.png'  alt='DashBoard' width='300' />
 
-## プレビュー
+## 💌 プレビュー
 
 <img  src='/src/assets/previews/DashBoard.png'  alt='DashBoard' />
 <img  src='/src/assets/previews/TaskBoard.png'  alt='ChatGPT' />
@@ -78,18 +82,18 @@ Vuetify の洗練されたテーマを基盤に、明確で効率的なプロジ
 
 <br>
 
-## プリパック
+## 📦 プリパック
 
-### UI Frameworks
+### 🏷️UI Frameworks
 
 - [Vuetify3](https://next.vuetifyjs.com/en/) - Vuetify は、美しく手作りされた Vue コンポーネントで構成された、デザインスキル不要の UI フレームワークです。
 
-### Icons
+### 🏷️Icons
 
 - [Iconify](https://iconify.design) - 任意のアイコンセットを使用 [🔍Icônes](https://icones.netlify.app/)
 - [Pure CSS Icons via UnoCSS](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
 
-### プラグイン
+### 🏷️ プラグイン
 
 - [Vue Router4](https://router.vuejs.org/)
 - [VueUse](https://github.com/antfu/vueuse) - 便利なコンポジション API 集
@@ -97,7 +101,7 @@ Vuetify の洗練されたテーマを基盤に、明確で効率的なプロジ
 - [Vue-Masonry-Wall](https://github.com/DerYeger/yeger/tree/main/packages/vue-masonry-wall) -Vue 3 のレスポンシブな Masonry レイアウト SSR をサポートしています
 - [Vue-Virtual-Scroller](https://github.com/Akryum/vue-virtual-scroller) - 超高速の任意のデータ量のスクロール
 
-## 今すぐ試す!
+## 👻 今すぐ試す!
 
 ```
 git clone https://github.com/yangjiakai/lux-admin-vuetify3.git
@@ -109,12 +113,14 @@ npm install
 npm run dev
 ```
 
-### Set ApiKey
+### 🔑Set ApiKey
 
-Find the `.env.template` file in the root directory, remove the `.template` suffix, and replace` VITE_OPENAI_API_KEY`, `VITE_UNSPLASH_ACCESS_KEY`, and `VITE_GITHUB_CLIENT_ID` with your own keys.
+Find the `.env.template` file in the root directory, remove the `.template` suffix, and replace` VITE_OPENAI_API_KEY`, `VITE_UNSPLASH_ACCESS_KEY`, and `VITE_GITHUB_CLIENT_ID`, and `VITE_TTS_KEY` and `VITE_TTS_REGION` with your own keys.
 
 > openai apikey： https://platform.openai.com/account/api-keys
 
 > unsplash apikey： https://unsplash.com/oauth/applications
 
 > github apikey： https://github.com/settings/tokens
+
+> azure textToSpeech : https://speech.microsoft.com/

@@ -23,10 +23,10 @@ const headers = [
   { title: "拥有者", key: "user" },
   { title: "照片数量", key: "total_photos", align: "center" },
 
-  { title: "封面图", key: "cover_photo" },
-  { title: "预览图", key: "preview_photos" },
+  { title: "封面图", key: "cover_photo", align: "center" },
+  { title: "预览图", key: "preview_photos", align: "center" },
   { title: "链接", key: "links" },
-  { title: "标签", key: "tags" },
+  { title: "标签", key: "tags", width: "300px", align: "center" },
   { title: "发布时间", key: "published_at" },
 ];
 
@@ -57,9 +57,17 @@ const getCollections = async () => {
 };
 
 const onUpdateOptions = async (options) => {
+  if (!queryOptions.query) return;
   queryOptions.per_page = options.itemsPerPage;
   queryOptions.page = options.page;
   await getCollections();
+};
+
+const imgOverlay = ref(false);
+const imgSrc = ref("");
+const previewImg = (url) => {
+  imgSrc.value = url;
+  imgOverlay.value = true;
 };
 </script>
 
@@ -69,20 +77,22 @@ const onUpdateOptions = async (options) => {
       <v-card-title class="font-weight-bold">
         <span> Unsplash Collections</span>
         <v-spacer></v-spacer>
-        <v-text-field
-          v-model="queryOptions.query"
-          variant="solo"
-          class="elevation-1"
-          append-icon="mdi-magnify"
-          @click:append="getCollections"
-          label="Search"
-          single-line
-          hide-details
-          clearable
-        ></v-text-field>
+        <div class="w-25">
+          <v-text-field
+            v-model="queryOptions.query"
+            variant="solo"
+            prepend-inner-icon="mdi-magnify"
+            @click:append="getCollections"
+            label="Search"
+            single-line
+            hide-details
+            clearable
+            density="compact"
+          ></v-text-field>
+        </div>
       </v-card-title>
-      <hr />
-      <v-card-text>
+      <v-divider />
+      <div>
         <v-data-table-server
           :headers="headers"
           :items="collectionList"
@@ -97,8 +107,8 @@ const onUpdateOptions = async (options) => {
         >
           <template v-slot:item="{ item }">
             <tr>
-              <td>{{ item.columns.id }}</td>
-              <td>{{ item.columns.title }}</td>
+              <td># {{ item.columns.id }}</td>
+              <td class="font-weight-bold">{{ item.columns.title }}</td>
               <td class="font-weight-bold">
                 <v-avatar size="30" class="mr-2">
                   <img :src="item.columns.user.profile_image.small" alt="alt" />
@@ -115,17 +125,26 @@ const onUpdateOptions = async (options) => {
               <td class="pa-2">
                 <v-img
                   :src="item.columns.cover_photo.urls.thumb"
-                  max-width="100px"
+                  height="100"
+                  width="160"
+                  cover
+                  class="rounded-lg v-card--link"
+                  @click="previewImg(item.columns.cover_photo.urls.regular)"
                 />
               </td>
               <td>
-                <!-- <v-img
-                  v-for="photo in item.columns.preview_photos"
-                  :key="photo.id"
-                  :src="photo.urls.thumb"
-                  max-width="100px"
-                  class="mr-2"
-                /> -->
+                <div class="d-flex align-center">
+                  <v-img
+                    v-for="photo in item.columns.preview_photos"
+                    :key="photo.id"
+                    :src="photo.urls.thumb"
+                    @click="previewImg(photo.urls.regular)"
+                    height="100"
+                    width="60"
+                    cover
+                    class="mr-2 rounded-lg v-card--link"
+                  />
+                </div>
               </td>
               <td>
                 <CopyLabel :text="item.columns.links.html" />
@@ -135,9 +154,9 @@ const onUpdateOptions = async (options) => {
                 <v-chip
                   v-for="tag in item.columns.tags"
                   variant="outlined"
-                  color="primary"
+                  color="grey"
                   size="small"
-                  class="font-weight-bold mr-1"
+                  class="font-weight-bold mx-1 my-1"
                 >
                   {{ tag.title }}
                 </v-chip>
@@ -154,8 +173,20 @@ const onUpdateOptions = async (options) => {
             </tr>
           </template>
         </v-data-table-server>
-      </v-card-text>
+      </div>
     </v-card>
+    <v-overlay
+      v-model="imgOverlay"
+      location-strategy="connected"
+      scroll-strategy="none"
+    >
+      <div
+        @click="imgOverlay = false"
+        class="w-screen h-screen d-flex align-center justify-center"
+      >
+        <v-img height="80%" :src="imgSrc" />
+      </div>
+    </v-overlay>
   </div>
 </template>
 

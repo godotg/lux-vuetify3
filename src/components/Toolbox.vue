@@ -45,7 +45,7 @@ const toolboxShow = ref(false);
           text="Close Toolbox"
         ></v-tooltip>
       </v-btn>
-      <hr />
+      <v-divider />
       <!-- ---------------------------------------------- -->
       <!-- ApiKey -->
       <!-- ---------------------------------------------- -->
@@ -63,17 +63,17 @@ const toolboxShow = ref(false);
         ></v-tooltip>
       </v-btn>
       <ApiKeyDialog />
-      <hr />
+      <v-divider />
       <!-- ---------------------------------------------- -->
       <!-- Chat Assistant -->
       <!-- ---------------------------------------------- -->
       <ChatAssistant />
-      <hr />
+      <v-divider />
       <!-- ---------------------------------------------- -->
       <!-- Translation Assistant -->
       <!-- ---------------------------------------------- -->
       <TranslationAssistant />
-      <hr />
+      <v-divider />
       <!-- ---------------------------------------------- -->
       <!-- Code Assistant -->
       <!-- ---------------------------------------------- -->
@@ -105,14 +105,14 @@ const toolboxShow = ref(false);
   z-index: 999;
   position: fixed;
   bottom: 150px;
-  right: 20px;
+  right: 5px;
 }
 
 .toolbox-activator {
   position: fixed;
   transition: all 0.3s ease;
   bottom: 100px;
-  right: 20px;
+  right: 5px;
   z-index: 999;
   padding: 0.5rem;
   border-radius: 0.5rem;

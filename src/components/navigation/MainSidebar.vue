@@ -14,12 +14,30 @@ const navigation = ref(configs.navigation);
 const openGithubSite = () => {
   window.open("https://github.com/yangjiakai", "_blank");
 };
+
+onMounted(() => {
+  scrollToBottom();
+});
+
+const scrollToBottom = () => {
+  const contentArea = document.querySelector(".v-navigation-drawer__content");
+  const activeItem = document.querySelector(
+    ".v-list-item--active"
+  ) as HTMLElement;
+
+  setTimeout(() => {
+    contentArea?.scrollTo({
+      top: activeItem?.offsetTop,
+    });
+  }, 100);
+};
 </script>
 
 <template>
   <v-navigation-drawer
-    v-model="customizeTheme.mainSidebar"
+    border="none"
     elevation="1"
+    v-model="customizeTheme.mainSidebar"
     id="mainMenu"
   >
     <!-- ---------------------------------------------- -->
@@ -27,7 +45,7 @@ const openGithubSite = () => {
     <!-- ---------------------------------------------- -->
     <template v-if="!customizeTheme.miniSidebar" v-slot:prepend>
       <v-card
-        elevation="0"
+        style="box-shadow: rgba(0, 0, 0, 0.05) 0px 25px 15px -20px"
         height="100"
         class="d-flex align-center justify-center"
       >
@@ -49,9 +67,9 @@ const openGithubSite = () => {
     <!-- ---------------------------------------------- -->
     <!---Nav List -->
     <!-- ---------------------------------------------- -->
-    <perfect-scrollbar class="scrollnav">
-      <main-menu :menu="navigation.menu"></main-menu>
-    </perfect-scrollbar>
+
+    <main-menu :menu="navigation.menu"></main-menu>
+
     <!-- ---------------------------------------------- -->
     <!---Bottom Area -->
     <!-- ---------------------------------------------- -->

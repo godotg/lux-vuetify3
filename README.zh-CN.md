@@ -31,13 +31,13 @@
 <a href="https://github.com/yangjiakai/jk-vuetify3-lux-admin/blob/main/README.md">English</a> | <b>简体中文</b>| <a href="https://github.com/yangjiakai/jk-vuetify3-lux-admin/blob/main/README.jp.md">日本語</a>
 </p>
 
-## 序文
+## 📖 序文
 
 > 目标创造最优秀的 vuetify3 的 Admin 开源模板
 
 在 Vuetify 精美的主题基础上，我们构建了一个清晰且高效的项目逻辑架构，整合了最新的技术框架。本项目旨在实现各种常见的技术需求和功能，同时融合了 AI 助手，以提供更智能化的体验。此外，我们确保所有页面在多种设备上均能自适应展示，实现优雅的跨平台兼容性。
 
-## 特性
+## 📚 特性
 
 - 📖 [Vue 3.2](https://github.com/vuejs/core)
 - 📖 [Vite 4.x](https://github.com/vitejs/vite)
@@ -56,13 +56,17 @@
 - 📝 富文本编辑器
 - 📇 响应式多平台自适应
 
-## 联络我
+## 📈 项目活跃度
+
+![Alt](https://repobeats.axiom.co/api/embed/306361b2af1a8556f64a0a828e1726a94bff36f0.svg "Repobeats analytics image")
+
+## 💬 联络我
 
 - 邮箱 <a href="mailto:yjkbako@gmail.com">yjkbako@gmail.com</a>
 - 推特 https://twitter.com/baibaixiang
 - 微信 <img  src='/src/assets/wechat-qrcode.png'  alt='DashBoard' width='300' />
 
-## 预览
+## 💌 预览
 
 <img  src='/src/assets/previews/DashBoard.png'  alt='DashBoard' />
 <img  src='/src/assets/previews/TaskBoard.png'  alt='ChatGPT' />
@@ -77,13 +81,14 @@
 <img  src='/src/assets/previews/Unsplash2.png'  alt='ChatGPT' />
 
 <br>
-## Pre-packed
 
-### UI 框架
+## 📦Pre-packed
+
+### 🏷️UI 框架
 
 - [Vuetify3](https://next.vuetifyjs.com/en/) - Vuetify 是一个不要求设计能力的 Vue 界面组件框架，自带了许多自行设计实现的 Vue 组件。
 
-### Icons
+### 🏷️Icons
 
 - [Iconify](https://iconify.design) - 使用任意的图标集 [🔍Icônes](https://icones.netlify.app/)
 - [Pure CSS Icons via UnoCSS](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
@@ -126,7 +131,7 @@
 
 - [ ] ......
 
-### 插件
+### 🏷️ 插件
 
 - [Vue Router4](https://router.vuejs.org/)
 - [VueUse](https://github.com/antfu/vueuse) - 非常有用的组合式 API 合集
@@ -134,7 +139,7 @@
 - [Vue-Masonry-Wall](https://github.com/DerYeger/yeger/tree/main/packages/vue-masonry-wall) - 是一种 Vue3 响应式,支持 SSR,且零依的的瀑布流布局方案
 - [Vue-Virtual-Scroller](https://github.com/Akryum/vue-virtual-scroller) - 大数据快速虚拟滚动插件
 
-## 现在可以试试!
+## 👻 现在可以试试!
 
 ```
 git clone https://github.com/yangjiakai/lux-admin-vuetify3.git
@@ -146,13 +151,15 @@ npm install
 npm run dev
 ```
 
-### 配置 ApiKey
+### 🔑 配置 ApiKey
 
 找到根目录下的`.env.template`文件，去掉`.template`后缀
-把`VITE_OPENAI_API_KEY`,`VITE_UNSPLASH_ACCESS_KEY`,`VITE_GITHUB_CLIENT_ID`分别替换成你自己的 Key
+把`VITE_OPENAI_API_KEY`,`VITE_UNSPLASH_ACCESS_KEY`,`VITE_GITHUB_CLIENT_ID`,`VITE_TTS_KEY` , `VITE_TTS_REGION`分别替换成你自己的
 
 > openai apikey： https://platform.openai.com/account/api-keys
 
 > unsplash apikey： https://unsplash.com/oauth/applications
 
 > github apikey： https://github.com/settings/tokens
+
+> azure textToSpeech : https://speech.microsoft.com/

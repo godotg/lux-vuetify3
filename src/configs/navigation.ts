@@ -41,7 +41,7 @@ export default {
       items: menuApps,
     },
     {
-      text: "Data Tables",
+      text: "Data",
       items: menuData,
     },
     {
