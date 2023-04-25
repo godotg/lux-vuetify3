@@ -59,6 +59,7 @@ function initNews() {
     doInitNews();
   }, 1000);
 }
+
 async function doInitNews() {
   if (!isWebsocketReady()) {
     initNews();
@@ -123,6 +124,9 @@ function copyNews(news: News) {
   let str = "";
   str = str + news.level + "级情报 " + news.ctime + "\n";
   str = str + "⚡" + news.title + "\n\n" + news.content;
+  if (!_.isEmpty(news.stocks) || !_.isEmpty(news.industries) || !_.isEmpty(news.subjects)) {
+    str = str + "\n🎯股票:";
+  }
   if (!_.isEmpty(news.stocks)) {
     str = str + "\n\n🎯股票:";
     for (const stock of news.stocks) {
@@ -174,12 +178,14 @@ function copyNews(news: News) {
             </template>
             <template v-if="!_.isEmpty(newsEle.industries)">
               <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward" color="primary"></v-icon>
-              <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined" class="mr-1">
+              <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined"
+                      class="mr-1">
                 {{ industry.name }} {{ industry.rise }}
               </v-chip>
             </template>
             <template v-if="!_.isEmpty(newsEle.subjects)">
-              <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries)" icon="mdi-slash-forward" color="primary"></v-icon>
+              <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries)" icon="mdi-slash-forward"
+                      color="primary"></v-icon>
               <v-chip v-for="subject in newsEle.subjects" size="x-small" class="mr-1">
                 {{ subject }}
               </v-chip>
@@ -205,7 +211,8 @@ function copyNews(news: News) {
             <v-card-text class="text-pre-wrap">
               {{ newsEle.content }}
             </v-card-text>
-            <v-card-actions v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
+            <v-card-actions
+              v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
               <div>
                 <template v-if="!_.isEmpty(newsEle.stocks)">
                   <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small" class="mr-1">
@@ -214,12 +221,14 @@ function copyNews(news: News) {
                 </template>
                 <template v-if="!_.isEmpty(newsEle.industries)">
                   <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward" color="primary"></v-icon>
-                  <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined" class="mr-1">
+                  <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined"
+                          class="mr-1">
                     {{ industry.name }} {{ industry.rise }}
                   </v-chip>
                 </template>
                 <template v-if="!_.isEmpty(newsEle.subjects)">
-                  <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries)" icon="mdi-slash-forward" color="primary"></v-icon>
+                  <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries)" icon="mdi-slash-forward"
+                          color="primary"></v-icon>
                   <v-chip v-for="subject in newsEle.subjects" size="x-small" class="mr-1">
                     {{ subject }}
                   </v-chip>
