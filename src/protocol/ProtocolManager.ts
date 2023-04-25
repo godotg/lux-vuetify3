@@ -26,6 +26,9 @@ import NewsStock from './news/NewsStock';
 import NewsIndustry from './news/NewsIndustry';
 import NewsRequest from './news/NewsRequest';
 import NewsResponse from './news/NewsResponse';
+import GaiNian from './gn/GaiNian';
+import GnRequest from './gn/GnRequest';
+import GnResponse from './gn/GnResponse';
 
 const protocols = new Map<number, any>();
 
@@ -58,6 +61,9 @@ protocols.set(201, NewsStock);
 protocols.set(202, NewsIndustry);
 protocols.set(203, NewsRequest);
 protocols.set(204, NewsResponse);
+protocols.set(220, GaiNian);
+protocols.set(221, GnRequest);
+protocols.set(222, GnResponse);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
