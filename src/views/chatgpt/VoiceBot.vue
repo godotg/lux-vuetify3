@@ -18,6 +18,8 @@ import AnimaitonCss02 from "@/components/animations/AnimaitonCss02.vue";
 import { useSpeechStore } from "@/stores/speechStore";
 
 import { createTranscriptionApi, createCompletionApi } from "@/api/aiApi";
+import VoiceConfigDialog from "@/components/ai/VoiceConfigDialog.vue";
+
 const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
 const speechStore = useSpeechStore();
@@ -31,7 +33,7 @@ interface Message {
 const messages = ref<Message[]>([
   {
     content:
-      "想象我们是朋友，和我进行轻松有趣的对话。我们可以聊天天气、音乐、电影、运动或者日常生活等话题。请尽情地与我互动并回应我的问题，让我们像朋友一样自然地交流。",
+      "想象我们是朋友,和我进行轻松有趣的对话。我们可以聊天天气、音乐、电影、运动或者日常生活等话题。请尽情地与我互动并回应我的问题,让我们像朋友一样自然地交流。并且我会多种语言,我会用不同的语言跟你交流,比如说我当前的问题是中文时,希望你下个回答用中文,我当前的问题是英文时,你的下个回答用英文,我当前的问题是日语时,你的下个回答是日语",
     role: "system",
   },
 ]);
@@ -75,6 +77,7 @@ const createCompletion = async () => {
         model: "gpt-3.5-turbo",
         temperature: 1,
         n: 1,
+        max_tokens: 100,
       },
       chatStore.getApiKey
     );
@@ -224,6 +227,7 @@ const state = reactive({
 
       <AnimationAi :size="300" />
     </div>
+
     <v-sheet
       elevation="0"
       color="transparent"
@@ -253,6 +257,23 @@ const state = reactive({
         ><v-icon>mdi-microphone</v-icon></v-btn
       >
     </v-sheet>
+
+    <span class="config">
+      <VoiceConfigDialog />
+
+      <span class="ml-2 text-h6 font-weight-bold text-primary">{{
+        speechStore.localName
+      }}</span>
+      <v-chip
+        density="comfortable"
+        class="d-none d-sm-inline ml-1 font-weight-bold"
+        label
+        size="small"
+        color="primary"
+      >
+        {{ speechStore.speechSynthesisLanguage }}</v-chip
+      >
+    </span>
   </v-card>
 </template>
 
@@ -298,5 +319,13 @@ const state = reactive({
 .bg {
   background-image: url("@/assets/images/chat-bg-2.png");
   background-repeat: repeat;
+  position: relative;
+}
+
+.config {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  margin: 30px;
 }
 </style>
