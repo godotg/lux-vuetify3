@@ -3,6 +3,9 @@ import {asyncAsk, isWebsocketReady} from "@/utils/websocket";
 import News from "@/protocol/news/News";
 import NewsRequest from "@/protocol/news/NewsRequest";
 import NewsResponse from "@/protocol/news/NewsResponse";
+import GaiNian from "@/protocol/gn/GaiNian";
+import GnRequest from "@/protocol/gn/GnRequest";
+import GnResponse from "@/protocol/gn/GnResponse";
 import _ from "lodash";
 import {useClipboard} from "@vueuse/core";
 import {useSnackbarStore} from "@/stores/snackbarStore";
@@ -14,6 +17,7 @@ const {mobile} = useDisplay()
 
 
 const newsRef = ref<News[]>([]);
+const gnRef = ref<GaiNian[]>([]);
 const loadingRef = ref(false);
 
 
@@ -47,16 +51,16 @@ const levelMap = {
 
 
 onMounted(() => {
-  console.log("news on mounted");
+  console.log("news on mounted-----------------------------------------");
   initNews();
-  setInterval(() => {
-    requestNews();
-  }, 10000)
+  setInterval(() => requestNews(), 10000);
+  setInterval(() => requestGn(), 60000);
 });
 
 function initNews() {
   setTimeout(() => {
     doInitNews();
+    requestGn();
   }, 1000);
 }
 
@@ -69,7 +73,7 @@ async function doInitNews() {
   request.startId = -1;
   request.endId = -1;
   const response: NewsResponse = await asyncAsk(request)
-  console.log("news init:" + response);
+  console.log("news init ----------------------------------------");
   updateNewsRef(response.news)
 }
 
@@ -82,8 +86,14 @@ async function requestNews() {
   request.startId = firstNews.id + 1;
   request.endId = -1;
   const response: NewsResponse = await asyncAsk(request)
-  console.log("news request response:" + response);
+  console.log("news request response ----------------------------------");
   updateNewsRef(response.news);
+}
+
+async function requestGn() {
+  const request = new GnRequest();
+  const response: GnResponse = await asyncAsk(request)
+  gnRef.value = response.gns;
 }
 
 async function loadMoreNews() {
@@ -99,9 +109,9 @@ async function loadMoreNews() {
   setTimeout(() => {
     loadingRef.value = false;
   }, 10000);
+  console.log("news loadMore --------------------------------------");
   const response: NewsResponse = await asyncAsk(request)
   loadingRef.value = false;
-  console.log("news loadMore:" + response);
   updateNewsRef(response.news);
 }
 
@@ -119,6 +129,15 @@ function updateNewsRef(news: Array<News>) {
   newsRef.value = newNews;
 }
 
+function copyGn(gn: GaiNian) {
+  let str = "";
+  str = str + gn.level + "级电报 " + gn.ctime + "\n";
+  str = str + "⚡" + gn.title + "\n\n" + gn.content + "\n\n";
+  str = str + gn.url + "\n\n";
+  str = str + "🌴快乐韭菜网：做一个快乐的韭菜， https://jiucai.fun";
+  copy(str);
+  snackbarStore.showSuccessMessage("复制成功");
+}
 
 function copyNews(news: News) {
   let str = "";
@@ -157,6 +176,23 @@ function copyNews(news: News) {
 <template>
   <v-container>
     <template v-if="mobile">
+      <v-card v-for="gnEle in gnRef" class="mt-3" v-ripple @click="copyGn(gnEle)">
+        <v-card-title>
+          <v-icon :color="levelMap[gnEle.level].color" :icon="levelMap[gnEle.level].icon"></v-icon>
+          级情报 {{ gnEle.ctime }}
+        </v-card-title>
+        <v-card-subtitle>
+          {{ gnEle.title }}
+        </v-card-subtitle>
+        <v-card-text class="text-pre-wrap">
+          {{ gnEle.content }}
+        </v-card-text>
+        <v-card-text class="text-pre-wrap">
+          <a :href="gnEle.url" class="text-blue" target="_blank">
+            {{ gnEle.url }}
+          </a>
+        </v-card-text>
+      </v-card>
       <v-card v-for="newsEle in newsRef" class="mt-3" v-ripple @click="copyNews(newsEle)">
         <v-card-title>
           <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
@@ -195,6 +231,30 @@ function copyNews(news: News) {
       </v-card>
     </template>
     <v-timeline v-else density="compact" side="end">
+      <template v-for="gnEle in gnRef">
+        <v-timeline-item fill-dot :dot-color="levelMap[gnEle.level].color" :size="levelMap[gnEle.level].size">
+          <template v-slot:icon>
+            <span>{{ gnEle.level }}</span>
+          </template>
+          <v-card v-ripple @click="copyGn(gnEle)" max-width="1100px">
+            <v-card-title>
+              <v-icon :color="levelMap[gnEle.level].color" :icon="levelMap[gnEle.level].icon"></v-icon>
+              级情报 {{ gnEle.ctime }}
+            </v-card-title>
+            <v-card-subtitle>
+              {{ gnEle.title }}
+            </v-card-subtitle>
+            <v-card-text class="text-pre-wrap">
+              {{ gnEle.content }}
+            </v-card-text>
+            <v-card-text class="text-pre-wrap">
+              <a :href="gnEle.url" class="text-blue" target="_blank">
+                {{ gnEle.url }}
+              </a>
+            </v-card-text>
+          </v-card>
+        </v-timeline-item>
+      </template>
       <template v-for="newsEle in newsRef">
         <v-timeline-item fill-dot :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
           <template v-slot:icon>

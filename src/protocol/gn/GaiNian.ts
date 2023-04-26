@@ -6,6 +6,7 @@ class GaiNian {
     level: string = '';
     title: string = '';
     content: string = '';
+    url: string = '';
     ctime: string = '';
 
     static PROTOCOL_ID: number = 220;
@@ -23,6 +24,7 @@ class GaiNian {
         buffer.writeLong(packet.id);
         buffer.writeString(packet.level);
         buffer.writeString(packet.title);
+        buffer.writeString(packet.url);
     }
 
     static read(buffer: any): GaiNian | null {
@@ -40,6 +42,8 @@ class GaiNian {
         packet.level = result3;
         const result4 = buffer.readString();
         packet.title = result4;
+        const result5 = buffer.readString();
+        packet.url = result5;
         return packet;
     }
 }
