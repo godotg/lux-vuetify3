@@ -7,11 +7,9 @@ import GaiNian from "@/protocol/gn/GaiNian";
 import GnRequest from "@/protocol/gn/GnRequest";
 import GnResponse from "@/protocol/gn/GnResponse";
 import _ from "lodash";
-import {useClipboard} from "@vueuse/core";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useDisplay} from "vuetify";
-
-const {copy} = useClipboard();
+import clipboard from "@/utils/clipboardUtils";
 const snackbarStore = useSnackbarStore();
 const {mobile} = useDisplay()
 
@@ -129,17 +127,17 @@ function updateNewsRef(news: Array<News>) {
   newsRef.value = newNews;
 }
 
-function copyGn(gn: GaiNian) {
+function copyGn(gn: GaiNian, event: Event) {
   let str = "";
   str = str + gn.level + "级电报 " + gn.ctime + "\n";
   str = str + "⚡" + gn.title + "\n\n" + gn.content + "\n\n";
   str = str + gn.url + "\n\n";
   str = str + "🌴快乐韭菜网：做一个快乐的韭菜， https://jiucai.fun";
-  copy(str);
+  clipboard(str, event);
   snackbarStore.showSuccessMessage("复制成功");
 }
 
-function copyNews(news: News) {
+function copyNews(news: News, event: Event) {
   let str = "";
   str = str + news.level + "级情报 " + news.ctime + "\n";
   str = str + "⚡" + news.title + "\n\n" + news.content;
@@ -166,7 +164,7 @@ function copyNews(news: News) {
     }
   }
   str = str + "\n🌴快乐韭菜网：做一个快乐的韭菜， https://jiucai.fun";
-  copy(str);
+  clipboard(str, event);
   snackbarStore.showSuccessMessage("复制成功");
 }
 
@@ -176,7 +174,7 @@ function copyNews(news: News) {
 <template>
   <v-container>
     <template v-if="mobile">
-      <v-card v-for="gnEle in gnRef" class="mt-3" v-ripple @click="copyGn(gnEle)">
+      <v-card v-for="gnEle in gnRef" class="mt-3" v-ripple @click="copyGn(gnEle, $event)">
         <v-card-title>
           <v-icon :color="levelMap[gnEle.level].color" :icon="levelMap[gnEle.level].icon"></v-icon>
           级情报 {{ gnEle.ctime }}
@@ -193,7 +191,7 @@ function copyNews(news: News) {
           </a>
         </v-card-text>
       </v-card>
-      <v-card v-for="newsEle in newsRef" class="mt-3" v-ripple @click="copyNews(newsEle)">
+      <v-card v-for="newsEle in newsRef" class="mt-3" v-ripple @click="copyNews(newsEle, $event)">
         <v-card-title>
           <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
           级情报 {{ newsEle.ctime }}
@@ -236,7 +234,7 @@ function copyNews(news: News) {
           <template v-slot:icon>
             <span>{{ gnEle.level }}</span>
           </template>
-          <v-card v-ripple @click="copyGn(gnEle)" max-width="1100px">
+          <v-card v-ripple @click="copyGn(gnEle, $event)" max-width="1100px">
             <v-card-title>
               <v-icon :color="levelMap[gnEle.level].color" :icon="levelMap[gnEle.level].icon"></v-icon>
               级情报 {{ gnEle.ctime }}
@@ -260,7 +258,7 @@ function copyNews(news: News) {
           <template v-slot:icon>
             <span>{{ newsEle.level }}</span>
           </template>
-          <v-card v-ripple @click="copyNews(newsEle)" max-width="1100px">
+          <v-card v-ripple @click="copyNews(newsEle, $event)" max-width="1100px">
             <v-card-title>
               <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
               级情报 {{ newsEle.ctime }}
