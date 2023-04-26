@@ -24,7 +24,7 @@ setInterval(() => send(new Ping()), 30 * 1000);
 
 // 如果服务器长时间没有回应，则重新连接
 function reconnect() {
-  if (new Date().getTime() - pingTime < 60 * 1000) {
+  if (new Date().getTime() - pingTime < 3 * 60 * 1000) {
     return;
   }
   snackbarStore.showInfoMessage("正在连接服务器");
@@ -37,14 +37,14 @@ function reconnect() {
 // 2 (CLOSING)，连接正在关闭
 // 3 (CLOSED)，连接已关闭或者没有链接成功
 function connect(desc): WebSocket {
-  console.log('start connect websocket: ' + desc);
+  console.log(new Date(), 'start connect websocket: ' + desc);
 
   const webSocket = new WebSocket(wsUrl);
 
   webSocket.binaryType = 'arraybuffer';
 
   webSocket.onopen = function () {
-    console.log('websocket open success');
+    console.log(new Date(), 'websocket open success');
 
     // websocket连接成功过后，先发送ping同步服务器时间，再发送登录请求
     send(new Ping());
@@ -95,15 +95,11 @@ function connect(desc): WebSocket {
   };
 
   webSocket.onerror = function (event) {
-    pingTime = 0;
-    console.log('websocket error');
-    console.log(event);
+    console.log(new Date(), 'websocket error', event);
   };
 
   webSocket.onclose = function (event) {
-    pingTime = 0;
-    console.log('websocket close');
-    console.log(event);
+    console.log(new Date(), 'websocket close', event);
   };
   return webSocket;
 }
@@ -115,7 +111,7 @@ export function isWebsocketReady(): boolean {
 export function send(packet: any, attachment: any = null) {
   switch (ws.readyState) {
     case 0:
-      console.log("0, ws connecting server");
+      console.log(new Date(), "0, ws connecting server");
       snackbarStore.showWarningMessage("正在连接服务器");
       break;
     case 1:
@@ -137,15 +133,15 @@ export function send(packet: any, attachment: any = null) {
       ws.send(buffer.buffer);
       break;
     case 2:
-      pingTime = 0;
-      console.log("2, ws is closing, trying to reconnect");
+      pingTime = pingTime - 5 * 1000;
+      console.log(new Date(), "2, ws is closing, trying to reconnect");
       break;
     case 3:
-      pingTime = 0;
-      console.log("3, ws is closing, trying to reconnect");
+      pingTime = pingTime - 5 * 1000;
+      console.log(new Date(), "3, ws is closing, trying to reconnect");
       break;
     default:
-      console.log("4, server error");
+      console.log(new Date(), "4, server error");
       snackbarStore.showErrorMessage("server error");
   }
 }
