@@ -17,17 +17,17 @@ let uuid: number = 0;
 
 const signalAttachmentMap: Map<number, EncodedPacketInfo> = new Map<number, EncodedPacketInfo>();
 
-// 每30秒发送一次心跳包
-setInterval(() => reconnect(), 10 * 1000);
-
-setInterval(() => send(new Ping()), 30 * 1000);
+setInterval(() => reconnect(), 30 * 1000);
 
 // 如果服务器长时间没有回应，则重新连接
 function reconnect() {
   if (new Date().getTime() - pingTime < 3 * 60 * 1000) {
+    // 每30秒发送一次心跳包
+    send(new Ping())
     return;
   }
   snackbarStore.showInfoMessage("正在连接服务器");
+  ws.close(3999);
   ws = connect("timeout and reconnect");
 }
 
