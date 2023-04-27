@@ -10,6 +10,7 @@ import _ from "lodash";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useDisplay} from "vuetify";
 import clipboard from "@/utils/clipboardUtils";
+
 const snackbarStore = useSnackbarStore();
 const {mobile} = useDisplay()
 
@@ -140,12 +141,17 @@ function copyGn(gn: GaiNian, event: Event) {
 function copyNews(news: News, event: Event) {
   let str = "";
   str = str + news.level + "级情报 " + news.ctime + "\n";
-  str = str + "⚡" + news.title + "\n\n" + news.content;
+  if (!_.isEmpty(news.title)) {
+    str = str + "⚡" + news.title + "\n\n"
+  } else {
+    str = str + "\n"
+  }
+  str = str + news.content;
   if (!_.isEmpty(news.stocks) || !_.isEmpty(news.industries) || !_.isEmpty(news.subjects)) {
-    str = str + "\n🎯股票:";
+    str = str + "\n";
   }
   if (!_.isEmpty(news.stocks)) {
-    str = str + "\n\n🎯股票:";
+    str = str + "\n🎯股票:";
     for (const stock of news.stocks) {
       str = str + " " + stock.name + "#" + stock.price + "(" + stock.rise + ")";
     }
