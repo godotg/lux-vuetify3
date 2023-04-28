@@ -6,6 +6,9 @@ import menuLanding from "./menus/landing.menu";
 import menuData from "./menus/data.menu";
 import menuAi from "./menus/ai.menu";
 
+
+import menuZp from "./menus/zp.menu";
+
 export default {
   menu: [
     {
@@ -19,6 +22,10 @@ export default {
           icon: "mdi-view-dashboard-outline",
         },
       ],
+    },
+    {
+      text: "忠平",
+      items: menuZp,
     },
     {
       text: "chatgpt",

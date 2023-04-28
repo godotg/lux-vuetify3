@@ -4,6 +4,7 @@
     "zp": "vite --mode zp"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.192"
+    "@types/lodash": "^4.14.192",
+    "universal-cookie": "^4.0.4"
   }
 }

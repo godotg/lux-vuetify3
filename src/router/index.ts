@@ -10,6 +10,10 @@ import AppsRoutes from "./apps.routes";
 import DataRoutes from "./data.routes";
 import AiRoutes from "./ai.routes";
 
+import { getToken } from "@/utils/authUtils";
+import ZpRoutes from "./zp.routes";
+import _ from "lodash";
+
 export const routes = [
   {
     path: "/",
@@ -30,6 +34,7 @@ export const routes = [
     component: () =>
       import(/* webpackChunkName: "error" */ "@/views/errors/NotFoundPage.vue"),
   },
+  ...ZpRoutes,
   ...UserRoutes,
   ...LandingRoutes,
   ...AuthRoutes,
@@ -58,6 +63,18 @@ const router = createRouter({
       return { top: 0 };
     }
   },
+});
+
+router.beforeEach((to, from, next) => {
+  // 验证权限
+  const auth = getToken();
+  if (_.isNil(auth)) {
+    if (!_.isEqual(to.meta.auth, true)) {
+      next({ path: '/signin' });
+      return;
+    }
+  }
+  next();
 });
 
 export default router;

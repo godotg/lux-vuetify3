@@ -1,4 +1,47 @@
 export default {
+  upload: '确认上传',
+  appName: '忠平TMS系统',
+
+  zp: {
+    createOrderFromExcelMenu: "创建订单",
+    createOrderFromExcel: 'Excel生成订单',
+    createOrderFromExcel01: '通过excel智能生成订单，自动检验excel格式',
+    createOrderFromExcel02: '请上传一个或者多个excel文件',
+    queryOrderMenu: "查询订单",
+    queryOrderTitle: '订单查询',
+    queryOrder01: '订单数据查询',
+    queryOrder02: '输入订单id'
+  },
+
+  user: {
+    login: '登录',
+    loginByPassword: '密码登录',
+    account: '默认账号：test',
+    password: '默认密码：test',
+    accountError: '账号错误',
+    passwordEmpty: '密码不能为空',
+
+    userCenter: '个人中心',
+    userSetting: '设置',
+    logout: '退出登录'
+  },
+
+
+  notice: {
+    loginSuccess: '登录成功',
+    logoutSuccess: '安全退出',
+    loginNameEmptyError: '输入用户名才能登录',
+    loginPasswordEmptyError: '请输入密码',
+
+    notSignInError: '请先登录',
+    inputFormatError: '输入格式错误',
+
+    copySuccess: '复制成功',
+    copyError: '复制失败',
+
+    settingSuccess: '设置成功'
+  },
+
   common: {
     add: "新增",
     cancel: "取消",
