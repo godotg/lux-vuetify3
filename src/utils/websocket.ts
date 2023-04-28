@@ -63,7 +63,7 @@ function connect(desc): WebSocket {
     const packet = ProtocolManager.read(buffer);
     let attachment: any = null;
     if (buffer.isReadable() && buffer.readBoolean()) {
-      console.log(new Date(), "Websocket收到异步response:", packet);
+      console.log(new Date(), "Websocket收到异步response <-- ", packet);
       attachment = ProtocolManager.read(buffer);
       const encodedPacketInfo = signalAttachmentMap.get(attachment.signalId);
       if (encodedPacketInfo == undefined) {
@@ -72,7 +72,7 @@ function connect(desc): WebSocket {
       encodedPacketInfo.promiseResolve(packet);
       return;
     }
-    console.log(new Date(), "Websocket收到同步response:", packet);
+    console.log(new Date(), "Websocket收到同步response <-- ", packet);
     if (packet.protocolId() == Pong.PROTOCOL_ID) {
       if (Number.isInteger(packet.time)) {
         pingTime = packet.time;
@@ -120,11 +120,11 @@ export function send(packet: any, attachment: any = null) {
       ProtocolManager.write(buffer, packet);
       if (attachment == null) {
         buffer.writeBoolean(false);
-        console.log(new Date(), "Websocket发送同步request:", packet)
+        console.log(new Date(), "Websocket发送同步request --> ", packet)
       } else {
         buffer.writeBoolean(true);
         ProtocolManager.write(buffer, attachment)
-        console.log(new Date(), "Websocket发送异步request:", packet)
+        console.log(new Date(), "Websocket发送异步request --> ", packet)
       }
       const writeOffset = buffer.writeOffset;
       buffer.setWriteOffset(0);
