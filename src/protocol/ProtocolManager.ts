@@ -29,6 +29,8 @@ import NewsResponse from './news/NewsResponse';
 import GaiNian from './gn/GaiNian';
 import GnRequest from './gn/GnRequest';
 import GnResponse from './gn/GnResponse';
+import ChatMessageRequest from './chatgpt/ChatMessageRequest';
+import ChatMessageResponse from './chatgpt/ChatMessageResponse';
 
 const protocols = new Map<number, any>();
 
@@ -64,6 +66,8 @@ protocols.set(204, NewsResponse);
 protocols.set(220, GaiNian);
 protocols.set(221, GnRequest);
 protocols.set(222, GnResponse);
+protocols.set(230, ChatMessageRequest);
+protocols.set(231, ChatMessageResponse);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
