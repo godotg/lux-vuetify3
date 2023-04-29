@@ -1,17 +1,45 @@
 export default {
-  upload: '确认上传',
-  appName: '忠平TMS系统',
-
-  zp: {
-    createOrderFromExcelMenu: "创建订单",
-    createOrderFromExcel: 'Excel生成订单',
-    createOrderFromExcel01: '通过excel智能生成订单，自动检验excel格式',
-    createOrderFromExcel02: '请上传一个或者多个excel文件',
-    queryOrderMenu: "查询订单",
-    queryOrderTitle: '订单查询',
-    queryOrder01: '订单数据查询',
-    queryOrder02: '输入订单id'
+  home: {
+    main: '主页',
+    titleTop: 'Tank项目的后台管理系统',
+    title: '后台管理',
+    description: '极致性能，天生异步，Actor设计思想，无锁化设计，基于Spring的MVC式用法的RPC服务器框架'
   },
+
+  player: {
+    title: '玩家查询',
+    description: '玩家数据查询',
+    searchContent: '输入玩家名称'
+  },
+
+  gm: {
+    level: '等级修改',
+    levelInput: '输入等级',
+    goldInput: '输入金币',
+    gemInput: '输入钻石',
+    energyInput: '输入能量',
+    expInput: '输入经验',
+    currency: '货币修改'
+  },
+
+  setting: {
+    app: '系统设置',
+    theme: '主题背景',
+    darkTheme: '深黑模式',
+    language: '多语言',
+    cnLanguage: '中文',
+    enLanguage: '英文'
+  },
+
+
+  javaHotswap: 'Java热更新',
+  excelHotswap: 'Excel热更新',
+  javaUploadText: '在线不停服更新全服代码，请注意更新的代码是否正确',
+  excelUploadText: '在线不停机更新全服配置表，只支持excel或者json文件热更新，请注意更新的数据是否正确',
+  javaUploadNotice: '请上传一个或者多个class补丁文件',
+  excelUploadNotice: '请上传一个或者多个excel或者json文件',
+  upload: '确认上传',
+  gameName: '进击的坦克',
 
   user: {
     login: '登录',
@@ -25,7 +53,6 @@ export default {
     userSetting: '设置',
     logout: '退出登录'
   },
-
 
   notice: {
     loginSuccess: '登录成功',
@@ -53,6 +80,7 @@ export default {
     contact: "联系我们",
     tos: "服务条款",
     policy: "隐私政策",
+    confirm: '确定'
   },
   login: {
     title: "登录",

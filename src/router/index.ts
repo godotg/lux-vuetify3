@@ -11,7 +11,7 @@ import DataRoutes from "./data.routes";
 import AiRoutes from "./ai.routes";
 
 import { getToken } from "@/utils/authUtils";
-import ZpRoutes from "./zp.routes";
+import TankRoutes from "./tank.routes";
 import _ from "lodash";
 
 export const routes = [
@@ -34,7 +34,7 @@ export const routes = [
     component: () =>
       import(/* webpackChunkName: "error" */ "@/views/errors/NotFoundPage.vue"),
   },
-  ...ZpRoutes,
+  ...TankRoutes,
   ...UserRoutes,
   ...LandingRoutes,
   ...AuthRoutes,

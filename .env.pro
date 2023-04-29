@@ -1,1 +1,1 @@
-VITE_API_BASE_URL=http://124.221.193.100
+VITE_API_BASE_URL=http://tank-api.zfoo.net

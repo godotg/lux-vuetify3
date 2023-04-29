@@ -4,17 +4,18 @@
     <img class="white--text align-end" src="@/assets/tank/excel.jpg"/>
 
     <v-card-title>
-      {{ $t("zp.createOrderFromExcel01") }}
+      {{ $t("excelHotswap") }}
     </v-card-title>
 
     <v-card-text>
+      <div> {{ $t("excelUploadText") }}</div>
       <v-file-input
         v-model="excelRef.excelFiles"
         multiple
         show-size
         prepend-icon="mdi-file-excel-outline"
-        accept=".xls,.xlsx"
-        :label="$t('zp.createOrderFromExcel02')"
+        accept=".xls,.xlsx,.json"
+        :label="$t('excelUploadNotice')"
       />
     </v-card-text>
 
@@ -55,11 +56,11 @@ const upload = async () => {
   for (const file of excelRef.excelFiles) {
     formData.append("files", file);
   }
-  const response = await axios.post(BASE_URL + "/api/order/createFromExcel", formData, httpHeaders());
+  const response = await axios.post(BASE_URL + "/api/excel/hotswap", formData, httpHeaders());
 
   const code = response.data.code;
   if (code != 1) {
-    snackbarStore.showErrorMessage(response.data.message, code);
+    snackbarStore.showErrorMessage(response.data.message);
     return;
   }
   snackbarStore.showSuccessMessage(response.data.message);

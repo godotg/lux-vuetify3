@@ -12,7 +12,7 @@
       >
         <v-text-field
           ref="refEmail"
-          v-model="account"
+          v-model="userName"
           required
           :error="error"
           :label="$t('user.account')"
@@ -114,7 +114,6 @@ import {useI18n} from 'vue-i18n'
 const {t} = useI18n()
 import { useSnackbarStore } from "@/stores/snackbarStore";
 const snackbarStore = useSnackbarStore();
-
 import {BASE_URL, setToken} from "@/utils/authUtils";
 import _ from "lodash";
 
@@ -129,7 +128,7 @@ const isLoading = ref(false);
 const isSignInDisabled = ref(false);
 
 
-const account = ref("");
+const userName = ref("");
 const password = ref("");
 
 const error = ref(false);
@@ -156,17 +155,17 @@ const rules = reactive({
 
 
 const submit = async () => {
-  signIn(account.value, password.value);
+  signIn(userName.value, password.value);
 };
 
-const signIn = async (account, password) => {
-  if (_.isEmpty(account)) {
-    snackbarStore.showErrorSnackbar(t('notice.loginNameEmptyError'));
+const signIn = async (userName, password) => {
+  if (_.isEmpty(userName)) {
+    snackbarStore.showErrorMessage(t('notice.loginNameEmptyError'));
     return;
   }
 
   if (_.isEmpty(password)) {
-    snackbarStore.showErrorSnackbar(t('notice.loginPasswordEmptyError'));
+    snackbarStore.showErrorMessage(t('notice.loginPasswordEmptyError'));
     return;
   }
 
@@ -174,7 +173,7 @@ const signIn = async (account, password) => {
   isSignInDisabled.value = true;
 
   const response = await axios.post(BASE_URL + "/api/signIn", {
-    account,
+    userName,
     password
   }).catch(reason => {
     snackbarStore.showErrorMessage(reason);

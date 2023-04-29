@@ -7,7 +7,7 @@ import menuData from "./menus/data.menu";
 import menuAi from "./menus/ai.menu";
 
 
-import menuZp from "./menus/zp.menu";
+import menuTank from "./menus/tank.menu";
 
 export default {
   menu: [
@@ -24,8 +24,8 @@ export default {
       ],
     },
     {
-      text: "忠平",
-      items: menuZp,
+      text: "Tank",
+      items: menuTank,
     },
     {
       text: "chatgpt",
