@@ -18,6 +18,12 @@ export default {
           link: "/",
           icon: "mdi-format-font-size-increase",
         },
+        {
+          key: "jiucai.chatgpt",
+          text: "ChatGpt",
+          link: "/chatgpt",
+          icon: "mdi-robot-confused-outline",
+        }
       ],
     },
     {
