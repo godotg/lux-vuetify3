@@ -52,15 +52,15 @@ const sendMessage = () => {
   // 发送User Message
   chatStore.addToHistory(createMessage(user.value, userMessage.value));
 
+  // 清空Input
+  userMessage.value = "";
+
   // AI等待Message
   aiMessage.value = "Please wait a moment ......";
   chatStore.addToHistory(createMessage(bot.value, aiMessage.value));
 
   // 请求AI回答
   getCompletion();
-
-  // 清空Input
-  userMessage.value = "";
 };
 
 const getCompletion = async () => {
