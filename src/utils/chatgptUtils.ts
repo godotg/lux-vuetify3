@@ -1,13 +1,12 @@
-import {asyncAsk, isWebsocketReady} from "@/utils/websocket";
+import {send, isWebsocketReady} from "@/utils/websocket";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import _ from "lodash";
 
 import ChatMessageRequest from "@/protocol/chatgpt/ChatMessageRequest";
-import ChatMessageResponse from "@/protocol/chatgpt/ChatMessageResponse";
 
 const snackbarStore = useSnackbarStore();
 
-export async function askChatgpt(messages) {
+export function sendChatgpt(messages) {
   if (!isWebsocketReady()) {
     snackbarStore.showErrorMessage("请稍等，无法连接服务器");
     return;
@@ -29,6 +28,5 @@ export async function askChatgpt(messages) {
 
   messages.forEach(it => request.messages.push(it.content));
 
-  const response: ChatMessageResponse = await asyncAsk(request);
-  return response;
+  send(request);
 }

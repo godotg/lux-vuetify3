@@ -80,17 +80,17 @@ function connect(desc): WebSocket {
         pingTime = Number.parseInt(packet.time);
       }
     } else if (packet.protocolId() == Message.PROTOCOL_ID) {
-      if (packet.code == 1) {
-        snackbarStore.showSuccessMessage(packet.message);
-      } else if (packet.code == 2) {
-        // do noting
-      } else {
+      if (packet.code == 0) {
         snackbarStore.showErrorMessage(packet.message);
+      } else if (packet.code == 1) {
+        snackbarStore.showSuccessMessage(packet.message);
+      } else {
+        snackbarStore.showSuccessMessage(packet.message);
       }
     } else if (packet.protocolId() == Error.PROTOCOL_ID) {
       snackbarStore.showErrorMessage(packet.messerrorMessageage);
     } else {
-      ProtocolManager.getProtocol(packet.protocolId()).receiver(packet);
+      route(packet);
     }
   };
 
@@ -175,4 +175,18 @@ export async function asyncAsk(packet: any): Promise<any> {
   signalAttachmentMap.set(signalId, encodedPacketInfo);
   send(packet, attachment);
   return promise;
+}
+
+const receiverMap = new Map<number, any>();
+export function registerPacketReceiver(protocolId: number, fun: any) {
+  receiverMap.set(protocolId, fun);
+}
+
+function route(packet: any) {
+  const receiver = receiverMap.get(packet.protocolId());
+  if (receiver == null) {
+    console.log("路由不存在:", packet);
+    return;
+  }
+  receiver(packet);
 }

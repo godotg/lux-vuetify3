@@ -13,7 +13,15 @@ import "md-editor-v3/lib/style.css";
 import { createCompletionApi } from "@/api/aiApi";
 const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
-import {askChatgpt} from "@/utils/chatgptUtils";
+
+
+import {sendChatgpt} from "@/utils/chatgptUtils";
+import {registerPacketReceiver} from "@/utils/websocket";
+import ChatMessageNotice from "@/protocol/chatgpt/ChatMessageNotice";
+onMounted(() => {
+  registerPacketReceiver(ChatMessageNotice.PROTOCOL_ID, createCompletion);
+});
+
 
 interface Message {
   content: string;
@@ -43,21 +51,20 @@ const sendMessage = async () => {
 
     isLoading.value = true;
     // Create a completion
-    await createCompletion();
+    sendChatgpt(messages.value);
   }
 };
 
-const createCompletion = async () => {
+const createCompletion = (packet: ChatMessageNotice) => {
   // Check if the API key is set
 
   try {
-    const completion = await askChatgpt(messages.value);
 
     isLoading.value = false;
 
     // Add the bot message
     messages.value.push({
-      content: completion.choices[0],
+      content: packet.choice,
       role: "assistant",
     });
   } catch (error) {
