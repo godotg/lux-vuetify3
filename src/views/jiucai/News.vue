@@ -28,12 +28,12 @@ const levelMap = {
   },
   "A": {
     icon: "mdi-alpha-a-circle-outline",
-    color: "primary",
+    color: "success",
     size: "large"
   },
   "B": {
     icon: "mdi-alpha-b-circle-outline",
-    color: "success",
+    color: "cyan",
     size: "default"
   },
   "C": {

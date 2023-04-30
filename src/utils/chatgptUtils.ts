@@ -1,5 +1,6 @@
 import {send, isWebsocketReady} from "@/utils/websocket";
 import {useSnackbarStore} from "@/stores/snackbarStore";
+import { isMobile } from "@/utils/common";
 import _ from "lodash";
 
 import ChatMessageRequest from "@/protocol/chatgpt/ChatMessageRequest";
@@ -17,6 +18,7 @@ export function sendChatgpt(messages) {
   }
 
   const request = new ChatMessageRequest();
+  request.mobile = isMobile();
 
   // const size = _.size(messages);
   // if (size < 2) {
