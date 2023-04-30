@@ -84,8 +84,12 @@ function connect(desc): WebSocket {
         snackbarStore.showErrorMessage(packet.message);
       } else if (packet.code == 1) {
         snackbarStore.showSuccessMessage(packet.message);
+      } else if (packet.code == 2) {
+        snackbarStore.showInfoMessage(packet.message);
+      } else if (packet.code == 3) {
+        snackbarStore.showWarningMessage(packet.message);
       } else {
-        snackbarStore.showSuccessMessage(packet.message);
+        snackbarStore.showInfoMessage(packet.message);
       }
     } else if (packet.protocolId() == Error.PROTOCOL_ID) {
       snackbarStore.showErrorMessage(packet.messerrorMessageage);
@@ -178,6 +182,7 @@ export async function asyncAsk(packet: any): Promise<any> {
 }
 
 const receiverMap = new Map<number, any>();
+
 export function registerPacketReceiver(protocolId: number, fun: any) {
   receiverMap.set(protocolId, fun);
 }
