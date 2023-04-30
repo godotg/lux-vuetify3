@@ -36,7 +36,7 @@ const levelMap = {
     color: "cyan",
     size: "default"
   },
-  "C": {e
+  "C": {
     icon: "mdi-alpha-c-circle-outline",
     color: "info",
     size: "small"
