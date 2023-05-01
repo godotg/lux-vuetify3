@@ -7,7 +7,7 @@
 import { useSnackbarStore } from "@/stores/snackbarStore";
 import { useChatStore } from "@/views/app/chat/chatStore";
 import AnimationAi from "@/components/animations/AnimationBot1.vue";
-
+import { Icon } from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { createCompletionApi } from "@/api/aiApi";
@@ -79,6 +79,8 @@ const createCompletion = async () => {
 // Scroll to the bottom of the message container
 const scrollToBottom = () => {
   const container = document.querySelector(".message-container");
+  console.log("container: ", container);
+
   setTimeout(() => {
     container?.scrollTo({
       top: container?.scrollHeight,
@@ -105,7 +107,7 @@ watch(
       <perfect-scrollbar v-if="messages.length > 0" class="message-container">
         <template v-for="message in messages">
           <div v-if="message.role === 'user'">
-            <div class="pa-6 user-message">
+            <div class="pa-4 user-message">
               <v-avatar class="ml-4" rounded="sm" variant="elevated">
                 <img src="@/assets/images/avatars/avatar_user.jpg" alt="alt" />
               </v-avatar>
@@ -117,10 +119,10 @@ watch(
             </div>
           </div>
           <div v-else>
-            <div class="pa-6 assistant-message">
+            <div class="pa-4 assistant-message">
               <v-avatar class="mr-4" rounded="sm" variant="elevated">
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwrAiMevuwrbU9o0Ck2paVf4ufHUDb2dU48MEDrAlrQw&s"
+                  src="@/assets/images/avatars/avatar_assistant.jpg"
                   alt="alt"
                 />
               </v-avatar>
@@ -151,6 +153,8 @@ watch(
       <v-sheet elevation="0" class="input-panel">
         <v-text-field
           color="primary"
+          type="text"
+          clearable
           variant="solo"
           ref="input"
           v-model="userMessage"
@@ -161,9 +165,18 @@ watch(
           <template #prepend-inner>
             <v-icon>mdi-microphone</v-icon>
           </template>
-
-          <template #append-inner>
-            <v-icon @click="sendMessage">mdi-send</v-icon>
+          <template v-slot:append-inner>
+            <v-fade-transition leave-absolute>
+              <Icon
+                v-if="isLoading"
+                class="text-primary"
+                width="30"
+                icon="eos-icons:three-dots-loading"
+              />
+              <v-icon color="primary" v-else @click="sendMessage"
+                >mdi-send</v-icon
+              >
+            </v-fade-transition>
           </template>
         </v-text-field>
       </v-sheet>
@@ -180,9 +193,11 @@ watch(
   flex-direction: column;
   .messsage-area {
     flex: 1;
+    height: 100%;
   }
   .input-area {
     padding: 1rem;
+    height: 90px;
 
     align-items: center;
     .input-panel {
@@ -214,7 +229,7 @@ watch(
 }
 
 .message-container {
-  height: 100%;
+  height: calc(100vh - 154px);
   background-image: url("@/assets/images/chat-bg-2.png");
   background-repeat: repeat;
 }
@@ -231,7 +246,7 @@ watch(
   }
 }
 
-::v-deep .md-editor-preview-wrapper {
-  padding: 5px 16px;
+:deep(.md-editor-preview-wrapper) {
+  padding: 5px 15px;
 }
 </style>
