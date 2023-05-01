@@ -17,7 +17,7 @@ const {mobile} = useDisplay()
 
 const newsRef = ref<News[]>([]);
 const gnRef = ref<GaiNian[]>([]);
-const loadingRef = ref(false);
+const loadingRef = ref(true);
 
 
 const levelMap = {
@@ -28,17 +28,17 @@ const levelMap = {
   },
   "A": {
     icon: "mdi-alpha-a-circle-outline",
-    color: "success",
+    color: "warning",
     size: "large"
   },
   "B": {
     icon: "mdi-alpha-b-circle-outline",
-    color: "info",
+    color: "success",
     size: "default"
   },
   "C": {
     icon: "mdi-alpha-c-circle-outline",
-    color: "cyan",
+    color: "info",
     size: "small"
   },
   "D": {
@@ -72,6 +72,7 @@ async function doInitNews() {
   request.startId = -1;
   request.endId = -1;
   const response: NewsResponse = await asyncAsk(request)
+  loadingRef.value = false;
   console.log("news init ----------------------------------------");
   updateNewsRef(response.news)
 }
