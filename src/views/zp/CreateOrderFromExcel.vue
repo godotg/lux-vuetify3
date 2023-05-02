@@ -30,8 +30,9 @@
 
 <script setup lang="ts">
 import axios, {AxiosResponse} from "axios";
-import {BASE_URL, httpHeaders} from "@/utils/authUtils";
 import { useSnackbarStore } from "@/stores/snackbarStore";
+import { BASE_URL, useZpAuthStore } from "@/stores/zpAuthStorage";
+const zpAuthStore = useZpAuthStore();
 const snackbarStore = useSnackbarStore();
 
 const route = useRoute();
@@ -55,7 +56,7 @@ const upload = async () => {
   for (const file of excelRef.excelFiles) {
     formData.append("files", file);
   }
-  const response = await axios.post(BASE_URL + "/api/order/createFromExcel", formData, httpHeaders());
+  const response = await axios.post(BASE_URL + "/api/order/createFromExcel", formData, zpAuthStore.httpHeaders());
 
   const code = response.data.code;
   if (code != 1) {

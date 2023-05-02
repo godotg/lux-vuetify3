@@ -44,11 +44,12 @@
 
 <script setup lang="ts">
 import axios from "axios";
-import {BASE_URL, httpHeaders} from "@/utils/authUtils";
+import { BASE_URL, useZpAuthStore } from "@/stores/zpAuthStorage";
 import {onMounted} from "vue";
 import _ from "lodash";
-
 import { useSnackbarStore } from "@/stores/snackbarStore";
+
+const zpAuthStore = useZpAuthStore();
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
 
@@ -88,7 +89,7 @@ const fetchData = async () => {
     excelType: selectExcelType.value,
     page,
     itemsPerPage
-  }, httpHeaders());
+  }, zpAuthStore.httpHeaders());
 
   const code = response.data.code;
   if (code != 1) {
@@ -113,7 +114,7 @@ const fetchData = async () => {
 }
 
 const fetchExcelTypes = async () => {
-  const response = await axios.post(BASE_URL + "/api/order/excelTypes", {}, httpHeaders());
+  const response = await axios.post(BASE_URL + "/api/order/excelTypes", {}, zpAuthStore.httpHeaders());
 
   const code = response.data.code;
   if (code != 1) {

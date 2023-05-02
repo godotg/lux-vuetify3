@@ -1,20 +1,17 @@
-import { useCookies } from '@vueuse/integrations/useCookies'
-
-const cookies = useCookies();
 
 export const TokenKey = "zptoken";
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export function getToken() {
-    return cookies.get(TokenKey);
+    return null;
 }
 
 export function setToken(token) {
-    return cookies.set(TokenKey, token);
+  return null;
 }
 
 export function removeToken() {
-    return cookies.remove(TokenKey);
+  return null;
 }
 
 export function httpHeaders() {

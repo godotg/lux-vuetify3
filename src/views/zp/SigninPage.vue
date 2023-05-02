@@ -113,9 +113,9 @@ import {useI18n} from 'vue-i18n'
 
 const {t} = useI18n()
 import { useSnackbarStore } from "@/stores/snackbarStore";
+import { BASE_URL, useZpAuthStore } from "@/stores/zpAuthStorage";
 const snackbarStore = useSnackbarStore();
-
-import {BASE_URL, setToken} from "@/utils/authUtils";
+const zpAuthStore = useZpAuthStore();
 import _ from "lodash";
 
 const router = useRouter();
@@ -194,7 +194,7 @@ const signIn = async (account, password) => {
   isSignInDisabled.value = false;
 
   console.log(response);
-  setToken(response.data.data.token);
+  zpAuthStore.setToken(response.data.data.token);
   console.log("************************************************");
   router.push({path: "/",});
 };
