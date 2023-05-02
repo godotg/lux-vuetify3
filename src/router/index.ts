@@ -9,8 +9,7 @@ import ChartsRoutes from "./charts.routes";
 import AppsRoutes from "./apps.routes";
 import DataRoutes from "./data.routes";
 import AiRoutes from "./ai.routes";
-import { useZpAuthStore } from "@/stores/zpAuthStorage";
-const zpAuthStore = useZpAuthStore();
+import { getToken } from "@/utils/authUtils";
 import ZpRoutes from "./zp.routes";
 import _ from "lodash";
 
@@ -67,7 +66,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   // 验证权限
-  const auth = zpAuthStore.token;
+  const auth = getToken();
   if (_.isNil(auth)) {
     if (!_.isEqual(to.meta.auth, true)) {
       next({ path: '/signin' });

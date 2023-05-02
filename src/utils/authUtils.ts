@@ -1,23 +1,10 @@
-
-export const TokenKey = "zptoken";
-export const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import _ from "lodash";
+var token = null;
 
 export function getToken() {
-    return null;
+    return token;
 }
 
 export function setToken(token) {
-  return null;
-}
-
-export function removeToken() {
-  return null;
-}
-
-export function httpHeaders() {
-  return {
-    headers: {
-      "zptoken": getToken(),
-    },
-  };
+  this.token = token;
 }
