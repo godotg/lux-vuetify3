@@ -52,7 +52,7 @@ const levelMap = {
 onMounted(() => {
   console.log("news on mounted-----------------------------------------");
   initNews();
-  setInterval(() => requestNews(), 10000);
+  setInterval(() => requestNews(), 15000);
   setInterval(() => requestGn(), 60000);
 });
 
