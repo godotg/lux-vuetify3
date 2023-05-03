@@ -3,6 +3,7 @@ import _ from "lodash";
 
 export const useNewsStore = defineStore("newsInfos", {
   state: () => ({
+    gnInfos: [],
     newsInfos: []
   }),
 
@@ -14,6 +15,28 @@ export const useNewsStore = defineStore("newsInfos", {
   getters: {},
 
   actions: {
+    isNewGn(id: number): boolean {
+      const index = _.findIndex(this.gnInfos, it => it.id == id);
+      if (index >= 0) {
+        const gn = this.gnInfos[index];
+        if (new Date().getTime() - gn.time < 7 * 24 * 60 * 60 * 1000) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      if (this.gnInfos.length >= 50) {
+        this.gnInfos = _.drop(this.gnInfos, 10);
+      }
+
+      this.gnInfos.push({
+        id: id,
+        time: new Date().getTime()
+      });
+      return true;
+    },
+
     isNew(id: number): boolean {
       const index = _.findIndex(this.newsInfos, it => it.id == id);
       if (index >= 0) {
@@ -25,7 +48,7 @@ export const useNewsStore = defineStore("newsInfos", {
         }
       }
 
-      if (this.newsInfos.length >= 1000) {
+      if (this.newsInfos.length >= 500) {
         this.newsInfos = _.drop(this.newsInfos, 100);
       }
 

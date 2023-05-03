@@ -187,6 +187,7 @@ function copyNews(news: News, event: Event) {
         <v-card-title>
           <v-icon :color="levelMap[gnEle.level].color" :icon="levelMap[gnEle.level].icon"></v-icon>
           级情报 {{ gnEle.ctime }}
+          <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
         </v-card-title>
         <v-card-subtitle>
           {{ gnEle.title }}
@@ -204,6 +205,7 @@ function copyNews(news: News, event: Event) {
         <v-card-title>
           <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
           级情报 {{ newsEle.ctime }}
+          <v-icon v-if="newsStore.isNew(newsEle.id)" color="primary" icon="mdi-new-box"></v-icon>
         </v-card-title>
         <v-card-subtitle>
           {{ newsEle.title }}
@@ -247,6 +249,7 @@ function copyNews(news: News, event: Event) {
             <v-card-title>
               <v-icon :color="levelMap[gnEle.level].color" :icon="levelMap[gnEle.level].icon"></v-icon>
               级情报 {{ gnEle.ctime }}
+              <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
             </v-card-title>
             <v-card-subtitle>
               {{ gnEle.title }}
