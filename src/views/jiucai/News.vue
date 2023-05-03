@@ -58,6 +58,12 @@ onMounted(() => {
   setInterval(() => requestGn(), 60000);
 });
 
+document.addEventListener("visibilitychange", function() {
+  if (document.visibilityState === "visible") {
+    requestNews();
+  }
+});
+
 function initNews() {
   setTimeout(() => {
     doInitNews();
@@ -89,7 +95,9 @@ async function requestNews() {
   request.endId = -1;
   const response: NewsResponse = await asyncAsk(request)
   console.log("news request response ----------------------------------");
-  updateNewsRef(response.news);
+  if (document.visibilityState === "visible") {
+    updateNewsRef(response.news);
+  }
 }
 
 async function requestGn() {
