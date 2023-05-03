@@ -137,11 +137,11 @@ export function send(packet: any, attachment: any = null) {
       ws.send(buffer.buffer);
       break;
     case 2:
-      pingTime = pingTime - 5 * 1000;
+      pingTime = pingTime - 60 * 1000;
       console.log(new Date(), "2, ws is closing, trying to reconnect");
       break;
     case 3:
-      pingTime = pingTime - 5 * 1000;
+      pingTime = pingTime - 60 * 1000;
       console.log(new Date(), "3, ws is closing, trying to reconnect");
       break;
     default:
