@@ -7,11 +7,13 @@ import GaiNian from "@/protocol/gn/GaiNian";
 import GnRequest from "@/protocol/gn/GnRequest";
 import GnResponse from "@/protocol/gn/GnResponse";
 import _ from "lodash";
-import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useDisplay} from "vuetify";
 import clipboard from "@/utils/clipboardUtils";
+import {useSnackbarStore} from "@/stores/snackbarStore";
+import {useNewsStore} from "@/stores/newsStore";
 
 const snackbarStore = useSnackbarStore();
+const newsStore = useNewsStore();
 const {mobile} = useDisplay()
 
 
@@ -269,6 +271,7 @@ function copyNews(news: News, event: Event) {
             <v-card-title>
               <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
               级情报 {{ newsEle.ctime }}
+              <v-icon v-if="newsStore.isNew(newsEle.id)" color="primary" icon="mdi-new-box"></v-icon>
             </v-card-title>
             <v-card-subtitle>
               {{ newsEle.title }}
