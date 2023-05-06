@@ -36,7 +36,7 @@ import FeatureGradientChart from "./components/FeatureGradientChart.vue";
       <FeatureDynamicScroller />
     </FeatureCard>
 
-    <!-- <FeatureCard title="File">
+    <!-- <FeatureCard  title="File">
       <FeatureFile />
     </FeatureCard> -->
 
