@@ -78,7 +78,7 @@ const groupChatNoticeCompletion = (packet: GroupChatNotice) => {
 
 function toMessage(chatMessage: ChatMessage): Message {
   const avatarId = chatMessage.sendId % 100 + 1;
-  const avatar = "avatars/" + avatarId + ".jpg";
+  const avatar = "ab/" + avatarId + ".jpg";
   return {
     id: chatMessage.id,
     type: chatMessage.type,
