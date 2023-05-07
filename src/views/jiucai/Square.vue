@@ -4,13 +4,14 @@
 * @Description:
 -->
 <script setup lang="ts">
-import {useSnackbarStore} from "@/stores/snackbarStore";
-import {useChatStore} from "@/views/app/chat/chatStore";
+import { useSnackbarStore } from "@/stores/snackbarStore";
+import { useChatStore } from "@/views/app/chat/chatStore";
 import AnimationChat from "@/components/animations/AnimationChat1.vue";
 import AnimationAi from "@/components/animations/AnimationBot1.vue";
-import {Icon} from "@iconify/vue";
+import { Icon } from "@iconify/vue";
 import MdEditor from "md-editor-v3";
-
+import "md-editor-v3/lib/style.css";
+import { createCompletionApi } from "@/api/aiApi";
 const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
 
@@ -68,6 +69,7 @@ const sendMessage = async () => {
   }
 };
 
+// 下面的逻辑都是自己的
 const groupChatNoticeCompletion = (packet: GroupChatNotice) => {
   isLoading.value = false;
   updateMessage(packet.messages);
@@ -109,6 +111,8 @@ async function initHistory() {
   updateMessage(response.messages);
   scrollToBottom();
   setTimeout(() => scrollToBottom(), 300);
+  console.log("aaaaaaaaaaaaaaaaaaaa")
+  snackbarStore.showSuccessMessage("聊天记录加载成功");
 }
 
 async function moreHistory() {
@@ -122,6 +126,7 @@ async function moreHistory() {
     return;
   }
   messages.value = _.concat(chatMessages.map(it => toMessage(it)), messages.value);
+  snackbarStore.showSuccessMessage("加载成功");
 }
 
 // Scroll to the bottom of the message container
@@ -142,6 +147,8 @@ const scrollToBottom = () => {
   <div class="chat-bot">
     <div class="messsage-area">
       <perfect-scrollbar v-if="messages.length > 0" class="message-container">
+
+<!--        自己的加载历史聊天记录的逻辑-->
         <v-container @click="moreHistory()">
           <v-row>
             <v-col v-ripple>
@@ -149,11 +156,13 @@ const scrollToBottom = () => {
             </v-col>
           </v-row>
         </v-container>
+
+
         <template v-for="message in messages">
           <div v-if="message.role === 'user'">
             <div class="pa-4 user-message">
               <v-avatar class="ml-4" rounded="sm" variant="elevated">
-                <img :src="myAvatar" alt="alt"/>
+                <img :src="message.avatar" alt="alt"/>
               </v-avatar>
               <v-card class="gradient gray" theme="dark">
                 <v-card-text>
@@ -163,34 +172,9 @@ const scrollToBottom = () => {
             </div>
           </div>
           <div v-else>
-            <div v-if="mobile">
-              <div class="pa-2 pa-md-5 assistant-message">
-                <v-avatar
-                  class="mr-2 mr-md-4"
-                  rounded="sm"
-                  variant="elevated"
-                >
-                  <img
-                    :src="aiAvatar"
-                    alt="alt"
-                  />
-                </v-avatar>
-              </div>
-              <div class="pa-2 pa-md-5 assistant-message">
-                <v-card>
-                  <div>
-                    <md-editor
-                      v-model="message.content"
-                      class="font-1"
-                      previewOnly
-                    />
-                  </div>
-                </v-card>
-              </div>
-            </div>
-            <div v-else class="pa-2 pa-md-5 assistant-message">
+            <div class="pa-2 pa-md-5 assistant-message">
               <v-avatar
-                class="d-none d-md-block mr-2 mr-md-4"
+                class="mr-2 mr-md-4"
                 rounded="sm"
                 variant="elevated"
               >
@@ -221,7 +205,7 @@ const scrollToBottom = () => {
       </perfect-scrollbar>
       <div class="no-message-container" v-else>
         <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
-          Let It Go
+          Loading...
         </h1>
         <AnimationSquare :size="300"/>
       </div>
@@ -251,8 +235,7 @@ const scrollToBottom = () => {
                 icon="eos-icons:three-dots-loading"
               />
               <v-icon color="primary" v-else @click="sendMessage"
-              >mdi-send
-              </v-icon
+                >mdi-send</v-icon
               >
             </v-fade-transition>
           </template>
@@ -269,18 +252,15 @@ const scrollToBottom = () => {
   height: 100%;
   display: flex;
   flex-direction: column;
-
   .messsage-area {
     flex: 1;
     height: 100%;
   }
-
   .input-area {
     padding: 1rem;
     height: 90px;
 
     align-items: center;
-
     .input-panel {
       border-radius: 5px;
       max-width: 1200px;
@@ -321,7 +301,6 @@ const scrollToBottom = () => {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   h1 {
     font-size: 2rem;
     font-weight: 500;
