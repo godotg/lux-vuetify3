@@ -61,12 +61,6 @@ const showMobileSearch = ref(false);
       <v-spacer></v-spacer>
 
       <div class="d-flex">
-        <v-btn v-if="!mdAndUp" icon @click="showMobileSearch = true">
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-        <!-- search input desktop -->
-
-
         <ToolbarNewsNotifications />
         <ToolbarNewsLevel />
         <ToolbarLanguage />
