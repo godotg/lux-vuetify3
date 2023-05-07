@@ -55,6 +55,10 @@ const levelMap = {
   },
 };
 
+const jokes = [
+  "做一个快乐的韭菜",
+  "爱割才会赢",
+];
 
 onMounted(() => {
   console.log("news on mounted-----------------------------------------");
