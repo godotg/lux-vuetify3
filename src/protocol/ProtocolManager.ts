@@ -29,8 +29,13 @@ import NewsResponse from './news/NewsResponse';
 import GaiNian from './gn/GaiNian';
 import GnRequest from './gn/GnRequest';
 import GnResponse from './gn/GnResponse';
-import ChatMessageRequest from './chatgpt/ChatMessageRequest';
-import ChatMessageNotice from './chatgpt/ChatMessageNotice';
+import ChatgptMessageRequest from './chatgpt/ChatgptMessageRequest';
+import ChatgptMessageNotice from './chatgpt/ChatgptMessageNotice';
+import ChatMessage from './chat/ChatMessage';
+import GroupChatNotice from './chat/GroupChatNotice';
+import GroupChatRequest from './chat/GroupChatRequest';
+import GroupHistoryMessageRequest from './chat/GroupHistoryMessageRequest';
+import GroupHistoryMessageResponse from './chat/GroupHistoryMessageResponse';
 
 const protocols = new Map<number, any>();
 
@@ -66,8 +71,13 @@ protocols.set(204, NewsResponse);
 protocols.set(220, GaiNian);
 protocols.set(221, GnRequest);
 protocols.set(222, GnResponse);
-protocols.set(230, ChatMessageRequest);
-protocols.set(231, ChatMessageNotice);
+protocols.set(230, ChatgptMessageRequest);
+protocols.set(231, ChatgptMessageNotice);
+protocols.set(240, ChatMessage);
+protocols.set(241, GroupChatNotice);
+protocols.set(242, GroupChatRequest);
+protocols.set(243, GroupHistoryMessageRequest);
+protocols.set(244, GroupHistoryMessageResponse);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {

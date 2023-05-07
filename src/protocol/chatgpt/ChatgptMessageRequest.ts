@@ -1,6 +1,6 @@
 
 
-class ChatMessageRequest {
+class ChatgptMessageRequest {
 
     requestId: number = 0;
     mobile: boolean = false;
@@ -9,10 +9,10 @@ class ChatMessageRequest {
     static PROTOCOL_ID: number = 230;
 
     protocolId(): number {
-        return ChatMessageRequest.PROTOCOL_ID;
+        return ChatgptMessageRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: ChatMessageRequest | null) {
+    static write(buffer: any, packet: ChatgptMessageRequest | null) {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
@@ -21,11 +21,11 @@ class ChatMessageRequest {
         buffer.writeInt(packet.requestId);
     }
 
-    static read(buffer: any): ChatMessageRequest | null {
+    static read(buffer: any): ChatgptMessageRequest | null {
         if (!buffer.readBoolean()) {
             return null;
         }
-        const packet = new ChatMessageRequest();
+        const packet = new ChatgptMessageRequest();
         const list0 = buffer.readStringList();
         packet.messages = list0;
         const result1 = buffer.readBoolean(); 
@@ -36,4 +36,4 @@ class ChatMessageRequest {
     }
 }
 
-export default ChatMessageRequest;
+export default ChatgptMessageRequest;

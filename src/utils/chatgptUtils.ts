@@ -3,7 +3,7 @@ import {useSnackbarStore} from "@/stores/snackbarStore";
 import { isMobile } from "@/utils/common";
 import _ from "lodash";
 
-import ChatMessageRequest from "@/protocol/chatgpt/ChatMessageRequest";
+import ChatgptMessageRequest from "@/protocol/chatgpt/ChatgptMessageRequest";
 
 const snackbarStore = useSnackbarStore();
 
@@ -17,7 +17,7 @@ export function sendChatgpt(messages) {
     return;
   }
 
-  const request = new ChatMessageRequest();
+  const request = new ChatgptMessageRequest();
   request.mobile = isMobile();
 
   // const size = _.size(messages);

@@ -1,6 +1,6 @@
 
 
-class ChatMessageNotice {
+class ChatgptMessageNotice {
 
     requestId: number = 0;
     choice: string = '';
@@ -8,10 +8,10 @@ class ChatMessageNotice {
     static PROTOCOL_ID: number = 231;
 
     protocolId(): number {
-        return ChatMessageNotice.PROTOCOL_ID;
+        return ChatgptMessageNotice.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: ChatMessageNotice | null) {
+    static write(buffer: any, packet: ChatgptMessageNotice | null) {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
@@ -19,11 +19,11 @@ class ChatMessageNotice {
         buffer.writeInt(packet.requestId);
     }
 
-    static read(buffer: any): ChatMessageNotice | null {
+    static read(buffer: any): ChatgptMessageNotice | null {
         if (!buffer.readBoolean()) {
             return null;
         }
-        const packet = new ChatMessageNotice();
+        const packet = new ChatgptMessageNotice();
         const result0 = buffer.readString();
         packet.choice = result0;
         const result1 = buffer.readInt();
@@ -32,4 +32,4 @@ class ChatMessageNotice {
     }
 }
 
-export default ChatMessageNotice;
+export default ChatgptMessageNotice;

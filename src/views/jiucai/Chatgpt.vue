@@ -18,13 +18,13 @@ const chatStore = useChatStore();
 
 import {sendChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
-import ChatMessageNotice from "@/protocol/chatgpt/ChatMessageNotice";
+import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore, myAvatar, aiAvatar} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
 onMounted(() => {
-  registerPacketReceiver(ChatMessageNotice.PROTOCOL_ID, createCompletion);
+  registerPacketReceiver(ChatgptMessageNotice.PROTOCOL_ID, createCompletion);
 });
 
 
@@ -60,7 +60,7 @@ const sendMessage = async () => {
   }
 };
 
-const createCompletion = (packet: ChatMessageNotice) => {
+const createCompletion = (packet: ChatgptMessageNotice) => {
   // Check if the API key is set
 
   try {
