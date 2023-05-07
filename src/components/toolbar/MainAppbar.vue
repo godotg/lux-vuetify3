@@ -1,12 +1,13 @@
 <!--
-* @Component: 
+* @Component:
 * @Maintainer: J.K. Yang
-* @Description: 
+* @Description:
 -->
 <script setup lang="ts">
 import { useDisplay } from "vuetify";
 import { useCustomizeThemeStore } from "@/stores/customizeTheme";
 import ToolbarLanguage from "@/components/toolbar/ToolbarLanguage.vue";
+import ToolbarNewsLevel from "@/components/toolbar/ToolbarNewsLevel.vue";
 import ToolbarNotifications from "./ToolbarNotifications.vue";
 import ToolbarUser from "./ToolbarUser.vue";
 import { useTodoStore } from "@/views/app/todo/todoStore";
@@ -75,6 +76,7 @@ const showMobileSearch = ref(false);
             <v-icon>mdi-calendar-check</v-icon>
           </v-badge>
         </v-btn>
+        <ToolbarNewsLevel />
         <ToolbarLanguage />
         <ToolbarNotifications />
         <ToolbarUser />

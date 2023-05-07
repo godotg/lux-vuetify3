@@ -1,15 +1,17 @@
 import {defineStore} from "pinia";
 import _ from "lodash";
 
-export const useNewsStore = defineStore("newsInfos", {
+export const useNewsStore = defineStore("newsStore", {
   state: () => ({
     gnInfos: [],
-    newsInfos: []
+    newsInfos: [],
+    newsLevelFilter: "D",
+    newsLevelFilterValue: 5
   }),
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["newsInfos"]}],
+    strategies: [{storage: localStorage, paths: ["newsInfos", "newsLevelFilter", "newsLevelFilterValue"]}],
   },
 
   getters: {},
@@ -58,5 +60,10 @@ export const useNewsStore = defineStore("newsInfos", {
       });
       return true;
     },
+
+    updateNewsLevelFilter(level: string, value: number) {
+      this.newsLevelFilter = level;
+      this.newsLevelFilterValue = value;
+    }
   }
 });

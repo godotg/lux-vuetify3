@@ -24,26 +24,31 @@ const loadingRef = ref(true);
 
 const levelMap = {
   "S": {
+    value: 1,
     icon: "mdi-alpha-s-circle-outline",
     color: "error",
     size: "x-large"
   },
   "A": {
+    value: 2,
     icon: "mdi-alpha-a-circle-outline",
     color: "warning",
     size: "large"
   },
   "B": {
+    value: 3,
     icon: "mdi-alpha-b-circle-outline",
     color: "success",
     size: "default"
   },
   "C": {
+    value: 4,
     icon: "mdi-alpha-c-circle-outline",
     color: "info",
     size: "small"
   },
   "D": {
+    value: 5,
     icon: "mdi-alpha-d-circle-outline",
     color: "blue-grey",
     size: "x-small"
@@ -274,7 +279,7 @@ function copyNews(news: News, event: Event) {
         </v-timeline-item>
       </template>
       <template v-for="newsEle in newsRef">
-        <v-timeline-item fill-dot :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
+        <v-timeline-item v-if="newsStore.newsLevelFilterValue >= levelMap[newsEle.level].value" fill-dot :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
           <template v-slot:icon>
             <span>{{ newsEle.level }}</span>
           </template>
