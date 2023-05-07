@@ -6,6 +6,7 @@
 <script setup lang="ts">
 import { useSnackbarStore } from "@/stores/snackbarStore";
 import { useChatStore } from "@/views/app/chat/chatStore";
+import AnimationChat from "@/components/animations/AnimationChat1.vue";
 import AnimationAi from "@/components/animations/AnimationBot1.vue";
 import { Icon } from "@iconify/vue";
 import MdEditor from "md-editor-v3";
@@ -125,7 +126,11 @@ watch(
               </v-avatar>
               <v-card>
                 <div>
-                  <md-editor v-model="message.content" previewOnly />
+                  <md-editor
+                    v-model="message.content"
+                    class="font-1"
+                    previewOnly
+                  />
                 </div>
               </v-card>
             </div>
@@ -143,7 +148,7 @@ watch(
         <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
           Chat With Me
         </h1>
-        <AnimationAi :size="300" />
+        <AnimationChat :size="300" />
       </div>
     </div>
     <div class="input-area">
@@ -243,7 +248,18 @@ watch(
   }
 }
 
-::v-deep .md-editor-preview-wrapper {
+:deep(.md-editor-preview-wrapper) {
   padding: 5px 15px;
+}
+
+.font-1 {
+  font-size: 13px !important;
+}
+
+@media screen and (max-width: 768px) {
+  :deep(#md-editor-v3-preview),
+  .user-message {
+    font-size: 14px !important;
+  }
 }
 </style>
