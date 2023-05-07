@@ -119,7 +119,32 @@ watch(
             </div>
           </div>
           <div v-else>
-            <div class="pa-2 pa-md-5 assistant-message">
+            <div v-if="mobile">
+              <div class="pa-2 pa-md-5 assistant-message">
+                <v-avatar
+                  class="mr-2 mr-md-4"
+                  rounded="sm"
+                  variant="elevated"
+                >
+                  <img
+                    src="@/assets/images/avatars/avatar_assistant.jpg"
+                    alt="alt"
+                  />
+                </v-avatar>
+              </div>
+              <div class="pa-2 pa-md-5 assistant-message">
+                <v-card>
+                  <div>
+                    <md-editor
+                      v-model="message.content"
+                      class="font-1"
+                      previewOnly
+                    />
+                  </div>
+                </v-card>
+              </div>
+            </div>
+            <div v-else class="pa-2 pa-md-5 assistant-message">
               <v-avatar
                 class="d-none d-md-block mr-2 mr-md-4"
                 rounded="sm"
