@@ -3,7 +3,8 @@ import _ from "lodash";
 
 const newGnTimeout = 3 * 24 * 60 * 60 * 1000;
 const newNewsTimeout = 3 * 60 * 1000;
-export const myAvatar = "src/assets/avatars/" + _.random(1, 50) + ".jpg";
+export const myAvatarId = _.random(1, 50);
+export const myAvatar = "src/assets/avatars/" + myAvatarId + ".jpg";
 export const aiAvatar = "src/assets/avatars/" + _.random(51, 100) + ".jpg";
 
 export const useNewsStore = defineStore("newsStore", {

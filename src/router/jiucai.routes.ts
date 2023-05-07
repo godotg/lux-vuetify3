@@ -13,4 +13,11 @@ export default [
     },
     component: () => import("@/views/jiucai/Chatgpt.vue"),
   },
+  {
+    path: "/square",
+    meta: {
+      layout: "landing",
+    },
+    component: () => import("@/views/jiucai/Square.vue"),
+  },
 ];

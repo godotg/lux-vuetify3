@@ -23,6 +23,12 @@ export default {
           text: "ChatGpt",
           link: "/chatgpt",
           icon: "mdi-robot-confused-outline",
+        },
+        {
+          key: "jiucai.square",
+          text: "Square",
+          link: "/square",
+          icon: "mdi-gamepad-square-outline",
         }
       ],
     },

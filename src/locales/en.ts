@@ -2,6 +2,7 @@ export default {
   jiucai: {
     news: "News",
     chatgpt: "ChatGpt",
+    square: "Square",
   },
   common: {
     add: "Add",

@@ -4,33 +4,45 @@
 * @Description:
 -->
 <script setup lang="ts">
-import { useSnackbarStore } from "@/stores/snackbarStore";
-import { useChatStore } from "@/views/app/chat/chatStore";
-import AnimationChat from "@/components/animations/AnimationChat1.vue";
+import {useSnackbarStore} from "@/stores/snackbarStore";
+import {useChatStore} from "@/views/app/chat/chatStore";
+import AnimationSquare from "@/components/animations/AnimationSquare.vue";
 import AnimationAi from "@/components/animations/AnimationBot1.vue";
-import { Icon } from "@iconify/vue";
+import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
-import "md-editor-v3/lib/style.css";
-import { createCompletionApi } from "@/api/aiApi";
+
 const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
 
 
-import {sendChatgpt} from "@/utils/chatgptUtils";
-import {registerPacketReceiver} from "@/utils/websocket";
-import ChatMessageNotice from "@/protocol/chatgpt/ChatMessageNotice";
-import {useNewsStore, myAvatar, aiAvatar} from "@/stores/newsStore";
+import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
+import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
+import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
+import {registerPacketReceiver, send, asyncAsk} from "@/utils/websocket";
+import GroupChatNotice from "@/protocol/chat/GroupChatNotice";
+import ChatMessage from "@/protocol/chat/ChatMessage";
+import {useNewsStore, myAvatarId, aiAvatar} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
+import _ from "lodash";
+
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
 onMounted(() => {
-  registerPacketReceiver(ChatMessageNotice.PROTOCOL_ID, createCompletion);
+  registerPacketReceiver(GroupChatNotice.PROTOCOL_ID, groupChatNoticeCompletion);
+  setTimeout(() => initHistory(), 2000);
 });
 
 
 interface Message {
-  content: string;
-  role: "user" | "assistant";
+  id: number;
+  type: number;
+  sendId: number;
+  message: string;
+  timestamp: number;
+
+  prependAvatar: string;
+  title: string;
+  subtitle: string;
 }
 
 // Message List
@@ -46,37 +58,70 @@ const sendMessage = async () => {
   // Clear the input
 
   if (userMessage.value) {
-    // Add the message to the list
-    messages.value.push({
-      content: userMessage.value,
-      role: "user",
-    });
 
-    userMessage.value = "";
-
+    // 自己的韭菜广场的发送
+    const request = new GroupChatRequest();
+    request.message = userMessage.value;
     isLoading.value = true;
-    // Create a completion
-    sendChatgpt(messages.value);
+    send(request);
+    userMessage.value = "";
   }
 };
 
-const createCompletion = (packet: ChatMessageNotice) => {
-  // Check if the API key is set
-
-  try {
-
-    isLoading.value = false;
-
-    // Add the bot message
-    messages.value.push({
-      content: packet.choice,
-      role: "assistant",
-    });
-  } catch (error) {
-    isLoading.value = false;
-    snackbarStore.showErrorMessage(error.message);
-  }
+const groupChatNoticeCompletion = (packet: GroupChatNotice) => {
+  isLoading.value = false;
+  updateMessage(packet.messages);
+  scrollToBottom();
 };
+
+function toMessage(chatMessage: ChatMessage): Message {
+  const avatarId = chatMessage.sendId % 100 + 1;
+  const avatar = "src/assets/avatars/" + avatarId + ".jpg";
+  return {
+    id: chatMessage.id,
+    type: chatMessage.type,
+    sendId: chatMessage.sendId,
+    message: chatMessage.message,
+    timestamp: chatMessage.timestamp,
+    prependAvatar: avatar,
+    title: "",
+    subtitle: chatMessage.message
+  };
+}
+const updateMessage = (chatMessages: Array<ChatMessage>) => {
+  if (_.isEmpty(chatMessages)) {
+    return;
+  }
+  for (const chatMessage of chatMessages) {
+    if (_.findIndex(messages.value, it => it.id == chatMessage.id) >= 0) {
+      continue;
+    }
+    messages.value.push(toMessage(chatMessage));
+  }
+}
+
+async function initHistory() {
+  const firstMessage = _.first(messages.value);
+  const firstMessageId = _.isEmpty(firstMessage) ? 0 : firstMessage.id;
+  const request = new GroupHistoryMessageRequest();
+  request.lastMessageId = firstMessageId;
+  const response: GroupHistoryMessageResponse = await asyncAsk(request);
+  updateMessage(response.messages);
+  scrollToBottom();
+}
+
+async function moreHistory() {
+  const firstMessage = _.first(messages.value);
+  const firstMessageId = _.isEmpty(firstMessage) ? 0 : firstMessage.id;
+  const request = new GroupHistoryMessageRequest();
+  request.lastMessageId = firstMessageId;
+  const response: GroupHistoryMessageResponse = await asyncAsk(request);
+  const chatMessages = response.messages;
+  if (_.isEmpty(chatMessages)) {
+    return;
+  }
+  messages.value = _.concat(chatMessages.map(it => toMessage(it)), messages.value);
+}
 
 // Scroll to the bottom of the message container
 const scrollToBottom = () => {
@@ -90,99 +135,37 @@ const scrollToBottom = () => {
   }, 100);
 };
 
-watch(
-  () => messages.value,
-  (val) => {
-    if (val) {
-      scrollToBottom();
-    }
-  },
-  {
-    deep: true,
-  }
-);
 </script>
 
 <template>
   <div class="chat-bot">
     <div class="messsage-area">
-      <perfect-scrollbar v-if="messages.length > 0" class="message-container">
-        <template v-for="message in messages">
-          <div v-if="message.role === 'user'">
-            <div class="pa-4 user-message">
-              <v-avatar class="ml-4" rounded="sm" variant="elevated">
-                <img :src="myAvatar" alt="alt" />
-              </v-avatar>
-              <v-card class="gradient gray" theme="dark">
-                <v-card-text>
-                  <b> {{ message.content }}</b></v-card-text
-                >
-              </v-card>
-            </div>
-          </div>
-          <div v-else>
-            <div v-if="mobile">
-              <div class="pa-2 pa-md-5 assistant-message">
-                <v-avatar
-                  class="mr-2 mr-md-4"
-                  rounded="sm"
-                  variant="elevated"
-                >
-                  <img
-                    :src="aiAvatar"
-                    alt="alt"
-                  />
-                </v-avatar>
-              </div>
-              <div class="pa-2 pa-md-5 assistant-message">
-                <v-card>
-                  <div>
-                    <md-editor
-                      v-model="message.content"
-                      class="font-1"
-                      previewOnly
-                    />
-                  </div>
-                </v-card>
-              </div>
-            </div>
-            <div v-else class="pa-2 pa-md-5 assistant-message">
-              <v-avatar
-                class="d-none d-md-block mr-2 mr-md-4"
-                rounded="sm"
-                variant="elevated"
+      <perfect-scrollbar class="message-container">
+        <!--        只有这个container里面的内容是我自己写的-->
+        <v-container>
+          <v-container>
+            <div class="no-message-container">
+              <AnimationSquare :size="300"/>
+              <v-btn
+                class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold"
+                height="100"
+                size="x-large"
+                @click="moreHistory()"
               >
-                <img
-                  :src="aiAvatar"
-                  alt="alt"
-                />
-              </v-avatar>
-              <v-card>
-                <div>
-                  <md-editor
-                    v-model="message.content"
-                    class="font-1"
-                    previewOnly
-                  />
-                </div>
-              </v-card>
+                One More
+              </v-btn>
             </div>
-          </div>
-        </template>
-        <div v-if="isLoading">
-          <div class="pa-6">
-            <div class="message">
-              <AnimationAi :size="100" />
-            </div>
-          </div>
-        </div>
+          </v-container>
+          <v-list
+            :items="messages"
+            item-props
+          >
+            <template v-slot:subtitle="{ subtitle }">
+              <div class="text-wrap">{{ subtitle }}</div>
+            </template>
+          </v-list>
+        </v-container>
       </perfect-scrollbar>
-      <div class="no-message-container" v-else>
-        <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
-          Chat With Me
-        </h1>
-        <AnimationChat :size="300" />
-      </div>
     </div>
     <div class="input-area">
       <v-sheet elevation="0" class="input-panel">
@@ -209,7 +192,8 @@ watch(
                 icon="eos-icons:three-dots-loading"
               />
               <v-icon color="primary" v-else @click="sendMessage"
-              >mdi-send</v-icon
+              >mdi-send
+              </v-icon
               >
             </v-fade-transition>
           </template>
@@ -226,15 +210,18 @@ watch(
   height: 100%;
   display: flex;
   flex-direction: column;
+
   .messsage-area {
     flex: 1;
     height: 100%;
   }
+
   .input-area {
     padding: 1rem;
     height: 90px;
 
     align-items: center;
+
     .input-panel {
       border-radius: 5px;
       max-width: 1200px;
@@ -275,6 +262,7 @@ watch(
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   h1 {
     font-size: 2rem;
     font-weight: 500;
