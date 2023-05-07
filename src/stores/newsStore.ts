@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import _ from "lodash";
 
-const newGnTimeout = 7 * 24 * 60 * 60 * 1000;
+const newGnTimeout = 3 * 24 * 60 * 60 * 1000;
 const newNewsTimeout = 3 * 60 * 1000;
 
 export const useNewsStore = defineStore("newsStore", {
