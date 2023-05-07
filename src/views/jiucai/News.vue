@@ -14,7 +14,7 @@ import {useNewsStore} from "@/stores/newsStore";
 
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
-const {mobile} = useDisplay()
+const {mobile} = useDisplay();
 
 
 const newsRef = ref<News[]>([]);

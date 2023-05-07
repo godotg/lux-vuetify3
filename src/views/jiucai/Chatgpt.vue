@@ -19,6 +19,8 @@ const chatStore = useChatStore();
 import {sendChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
 import ChatMessageNotice from "@/protocol/chatgpt/ChatMessageNotice";
+import {useDisplay} from "vuetify";
+const {mobile} = useDisplay();
 onMounted(() => {
   registerPacketReceiver(ChatMessageNotice.PROTOCOL_ID, createCompletion);
 });
