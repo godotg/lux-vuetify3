@@ -111,7 +111,6 @@ async function initHistory() {
   updateMessage(response.messages);
   scrollToBottom();
   setTimeout(() => scrollToBottom(), 300);
-  console.log("aaaaaaaaaaaaaaaaaaaa")
   snackbarStore.showSuccessMessage("聊天记录加载成功");
 }
 
