@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useChatStore} from "@/views/app/chat/chatStore";
-import AnimationSquare from "@/components/animations/AnimationSquare.vue";
+import AnimationChat from "@/components/animations/AnimationChat1.vue";
 import AnimationAi from "@/components/animations/AnimationBot1.vue";
 import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
@@ -15,6 +15,7 @@ const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
 
 
+import AnimationSquare from "@/components/animations/AnimationSquare.vue";
 import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
 import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
@@ -40,9 +41,8 @@ interface Message {
   message: string;
   timestamp: number;
 
-  prependAvatar: string;
-  title: string;
-  subtitle: string;
+  avatar: string;
+  content: string;
 }
 
 // Message List
@@ -83,11 +83,11 @@ function toMessage(chatMessage: ChatMessage): Message {
     sendId: chatMessage.sendId,
     message: chatMessage.message,
     timestamp: chatMessage.timestamp,
-    prependAvatar: avatar,
-    title: "",
-    subtitle: chatMessage.message
+    avatar: avatar,
+    content: chatMessage.message,
   };
 }
+
 const updateMessage = (chatMessages: Array<ChatMessage>) => {
   if (_.isEmpty(chatMessages)) {
     return;
@@ -108,6 +108,7 @@ async function initHistory() {
   const response: GroupHistoryMessageResponse = await asyncAsk(request);
   updateMessage(response.messages);
   scrollToBottom();
+  setTimeout(() => scrollToBottom(), 300);
 }
 
 async function moreHistory() {
@@ -140,32 +141,90 @@ const scrollToBottom = () => {
 <template>
   <div class="chat-bot">
     <div class="messsage-area">
-      <perfect-scrollbar class="message-container">
-        <!--        只有这个container里面的内容是我自己写的-->
-        <v-container>
-          <v-container>
-            <div class="no-message-container">
+      <perfect-scrollbar v-if="messages.length > 0" class="message-container">
+        <v-container @click="moreHistory()">
+          <v-row>
+            <v-col v-ripple>
               <AnimationSquare :size="300"/>
-              <v-btn
-                class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold"
-                height="100"
-                size="x-large"
-                @click="moreHistory()"
-              >
-                One More
-              </v-btn>
-            </div>
-          </v-container>
-          <v-list
-            :items="messages"
-            item-props
-          >
-            <template v-slot:subtitle="{ subtitle }">
-              <div class="text-wrap">{{ subtitle }}</div>
-            </template>
-          </v-list>
+            </v-col>
+          </v-row>
         </v-container>
+        <template v-for="message in messages">
+          <div v-if="message.role === 'user'">
+            <div class="pa-4 user-message">
+              <v-avatar class="ml-4" rounded="sm" variant="elevated">
+                <img :src="myAvatar" alt="alt"/>
+              </v-avatar>
+              <v-card class="gradient gray" theme="dark">
+                <v-card-text>
+                  <b> {{ message.content }}</b></v-card-text
+                >
+              </v-card>
+            </div>
+          </div>
+          <div v-else>
+            <div v-if="mobile">
+              <div class="pa-2 pa-md-5 assistant-message">
+                <v-avatar
+                  class="mr-2 mr-md-4"
+                  rounded="sm"
+                  variant="elevated"
+                >
+                  <img
+                    :src="aiAvatar"
+                    alt="alt"
+                  />
+                </v-avatar>
+              </div>
+              <div class="pa-2 pa-md-5 assistant-message">
+                <v-card>
+                  <div>
+                    <md-editor
+                      v-model="message.content"
+                      class="font-1"
+                      previewOnly
+                    />
+                  </div>
+                </v-card>
+              </div>
+            </div>
+            <div v-else class="pa-2 pa-md-5 assistant-message">
+              <v-avatar
+                class="d-none d-md-block mr-2 mr-md-4"
+                rounded="sm"
+                variant="elevated"
+              >
+                <img
+                  :src="message.avatar"
+                  alt="alt"
+                />
+              </v-avatar>
+              <v-card>
+                <div>
+                  <md-editor
+                    v-model="message.content"
+                    class="font-1"
+                    previewOnly
+                  />
+                </div>
+              </v-card>
+            </div>
+          </div>
+        </template>
+        <div v-if="isLoading">
+          <div class="pa-6">
+            <div class="message">
+              <AnimationAi :size="100"/>
+            </div>
+          </div>
+        </div>
       </perfect-scrollbar>
+      <div class="no-message-container" v-else>
+        <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
+          Let It Go
+        </h1>
+        <AnimationSquare :size="300"/>
+      </div>
     </div>
     <div class="input-area">
       <v-sheet elevation="0" class="input-panel">
