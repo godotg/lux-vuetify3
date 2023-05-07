@@ -9,6 +9,7 @@ import { useCustomizeThemeStore } from "@/stores/customizeTheme";
 import ToolbarLanguage from "@/components/toolbar/ToolbarLanguage.vue";
 import ToolbarNewsLevel from "@/components/toolbar/ToolbarNewsLevel.vue";
 import ToolbarNotifications from "./ToolbarNotifications.vue";
+import ToolbarNewsNotifications from "./ToolbarNewsNotifications.vue";
 import ToolbarUser from "./ToolbarUser.vue";
 import { useTodoStore } from "@/views/app/todo/todoStore";
 const { mdAndUp } = useDisplay();
@@ -65,20 +66,10 @@ const showMobileSearch = ref(false);
         </v-btn>
         <!-- search input desktop -->
 
-        <v-btn v-if="mdAndUp" icon class="text-none">
-          <v-badge dot color="success">
-            <v-icon>mdi-account-multiple-outline</v-icon>
-          </v-badge>
-        </v-btn>
 
-        <v-btn v-if="mdAndUp" icon to="/apps/todo" class="text-none">
-          <v-badge :content="`${todoStore.getTodoList.length} +`" color="error">
-            <v-icon>mdi-calendar-check</v-icon>
-          </v-badge>
-        </v-btn>
+        <ToolbarNewsNotifications />
         <ToolbarNewsLevel />
         <ToolbarLanguage />
-        <ToolbarNotifications />
         <ToolbarUser />
       </div>
     </div>

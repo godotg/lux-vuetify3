@@ -1,6 +1,9 @@
 import {defineStore} from "pinia";
 import _ from "lodash";
 
+const newGnTimeout = 7 * 24 * 60 * 60 * 1000;
+const newNewsTimeout = 3 * 60 * 1000;
+
 export const useNewsStore = defineStore("newsStore", {
   state: () => ({
     gnInfos: [],
@@ -21,7 +24,7 @@ export const useNewsStore = defineStore("newsStore", {
       const index = _.findIndex(this.gnInfos, it => it.id == id);
       if (index >= 0) {
         const gn = this.gnInfos[index];
-        if (new Date().getTime() - gn.time < 7 * 24 * 60 * 60 * 1000) {
+        if (new Date().getTime() - gn.time < newGnTimeout) {
           return true;
         } else {
           return false;
@@ -43,7 +46,7 @@ export const useNewsStore = defineStore("newsStore", {
       const index = _.findIndex(this.newsInfos, it => it.id == id);
       if (index >= 0) {
         const news = this.newsInfos[index];
-        if (new Date().getTime() - news.time < 3 * 60 * 1000) {
+        if (new Date().getTime() - news.time < newNewsTimeout) {
           return true;
         } else {
           return false;
@@ -59,6 +62,12 @@ export const useNewsStore = defineStore("newsStore", {
         time: new Date().getTime()
       });
       return true;
+    },
+
+    totalNewNews(): number {
+      const currentTime = new Date().getTime();
+      const total = this.newsInfos.filter(it => currentTime - it.time < newNewsTimeout).length;
+      return total;
     },
 
     updateNewsLevelFilter(level: string, value: number) {
