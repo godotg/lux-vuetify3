@@ -20,7 +20,7 @@ import AnimationSquare from "@/components/animations/AnimationSquare.vue";
 import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
 import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
-import {registerPacketReceiver, send, asyncAsk} from "@/utils/websocket";
+import {registerPacketReceiver,isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import GroupChatNotice from "@/protocol/chat/GroupChatNotice";
 import ChatMessage from "@/protocol/chat/ChatMessage";
 import {useNewsStore, myAvatarId, aiAvatar} from "@/stores/newsStore";
@@ -31,7 +31,7 @@ const {mobile} = useDisplay();
 const newsStore = useNewsStore();
 onMounted(() => {
   registerPacketReceiver(GroupChatNotice.PROTOCOL_ID, groupChatNoticeCompletion);
-  setTimeout(() => initHistory(), 2000);
+  initHistory();
 });
 
 
@@ -103,6 +103,14 @@ const updateMessage = (chatMessages: Array<ChatMessage>) => {
 }
 
 async function initHistory() {
+  setTimeout(() => doInitHistory(), 1000);
+}
+
+function doInitHistory() {
+  if (!isWebsocketReady()) {
+    initHistory();
+    return;
+  }
   const firstMessage = _.first(messages.value);
   const firstMessageId = _.isEmpty(firstMessage) ? 0 : firstMessage.id;
   const request = new GroupHistoryMessageRequest();

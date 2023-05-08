@@ -64,7 +64,7 @@ onMounted(() => {
   console.log("news on mounted-----------------------------------------");
   initNews();
   setInterval(() => requestNews(), 15000);
-  setInterval(() => requestGn(), 60000);
+  setInterval(() => requestGn(), 600000);
 });
 
 document.addEventListener("visibilitychange", function() {
