@@ -106,13 +106,13 @@ async function initHistory() {
   setTimeout(() => doInitHistory(), 1000);
 }
 
-function doInitHistory() {
+async function doInitHistory() {
   if (!isWebsocketReady()) {
     initHistory();
     return;
   }
   const firstMessage = _.first(messages.value);
-  const firstMessageId = _.isEmpty(firstMessage) ? 0 : firstMessage.id;
+  const firstMessageId = _.isNil(firstMessage) ? 0 : firstMessage.id;
   const request = new GroupHistoryMessageRequest();
   request.lastMessageId = firstMessageId;
   const response: GroupHistoryMessageResponse = await asyncAsk(request);
@@ -124,7 +124,7 @@ function doInitHistory() {
 
 async function moreHistory() {
   const firstMessage = _.first(messages.value);
-  const firstMessageId = _.isEmpty(firstMessage) ? 0 : firstMessage.id;
+  const firstMessageId = _.isNil(firstMessage) ? 0 : firstMessage.id;
   const request = new GroupHistoryMessageRequest();
   request.lastMessageId = firstMessageId;
   const response: GroupHistoryMessageResponse = await asyncAsk(request);

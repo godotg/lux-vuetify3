@@ -147,7 +147,7 @@ watch(
                   <div>
                     <md-editor
                       v-model="message.content"
-                      class="font-1 text-pre-wrap"
+                      class="font-1"
                       previewOnly
                     />
                   </div>
@@ -169,7 +169,7 @@ watch(
                 <div>
                   <md-editor
                     v-model="message.content"
-                    class="font-1 text-pre-wrap"
+                    class="font-1"
                     previewOnly
                   />
                 </div>
