@@ -16,11 +16,12 @@ const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
 
 
-import {sendChatgpt} from "@/utils/chatgptUtils";
+import {sendChatgpt, formatChatgptMarkdown} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore, myAvatar, aiAvatar} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
+import _ from "lodash";
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
 onMounted(() => {
@@ -29,6 +30,7 @@ onMounted(() => {
 
 
 interface Message {
+  requestId: number;
   content: string;
   role: "user" | "assistant";
 }
@@ -48,6 +50,7 @@ const sendMessage = async () => {
   if (userMessage.value) {
     // Add the message to the list
     messages.value.push({
+      requestId: 0,
       content: userMessage.value,
       role: "user",
     });
@@ -68,10 +71,16 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
     isLoading.value = false;
 
     // Add the bot message
-    messages.value.push({
-      content: packet.choice,
-      role: "assistant",
-    });
+    const message = _.find(messages.value, it => it.requestId == packet.requestId);
+    if (_.isNil(message)) {
+      messages.value.push({
+        requestId: packet.requestId,
+        content: packet.choice,
+        role: "assistant",
+      });
+    } else {
+      message.content = formatChatgptMarkdown(message.content, packet.choice);
+    }
   } catch (error) {
     isLoading.value = false;
     snackbarStore.showErrorMessage(error.message);
@@ -81,7 +90,6 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
 // Scroll to the bottom of the message container
 const scrollToBottom = () => {
   const container = document.querySelector(".message-container");
-  console.log("container: ", container);
 
   setTimeout(() => {
     container?.scrollTo({
@@ -139,7 +147,7 @@ watch(
                   <div>
                     <md-editor
                       v-model="message.content"
-                      class="font-1"
+                      class="font-1 text-pre-wrap"
                       previewOnly
                     />
                   </div>
@@ -161,7 +169,7 @@ watch(
                 <div>
                   <md-editor
                     v-model="message.content"
-                    class="font-1"
+                    class="font-1 text-pre-wrap"
                     previewOnly
                   />
                 </div>

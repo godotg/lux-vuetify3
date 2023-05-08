@@ -6,6 +6,7 @@ import _ from "lodash";
 import ChatgptMessageRequest from "@/protocol/chatgpt/ChatgptMessageRequest";
 
 const snackbarStore = useSnackbarStore();
+let requestId = 1;
 
 export function sendChatgpt(messages) {
   if (!isWebsocketReady()) {
@@ -19,6 +20,7 @@ export function sendChatgpt(messages) {
 
   const request = new ChatgptMessageRequest();
   request.mobile = isMobile();
+  request.requestId = requestId++;
 
   // const size = _.size(messages);
   // if (size < 2) {
@@ -31,4 +33,21 @@ export function sendChatgpt(messages) {
   messages.forEach(it => request.messages.push(it.content));
 
   send(request);
+}
+
+const mdEnd = "\n```\n";
+export function formatChatgptMarkdown(message: string, choice: string): string {
+  if (choice.startsWith("```")) {
+    message = message + choice + mdEnd;
+  } else if (choice.startsWith("``")) {
+    message = message + "\n";
+  } else if (choice.startsWith("`\n")) {
+    // do nothing
+  } else if (message.endsWith(mdEnd)) {
+    message = message.substring(0, message.lastIndexOf(mdEnd)) + choice + mdEnd;
+  } else {
+    message = message + choice;
+  }
+  console.log(message);
+  return message;
 }
