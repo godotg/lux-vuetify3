@@ -56,8 +56,8 @@ const levelMap = {
 };
 
 const jokes = [
-  "做一个快乐的韭菜",
-  "爱割才会赢",
+  "🌴快乐韭菜网：做一个快乐的韭菜， https://jiucai.fun",
+  "🌴快乐韭菜网：爱割才会赢， https://jiucai.fun",
 ];
 
 onMounted(() => {
@@ -153,7 +153,7 @@ function copyGn(gn: GaiNian, event: Event) {
   str = str + gn.level + "级电报 " + gn.ctime + "\n";
   str = str + "⚡" + gn.title + "\n\n" + gn.content + "\n\n";
   str = str + gn.url + "\n\n";
-  str = str + "🌴快乐韭菜网：做一个快乐的韭菜， https://jiucai.fun";
+  str = str + jokes[_.random(0, jokes.length - 1)];
   clipboard(str, event);
   snackbarStore.showSuccessMessage("复制成功");
 }
@@ -189,7 +189,8 @@ function copyNews(news: News, event: Event) {
       str = str + " " + subject;
     }
   }
-  str = str + "\n🌴快乐韭菜网：做一个快乐的韭菜， https://jiucai.fun";
+  str = str + "\n";
+  str = str + jokes[_.random(0, jokes.length - 1)];
   clipboard(str, event);
   snackbarStore.showSuccessMessage("复制成功");
 }
