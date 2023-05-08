@@ -36,6 +36,12 @@ export function sendChatgpt(messages) {
 }
 
 const mdEnd = "\n```\n";
+
+/**
+ * 格式化stream的返回message，自动不全md文档
+ * @param message old choice
+ * @param choice new choice
+ */
 export function formatChatgptMarkdown(message: string, choice: string): string {
   if (choice.startsWith("```")) {
     message = message + choice + mdEnd;
