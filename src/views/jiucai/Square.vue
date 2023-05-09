@@ -159,7 +159,12 @@ const scrollToBottom = () => {
         <v-container @click="moreHistory()">
           <v-row>
             <v-col v-ripple>
-              <AnimationSquare :size="300"/>
+              <div class="no-message-container">
+                <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
+                  One more thing
+                </h1>
+                <AnimationSquare :size="300"/>
+              </div>
             </v-col>
           </v-row>
         </v-container>
