@@ -16,7 +16,7 @@ const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
 
 
-import {sendChatgpt, formatChatgptMarkdown} from "@/utils/chatgptUtils";
+import {sendChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore, myAvatar, aiAvatar} from "@/stores/newsStore";
@@ -31,6 +31,7 @@ onMounted(() => {
 
 interface Message {
   requestId: number;
+  rawContent: string;
   content: string;
   role: "user" | "assistant";
 }
@@ -51,6 +52,7 @@ const sendMessage = async () => {
     // Add the message to the list
     messages.value.push({
       requestId: 0,
+      rawContent: "",
       content: userMessage.value,
       role: "user",
     });
@@ -71,15 +73,27 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
     isLoading.value = false;
 
     // Add the bot message
-    const message = _.find(messages.value, it => it.requestId == packet.requestId);
+    let message = _.find(messages.value, it => it.requestId == packet.requestId);
+    const choice = packet.choice;
+
     if (_.isNil(message)) {
-      messages.value.push({
+      message = {
         requestId: packet.requestId,
-        content: packet.choice,
+        rawContent: choice,
+        content: choice,
         role: "assistant",
-      });
+      };
+      messages.value.push(message);
     } else {
-      message.content = formatChatgptMarkdown(message.content, packet.choice);
+      // 记录一个原始的字符串返回，判断这个原始的字符串包含多少个  ``` 符号md的符号，奇数手动补齐md文档的格式就行了
+      message.rawContent = message.rawContent + choice;
+      const mdEnd = "\n```\n";
+      const count = message.rawContent.split("```").filter(x => x !== "").length - 1;
+      if (count % 2 == 0) {
+        message.content = message.rawContent;
+      } else {
+        message.content = message.rawContent + mdEnd;
+      }
     }
   } catch (error) {
     isLoading.value = false;
