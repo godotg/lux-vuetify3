@@ -88,7 +88,7 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
       // 记录一个原始的字符串返回，判断这个原始的字符串包含多少个  ``` 符号md的符号，奇数手动补齐md文档的格式就行了
       message.rawContent = message.rawContent + choice;
       const mdEnd = "\n```\n";
-      const count = message.rawContent.split("```").filter(x => x !== "").length - 1;
+      const count = message.rawContent.split("```").length - 1;
       if (count % 2 == 0) {
         message.content = message.rawContent;
       } else {
