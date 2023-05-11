@@ -17,7 +17,7 @@ export const useNewsStore = defineStore("newsStore", {
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["newsInfos", "newsLevelFilter", "newsLevelFilterValue"]}],
+    strategies: [{storage: localStorage, paths: ["newsInfos", "gnInfos", "newsLevelFilter", "newsLevelFilterValue"]}],
   },
 
   getters: {},
