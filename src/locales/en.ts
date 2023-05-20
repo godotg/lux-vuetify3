@@ -127,9 +127,11 @@ export default {
       richTextEditor: "Rich Text Editor",
       editTable: "Edit Table",
     },
-    chatbot_v1: "ChatBot v1",
-    chatbot_v2: "ChatBot v2(Stream)",
+    chatbot_v1: "ChatBot",
+    chatbot_v2: "Q&A Bot",
     voicebot: "VoiceBot",
+    imagebot: "ImageBot",
+    chartbot: "ChartBot",
   },
 
   dashboard: {
@@ -150,6 +152,9 @@ export default {
     apikey: {
       title: "API Key",
     },
+    chatgptConfig: {
+      title: "ChatGPT Config",
+    },
     chatAssistant: {
       title: "Chat Assistant",
     },
@@ -165,6 +170,15 @@ export default {
     },
     playGround: {
       title: "Playground",
+    },
+  },
+  chatgpt: {
+    config: {
+      title: "ChatGPT Config",
+      apikey: "API Key",
+      apikeyPlaceholder: "If not input , the ApiKey in the .env will be used.",
+      model: "Model",
+      role: "Role",
     },
   },
 

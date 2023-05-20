@@ -59,11 +59,11 @@ const sendMessage = async () => {
 
 const createCompletion = async () => {
   // Check if the API key is set
-  if (!chatGPTStore.getApiKey) {
-    snackbarStore.showErrorMessage("请先输入API KEY");
-    isLoading.value = false;
-    return;
-  }
+  // if (!chatGPTStore.getApiKey) {
+  //   snackbarStore.showErrorMessage("请先输入API KEY");
+  //   isLoading.value = false;
+  //   return;
+  // }
 
   try {
     const completion = await createCompletionApi(
@@ -244,9 +244,7 @@ const clearMessages = () => {
     <div class="input-area">
       <v-sheet class="input-panel" height="100">
         <div class="panel-left">
-          <span>
-            <VoiceConfigDialog />
-          </span>
+          <VoiceConfigDialog />
         </div>
         <div class="panel-center">
           <!-- Recording Animation -->
