@@ -9,9 +9,12 @@
       <v-col cols="2">
         <v-select
           v-model="selectExcelType"
-          :items="excelTypes"
+          :items="orderTypes"
           @update:modelValue="query()"
           density="compact"></v-select>
+      </v-col>
+      <v-col cols="1">
+        <v-btn density="compact" icon="mdi-card-bulleted-settings-outline" size="x-large" color="info" @click="settingDialog = !settingDialog"></v-btn>
       </v-col>
       <v-col>
         <v-text-field
@@ -28,7 +31,7 @@
     <v-row>
       <v-col>
         <v-data-table-server
-          :headers="orders.headers"
+          :headers="computedHeaders"
           :items="orders.playerRows"
           :search="orders.search"
           :loading="orders.loading"
@@ -39,6 +42,23 @@
         />
       </v-col>
     </v-row>
+
+    <v-dialog v-model="settingDialog" max-width="800">
+      <v-card>
+        <v-card-title>
+          过滤需要查看的属性
+        </v-card-title>
+        <v-card-text>
+          <v-row>
+            <template v-for="header in allOrderHeaders">
+              <v-col cols="4">
+                <v-checkbox v-model="selected" :label="header" :value="header"></v-checkbox>
+              </v-col>
+            </template>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -53,8 +73,11 @@ const zpAuthStore = useZpAuthStore();
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
 
-const selectExcelType = ref('全部')
-const excelTypes = ref(['全部'])
+const selectExcelType = ref('全部');
+const orderTypes = ref(['全部']);
+const settingDialog = ref<boolean>(false);
+const allOrderHeaders = ref([]);
+const selected = ref([]);
 
 const orders = reactive({
   search: '',
@@ -64,15 +87,7 @@ const orders = reactive({
     page: 1,
     itemsPerPage: 10
   },
-  headers: [
-    {title: '玩家id', key: 'id'},
-    {title: '名称', key: 'name'},
-    {title: '头像', key: 'avatar'},
-    {title: '经验', key: 'exp'},
-    {title: '等级', key: 'level'},
-    {title: '注册时间', key: 'registerTime'},
-    {title: '最近登录时间', key: 'lastLoginTime'}
-  ],
+  headers: [],
   playerRows: []
 });
 
@@ -86,7 +101,7 @@ const fetchData = async () => {
   console.log("------------------" + page)
   const response = await axios.post(BASE_URL + "/api/order/query", {
     query,
-    excelType: selectExcelType.value,
+    orderType: selectExcelType.value,
     page,
     itemsPerPage
   }, zpAuthStore.httpHeaders());
@@ -113,16 +128,20 @@ const fetchData = async () => {
   snackbarStore.showSuccessMessage(response.data.message);
 }
 
-const fetchExcelTypes = async () => {
-  const response = await axios.post(BASE_URL + "/api/order/excelTypes", {}, zpAuthStore.httpHeaders());
+const fetchOrderTypes = async () => {
+  const response = await axios.post(BASE_URL + "/api/order/types", {}, zpAuthStore.httpHeaders());
 
   const code = response.data.code;
   if (code != 1) {
     snackbarStore.showErrorMessage(response.data.message, code);
     return;
   }
-  excelTypes.value = response.data.data.excelTypes;
-  console.log(response)
+  orderTypes.value = response.data.data.orderTypes;
+  allOrderHeaders.value = response.data.data.allOrderHeaders;
+  selected.value = response.data.data.allOrderHeaders;
+  if (!_.isEmpty(zpAuthStore.selectedHeaders)) {
+    selected.value = zpAuthStore.selectedHeaders;
+  }
   snackbarStore.showSuccessMessage(response.data.message);
 }
 
@@ -142,7 +161,7 @@ const query = async () => {
 
 onMounted(() => {
   fetchData();
-  fetchExcelTypes();
+  fetchOrderTypes();
 });
 
 watch(
@@ -161,6 +180,24 @@ watch(
     fetchData();
   }
 )
+
+watch(
+  () => selected.value,
+  (newValue, oldValue) => {
+    zpAuthStore.setSelectedHeaders(newValue);
+  }
+)
+
+const computedHeaders = computed(() => {
+  const cHeaders = [];
+  for (const header of orders.headers) {
+    if (_.findIndex(selected.value, it => it == header.title) < 0) {
+      continue;
+    }
+    cHeaders.push(header);
+  }
+  return cHeaders;
+});
 
 
 </script>

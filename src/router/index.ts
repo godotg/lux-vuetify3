@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 import UserRoutes from "./user.routes";
 import AuthRoutes from "./auth.routes";
 import UIRoutes from "./ui.routes";
@@ -9,7 +9,7 @@ import ChartsRoutes from "./charts.routes";
 import AppsRoutes from "./apps.routes";
 import DataRoutes from "./data.routes";
 import AiRoutes from "./ai.routes";
-import { useZpAuthStore } from "@/stores/zpAuthStorage";
+import {useZpAuthStore} from "@/stores/zpAuthStorage";
 import ZpRoutes from "./zp.routes";
 import _ from "lodash";
 
@@ -59,20 +59,22 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition;
     } else {
-      return { top: 0 };
+      return {top: 0};
     }
   },
 });
 
 router.beforeEach((to, from, next) => {
+  if (to.path == "/signin") {
+    next();
+    return;
+  }
   const zpAuthStore = useZpAuthStore();
   // 验证权限
   const auth = zpAuthStore.token;
-  if (_.isNil(auth)) {
-    if (!_.isEqual(to.meta.auth, true)) {
-      next({ path: '/signin' });
-      return;
-    }
+  if (_.isEmpty(auth)) {
+    next({path: '/signin'});
+    return;
   }
   next();
 });

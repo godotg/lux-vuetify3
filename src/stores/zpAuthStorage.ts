@@ -5,12 +5,13 @@ export const TokenKey = "zptoken";
 
 export const useZpAuthStore = defineStore("zpAuth", {
   state: () => ({
-    token: ""
+    token: "",
+    selectedHeaders: []
   }),
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["token"]}],
+    strategies: [{storage: localStorage, paths: ["token", "selectedHeaders"]}],
   },
 
   getters: {},
@@ -18,6 +19,9 @@ export const useZpAuthStore = defineStore("zpAuth", {
   actions: {
     setToken(token: string) {
       this.token = token;
+    },
+    setSelectedHeaders(selected) {
+      this.selectedHeaders = selected
     },
     removeToken() {
       this.token = "";
