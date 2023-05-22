@@ -87,4 +87,26 @@ export default [
       title: "CustomFormGeneration",
     },
   },
+  // rich text editor
+  {
+    path: "/data/rich-text-editor",
+    component: () => import("@/views/datatable/editor/RichTextEditorPage.vue"),
+    meta: {
+      requiresAuth: true,
+      layout: "landing",
+      category: "Data",
+      title: "RichTextEditor",
+    },
+  },
+  // edit table
+  {
+    path: "/data/edit-table",
+    component: () => import("@/views/datatable/EditTablePage.vue"),
+    meta: {
+      requiresAuth: true,
+      layout: "ui",
+      category: "Data",
+      title: "EditTable",
+    },
+  },
 ];

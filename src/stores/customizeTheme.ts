@@ -11,6 +11,7 @@ interface State {
   darkTheme: boolean;
   primaryColor: Color;
   mainSidebar: boolean;
+  localCode: string;
 }
 
 export const useCustomizeThemeStore = defineStore({
@@ -23,6 +24,7 @@ export const useCustomizeThemeStore = defineStore({
       colorName: "grey",
       colorValue: "#344767",
     },
+    localCode: "en",
     mainSidebar: true,
     // mainSidebar: isMobile() ? false : true,
   }),
@@ -30,7 +32,10 @@ export const useCustomizeThemeStore = defineStore({
   persist: {
     enabled: true,
     strategies: [
-      { storage: localStorage, paths: ["darkTheme", "mainSidebar"] },
+      {
+        storage: localStorage,
+        paths: ["darkTheme", "primaryColor", "localCode", "mainSidebar"],
+      },
     ],
   },
 
@@ -41,6 +46,9 @@ export const useCustomizeThemeStore = defineStore({
     },
     setPrimaryColor(payload: Color) {
       this.primaryColor = payload;
+    },
+    setLocalCode(localCode: string) {
+      this.localCode = localCode;
     },
   },
 });

@@ -5,25 +5,20 @@
 -->
 <script setup lang="ts">
 import { useSnackbarStore } from "@/stores/snackbarStore";
-import { useChatStore } from "@/views/app/chat/chatStore";
 import AnimationAi from "@/components/animations/AnimationBot1.vue";
 // import AnimationSpeech from "@/components/animations/AnimationSpeech.vue";
 import AnimationRecording from "@/components/animations/AnimationRecording.vue";
-
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-
 import AnimaitonCss01 from "@/components/animations/AnimaitonCss01.vue";
 import AnimaitonCss02 from "@/components/animations/AnimaitonCss02.vue";
 import { useSpeechStore } from "@/stores/speechStore";
-
 import { createTranscriptionApi, createCompletionApi } from "@/api/aiApi";
 import VoiceConfigDialog from "@/components/ai/VoiceConfigDialog.vue";
-
+import { useChatGPTStore } from "@/stores/chatGPTStore";
 const snackbarStore = useSnackbarStore();
-const chatStore = useChatStore();
 const speechStore = useSpeechStore();
-
+const chatGPTStore = useChatGPTStore();
 interface Message {
   content: string;
   role: "user" | "assistant" | "system";
@@ -64,11 +59,11 @@ const sendMessage = async () => {
 
 const createCompletion = async () => {
   // Check if the API key is set
-  if (!chatStore.getApiKey) {
-    snackbarStore.showErrorMessage("请先输入API KEY");
-    isLoading.value = false;
-    return;
-  }
+  // if (!chatGPTStore.getApiKey) {
+  //   snackbarStore.showErrorMessage("请先输入API KEY");
+  //   isLoading.value = false;
+  //   return;
+  // }
 
   try {
     const completion = await createCompletionApi(
@@ -77,9 +72,9 @@ const createCompletion = async () => {
         model: "gpt-3.5-turbo",
         temperature: 1,
         n: 1,
-        max_tokens: 100,
+        max_tokens: 200,
       },
-      chatStore.getApiKey
+      chatGPTStore.getApiKey
     );
 
     isLoading.value = false;
@@ -90,7 +85,7 @@ const createCompletion = async () => {
       role: "assistant",
     });
     state.isResponse = false;
-    speechStore.textToSpeech(completion.data.choices[0].message.content);
+    speechStore.ssmlToSpeak(completion.data.choices[0].message.content);
   } catch (error) {
     state.isResponse = false;
     snackbarStore.showErrorMessage(error.message);
@@ -145,7 +140,10 @@ const startRecording = async () => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("model", "whisper-1");
-        const res = await createTranscriptionApi(formData, chatStore.getApiKey);
+        const res = await createTranscriptionApi(
+          formData,
+          chatGPTStore.getApiKey
+        );
         userMessage.value = res.data.text;
 
         // 停止媒体流的所有轨道
@@ -175,6 +173,16 @@ const state = reactive({
   isRecording: false,
   isResponse: false,
 });
+
+const clearMessages = () => {
+  messages.value = [
+    {
+      content:
+        "想象我们是朋友,和我进行轻松有趣的对话。我们可以聊天天气、音乐、电影、运动或者日常生活等话题。请尽情地与我互动并回应我的问题,让我们像朋友一样自然地交流。并且我会多种语言,我会用不同的语言跟你交流,比如说我当前的问题是中文时,希望你下个回答用中文,我当前的问题是英文时,你的下个回答用英文,我当前的问题是日语时,你的下个回答是日语",
+      role: "system",
+    },
+  ];
+};
 </script>
 
 <template>
@@ -226,7 +234,7 @@ const state = reactive({
 
       <!-- No Message Content -->
       <div class="no-message-container" v-else>
-        <h1 style="color: #6746f5" class="text-h4 text-md-h2 font-weight-bold">
+        <h1 style="color: #4d5271" class="text-h3 text-md-h2 font-weight-bold">
           Talk With Me
         </h1>
 
@@ -234,44 +242,42 @@ const state = reactive({
       </div>
     </div>
     <div class="input-area">
-      <v-sheet class="input-panel" height="120">
-        <!-- Recording Animation -->
-        <AnimationRecording
-          v-if="state.isRecording"
-          @click="stopRecording"
-          :size="140"
-        />
-        <!-- Response Animation -->
-        <AnimaitonCss02 v-else-if="state.isResponse" />
-        <!-- Playing Animation -->
-        <AnimaitonCss01 v-else-if="speechStore.isPlaying" />
-        <!-- Recording Btn -->
-        <v-btn
-          v-else
-          size="x-large"
-          color="#6746f5"
-          class="text-white"
-          icon
-          variant="elevated"
-          @click="startRecording"
-          ><v-icon>mdi-microphone</v-icon></v-btn
-        >
-        <span class="config">
+      <v-sheet class="input-panel" height="100">
+        <div class="panel-left">
           <VoiceConfigDialog />
-
-          <span class="ml-2 text-h6 font-weight-bold text-primary">{{
-            speechStore.localName
-          }}</span>
-          <v-chip
-            density="comfortable"
-            class="d-none d-sm-inline ml-1 font-weight-bold"
-            label
-            size="small"
-            color="primary"
+        </div>
+        <div class="panel-center">
+          <!-- Recording Animation -->
+          <AnimationRecording
+            v-if="state.isRecording"
+            @click="stopRecording"
+            :size="140"
+          />
+          <!-- Response Animation -->
+          <AnimaitonCss02 v-else-if="state.isResponse" />
+          <!-- Playing Animation -->
+          <AnimaitonCss01 v-else-if="speechStore.isPlaying" />
+          <!-- Recording Btn -->
+          <v-btn
+            v-else
+            size="x-large"
+            icon
+            variant="elevated"
+            class="gradient gray"
+            @click="startRecording"
+            ><v-icon size="30">mdi-microphone</v-icon></v-btn
           >
-            {{ speechStore.speechSynthesisLanguage }}</v-chip
-          >
-        </span>
+        </div>
+        <div class="panel-right">
+          <v-btn icon variant="elevated" @click="clearMessages">
+            <v-icon size="30" class="text-primary">mdi-broom</v-icon>
+            <v-tooltip
+              activator="parent"
+              location="top"
+              text="Clear"
+            ></v-tooltip>
+          </v-btn>
+        </div>
       </v-sheet>
     </div>
   </div>
@@ -294,11 +300,11 @@ const state = reactive({
     align-items: center;
     .input-panel {
       border-radius: 5px;
-      max-width: 600px;
+      max-width: 500px;
       margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-around;
       position: relative;
       .config {
         position: absolute;

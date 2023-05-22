@@ -5,24 +5,46 @@
 -->
 <script setup lang="ts">
 import { useSnackbarStore } from "@/stores/snackbarStore";
-import { useChatStore } from "@/views/app/chat/chatStore";
 import AnimationAi from "@/components/animations/AnimationBot2.vue";
-import { read } from "@/utils/aiUtils";
+import { read, countAndCompleteCodeBlocks } from "@/utils/aiUtils";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
+import { scrollToBottom } from "@/utils/common";
+import { useChatGPTStore } from "@/stores/chatGPTStore";
+import ApiKeyDialog from "@/components/ApiKeyDialog.vue";
 const snackbarStore = useSnackbarStore();
-const chatStore = useChatStore();
+const chatGPTStore = useChatGPTStore();
 
 interface Message {
   content: string;
-  role: "user" | "assistant";
+  role: "user" | "assistant" | "system";
 }
+
+// User Input Message
+const userMessage = ref("");
+
+// Prompt Message
+const promptMessage = computed(() => {
+  return [
+    {
+      content: chatGPTStore.propmpt,
+      role: "system",
+    },
+  ];
+});
 
 // Message List
 const messages = ref<Message[]>([]);
 
-// User Input Message
-const userMessage = ref("");
+const requestMessages = computed(() => {
+  if (messages.value.length <= 10) {
+    return [...promptMessage.value, ...messages.value];
+  } else {
+    // 截取最新的10条信息
+    const slicedMessages = messages.value.slice(-10);
+    return [...promptMessage.value, ...slicedMessages];
+  }
+});
 
 // Send Messsage
 const sendMessage = async () => {
@@ -43,23 +65,24 @@ const sendMessage = async () => {
 
 const createCompletion = async () => {
   // Check if the API key is set
-  if (!chatStore.getApiKey) {
-    snackbarStore.showErrorMessage("请先输入API KEY");
-    return;
-  }
+  // if (!chatGPTStore.getApiKey) {
+  //   snackbarStore.showErrorMessage("请先输入API KEY");
+  //   return;
+  // }
 
   try {
     // Create a completion (axios is not used here because it does not support streaming)
     const completion = await fetch(
-      "https://api.openai.com/v1/chat/completions",
+      "https://baixiang.yunrobot.cn/v1/chat/completions",
+      // "https://api.openai.com/v1/chat/completions",
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${chatStore.getApiKey}`,
+          Authorization: `Bearer ${chatGPTStore.getApiKey}`,
         },
         method: "POST",
         body: JSON.stringify({
-          messages: messages.value,
+          messages: requestMessages.value,
           model: "gpt-3.5-turbo",
           stream: true,
         }),
@@ -93,43 +116,57 @@ const createCompletion = async () => {
   }
 };
 
-// Scroll to the bottom of the message container
-const scrollToBottom = () => {
-  const container = document.querySelector(".message-container");
-
-  container?.scrollTo({
-    top: container?.scrollHeight,
-  });
-};
-
 watch(
   () => messages.value,
   (val) => {
     if (val) {
-      scrollToBottom();
+      scrollToBottom(document.querySelector(".message-container"));
     }
   },
   {
     deep: true,
   }
 );
+
+const displayMessages = computed(() => {
+  const messagesCopy = messages.value.slice(); // 创建原始数组的副本
+  const lastMessage = messagesCopy[messagesCopy.length - 1];
+  const updatedLastMessage = {
+    ...lastMessage,
+    content: countAndCompleteCodeBlocks(lastMessage.content),
+  };
+  messagesCopy[messagesCopy.length - 1] = updatedLastMessage;
+  return messagesCopy;
+});
+
+const handleKeydown = (e) => {
+  if (e.key === "Enter" && (e.altKey || e.shiftKey)) {
+    // 当同时按下 alt或者shift 和 enter 时，插入一个换行符
+    e.preventDefault();
+    userMessage.value += "\n";
+  } else if (e.key === "Enter") {
+    // 当只按下 enter 时，发送消息
+    e.preventDefault();
+    sendMessage();
+  }
+};
 </script>
 
 <template>
   <div class="chat-bot">
     <div class="messsage-area">
       <perfect-scrollbar v-if="messages.length > 0" class="message-container">
-        <template v-for="message in messages">
+        <template v-for="message in displayMessages">
           <div v-if="message.role === 'user'">
             <div class="pa-5 user-message">
-              <div class="message align-center">
+              <div class="message align-center text-pre-wrap">
                 <v-avatar class="mr-4 mr-lg-8">
                   <img
                     src="@/assets/images/avatars/avatar_user.jpg"
                     alt="alt"
                   />
                 </v-avatar>
-                <b> {{ message.content }}</b>
+                <span> {{ message.content }}</span>
               </div>
             </div>
           </div>
@@ -156,35 +193,47 @@ watch(
       </div>
     </div>
     <div class="input-area">
-      <v-sheet elevation="0" class="input-panel" max-width="1200">
-        <!-- Todo Select Model  -->
-
-        <!-- <div class="mb-2">
-        <v-select
-          class="w-50"
-          label="Model"
-          hide-details
-          :items="['GPT-4', 'GPT-3.5']"
-          variant="solo"
-        ></v-select>
-      </div> -->
-        <v-text-field
+      <v-sheet
+        elevation="0"
+        class="input-panel d-flex align-center pa-1"
+        max-width="1200"
+      >
+        <v-btn
+          variant="elevated"
+          icon
+          @click="chatGPTStore.configDialog = true"
+        >
+          <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
+          <v-tooltip
+            activator="parent"
+            location="top"
+            text="ChatGPT Config"
+          ></v-tooltip>
+        </v-btn>
+        <v-textarea
+          class="ml-2"
           color="primary"
+          type="text"
+          clearable
+          variant="solo"
           ref="input"
           v-model="userMessage"
           placeholder="SendMessage"
           hide-details
-          @keyup.enter="sendMessage"
+          @keydown="handleKeydown"
+          rows="1"
+          no-resize
         >
-          <template #prepend-inner>
+          <!-- <template #prepend-inner>
             <v-icon>mdi-microphone</v-icon>
-          </template>
+          </template> -->
 
           <template #append-inner>
             <v-icon @click="sendMessage">mdi-send</v-icon>
           </template>
-        </v-text-field>
+        </v-textarea>
       </v-sheet>
+      <ApiKeyDialog />
     </div>
   </div>
 </template>

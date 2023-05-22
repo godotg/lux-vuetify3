@@ -5,32 +5,54 @@
 -->
 <script setup lang="ts">
 import { useSnackbarStore } from "@/stores/snackbarStore";
-import { useChatStore } from "@/views/app/chat/chatStore";
+import AnimationChat from "@/components/animations/AnimationChat1.vue";
 import AnimationAi from "@/components/animations/AnimationBot1.vue";
+import { read, countAndCompleteCodeBlocks } from "@/utils/aiUtils";
+import { scrollToBottom } from "@/utils/common";
 import { Icon } from "@iconify/vue";
 import MdEditor from "md-editor-v3";
+import { useChatGPTStore } from "@/stores/chatGPTStore";
 import "md-editor-v3/lib/style.css";
-import { createCompletionApi } from "@/api/aiApi";
+import ApiKeyDialog from "@/components/ApiKeyDialog.vue";
 const snackbarStore = useSnackbarStore();
-const chatStore = useChatStore();
+const chatGPTStore = useChatGPTStore();
 
 interface Message {
   content: string;
-  role: "user" | "assistant";
+  role: "user" | "assistant" | "system";
 }
+// User Input Message
+const userMessage = ref("");
+
+// Prompt Message
+const promptMessage = computed(() => {
+  console.log("chatGPTStore.propmpt", chatGPTStore.propmpt);
+
+  return [
+    {
+      content: chatGPTStore.propmpt,
+      role: "system",
+    },
+  ];
+});
 
 // Message List
 const messages = ref<Message[]>([]);
 
-// User Input Message
-const userMessage = ref("");
+const requestMessages = computed(() => {
+  if (messages.value.length <= 10) {
+    return [...promptMessage.value, ...messages.value];
+  } else {
+    // 截取最新的10条信息
+    const slicedMessages = messages.value.slice(-10);
+    return [...promptMessage.value, ...slicedMessages];
+  }
+});
 
 const isLoading = ref(false);
 
 // Send Messsage
 const sendMessage = async () => {
-  // Clear the input
-
   if (userMessage.value) {
     // Add the message to the list
     messages.value.push({
@@ -38,9 +60,9 @@ const sendMessage = async () => {
       role: "user",
     });
 
+    // Clear the input
     userMessage.value = "";
 
-    isLoading.value = true;
     // Create a completion
     await createCompletion();
   }
@@ -48,70 +70,104 @@ const sendMessage = async () => {
 
 const createCompletion = async () => {
   // Check if the API key is set
-  if (!chatStore.getApiKey) {
-    snackbarStore.showErrorMessage("请先输入API KEY");
-    isLoading.value = false;
-    return;
-  }
+  // if (!chatGPTStore.getApiKey) {
+  //   snackbarStore.showErrorMessage("请先输入API KEY");
+  //   return;
+  // }
 
   try {
-    const completion = await createCompletionApi(
+    // Create a completion (axios is not used here because it does not support streaming)
+    const completion = await fetch(
+      "https://baixiang.yunrobot.cn/v1/chat/completions",
+      // "https://api.openai.com/v1/chat/completions",
       {
-        messages: messages.value,
-        model: "gpt-3.5-turbo",
-      },
-      chatStore.getApiKey
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${chatGPTStore.getApiKey}`,
+        },
+        method: "POST",
+        body: JSON.stringify({
+          messages: requestMessages.value,
+          model: "gpt-3.5-turbo",
+          stream: true,
+        }),
+      }
     );
 
-    isLoading.value = false;
+    // Handle errors
+    if (!completion.ok) {
+      const errorData = await completion.json();
+      snackbarStore.showErrorMessage(errorData.error.message);
+
+      return;
+    }
+
+    // Create a reader
+    const reader = completion.body?.getReader();
+    if (!reader) {
+      snackbarStore.showErrorMessage("Cannot read the stream.");
+    }
 
     // Add the bot message
     messages.value.push({
-      content: completion.data.choices[0].message.content,
+      content: "",
       role: "assistant",
     });
+
+    // Read the stream
+    read(reader, messages);
   } catch (error) {
-    isLoading.value = false;
     snackbarStore.showErrorMessage(error.message);
   }
-};
-
-// Scroll to the bottom of the message container
-const scrollToBottom = () => {
-  const container = document.querySelector(".message-container");
-  console.log("container: ", container);
-
-  setTimeout(() => {
-    container?.scrollTo({
-      top: container?.scrollHeight,
-    });
-  }, 100);
 };
 
 watch(
   () => messages.value,
   (val) => {
     if (val) {
-      scrollToBottom();
+      scrollToBottom(document.querySelector(".message-container"));
     }
   },
   {
     deep: true,
   }
 );
+
+const displayMessages = computed(() => {
+  const messagesCopy = messages.value.slice(); // 创建原始数组的副本
+  const lastMessage = messagesCopy[messagesCopy.length - 1];
+  const updatedLastMessage = {
+    ...lastMessage,
+    content: countAndCompleteCodeBlocks(lastMessage.content),
+  };
+  messagesCopy[messagesCopy.length - 1] = updatedLastMessage;
+  return messagesCopy;
+});
+
+const handleKeydown = (e) => {
+  if (e.key === "Enter" && (e.altKey || e.shiftKey)) {
+    // 当同时按下 alt或者shift 和 enter 时，插入一个换行符
+    e.preventDefault();
+    userMessage.value += "\n";
+  } else if (e.key === "Enter") {
+    // 当只按下 enter 时，发送消息
+    e.preventDefault();
+    sendMessage();
+  }
+};
 </script>
 
 <template>
   <div class="chat-bot">
     <div class="messsage-area">
       <perfect-scrollbar v-if="messages.length > 0" class="message-container">
-        <template v-for="message in messages">
+        <template v-for="message in displayMessages">
           <div v-if="message.role === 'user'">
             <div class="pa-4 user-message">
               <v-avatar class="ml-4" rounded="sm" variant="elevated">
                 <img src="@/assets/images/avatars/avatar_user.jpg" alt="alt" />
               </v-avatar>
-              <v-card class="gradient gray" theme="dark">
+              <v-card class="gradient gray text-pre-wrap" theme="dark">
                 <v-card-text>
                   <b> {{ message.content }}</b></v-card-text
                 >
@@ -119,8 +175,12 @@ watch(
             </div>
           </div>
           <div v-else>
-            <div class="pa-4 assistant-message">
-              <v-avatar class="mr-4" rounded="sm" variant="elevated">
+            <div class="pa-2 pa-md-5 assistant-message">
+              <v-avatar
+                class="d-none d-md-block mr-2 mr-md-4"
+                rounded="sm"
+                variant="elevated"
+              >
                 <img
                   src="@/assets/images/avatars/avatar_assistant.jpg"
                   alt="alt"
@@ -128,7 +188,11 @@ watch(
               </v-avatar>
               <v-card>
                 <div>
-                  <md-editor v-model="message.content" previewOnly />
+                  <md-editor
+                    v-model="message.content"
+                    class="font-1"
+                    previewOnly
+                  />
                 </div>
               </v-card>
             </div>
@@ -146,12 +210,26 @@ watch(
         <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
           Chat With Me
         </h1>
-        <AnimationAi :size="300" />
+        <AnimationChat :size="300" />
       </div>
     </div>
     <div class="input-area">
-      <v-sheet elevation="0" class="input-panel">
-        <v-text-field
+      <v-sheet elevation="0" class="input-panel d-flex align-center pa-1">
+        <v-btn
+          variant="elevated"
+          icon
+          @click="chatGPTStore.configDialog = true"
+        >
+          <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
+          <v-tooltip
+            activator="parent"
+            location="top"
+            text="ChatGPT Config"
+          ></v-tooltip>
+        </v-btn>
+
+        <v-textarea
+          class="ml-2"
           color="primary"
           type="text"
           clearable
@@ -160,11 +238,10 @@ watch(
           v-model="userMessage"
           placeholder="SendMessage"
           hide-details
-          @keyup.enter="sendMessage"
+          @keydown="handleKeydown"
+          rows="1"
+          no-resize
         >
-          <template #prepend-inner>
-            <v-icon>mdi-microphone</v-icon>
-          </template>
           <template v-slot:append-inner>
             <v-fade-transition leave-absolute>
               <Icon
@@ -178,8 +255,9 @@ watch(
               >
             </v-fade-transition>
           </template>
-        </v-text-field>
+        </v-textarea>
       </v-sheet>
+      <ApiKeyDialog />
     </div>
   </div>
 </template>
@@ -248,5 +326,16 @@ watch(
 
 :deep(.md-editor-preview-wrapper) {
   padding: 5px 15px;
+}
+
+.font-1 {
+  font-size: 13px !important;
+}
+
+@media screen and (max-width: 768px) {
+  :deep(#md-editor-v3-preview),
+  .user-message {
+    font-size: 14px !important;
+  }
 }
 </style>

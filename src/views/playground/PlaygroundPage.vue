@@ -15,6 +15,8 @@ import FeatureGithubEventTimeLine from "./components/FeatureGithubEventTimeLine.
 import FeatureFaker from "./components/FeatureFaker.vue";
 import FeatureEditData from "./components/FeatureEditData.vue";
 import FeatureTTS from "./components/FeatureTTS.vue";
+import FeatureGradientChart from "./components/FeatureGradientChart.vue";
+import FeatureFormItem from "./components/FeatureFormItem.vue";
 </script>
 
 <template>
@@ -35,7 +37,7 @@ import FeatureTTS from "./components/FeatureTTS.vue";
       <FeatureDynamicScroller />
     </FeatureCard>
 
-    <!-- <FeatureCard title="File">
+    <!-- <FeatureCard  title="File">
       <FeatureFile />
     </FeatureCard> -->
 
@@ -61,6 +63,14 @@ import FeatureTTS from "./components/FeatureTTS.vue";
 
     <FeatureCard title="TTS">
       <FeatureTTS />
+    </FeatureCard>
+
+    <FeatureCard title="GradientChart">
+      <FeatureGradientChart />
+    </FeatureCard>
+
+    <FeatureCard title="FormItem">
+      <FeatureFormItem />
     </FeatureCard>
   </v-container>
 </template>
