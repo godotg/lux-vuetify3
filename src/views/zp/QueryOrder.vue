@@ -1,39 +1,40 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="2">
-        <v-card-title>
-          {{ $t('zp.queryOrder01') }}
-        </v-card-title>
-      </v-col>
-      <v-col cols="2">
-        <v-select
-          v-model="selectExcelType"
-          :items="orderTypes"
-          @update:modelValue="query()"
-          density="compact"></v-select>
-      </v-col>
-      <v-col cols="1">
-        <v-btn density="compact" icon="mdi-card-bulleted-settings-outline" size="x-large" color="info" @click="settingDialog = !settingDialog"></v-btn>
-      </v-col>
-      <v-col>
-        <v-text-field
-          v-model="orders.search"
-          append-icon="search"
-          :label="$t('zp.queryOrder02')"
-          single-line
-          hide-details
-          @click:append="query()"
-          @keyup.enter="query()"
-        />
-      </v-col>
-    </v-row>
+    <v-container>
+      <v-row>
+        <v-col cols="2">
+          <v-card-title>
+            {{ $t('zp.queryOrder01') }}
+          </v-card-title>
+        </v-col>
+        <v-col cols="2">
+          <v-select
+            v-model="selectExcelType"
+            :items="orderTypes"
+            @update:modelValue="query()"
+            density="compact"></v-select>
+        </v-col>
+        <v-col cols="1">
+          <v-btn density="compact" icon="mdi-card-bulleted-settings-outline" size="x-large" color="info"
+                 @click="settingDialog = !settingDialog"></v-btn>
+        </v-col>
+        <v-col>
+          <v-combobox v-model="startDate" label="发货日期" :items="startDates"/>
+        </v-col>
+        <v-col>
+          <v-combobox v-model="endDate" label="到货日期" :items="endDates"/>
+        </v-col>
+        <v-col cols="1">
+          <v-btn density="compact" icon="mdi-cloud-download-outline" size="x-large" color="primary"
+                 @click="downloadData"></v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
     <v-row>
       <v-col>
         <v-data-table-server
           :headers="computedHeaders"
           :items="orders.playerRows"
-          :search="orders.search"
           :loading="orders.loading"
           :items-per-page="orders.options.itemsPerPage"
           :items-length="orders.totalRows"
@@ -52,7 +53,7 @@
           <v-row>
             <template v-for="header in allOrderHeaders">
               <v-col cols="4">
-                <v-checkbox v-model="selected" :label="header" :value="header"></v-checkbox>
+                <v-checkbox v-model="selected" :label="header" :value="header" color="primary"></v-checkbox>
               </v-col>
             </template>
           </v-row>
@@ -64,10 +65,10 @@
 
 <script setup lang="ts">
 import axios from "axios";
-import { BASE_URL, useZpAuthStore } from "@/stores/zpAuthStorage";
+import {BASE_URL, useZpAuthStore} from "@/stores/zpAuthStorage";
 import {onMounted} from "vue";
 import _ from "lodash";
-import { useSnackbarStore } from "@/stores/snackbarStore";
+import {useSnackbarStore} from "@/stores/snackbarStore";
 
 const zpAuthStore = useZpAuthStore();
 const snackbarStore = useSnackbarStore();
@@ -80,7 +81,6 @@ const allOrderHeaders = ref([]);
 const selected = ref([]);
 
 const orders = reactive({
-  search: '',
   loading: true,
   totalRows: 0,
   options: {
@@ -91,16 +91,23 @@ const orders = reactive({
   playerRows: []
 });
 
+const startDates = ref<string[]>([]);
+const endDates = ref<string[]>([]);
+const startDate = ref("");
+const endDate = ref("");
+
 
 const fetchData = async () => {
   orders.loading = true;
 
-  const query = orders.search.trim();
+  const query = "";
   const page = orders.options.page;
   const itemsPerPage = orders.options.itemsPerPage;
   console.log("------------------" + page)
   const response = await axios.post(BASE_URL + "/api/order/query", {
     query,
+    startDate: startDate.value,
+    endDate: endDate.value,
     orderType: selectExcelType.value,
     page,
     itemsPerPage
@@ -108,7 +115,6 @@ const fetchData = async () => {
 
   const code = response.data.code;
   if (code != 1) {
-    snackbarStore.showErrorMessage(response.data.message);
     return;
   }
 
@@ -126,6 +132,36 @@ const fetchData = async () => {
   orders.playerRows = result;
   orders.loading = false;
   snackbarStore.showSuccessMessage(response.data.message);
+}
+
+const downloadData = async () => {
+  const query = "";
+  const page = orders.options.page;
+  const itemsPerPage = orders.options.itemsPerPage;
+  const request = {
+    query,
+    startDate: startDate.value,
+    endDate: endDate.value,
+    orderType: selectExcelType.value,
+    page,
+    itemsPerPage
+  };
+  const json = JSON.stringify(request);
+  const response = await axios.get(BASE_URL + "/api/order/download?json=" + json, {
+    headers: {
+      "zptoken": zpAuthStore.token,
+    },
+    responseType: "blob"
+  });
+  snackbarStore.showSuccessMessage("下载成功");
+  const data = response.data;
+  const url = window.URL.createObjectURL(new Blob([data]));
+  const link = document.createElement('a');// 创建a标签并点击， 即触发下载
+  link.style.display = 'none';
+  link.href = url;
+  link.setAttribute('download', selectExcelType.value + ".xlsx");
+  document.body.appendChild(link);
+  link.click();
 }
 
 const fetchOrderTypes = async () => {
@@ -159,7 +195,24 @@ const query = async () => {
   fetchData();
 }
 
+
+function getFormatDate(date: Date): string {
+  const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+  const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  return date.getFullYear() + '-' + month + '-' + day;
+}
+
+const init = () => {
+  const today = new Date();
+  for (let i = 1; i <= 12; i++) {
+    const tempDate = new Date(today.getFullYear(), today.getMonth() - i, 1);
+    startDates.value.push(getFormatDate(tempDate));
+    endDates.value.push(getFormatDate(tempDate));
+  }
+}
+
 onMounted(() => {
+  init();
   fetchData();
   fetchOrderTypes();
 });
@@ -179,14 +232,26 @@ watch(
     console.log("----------------------------------------------------------")
     fetchData();
   }
-)
+);
 
 watch(
   () => selected.value,
   (newValue, oldValue) => {
     zpAuthStore.setSelectedHeaders(newValue);
   }
-)
+);
+watch(
+  () => startDate.value,
+  (newValue, oldValue) => {
+    fetchData();
+  }
+);
+watch(
+  () => endDate.value,
+  (newValue, oldValue) => {
+    fetchData();
+  }
+);
 
 const computedHeaders = computed(() => {
   const cHeaders = [];

@@ -21,7 +21,7 @@ export default [
         ),
     meta: {
       title: "Order",
-      layout: "ui",
+      layout: "landing",
       category: "zp",
     },
   },
