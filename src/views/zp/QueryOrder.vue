@@ -85,7 +85,7 @@ const orders = reactive({
   totalRows: 0,
   options: {
     page: 1,
-    itemsPerPage: 10
+    itemsPerPage: 50
   },
   headers: [],
   playerRows: []

@@ -11,7 +11,10 @@ export const useZpAuthStore = defineStore("zpAuth", {
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["token", "selectedHeaders"]}],
+    strategies: [
+      {storage: sessionStorage, paths: ["token"]},
+      {storage: localStorage, paths: ["selectedHeaders"]}
+    ],
   },
 
   getters: {},
