@@ -26,6 +26,19 @@ export default [
     },
   },
   {
+    path: "/order/queryHistory",
+    name: "order-query-history",
+    component: () =>
+      import(
+        /* webpackChunkName: "tank-java" */ "@/views/zp/QueryOrderHistory.vue"
+        ),
+    meta: {
+      title: "OrderHistory",
+      layout: "landing",
+      category: "zp",
+    },
+  },
+  {
     path: "/signin",
     name: "signin",
     component: () =>

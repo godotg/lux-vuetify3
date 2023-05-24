@@ -11,4 +11,10 @@ export default [
     text: "Query Order Menu",
     link: "/order/query",
   },
+  {
+    icon: "mdi-history",
+    key: "zp.queryOrderHistoryMenu",
+    text: "Query Order History Menu",
+    link: "/order/queryHistory",
+  },
 ];

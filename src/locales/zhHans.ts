@@ -8,6 +8,7 @@ export default {
     createOrderFromExcel01: '通过excel智能生成订单，自动检验excel格式',
     createOrderFromExcel02: '请上传一个或者多个excel文件',
     queryOrderMenu: "查询订单",
+    queryOrderHistoryMenu: "操作记录",
     queryOrderTitle: '订单查询',
     queryOrder01: '订单数据查询',
     queryOrder02: '输入订单id'
