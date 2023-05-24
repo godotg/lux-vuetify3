@@ -40,6 +40,7 @@
           :items-length="orders.totalRows"
           @update:options="onUpdateOptions"
           @update:page="onUpdatePage"
+          @click:row="orderModifyClick"
         />
       </v-col>
     </v-row>
@@ -58,6 +59,33 @@
             </template>
           </v-row>
         </v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="orderModifyDialog" max-width="800">
+      <v-card>
+        <v-card-title>
+          订单操作
+        </v-card-title>
+        <v-card-text>
+          <v-row>
+            <template v-for="header in orderModifyHeader">
+              <v-col cols="4">
+                <v-text-field v-model="orderModifyEntity[header.key]" :value="orderModifyEntity[header.key]"
+                              :hint="header.title"
+                              persistent-hint
+                              color="primary"></v-text-field>
+              </v-col>
+            </template>
+          </v-row>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn variant="outlined" append-icon="mdi-delete-circle-outline" color="error" @click="deleteModifyClick">
+            删除
+          </v-btn>
+          <v-spacer/>
+          <v-btn variant="outlined" append-icon="mdi-check" color="info" @click="updateModifyClick">更新</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -220,9 +248,6 @@ onMounted(() => {
 watch(
   () => orders.options,
   (newValue, oldValue) => {
-    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")
-    console.log(newValue)
-    console.log(oldValue)
     if (_.isEqual(newValue, oldValue)) {
       return;
     }
@@ -264,5 +289,63 @@ const computedHeaders = computed(() => {
   return cHeaders;
 });
 
+
+// 订单操作-----------------------------------------------------------------------------------------------------------
+const orderModifyDialog = ref<boolean>(false);
+const orderModifyHeader = ref(null);
+const orderModifyEntity = ref(null);
+
+const orderModifyClick = async (event, item) => {
+  const id = item.item.raw.id;
+  orderModifyDialog.value = true;
+
+  const response = await axios.post(BASE_URL + "/api/order/queryOne", {
+    id: id
+  }, zpAuthStore.httpHeaders());
+
+  const code = response.data.code;
+  if (code != 1) {
+    snackbarStore.showErrorMessage(response.data.message, code);
+    return;
+  }
+  orderModifyHeader.value = response.data.data.headers;
+  orderModifyEntity.value = response.data.data.entity;
+  snackbarStore.showSuccessMessage(response.data.message);
+  for (const ele of orderModifyHeader.value) {
+    const key = ele.key;
+    const title = ele.title;
+    console.log(orderModifyEntity.value[key])
+  }
+}
+
+const updateModifyClick = async () => {
+  const response = await axios.post(BASE_URL + "/api/order/updateOne", {
+    entity: orderModifyEntity.value
+  }, zpAuthStore.httpHeaders());
+
+  const code = response.data.code;
+  if (code != 1) {
+    snackbarStore.showErrorMessage(response.data.message, code);
+    return;
+  }
+  snackbarStore.showSuccessMessage(response.data.message);
+  orderModifyDialog.value = false;
+  fetchData();
+}
+
+const deleteModifyClick = async () => {
+  const response = await axios.post(BASE_URL + "/api/order/deleteOne", {
+    id: orderModifyEntity.value.id
+  }, zpAuthStore.httpHeaders());
+
+  const code = response.data.code;
+  if (code != 1) {
+    snackbarStore.showErrorMessage(response.data.message, code);
+    return;
+  }
+  snackbarStore.showSuccessMessage(response.data.message);
+  orderModifyDialog.value = false;
+  fetchData();
+}
 
 </script>
