@@ -19,10 +19,10 @@
                  @click="settingDialog = !settingDialog"></v-btn>
         </v-col>
         <v-col>
-          <v-combobox v-model="startDate" label="发货日期" :items="startDates"/>
+          <v-combobox v-model="startDate" label="开始日期" :items="startDates"/>
         </v-col>
         <v-col>
-          <v-combobox v-model="endDate" label="到货日期" :items="endDates"/>
+          <v-combobox v-model="endDate" label="结束日期" :items="endDates"/>
         </v-col>
         <v-col cols="1">
           <v-btn density="compact" icon="mdi-cloud-download-outline" size="x-large" color="primary"
