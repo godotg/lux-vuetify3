@@ -3,16 +3,25 @@ import _ from "lodash";
 
 const newGnTimeout = 3 * 24 * 60 * 60 * 1000;
 const newNewsTimeout = 3 * 60 * 1000;
-export const myAvatarId = _.random(1, 100);
-export const myAvatar = "ab/" + myAvatarId + ".jpg";
-export const aiAvatar = "ab/" + _.random(101, 200) + ".jpg";
+const myAvatarDefault = avatarAutoUrl(1);
+const aiAvatarDefault = avatarAutoUrl(2);
+
+export function avatarAutoUrl(id: number): string {
+  const avatarId = id % 800 + 1;
+  const avatar = "ab/" + avatarId + ".jpg";
+  return avatar;
+}
 
 export const useNewsStore = defineStore("newsStore", {
   state: () => ({
     gnInfos: [],
     newsInfos: [],
     newsLevelFilter: "D",
-    newsLevelFilterValue: 5
+    newsLevelFilterValue: 5,
+
+    ipLong: 0,
+    sid: 0,
+    activeUid: 0,
   }),
 
   persist: {
@@ -76,6 +85,13 @@ export const useNewsStore = defineStore("newsStore", {
     updateNewsLevelFilter(level: string, value: number) {
       this.newsLevelFilter = level;
       this.newsLevelFilterValue = value;
-    }
+    },
+
+    myAvatar(): string {
+      return this.ipLong == 0 ? myAvatarDefault : avatarAutoUrl(this.ipLong);
+    },
+    aiAvatar(): string {
+      return this.ipLong == 0 ? aiAvatarDefault : avatarAutoUrl(this.ipLong + 1);
+    },
   }
 });

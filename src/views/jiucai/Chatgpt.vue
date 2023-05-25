@@ -19,7 +19,7 @@ const chatStore = useChatStore();
 import {sendChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
-import {useNewsStore, myAvatar, aiAvatar} from "@/stores/newsStore";
+import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 const {mobile} = useDisplay();
@@ -133,7 +133,7 @@ watch(
           <div v-if="message.role === 'user'">
             <div class="pa-4 user-message">
               <v-avatar class="ml-4" rounded="sm" variant="elevated">
-                <img :src="myAvatar" alt="alt" />
+                <img :src="newsStore.myAvatar()" alt="alt" />
               </v-avatar>
               <v-card class="gradient gray" theme="dark">
                 <v-card-text>
@@ -151,7 +151,7 @@ watch(
                   variant="elevated"
                 >
                   <img
-                    :src="aiAvatar"
+                    :src="newsStore.aiAvatar()"
                     alt="alt"
                   />
                 </v-avatar>
@@ -175,7 +175,7 @@ watch(
                 variant="elevated"
               >
                 <img
-                  :src="aiAvatar"
+                  :src="newsStore.aiAvatar()"
                   alt="alt"
                 />
               </v-avatar>

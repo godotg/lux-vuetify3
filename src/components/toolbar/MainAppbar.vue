@@ -8,6 +8,7 @@ import { useDisplay } from "vuetify";
 import { useCustomizeThemeStore } from "@/stores/customizeTheme";
 import ToolbarLanguage from "@/components/toolbar/ToolbarLanguage.vue";
 import ToolbarNewsLevel from "@/components/toolbar/ToolbarNewsLevel.vue";
+import ToolbarUserJiucai from "@/components/toolbar/ToolbarUserJiucai.vue";
 import ToolbarNotifications from "./ToolbarNotifications.vue";
 import ToolbarNewsNotifications from "./ToolbarNewsNotifications.vue";
 import ToolbarUser from "./ToolbarUser.vue";
@@ -64,7 +65,7 @@ const showMobileSearch = ref(false);
         <ToolbarNewsNotifications />
         <ToolbarNewsLevel />
         <ToolbarLanguage />
-        <ToolbarUser />
+        <ToolbarUserJiucai />
       </div>
     </div>
   </v-app-bar>

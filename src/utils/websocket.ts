@@ -5,10 +5,14 @@ import Error from '@/protocol/common/Error.js';
 import Message from '@/protocol/common/Message.js';
 import Ping from '@/protocol/common/Ping';
 import Pong from '@/protocol/common/Pong';
+import ServerSessionActiveNotice from '@/protocol/auth/ServerSessionActiveNotice';
+
+
 import {useSnackbarStore} from "@/stores/snackbarStore";
+import {useNewsStore} from "@/stores/newsStore";
 
 const snackbarStore = useSnackbarStore();
-
+const newsStore = useNewsStore();
 
 const wsUrl: string = import.meta.env.VITE_API_BASE_URL;
 let pingTime: number = 0;
@@ -62,6 +66,7 @@ function connect(desc): WebSocket {
     buffer.setReadOffset(4);
     const packet = ProtocolManager.read(buffer);
     let attachment: any = null;
+    console.log(packet)
     if (buffer.isReadable() && buffer.readBoolean()) {
       console.log(new Date(), "Websocket收到异步response <-- ", packet);
       attachment = ProtocolManager.read(buffer);
@@ -79,7 +84,22 @@ function connect(desc): WebSocket {
       } else {
         pingTime = Number.parseInt(packet.time);
       }
-    } else if (packet.protocolId() == Message.PROTOCOL_ID) {
+      return;
+    }
+
+    if (packet.protocolId() == ServerSessionActiveNotice.PROTOCOL_ID) {
+      newsStore.ipLong = packet.ipLong;
+      newsStore.sid = packet.sid;
+      newsStore.activeUid = packet.activeUid;
+      return;
+    }
+
+    if (packet.protocolId() == Error.PROTOCOL_ID) {
+      snackbarStore.showErrorMessage(packet.messerrorMessageage);
+      return;
+    }
+
+    if (packet.protocolId() == Message.PROTOCOL_ID) {
       if (packet.code == 0) {
         snackbarStore.showErrorMessage(packet.message);
       } else if (packet.code == 1) {
@@ -91,11 +111,10 @@ function connect(desc): WebSocket {
       } else {
         snackbarStore.showInfoMessage(packet.message);
       }
-    } else if (packet.protocolId() == Error.PROTOCOL_ID) {
-      snackbarStore.showErrorMessage(packet.messerrorMessageage);
-    } else {
-      route(packet);
+      return;
     }
+
+    route(packet);
   };
 
   webSocket.onerror = function (event) {

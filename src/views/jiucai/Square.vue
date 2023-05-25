@@ -23,7 +23,7 @@ import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResp
 import {registerPacketReceiver,isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import GroupChatNotice from "@/protocol/chat/GroupChatNotice";
 import ChatMessage from "@/protocol/chat/ChatMessage";
-import {useNewsStore, myAvatarId, aiAvatar} from "@/stores/newsStore";
+import {useNewsStore, avatarAutoUrl} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 
@@ -77,15 +77,13 @@ const groupChatNoticeCompletion = (packet: GroupChatNotice) => {
 };
 
 function toMessage(chatMessage: ChatMessage): Message {
-  const avatarId = chatMessage.sendId % 800 + 1;
-  const avatar = "ab/" + avatarId + ".jpg";
   return {
     id: chatMessage.id,
     type: chatMessage.type,
     sendId: chatMessage.sendId,
     message: chatMessage.message,
     timestamp: chatMessage.timestamp,
-    avatar: avatar,
+    avatar: avatarAutoUrl(chatMessage.sendId),
     content: chatMessage.message,
   };
 }
