@@ -53,8 +53,9 @@ function connect(desc): WebSocket {
     // websocket连接成功过后，先发送ping同步服务器时间，再发送登录请求
     send(new Ping());
 
-    snackbarStore.showSuccessMessage("连接服务器成功");
     pingTime = new Date().getTime();
+    snackbarStore.showSuccessMessage("连接服务器成功");
+    newsStore.online = true;
   };
 
 
@@ -119,10 +120,12 @@ function connect(desc): WebSocket {
 
   webSocket.onerror = function (event) {
     console.log(new Date(), 'websocket error', event);
+    newsStore.online = false;
   };
 
   webSocket.onclose = function (event) {
     console.log(new Date(), 'websocket close', event);
+    newsStore.online = false;
   };
   return webSocket;
 }

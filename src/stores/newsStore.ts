@@ -19,6 +19,7 @@ export const useNewsStore = defineStore("newsStore", {
     newsLevelFilter: "D",
     newsLevelFilterValue: 5,
 
+    online: false,
     ipLong: 0,
     sid: 0,
     activeUid: 0,

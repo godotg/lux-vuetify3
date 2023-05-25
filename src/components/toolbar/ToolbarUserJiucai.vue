@@ -70,7 +70,7 @@ const navs = [
     <!-- ---------------------------------------------- -->
     <template v-slot:activator="{ props }">
       <v-btn class="mx-2" icon v-bind="props">
-        <v-badge content="2" color="success" dot bordered>
+        <v-badge content="2" :color="newsStore.online ? 'success' : 'error'" dot bordered>
           <v-avatar size="40">
             <v-img
               :src="newsStore.myAvatar()"
