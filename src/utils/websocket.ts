@@ -89,6 +89,7 @@ function connect(desc): WebSocket {
     }
 
     if (packet.protocolId() == ServerSessionActiveNotice.PROTOCOL_ID) {
+      newsStore.ip = packet.ip;
       newsStore.ipLong = packet.ipLong;
       newsStore.sid = packet.sid;
       newsStore.activeUid = packet.activeUid;

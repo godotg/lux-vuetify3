@@ -7,6 +7,7 @@
 import StatusMenu from "./StatusMenu.vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
+import StatusMenuJiucai from "./StatusMenuJiucai.vue";
 import {useNewsStore} from "@/stores/newsStore";
 const newsStore = useNewsStore();
 
@@ -94,12 +95,12 @@ const navs = [
           </template>
 
           <v-list-item-title class="font-weight-bold text-primary">
-            YANG J.K.
-            <StatusMenu />
+            {{ newsStore.activeUid }}
+            <StatusMenuJiucai />
           </v-list-item-title>
           <v-list-item-subtitle>
             <!-- {{ $store.state.user.email  }} -->
-            yjkbako@gmail.com
+            {{ newsStore.ip }}
           </v-list-item-subtitle>
         </v-list-item>
       </v-list>

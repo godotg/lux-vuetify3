@@ -2,6 +2,7 @@
 
 class ServerSessionActiveNotice {
 
+    ip: string = '';
     ipLong: number = 0;
     sid: number = 0;
     activeUid: number = 0;
@@ -17,6 +18,7 @@ class ServerSessionActiveNotice {
             return;
         }
         buffer.writeLong(packet.activeUid);
+        buffer.writeString(packet.ip);
         buffer.writeLong(packet.ipLong);
         buffer.writeLong(packet.sid);
     }
@@ -28,10 +30,12 @@ class ServerSessionActiveNotice {
         const packet = new ServerSessionActiveNotice();
         const result0 = buffer.readLong();
         packet.activeUid = result0;
-        const result1 = buffer.readLong();
-        packet.ipLong = result1;
+        const result1 = buffer.readString();
+        packet.ip = result1;
         const result2 = buffer.readLong();
-        packet.sid = result2;
+        packet.ipLong = result2;
+        const result3 = buffer.readLong();
+        packet.sid = result3;
         return packet;
     }
 }
