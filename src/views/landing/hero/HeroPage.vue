@@ -1,5 +1,8 @@
 <script setup lang="ts">
-
+import AnimationChat from "@/components/animations/AnimationChat1.vue";
+import ZpAnimation1 from "@/components/animations/ZpAnimation1.vue";
+import ZpAnimation2 from "@/components/animations/ZpAnimation2.vue";
+import ZpAnimation3 from "@/components/animations/ZpAnimation3.vue";
 import {useDisplay} from "vuetify";
 
 const {mobile} = useDisplay();
@@ -34,16 +37,17 @@ const {mobile} = useDisplay();
   <v-container>
     <v-row justify="center">
       <v-col cols="12" sm="5" lg="5">
-        <v-card-title class="text-center mb-8">公司简介</v-card-title>
-        <v-card-subtitle class="text-center text-pre-wrap mb-8">
+        <v-card-title class="text-center">公司简介</v-card-title>
+        <v-card-subtitle class="text-center text-pre-wrap">
           上海忠平物流有限公司公司成立于2008年，是一家以供应链管理服务为主导的专业第三方物流，总部设在上海。
         </v-card-subtitle>
-        <v-card-subtitle class="text-center text-pre-wrap mb-8">
+        <v-card-subtitle class="text-center text-pre-wrap">
           目前业务涉及配送涉及大型超市、高端超市、大型连锁餐饮、高端餐饮客户等等。
         </v-card-subtitle>
         <v-card-subtitle class="text-center text-pre-wrap">
           公司具备“整体解决方案基础”立志于将服务做到区域内最大，并提供各项增值服务，形成专业的物流服务体系。
         </v-card-subtitle>
+        <ZpAnimation1 :size="300" />
       </v-col>
       <v-col cols="12" sm="5" lg="7" class="ml-auto">
         <img src="@/assets/zp/truck2.jpg" alt="banner" class="img-fluid"/>
@@ -55,19 +59,20 @@ const {mobile} = useDisplay();
     <v-container>
       <v-row justify="center">
         <v-col cols="12" sm="5" lg="7" class="ml-auto">
-          <img src="@/assets/zp/truck2.jpg" alt="banner" class="img-fluid"/>
+          <img src="@/assets/zp/truck3.jpg" alt="banner" class="img-fluid"/>
         </v-col>
         <v-col cols="12" sm="5" lg="5">
-          <div class="text-center font-weight-medium text-h6 mb-8">公司实力</div>
-          <v-card-subtitle class="text-center text-pre-wrap mb-8">
+          <div class="text-center font-weight-medium text-h6">公司实力</div>
+          <v-card-subtitle class="text-center text-pre-wrap">
             目前公司专注于冷藏、冷冻、市内配送服务及普通货物运输。
           </v-card-subtitle>
-          <v-card-subtitle class="text-center text-pre-wrap mb-8  ">
+          <v-card-subtitle class="text-center text-pre-wrap  ">
             拥有多款车型，冷藏运输资源覆盖了华东及华南地区多个城市。
           </v-card-subtitle>
           <v-card-subtitle class="text-center text-pre-wrap">
             车辆配有GPS温度记录仪，可随时监控车厢温度、制冷机开关情况及车辆位置。
           </v-card-subtitle>
+          <ZpAnimation2 :size="300" />
         </v-col>
       </v-row>
     </v-container>
@@ -76,13 +81,14 @@ const {mobile} = useDisplay();
   <v-container>
     <v-row justify="center">
       <v-col cols="12" sm="5" lg="5">
-        <v-card-title class="text-center mb-8">业务范围</v-card-title>
-        <v-card-subtitle class="text-center text-pre-wrap mb-8">
+        <v-card-title class="text-center">业务范围</v-card-title>
+        <v-card-subtitle class="text-center text-pre-wrap">
           目前公司专注于冷藏、冷冻、市内配送服务及普通货物运输。
         </v-card-subtitle>
         <v-card-subtitle class="text-center text-pre-wrap">
           冷藏运输资源涵盖了大部分车型，覆盖了华东及华南地区多个城市。
         </v-card-subtitle>
+        <ZpAnimation3 :size="300" />
       </v-col>
       <v-col cols="12" sm="5" lg="7" class="ml-auto">
         <img src="@/assets/zp/truck4.jpg" alt="banner" class="img-fluid"/>
@@ -262,6 +268,9 @@ const {mobile} = useDisplay();
       Start Contact Form
   ----------------------------------------------- -->
     <v-row justify="center">
+      <v-col cols="12" md="4">
+        <AnimationChat :size="300" />
+      </v-col>
       <v-col cols="12" md="8">
         <div>
           <form>
@@ -283,19 +292,15 @@ const {mobile} = useDisplay();
                 ></v-textarea>
               </v-col>
             </v-row>
-            <v-btn color="primary">
-              提交
-            </v-btn>
+            <v-row>
+              <v-col offset="9">
+                <v-btn color="primary">
+                  提交
+                </v-btn>
+              </v-col>
+            </v-row>
           </form>
         </div>
-      </v-col>
-      <v-col cols="12" md="4">
-        <h2 class="detail-title font-weight-medium">
-          通讯地址
-        </h2>
-        <p class="mt-7 op-8 mb-0">上海市宝山区城银路525号1217室</p>
-        <p class="mt-7 op-8 mb-0">021-66683379</p>
-        <p class="mt-7 op-8 mb-0">hu.yudang@shzpwl.com</p>
       </v-col>
     </v-row>
   </v-container>
