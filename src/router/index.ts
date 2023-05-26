@@ -65,6 +65,10 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  if (routes.findIndex(it => it.path == to.path) < 0) {
+    next();
+    return;
+  }
   if (to.path == "/signin") {
     next();
     return;
