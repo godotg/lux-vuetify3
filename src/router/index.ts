@@ -16,17 +16,15 @@ import _ from "lodash";
 export const routes = [
   {
     path: "/",
-    redirect: "/dashboard",
-    meta: {},
-  } as any,
-  {
-    path: "/dashboard",
+    name: "landing-home",
+    component: () =>
+      import(
+        /* webpackChunkName: "landing-home" */ "@/views/landing/hero/HeroPage.vue"
+        ),
     meta: {
-      requiresAuth: true,
-      layout: "landing",
     },
-    component: () => import("@/views/pages/DashBoard.vue"),
   },
+
   {
     path: "/:pathMatch(.*)*",
     name: "error",
@@ -34,16 +32,6 @@ export const routes = [
       import(/* webpackChunkName: "error" */ "@/views/errors/NotFoundPage.vue"),
   },
   ...ZpRoutes,
-  ...UserRoutes,
-  ...LandingRoutes,
-  ...AuthRoutes,
-  ...PagesRoutes,
-  ...UtilityRoutes,
-  ...UIRoutes,
-  ...ChartsRoutes,
-  ...AppsRoutes,
-  ...DataRoutes,
-  ...AiRoutes,
 ];
 
 // 动态路由，基于用户权限动态去加载
