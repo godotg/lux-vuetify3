@@ -24,7 +24,14 @@ export const routes = [
     meta: {
     },
   },
-
+  {
+    path: "/dashboard",
+    meta: {
+      requiresAuth: true,
+      layout: "landing",
+    },
+    component: () => import("@/views/pages/DashBoard.vue"),
+  },
   {
     path: "/:pathMatch(.*)*",
     name: "error",
@@ -32,6 +39,7 @@ export const routes = [
       import(/* webpackChunkName: "error" */ "@/views/errors/NotFoundPage.vue"),
   },
   ...ZpRoutes,
+  ...ChartsRoutes,
 ];
 
 // 动态路由，基于用户权限动态去加载
@@ -54,6 +62,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (routes.findIndex(it => it.path == to.path) < 0) {
+    next();
+    return;
+  }
+  if (to.path == "/") {
     next();
     return;
   }

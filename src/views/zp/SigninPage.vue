@@ -196,7 +196,7 @@ const signIn = async (account, password) => {
   console.log(response);
   zpAuthStore.setToken(response.data.data.token);
   console.log("************************************************");
-  router.push({path: "/",});
+  router.push({path: "/order/query",});
 };
 
 

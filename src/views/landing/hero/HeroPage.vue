@@ -309,24 +309,30 @@ const {mobile} = useDisplay();
   <v-footer>
     <v-container>
       <v-row>
-        <v-col cols="12" md="3" sm="6">
+        <v-col cols="12" md="2" sm="6">
           <h4 class="font-weight-regular font-18">总部地址</h4>
           <p class="mt-5 text-muted">上海市宝山区城银路525号1217室</p>
         </v-col>
-        <v-col cols="12" md="3" sm="6">
+        <v-col cols="12" md="2" sm="6">
           <h4 class="font-weight-regular font-18">电话</h4>
           <p class="mt-5 text-muted">021-66683379</p>
         </v-col>
-        <v-col cols="12" md="3" sm="6">
+        <v-col cols="12" md="2" sm="6">
           <h4 class="font-weight-regular font-18">邮件</h4>
           <p class="mt-5 text-muted">
             hu.yudang@shzpwl.com
           </p>
         </v-col>
-        <v-col cols="12" md="3" sm="6">
+        <v-col cols="12" md="2" sm="6">
           <h4 class="font-weight-regular font-18">官方网址</h4>
           <p class="mt-5 text-muted">
             www.shzpwl.com
+          </p>
+        </v-col>
+        <v-col cols="12" md="2" sm="6">
+          <h4 class="font-weight-regular font-18">TMS</h4>
+          <p class="mt-5 text-muted">
+            <a href="/order/query" class="link">忠平TMS</a>
           </p>
         </v-col>
       </v-row>
