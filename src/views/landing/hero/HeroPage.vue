@@ -347,7 +347,7 @@ const {mobile} = useDisplay();
         <v-col cols="12" md="4" sm="12">
           <div>
             <a target="_blank"
-               href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41102402000277">
+               href="http://www.beian.gov.cn">
               <img src="@/assets/zp/icon-fw.png" style="float:left;"/>
               <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
                 沪ICP备2023010169号</p></a>
