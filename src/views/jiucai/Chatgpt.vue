@@ -257,9 +257,10 @@ const handleKeydown = (e) => {
         <v-btn
           variant="elevated"
           icon
+          size="x-small"
           @click="chatGPTStore.configDialog = true"
         >
-          <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
+          <v-icon size="28" class="text-primary">mdi-cog-outline</v-icon>
           <v-tooltip
             activator="parent"
             location="top"
@@ -268,7 +269,7 @@ const handleKeydown = (e) => {
         </v-btn>
 
         <v-textarea
-          class="ml-2"
+          class="ml-1"
           color="primary"
           type="text"
           clearable
