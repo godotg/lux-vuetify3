@@ -114,6 +114,26 @@ const navs = [
             }}</v-list-item-subtitle>
           </div>
         </v-list-item>
+        <v-list-item color="primary" href="https://github.com/yangjiakai/lux-admin-vuetify3" link density="compact">
+          <template v-slot:prepend>
+            <v-avatar size="30">
+              <v-icon>mdi-vuetify</v-icon>
+            </v-avatar>
+          </template>
+          <div>
+            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.frontendGithub") }}</v-list-item-subtitle>
+          </div>
+        </v-list-item>
+        <v-list-item color="primary" href="https://github.com/zfoo-project/zfoo" link density="compact">
+          <template v-slot:prepend>
+            <v-avatar size="30">
+              <v-icon>mdi-github</v-icon>
+            </v-avatar>
+          </template>
+          <div>
+            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.backendGithub") }}</v-list-item-subtitle>
+          </div>
+        </v-list-item>
       </v-list>
       <v-divider />
     </v-card>

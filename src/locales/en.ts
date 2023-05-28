@@ -7,6 +7,8 @@ export default {
     billing: "leek juice",
     team: "cutting leek team",
     ask: "how to cut leeks",
+    frontendGithub: "frontend open source",
+    backendGithub: "backend open source",
   },
   common: {
     add: "Add",
