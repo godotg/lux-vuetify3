@@ -22,38 +22,22 @@ const handleLogout = () => {
 
 const navs = [
   {
-    title: "Profile Details",
-    key: "menu.profileDetails",
-    link: "/profile",
+    title: "jiucai.profileDetails",
+    link: "/team",
     icon: "mdi-account-box-outline",
   },
   {
-    title: "Plans and Billing",
-    key: "menu.plansAndBilling",
-    link: "/plans-and-billing",
+    title: "jiucai.billing",
+    link: "/team",
     icon: "mdi-credit-card-outline",
   },
   {
-    title: "Team",
-    key: "menu.team",
+    title: "jiucai.team",
     link: "/team",
     icon: "mdi-account-group-outline",
   },
   {
-    title: "API Dashboard",
-    key: "menu.apiDashboard",
-    link: "/api-dashboard",
-    icon: "mdi-monitor-dashboard",
-  },
-  {
-    title: "Integrations",
-    key: "menu.integrations",
-    link: "/integrations",
-    icon: "mdi-puzzle-outline",
-  },
-  {
-    title: "Ask the Community",
-    key: "menu.askCommunity",
+    title: "jiucai.ask",
     link: "/ask-the-community",
     icon: "mdi-help-circle-outline",
   },
@@ -126,7 +110,7 @@ const navs = [
 
           <div>
             <v-list-item-subtitle class="text-body-2">{{
-              nav.title
+              $t(nav.title)
             }}</v-list-item-subtitle>
           </div>
         </v-list-item>

@@ -3,6 +3,10 @@ export default {
     news: "News",
     chatgpt: "ChatGpt",
     square: "Square",
+    profileDetails: "vvvip leek account",
+    billing: "leek juice",
+    team: "cutting leek team",
+    ask: "how to cut leeks",
   },
   common: {
     add: "Add",

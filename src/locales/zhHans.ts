@@ -3,6 +3,10 @@ export default {
     news: "情报",
     chatgpt: "ChatGpt",
     square: "广场",
+    profileDetails: "至尊vip韭菜账户",
+    billing: "韭菜汁剩余量",
+    team: "专业的割韭菜团队",
+    ask: "如何割韭菜",
   },
   common: {
     add: "新增",
