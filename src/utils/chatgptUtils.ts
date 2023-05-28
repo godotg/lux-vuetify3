@@ -1,12 +1,13 @@
-import {send, isWebsocketReady} from "@/utils/websocket";
+import {isWebsocketReady, send} from "@/utils/websocket";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {isMobile} from "@/utils/common";
 import _ from "lodash";
 
 import ChatgptMessageRequest from "@/protocol/chatgpt/ChatgptMessageRequest";
+import ChatgptForceStopRequest from "@/protocol/chatgpt/ChatgptForceStopRequest";
 
 const snackbarStore = useSnackbarStore();
-let requestId = 1;
+let requestId = 0;
 
 export function sendChatgpt(messages) {
   if (!isWebsocketReady()) {
@@ -20,7 +21,8 @@ export function sendChatgpt(messages) {
 
   const request = new ChatgptMessageRequest();
   request.mobile = isMobile();
-  request.requestId = requestId++;
+  requestId++;
+  request.requestId = requestId;
 
   // const size = _.size(messages);
   // if (size < 2) {
@@ -32,5 +34,15 @@ export function sendChatgpt(messages) {
 
   messages.forEach(it => request.messages.push(it.content));
 
+  send(request);
+}
+
+
+export function forceStopChatgpt() {
+  if (requestId <= 0) {
+    return;
+  }
+  const request = new ChatgptForceStopRequest();
+  request.requestId = requestId;
   send(request);
 }

@@ -4,6 +4,7 @@ class ChatgptMessageNotice {
 
     requestId: number = 0;
     choice: string = '';
+    finishReason: number = 0;
 
     static PROTOCOL_ID: number = 231;
 
@@ -16,6 +17,7 @@ class ChatgptMessageNotice {
             return;
         }
         buffer.writeString(packet.choice);
+        buffer.writeInt(packet.finishReason);
         buffer.writeInt(packet.requestId);
     }
 
@@ -27,7 +29,9 @@ class ChatgptMessageNotice {
         const result0 = buffer.readString();
         packet.choice = result0;
         const result1 = buffer.readInt();
-        packet.requestId = result1;
+        packet.finishReason = result1;
+        const result2 = buffer.readInt();
+        packet.requestId = result2;
         return packet;
     }
 }

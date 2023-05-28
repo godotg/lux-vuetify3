@@ -20,7 +20,7 @@ const chatGPTStore = useChatGPTStore();
 
 
 
-import {sendChatgpt} from "@/utils/chatgptUtils";
+import {sendChatgpt, forceStopChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore} from "@/stores/newsStore";
@@ -31,6 +31,14 @@ const newsStore = useNewsStore();
 onMounted(() => {
   registerPacketReceiver(ChatgptMessageNotice.PROTOCOL_ID, createCompletion);
 });
+const forceStop = async () => {
+  forceStopChatgpt();
+}
+const clearChatHistory = async () => {
+  userMessage.value = "";
+  messages.value = [];
+  isLoading.value = false;
+}
 
 
 interface Message {
@@ -94,7 +102,9 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
 
   try {
 
-    isLoading.value = false;
+    if (packet.finishReason != 0) {
+      isLoading.value = false;
+    }
 
     // Add the bot message
     let message = _.find(messages.value, it => it.requestId == packet.requestId);
@@ -271,6 +281,10 @@ const handleKeydown = (e) => {
           rows="1"
           no-resize
         >
+          <template v-slot:prepend-inner>
+            <v-icon v-if="isLoading" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
+            <v-icon v-else v-ripple color="primary" @click="clearChatHistory">mdi-broom</v-icon>
+          </template>
           <template v-slot:append-inner>
             <v-fade-transition leave-absolute>
               <Icon
