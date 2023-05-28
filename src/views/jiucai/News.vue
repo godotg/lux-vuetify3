@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {asyncAsk, isWebsocketReady} from "@/utils/websocket";
+import AnimationLeek1 from "@/animation/AnimationLeek1.vue";
 import News from "@/protocol/news/News";
 import NewsRequest from "@/protocol/news/NewsRequest";
 import NewsResponse from "@/protocol/news/NewsResponse";
@@ -14,7 +15,7 @@ import {useNewsStore} from "@/stores/newsStore";
 
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
-const {mobile} = useDisplay();
+const {mobile, width, height} = useDisplay();
 
 
 const newsRef = ref<News[]>([]);
@@ -337,4 +338,6 @@ function copyNews(news: News, event: Event) {
       更多
     </v-footer>
   </v-container>
+
+  <AnimationLeek1 v-if="_.isEmpty(newsRef)" :size="mobile ? height : width" />
 </template>

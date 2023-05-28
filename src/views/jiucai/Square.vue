@@ -6,8 +6,7 @@
 <script setup lang="ts">
 import { useSnackbarStore } from "@/stores/snackbarStore";
 import { useChatStore } from "@/views/app/chat/chatStore";
-import AnimationChat from "@/components/animations/AnimationChat1.vue";
-import AnimationAi from "@/components/animations/AnimationBot1.vue";
+import AnimationAi from "@/animation/AnimationBot1.vue";
 import { Icon } from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
@@ -16,7 +15,7 @@ const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
 
 
-import AnimationSquare from "@/components/animations/AnimationSquare.vue";
+import AnimationSquare from "@/animation/AnimationSquare.vue";
 import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
 import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
