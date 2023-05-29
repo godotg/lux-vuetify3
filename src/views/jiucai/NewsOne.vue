@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {asyncAsk, isWebsocketReady} from "@/utils/websocket";
-import SeoQingBaoRequest from "@/protocol/seo/SeoQingBaoRequest";
-import SeoQingBaoResponse from "@/protocol/seo/SeoQingBaoResponse";
+import NewsOneRequest from "@/protocol/news/NewsOneRequest";
+import NewsOneResponse from "@/protocol/news/NewsOneResponse";
 import News from "@/protocol/news/News";
 import _ from "lodash";
 import {useSnackbarStore} from "@/stores/snackbarStore";
@@ -34,9 +34,9 @@ async function doInitNews() {
   const id = route.params.id;
   const newsId = _.toNumber(id);
 
-  const request = new SeoQingBaoRequest();
+  const request = new NewsOneRequest();
   request.id = newsId;
-  const response: SeoQingBaoResponse = await asyncAsk(request)
+  const response: NewsOneResponse = await asyncAsk(request)
   newsRef.value = response.news;
   keywordsRef.value = response.keywords;
   descriptionRef.value = response.description;

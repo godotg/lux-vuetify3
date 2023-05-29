@@ -26,6 +26,8 @@ import NewsStock from './news/NewsStock';
 import NewsIndustry from './news/NewsIndustry';
 import NewsRequest from './news/NewsRequest';
 import NewsResponse from './news/NewsResponse';
+import NewsOneRequest from './news/NewsOneRequest';
+import NewsOneResponse from './news/NewsOneResponse';
 import GaiNian from './gn/GaiNian';
 import GnRequest from './gn/GnRequest';
 import GnResponse from './gn/GnResponse';
@@ -38,8 +40,6 @@ import GroupChatRequest from './chat/GroupChatRequest';
 import GroupHistoryMessageRequest from './chat/GroupHistoryMessageRequest';
 import GroupHistoryMessageResponse from './chat/GroupHistoryMessageResponse';
 import ServerSessionActiveNotice from './auth/ServerSessionActiveNotice';
-import SeoQingBaoRequest from './seo/SeoQingBaoRequest';
-import SeoQingBaoResponse from './seo/SeoQingBaoResponse';
 
 const protocols = new Map<number, any>();
 
@@ -72,6 +72,8 @@ protocols.set(201, NewsStock);
 protocols.set(202, NewsIndustry);
 protocols.set(203, NewsRequest);
 protocols.set(204, NewsResponse);
+protocols.set(205, NewsOneRequest);
+protocols.set(206, NewsOneResponse);
 protocols.set(220, GaiNian);
 protocols.set(221, GnRequest);
 protocols.set(222, GnResponse);
@@ -84,8 +86,6 @@ protocols.set(242, GroupChatRequest);
 protocols.set(243, GroupHistoryMessageRequest);
 protocols.set(244, GroupHistoryMessageResponse);
 protocols.set(250, ServerSessionActiveNotice);
-protocols.set(260, SeoQingBaoRequest);
-protocols.set(261, SeoQingBaoResponse);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
