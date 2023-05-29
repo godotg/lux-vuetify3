@@ -339,5 +339,5 @@ function copyNews(news: News, event: Event) {
     </v-footer>
   </v-container>
 
-  <AnimationLeek1 v-if="_.isEmpty(newsRef)" :size="mobile ? height : width" />
+  <AnimationLeek1 v-if="_.isEmpty(newsRef)" :size="width" />
 </template>
