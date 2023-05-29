@@ -21,7 +21,7 @@ export default [
     component: () => import("@/views/jiucai/Square.vue"),
   },
   {
-    path: "/qb/:id",
+    path: "/ae/:id",
     meta: {
       layout: "landing",
     },
