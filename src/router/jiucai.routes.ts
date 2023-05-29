@@ -21,10 +21,11 @@ export default [
     component: () => import("@/views/jiucai/Square.vue"),
   },
   {
-    path: "/seo",
+    path: "/qb/:id",
     meta: {
       layout: "landing",
     },
-    component: () => import("@/views/jiucai/Seo.vue"),
+    component: () => import("@/views/jiucai/QingBao.vue"),
   },
+
 ];

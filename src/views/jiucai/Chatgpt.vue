@@ -39,6 +39,14 @@ const clearChatHistory = async () => {
   messages.value = [];
   isLoading.value = false;
 }
+const isGenerating = ref(false);
+
+// Scroll to the bottom of the message container
+const scrollToBottomDelay = () => {
+  setTimeout(() => {
+    scrollToBottom(document.querySelector(".message-container"));
+  }, 100);
+};
 
 
 interface Message {
@@ -92,6 +100,7 @@ const sendMessage = async () => {
     userMessage.value = "";
 
     isLoading.value = true;
+    isGenerating.value = true;
     // Create a completion
     sendChatgpt(requestMessages.value);
   }
@@ -101,9 +110,9 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
   // Check if the API key is set
 
   try {
-
+    isLoading.value = false;
     if (packet.finishReason != 0) {
-      isLoading.value = false;
+      isGenerating.value = false;
     }
 
     // Add the bot message
@@ -139,7 +148,7 @@ watch(
   () => messages.value,
   (val) => {
     if (val) {
-      scrollToBottom(document.querySelector(".message-container"));
+      scrollToBottomDelay();
     }
   },
   {
@@ -283,13 +292,13 @@ const handleKeydown = (e) => {
           no-resize
         >
           <template v-slot:prepend-inner>
-            <v-icon v-if="isLoading" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
+            <v-icon v-if="isGenerating" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
             <v-icon v-else v-ripple color="primary" @click="clearChatHistory">mdi-broom</v-icon>
           </template>
           <template v-slot:append-inner>
             <v-fade-transition leave-absolute>
               <Icon
-                v-if="isLoading"
+                v-if="isGenerating"
                 class="text-primary"
                 width="30"
                 icon="eos-icons:three-dots-loading"
