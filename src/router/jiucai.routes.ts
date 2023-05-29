@@ -25,7 +25,7 @@ export default [
     meta: {
       layout: "landing",
     },
-    component: () => import("@/views/jiucai/QingBao.vue"),
+    component: () => import("@/views/jiucai/NewsOne.vue"),
   },
 
 ];
