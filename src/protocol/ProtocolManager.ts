@@ -38,6 +38,8 @@ import GroupChatRequest from './chat/GroupChatRequest';
 import GroupHistoryMessageRequest from './chat/GroupHistoryMessageRequest';
 import GroupHistoryMessageResponse from './chat/GroupHistoryMessageResponse';
 import ServerSessionActiveNotice from './auth/ServerSessionActiveNotice';
+import SeoQingBaoRequest from './seo/SeoQingBaoRequest';
+import SeoQingBaoResponse from './seo/SeoQingBaoResponse';
 
 const protocols = new Map<number, any>();
 
@@ -82,6 +84,8 @@ protocols.set(242, GroupChatRequest);
 protocols.set(243, GroupHistoryMessageRequest);
 protocols.set(244, GroupHistoryMessageResponse);
 protocols.set(250, ServerSessionActiveNotice);
+protocols.set(260, SeoQingBaoRequest);
+protocols.set(261, SeoQingBaoResponse);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {

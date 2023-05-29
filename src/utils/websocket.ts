@@ -67,7 +67,6 @@ function connect(desc): WebSocket {
     buffer.setReadOffset(4);
     const packet = ProtocolManager.read(buffer);
     let attachment: any = null;
-    console.log(packet)
     if (buffer.isReadable() && buffer.readBoolean()) {
       console.log(new Date(), "Websocket收到异步response <-- ", packet);
       attachment = ProtocolManager.read(buffer);
