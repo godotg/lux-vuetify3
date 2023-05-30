@@ -57,11 +57,11 @@ const levelMap = {
 };
 
 const jokes = [
-  "🌴快乐韭菜网，做一个快乐的韭菜， jiucai.fun",
-  "🌴快乐韭菜网，爱割才会赢， jiucai.fun",
-  "🌴做韭菜也得快乐哦， jiucai.fun",
-  "🌴韭菜炒鸡蛋，快乐干饭， jiucai.fun",
-  "🌴因为run的快，所以是一个快乐的韭菜， jiucai.fun",
+  "🌴快乐韭菜网，做一个快乐的韭菜，https://jiucai.fun",
+  "🌴快乐韭菜网，爱割才会赢，https://jiucai.fun",
+  "🌴做韭菜也得快乐哦，https://jiucai.fun",
+  "🌴韭菜炒鸡蛋，快乐干饭，https://jiucai.fun",
+  "🌴因为run的快，所以是一个快乐的韭菜，https://jiucai.fun",
 ];
 
 onMounted(() => {
@@ -128,7 +128,7 @@ async function loadMoreNews() {
   loadingRef.value = true;
   const request = new NewsRequest();
   request.startId = -1;
-  request.endId = lastNews.id;
+  request.endId = lastNews.id - 1;
   setTimeout(() => {
     loadingRef.value = false;
   }, 10000);
