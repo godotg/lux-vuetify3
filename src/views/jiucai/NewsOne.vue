@@ -1,13 +1,17 @@
 <script setup lang="ts">
+import axios from "axios";
 import {asyncAsk, isWebsocketReady} from "@/utils/websocket";
 import NewsOneRequest from "@/protocol/news/NewsOneRequest";
 import NewsOneResponse from "@/protocol/news/NewsOneResponse";
 import News from "@/protocol/news/News";
 import _ from "lodash";
-import {useSnackbarStore} from "@/stores/snackbarStore";
 
+import {useSnackbarStore} from "@/stores/snackbarStore";
 const snackbarStore = useSnackbarStore();
+
+
 const route = useRoute();
+
 
 const newsRef = ref<News | null>(null);
 const keywordsRef = ref<string>();
@@ -21,11 +25,11 @@ onMounted(() => {
 
 function initNews() {
   setTimeout(() => {
-    doInitNews();
+    doInitNewsByHttp();
   }, 1000);
 }
 
-async function doInitNews() {
+async function doInitNewsByWebsocket() {
   if (!isWebsocketReady()) {
     initNews();
     return;
@@ -41,6 +45,22 @@ async function doInitNews() {
   keywordsRef.value = response.keywords;
   descriptionRef.value = response.description;
   commentRef.value = response.comment;
+}
+
+async function doInitNewsByHttp() {
+  try {
+    const id = route.params.id;
+    const newsId = _.toNumber(id);
+    const response = await axios.get("https://jiucai.fun/aj/" + newsId);
+    console.log(response);
+    newsRef.value = response.data.news;
+    keywordsRef.value = response.data.keywords;
+    descriptionRef.value = response.data.description;
+    commentRef.value = response.data.comment;
+  } catch (error) {
+    console.error(error);
+    doInitNewsByWebsocket();
+  }
 }
 
 </script>
@@ -99,8 +119,7 @@ async function doInitNews() {
         点评
         <v-icon color="primary" icon="mdi-eye-circle-outline mdi-spin"></v-icon>
       </v-card-title>
-      <v-card-text class="text-pre-wrap">
-        {{ commentRef }}
+      <v-card-text v-html="commentRef" class="text-pre-wrap">
       </v-card-text>
     </v-card>
 
