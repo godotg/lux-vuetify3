@@ -1,13 +1,19 @@
 <!--
 * @Component: BackToTop
 * @Maintainer: J.K. Yang
-* @Description: 
+* @Description:
 -->
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
+const route = useRoute();
+import _ from "lodash";
 const isVisible = ref(false);
 
 const handleScroll = () => {
+  if (!_.isEqual(route.path,"/")) {
+    isVisible.value = false;
+    return;
+  }
   isVisible.value = window.scrollY > 200;
 };
 
