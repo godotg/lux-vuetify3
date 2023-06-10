@@ -216,7 +216,7 @@ const handleKeydown = (e) => {
                 </div>
               </v-card>
             </div>
-            <v-card-subtitle class="ma-0 pa-0 text-center">
+            <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px">
               {{ parseTime(message.timestamp) }} {{ message.region }}
             </v-card-subtitle>
           </div>
