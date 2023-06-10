@@ -192,33 +192,21 @@ const handleKeydown = (e) => {
               </v-avatar>
               <v-card class="gradient gray text-pre-wrap" theme="dark">
                 <v-card-text>
-                  <b> {{ message.content }}</b></v-card-text
-                >
+                  <b> {{ message.content }}</b></v-card-text>
               </v-card>
             </div>
           </div>
           <div v-else>
             <div v-if="mobile">
               <div class="pa-2 pa-md-5 assistant-message">
-                <v-avatar
-                  class="mr-2 mr-md-4"
-                  rounded="sm"
-                  variant="elevated"
-                >
-                  <img
-                    :src="newsStore.aiAvatar()"
-                    alt="alt"
-                  />
+                <v-avatar class="mr-2 mr-md-4" rounded="sm" variant="elevated">
+                  <img :src="newsStore.aiAvatar()" alt="alt"/>
                 </v-avatar>
               </div>
               <div class="pa-2 pa-md-5 assistant-message">
                 <v-card>
                   <div>
-                    <md-editor
-                      v-model="message.content"
-                      class="font-1"
-                      previewOnly
-                    />
+                    <md-editor v-model="message.content" class="font-1" previewOnly/>
                   </div>
                 </v-card>
               </div>
@@ -236,11 +224,7 @@ const handleKeydown = (e) => {
               </v-avatar>
               <v-card>
                 <div>
-                  <md-editor
-                    v-model="message.content"
-                    class="font-1"
-                    previewOnly
-                  />
+                  <md-editor v-model="message.content" class="font-1" previewOnly />
                 </div>
               </v-card>
             </div>
@@ -262,14 +246,9 @@ const handleKeydown = (e) => {
       </div>
     </div>
     <div class="input-area">
-      <v-sheet elevation="0" class="input-panel d-flex align-center pa-1">
-        <v-btn
-          variant="elevated"
-          icon
-          size="x-small"
-          @click="chatGPTStore.configDialog = true"
-        >
-          <v-icon size="28" class="text-primary">mdi-cog-outline</v-icon>
+      <v-sheet color="transparent" elevation="0" class="input-panel d-flex align-end pa-1">
+        <v-btn size="x-small" class="mb-3" variant="elevated" icon @click="chatGPTStore.configDialog = true">
+          <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
           <v-tooltip
             activator="parent"
             location="top"
@@ -324,15 +303,20 @@ const handleKeydown = (e) => {
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+
   .messsage-area {
     flex: 1;
     height: 100%;
   }
-  .input-area {
-    padding: 1rem;
-    height: 90px;
 
+  .input-area {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 1rem;
     align-items: center;
+
     .input-panel {
       border-radius: 5px;
       max-width: 1200px;
@@ -373,6 +357,7 @@ const handleKeydown = (e) => {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   h1 {
     font-size: 2rem;
     font-weight: 500;
@@ -388,6 +373,7 @@ const handleKeydown = (e) => {
 }
 
 @media screen and (max-width: 768px) {
+
   :deep(#md-editor-v3-preview),
   .user-message {
     font-size: 14px !important;
