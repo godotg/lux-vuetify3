@@ -21,6 +21,7 @@ export const useNewsStore = defineStore("newsStore", {
 
     online: false,
     ip: "local",
+    region: "",
     ipLong: 0,
     sid: 0,
     activeUid: 0,

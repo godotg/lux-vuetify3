@@ -86,6 +86,9 @@ const navs = [
             <!-- {{ $store.state.user.email  }} -->
             {{ newsStore.ip }}
           </v-list-item-subtitle>
+          <v-list-item-subtitle>
+            {{ newsStore.region }}
+          </v-list-item-subtitle>
         </v-list-item>
       </v-list>
       <v-divider />

@@ -23,6 +23,7 @@ import {registerPacketReceiver,isWebsocketReady, send, asyncAsk} from "@/utils/w
 import GroupChatNotice from "@/protocol/chat/GroupChatNotice";
 import ChatMessage from "@/protocol/chat/ChatMessage";
 import {useNewsStore, avatarAutoUrl} from "@/stores/newsStore";
+import {parseTime} from "@/utils/timeUtils";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 
@@ -38,6 +39,7 @@ interface Message {
   id: number;
   type: number;
   sendId: number;
+  region: string;
   message: string;
   timestamp: number;
 
@@ -80,6 +82,7 @@ function toMessage(chatMessage: ChatMessage): Message {
     id: chatMessage.id,
     type: chatMessage.type,
     sendId: chatMessage.sendId,
+    region: chatMessage.region,
     message: chatMessage.message,
     timestamp: chatMessage.timestamp,
     avatar: avatarAutoUrl(chatMessage.sendId),
@@ -145,6 +148,17 @@ const scrollToBottom = () => {
   }, 100);
 };
 
+const handleKeydown = (e) => {
+  if (e.key === "Enter" && (e.altKey || e.shiftKey)) {
+    // 当同时按下 alt或者shift 和 enter 时，插入一个换行符
+    e.preventDefault();
+    userMessage.value += "\n";
+  } else if (e.key === "Enter") {
+    // 当只按下 enter 时，发送消息
+    e.preventDefault();
+    sendMessage();
+  }
+};
 </script>
 
 <template>
@@ -202,6 +216,9 @@ const scrollToBottom = () => {
                 </div>
               </v-card>
             </div>
+            <v-card-subtitle class="ma-0 pa-0 text-center">
+              {{ parseTime(message.timestamp) }} {{ message.region }}
+            </v-card-subtitle>
           </div>
         </template>
         <div v-if="isLoading">
@@ -220,17 +237,19 @@ const scrollToBottom = () => {
       </div>
     </div>
     <div class="input-area">
-      <v-sheet elevation="0" class="input-panel">
+      <v-sheet color="transparent" elevation="0" class="input-panel d-flex align-end pa-1">
         <v-text-field
           color="primary"
           type="text"
-          clearable
           variant="solo"
           ref="input"
           v-model="userMessage"
           placeholder="SendMessage"
           hide-details
-          @keyup.enter="sendMessage"
+          @keydown="handleKeydown"
+          rows="1"
+          max-rows="9"
+          auto-grow
         >
           <template #prepend-inner>
             <v-icon>mdi-microphone</v-icon>
@@ -261,15 +280,20 @@ const scrollToBottom = () => {
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+
   .messsage-area {
     flex: 1;
     height: 100%;
   }
-  .input-area {
-    padding: 1rem;
-    height: 90px;
 
+  .input-area {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 1rem;
     align-items: center;
+
     .input-panel {
       border-radius: 5px;
       max-width: 1200px;
@@ -310,6 +334,7 @@ const scrollToBottom = () => {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   h1 {
     font-size: 2rem;
     font-weight: 500;
@@ -325,6 +350,7 @@ const scrollToBottom = () => {
 }
 
 @media screen and (max-width: 768px) {
+
   :deep(#md-editor-v3-preview),
   .user-message {
     font-size: 14px !important;
