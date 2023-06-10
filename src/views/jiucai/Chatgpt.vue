@@ -260,7 +260,6 @@ const handleKeydown = (e) => {
           class="ml-1"
           color="primary"
           type="text"
-          clearable
           variant="solo"
           ref="input"
           v-model="userMessage"
@@ -268,9 +267,8 @@ const handleKeydown = (e) => {
           hide-details
           @keydown="handleKeydown"
           rows="1"
-          max-rows="21"
+          max-rows="9"
           auto-grow
-          no-resize
         >
           <template v-slot:prepend-inner>
             <v-icon v-if="isGenerating" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
