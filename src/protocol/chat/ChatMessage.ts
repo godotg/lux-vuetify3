@@ -5,6 +5,7 @@ class ChatMessage {
     id: number = 0;
     type: number = 0;
     sendId: number = 0;
+    region: string = '';
     message: string = '';
     timestamp: number = 0;
 
@@ -20,6 +21,7 @@ class ChatMessage {
         }
         buffer.writeLong(packet.id);
         buffer.writeString(packet.message);
+        buffer.writeString(packet.region);
         buffer.writeLong(packet.sendId);
         buffer.writeLong(packet.timestamp);
         buffer.writeByte(packet.type);
@@ -34,12 +36,14 @@ class ChatMessage {
         packet.id = result0;
         const result1 = buffer.readString();
         packet.message = result1;
-        const result2 = buffer.readLong();
-        packet.sendId = result2;
+        const result2 = buffer.readString();
+        packet.region = result2;
         const result3 = buffer.readLong();
-        packet.timestamp = result3;
-        const result4 = buffer.readByte();
-        packet.type = result4;
+        packet.sendId = result3;
+        const result4 = buffer.readLong();
+        packet.timestamp = result4;
+        const result5 = buffer.readByte();
+        packet.type = result5;
         return packet;
     }
 }
