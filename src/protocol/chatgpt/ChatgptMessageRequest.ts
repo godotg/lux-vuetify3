@@ -3,6 +3,7 @@
 class ChatgptMessageRequest {
 
     requestId: number = 0;
+    ai: number = 0;
     mobile: boolean = false;
     messages: Array<string> = [];
 
@@ -16,6 +17,7 @@ class ChatgptMessageRequest {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
+        buffer.writeInt(packet.ai);
         buffer.writeStringList(packet.messages);
         buffer.writeBoolean(packet.mobile);
         buffer.writeInt(packet.requestId);
@@ -26,12 +28,14 @@ class ChatgptMessageRequest {
             return null;
         }
         const packet = new ChatgptMessageRequest();
-        const list0 = buffer.readStringList();
-        packet.messages = list0;
-        const result1 = buffer.readBoolean(); 
-        packet.mobile = result1;
-        const result2 = buffer.readInt();
-        packet.requestId = result2;
+        const result0 = buffer.readInt();
+        packet.ai = result0;
+        const list1 = buffer.readStringList();
+        packet.messages = list1;
+        const result2 = buffer.readBoolean(); 
+        packet.mobile = result2;
+        const result3 = buffer.readInt();
+        packet.requestId = result3;
         return packet;
     }
 }
