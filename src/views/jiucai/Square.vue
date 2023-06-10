@@ -238,7 +238,7 @@ const handleKeydown = (e) => {
     </div>
     <div class="input-area">
       <v-sheet color="transparent" elevation="0" class="input-panel d-flex align-end pa-1">
-        <v-text-field
+        <v-textarea
           color="primary"
           type="text"
           variant="solo"
@@ -267,7 +267,7 @@ const handleKeydown = (e) => {
               >
             </v-fade-transition>
           </template>
-        </v-text-field>
+        </v-textarea>
       </v-sheet>
     </div>
   </div>
