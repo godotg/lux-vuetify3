@@ -5,8 +5,8 @@
 -->
 <script setup lang="ts">
 import { useSnackbarStore } from "@/stores/snackbarStore";
-import AnimationChat1 from "@/animation/AnimationAI1.vue";
-import AnimationChat2 from "@/animation/AnimationChat1.vue";
+import AnimationAI1 from "@/animation/AnimationAI1.vue";
+import AnimationAI2 from "@/animation/AnimationAI2.vue";
 import AnimationBot1 from "@/animation/AnimationBot1.vue";
 import { read, countAndCompleteCodeBlocks } from "@/utils/aiUtils";
 import { scrollToBottom } from "@/utils/common";
@@ -254,13 +254,13 @@ const handleKeydown = (e) => {
         </div>
       </perfect-scrollbar>
       <div class="no-message-container" v-else>
-        <AnimationChat1 v-if="props.ai == 1" :size="props.size" />
-        <AnimationChat2 v-else :size="props.size" />
+        <AnimationAI1 v-if="props.ai == 1" :size="props.size" />
+        <AnimationAI2 v-else :size="props.size" />
       </div>
     </div>
     <div class="input-area">
       <v-sheet color="transparent" elevation="0" class="input-panel d-flex align-end pa-1">
-        <v-btn size="x-small" class="mb-3" variant="elevated" icon @click="chatGPTStore.configDialog = true">
+        <v-btn v-if="!mobile" size="x-small" class="mb-3 mr-1" variant="elevated" icon @click="chatGPTStore.configDialog = true">
           <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
           <v-tooltip
             activator="parent"
@@ -270,7 +270,6 @@ const handleKeydown = (e) => {
         </v-btn>
 
         <v-textarea
-          class="ml-1"
           color="primary"
           type="text"
           variant="solo"
