@@ -2,7 +2,7 @@ export default {
   jiucai: {
     news: "情报",
     chatgpt: "ChatGpt",
-    spark: "讯飞星火",
+    spark: "星火认知",
     square: "广场",
     profileDetails: "至尊vip韭菜账户",
     billing: "韭菜汁剩余量",

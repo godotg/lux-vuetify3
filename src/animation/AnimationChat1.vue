@@ -14,8 +14,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold mb-9">
-    星火认知
+  <h1 class="text-h4 text-md-h3 text-blue-lighten-1 font-weight-bold mb-9">
+    星火认知大模型
   </h1>
   <Vue3Lottie
     animationLink="/aa/chat-animation-1.json"
