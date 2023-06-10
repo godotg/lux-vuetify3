@@ -37,6 +37,10 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  size: {
+    type: Number,
+    default: 300,
+  },
 });
 
 onMounted(() => {
@@ -113,7 +117,7 @@ const sendMessage = async () => {
     isLoading.value = true;
     isGenerating.value = true;
     // Create a completion
-    sendChatgpt(requestMessages.value);
+    sendChatgpt(requestMessages.value, props.ai);
   }
 };
 
@@ -250,8 +254,8 @@ const handleKeydown = (e) => {
         </div>
       </perfect-scrollbar>
       <div class="no-message-container" v-else>
-        <AnimationChat1 v-if="props.ai == 1" :size="300" />
-        <AnimationChat2 v-else :size="300" />
+        <AnimationChat1 v-if="props.ai == 1" :size="props.size" />
+        <AnimationChat2 v-else :size="props.size" />
       </div>
     </div>
     <div class="input-area">

@@ -18,7 +18,7 @@ const props = defineProps({
     星火认知大模型
   </h1>
   <Vue3Lottie
-    animationLink="/aa/chat-animation-1.json"
+    animationLink="/aa/ai-animation-2.json"
     :height="props.size"
     :width="props.size"
   />

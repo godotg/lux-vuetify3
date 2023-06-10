@@ -14,11 +14,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold mb-9">
-    OpenAI
-  </h1>
   <Vue3Lottie
-    animationLink="/aa/ai-animation-1.json"
+    animationLink="/aa/openai-animation-1.json"
     :height="props.size"
     :width="props.size"
   />

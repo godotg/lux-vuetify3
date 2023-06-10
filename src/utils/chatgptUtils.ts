@@ -9,7 +9,7 @@ import ChatgptForceStopRequest from "@/protocol/chatgpt/ChatgptForceStopRequest"
 const snackbarStore = useSnackbarStore();
 let requestId = 0;
 
-export function sendChatgpt(messages) {
+export function sendChatgpt(messages, ai) {
   if (!isWebsocketReady()) {
     snackbarStore.showErrorMessage("请稍等，无法连接服务器");
     return;
@@ -23,6 +23,7 @@ export function sendChatgpt(messages) {
   request.mobile = isMobile();
   requestId++;
   request.requestId = requestId;
+  request.ai = ai;
 
   // const size = _.size(messages);
   // if (size < 2) {
