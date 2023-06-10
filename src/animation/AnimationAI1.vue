@@ -15,7 +15,7 @@ const props = defineProps({
 
 <template>
   <Vue3Lottie
-    animationLink="/aa/openai-animation-1.json"
+    animationLink="/aa/openai-animation-2.json"
     :height="props.size"
     :width="props.size"
   />
