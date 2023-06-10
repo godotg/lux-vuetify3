@@ -289,6 +289,8 @@ const handleKeydown = (e) => {
           hide-details
           @keydown="handleKeydown"
           rows="1"
+          max-rows="21"
+          auto-grow
           no-resize
         >
           <template v-slot:prepend-inner>
