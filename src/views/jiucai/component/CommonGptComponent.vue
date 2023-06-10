@@ -5,8 +5,9 @@
 -->
 <script setup lang="ts">
 import { useSnackbarStore } from "@/stores/snackbarStore";
-import AnimationChat from "@/animation/AnimationChat1.vue";
-import AnimationAi from "@/animation/AnimationBot1.vue";
+import AnimationChat1 from "@/animation/AnimationAI1.vue";
+import AnimationChat2 from "@/animation/AnimationChat1.vue";
+import AnimationBot1 from "@/animation/AnimationBot1.vue";
 import { read, countAndCompleteCodeBlocks } from "@/utils/aiUtils";
 import { scrollToBottom } from "@/utils/common";
 import { Icon } from "@iconify/vue";
@@ -28,6 +29,16 @@ import {useDisplay} from "vuetify";
 import _ from "lodash";
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
+
+
+const props = defineProps({
+  // 1表示chatgpt，2表示讯飞星火
+  ai: {
+    type: Number,
+    default: 1,
+  },
+});
+
 onMounted(() => {
   registerPacketReceiver(ChatgptMessageNotice.PROTOCOL_ID, createCompletion);
 });
@@ -233,16 +244,14 @@ const handleKeydown = (e) => {
         <div v-if="isLoading">
           <div class="pa-6">
             <div class="message">
-              <AnimationAi :size="100" />
+              <AnimationBot1 :size="100" />
             </div>
           </div>
         </div>
       </perfect-scrollbar>
       <div class="no-message-container" v-else>
-        <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
-          Chat With Me
-        </h1>
-        <AnimationChat :size="300" />
+        <AnimationChat1 v-if="props.ai == 1" :size="300" />
+        <AnimationChat2 v-else :size="300" />
       </div>
     </div>
     <div class="input-area">
@@ -263,7 +272,7 @@ const handleKeydown = (e) => {
           variant="solo"
           ref="input"
           v-model="userMessage"
-          placeholder="SendMessage"
+          placeholder="Ask Anything"
           hide-details
           @keydown="handleKeydown"
           rows="1"

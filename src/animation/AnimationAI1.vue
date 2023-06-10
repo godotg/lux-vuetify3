@@ -15,10 +15,10 @@ const props = defineProps({
 
 <template>
   <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold mb-9">
-    星火认知
+    OpenAI
   </h1>
   <Vue3Lottie
-    animationLink="/aa/chat-animation-1.json"
+    animationLink="/aa/ai-animation-1.json"
     :height="props.size"
     :width="props.size"
   />

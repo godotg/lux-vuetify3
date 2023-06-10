@@ -2,6 +2,7 @@ export default {
   jiucai: {
     news: "News",
     chatgpt: "ChatGpt",
+    spark: "Spark",
     square: "Square",
     profileDetails: "vvvip leek account",
     billing: "leek juice",

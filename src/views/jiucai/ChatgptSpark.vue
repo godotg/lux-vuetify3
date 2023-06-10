@@ -3,5 +3,5 @@ import CommonGptComponent from "./component/CommonGptComponent";
 </script>
 
 <template>
-  <CommonGptComponent :ai="1"/>
+  <CommonGptComponent :ai="2"/>
 </template>
