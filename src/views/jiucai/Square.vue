@@ -55,6 +55,8 @@ const userMessage = ref("");
 
 const isLoading = ref(false);
 
+const onlineUsersRef = ref(0);
+
 // Send Messsage
 const sendMessage = async () => {
   // Clear the input
@@ -128,6 +130,7 @@ async function doInitHistory() {
   updateMessage(response.messages);
   refreshMessageNotification();
   scrollToBottom();
+  onlineUsersRef.value = response.onlineUsers;
   setTimeout(() => scrollToBottom(), 300);
   snackbarStore.showSuccessMessage("聊天记录加载成功");
 }
@@ -231,6 +234,9 @@ const handleKeydown = (e) => {
             </v-card-subtitle>
           </div>
         </template>
+        <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px">
+          online user {{ onlineUsersRef }}
+        </v-card-subtitle>
         <div v-if="isLoading">
           <div class="pa-6">
             <div class="message">
