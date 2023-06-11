@@ -18,6 +18,7 @@ export const useNewsStore = defineStore("newsStore", {
     newsInfos: [],
     newsLevelFilter: "D",
     newsLevelFilterValue: 5,
+    chatMessageId: 0,
 
     online: false,
     ip: "local",
@@ -25,11 +26,14 @@ export const useNewsStore = defineStore("newsStore", {
     ipLong: 0,
     sid: 0,
     activeUid: 0,
+    // 仅在登录有用，后面基本上没用
+    newsIdDiff: 0,
+    chatMessageIdDiff: 0,
   }),
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["newsInfos", "gnInfos", "newsLevelFilter", "newsLevelFilterValue"]}],
+    strategies: [{storage: localStorage, paths: ["newsInfos", "gnInfos", "newsLevelFilter", "newsLevelFilterValue", "chatMessageId"]}],
   },
 
   getters: {},
@@ -95,6 +99,13 @@ export const useNewsStore = defineStore("newsStore", {
     },
     aiAvatar(): string {
       return this.ipLong == 0 ? aiAvatarDefault : avatarAutoUrl(this.ipLong + 1);
+    },
+
+    getMaxNewsId(): number {
+      if (_.isEmpty(this.newsInfos)) {
+        return 0;
+      }
+      return _.maxBy(this.newsInfos, it => it.id).id;
     },
   }
 });

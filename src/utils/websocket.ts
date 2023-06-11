@@ -5,11 +5,14 @@ import Error from '@/protocol/common/Error.js';
 import Message from '@/protocol/common/Message.js';
 import Ping from '@/protocol/common/Ping';
 import Pong from '@/protocol/common/Pong';
-import ServerSessionActiveNotice from '@/protocol/auth/ServerSessionActiveNotice';
+import LoginRequest from '@/protocol/auth/LoginRequest';
+import LoginResponse from '@/protocol/auth/LoginResponse';
+import GroupChatNotice from '@/protocol/chat/GroupChatNotice';
 
 
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
+import _ from "lodash";
 
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
@@ -47,7 +50,7 @@ function connect(desc): WebSocket {
 
   webSocket.binaryType = 'arraybuffer';
 
-  webSocket.onopen = function () {
+  webSocket.onopen = async function () {
     console.log(new Date(), 'websocket open success');
 
     // websocket连接成功过后，先发送ping同步服务器时间，再发送登录请求
@@ -56,6 +59,19 @@ function connect(desc): WebSocket {
     pingTime = new Date().getTime();
     snackbarStore.showSuccessMessage("连接服务器成功");
     newsStore.online = true;
+
+    // 登录
+    const loginRequest = new LoginRequest();
+    loginRequest.newsId = newsStore.getMaxNewsId();
+    loginRequest.chatMessageId = newsStore.chatMessageId;
+    const loginResponse: LoginResponse = await asyncAsk(loginRequest);
+    newsStore.ip = loginResponse.ip;
+    newsStore.ipLong = loginResponse.ipLong;
+    newsStore.region = loginResponse.region;
+    newsStore.sid = loginResponse.sid;
+    newsStore.activeUid = loginResponse.activeUid;
+    newsStore.newsIdDiff = loginResponse.newsIdDiff;
+    newsStore.chatMessageIdDiff = loginResponse.chatMessageIdDiff;
   };
 
 
@@ -84,15 +100,6 @@ function connect(desc): WebSocket {
       } else {
         pingTime = Number.parseInt(packet.time);
       }
-      return;
-    }
-
-    if (packet.protocolId() == ServerSessionActiveNotice.PROTOCOL_ID) {
-      newsStore.ip = packet.ip;
-      newsStore.ipLong = packet.ipLong;
-      newsStore.region = packet.region;
-      newsStore.sid = packet.sid;
-      newsStore.activeUid = packet.activeUid;
       return;
     }
 
@@ -212,6 +219,10 @@ export function registerPacketReceiver(protocolId: number, fun: any) {
 
 function route(packet: any) {
   const receiver = receiverMap.get(packet.protocolId());
+  if (packet.protocolId() == GroupChatNotice.PROTOCOL_ID) {
+    newsStore.chatMessageIdDiff = _.first(packet.messages).id - newsStore.chatMessageId;
+    console.log(newsStore.chatMessageIdDiff);
+  }
   if (receiver == null) {
     console.log("路由不存在:", packet);
     return;

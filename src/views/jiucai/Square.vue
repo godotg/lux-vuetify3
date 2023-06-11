@@ -13,7 +13,7 @@ import "md-editor-v3/lib/style.css";
 import { createCompletionApi } from "@/api/aiApi";
 const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
-
+const route = useRoute();
 
 import AnimationSquare from "@/animation/AnimationSquare.vue";
 import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
@@ -75,7 +75,16 @@ const groupChatNoticeCompletion = (packet: GroupChatNotice) => {
   isLoading.value = false;
   updateMessage(packet.messages);
   scrollToBottom();
+  if (_.isEqual(route.path,"/square")) {
+    refreshMessageNotification();
+    return;
+  }
 };
+
+function refreshMessageNotification() {
+  newsStore.chatMessageId = _.maxBy(messages.value, it => it.id).id;
+  newsStore.chatMessageIdDiff = 0;
+}
 
 function toMessage(chatMessage: ChatMessage): Message {
   return {
@@ -117,6 +126,7 @@ async function doInitHistory() {
   request.lastMessageId = firstMessageId;
   const response: GroupHistoryMessageResponse = await asyncAsk(request);
   updateMessage(response.messages);
+  refreshMessageNotification();
   scrollToBottom();
   setTimeout(() => scrollToBottom(), 300);
   snackbarStore.showSuccessMessage("聊天记录加载成功");

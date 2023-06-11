@@ -106,7 +106,7 @@ async function requestNews() {
   const request = new NewsRequest();
   request.startId = firstNews.id + 1;
   request.endId = -1;
-  const response: NewsResponse = await asyncAsk(request)
+  const response: NewsResponse = await asyncAsk(request);
   console.log("news request response ----------------------------------");
   if (document.visibilityState === "visible") {
     updateNewsRef(response.news);
@@ -143,6 +143,7 @@ function updateNewsRef(news: Array<News>) {
   if (_.isEmpty(news)) {
     return;
   }
+  newsStore.newsIdDiff = 0;
   news = _.filter(news, (it) => {
     return _.findIndex(newsRef.value, (it1) => it1.id == it.id) < 0;
   });
