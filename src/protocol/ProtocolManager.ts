@@ -39,7 +39,8 @@ import GroupChatNotice from './chat/GroupChatNotice';
 import GroupChatRequest from './chat/GroupChatRequest';
 import GroupHistoryMessageRequest from './chat/GroupHistoryMessageRequest';
 import GroupHistoryMessageResponse from './chat/GroupHistoryMessageResponse';
-import ServerSessionActiveNotice from './auth/ServerSessionActiveNotice';
+import LoginRequest from './auth/LoginRequest';
+import LoginResponse from './auth/LoginResponse';
 
 const protocols = new Map<number, any>();
 
@@ -85,7 +86,8 @@ protocols.set(241, GroupChatNotice);
 protocols.set(242, GroupChatRequest);
 protocols.set(243, GroupHistoryMessageRequest);
 protocols.set(244, GroupHistoryMessageResponse);
-protocols.set(250, ServerSessionActiveNotice);
+protocols.set(250, LoginRequest);
+protocols.set(251, LoginResponse);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
