@@ -229,12 +229,12 @@ const handleKeydown = (e) => {
                 </div>
               </v-card>
             </div>
-            <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px">
+            <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px;color: black">
               {{ parseTime(message.timestamp) }} {{ message.region }}
             </v-card-subtitle>
           </div>
         </template>
-        <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px">
+        <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px;color: black">
           online user {{ onlineUsersRef }}
         </v-card-subtitle>
         <div v-if="isLoading">
@@ -260,7 +260,7 @@ const handleKeydown = (e) => {
           variant="solo"
           ref="input"
           v-model="userMessage"
-          placeholder="SendMessage"
+          placeholder="Send Message"
           hide-details
           @keydown="handleKeydown"
           rows="1"
@@ -268,7 +268,7 @@ const handleKeydown = (e) => {
           auto-grow
         >
           <template #prepend-inner>
-            <v-icon>mdi-microphone</v-icon>
+            <v-icon color="primary">mdi-microphone</v-icon>
           </template>
           <template v-slot:append-inner>
             <v-fade-transition leave-absolute>
