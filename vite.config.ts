@@ -4,6 +4,7 @@ import vue from "@vitejs/plugin-vue";
 import vuetify from "vite-plugin-vuetify";
 
 import AutoImport from "unplugin-auto-import/vite";
+import { VitePWA } from 'vite-plugin-pwa'
 
 // Utilities
 import { defineConfig } from "vite";
@@ -24,6 +25,7 @@ export default defineConfig({
     AutoImport({
       imports: ["vue", "vue-router", "pinia"],
     }),
+    VitePWA(),
   ],
   define: { "process.env": {} },
   test: {
@@ -40,6 +42,13 @@ export default defineConfig({
   },
   server: {
     port: 4399,
+    proxy: {
+      "/sdApi": {
+        target: "http://me.yunrobot.cn:7860",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/sdApi/, ""),
+      },
+    },
   },
   css: {
     preprocessorOptions: {

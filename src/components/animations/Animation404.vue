@@ -1,7 +1,7 @@
 <!--
-* @Component: 
+* @Component:
 * @Maintainer: J.K. Yang
-* @Description: 
+* @Description:
 -->
 <script setup lang="ts">
 import { Vue3Lottie } from "vue3-lottie";
@@ -15,7 +15,7 @@ const props = defineProps({
 
 <template>
   <Vue3Lottie
-    animationLink="https://assets2.lottiefiles.com/packages/lf20_cr9slsdh.json"
+    animationLink="/aa/error404-animation-1.json"
     :height="props.size"
     :width="props.size"
   />

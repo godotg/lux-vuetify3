@@ -43,6 +43,18 @@ export default {
     settingSuccess: '设置成功'
   },
 
+  jiucai: {
+    news: "情报",
+    chatgpt: "ChatGpt",
+    spark: "星火认知",
+    square: "广场",
+    profileDetails: "至尊vip韭菜账户",
+    billing: "韭菜汁剩余量",
+    team: "专业的割韭菜团队",
+    ask: "如何割韭菜",
+    frontendGithub: "前端开源地址",
+    backendGithub: "后端开源地址",
+  },
   common: {
     add: "新增",
     cancel: "取消",

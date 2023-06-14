@@ -1,4 +1,16 @@
 export default {
+  jiucai: {
+    news: "News",
+    chatgpt: "ChatGpt",
+    spark: "Spark",
+    square: "Square",
+    profileDetails: "vvvip leek account",
+    billing: "leek juice",
+    team: "cutting leek team",
+    ask: "how to cut leeks",
+    frontendGithub: "frontend source",
+    backendGithub: "backend source",
+  },
   common: {
     add: "Add",
     cancel: "Cancel",

@@ -1,13 +1,16 @@
 <!--
-* @Component: 
+* @Component:
 * @Maintainer: J.K. Yang
-* @Description: 
+* @Description:
 -->
 <script setup lang="ts">
 import { useDisplay } from "vuetify";
 import { useCustomizeThemeStore } from "@/stores/customizeTheme";
 import ToolbarLanguage from "@/components/toolbar/ToolbarLanguage.vue";
+import ToolbarNewsLevel from "@/components/toolbar/ToolbarNewsLevel.vue";
+import ToolbarUserJiucai from "@/components/toolbar/ToolbarUserJiucai.vue";
 import ToolbarNotifications from "./ToolbarNotifications.vue";
+import ToolbarNewsNotifications from "./ToolbarNewsNotifications.vue";
 import ToolbarUser from "./ToolbarUser.vue";
 import { useTodoStore } from "@/views/app/todo/todoStore";
 const { mdAndUp } = useDisplay();
@@ -59,26 +62,10 @@ const showMobileSearch = ref(false);
       <v-spacer></v-spacer>
 
       <div class="d-flex">
-        <v-btn v-if="!mdAndUp" icon @click="showMobileSearch = true">
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-        <!-- search input desktop -->
-
-        <v-btn v-if="mdAndUp" icon>
-          <v-badge dot color="success">
-            <v-icon>mdi-account-multiple-outline</v-icon>
-          </v-badge>
-        </v-btn>
-        <ToolbarNotifications />
-        <v-btn v-if="mdAndUp" icon to="/apps/todo">
-          <v-badge :content="`${todoStore.getTodoList.length} +`" color="error">
-            <v-icon>mdi-calendar-check</v-icon>
-          </v-badge>
-        </v-btn>
-        <v-divider vertical thickness="2" inset class="ml-5 mr-1"></v-divider>
-
+        <ToolbarNewsNotifications />
+        <ToolbarNewsLevel />
         <ToolbarLanguage />
-        <ToolbarUser />
+        <ToolbarUserJiucai />
       </div>
     </div>
   </v-app-bar>

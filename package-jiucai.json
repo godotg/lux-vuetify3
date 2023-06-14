@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "jiucai": "vite --mode jiucai",
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.192"
+  }
+}
