@@ -1,10 +1,4 @@
-import menuUI from "./menus/ui.menu";
-import menuApps from "./menus/apps.menu";
-import menuPages from "./menus/pages.menu";
 import menuCharts from "./menus/charts.menu";
-import menuLanding from "./menus/landing.menu";
-import menuData from "./menus/data.menu";
-import menuAi from "./menus/ai.menu";
 
 
 import menuZp from "./menus/zp.menu";
