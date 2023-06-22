@@ -227,11 +227,8 @@ function copyNews(news: News, event: Event) {
       <template v-for="newsEle in newsRef">
         <v-card v-if="newsStore.newsLevelFilterValue >= levelMap[newsEle.level].value" class="mt-3" v-ripple @click="copyNews(newsEle, $event)">
           <v-card-title>
-            <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
-            <template v-if="newsEle.level == 'C' || newsEle.level == 'D'">
-              级情报 {{ newsEle.ctime }}
-            </template>
-            <a v-else :href="'/ac/' + newsEle.id">
+            <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon" :to="'/ac/' + newsEle.id"></v-icon>
+            <a :href="'/ac/' + newsEle.id">
               级情报 {{ newsEle.ctime }}
             </a>
             <v-icon v-if="newsStore.isNew(newsEle.id)" color="primary" icon="mdi-new-box"></v-icon>
@@ -302,11 +299,8 @@ function copyNews(news: News, event: Event) {
           </template>
           <v-card v-ripple @click="copyNews(newsEle, $event)" max-width="1100px">
             <v-card-title>
-              <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
-              <template v-if="newsEle.level == 'C' || newsEle.level == 'D'">
-                级情报 {{ newsEle.ctime }}
-              </template>
-              <a v-else :href="'/ac/' + newsEle.id">
+              <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon" :to="'/ac/' + newsEle.id"></v-icon>
+              <a :href="'/ac/' + newsEle.id">
                 级情报 {{ newsEle.ctime }}
               </a>
               <v-icon v-if="newsStore.isNew(newsEle.id)" color="primary" icon="mdi-new-box"></v-icon>

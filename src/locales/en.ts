@@ -4,6 +4,7 @@ export default {
     chatgpt: "ChatGpt",
     spark: "Spark",
     square: "Square",
+    midjourney: "Midjourney",
     profileDetails: "vvvip leek account",
     billing: "leek juice",
     team: "cutting leek team",

@@ -17,8 +17,14 @@ export default {
           icon: "mdi-robot-confused-outline",
         },
         {
+          key: "jiucai.midjourney",
+          text: "Midjourney",
+          link: "/midjourney",
+          icon: "mdi-shark-fin-outline",
+        },
+        {
           key: "jiucai.spark",
-          text: "SPark",
+          text: "Spark",
           link: "/spark",
           icon: "mdi-fire",
         },

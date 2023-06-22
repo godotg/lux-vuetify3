@@ -4,6 +4,7 @@ export default {
     chatgpt: "ChatGpt",
     spark: "星火认知",
     square: "广场",
+    midjourney: "Midjourney",
     profileDetails: "至尊vip韭菜账户",
     billing: "韭菜汁剩余量",
     team: "专业的割韭菜团队",
