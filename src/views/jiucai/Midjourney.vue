@@ -17,7 +17,7 @@ const chatStore = useChatStore();
 const route = useRoute();
 
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
-import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
+import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
 import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
 import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
@@ -58,6 +58,13 @@ const isLoading = ref(false);
 
 const onlineUsersRef = ref(0);
 
+function seed(): string{
+  const a = _.random(10_0000_0000, 19_0000_0000);
+  const b = _.random(1_0000_0000, 1_9000_0000);
+  const seed = _.toString(a) + _.toString(b);
+  return seed;
+}
+
 // Send Messsage
 const sendMessage = async () => {
   // Clear the input
@@ -65,8 +72,9 @@ const sendMessage = async () => {
   if (userMessage.value) {
 
     // 自己的韭菜广场的发送
-    const request = new GroupChatRequest();
-    request.message = userMessage.value;
+    const request = new MidImagineRequest();
+    request.prompt = userMessage.value;
+    request.nonce = seed();
     isLoading.value = true;
     send(request);
     userMessage.value = "";
@@ -134,20 +142,6 @@ async function doInitHistory() {
   onlineUsersRef.value = response.onlineUsers;
   setTimeout(() => scrollToBottom(), 300);
   snackbarStore.showSuccessMessage("聊天记录加载成功");
-}
-
-async function moreHistory() {
-  const firstMessage = _.first(messages.value);
-  const firstMessageId = _.isNil(firstMessage) ? 0 : firstMessage.id;
-  const request = new GroupHistoryMessageRequest();
-  request.lastMessageId = firstMessageId;
-  const response: GroupHistoryMessageResponse = await asyncAsk(request);
-  const chatMessages = response.messages;
-  if (_.isEmpty(chatMessages)) {
-    return;
-  }
-  messages.value = _.concat(chatMessages.map(it => toMessage(it)), messages.value);
-  snackbarStore.showSuccessMessage("加载成功");
 }
 
 // Scroll to the bottom of the message container
@@ -251,7 +245,7 @@ const handleKeydown = (e) => {
       variant="solo"
       ref="input"
       v-model="userMessage"
-      placeholder="Send Message"
+      placeholder="prompt"
       hide-details
       @keydown="handleKeydown"
       rows="1"

@@ -1,10 +1,18 @@
 import { add } from "./demo";
 import Demo from "./Demo.vue";
 import { mount } from "@vue/test-utils";
+import _ from "lodash";
+
+function seed(): string{
+  const a = _.random(10_0000_0000, 19_0000_0000);
+  const b = _.random(1_0000_0000, 1_9000_0000);
+  const seed = _.toString(a) + _.toString(b);
+  return seed;
+}
 
 // demo1
 test("first", () => {
-  expect(1 + 1).toBe(2);
+  console.log(seed());
 });
 
 // function
