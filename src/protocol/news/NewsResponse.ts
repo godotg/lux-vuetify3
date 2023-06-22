@@ -3,7 +3,7 @@ import News from './News';
 
 class NewsResponse {
 
-    news: Array<News> = [];
+    news: Array<fun.jiucai.common.packet.news.News> = [];
 
     static PROTOCOL_ID: number = 204;
 

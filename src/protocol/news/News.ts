@@ -9,8 +9,8 @@ class News {
     title: string = '';
     content: string = '';
     ctime: string = '';
-    stocks: Array<NewsStock> = [];
-    industries: Array<NewsIndustry> = [];
+    stocks: Array<fun.jiucai.common.packet.news.NewsStock> = [];
+    industries: Array<fun.jiucai.common.packet.news.NewsIndustry> = [];
     subjects: Array<string> = [];
 
     static PROTOCOL_ID: number = 200;

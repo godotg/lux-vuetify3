@@ -41,6 +41,12 @@ import GroupHistoryMessageRequest from './chat/GroupHistoryMessageRequest';
 import GroupHistoryMessageResponse from './chat/GroupHistoryMessageResponse';
 import LoginRequest from './auth/LoginRequest';
 import LoginResponse from './auth/LoginResponse';
+import MidImagineRequest from './midjourney/MidImagineRequest';
+import MidImagineNotice from './midjourney/MidImagineNotice';
+import BrokerRegisterAsk from './broker/BrokerRegisterAsk';
+import BrokerRegisterAnswer from './broker/BrokerRegisterAnswer';
+import MidImagineAsk from './broker/MidImagineAsk';
+import MidImagineNotify from './broker/MidImagineNotify';
 
 const protocols = new Map<number, any>();
 
@@ -88,6 +94,12 @@ protocols.set(243, GroupHistoryMessageRequest);
 protocols.set(244, GroupHistoryMessageResponse);
 protocols.set(250, LoginRequest);
 protocols.set(251, LoginResponse);
+protocols.set(270, MidImagineRequest);
+protocols.set(271, MidImagineNotice);
+protocols.set(300, BrokerRegisterAsk);
+protocols.set(301, BrokerRegisterAnswer);
+protocols.set(302, MidImagineAsk);
+protocols.set(303, MidImagineNotify);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
