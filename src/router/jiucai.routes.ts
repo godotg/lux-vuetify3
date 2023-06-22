@@ -28,6 +28,13 @@ export default [
     component: () => import("@/views/jiucai/Square.vue"),
   },
   {
+    path: "/midjourney",
+    meta: {
+      layout: "landing",
+    },
+    component: () => import("@/views/jiucai/Midjourney.vue"),
+  },
+  {
     path: "/ac/:id",
     meta: {
       layout: "landing",
