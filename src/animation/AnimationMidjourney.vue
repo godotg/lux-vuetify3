@@ -10,6 +10,10 @@ const props = defineProps({
     type: Number,
     default: 400,
   },
+  delay: {
+    type: Number,
+    default: 0,
+  },
 });
 </script>
 
@@ -18,6 +22,7 @@ const props = defineProps({
     animationLink="/aa/midjourney-animation-1.json"
     :height="props.size"
     :width="props.size"
+    :delay="props.delay"
   />
 </template>
 
