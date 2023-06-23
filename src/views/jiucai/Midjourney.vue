@@ -5,47 +5,49 @@
 -->
 <script setup lang="ts">
 import {useSnackbarStore} from "@/stores/snackbarStore";
-import {useChatStore} from "@/views/app/chat/chatStore";
-import AnimationAi from "@/animation/AnimationAI1.vue";
+import AnimationAi from "@/animation/AnimationRun1.vue";
 import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-import {createCompletionApi} from "@/api/aiApi";
 
 const snackbarStore = useSnackbarStore();
-const chatStore = useChatStore();
 const route = useRoute();
 
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
-import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
-import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
+import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
+
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
-import GroupChatNotice from "@/protocol/chat/GroupChatNotice";
-import ChatMessage from "@/protocol/chat/ChatMessage";
 import {useNewsStore, avatarAutoUrl} from "@/stores/newsStore";
-import {parseTime} from "@/utils/timeUtils";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 
 const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
 onMounted(() => {
-  registerPacketReceiver(GroupChatNotice.PROTOCOL_ID, groupChatNoticeCompletion);
-  initHistory();
+  registerPacketReceiver(MidImagineNotice.PROTOCOL_ID, midjourneyNoticeRefresh);
+  messages.value.push(
+    {
+      id: "111",
+      type: "create",
+      imageUrl: "",
+      content: "aaaaaaa"
+    },
+    {
+      id: "111",
+      type: "create",
+      imageUrl: "",
+      content: "![](https://jiucai.fun/out.png)"
+    },
+  )
 });
 
 
 interface Message {
-  id: number;
-  type: number;
-  sendId: number;
-  region: string;
-  message: string;
-  timestamp: number;
-
-  avatar: string;
+  id: string;
+  type: string;
   content: string;
+  imageUrl: string;
 }
 
 // Message List
@@ -56,9 +58,7 @@ const userMessage = ref("");
 
 const isLoading = ref(false);
 
-const onlineUsersRef = ref(0);
-
-function seed(): string{
+function seed(): string {
   const a = _.random(10_0000_0000, 19_0000_0000);
   const b = _.random(1_0000_0000, 1_9000_0000);
   const seed = _.toString(a) + _.toString(b);
@@ -82,67 +82,35 @@ const sendMessage = async () => {
 };
 
 // 下面的逻辑都是自己的
-const groupChatNoticeCompletion = (packet: GroupChatNotice) => {
-  isLoading.value = false;
-  updateMessage(packet.messages);
-  scrollToBottom();
-  if (_.isEqual(route.path, "/square")) {
-    refreshMessageNotification();
-    return;
+const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
+  const id = packet.nonce;
+  const type = packet.type;
+  const imageUrl = packet.imageUrl;
+  const content = packet.content;
+  if (type === "provider") {
+    messages.value.push({
+      id: packet.nonce,
+      type: packet.type,
+      imageUrl: packet.imageUrl,
+      content: packet.content
+    });
+  } else if (type === "consumer") {
+    const message = _.find(messages.value, it => it.id == id);
+    message.content = content;
+  } else if (type === "create") {
+    const message = _.find(messages.value, it => it.id == id);
+    message.content = content;
+  } else if (type === "update") {
+    const message = _.find(messages.value, it => it.id == id);
+    message.content = content;
+  } else if (type === "complete") {
+    const message = _.find(messages.value, it => it.id == id);
+    message.content = content;
+    isLoading.value = false;
+  } else if (type === "stop") {
+    isLoading.value = false;
   }
 };
-
-function refreshMessageNotification() {
-  newsStore.chatMessageId = _.maxBy(messages.value, it => it.id).id;
-  newsStore.chatMessageIdDiff = 0;
-}
-
-function toMessage(chatMessage: ChatMessage): Message {
-  return {
-    id: chatMessage.id,
-    type: chatMessage.type,
-    sendId: chatMessage.sendId,
-    region: chatMessage.region,
-    message: chatMessage.message,
-    timestamp: chatMessage.timestamp,
-    avatar: avatarAutoUrl(chatMessage.sendId),
-    content: chatMessage.message,
-  };
-}
-
-const updateMessage = (chatMessages: Array<ChatMessage>) => {
-  if (_.isEmpty(chatMessages)) {
-    return;
-  }
-  for (const chatMessage of chatMessages) {
-    if (_.findIndex(messages.value, it => it.id == chatMessage.id) >= 0) {
-      continue;
-    }
-    messages.value.push(toMessage(chatMessage));
-  }
-}
-
-async function initHistory() {
-  setTimeout(() => doInitHistory(), 1000);
-}
-
-async function doInitHistory() {
-  if (!isWebsocketReady()) {
-    initHistory();
-    return;
-  }
-  const firstMessage = _.first(messages.value);
-  const firstMessageId = _.isNil(firstMessage) ? 0 : firstMessage.id;
-  const request = new GroupHistoryMessageRequest();
-  request.lastMessageId = firstMessageId;
-  const response: GroupHistoryMessageResponse = await asyncAsk(request);
-  updateMessage(response.messages);
-  refreshMessageNotification();
-  scrollToBottom();
-  onlineUsersRef.value = response.onlineUsers;
-  setTimeout(() => scrollToBottom(), 300);
-  snackbarStore.showSuccessMessage("聊天记录加载成功");
-}
 
 // Scroll to the bottom of the message container
 const scrollToBottom = () => {
@@ -180,95 +148,61 @@ const handleKeydown = (e) => {
       </v-col>
     </v-row>
   </v-container>
-  <div v-else>
-    <template v-for="message in messages">
-      <div v-if="message.role === 'user'">
-        <div class="pa-4 user-message">
-          <v-avatar class="ml-4" rounded="sm" variant="elevated">
-            <img :src="message.avatar" alt="alt"/>
-          </v-avatar>
-          <v-card class="gradient gray" theme="dark">
-            <v-card-text>
-              <b> {{ message.content }}</b></v-card-text
-            >
-          </v-card>
-        </div>
-      </div>
-      <div v-else>
-        <div class="pa-2 pa-md-5 assistant-message">
-          <v-avatar
-            class="mr-2 mr-md-4"
-            rounded="sm"
-            variant="elevated"
-          >
-            <img
-              :src="message.avatar"
-              alt="alt"
+  <v-container v-else>
+    <v-row v-for="message in messages">
+      <v-avatar class="mr-2 mr-md-4" rounded="sm" variant="elevated">
+        <img :src="newsStore.myAvatar()" alt="alt"/>
+      </v-avatar>
+      <v-card :max-width="width * 0.3" class="mb-2">
+        <md-editor v-model="message.content" class="font-1" previewOnly/>
+      </v-card>
+      <v-progress-linear
+        model-value="90.5"
+        height="25"
+      >
+        <strong>{{ Math.ceil(knowledge) }}%</strong>
+      </v-progress-linear>
+    </v-row>
+
+    <v-row v-if="isLoading">
+      <v-col cols="12">
+        <AnimationAi :size="300"/>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-container>
+    <v-footer color="transparent" app>
+      <v-textarea
+        color="primary"
+        type="text"
+        variant="solo"
+        ref="input"
+        v-model="userMessage"
+        placeholder="prompt"
+        hide-details
+        @keydown="handleKeydown"
+        rows="1"
+        max-rows="9"
+        auto-grow
+      >
+        <template #prepend-inner>
+          <v-icon color="primary">mdi-microphone</v-icon>
+        </template>
+        <template v-slot:append-inner>
+          <v-fade-transition leave-absolute>
+            <Icon
+              v-if="isLoading"
+              class="text-primary"
+              width="30"
+              icon="eos-icons:three-dots-loading"
             />
-          </v-avatar>
-          <v-card>
-            <div>
-              <md-editor
-                v-model="message.content"
-                class="font-1"
-                previewOnly
-              />
-            </div>
-          </v-card>
-        </div>
-        <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px;color: black">
-          {{ parseTime(message.timestamp) }} {{ message.region }}
-        </v-card-subtitle>
-      </div>
-    </template>
-    <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px;color: black">
-      online user {{ onlineUsersRef }}
-    </v-card-subtitle>
-    <div v-if="isLoading">
-      <div class="pa-6">
-        <div class="message">
-          <AnimationAi :size="100"/>
-        </div>
-      </div>
-    </div>
-    <div class="no-message-container" v-else>
-      <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
-        Loading...
-      </h1>
-      <AnimationMidjourney :size="300"/>
-    </div>
-  </div>
-  <v-footer color="transparent" app>
-    <v-textarea
-      color="primary"
-      type="text"
-      variant="solo"
-      ref="input"
-      v-model="userMessage"
-      placeholder="prompt"
-      hide-details
-      @keydown="handleKeydown"
-      rows="1"
-      max-rows="9"
-      auto-grow
-    >
-      <template #prepend-inner>
-        <v-icon color="primary">mdi-microphone</v-icon>
-      </template>
-      <template v-slot:append-inner>
-        <v-fade-transition leave-absolute>
-          <Icon
-            v-if="isLoading"
-            class="text-primary"
-            width="30"
-            icon="eos-icons:three-dots-loading"
-          />
-          <v-icon color="primary" v-else @click="sendMessage"
-          >mdi-send
-          </v-icon
-          >
-        </v-fade-transition>
-      </template>
-    </v-textarea>
-  </v-footer>
+            <v-icon color="primary" v-else @click="sendMessage"
+            >mdi-send
+            </v-icon
+            >
+          </v-fade-transition>
+        </template>
+      </v-textarea>
+    </v-footer>
+  </v-container>
 </template>
