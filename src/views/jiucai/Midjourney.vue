@@ -118,6 +118,7 @@ interface Message {
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
 const imageUrlRef = ref<string>("");
+const imageUrlLazyRef = ref<string>("");
 
 // User Input Message
 const userMessage = ref("");
@@ -134,6 +135,7 @@ function seed(): string {
 function openImage(imageUrl) {
   dialogRef.value = true;
   imageUrlRef.value = imageUrl + "!middle";
+  imageUrlLazyRef.value = imageUrl + "!low";
 }
 
 // Send Messsage
@@ -279,6 +281,14 @@ const handleKeydown = (e) => {
         <v-img v-if="!_.isEmpty(message.imageUrl)"
                :src="message.imageUrl + '!low'"
                @click="openImage(message.imageUrl)" class="mb-1" alt="alt">
+          <template v-slot:placeholder>
+            <div class="d-flex align-center justify-center fill-height">
+              <v-progress-circular
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+            </div>
+          </template>
         </v-img>
         <v-btn-toggle v-if="message.reroll" color="primary" variant="outlined" multiple rounded divided class="ml-1">
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'upsample')">U1</v-btn>
@@ -357,7 +367,16 @@ const handleKeydown = (e) => {
 
   <v-dialog v-model="dialogRef" width="auto">
     <v-card>
-      <v-img :src="imageUrlRef"></v-img>
+      <v-img :src="imageUrlRef" :lazy-src="imageUrlLazyRef">
+        <template v-slot:placeholder>
+          <div class="d-flex align-center justify-center fill-height">
+            <v-progress-circular
+              color="primary"
+              indeterminate
+            ></v-progress-circular>
+          </div>
+        </template>
+      </v-img>
     </v-card>
   </v-dialog>
 </template>
