@@ -15,6 +15,7 @@ const route = useRoute();
 
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
+import MidImagineRerollRequest from "@/protocol/midjourney/MidImagineRerollRequest";
 import MidImagineHistoryRequest from "@/protocol/midjourney/MidImagineHistoryRequest";
 import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
 
@@ -59,7 +60,7 @@ onMounted(() => {
   //     progress: 88
   //   },
   // );
-  setTimeout(() => scrollToBottomDelay(), 1000);
+  setTimeout(() => scrollToBottomDelay(), 1500);
 });
 
 async function initHistory() {
@@ -100,6 +101,7 @@ interface Message {
   content: string;
   imageUrl: string;
   progress: number;
+  reroll: boolean;
 }
 
 // Message List
@@ -128,9 +130,18 @@ const sendMessage = async () => {
     request.prompt = userMessage.value;
     request.nonce = seed();
     isLoading.value = true;
-    send(request);
     userMessage.value = "";
+    send(request);
   }
+};
+
+const reroll = async (id) => {
+  const request = new MidImagineRerollRequest();
+  request.rerollNonce = id;
+  request.nonce = seed();
+  isLoading.value = true;
+  userMessage.value = "";
+  send(request);
 };
 
 // 下面的逻辑都是自己的
@@ -148,7 +159,8 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
         type: packet.type,
         imageUrl: packet.imageUrl,
         content: packet.content,
-        progress: packet.progress
+        progress: packet.progress,
+        reroll: false
       });
     }
     updateMessage(packet);
@@ -184,6 +196,7 @@ function updateMessage(packet: MidImagineNotice) {
   const imageUrl = packet.imageUrl;
   const content = packet.content;
   const progress = packet.progress;
+  const reroll = packet.reroll;
   const message = _.find(messages.value, it => it.id == id);
   if (message == null) {
     return;
@@ -192,6 +205,7 @@ function updateMessage(packet: MidImagineNotice) {
   message.imageUrl = imageUrl;
   message.content = content;
   message.progress = progress;
+  message.reroll = reroll;
   // 保存到本地
   imageStore.midPrompts = _.takeRight(messages.value, 5);
 
@@ -227,7 +241,7 @@ const handleKeydown = (e) => {
       <v-avatar class="mr-2 mr-md-4" rounded="sm" variant="elevated">
         <img :src="newsStore.myAvatar()" alt="alt"/>
       </v-avatar>
-      <v-card :max-width="width * 0.3" class="mb-2">
+      <v-card max-width="500px" class="mb-2">
         <md-editor v-model="message.content" class="font-1" previewOnly/>
       </v-card>
       <v-progress-linear
@@ -243,6 +257,22 @@ const handleKeydown = (e) => {
         :striped="message.type === 'update'"
       >
       </v-progress-linear>
+      <v-col v-if="message.reroll" cols="12">
+        <v-btn-toggle color="primary" divided>
+          <v-btn class="font-weight-bold">U1</v-btn>
+          <v-btn class="font-weight-bold">U2</v-btn>
+          <v-btn class="font-weight-bold">U3</v-btn>
+          <v-btn class="font-weight-bold">U4</v-btn>
+        </v-btn-toggle>
+        <v-icon size="large">mdi-slash-forward</v-icon>
+        <v-btn-toggle color="primary" divided>
+          <v-btn class="font-weight-bold">V1</v-btn>
+          <v-btn class="font-weight-bold">V2</v-btn>
+          <v-btn class="font-weight-bold">V3</v-btn>
+          <v-btn class="font-weight-bold">V4</v-btn>
+          <v-btn icon="mdi-reload" @click="reroll(message.id)"></v-btn>
+        </v-btn-toggle>
+      </v-col>
     </v-row>
 
     <v-row v-if="isLoading">

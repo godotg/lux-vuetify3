@@ -10,6 +10,8 @@ class MidImagineNotice {
     imageUrl: string = '';
     // 只有type为update状态才有意义
     progress: number = 0;
+    // 只有type为complete状态才有意义
+    reroll: boolean = false;
 
     static PROTOCOL_ID: number = 272;
 
@@ -25,6 +27,7 @@ class MidImagineNotice {
         buffer.writeString(packet.imageUrl);
         buffer.writeString(packet.nonce);
         buffer.writeInt(packet.progress);
+        buffer.writeBoolean(packet.reroll);
         buffer.writeString(packet.type);
     }
 
@@ -41,8 +44,10 @@ class MidImagineNotice {
         packet.nonce = result2;
         const result3 = buffer.readInt();
         packet.progress = result3;
-        const result4 = buffer.readString();
-        packet.type = result4;
+        const result4 = buffer.readBoolean(); 
+        packet.reroll = result4;
+        const result5 = buffer.readString();
+        packet.type = result5;
         return packet;
     }
 }
