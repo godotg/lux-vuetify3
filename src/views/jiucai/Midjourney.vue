@@ -21,26 +21,44 @@ import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/
 import {useNewsStore, avatarAutoUrl} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
+import {scrollToBottom} from "@/utils/common";
 
 const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
 onMounted(() => {
   registerPacketReceiver(MidImagineNotice.PROTOCOL_ID, midjourneyNoticeRefresh);
-  messages.value.push(
-    {
-      id: "111",
-      type: "create",
-      imageUrl: "",
-      content: "aaaaaaa"
-    },
-    {
-      id: "111",
-      type: "create",
-      imageUrl: "",
-      content: "![](https://jiucai.fun/out.png)"
-    },
-  )
+  // messages.value.push(
+  //   {
+  //     id: "111",
+  //     type: "create",
+  //     imageUrl: "",
+  //     content: "aaaaaaa",
+  //     progress: 33
+  //   },
+  //   {
+  //     id: "111",
+  //     type: "create",
+  //     imageUrl: "",
+  //     content: "![](https://jiucai.fun/out.png)",
+  //     progress: 88
+  //   },
+  //   {
+  //     id: "111",
+  //     type: "create",
+  //     imageUrl: "",
+  //     content: "![](https://jiucai.fun/out.png)",
+  //     progress: 88
+  //   },
+  // );
+  scrollToBottomDelay();
 });
+
+// Scroll to the bottom of the message container
+const scrollToBottomDelay = () => {
+  setTimeout(() => {
+    window.scrollTo({ top: 999999, behavior: "smooth" });
+  }, 200);
+};
 
 
 interface Message {
@@ -48,6 +66,7 @@ interface Message {
   type: string;
   content: string;
   imageUrl: string;
+  progress: number;
 }
 
 // Message List
@@ -87,42 +106,49 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
   const type = packet.type;
   const imageUrl = packet.imageUrl;
   const content = packet.content;
+  const progress = packet.progress;
   if (type === "provider") {
     messages.value.push({
       id: packet.nonce,
       type: packet.type,
       imageUrl: packet.imageUrl,
-      content: packet.content
+      content: packet.content,
+      progress: packet.progress
     });
+    scrollToBottomDelay();
   } else if (type === "consumer") {
-    const message = _.find(messages.value, it => it.id == id);
-    message.content = content;
+    updateMessage(packet);
+    scrollToBottomDelay();
   } else if (type === "create") {
-    const message = _.find(messages.value, it => it.id == id);
-    message.content = content;
+    updateMessage(packet);
+    scrollToBottomDelay();
   } else if (type === "update") {
-    const message = _.find(messages.value, it => it.id == id);
-    message.content = content;
+    updateMessage(packet);
   } else if (type === "complete") {
-    const message = _.find(messages.value, it => it.id == id);
-    message.content = content;
+    updateMessage(packet);
+    setTimeout(() => scrollToBottomDelay(), 1000);
+    setTimeout(() => scrollToBottomDelay(), 2000);
+    setTimeout(() => scrollToBottomDelay(), 3000);
+    setTimeout(() => scrollToBottomDelay(), 4000);
     isLoading.value = false;
   } else if (type === "stop") {
+    updateMessage(packet);
     isLoading.value = false;
   }
 };
 
-// Scroll to the bottom of the message container
-const scrollToBottom = () => {
-  const container = document.querySelector(".message-container");
-  console.log("container: ", container);
-
-  setTimeout(() => {
-    container?.scrollTo({
-      top: container?.scrollHeight,
-    });
-  }, 100);
-};
+function updateMessage(packet: MidImagineNotice) {
+  const id = packet.nonce;
+  const type = packet.type;
+  const imageUrl = packet.imageUrl;
+  const content = packet.content;
+  const progress = packet.progress;
+  const message = _.find(messages.value, it => it.id == id);
+  message.type = type;
+  message.imageUrl = imageUrl;
+  message.content = content;
+  message.progress = progress;
+}
 
 const handleKeydown = (e) => {
   if (e.key === "Enter" && (e.altKey || e.shiftKey)) {
@@ -157,10 +183,17 @@ const handleKeydown = (e) => {
         <md-editor v-model="message.content" class="font-1" previewOnly/>
       </v-card>
       <v-progress-linear
-        model-value="90.5"
-        height="25"
+        v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'"
+        v-model="message.progress"
+        height="15"
+        color="primary"
+        class="mb-2"
+        buffer-value="0"
+        rounded
+        :indeterminate="message.type === 'provider' || message.type === 'consumer'"
+        :stream="message.type === 'create'"
+        :striped="message.type === 'update'"
       >
-        <strong>{{ Math.ceil(knowledge) }}%</strong>
       </v-progress-linear>
     </v-row>
 

@@ -9,7 +9,7 @@ class MidImagineNotice {
     // 只有type为complete状态才能够访问图片
     imageUrl: string = '';
     // 只有type为update状态才有意义
-    progress: string = '';
+    progress: number = 0;
 
     static PROTOCOL_ID: number = 271;
 
@@ -24,7 +24,7 @@ class MidImagineNotice {
         buffer.writeString(packet.content);
         buffer.writeString(packet.imageUrl);
         buffer.writeString(packet.nonce);
-        buffer.writeString(packet.progress);
+        buffer.writeInt(packet.progress);
         buffer.writeString(packet.type);
     }
 
@@ -39,7 +39,7 @@ class MidImagineNotice {
         packet.imageUrl = result1;
         const result2 = buffer.readString();
         packet.nonce = result2;
-        const result3 = buffer.readString();
+        const result3 = buffer.readInt();
         packet.progress = result3;
         const result4 = buffer.readString();
         packet.type = result4;
