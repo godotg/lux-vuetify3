@@ -5,7 +5,11 @@
 -->
 <script setup lang="ts">
 import {useSnackbarStore} from "@/stores/snackbarStore";
-import AnimationAi from "@/animation/AnimationRun1.vue";
+import AnimationRun1 from "@/animation/AnimationRun1.vue";
+import AnimationRun2 from "@/animation/AnimationRun2.vue";
+import AnimationRun3 from "@/animation/AnimationRun3.vue";
+import AnimationRun4 from "@/animation/AnimationRun4.vue";
+import AnimationRun5 from "@/animation/AnimationRun5.vue";
 import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
@@ -28,10 +32,13 @@ import {scrollToBottom} from "@/utils/common";
 import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
 import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
 import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
+import ImageBot from "@/views/chatgpt/ImageBot.vue";
 
 const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
 const imageStore = useImageStore();
+
+let animationRunIndex = 1;
 
 onMounted(() => {
   registerPacketReceiver(MidImagineNotice.PROTOCOL_ID, midjourneyNoticeRefresh);
@@ -108,6 +115,8 @@ interface Message {
 
 // Message List
 const messages = ref<Message[]>([]);
+const dialogRef = ref<boolean>(false);
+const imageUrlRef = ref<string>("");
 
 // User Input Message
 const userMessage = ref("");
@@ -119,6 +128,11 @@ function seed(): string {
   const b = _.random(1_0000_0000, 2_0000_0000);
   const seed = _.toString(a) + _.toString(b);
   return seed;
+}
+
+function openImage(imageUrl) {
+  dialogRef.value = true;
+  imageUrlRef.value = imageUrl + "!middle";
 }
 
 // Send Messsage
@@ -133,6 +147,7 @@ const sendMessage = async () => {
     request.nonce = seed();
     isLoading.value = true;
     userMessage.value = "";
+    animationRunIndex = _.random(1, 5);
     send(request);
   }
 };
@@ -143,6 +158,7 @@ const reroll = async (midjourneyId) => {
   request.nonce = seed();
   isLoading.value = true;
   userMessage.value = "";
+  animationRunIndex = _.random(1, 5);
   send(request);
 };
 
@@ -154,6 +170,7 @@ const select = async (midjourneyId, index, category) => {
   request.nonce = seed();
   isLoading.value = true;
   userMessage.value = "";
+  animationRunIndex++;
   send(request);
 };
 
@@ -253,11 +270,28 @@ const handleKeydown = (e) => {
   </v-container>
   <v-container v-else>
     <v-row v-for="message in messages">
-      <v-avatar class="mr-2 mr-md-4" rounded="sm" variant="elevated">
+      <v-avatar class="mr-2 mr-md-4 mb-1" rounded="sm" variant="elevated">
         <img :src="newsStore.myAvatar()" alt="alt"/>
       </v-avatar>
       <v-card max-width="500px" class="mb-2">
         <md-editor v-model="message.content" class="font-1" previewOnly/>
+        <v-img v-if="!_.isEmpty(message.imageUrl)"
+               :src="message.imageUrl + '!low'"
+               @click="openImage(message.imageUrl)" class="mb-1" alt="alt">
+        </v-img>
+        <v-btn-toggle v-if="message.reroll" color="primary" variant="outlined" multiple rounded divided class="ml-1">
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'upsample')">U1</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'upsample')">U2</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'upsample')">U3</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'upsample')">U4</v-btn>
+          <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
+        </v-btn-toggle>
+        <v-btn-toggle v-if="message.reroll" color="primary" variant="outlined" multiple rounded divided class="ml-1 mb-1">
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'variation')">V1</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'variation')">V2</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'variation')">V3</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'variation')">V4</v-btn>
+        </v-btn-toggle>
       </v-card>
       <v-progress-linear
         v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'"
@@ -272,27 +306,15 @@ const handleKeydown = (e) => {
         :striped="message.type === 'update'"
       >
       </v-progress-linear>
-      <v-col v-if="message.reroll" cols="12">
-        <v-btn-toggle color="primary" divided>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'upsample')">U1</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'upsample')">U2</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'upsample')">U3</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'upsample')">U4</v-btn>
-        </v-btn-toggle>
-        <v-icon size="large">mdi-slash-forward</v-icon>
-        <v-btn-toggle color="primary" divided>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'variation')">V1</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'variation')">V2</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'variation')">V3</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'variation')">V4</v-btn>
-          <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
-        </v-btn-toggle>
-      </v-col>
     </v-row>
 
     <v-row v-if="isLoading">
       <v-col cols="12">
-        <AnimationAi :size="300"/>
+        <AnimationRun1 v-if="animationRunIndex === 1" :size="300"/>
+        <AnimationRun2 v-else-if="animationRunIndex === 2" :size="300"/>
+        <AnimationRun3 v-else-if="animationRunIndex === 3" :size="300"/>
+        <AnimationRun4 v-else-if="animationRunIndex === 4" :size="300"/>
+        <AnimationRun5 v-else :size="300"/>
       </v-col>
     </v-row>
   </v-container>
@@ -331,4 +353,10 @@ const handleKeydown = (e) => {
       </v-textarea>
     </v-footer>
   </v-container>
+
+  <v-dialog v-model="dialogRef" width="auto">
+    <v-card>
+      <v-img :src="imageUrlRef"></v-img>
+    </v-card>
+  </v-dialog>
 </template>
