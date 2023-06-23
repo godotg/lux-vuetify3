@@ -15,18 +15,27 @@ const route = useRoute();
 
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
+import MidImagineHistoryRequest from "@/protocol/midjourney/MidImagineHistoryRequest";
 import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
 
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
-import {useNewsStore, avatarAutoUrl} from "@/stores/newsStore";
+import {useNewsStore} from "@/stores/newsStore";
+import {useImageStore} from "@/stores/imageStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import {scrollToBottom} from "@/utils/common";
+import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
+import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
 
 const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
+const imageStore = useImageStore();
+
 onMounted(() => {
   registerPacketReceiver(MidImagineNotice.PROTOCOL_ID, midjourneyNoticeRefresh);
+  messages.value = imageStore.midPrompts;
+  initHistory();
+  setInterval(() => initHistory(), 5 * 1000);
   // messages.value.push(
   //   {
   //     id: "111",
@@ -50,13 +59,37 @@ onMounted(() => {
   //     progress: 88
   //   },
   // );
-  scrollToBottomDelay();
+  setTimeout(() => scrollToBottomDelay(), 1000);
 });
+
+async function initHistory() {
+  setTimeout(() => doInitHistory(), 1000);
+}
+
+async function doInitHistory() {
+  if (!isWebsocketReady()) {
+    initHistory();
+    return;
+  }
+  if (_.isEmpty(messages.value)) {
+    messages.value = [];
+    return;
+  }
+  for (const message of messages.value) {
+    if (message.type === 'complete') {
+      continue;
+    }
+    const request = new MidImagineHistoryRequest();
+    request.nonce = message.id;
+    send(request);
+  }
+}
+
 
 // Scroll to the bottom of the message container
 const scrollToBottomDelay = () => {
   setTimeout(() => {
-    window.scrollTo({ top: 999999, behavior: "smooth" });
+    window.scrollTo({top: 999999, behavior: "smooth"});
   }, 200);
 };
 
@@ -78,8 +111,8 @@ const userMessage = ref("");
 const isLoading = ref(false);
 
 function seed(): string {
-  const a = _.random(10_0000_0000, 19_0000_0000);
-  const b = _.random(1_0000_0000, 1_9000_0000);
+  const a = _.random(10_0000_0000, 20_0000_0000);
+  const b = _.random(1_0000_0000, 2_0000_0000);
   const seed = _.toString(a) + _.toString(b);
   return seed;
 }
@@ -108,13 +141,17 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
   const content = packet.content;
   const progress = packet.progress;
   if (type === "provider") {
-    messages.value.push({
-      id: packet.nonce,
-      type: packet.type,
-      imageUrl: packet.imageUrl,
-      content: packet.content,
-      progress: packet.progress
-    });
+    const message = _.find(messages.value, it => it.id == id);
+    if (message == null) {
+      messages.value.push({
+        id: packet.nonce,
+        type: packet.type,
+        imageUrl: packet.imageUrl,
+        content: packet.content,
+        progress: packet.progress
+      });
+    }
+    updateMessage(packet);
     scrollToBottomDelay();
   } else if (type === "consumer") {
     updateMessage(packet);
@@ -134,6 +171,10 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
   } else if (type === "stop") {
     updateMessage(packet);
     isLoading.value = false;
+  } else if (type === "expire") {
+    // 过期给一个提示
+    isLoading.value = false;
+    snackbarStore.showErrorMessage(content)
   }
 };
 
@@ -144,10 +185,16 @@ function updateMessage(packet: MidImagineNotice) {
   const content = packet.content;
   const progress = packet.progress;
   const message = _.find(messages.value, it => it.id == id);
+  if (message == null) {
+    return;
+  }
   message.type = type;
   message.imageUrl = imageUrl;
   message.content = content;
   message.progress = progress;
+  // 保存到本地
+  imageStore.midPrompts = _.takeRight(messages.value, 5);
+
 }
 
 const handleKeydown = (e) => {
@@ -161,6 +208,7 @@ const handleKeydown = (e) => {
     sendMessage();
   }
 };
+
 </script>
 
 <template>
