@@ -95,13 +95,12 @@ async function doInitHistory() {
 async function download(url) {
   new JsFileDownloader({
     url: url
-  })
-    .then(function () {
-      // Called when download ended
-    })
-    .catch(function (error) {
-      // Called when an error occurred
-    });
+  }).then(function () {
+    // Called when download ended
+  }).catch(function (error) {
+    // Called when an error occurred
+    snackbarStore.showErrorMessage(error);
+  });
 }
 
 // Scroll to the bottom of the message container
