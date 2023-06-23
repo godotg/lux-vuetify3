@@ -11,7 +11,7 @@ class MidImagineNotice {
     // 只有type为update状态才有意义
     progress: number = 0;
 
-    static PROTOCOL_ID: number = 271;
+    static PROTOCOL_ID: number = 272;
 
     protocolId(): number {
         return MidImagineNotice.PROTOCOL_ID;

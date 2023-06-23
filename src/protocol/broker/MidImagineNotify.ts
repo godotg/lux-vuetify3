@@ -16,7 +16,7 @@ class MidImagineNotify {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        buffer.writePacket(packet.notice, 271);
+        buffer.writePacket(packet.notice, 272);
         buffer.writeLong(packet.noticeSid);
     }
 
@@ -25,7 +25,7 @@ class MidImagineNotify {
             return null;
         }
         const packet = new MidImagineNotify();
-        const result0 = buffer.readPacket(271);
+        const result0 = buffer.readPacket(272);
         packet.notice = result0;
         const result1 = buffer.readLong();
         packet.noticeSid = result1;
