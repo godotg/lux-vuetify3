@@ -13,9 +13,7 @@ import AnimationRun5 from "@/animation/AnimationRun5.vue";
 import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-
-const snackbarStore = useSnackbarStore();
-const route = useRoute();
+import JsFileDownloader from "js-file-downloader";
 
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
@@ -28,11 +26,10 @@ import {useNewsStore} from "@/stores/newsStore";
 import {useImageStore} from "@/stores/imageStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
-import {scrollToBottom} from "@/utils/common";
-import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
-import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
 import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
-import ImageBot from "@/views/chatgpt/ImageBot.vue";
+
+const snackbarStore = useSnackbarStore();
+const route = useRoute();
 
 const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
@@ -95,6 +92,17 @@ async function doInitHistory() {
   }
 }
 
+async function download(url) {
+  new JsFileDownloader({
+    url: url
+  })
+    .then(function () {
+      // Called when download ended
+    })
+    .catch(function (error) {
+      // Called when an error occurred
+    });
+}
 
 // Scroll to the bottom of the message container
 const scrollToBottomDelay = () => {
@@ -118,7 +126,8 @@ interface Message {
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
 const imageUrlRef = ref<string>("");
-const imageUrlLazyRef = ref<string>("");
+const imageUrlMiddleRef = ref<string>("");
+const imageUrlLowRef = ref<string>("");
 
 // User Input Message
 const userMessage = ref("");
@@ -134,8 +143,9 @@ function seed(): string {
 
 function openImage(imageUrl) {
   dialogRef.value = true;
-  imageUrlRef.value = imageUrl + "!middle";
-  imageUrlLazyRef.value = imageUrl + "!low";
+  imageUrlRef.value = imageUrl;
+  imageUrlMiddleRef.value = imageUrl + "!middle";
+  imageUrlLowRef.value = imageUrl + "!low";
 }
 
 // Send Messsage
@@ -367,7 +377,7 @@ const handleKeydown = (e) => {
   </v-container>
 
   <v-dialog v-model="dialogRef" width="auto" height="auto">
-    <v-img :src="imageUrlRef" :lazy-src="imageUrlLazyRef" :max-height="height * 0.9">
+    <v-img :src="imageUrlMiddleRef" :lazy-src="imageUrlLowRef" :max-height="height * 0.9">
       <template v-slot:placeholder>
         <div class="d-flex align-center justify-center fill-height">
           <v-progress-circular
@@ -379,7 +389,7 @@ const handleKeydown = (e) => {
     </v-img>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="primary" icon="mdi-cloud-download-outline"></v-btn>
+      <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
     </v-card-actions>
   </v-dialog>
 </template>

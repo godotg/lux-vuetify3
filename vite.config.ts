@@ -39,6 +39,7 @@ export default defineConfig({
   },
   server: {
     port: 4399,
+    cors: true,
     proxy: {
       "/sdApi": {
         target: "http://me.yunrobot.cn:7860",
