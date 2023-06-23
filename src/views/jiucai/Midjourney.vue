@@ -27,6 +27,7 @@ import _ from "lodash";
 import {scrollToBottom} from "@/utils/common";
 import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
 import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
+import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
 
 const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
@@ -138,6 +139,17 @@ const sendMessage = async () => {
 const reroll = async (id) => {
   const request = new MidRerollRequest();
   request.rerollNonce = id;
+  request.nonce = seed();
+  isLoading.value = true;
+  userMessage.value = "";
+  send(request);
+};
+
+const select = async (id, index, category) => {
+  const request = new MidSelectRequest();
+  request.rerollNonce = id;
+  request.index = index;
+  request.category = category;
   request.nonce = seed();
   isLoading.value = true;
   userMessage.value = "";
@@ -259,17 +271,17 @@ const handleKeydown = (e) => {
       </v-progress-linear>
       <v-col v-if="message.reroll" cols="12">
         <v-btn-toggle color="primary" divided>
-          <v-btn class="font-weight-bold">U1</v-btn>
-          <v-btn class="font-weight-bold">U2</v-btn>
-          <v-btn class="font-weight-bold">U3</v-btn>
-          <v-btn class="font-weight-bold">U4</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.id, 1, 'upsample')">U1</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.id, 2, 'upsample')">U2</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.id, 3, 'upsample')">U3</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.id, 4, 'upsample')">U4</v-btn>
         </v-btn-toggle>
         <v-icon size="large">mdi-slash-forward</v-icon>
         <v-btn-toggle color="primary" divided>
-          <v-btn class="font-weight-bold">V1</v-btn>
-          <v-btn class="font-weight-bold">V2</v-btn>
-          <v-btn class="font-weight-bold">V3</v-btn>
-          <v-btn class="font-weight-bold">V4</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.id, 1, 'variation')">V1</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.id, 2, 'variation')">V2</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.id, 3, 'variation')">V3</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.id, 4, 'variation')">V4</v-btn>
           <v-btn icon="mdi-reload" @click="reroll(message.id)"></v-btn>
         </v-btn-toggle>
       </v-col>
