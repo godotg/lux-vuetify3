@@ -2,7 +2,7 @@
 
 class MidImagineNotice {
 
-    // provider为加入到了providers队列，consumer为开始消费任务，create为创建消息，update为更新消息，complete为创建完成，stop为发生错误停止生成
+    // provider为加入到了providers队列，consumer为开始消费任务，create为创建消息，update为更新消息，complete为创建完成，stop为发生错误停止生成，expire图片过期
     type: string = '';
     nonce: string = '';
     content: string = '';

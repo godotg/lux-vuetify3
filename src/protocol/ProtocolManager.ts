@@ -44,10 +44,12 @@ import LoginResponse from './auth/LoginResponse';
 import MidImagineRequest from './midjourney/MidImagineRequest';
 import MidImagineHistoryRequest from './midjourney/MidImagineHistoryRequest';
 import MidImagineNotice from './midjourney/MidImagineNotice';
+import MidImagineRerollRequest from './midjourney/MidImagineRerollRequest';
 import BrokerRegisterAsk from './broker/BrokerRegisterAsk';
 import BrokerRegisterAnswer from './broker/BrokerRegisterAnswer';
 import MidImagineAsk from './broker/MidImagineAsk';
 import MidImagineNotify from './broker/MidImagineNotify';
+import MidImagineRerollAsk from './broker/MidImagineRerollAsk';
 
 const protocols = new Map<number, any>();
 
@@ -98,10 +100,12 @@ protocols.set(251, LoginResponse);
 protocols.set(270, MidImagineRequest);
 protocols.set(271, MidImagineHistoryRequest);
 protocols.set(272, MidImagineNotice);
+protocols.set(273, MidImagineRerollRequest);
 protocols.set(300, BrokerRegisterAsk);
 protocols.set(301, BrokerRegisterAnswer);
 protocols.set(302, MidImagineAsk);
 protocols.set(303, MidImagineNotify);
+protocols.set(304, MidImagineRerollAsk);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
