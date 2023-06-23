@@ -297,7 +297,8 @@ const handleKeydown = (e) => {
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'upsample')">U4</v-btn>
           <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
         </v-btn-toggle>
-        <v-btn-toggle v-if="message.reroll" color="primary" variant="outlined" multiple rounded divided class="ml-1 mb-1">
+        <v-btn-toggle v-if="message.reroll" color="primary" variant="outlined" multiple rounded divided
+                      class="ml-1 mb-1">
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'variation')">V1</v-btn>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'variation')">V2</v-btn>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'variation')">V3</v-btn>
@@ -365,18 +366,20 @@ const handleKeydown = (e) => {
     </v-footer>
   </v-container>
 
-  <v-dialog v-model="dialogRef" width="auto">
-    <v-card>
-      <v-img :src="imageUrlRef" :lazy-src="imageUrlLazyRef">
-        <template v-slot:placeholder>
-          <div class="d-flex align-center justify-center fill-height">
-            <v-progress-circular
-              color="primary"
-              indeterminate
-            ></v-progress-circular>
-          </div>
-        </template>
-      </v-img>
-    </v-card>
+  <v-dialog v-model="dialogRef" width="auto" height="auto">
+    <v-img :src="imageUrlRef" :lazy-src="imageUrlLazyRef" :max-height="height * 0.9">
+      <template v-slot:placeholder>
+        <div class="d-flex align-center justify-center fill-height">
+          <v-progress-circular
+            color="primary"
+            indeterminate
+          ></v-progress-circular>
+        </div>
+      </template>
+    </v-img>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn color="primary" icon="mdi-cloud-download-outline"></v-btn>
+    </v-card-actions>
   </v-dialog>
 </template>
