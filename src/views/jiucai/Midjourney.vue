@@ -38,6 +38,7 @@ const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
 const imageStore = useImageStore();
 
+const MAX_HISTORY = 10;
 let animationRunIndex = 1;
 
 onMounted(() => {
@@ -240,7 +241,7 @@ function updateMessage(packet: MidImagineNotice) {
   message.reroll = reroll;
   message.midjourneyId = midjourneyId;
   // 保存到本地
-  imageStore.midPrompts = _.takeRight(messages.value, 5);
+  imageStore.midPrompts = _.takeRight(messages.value, MAX_HISTORY);
 }
 
 const handleKeydown = (e) => {
