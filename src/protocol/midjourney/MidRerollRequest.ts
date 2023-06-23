@@ -1,6 +1,6 @@
 
 
-class MidImagineRerollRequest {
+class MidRerollRequest {
 
     nonce: string = '';
     rerollNonce: string = '';
@@ -8,10 +8,10 @@ class MidImagineRerollRequest {
     static PROTOCOL_ID: number = 273;
 
     protocolId(): number {
-        return MidImagineRerollRequest.PROTOCOL_ID;
+        return MidRerollRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: MidImagineRerollRequest | null) {
+    static write(buffer: any, packet: MidRerollRequest | null) {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
@@ -19,11 +19,11 @@ class MidImagineRerollRequest {
         buffer.writeString(packet.rerollNonce);
     }
 
-    static read(buffer: any): MidImagineRerollRequest | null {
+    static read(buffer: any): MidRerollRequest | null {
         if (!buffer.readBoolean()) {
             return null;
         }
-        const packet = new MidImagineRerollRequest();
+        const packet = new MidRerollRequest();
         const result0 = buffer.readString();
         packet.nonce = result0;
         const result1 = buffer.readString();
@@ -32,4 +32,4 @@ class MidImagineRerollRequest {
     }
 }
 
-export default MidImagineRerollRequest;
+export default MidRerollRequest;

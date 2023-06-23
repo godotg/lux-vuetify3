@@ -1,18 +1,18 @@
-import MidImagineRerollRequest from '../midjourney/MidImagineRerollRequest';
+import MidRerollRequest from '../midjourney/MidRerollRequest';
 
 
-class MidImagineRerollAsk {
+class MidRerollAsk {
 
     requestSid: number = 0;
-    request: MidImagineRerollRequest | null = null;
+    request: MidRerollRequest | null = null;
 
     static PROTOCOL_ID: number = 304;
 
     protocolId(): number {
-        return MidImagineRerollAsk.PROTOCOL_ID;
+        return MidRerollAsk.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: MidImagineRerollAsk | null) {
+    static write(buffer: any, packet: MidRerollAsk | null) {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
@@ -20,11 +20,11 @@ class MidImagineRerollAsk {
         buffer.writeLong(packet.requestSid);
     }
 
-    static read(buffer: any): MidImagineRerollAsk | null {
+    static read(buffer: any): MidRerollAsk | null {
         if (!buffer.readBoolean()) {
             return null;
         }
-        const packet = new MidImagineRerollAsk();
+        const packet = new MidRerollAsk();
         const result0 = buffer.readPacket(273);
         packet.request = result0;
         const result1 = buffer.readLong();
@@ -33,4 +33,4 @@ class MidImagineRerollAsk {
     }
 }
 
-export default MidImagineRerollAsk;
+export default MidRerollAsk;

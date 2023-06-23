@@ -15,8 +15,8 @@ const route = useRoute();
 
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
-import MidImagineRerollRequest from "@/protocol/midjourney/MidImagineRerollRequest";
-import MidImagineHistoryRequest from "@/protocol/midjourney/MidImagineHistoryRequest";
+import MidRerollRequest from "@/protocol/midjourney/MidRerollRequest";
+import MidHistoryRequest from "@/protocol/midjourney/MidHistoryRequest";
 import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
 
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
@@ -80,7 +80,7 @@ async function doInitHistory() {
     if (message.type === 'complete') {
       continue;
     }
-    const request = new MidImagineHistoryRequest();
+    const request = new MidHistoryRequest();
     request.nonce = message.id;
     send(request);
   }
@@ -136,7 +136,7 @@ const sendMessage = async () => {
 };
 
 const reroll = async (id) => {
-  const request = new MidImagineRerollRequest();
+  const request = new MidRerollRequest();
   request.rerollNonce = id;
   request.nonce = seed();
   isLoading.value = true;

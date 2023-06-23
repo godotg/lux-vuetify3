@@ -42,14 +42,16 @@ import GroupHistoryMessageResponse from './chat/GroupHistoryMessageResponse';
 import LoginRequest from './auth/LoginRequest';
 import LoginResponse from './auth/LoginResponse';
 import MidImagineRequest from './midjourney/MidImagineRequest';
-import MidImagineHistoryRequest from './midjourney/MidImagineHistoryRequest';
+import MidHistoryRequest from './midjourney/MidHistoryRequest';
 import MidImagineNotice from './midjourney/MidImagineNotice';
-import MidImagineRerollRequest from './midjourney/MidImagineRerollRequest';
+import MidRerollRequest from './midjourney/MidRerollRequest';
+import MidSelectRequest from './midjourney/MidSelectRequest';
 import BrokerRegisterAsk from './broker/BrokerRegisterAsk';
 import BrokerRegisterAnswer from './broker/BrokerRegisterAnswer';
 import MidImagineAsk from './broker/MidImagineAsk';
 import MidImagineNotify from './broker/MidImagineNotify';
-import MidImagineRerollAsk from './broker/MidImagineRerollAsk';
+import MidRerollAsk from './broker/MidRerollAsk';
+import MidSelectAsk from './broker/MidSelectAsk';
 
 const protocols = new Map<number, any>();
 
@@ -98,14 +100,16 @@ protocols.set(244, GroupHistoryMessageResponse);
 protocols.set(250, LoginRequest);
 protocols.set(251, LoginResponse);
 protocols.set(270, MidImagineRequest);
-protocols.set(271, MidImagineHistoryRequest);
+protocols.set(271, MidHistoryRequest);
 protocols.set(272, MidImagineNotice);
-protocols.set(273, MidImagineRerollRequest);
+protocols.set(273, MidRerollRequest);
+protocols.set(274, MidSelectRequest);
 protocols.set(300, BrokerRegisterAsk);
 protocols.set(301, BrokerRegisterAnswer);
 protocols.set(302, MidImagineAsk);
 protocols.set(303, MidImagineNotify);
-protocols.set(304, MidImagineRerollAsk);
+protocols.set(304, MidRerollAsk);
+protocols.set(305, MidSelectAsk);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
