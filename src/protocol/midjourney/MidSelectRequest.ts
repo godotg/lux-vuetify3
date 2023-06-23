@@ -5,7 +5,7 @@ class MidSelectRequest {
     category: string = '';
     index: number = 0;
     nonce: string = '';
-    rerollNonce: string = '';
+    midjourneyId: number = 0;
 
     static PROTOCOL_ID: number = 274;
 
@@ -19,8 +19,8 @@ class MidSelectRequest {
         }
         buffer.writeString(packet.category);
         buffer.writeInt(packet.index);
+        buffer.writeLong(packet.midjourneyId);
         buffer.writeString(packet.nonce);
-        buffer.writeString(packet.rerollNonce);
     }
 
     static read(buffer: any): MidSelectRequest | null {
@@ -32,10 +32,10 @@ class MidSelectRequest {
         packet.category = result0;
         const result1 = buffer.readInt();
         packet.index = result1;
-        const result2 = buffer.readString();
-        packet.nonce = result2;
+        const result2 = buffer.readLong();
+        packet.midjourneyId = result2;
         const result3 = buffer.readString();
-        packet.rerollNonce = result3;
+        packet.nonce = result3;
         return packet;
     }
 }

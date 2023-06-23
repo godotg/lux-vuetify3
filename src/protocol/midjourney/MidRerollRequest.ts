@@ -3,7 +3,7 @@
 class MidRerollRequest {
 
     nonce: string = '';
-    rerollNonce: string = '';
+    midjourneyId: number = 0;
 
     static PROTOCOL_ID: number = 273;
 
@@ -15,8 +15,8 @@ class MidRerollRequest {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
+        buffer.writeLong(packet.midjourneyId);
         buffer.writeString(packet.nonce);
-        buffer.writeString(packet.rerollNonce);
     }
 
     static read(buffer: any): MidRerollRequest | null {
@@ -24,10 +24,10 @@ class MidRerollRequest {
             return null;
         }
         const packet = new MidRerollRequest();
-        const result0 = buffer.readString();
-        packet.nonce = result0;
+        const result0 = buffer.readLong();
+        packet.midjourneyId = result0;
         const result1 = buffer.readString();
-        packet.rerollNonce = result1;
+        packet.nonce = result1;
         return packet;
     }
 }

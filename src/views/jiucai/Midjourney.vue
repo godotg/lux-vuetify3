@@ -103,6 +103,7 @@ interface Message {
   imageUrl: string;
   progress: number;
   reroll: boolean;
+  midjourneyId: number;
 }
 
 // Message List
@@ -136,18 +137,18 @@ const sendMessage = async () => {
   }
 };
 
-const reroll = async (id) => {
+const reroll = async (midjourneyId) => {
   const request = new MidRerollRequest();
-  request.rerollNonce = id;
+  request.midjourneyId = midjourneyId;
   request.nonce = seed();
   isLoading.value = true;
   userMessage.value = "";
   send(request);
 };
 
-const select = async (id, index, category) => {
+const select = async (midjourneyId, index, category) => {
   const request = new MidSelectRequest();
-  request.rerollNonce = id;
+  request.midjourneyId = midjourneyId;
   request.index = index;
   request.category = category;
   request.nonce = seed();
@@ -163,6 +164,7 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
   const imageUrl = packet.imageUrl;
   const content = packet.content;
   const progress = packet.progress;
+  const midjourneyId = packet.midjourneyId;
   if (type === "provider") {
     const message = _.find(messages.value, it => it.id == id);
     if (message == null) {
@@ -172,7 +174,8 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
         imageUrl: packet.imageUrl,
         content: packet.content,
         progress: packet.progress,
-        reroll: false
+        reroll: false,
+        midjourneyId: midjourneyId,
       });
     }
     updateMessage(packet);
@@ -190,7 +193,6 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
     setTimeout(() => scrollToBottomDelay(), 1000);
     setTimeout(() => scrollToBottomDelay(), 2000);
     setTimeout(() => scrollToBottomDelay(), 3000);
-    setTimeout(() => scrollToBottomDelay(), 4000);
     isLoading.value = false;
   } else if (type === "stop") {
     updateMessage(packet);
@@ -209,6 +211,7 @@ function updateMessage(packet: MidImagineNotice) {
   const content = packet.content;
   const progress = packet.progress;
   const reroll = packet.reroll;
+  const midjourneyId = packet.midjourneyId;
   const message = _.find(messages.value, it => it.id == id);
   if (message == null) {
     return;
@@ -218,9 +221,9 @@ function updateMessage(packet: MidImagineNotice) {
   message.content = content;
   message.progress = progress;
   message.reroll = reroll;
+  message.midjourneyId = midjourneyId;
   // 保存到本地
   imageStore.midPrompts = _.takeRight(messages.value, 5);
-
 }
 
 const handleKeydown = (e) => {
@@ -271,18 +274,18 @@ const handleKeydown = (e) => {
       </v-progress-linear>
       <v-col v-if="message.reroll" cols="12">
         <v-btn-toggle color="primary" divided>
-          <v-btn class="font-weight-bold" @click="select(message.id, 1, 'upsample')">U1</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.id, 2, 'upsample')">U2</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.id, 3, 'upsample')">U3</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.id, 4, 'upsample')">U4</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'upsample')">U1</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'upsample')">U2</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'upsample')">U3</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'upsample')">U4</v-btn>
         </v-btn-toggle>
         <v-icon size="large">mdi-slash-forward</v-icon>
         <v-btn-toggle color="primary" divided>
-          <v-btn class="font-weight-bold" @click="select(message.id, 1, 'variation')">V1</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.id, 2, 'variation')">V2</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.id, 3, 'variation')">V3</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.id, 4, 'variation')">V4</v-btn>
-          <v-btn icon="mdi-reload" @click="reroll(message.id)"></v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'variation')">V1</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'variation')">V2</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'variation')">V3</v-btn>
+          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'variation')">V4</v-btn>
+          <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
         </v-btn-toggle>
       </v-col>
     </v-row>
