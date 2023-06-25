@@ -66,7 +66,7 @@ onMounted(() => {
   //     progress: 88
   //   },
   // );
-  setTimeout(() => scrollToBottomDelay(), 1500);
+  setTimeout(() => scrollToBottomDelay(), 100);
 });
 
 async function initHistory() {
@@ -331,11 +331,10 @@ const handleKeydown = (e) => {
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'variation')">V4</v-btn>
         </v-btn-toggle>
       </v-row>
-      <v-row class="my-3">
+      <v-row v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'">
         <v-progress-linear
-          v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'"
           v-model="message.progress"
-          height="15"
+          height="8"
           color="primary"
           class="mb-2"
           buffer-value="0"
@@ -345,6 +344,8 @@ const handleKeydown = (e) => {
           :striped="message.type === 'update'"
         >
         </v-progress-linear>
+      </v-row>
+      <v-row class="my-2">
       </v-row>
     </template>
 
