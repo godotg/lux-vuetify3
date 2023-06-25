@@ -285,53 +285,68 @@ const handleKeydown = (e) => {
     </v-row>
   </v-container>
   <v-container v-else>
-    <v-row v-for="message in messages">
-      <v-avatar class="mr-2 mr-md-4 mb-1" rounded="sm" variant="elevated">
-        <img :src="newsStore.myAvatar()" alt="alt"/>
-      </v-avatar>
-      <v-card max-width="500px" class="mb-2">
-        <md-editor v-model="message.content" class="font-1" previewOnly/>
-        <v-img v-if="!_.isEmpty(message.imageUrl)"
-               :src="message.imageUrl + '!low'"
-               @click="openImage(message.imageUrl)" class="mb-1" alt="alt">
-          <template v-slot:placeholder>
-            <div class="d-flex align-center justify-center fill-height">
-              <v-progress-circular
-                color="primary"
-                indeterminate
-              ></v-progress-circular>
-            </div>
-          </template>
-        </v-img>
-        <v-btn-toggle v-if="message.reroll" color="primary" variant="outlined" multiple rounded divided class="ml-1">
+    <template v-for="message in messages">
+      <v-row>
+        <v-avatar class="mr-2 mr-md-4 mb-1" rounded="sm" variant="elevated">
+          <img :src="newsStore.myAvatar()" alt="alt"/>
+        </v-avatar>
+        <v-card>
+          <md-editor v-model="message.content" class="font-1" previewOnly/>
+        </v-card>
+      </v-row>
+      <v-row v-if="!_.isEmpty(message.imageUrl)">
+        <v-avatar v-if="!mobile" class="mr-2 mr-md-4">
+        </v-avatar>
+        <v-card max-width="500px">
+          <v-img :src="message.imageUrl + '!low'" @click="openImage(message.imageUrl)" alt="alt">
+            <template v-slot:placeholder>
+              <div class="d-flex align-center justify-center fill-height">
+                <v-progress-circular
+                  color="primary"
+                  indeterminate
+                ></v-progress-circular>
+              </div>
+            </template>
+          </v-img>
+        </v-card>
+      </v-row>
+      <v-row v-if="message.reroll">
+        <v-avatar v-if="!mobile" class="mr-2 mr-md-4">
+        </v-avatar>
+        <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'upsample')">U1</v-btn>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'upsample')">U2</v-btn>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'upsample')">U3</v-btn>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'upsample')">U4</v-btn>
           <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
         </v-btn-toggle>
-        <v-btn-toggle v-if="message.reroll" color="primary" variant="outlined" multiple rounded divided
-                      class="ml-1 mb-1">
+      </v-row>
+      <v-row v-if="message.reroll">
+        <v-avatar v-if="!mobile" class="mr-2 mr-md-4">
+        </v-avatar>
+        <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'variation')">V1</v-btn>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'variation')">V2</v-btn>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'variation')">V3</v-btn>
           <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'variation')">V4</v-btn>
         </v-btn-toggle>
-      </v-card>
-      <v-progress-linear
-        v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'"
-        v-model="message.progress"
-        height="15"
-        color="primary"
-        class="mb-2"
-        buffer-value="0"
-        rounded
-        :indeterminate="message.type === 'provider' || message.type === 'consumer'"
-        :stream="message.type === 'create'"
-        :striped="message.type === 'update'"
-      >
-      </v-progress-linear>
-    </v-row>
+      </v-row>
+      <v-row class="my-3">
+        <v-progress-linear
+          v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'"
+          v-model="message.progress"
+          height="15"
+          color="primary"
+          class="mb-2"
+          buffer-value="0"
+          rounded
+          :indeterminate="message.type === 'provider' || message.type === 'consumer'"
+          :stream="message.type === 'create'"
+          :striped="message.type === 'update'"
+        >
+        </v-progress-linear>
+      </v-row>
+    </template>
 
     <v-row v-if="isLoading">
       <v-col cols="12">
@@ -343,41 +358,40 @@ const handleKeydown = (e) => {
       </v-col>
     </v-row>
   </v-container>
-  <v-container>
-    <v-footer color="transparent" app>
-      <v-textarea
-        color="primary"
-        type="text"
-        variant="solo"
-        ref="input"
-        v-model="userMessage"
-        placeholder="prompt"
-        hide-details
-        @keydown="handleKeydown"
-        rows="1"
-        max-rows="9"
-        auto-grow
-      >
-        <template #prepend-inner>
-          <v-icon color="primary">mdi-microphone</v-icon>
-        </template>
-        <template v-slot:append-inner>
-          <v-fade-transition leave-absolute>
-            <Icon
-              v-if="isLoading"
-              class="text-primary"
-              width="30"
-              icon="eos-icons:three-dots-loading"
-            />
-            <v-icon color="primary" v-else @click="sendMessage"
-            >mdi-send
-            </v-icon
-            >
-          </v-fade-transition>
-        </template>
-      </v-textarea>
-    </v-footer>
-  </v-container>
+
+  <v-footer color="transparent" app>
+    <v-textarea
+      color="primary"
+      type="text"
+      variant="solo"
+      ref="input"
+      v-model="userMessage"
+      placeholder="prompt"
+      hide-details
+      @keydown="handleKeydown"
+      rows="1"
+      max-rows="9"
+      auto-grow
+    >
+      <template #prepend-inner>
+        <v-icon color="primary">mdi-microphone</v-icon>
+      </template>
+      <template v-slot:append-inner>
+        <v-fade-transition leave-absolute>
+          <Icon
+            v-if="isLoading"
+            class="text-primary"
+            width="30"
+            icon="eos-icons:three-dots-loading"
+          />
+          <v-icon color="primary" v-else @click="sendMessage"
+          >mdi-send
+          </v-icon
+          >
+        </v-fade-transition>
+      </template>
+    </v-textarea>
+  </v-footer>
 
   <v-dialog v-model="dialogRef" width="auto" height="auto">
     <v-img :src="imageUrlMiddleRef" :lazy-src="imageUrlLowRef" :max-height="height * 0.9">
