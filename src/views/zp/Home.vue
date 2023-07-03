@@ -112,140 +112,140 @@ function comfortableSize()  {
     </div>
     <v-container>
       <v-row class="mt-8">
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s01.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s02.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s03.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s04.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s05.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s06.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s07.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s08.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s09.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s10.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s11.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s12.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s13.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s14.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s15.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s16.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s17.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s18.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s19.jpg"/>
             </div>
           </v-card>
         </v-col>
-        <v-col cols="6" md="3" sm="6">
+        <v-col cols="6" md="3" lg="2">
           <v-card class="portfolio-card overflow-hidden card-shadow">
             <div class="portfolio-img">
               <img src="@/assets/sb/s20.jpg"/>
