@@ -10,7 +10,7 @@ export const routes = [
     name: "landing-home",
     component: () =>
       import(
-        /* webpackChunkName: "landing-home" */ "@/views/landing/hero/HeroPage.vue"
+        /* webpackChunkName: "landing-home" */ "@/views/zp/Home.vue"
         ),
     meta: {
     },
