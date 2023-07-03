@@ -286,66 +286,70 @@ const handleKeydown = (e) => {
   </v-container>
   <v-container v-else>
     <template v-for="message in messages">
-      <v-row>
-        <v-avatar class="mr-2 mr-md-4 mb-1" rounded="sm" variant="elevated">
+      <v-row class="justify-start">
+        <v-avatar class="mt-3 mb-1 ml-3" rounded="sm" variant="elevated">
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
-        <v-card>
-          <md-editor v-model="message.content" class="font-1" previewOnly/>
-        </v-card>
+        <v-col cols="12" md="11">
+          <v-card>
+            <md-editor v-model="message.content" class="font-1" previewOnly/>
+          </v-card>
+        </v-col>
       </v-row>
       <v-row v-if="!_.isEmpty(message.imageUrl)">
-        <v-avatar v-if="!mobile" class="mr-2 mr-md-4">
+        <v-avatar v-if="!mobile" class="mt-3 mb-1 ml-3">
         </v-avatar>
-        <v-card max-width="500px">
-          <v-img :src="message.imageUrl + '!low'" @click="openImage(message.imageUrl)" alt="alt">
-            <template v-slot:placeholder>
-              <div class="d-flex align-center justify-center fill-height">
-                <v-progress-circular
-                  color="primary"
-                  indeterminate
-                ></v-progress-circular>
-              </div>
-            </template>
-          </v-img>
-        </v-card>
+        <v-col cols="12" md="11">
+          <v-card max-width="500px">
+            <v-img :src="message.imageUrl + '!low'" @click="openImage(message.imageUrl)" alt="alt">
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular
+                    color="primary"
+                    indeterminate
+                  ></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
+          </v-card>
+        </v-col>
       </v-row>
-      <v-row v-if="message.reroll">
-        <v-avatar v-if="!mobile" class="mr-2 mr-md-4">
+      <v-row v-if="message.reroll" class="my-0 py-0">
+        <v-avatar v-if="!mobile" class="ml-3">
         </v-avatar>
-        <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'upsample')">U1</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'upsample')">U2</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'upsample')">U3</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'upsample')">U4</v-btn>
-          <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
-        </v-btn-toggle>
+        <v-col cols="12" md="11" class="my-0 py-0">
+          <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
+            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'upsample')">U1</v-btn>
+            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'upsample')">U2</v-btn>
+            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'upsample')">U3</v-btn>
+            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'upsample')">U4</v-btn>
+            <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
+          </v-btn-toggle>
+          <br/>
+          <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
+            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'variation')">V1</v-btn>
+            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'variation')">V2</v-btn>
+            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'variation')">V3</v-btn>
+            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'variation')">V4</v-btn>
+          </v-btn-toggle>
+        </v-col>
       </v-row>
-      <v-row v-if="message.reroll">
-        <v-avatar v-if="!mobile" class="mr-2 mr-md-4">
-        </v-avatar>
-        <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'variation')">V1</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'variation')">V2</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'variation')">V3</v-btn>
-          <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'variation')">V4</v-btn>
-        </v-btn-toggle>
-      </v-row>
-      <v-row v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'">
-        <v-progress-linear
-          v-model="message.progress"
-          height="8"
-          color="primary"
-          class="mb-2"
-          buffer-value="0"
-          rounded
-          :indeterminate="message.type === 'provider' || message.type === 'consumer'"
-          :stream="message.type === 'create'"
-          :striped="message.type === 'update'"
-        >
-        </v-progress-linear>
-      </v-row>
-      <v-row class="my-2">
+      <v-row
+        v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'">
+        <v-col>
+          <v-progress-linear
+            v-model="message.progress"
+            height="8"
+            color="primary"
+            class="mb-2"
+            buffer-value="0"
+            rounded
+            :indeterminate="message.type === 'provider' || message.type === 'consumer'"
+            :stream="message.type === 'create'"
+            :striped="message.type === 'update'"
+          >
+          </v-progress-linear>
+        </v-col>
       </v-row>
     </template>
 
