@@ -14,7 +14,7 @@ const props = defineProps({
 </script>
 <template>
   <Vue3Lottie
-    animationLink="https://assets5.lottiefiles.com/packages/lf20_eop7ymay.json"
+    animationLink="zp/ZpAnimation3.json"
     :height="props.size"
     :width="props.size"
   />
