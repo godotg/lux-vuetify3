@@ -336,7 +336,7 @@ const handleKeydown = (e) => {
       </v-row>
       <v-row
         v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'">
-        <v-col>
+        <v-col cols="12" md="11">
           <v-progress-linear
             v-model="message.progress"
             height="8"
