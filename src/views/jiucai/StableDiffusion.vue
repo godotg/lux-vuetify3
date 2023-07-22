@@ -12,8 +12,8 @@ import JsFileDownloader from "js-file-downloader";
 
 import AnimationStableDiffusion from "@/animation/AnimationStableDiffusion.vue";
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
-import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
-import MidRerollRequest from "@/protocol/midjourney/MidRerollRequest";
+import SdSimulateRequest from "@/protocol/sdiffusion/SdSimulateRequest";
+import SdSimulateResponse from "@/protocol/sdiffusion/SdSimulateResponse";
 import MidHistoryRequest from "@/protocol/midjourney/MidHistoryRequest";
 import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
 import ImageDownloadRequest from "@/protocol/sdiffusion/ImageDownloadRequest";
@@ -24,7 +24,6 @@ import {useNewsStore} from "@/stores/newsStore";
 import {useImageStore} from "@/stores/imageStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
-import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
 
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
@@ -122,13 +121,6 @@ const userMessage = ref("");
 
 const isLoading = ref(false);
 
-function seed(): string {
-  const a = _.random(10_0000_0000, 20_0000_0000);
-  const b = _.random(1_0000_0000, 2_0000_0000);
-  const seed = _.toString(a) + _.toString(b);
-  return seed;
-}
-
 function openImage(message) {
   dialogRef.value = true;
   imageUrlRef.value = message.imageUrl;
@@ -141,41 +133,19 @@ function openImage(message) {
 // Send Messsage
 const sendMessage = async () => {
   // Clear the input
-
   if (userMessage.value) {
-
-    // 自己的韭菜广场的发送
-    const request = new MidImagineRequest();
+    const request = new SdSimulateRequest();
     request.prompt = userMessage.value;
-    request.nonce = seed();
+    request.nonce = _.random(0, 10_0000_0000);
     isLoading.value = true;
     userMessage.value = "";
     animationRunIndex = _.random(1, 5);
-    send(request);
+
+    const response: SdSimulateResponse = await asyncAsk(request);
+    console.log(response);
   }
 };
 
-const reroll = async (midjourneyId) => {
-  const request = new MidRerollRequest();
-  request.midjourneyId = midjourneyId;
-  request.nonce = seed();
-  isLoading.value = true;
-  userMessage.value = "";
-  animationRunIndex = _.random(1, 5);
-  send(request);
-};
-
-const select = async (midjourneyId, index, category) => {
-  const request = new MidSelectRequest();
-  request.midjourneyId = midjourneyId;
-  request.index = index;
-  request.category = category;
-  request.nonce = seed();
-  isLoading.value = true;
-  userMessage.value = "";
-  animationRunIndex++;
-  send(request);
-};
 
 // 下面的逻辑都是自己的
 const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
@@ -311,26 +281,6 @@ const handleKeydown = (e) => {
               </template>
             </v-img>
           </v-card>
-        </v-col>
-      </v-row>
-      <v-row v-if="message.reroll" class="my-0 py-0">
-        <v-avatar v-if="!mobile" class="ml-3">
-        </v-avatar>
-        <v-col cols="12" md="11" class="my-0 py-0">
-          <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
-            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'upsample')">U1</v-btn>
-            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'upsample')">U2</v-btn>
-            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'upsample')">U3</v-btn>
-            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'upsample')">U4</v-btn>
-            <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
-          </v-btn-toggle>
-          <br/>
-          <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
-            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 1, 'variation')">V1</v-btn>
-            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 2, 'variation')">V2</v-btn>
-            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 3, 'variation')">V3</v-btn>
-            <v-btn class="font-weight-bold" @click="select(message.midjourneyId, 4, 'variation')">V4</v-btn>
-          </v-btn-toggle>
         </v-col>
       </v-row>
       <v-row
