@@ -1,15 +1,15 @@
 import {defineStore} from "pinia";
-import _ from "lodash";
 
 
 export const useImageStore = defineStore("imageStore", {
   state: () => ({
     midPrompts: [],
+    downloads: [],
   }),
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["midPrompts"]}],
+    strategies: [{storage: localStorage, paths: ["midPrompts", "downloads"]}],
   },
 
   getters: {},

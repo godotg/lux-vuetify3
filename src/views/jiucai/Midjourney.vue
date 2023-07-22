@@ -29,7 +29,6 @@ import {useImageStore} from "@/stores/imageStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
-import NewsResponse from "@/protocol/news/NewsResponse";
 
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
@@ -46,29 +45,6 @@ onMounted(() => {
   messages.value = imageStore.midPrompts;
   initHistory();
   setInterval(() => initHistory(), 5 * 1000);
-  // messages.value.push(
-  //   {
-  //     id: "111",
-  //     type: "create",
-  //     imageUrl: "",
-  //     content: "aaaaaaa",
-  //     progress: 33
-  //   },
-  //   {
-  //     id: "111",
-  //     type: "create",
-  //     imageUrl: "",
-  //     content: "![](https://jiucai.fun/out.png)",
-  //     progress: 88
-  //   },
-  //   {
-  //     id: "111",
-  //     type: "create",
-  //     imageUrl: "",
-  //     content: "![](https://jiucai.fun/out.png)",
-  //     progress: 88
-  //   },
-  // );
   setTimeout(() => scrollToBottomDelay(), 100);
 });
 
@@ -96,6 +72,10 @@ async function doInitHistory() {
 }
 
 async function download(url) {
+  if (_.findIndex(imageStore.downloads, it => it === url) >= 0) {
+    snackbarStore.showErrorMessage("已经下载过该图片");
+    return;
+  }
   const request: ImageDownloadRequest = new ImageDownloadRequest();
   request.url = url;
   const response: ImageDownloadResponse = await asyncAsk(request);
@@ -104,6 +84,8 @@ async function download(url) {
     url: realUrl
   }).then(function () {
     // Called when download ended
+    imageStore.downloads.push(url);
+    imageStore.downloads = _.takeRight(imageStore.downloads, MAX_HISTORY);
   }).catch(function (error) {
     // Called when an error occurred
     snackbarStore.showErrorMessage(error);
