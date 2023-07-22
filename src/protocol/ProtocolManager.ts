@@ -52,6 +52,20 @@ import MidImagineAsk from './broker/MidImagineAsk';
 import MidImagineNotify from './broker/MidImagineNotify';
 import MidRerollAsk from './broker/MidRerollAsk';
 import MidSelectAsk from './broker/MidSelectAsk';
+import SeoAsk from './broker/SeoAsk';
+import SdSimulateAsk from './broker/SdSimulateAsk';
+import SdSimulateAnswer from './broker/SdSimulateAnswer';
+import SdSimulateNotify from './broker/SdSimulateNotify';
+import StableDiffusionRequest from './sdiffusion/StableDiffusionRequest';
+import StableDiffusionResponse from './sdiffusion/StableDiffusionResponse';
+import StableDiffusionParameters from './sdiffusion/StableDiffusionParameters';
+import InterrogatorPromptRequest from './sdiffusion/InterrogatorPromptRequest';
+import InterrogatorPromptResponse from './sdiffusion/InterrogatorPromptResponse';
+import SdSimulateRequest from './sdiffusion/SdSimulateRequest';
+import SdSimulateNotice from './sdiffusion/SdSimulateNotice';
+import SdHistoryRequest from './sdiffusion/SdHistoryRequest';
+import SdSimulateResponse from './sdiffusion/SdSimulateResponse';
+import SdImage from './sdiffusion/SdImage';
 
 const protocols = new Map<number, any>();
 
@@ -110,6 +124,20 @@ protocols.set(302, MidImagineAsk);
 protocols.set(303, MidImagineNotify);
 protocols.set(304, MidRerollAsk);
 protocols.set(305, MidSelectAsk);
+protocols.set(306, SeoAsk);
+protocols.set(307, SdSimulateAsk);
+protocols.set(308, SdSimulateAnswer);
+protocols.set(309, SdSimulateNotify);
+protocols.set(330, StableDiffusionRequest);
+protocols.set(331, StableDiffusionResponse);
+protocols.set(332, StableDiffusionParameters);
+protocols.set(333, InterrogatorPromptRequest);
+protocols.set(334, InterrogatorPromptResponse);
+protocols.set(340, SdSimulateRequest);
+protocols.set(341, SdSimulateNotice);
+protocols.set(342, SdHistoryRequest);
+protocols.set(343, SdSimulateResponse);
+protocols.set(344, SdImage);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {

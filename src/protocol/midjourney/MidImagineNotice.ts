@@ -10,6 +10,9 @@ class MidImagineNotice {
     midjourneyId: number = 0;
     // 只有type为complete状态才能够访问图片
     imageUrl: string = '';
+    imageUrlLow: string = '';
+    imageUrlMiddle: string = '';
+    imageUrlHigh: string = '';
     // 只有type为update状态才有意义
     progress: number = 0;
     // 只有type为complete状态才有意义
@@ -27,6 +30,9 @@ class MidImagineNotice {
         }
         buffer.writeString(packet.content);
         buffer.writeString(packet.imageUrl);
+        buffer.writeString(packet.imageUrlHigh);
+        buffer.writeString(packet.imageUrlLow);
+        buffer.writeString(packet.imageUrlMiddle);
         buffer.writeLong(packet.midjourneyId);
         buffer.writeString(packet.nonce);
         buffer.writeInt(packet.progress);
@@ -43,16 +49,22 @@ class MidImagineNotice {
         packet.content = result0;
         const result1 = buffer.readString();
         packet.imageUrl = result1;
-        const result2 = buffer.readLong();
-        packet.midjourneyId = result2;
+        const result2 = buffer.readString();
+        packet.imageUrlHigh = result2;
         const result3 = buffer.readString();
-        packet.nonce = result3;
-        const result4 = buffer.readInt();
-        packet.progress = result4;
-        const result5 = buffer.readBoolean(); 
-        packet.reroll = result5;
+        packet.imageUrlLow = result3;
+        const result4 = buffer.readString();
+        packet.imageUrlMiddle = result4;
+        const result5 = buffer.readLong();
+        packet.midjourneyId = result5;
         const result6 = buffer.readString();
-        packet.type = result6;
+        packet.nonce = result6;
+        const result7 = buffer.readInt();
+        packet.progress = result7;
+        const result8 = buffer.readBoolean(); 
+        packet.reroll = result8;
+        const result9 = buffer.readString();
+        packet.type = result9;
         return packet;
     }
 }
