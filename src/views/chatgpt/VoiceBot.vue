@@ -285,7 +285,6 @@ const clearMessages = () => {
 
 <style scoped lang="scss">
 .chat-bot {
-  background-color: #fff;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -295,7 +294,6 @@ const clearMessages = () => {
   .input-area {
     height: 152;
     padding: 1rem;
-    border-top: 1px solid #ddd;
 
     align-items: center;
     .input-panel {
@@ -357,20 +355,3 @@ const clearMessages = () => {
   padding: 5px 16px;
 }
 </style>
-
-<!-- <span class="config">
-  <VoiceConfigDialog />
-
-  <span class="ml-2 text-h6 font-weight-bold text-primary">{{
-    speechStore.localName
-  }}</span>
-  <v-chip
-    density="comfortable"
-    class="d-none d-sm-inline ml-1 font-weight-bold"
-    label
-    size="small"
-    color="primary"
-  >
-    {{ speechStore.speechSynthesisLanguage }}</v-chip
-  >
-</span> -->

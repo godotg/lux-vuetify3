@@ -5,28 +5,33 @@
 -->
 <script setup lang="ts">
 import { useSnackbarStore } from "@/stores/snackbarStore";
-import AnimationChat from "@/components/animations/AnimationChat1.vue";
-import AnimationAi from "@/components/animations/AnimationBot1.vue";
+import AnimationAi from "@/components/animations/AnimationBot2.vue";
 import { read, countAndCompleteCodeBlocks } from "@/utils/aiUtils";
-import { scrollToBottom } from "@/utils/common";
 import MdEditor from "md-editor-v3";
-import { useChatGPTStore } from "@/stores/chatGPTStore";
 import "md-editor-v3/lib/style.css";
+import { scrollToBottom } from "@/utils/common";
+import { useChatGPTStore } from "@/stores/chatGPTStore";
+import { useChatHistoryStore } from "@/stores/chatHistoryStore";
 import ApiKeyDialog from "@/components/ApiKeyDialog.vue";
 const snackbarStore = useSnackbarStore();
 const chatGPTStore = useChatGPTStore();
-
+const chatHistoryStore = useChatHistoryStore();
+const route = useRoute();
+const historyId = +route.params.id;
 interface Message {
   content: string;
   role: "user" | "assistant" | "system";
 }
+
+const messages = computed(() => {
+  return chatHistoryStore.getHistoryById(historyId);
+});
+
 // User Input Message
 const userMessage = ref("");
 
 // Prompt Message
 const promptMessage = computed(() => {
-  console.log("chatGPTStore.propmpt", chatGPTStore.propmpt);
-
   return [
     {
       content: chatGPTStore.propmpt,
@@ -34,9 +39,6 @@ const promptMessage = computed(() => {
     },
   ];
 });
-
-// Message List
-const messages = ref<Message[]>([]);
 
 const requestMessages = computed(() => {
   if (messages.value.length <= 10) {
@@ -48,13 +50,16 @@ const requestMessages = computed(() => {
   }
 });
 
-const isLoading = ref(false);
-
 // Send Messsage
 const sendMessage = async () => {
   if (userMessage.value) {
     // Add the message to the list
-    messages.value.push({
+    // messages.value.push({
+    //   content: userMessage.value,
+    //   role: "user",
+    // });
+
+    chatHistoryStore.addHistory(historyId, {
       content: userMessage.value,
       role: "user",
     });
@@ -82,7 +87,7 @@ const createCompletion = async () => {
       {
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${chatGPTStore.getApiKey}`,
+          Authorization: `Bearer ${chatGPTStore.getApiKey}`,
         },
         method: "POST",
         body: JSON.stringify({
@@ -108,7 +113,12 @@ const createCompletion = async () => {
     }
 
     // Add the bot message
-    messages.value.push({
+    // messages.value.push({
+    //   content: "",
+    //   role: "assistant",
+    // });
+
+    chatHistoryStore.addHistory(historyId, {
       content: "",
       role: "assistant",
     });
@@ -159,66 +169,51 @@ const inputRow = ref(1);
 </script>
 
 <template>
+  <div class="">newChat{{ historyId }}</div>
   <div class="chat-bot">
     <div class="messsage-area">
       <perfect-scrollbar v-if="messages.length > 0" class="message-container">
         <template v-for="message in displayMessages">
           <div v-if="message.role === 'user'">
-            <div class="pa-4 user-message">
-              <v-avatar class="ml-4" rounded="sm" variant="elevated">
-                <img src="@/assets/images/avatars/avatar_user.jpg" alt="alt" />
-              </v-avatar>
-              <v-card class="gradient gray text-pre-wrap" theme="dark">
-                <v-card-text>
-                  <b> {{ message.content }}</b></v-card-text
-                >
-              </v-card>
+            <div class="pa-5 user-message">
+              <div class="message align-center text-pre-wrap">
+                <v-avatar class="mr-4 mr-lg-8">
+                  <img
+                    src="@/assets/images/avatars/avatar_user.jpg"
+                    alt="alt"
+                  />
+                </v-avatar>
+                <span> {{ message.content }}</span>
+              </div>
             </div>
           </div>
           <div v-else>
-            <div class="pa-2 pa-md-5 assistant-message">
-              <v-avatar
-                class="d-none d-md-block mr-2 mr-md-4"
-                rounded="sm"
-                variant="elevated"
-              >
-                <img
-                  src="@/assets/images/avatars/avatar_assistant.jpg"
-                  alt="alt"
-                />
-              </v-avatar>
-              <v-card>
-                <div>
-                  <md-editor
-                    v-model="message.content"
-                    class="font-1"
-                    previewOnly
+            <div class="pa-5 assitant-message">
+              <div class="message">
+                <v-avatar class="mr-4 mr-lg-8">
+                  <img
+                    src="@/assets/images/avatars/avatar_assistant.jpg"
+                    alt="alt"
                   />
-                </div>
-              </v-card>
+                </v-avatar>
+                <md-editor v-model="message.content" previewOnly />
+              </div>
             </div>
           </div>
         </template>
-        <div v-if="isLoading">
-          <div class="pa-6">
-            <div class="message">
-              <AnimationAi :size="100" />
-            </div>
-          </div>
-        </div>
       </perfect-scrollbar>
       <div class="no-message-container" v-else>
         <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
-          Chat With Me
+          Ask Me Any Thing
         </h1>
-        <AnimationChat :size="300" />
+        <AnimationAi :size="300" />
       </div>
     </div>
     <div class="input-area">
       <v-sheet
-        color="transparent"
         elevation="0"
         class="input-panel d-flex align-end pa-1"
+        max-width="1200"
       >
         <v-btn
           class="mb-1"
@@ -233,25 +228,23 @@ const inputRow = ref(1);
             text="ChatGPT Config"
           ></v-tooltip>
         </v-btn>
-        <transition name="fade">
-          <v-textarea
-            class="mx-2"
-            color="primary"
-            type="text"
-            clearable
-            variant="solo"
-            ref="input"
-            v-model="userMessage"
-            placeholder="Ask Anything"
-            hide-details
-            @keydown="handleKeydown"
-            :rows="inputRow"
-            @focus="inputRow = 3"
-            @blur="inputRow = 1"
-          >
-          </v-textarea>
-        </transition>
-
+        <v-textarea
+          class="mx-2"
+          color="primary"
+          type="text"
+          clearable
+          variant="solo"
+          ref="input"
+          v-model="userMessage"
+          placeholder="Ask Me Anything"
+          hide-details
+          @keydown="handleKeydown"
+          no-resize
+          :rows="inputRow"
+          @focus="inputRow = 3"
+          @blur="inputRow = 1"
+        >
+        </v-textarea>
         <v-btn class="mb-1" color="primary" variant="elevated" icon>
           <v-icon @click="sendMessage">mdi-send</v-icon>
         </v-btn>
@@ -263,7 +256,7 @@ const inputRow = ref(1);
 
 <style scoped lang="scss">
 .chat-bot {
-  background-repeat: repeat;
+  background-color: #fcfcfe;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -271,15 +264,15 @@ const inputRow = ref(1);
 
   .messsage-area {
     flex: 1;
-    height: 100%;
   }
 
   .input-area {
+    padding: 1rem;
+
+    align-items: center;
     position: absolute;
     width: 100%;
     bottom: 0;
-    padding: 1rem;
-    align-items: center;
 
     .input-panel {
       border-radius: 5px;
@@ -290,17 +283,14 @@ const inputRow = ref(1);
 }
 
 .user-message {
-  display: flex;
-  align-content: center;
-  justify-content: end;
-  flex-direction: row-reverse;
+  background-color: #f6f6fd;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.assistant-message {
-  display: flex;
-  align-content: center;
-  justify-content: start;
-  flex-direction: row;
+.assitant-message {
+  background-color: #fff;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .message {
@@ -311,8 +301,6 @@ const inputRow = ref(1);
 
 .message-container {
   height: calc(100vh - 154px);
-  background-image: url("@/assets/images/chat-bg-2.png");
-  background-repeat: repeat;
 }
 
 .no-message-container {
@@ -329,17 +317,6 @@ const inputRow = ref(1);
 }
 
 :deep(.md-editor-preview-wrapper) {
-  padding: 5px 15px;
-}
-
-.font-1 {
-  font-size: 13px !important;
-}
-
-@media screen and (max-width: 768px) {
-  :deep(#md-editor-v3-preview),
-  .user-message {
-    font-size: 14px !important;
-  }
+  padding: 0px;
 }
 </style>

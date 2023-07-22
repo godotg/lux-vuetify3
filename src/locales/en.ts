@@ -170,8 +170,11 @@ export default {
       title: "Translation Assistant",
       targetLanguage: "Target Language",
       translate: "Translate",
-      speech: "Speech",
+      speech: "Click to start recording.",
+      stopSpeech: "Click again to end recording.",
       read: "Read",
+      sourceLanguagePlaceholder: "Select the target translation language",
+      targetLanguagePlaceholder: "You can paste the text directly for reading",
     },
     codeAssistant: {
       title: "Code Assistant",
@@ -184,6 +187,8 @@ export default {
     config: {
       title: "ChatGPT Config",
       apikey: "API Key",
+      proxyUrl: "Proxy Url",
+      proxyUrlPlaceholder: "Input your proxy url here.",
       apikeyPlaceholder: "If not input , the ApiKey in the .env will be used.",
       model: "Model",
       role: "Role",
@@ -210,6 +215,7 @@ export default {
       },
       sortBy: "Sort by",
     },
+
     dataFooter: {
       itemsPerPageText: "Items per page:",
       itemsPerPageAll: "All",
