@@ -66,6 +66,9 @@ import SdSimulateNotice from './sdiffusion/SdSimulateNotice';
 import SdHistoryRequest from './sdiffusion/SdHistoryRequest';
 import SdSimulateResponse from './sdiffusion/SdSimulateResponse';
 import SdImage from './sdiffusion/SdImage';
+import ImageDownloadRequest from './sdiffusion/ImageDownloadRequest';
+import ImageDownloadResponse from './sdiffusion/ImageDownloadResponse';
+import ImageDeleteAsk from './sdiffusion/ImageDeleteAsk';
 
 const protocols = new Map<number, any>();
 
@@ -138,6 +141,9 @@ protocols.set(341, SdSimulateNotice);
 protocols.set(342, SdHistoryRequest);
 protocols.set(343, SdSimulateResponse);
 protocols.set(344, SdImage);
+protocols.set(345, ImageDownloadRequest);
+protocols.set(346, ImageDownloadResponse);
+protocols.set(347, ImageDeleteAsk);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {

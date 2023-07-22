@@ -20,6 +20,8 @@ import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
 import MidRerollRequest from "@/protocol/midjourney/MidRerollRequest";
 import MidHistoryRequest from "@/protocol/midjourney/MidHistoryRequest";
 import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
+import ImageDownloadRequest from "@/protocol/sdiffusion/ImageDownloadRequest";
+import ImageDownloadResponse from "@/protocol/sdiffusion/ImageDownloadResponse";
 
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import {useNewsStore} from "@/stores/newsStore";
@@ -27,6 +29,7 @@ import {useImageStore} from "@/stores/imageStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
+import NewsResponse from "@/protocol/news/NewsResponse";
 
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
@@ -93,8 +96,12 @@ async function doInitHistory() {
 }
 
 async function download(url) {
+  const request: ImageDownloadRequest = new ImageDownloadRequest();
+  request.url = url;
+  const response: ImageDownloadResponse = await asyncAsk(request);
+  const realUrl = response.realUrl;
   new JsFileDownloader({
-    url: url
+    url: realUrl
   }).then(function () {
     // Called when download ended
   }).catch(function (error) {
@@ -116,6 +123,9 @@ interface Message {
   type: string;
   content: string;
   imageUrl: string;
+  imageUrlLow: string;
+  imageUrlMiddle: string;
+  imageUrlHigh: string;
   progress: number;
   reroll: boolean;
   midjourneyId: number;
@@ -125,8 +135,9 @@ interface Message {
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
 const imageUrlRef = ref<string>("");
-const imageUrlMiddleRef = ref<string>("");
 const imageUrlLowRef = ref<string>("");
+const imageUrlMiddleRef = ref<string>("");
+const imageUrlHighRef = ref<string>("");
 
 // User Input Message
 const userMessage = ref("");
@@ -140,11 +151,13 @@ function seed(): string {
   return seed;
 }
 
-function openImage(imageUrl) {
+function openImage(message) {
   dialogRef.value = true;
-  imageUrlRef.value = imageUrl;
-  imageUrlMiddleRef.value = imageUrl + "!middle";
-  imageUrlLowRef.value = imageUrl + "!low";
+  imageUrlRef.value = message.imageUrl;
+  imageUrlLowRef.value = message.imageUrlLow;
+  imageUrlMiddleRef.value = message.imageUrlMiddle;
+  imageUrlHighRef.value = message.imageUrlHigh;
+  console.log(height.value)
 }
 
 // Send Messsage
@@ -201,6 +214,9 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
         id: packet.nonce,
         type: packet.type,
         imageUrl: packet.imageUrl,
+        imageUrlLow: packet.imageUrlLow,
+        imageUrlMiddle: packet.imageUrlMiddle,
+        imageUrlHigh: packet.imageUrlHigh,
         content: packet.content,
         progress: packet.progress,
         reroll: false,
@@ -237,6 +253,9 @@ function updateMessage(packet: MidImagineNotice) {
   const id = packet.nonce;
   const type = packet.type;
   const imageUrl = packet.imageUrl;
+  const imageUrlLow = packet.imageUrlLow;
+  const imageUrlMiddle = packet.imageUrlMiddle;
+  const imageUrlHigh = packet.imageUrlHigh;
   const content = packet.content;
   const progress = packet.progress;
   const reroll = packet.reroll;
@@ -247,6 +266,9 @@ function updateMessage(packet: MidImagineNotice) {
   }
   message.type = type;
   message.imageUrl = imageUrl;
+  message.imageUrlLow = imageUrlLow;
+  message.imageUrlMiddle = imageUrlMiddle;
+  message.imageUrlHigh = imageUrlHigh;
   message.content = content;
   message.progress = progress;
   message.reroll = reroll;
@@ -301,7 +323,7 @@ const handleKeydown = (e) => {
         </v-avatar>
         <v-col cols="12" md="11">
           <v-card max-width="500px">
-            <v-img :src="message.imageUrl + '!low'" @click="openImage(message.imageUrl)" alt="alt">
+            <v-img :src="message.imageUrlLow" @click="openImage(message)" alt="alt">
               <template v-slot:placeholder>
                 <div class="d-flex align-center justify-center fill-height">
                   <v-progress-circular
@@ -398,20 +420,40 @@ const handleKeydown = (e) => {
     </v-textarea>
   </v-footer>
 
-  <v-dialog v-model="dialogRef" width="auto" height="auto">
-    <v-img :src="imageUrlMiddleRef" :lazy-src="imageUrlLowRef" :max-height="height * 0.9">
-      <template v-slot:placeholder>
-        <div class="d-flex align-center justify-center fill-height">
-          <v-progress-circular
-            color="primary"
-            indeterminate
-          ></v-progress-circular>
-        </div>
-      </template>
-    </v-img>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
-    </v-card-actions>
+  <v-dialog v-model="dialogRef" @click="dialogRef=!dialogRef">
+    <v-row v-if="mobile">
+      <v-col cols="12">
+        <v-img :src="imageUrlMiddleRef" :lazy-src="imageUrlLowRef" :max-width="width * 0.8" :max-height="height * 0.95">
+          <template v-slot:placeholder>
+            <div class="d-flex align-center justify-center fill-height">
+              <v-progress-circular
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+            </div>
+          </template>
+        </v-img>
+      </v-col>
+      <v-col cols="3" offset="9">
+        <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col offset="1">
+        <v-img :src="imageUrlMiddleRef" :lazy-src="imageUrlLowRef" :max-height="height * 0.95">
+          <template v-slot:placeholder>
+            <div class="d-flex align-center justify-center fill-height">
+              <v-progress-circular
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+            </div>
+          </template>
+        </v-img>
+      </v-col>
+      <v-col cols="1" align-self="end">
+        <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
+      </v-col>
+    </v-row>
   </v-dialog>
 </template>

@@ -92,7 +92,7 @@ async function doInitNews() {
   const request = new NewsRequest();
   request.startId = -1;
   request.endId = -1;
-  const response: NewsResponse = await asyncAsk(request)
+  const response: NewsResponse = await asyncAsk(request);
   loadingRef.value = false;
   console.log("news init ----------------------------------------");
   updateNewsRef(response.news)
