@@ -3,6 +3,7 @@ export default {
     news: "News",
     chatgpt: "ChatGpt",
     spark: "Spark",
+    diffusion: "Diffusion",
     square: "Square",
     midjourney: "Midjourney",
     profileDetails: "vvvip leek account",

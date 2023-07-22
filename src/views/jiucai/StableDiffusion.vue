@@ -10,6 +10,7 @@ import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import JsFileDownloader from "js-file-downloader";
 
+import AnimationStableDiffusion from "@/animation/AnimationStableDiffusion.vue";
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
 import MidRerollRequest from "@/protocol/midjourney/MidRerollRequest";
@@ -37,7 +38,7 @@ let animationRunIndex = 1;
 
 onMounted(() => {
   registerPacketReceiver(MidImagineNotice.PROTOCOL_ID, midjourneyNoticeRefresh);
-  messages.value = imageStore.midPrompts;
+  messages.value = imageStore.sdPrompts;
   initHistory();
   setInterval(() => initHistory(), 5 * 1000);
   setTimeout(() => scrollToBottomDelay(), 100);
@@ -251,7 +252,7 @@ function updateMessage(packet: MidImagineNotice) {
   message.reroll = reroll;
   message.midjourneyId = midjourneyId;
   // 保存到本地
-  imageStore.midPrompts = _.takeRight(messages.value, MAX_HISTORY);
+  imageStore.sdPrompts = _.takeRight(messages.value, MAX_HISTORY);
 }
 
 const handleKeydown = (e) => {
@@ -270,16 +271,15 @@ const handleKeydown = (e) => {
 
 <template>
   <v-container v-if="messages.length <= 0">
-    <v-row v-if="mobile">
-      <AnimationMidjourney :size="width * 0.7"/>
-      <AnimationMidjourney :size="width * 0.7" :delay="3000"/>
+    <v-row v-if="mobile" class="mt-12">
+      <v-col align-self="center">
+        <AnimationStableDiffusion :size="width * 0.9"/>
+        <AnimationMidjourney :size="width * 0.7"/>
+      </v-col>
     </v-row>
     <v-row v-else>
-      <v-col cols="6">
-        <AnimationMidjourney :size="height * 0.8"/>
-      </v-col>
-      <v-col cols="6">
-        <AnimationMidjourney :size="height * 0.8" :delay="3000"/>
+      <v-col>
+        <AnimationStableDiffusion :size="height * 0.8"/>
       </v-col>
     </v-row>
   </v-container>

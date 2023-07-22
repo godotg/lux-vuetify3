@@ -23,11 +23,17 @@ export default {
           icon: "mdi-shark-fin-outline",
         },
         {
-          key: "jiucai.spark",
-          text: "Spark",
-          link: "/spark",
-          icon: "mdi-fire",
+          key: "jiucai.diffusion",
+          text: "Diffusion",
+          link: "/diffusion",
+          icon: "mdi-head-heart-outline",
         },
+        // {
+        //   key: "jiucai.spark",
+        //   text: "Spark",
+        //   link: "/spark",
+        //   icon: "mdi-fire",
+        // },
         {
           key: "jiucai.square",
           text: "Square",

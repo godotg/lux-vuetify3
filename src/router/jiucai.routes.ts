@@ -35,6 +35,13 @@ export default [
     component: () => import("@/views/jiucai/Midjourney.vue"),
   },
   {
+    path: "/diffusion",
+    meta: {
+      layout: "landing",
+    },
+    component: () => import("@/views/jiucai/StableDiffusion.vue"),
+  },
+  {
     path: "/ac/:id",
     meta: {
       layout: "landing",
