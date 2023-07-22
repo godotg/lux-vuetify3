@@ -1,8 +1,3 @@
-<!--
-* @Component:
-* @Maintainer: J.K. Yang
-* @Description:
--->
 <script setup lang="ts">
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import AnimationRun1 from "@/animation/AnimationRun1.vue";
