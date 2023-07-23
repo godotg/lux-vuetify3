@@ -361,37 +361,72 @@ const handleKeydown = (e) => {
   </v-container>
 
   <v-footer color="transparent" app>
-    <v-textarea
-      color="primary"
-      type="text"
-      variant="solo"
-      ref="input"
-      v-model="userMessage"
-      placeholder="prompt"
-      hide-details
-      @keydown="handleKeydown"
-      rows="1"
-      max-rows="9"
-      auto-grow
-    >
-      <template #prepend-inner>
-        <v-icon color="primary">mdi-microphone</v-icon>
-      </template>
-      <template v-slot:append-inner>
-        <v-fade-transition leave-absolute>
-          <Icon
-            v-if="isLoading"
-            class="text-primary"
-            width="30"
-            icon="eos-icons:three-dots-loading"
-          />
-          <v-icon color="primary" v-else @click="sendMessage"
-          >mdi-send
-          </v-icon
-          >
-        </v-fade-transition>
-      </template>
-    </v-textarea>
+    <template v-if="mobile">
+      <v-textarea
+        color="primary"
+        type="text"
+        variant="solo"
+        ref="input"
+        v-model="userMessage"
+        placeholder="prompt"
+        hide-details
+        @keydown="handleKeydown"
+        rows="1"
+        max-rows="9"
+        auto-grow
+      >
+        <template #prepend-inner>
+          <v-icon color="primary">mdi-microphone</v-icon>
+        </template>
+        <template v-slot:append-inner>
+          <v-fade-transition leave-absolute>
+            <Icon
+              v-if="isLoading"
+              class="text-primary"
+              width="30"
+              icon="eos-icons:three-dots-loading"
+            />
+            <v-icon color="primary" v-else @click="sendMessage"
+            >mdi-send
+            </v-icon
+            >
+          </v-fade-transition>
+        </template>
+      </v-textarea>
+    </template>
+    <v-container v-else>
+      <v-textarea
+        color="primary"
+        type="text"
+        variant="solo"
+        ref="input"
+        v-model="userMessage"
+        placeholder="prompt"
+        hide-details
+        @keydown="handleKeydown"
+        rows="1"
+        max-rows="9"
+        auto-grow
+      >
+        <template #prepend-inner>
+          <v-icon color="primary">mdi-microphone</v-icon>
+        </template>
+        <template v-slot:append-inner>
+          <v-fade-transition leave-absolute>
+            <Icon
+              v-if="isLoading"
+              class="text-primary"
+              width="30"
+              icon="eos-icons:three-dots-loading"
+            />
+            <v-icon color="primary" v-else @click="sendMessage"
+            >mdi-send
+            </v-icon
+            >
+          </v-fade-transition>
+        </template>
+      </v-textarea>
+    </v-container>
   </v-footer>
 
   <v-dialog v-model="dialogRef" @click="dialogRef=!dialogRef">
