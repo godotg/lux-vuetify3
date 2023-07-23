@@ -1,10 +1,5 @@
 <script setup lang="ts">
 import {useSnackbarStore} from "@/stores/snackbarStore";
-import AnimationRun1 from "@/animation/AnimationRun1.vue";
-import AnimationRun2 from "@/animation/AnimationRun2.vue";
-import AnimationRun3 from "@/animation/AnimationRun3.vue";
-import AnimationRun4 from "@/animation/AnimationRun4.vue";
-import AnimationRun5 from "@/animation/AnimationRun5.vue";
 import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
@@ -33,7 +28,7 @@ const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
 const imageStore = useImageStore();
 
-const MAX_HISTORY = 30;
+const MAX_HISTORY = 20;
 let animationRunIndex = 1;
 
 onMounted(() => {
@@ -44,6 +39,10 @@ onMounted(() => {
   setTimeout(() => scrollToBottomDelay(), 100);
   loadConfigs();
 });
+
+function isFinished(message) {
+  return _.size(message.sdImages) >= message.batchSize;
+}
 
 async function initHistory() {
   setTimeout(() => doInitHistory(), 1000);
@@ -59,7 +58,7 @@ async function doInitHistory() {
     return;
   }
   for (const message of messages.value) {
-    if (!_.isEmpty(message.sdImages)) {
+    if (isFinished(message)) {
       continue;
     }
     const request = new SdHistoryRequest();
@@ -100,6 +99,7 @@ const scrollToBottomDelay = () => {
 interface Message {
   id: number;
   content: string;
+  batchSize: number;
   progress: number;
   refreshTime: number;
   costTime: number;
@@ -248,6 +248,7 @@ const sendMessage = async () => {
     const message = {
       id: response.nonce,
       content: request.prompt,
+      batchSize: request.batchSize,
       progress: 0,
       refreshTime: 0,
       costTime: response.costTime,
@@ -276,15 +277,22 @@ function refreshMessage(id) {
 
 // 下面的逻辑都是自己的
 const sdSimulateNoticeRefresh = (packet: SdSimulateNotice) => {
-  isLoading.value = false;
 
   const nonce = packet.nonce;
   const images = packet.images;
   const message = _.find(messages.value, it => it.id == nonce);
-  message.refreshTime = message.costTime + 3000;
   message.sdImages = images;
   images.forEach(it => imageStore.sds.push(it.id));
   imageStore.sds = _.takeRight(imageStore.sds, 2000);
+  if (isFinished(message)) {
+    message.refreshTime = message.costTime + 3000;
+    isLoading.value = false;
+  } else {
+    const progress = images.length / message.batchSize * 100;
+    if (message.progress < progress) {
+      message.progress = progress;
+    }
+  }
 };
 
 
@@ -344,7 +352,7 @@ const handleKeydown = (e) => {
           </v-card>
         </v-col>
       </v-row>
-      <v-row v-if="_.isEmpty(message.sdImages)">
+      <v-row v-if="!isFinished(message)">
         <v-col>
           <v-progress-linear
             v-model="message.progress"
@@ -359,16 +367,6 @@ const handleKeydown = (e) => {
         </v-col>
       </v-row>
     </template>
-
-    <v-row v-if="isLoading">
-      <v-col cols="12">
-        <AnimationRun1 v-if="animationRunIndex === 1" :size="300"/>
-        <AnimationRun2 v-else-if="animationRunIndex === 2" :size="300"/>
-        <AnimationRun3 v-else-if="animationRunIndex === 3" :size="300"/>
-        <AnimationRun4 v-else-if="animationRunIndex === 4" :size="300"/>
-        <AnimationRun5 v-else :size="300"/>
-      </v-col>
-    </v-row>
   </v-container>
 
   <v-footer color="transparent" app>
@@ -386,7 +384,7 @@ const handleKeydown = (e) => {
       auto-grow
     >
       <template #prepend-inner>
-        <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef">mdi-cog-outline</v-icon>
+        <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef" size="x-large" v-ripple>mdi-cog-outline mdi-spin</v-icon>
       </template>
       <template v-slot:append-inner>
         <v-fade-transition leave-absolute>
