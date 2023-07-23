@@ -14,8 +14,8 @@ import AnimationStableDiffusion from "@/animation/AnimationStableDiffusion.vue";
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import SdSimulateRequest from "@/protocol/sdiffusion/SdSimulateRequest";
 import SdSimulateResponse from "@/protocol/sdiffusion/SdSimulateResponse";
-import MidHistoryRequest from "@/protocol/midjourney/MidHistoryRequest";
-import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
+import SdSimulateNotice from "@/protocol/sdiffusion/SdSimulateNotice";
+import SdHistoryRequest from "@/protocol/sdiffusion/SdHistoryRequest";
 import ImageDownloadRequest from "@/protocol/sdiffusion/ImageDownloadRequest";
 import ImageDownloadResponse from "@/protocol/sdiffusion/ImageDownloadResponse";
 
@@ -36,10 +36,10 @@ const MAX_HISTORY = 10;
 let animationRunIndex = 1;
 
 onMounted(() => {
-  registerPacketReceiver(MidImagineNotice.PROTOCOL_ID, midjourneyNoticeRefresh);
+  registerPacketReceiver(SdSimulateNotice.PROTOCOL_ID, sdSimulateNoticeRefresh);
   messages.value = imageStore.sdPrompts;
   initHistory();
-  setInterval(() => initHistory(), 5 * 1000);
+  setInterval(() => initHistory(), 10 * 1000);
   setTimeout(() => scrollToBottomDelay(), 100);
   loadConfigs();
 });
@@ -58,10 +58,10 @@ async function doInitHistory() {
     return;
   }
   for (const message of messages.value) {
-    if (message.type === 'complete') {
+    if (!_.isEmpty(message.sdIds)) {
       continue;
     }
-    const request = new MidHistoryRequest();
+    const request = new SdHistoryRequest();
     request.nonce = message.id;
     send(request);
   }
@@ -97,16 +97,14 @@ const scrollToBottomDelay = () => {
 
 
 interface Message {
-  id: string;
-  type: string;
+  id: number;
   content: string;
+  costTime: number;
+  sdIds: Array<number>;
   imageUrl: string;
   imageUrlLow: string;
   imageUrlMiddle: string;
   imageUrlHigh: string;
-  progress: number;
-  reroll: boolean;
-  midjourneyId: number;
 }
 
 const styleInfos = [
@@ -250,88 +248,29 @@ const sendMessage = async () => {
     request.dimension = dimensionRef.value;
     request.ignores = imageStore.sds;
     const response: SdSimulateResponse = await asyncAsk(request);
+    messages.value.push({
+      id: response.nonce,
+      content: request.prompt,
+      costTime: response.costTime,
+      sdIds: [],
+      imageUrl: "",
+      imageUrlLow: "",
+      imageUrlMiddle: "",
+      imageUrlHigh: ""
+    });
     console.log(response);
   }
 };
 
 
 // 下面的逻辑都是自己的
-const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
+const sdSimulateNoticeRefresh = (packet: SdSimulateNotice) => {
   const id = packet.nonce;
-  const type = packet.type;
-  const imageUrl = packet.imageUrl;
-  const content = packet.content;
-  const progress = packet.progress;
-  const midjourneyId = packet.midjourneyId;
-  if (type === "provider") {
-    const message = _.find(messages.value, it => it.id == id);
-    if (message == null) {
-      messages.value.push({
-        id: packet.nonce,
-        type: packet.type,
-        imageUrl: packet.imageUrl,
-        imageUrlLow: packet.imageUrlLow,
-        imageUrlMiddle: packet.imageUrlMiddle,
-        imageUrlHigh: packet.imageUrlHigh,
-        content: packet.content,
-        progress: packet.progress,
-        reroll: false,
-        midjourneyId: midjourneyId,
-      });
-    }
-    updateMessage(packet);
-    scrollToBottomDelay();
-  } else if (type === "consumer") {
-    updateMessage(packet);
-    scrollToBottomDelay();
-  } else if (type === "create") {
-    updateMessage(packet);
-    scrollToBottomDelay();
-  } else if (type === "update") {
-    updateMessage(packet);
-  } else if (type === "complete") {
-    updateMessage(packet);
-    setTimeout(() => scrollToBottomDelay(), 1000);
-    setTimeout(() => scrollToBottomDelay(), 2000);
-    setTimeout(() => scrollToBottomDelay(), 3000);
-    isLoading.value = false;
-  } else if (type === "stop") {
-    updateMessage(packet);
-    isLoading.value = false;
-  } else if (type === "expire") {
-    // 过期给一个提示
-    isLoading.value = false;
-    snackbarStore.showErrorMessage(content)
-  }
+
+  isLoading.value = false;
+  snackbarStore.showErrorMessage("aaaaaaaaaaaaaaaa")
 };
 
-function updateMessage(packet: MidImagineNotice) {
-  const id = packet.nonce;
-  const type = packet.type;
-  const imageUrl = packet.imageUrl;
-  const imageUrlLow = packet.imageUrlLow;
-  const imageUrlMiddle = packet.imageUrlMiddle;
-  const imageUrlHigh = packet.imageUrlHigh;
-  const content = packet.content;
-  const progress = packet.progress;
-  const reroll = packet.reroll;
-  const midjourneyId = packet.midjourneyId;
-  const message = _.find(messages.value, it => it.id == id);
-  if (message == null) {
-    return;
-  }
-  message.type = type;
-  message.imageUrl = imageUrl;
-  message.imageUrlLow = imageUrlLow;
-  message.imageUrlMiddle = imageUrlMiddle;
-  message.imageUrlHigh = imageUrlHigh;
-  message.content = content;
-  message.progress = progress;
-  message.reroll = reroll;
-  message.midjourneyId = midjourneyId;
-  // 保存到本地
-  imageStore.sdPrompts = _.takeRight(messages.value, MAX_HISTORY);
-}
 
 const handleKeydown = (e) => {
   if (e.key === "Enter" && (e.altKey || e.shiftKey)) {

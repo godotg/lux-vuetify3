@@ -39,7 +39,7 @@ onMounted(() => {
   registerPacketReceiver(MidImagineNotice.PROTOCOL_ID, midjourneyNoticeRefresh);
   messages.value = imageStore.midPrompts;
   initHistory();
-  setInterval(() => initHistory(), 5 * 1000);
+  setInterval(() => initHistory(), 10 * 1000);
   setTimeout(() => scrollToBottomDelay(), 100);
 });
 
