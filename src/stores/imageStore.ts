@@ -5,7 +5,14 @@ export const useImageStore = defineStore("imageStore", {
   state: () => ({
     midPrompts: [],
     sdPrompts: [],
-    sdParameters: null,
+    sdParameters: {
+      prompt: "",
+      negativePrompt: "",
+      style: 0,
+      step: 20,
+      batchSize: 1,
+      dimension: 0
+    },
     sds: [],
     downloads: []
   }),

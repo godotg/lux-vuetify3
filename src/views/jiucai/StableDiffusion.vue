@@ -32,7 +32,7 @@ const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
 const imageStore = useImageStore();
 
-const MAX_HISTORY = 10;
+const MAX_HISTORY = 30;
 let animationRunIndex = 1;
 
 onMounted(() => {
@@ -99,6 +99,8 @@ const scrollToBottomDelay = () => {
 interface Message {
   id: number;
   content: string;
+  progress: number;
+  refreshTime: number;
   costTime: number;
   sdIds: Array<number>;
   imageUrl: string;
@@ -169,8 +171,8 @@ const imageUrlHighRef = ref<string>("");
 const promptRef = ref<string>("");
 const negativePromptRef = ref<string>("");
 const styleRef = ref<number>(0);
-const stepsRef = ref<number>(20);
-const batchSizeRef = ref<number>(1);
+const stepsRef = ref<number>(0);
+const batchSizeRef = ref<number>(0);
 const dimensionRef = ref<number>(0);
 
 function styleInfo(style) {
@@ -247,19 +249,37 @@ const sendMessage = async () => {
     request.dimension = dimensionRef.value;
     request.ignores = imageStore.sds;
     const response: SdSimulateResponse = await asyncAsk(request);
-    messages.value.push({
+    console.log(response);
+    const message = {
       id: response.nonce,
       content: request.prompt,
+      progress: 0,
+      refreshTime: 0,
       costTime: response.costTime,
       sdIds: [],
       imageUrl: "",
       imageUrlLow: "",
       imageUrlMiddle: "",
       imageUrlHigh: ""
-    });
-    console.log(response);
+    };
+    setTimeout(() => refreshMessage(response.nonce), 100);
+    messages.value.push(message);
+    imageStore.sdPrompts = _.takeRight(messages.value, MAX_HISTORY);
   }
 };
+
+function refreshMessage(id) {
+  const message = _.find(messages.value, it => it.id == id);
+  if (_.isNil(message)) {
+    return
+  }
+  if (message.refreshTime > message.costTime) {
+    return;
+  }
+  message.refreshTime += 100;
+  message.progress = message.refreshTime / message.costTime * 100;
+  setTimeout(() => refreshMessage(id), 100);
+}
 
 
 // 下面的逻辑都是自己的
@@ -328,7 +348,7 @@ const handleKeydown = (e) => {
         </v-col>
       </v-row>
       <v-row v-if="_.isEmpty(message.sdIds)">
-        <v-col cols="12" md="11">
+        <v-col>
           <v-progress-linear
             v-model="message.progress"
             height="8"
@@ -336,9 +356,7 @@ const handleKeydown = (e) => {
             class="mb-2"
             buffer-value="0"
             rounded
-            :indeterminate="message.type === 'provider' || message.type === 'consumer'"
-            :stream="message.type === 'create'"
-            :striped="message.type === 'update'"
+            striped
           >
           </v-progress-linear>
         </v-col>
