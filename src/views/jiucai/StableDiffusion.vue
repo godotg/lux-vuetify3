@@ -256,6 +256,7 @@ const sendMessage = async () => {
     setTimeout(() => refreshMessage(response.nonce), 100);
     messages.value.push(message);
     imageStore.sdPrompts = _.takeRight(messages.value, MAX_HISTORY);
+    scrollToBottomDelay();
   }
 };
 

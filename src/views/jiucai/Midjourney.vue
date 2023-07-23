@@ -142,7 +142,6 @@ const sendMessage = async () => {
   // Clear the input
 
   if (userMessage.value) {
-
     // 自己的韭菜广场的发送
     const request = new MidImagineRequest();
     request.prompt = userMessage.value;
