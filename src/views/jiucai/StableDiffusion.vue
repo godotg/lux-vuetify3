@@ -283,7 +283,8 @@ const sdSimulateNoticeRefresh = (packet: SdSimulateNotice) => {
   const message = _.find(messages.value, it => it.id == nonce);
   message.refreshTime = message.costTime + 3000;
   message.sdImages = images;
-
+  images.forEach(it => imageStore.sds.push(it.id));
+  imageStore.sds = _.takeRight(imageStore.sds, 2000);
 };
 
 
