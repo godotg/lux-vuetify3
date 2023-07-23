@@ -395,37 +395,41 @@ const handleKeydown = (e) => {
       </v-textarea>
     </template>
     <v-container v-else>
-      <v-textarea
-        color="primary"
-        type="text"
-        variant="solo"
-        ref="input"
-        v-model="userMessage"
-        placeholder="prompt"
-        hide-details
-        @keydown="handleKeydown"
-        rows="1"
-        max-rows="9"
-        auto-grow
-      >
-        <template #prepend-inner>
-          <v-icon color="primary">mdi-microphone</v-icon>
-        </template>
-        <template v-slot:append-inner>
-          <v-fade-transition leave-absolute>
-            <Icon
-              v-if="isLoading"
-              class="text-primary"
-              width="30"
-              icon="eos-icons:three-dots-loading"
-            />
-            <v-icon color="primary" v-else @click="sendMessage"
-            >mdi-send
-            </v-icon
-            >
-          </v-fade-transition>
-        </template>
-      </v-textarea>
+      <v-row>
+        <v-col cols="8" offset="2">
+          <v-textarea
+            color="primary"
+            type="text"
+            variant="solo"
+            ref="input"
+            v-model="userMessage"
+            placeholder="prompt"
+            hide-details
+            @keydown="handleKeydown"
+            rows="1"
+            max-rows="9"
+            auto-grow
+          >
+            <template #prepend-inner>
+              <v-icon color="primary">mdi-microphone</v-icon>
+            </template>
+            <template v-slot:append-inner>
+              <v-fade-transition leave-absolute>
+                <Icon
+                  v-if="isLoading"
+                  class="text-primary"
+                  width="30"
+                  icon="eos-icons:three-dots-loading"
+                />
+                <v-icon color="primary" v-else @click="sendMessage"
+                >mdi-send
+                </v-icon
+                >
+              </v-fade-transition>
+            </template>
+          </v-textarea>
+        </v-col>
+      </v-row>
     </v-container>
   </v-footer>
 
