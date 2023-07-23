@@ -289,11 +289,9 @@ const handleKeydown = (e) => {
         <v-avatar class="mt-3 mb-1 ml-3" rounded="sm" variant="elevated">
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
-        <v-col cols="12" md="11">
-          <v-card>
-            <md-editor v-model="message.content" class="font-1" previewOnly/>
-          </v-card>
-        </v-col>
+        <v-card class="mt-3 ml-3">
+          <md-editor v-model="message.content" class="font-1" previewOnly/>
+        </v-card>
       </v-row>
       <v-row v-if="!_.isEmpty(message.imageUrl)">
         <v-avatar v-if="!mobile" class="mt-3 mb-1 ml-3">

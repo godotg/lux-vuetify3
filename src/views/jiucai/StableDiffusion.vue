@@ -157,6 +157,7 @@ const dimensionInfos = [
 ];
 
 // Message List
+const isLoading = ref(false);
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
 const dialogSettingRef = ref<boolean>(false);
@@ -218,8 +219,6 @@ watch(
   }
 );
 
-
-const isLoading = ref(false);
 
 function openImage(message) {
   dialogRef.value = true;
@@ -306,11 +305,9 @@ const handleKeydown = (e) => {
         <v-avatar class="mt-3 mb-1 ml-3" rounded="sm" variant="elevated">
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
-        <v-col cols="12" md="11">
-          <v-card>
-            <md-editor v-model="message.content" class="font-1" previewOnly/>
-          </v-card>
-        </v-col>
+        <v-card class="mt-3 ml-3">
+          <md-editor v-model="message.content" class="font-1" previewOnly/>
+        </v-card>
       </v-row>
       <v-row v-if="!_.isEmpty(message.imageUrl)">
         <v-avatar v-if="!mobile" class="mt-3 mb-1 ml-3">
@@ -330,8 +327,7 @@ const handleKeydown = (e) => {
           </v-card>
         </v-col>
       </v-row>
-      <v-row
-        v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'">
+      <v-row v-if="_.isEmpty(message.sdIds)">
         <v-col cols="12" md="11">
           <v-progress-linear
             v-model="message.progress"
