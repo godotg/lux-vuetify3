@@ -329,7 +329,7 @@ const handleKeydown = (e) => {
         </v-card>
       </v-row>
       <v-row v-if="!_.isEmpty(message.sdImages)">
-        <v-col cols="3" v-for="(sdImage, index) in message.sdImages" :key="index">
+        <v-col :cols="mobile ? 6 : 3" v-for="(sdImage, index) in message.sdImages" :key="index">
           <v-card max-width="500px">
             <v-img :src="sdImage.imageUrlMiddle" @click="openImage(sdImage)" alt="alt">
               <template v-slot:placeholder>
@@ -408,7 +408,7 @@ const handleKeydown = (e) => {
   <v-dialog v-model="dialogRef" @click="dialogRef=!dialogRef">
     <v-row v-if="mobile">
       <v-col cols="12">
-        <v-img :src="imageUrlMiddleRef" :lazy-src="imageUrlLowRef" :max-width="width * 0.8" :max-height="height * 0.95">
+        <v-img :src="imageUrlMiddleRef" :lazy-src="imageUrlLowRef">
           <template v-slot:placeholder>
             <div class="d-flex align-center justify-center fill-height">
               <v-progress-circular
