@@ -24,6 +24,7 @@ import {useNewsStore} from "@/stores/newsStore";
 import {useImageStore} from "@/stores/imageStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
+import SdImage from "@/protocol/sdiffusion/SdImage";
 
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
@@ -58,7 +59,7 @@ async function doInitHistory() {
     return;
   }
   for (const message of messages.value) {
-    if (!_.isEmpty(message.sdIds)) {
+    if (!_.isEmpty(message.sdImages)) {
       continue;
     }
     const request = new SdHistoryRequest();
@@ -102,11 +103,7 @@ interface Message {
   progress: number;
   refreshTime: number;
   costTime: number;
-  sdIds: Array<number>;
-  imageUrl: string;
-  imageUrlLow: string;
-  imageUrlMiddle: string;
-  imageUrlHigh: string;
+  sdImages: Array<SdImage>;
 }
 
 const styleInfos = [
@@ -222,13 +219,12 @@ watch(
 );
 
 
-function openImage(message) {
+function openImage(sdImage) {
   dialogRef.value = true;
-  imageUrlRef.value = message.imageUrl;
-  imageUrlLowRef.value = message.imageUrlLow;
-  imageUrlMiddleRef.value = message.imageUrlMiddle;
-  imageUrlHighRef.value = message.imageUrlHigh;
-  console.log(height.value)
+  imageUrlRef.value = sdImage.imageUrl;
+  imageUrlLowRef.value = sdImage.imageUrlLow;
+  imageUrlMiddleRef.value = sdImage.imageUrlMiddle;
+  imageUrlHighRef.value = sdImage.imageUrlHigh;
 }
 
 // Send Messsage
@@ -245,22 +241,17 @@ const sendMessage = async () => {
     request.negativePrompt = negativePromptRef.value;
     request.steps = stepsRef.value;
     request.batchSize = batchSizeRef.value;
-    request.style = styleRef.value;
-    request.dimension = dimensionRef.value;
+    request.style = styleInfos[styleRef.value].style;
+    request.dimension = dimensionInfos[dimensionRef.value].dimension;
     request.ignores = imageStore.sds;
     const response: SdSimulateResponse = await asyncAsk(request);
-    console.log(response);
     const message = {
       id: response.nonce,
       content: request.prompt,
       progress: 0,
       refreshTime: 0,
       costTime: response.costTime,
-      sdIds: [],
-      imageUrl: "",
-      imageUrlLow: "",
-      imageUrlMiddle: "",
-      imageUrlHigh: ""
+      sdImages: []
     };
     setTimeout(() => refreshMessage(response.nonce), 100);
     messages.value.push(message);
@@ -284,10 +275,14 @@ function refreshMessage(id) {
 
 // 下面的逻辑都是自己的
 const sdSimulateNoticeRefresh = (packet: SdSimulateNotice) => {
-  const id = packet.nonce;
-
   isLoading.value = false;
-  snackbarStore.showErrorMessage("aaaaaaaaaaaaaaaa")
+
+  const nonce = packet.nonce;
+  const images = packet.images;
+  const message = _.find(messages.value, it => it.id == nonce);
+  message.refreshTime = message.costTime + 3000;
+  message.sdImages = images;
+
 };
 
 
@@ -299,7 +294,9 @@ const handleKeydown = (e) => {
   } else if (e.key === "Enter") {
     // 当只按下 enter 时，发送消息
     e.preventDefault();
-    sendMessage();
+    if (!isLoading.value) {
+      sendMessage();
+    }
   }
 };
 
@@ -329,12 +326,10 @@ const handleKeydown = (e) => {
           <md-editor v-model="message.content" class="font-1" previewOnly/>
         </v-card>
       </v-row>
-      <v-row v-if="!_.isEmpty(message.imageUrl)">
-        <v-avatar v-if="!mobile" class="mt-3 mb-1 ml-3">
-        </v-avatar>
-        <v-col cols="12" md="11">
+      <v-row v-if="!_.isEmpty(message.sdImages)">
+        <v-col cols="3" v-for="(sdImage, index) in message.sdImages" :key="index">
           <v-card max-width="500px">
-            <v-img :src="message.imageUrlLow" @click="openImage(message)" alt="alt">
+            <v-img :src="sdImage.imageUrlMiddle" @click="openImage(sdImage)" alt="alt">
               <template v-slot:placeholder>
                 <div class="d-flex align-center justify-center fill-height">
                   <v-progress-circular
@@ -347,7 +342,7 @@ const handleKeydown = (e) => {
           </v-card>
         </v-col>
       </v-row>
-      <v-row v-if="_.isEmpty(message.sdIds)">
+      <v-row v-if="_.isEmpty(message.sdImages)">
         <v-col>
           <v-progress-linear
             v-model="message.progress"
@@ -428,7 +423,7 @@ const handleKeydown = (e) => {
     </v-row>
     <v-row v-else>
       <v-col offset="1">
-        <v-img :src="imageUrlMiddleRef" :lazy-src="imageUrlLowRef" :max-height="height * 0.95">
+        <v-img :src="imageUrlHighRef" :lazy-src="imageUrlMiddleRef" :max-height="height * 0.7">
           <template v-slot:placeholder>
             <div class="d-flex align-center justify-center fill-height">
               <v-progress-circular
@@ -513,6 +508,8 @@ const handleKeydown = (e) => {
               :items="dimensionInfos"
               item-title="description"
               item-value="dimension"
+              hint="分辨率(Resolution)"
+              persistent-hint
               single-line
               chips
             ></v-select>

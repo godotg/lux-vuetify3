@@ -4,7 +4,7 @@ import SdImage from './SdImage';
 class SdSimulateNotice {
 
     nonce: number = 0;
-    images: Array<fun.jiucai.common.packet.sdiffusion.SdImage> = [];
+    images: Array<SdImage> = [];
 
     static PROTOCOL_ID: number = 341;
 

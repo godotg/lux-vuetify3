@@ -3,7 +3,7 @@ import ChatMessage from './ChatMessage';
 
 class GroupChatNotice {
 
-    messages: Array<fun.jiucai.common.packet.chat.ChatMessage> = [];
+    messages: Array<ChatMessage> = [];
 
     static PROTOCOL_ID: number = 241;
 

@@ -3,7 +3,7 @@ import GaiNian from './GaiNian';
 
 class GnResponse {
 
-    gns: Array<fun.jiucai.common.packet.gn.GaiNian> = [];
+    gns: Array<GaiNian> = [];
 
     static PROTOCOL_ID: number = 222;
 

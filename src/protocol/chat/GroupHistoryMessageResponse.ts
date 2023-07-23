@@ -4,7 +4,7 @@ import ChatMessage from './ChatMessage';
 class GroupHistoryMessageResponse {
 
     groupId: number = 0;
-    messages: Array<fun.jiucai.common.packet.chat.ChatMessage> = [];
+    messages: Array<ChatMessage> = [];
     onlineUsers: number = 0;
 
     static PROTOCOL_ID: number = 244;
