@@ -111,10 +111,13 @@ interface Message {
 // Message List
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
+const dialogSettingRef = ref<boolean>(false);
 const imageUrlRef = ref<string>("");
 const imageUrlLowRef = ref<string>("");
 const imageUrlMiddleRef = ref<string>("");
 const imageUrlHighRef = ref<string>("");
+const styleRef = ref<number>(0);
+
 
 // User Input Message
 const userMessage = ref("");
@@ -328,7 +331,7 @@ const handleKeydown = (e) => {
       auto-grow
     >
       <template #prepend-inner>
-        <v-icon color="primary">mdi-microphone</v-icon>
+        <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef">mdi-cog-outline</v-icon>
       </template>
       <template v-slot:append-inner>
         <v-fade-transition leave-absolute>
@@ -382,5 +385,37 @@ const handleKeydown = (e) => {
         <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
       </v-col>
     </v-row>
+  </v-dialog>
+
+  <v-dialog v-model="dialogSettingRef">
+    <v-card>
+      <v-container>
+        <v-row>
+          <v-col>
+            <v-slide-group
+              v-model="styleRef"
+              center-active
+              show-arrows
+            >
+              <v-slide-group-item
+                v-for="n in 9"
+                :key="n"
+                v-slot="{ isSelected, toggle }"
+              >
+                  <v-img
+                    src="aa/style/0.png"
+                    cover
+                    width="300"
+                    class="ma-2 text-right"
+                    @click="toggle"
+                  >
+                    <v-btn v-if="isSelected" icon="mdi-check" color="success" size="small"></v-btn>
+                  </v-img>
+              </v-slide-group-item>
+            </v-slide-group>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
   </v-dialog>
 </template>

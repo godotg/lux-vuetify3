@@ -82,26 +82,6 @@ function connect(desc): WebSocket {
     buffer.writeBytes(data);
     buffer.setReadOffset(4);
     const packet = ProtocolManager.read(buffer);
-    let attachment: any = null;
-    if (buffer.isReadable() && buffer.readBoolean()) {
-      console.log(new Date(), "Websocket收到异步response <-- ", packet);
-      attachment = ProtocolManager.read(buffer);
-      const encodedPacketInfo = signalAttachmentMap.get(attachment.signalId);
-      if (encodedPacketInfo == undefined) {
-        throw "可能消息超时找不到对应的SignalAttachment:" + attachment;
-      }
-      encodedPacketInfo.promiseResolve(packet);
-      return;
-    }
-    console.log(new Date(), "Websocket收到同步response <-- ", packet);
-    if (packet.protocolId() == Pong.PROTOCOL_ID) {
-      if (Number.isInteger(packet.time)) {
-        pingTime = packet.time;
-      } else {
-        pingTime = Number.parseInt(packet.time);
-      }
-      return;
-    }
 
     if (packet.protocolId() == Error.PROTOCOL_ID) {
       snackbarStore.showErrorMessage(packet.messerrorMessageage);
@@ -119,6 +99,27 @@ function connect(desc): WebSocket {
         snackbarStore.showWarningMessage(packet.message);
       } else {
         snackbarStore.showInfoMessage(packet.message);
+      }
+      return;
+    }
+
+    let attachment: any = null;
+    if (buffer.isReadable() && buffer.readBoolean()) {
+      console.log(new Date(), "Websocket收到异步response <-- ", packet);
+      attachment = ProtocolManager.read(buffer);
+      const encodedPacketInfo = signalAttachmentMap.get(attachment.signalId);
+      if (encodedPacketInfo == undefined) {
+        throw "可能消息超时找不到对应的SignalAttachment:" + attachment;
+      }
+      encodedPacketInfo.promiseResolve(packet);
+      return;
+    }
+    console.log(new Date(), "Websocket收到同步response <-- ", packet);
+    if (packet.protocolId() == Pong.PROTOCOL_ID) {
+      if (Number.isInteger(packet.time)) {
+        pingTime = packet.time;
+      } else {
+        pingTime = Number.parseInt(packet.time);
       }
       return;
     }
