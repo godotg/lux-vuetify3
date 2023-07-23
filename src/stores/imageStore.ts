@@ -5,16 +5,17 @@ export const useImageStore = defineStore("imageStore", {
   state: () => ({
     midPrompts: [],
     sdPrompts: [],
-    downloads: [],
+    sdParameters: null,
+    sds: [],
+    downloads: []
   }),
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["midPrompts", "sdPrompts", "downloads"]}],
+    strategies: [{storage: localStorage, paths: ["midPrompts", "sdPrompts", "sdParameters", "sds", "downloads"]}],
   },
 
   getters: {},
 
-  actions: {
-  }
+  actions: {}
 });

@@ -41,6 +41,7 @@ onMounted(() => {
   initHistory();
   setInterval(() => initHistory(), 5 * 1000);
   setTimeout(() => scrollToBottomDelay(), 100);
+  loadConfigs();
 });
 
 async function initHistory() {
@@ -108,6 +109,55 @@ interface Message {
   midjourneyId: number;
 }
 
+const styleInfos = [
+  {
+    image: "aa/style/0.png",
+    style: 0,
+    description: "二次元"
+  },
+  {
+    image: "aa/style/1.png",
+    style: 0,
+    description: "二次元"
+  },
+  {
+    image: "aa/style/2.png",
+    style: 0,
+    description: "二次元"
+  },
+  {
+    image: "aa/style/3.png",
+    style: 0,
+    description: "二次元"
+  },
+  {
+    image: "aa/style/4.png",
+    style: 0,
+    description: "二次元"
+  },
+  {
+    image: "aa/style/5.png",
+    style: 0,
+    description: "二次元"
+  },
+  {
+    image: "aa/style/6.png",
+    style: 0,
+    description: "二次元"
+  },
+];
+
+const dimensionInfos = [
+  {
+    dimension: 0,
+    description: "768 x 768"
+  },
+  {
+    dimension: 1,
+    description: "768 x 1024"
+  },
+];
+
 // Message List
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
@@ -116,11 +166,60 @@ const imageUrlRef = ref<string>("");
 const imageUrlLowRef = ref<string>("");
 const imageUrlMiddleRef = ref<string>("");
 const imageUrlHighRef = ref<string>("");
+
+const promptRef = ref<string>("");
+const negativePromptRef = ref<string>("");
 const styleRef = ref<number>(0);
+const stepsRef = ref<number>(20);
+const batchSizeRef = ref<number>(1);
+const dimensionRef = ref<number>(0);
 
+function styleInfo(style) {
+  const ele = _.find(styleInfos, it => it.style == style);
+  if (_.isNil(ele)) {
+    return _.first(styleInfos);
+  }
+  return ele;
+}
 
-// User Input Message
-const userMessage = ref("");
+function loadConfigs() {
+  const sdParameters = imageStore.sdParameters;
+  if (_.isNil(sdParameters)) {
+    return;
+  }
+  promptRef.value = sdParameters.prompt;
+  negativePromptRef.value = sdParameters.negativePrompt;
+  styleRef.value = sdParameters.style;
+  stepsRef.value = sdParameters.step;
+  batchSizeRef.value = sdParameters.batchSize;
+  dimensionRef.value = sdParameters.dimension;
+}
+
+function saveConfigs() {
+  imageStore.sdParameters = {
+    prompt: promptRef.value,
+    negativePrompt: negativePromptRef.value,
+    style: styleRef.value,
+    step: stepsRef.value,
+    batchSize: batchSizeRef.value,
+    dimension: dimensionRef.value
+  };
+}
+
+watch(
+  () => dialogSettingRef.value,
+  (val) => {
+    if (val) {
+      return;
+    }
+    // 持久化到本地
+    saveConfigs();
+  },
+  {
+    deep: true,
+  }
+);
+
 
 const isLoading = ref(false);
 
@@ -136,14 +235,20 @@ function openImage(message) {
 // Send Messsage
 const sendMessage = async () => {
   // Clear the input
-  if (userMessage.value) {
-    const request = new SdSimulateRequest();
-    request.prompt = userMessage.value;
-    request.nonce = _.random(0, 10_0000_0000);
+  if (promptRef.value) {
+    saveConfigs();
     isLoading.value = true;
-    userMessage.value = "";
     animationRunIndex = _.random(1, 5);
 
+    const request = new SdSimulateRequest();
+    request.nonce = _.random(0, 10_0000_0000);
+    request.prompt = promptRef.value;
+    request.negativePrompt = negativePromptRef.value;
+    request.steps = stepsRef.value;
+    request.batchSize = batchSizeRef.value;
+    request.style = styleRef.value;
+    request.dimension = dimensionRef.value;
+    request.ignores = imageStore.sds;
     const response: SdSimulateResponse = await asyncAsk(request);
     console.log(response);
   }
@@ -232,7 +337,7 @@ const handleKeydown = (e) => {
   if (e.key === "Enter" && (e.altKey || e.shiftKey)) {
     // 当同时按下 alt或者shift 和 enter 时，插入一个换行符
     e.preventDefault();
-    userMessage.value += "\n";
+    promptRef.value += "\n";
   } else if (e.key === "Enter") {
     // 当只按下 enter 时，发送消息
     e.preventDefault();
@@ -322,7 +427,7 @@ const handleKeydown = (e) => {
       type="text"
       variant="solo"
       ref="input"
-      v-model="userMessage"
+      v-model="promptRef"
       placeholder="prompt"
       hide-details
       @keydown="handleKeydown"
@@ -387,7 +492,7 @@ const handleKeydown = (e) => {
     </v-row>
   </v-dialog>
 
-  <v-dialog v-model="dialogSettingRef">
+  <v-dialog v-model="dialogSettingRef" :max-width="mobile ? width : width * 0.7">
     <v-card>
       <v-container>
         <v-row>
@@ -398,21 +503,83 @@ const handleKeydown = (e) => {
               show-arrows
             >
               <v-slide-group-item
-                v-for="n in 9"
-                :key="n"
+                v-for="(styleInfo, index) in styleInfos"
+                :key="index"
                 v-slot="{ isSelected, toggle }"
               >
-                  <v-img
-                    src="aa/style/0.png"
-                    cover
-                    width="300"
-                    class="ma-2 text-right"
-                    @click="toggle"
-                  >
-                    <v-btn v-if="isSelected" icon="mdi-check" color="success" size="small"></v-btn>
-                  </v-img>
+                <v-img
+                  :src="styleInfo.image"
+                  cover
+                  width="300"
+                  max-width="300"
+                  class="ma-2 text-right"
+                  @click="toggle"
+                >
+                  <v-btn v-if="isSelected" icon="mdi-check" color="cyan" size="small"></v-btn>
+                </v-img>
               </v-slide-group-item>
             </v-slide-group>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-chip color="primary" label size="large">
+              <v-icon start icon="mdi-heart-circle-outline"></v-icon>
+              {{ styleInfo(styleRef).description }}
+            </v-chip>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-slider
+              v-model="stepsRef"
+              thumb-color="primary"
+              thumb-label
+              step="1"
+              min="20"
+              max="150"
+              label="步数(Sampling steps)"
+            ></v-slider>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-slider
+              v-model="batchSizeRef"
+              thumb-color="primary"
+              thumb-label
+              step="1"
+              min="1"
+              max="4"
+              label="张数(Batch size)"
+            ></v-slider>
+          </v-col>
+          <v-col>
+            <v-select
+              v-model="dimensionRef"
+              :items="dimensionInfos"
+              item-title="description"
+              item-value="dimension"
+              single-line
+              chips
+            ></v-select>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-textarea
+              color="primary"
+              type="text"
+              variant="solo"
+              ref="input"
+              v-model="negativePromptRef"
+              placeholder="negative prompt"
+              hide-details
+              rows="1"
+              max-rows="9"
+              auto-grow
+            >
+            </v-textarea>
           </v-col>
         </v-row>
       </v-container>
