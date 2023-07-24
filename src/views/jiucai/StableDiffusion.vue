@@ -501,8 +501,7 @@ const handleKeydown = (e) => {
                 <v-img
                   :src="styleInfo.image"
                   cover
-                  width="300"
-                  max-width="300"
+                  :width="mobile ? 100 : 300"
                   class="ma-2 text-right"
                   @click="toggle"
                 >
@@ -529,12 +528,12 @@ const handleKeydown = (e) => {
               step="1"
               min="20"
               max="150"
-              label="步数(Sampling steps)"
+              label="步数(Steps)"
             ></v-slider>
           </v-col>
         </v-row>
         <v-row>
-          <v-col>
+          <v-col :cols="mobile ? 12 : 5">
             <v-slider
               v-model="batchSizeRef"
               thumb-color="primary"
@@ -542,10 +541,10 @@ const handleKeydown = (e) => {
               step="1"
               min="1"
               max="4"
-              label="张数(Batch size)"
+              label="张数(Batch)"
             ></v-slider>
           </v-col>
-          <v-col>
+          <v-col md="2">
             <v-select
               v-model="dimensionRef"
               :items="dimensionInfos"
@@ -568,7 +567,7 @@ const handleKeydown = (e) => {
               v-model="negativePromptRef"
               placeholder="negative prompt"
               hide-details
-              rows="1"
+              rows="3"
               max-rows="9"
               auto-grow
             >
