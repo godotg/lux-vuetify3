@@ -422,7 +422,8 @@ const handleKeydown = (e) => {
             auto-grow
           >
             <template #prepend-inner>
-              <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef" size="x-large" v-ripple>mdi-cog-outline
+              <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef" size="x-large" v-ripple>
+                mdi-cog-outline
                 mdi-spin
               </v-icon>
             </template>
@@ -461,12 +462,12 @@ const handleKeydown = (e) => {
         </v-img>
       </v-col>
       <v-col cols="3" offset="9">
-        <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
+        <v-btn color="primary" icon="mdi-cloud-download-outline" size="large" @click="download(imageUrlRef)"></v-btn>
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-col offset="1">
-        <v-img :src="imageUrlHighRef" :lazy-src="imageUrlMiddleRef" :max-height="height * 0.7">
+      <v-col offset="2">
+        <v-img :src="imageUrlHighRef" :lazy-src="imageUrlMiddleRef" :max-height="height * 0.8">
           <template v-slot:placeholder>
             <div class="d-flex align-center justify-center fill-height">
               <v-progress-circular
@@ -477,8 +478,8 @@ const handleKeydown = (e) => {
           </template>
         </v-img>
       </v-col>
-      <v-col cols="1" align-self="end">
-        <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
+      <v-col cols="2" align-self="end">
+        <v-btn color="primary" icon="mdi-cloud-download-outline" size="x-large" @click="download(imageUrlRef)"></v-btn>
       </v-col>
     </v-row>
   </v-dialog>
