@@ -247,7 +247,7 @@ const sendMessage = async () => {
     const response: SdSimulateResponse = await asyncAsk(request);
     const message = {
       id: response.nonce,
-      content: request.prompt,
+      content: response.enPrompt,
       batchSize: request.batchSize,
       progress: 0,
       refreshTime: 0,
