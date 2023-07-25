@@ -108,37 +108,37 @@ interface Message {
 
 const styleInfos = [
   {
-    image: "aa/style/0.png",
+    image: "aa/style/0.jpg",
     style: 0,
     description: "二次元"
   },
   {
-    image: "aa/style/1.png",
+    image: "aa/style/1.jpg",
     style: 0,
     description: "二次元"
   },
   {
-    image: "aa/style/2.png",
+    image: "aa/style/2.jpg",
     style: 0,
     description: "二次元"
   },
   {
-    image: "aa/style/3.png",
+    image: "aa/style/3.jpg",
     style: 0,
     description: "二次元"
   },
   {
-    image: "aa/style/4.png",
+    image: "aa/style/4.jpg",
     style: 0,
     description: "二次元"
   },
   {
-    image: "aa/style/5.png",
+    image: "aa/style/5.jpg",
     style: 0,
     description: "二次元"
   },
   {
-    image: "aa/style/6.png",
+    image: "aa/style/6.jpg",
     style: 0,
     description: "二次元"
   },
