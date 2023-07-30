@@ -203,17 +203,13 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
     scrollToBottomDelay();
   } else if (type === "consumer") {
     updateMessage(packet);
-    scrollToBottomDelay();
   } else if (type === "create") {
     updateMessage(packet);
-    scrollToBottomDelay();
   } else if (type === "update") {
     updateMessage(packet);
   } else if (type === "complete") {
     updateMessage(packet);
-    setTimeout(() => scrollToBottomDelay(), 1000);
-    setTimeout(() => scrollToBottomDelay(), 2000);
-    setTimeout(() => scrollToBottomDelay(), 3000);
+    scrollToBottomDelay();
     isLoading.value = false;
   } else if (type === "stop") {
     updateMessage(packet);
