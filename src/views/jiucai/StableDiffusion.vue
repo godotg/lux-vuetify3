@@ -20,6 +20,7 @@ import {useImageStore} from "@/stores/imageStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import SdImage from "@/protocol/sdiffusion/SdImage";
+import {isBlank} from "@/utils/stringUtils";
 
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
@@ -229,6 +230,10 @@ function openImage(sdImage) {
 
 // Send Messsage
 const sendMessage = async () => {
+  if (isBlank(userMessage.value)) {
+    snackbarStore.showErrorMessage("prompt不能为空");
+    return
+  }
   // Clear the input
   if (promptRef.value) {
     saveConfigs();

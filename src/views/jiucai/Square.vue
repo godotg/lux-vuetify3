@@ -21,6 +21,7 @@ import {useNewsStore, avatarAutoUrl} from "@/stores/newsStore";
 import {parseTime} from "@/utils/timeUtils";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
+import {isBlank} from "@/utils/stringUtils";
 
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
@@ -55,7 +56,10 @@ const onlineUsersRef = ref(0);
 // Send Messsage
 const sendMessage = async () => {
   // Clear the input
-
+  if (isBlank(userMessage.value)) {
+    snackbarStore.showErrorMessage("prompt不能为空");
+    return
+  }
   if (userMessage.value) {
 
     // 自己的韭菜广场的发送

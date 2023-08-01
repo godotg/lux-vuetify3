@@ -4,6 +4,7 @@ import AnimationAI1 from "@/animation/AnimationAI1.vue";
 import AnimationAI2 from "@/animation/AnimationAI2.vue";
 import AnimationBot1 from "@/animation/AnimationBot1.vue";
 import { read, countAndCompleteCodeBlocks } from "@/utils/aiUtils";
+import { isBlank } from "@/utils/stringUtils";
 import { scrollToBottom } from "@/utils/common";
 import { Icon } from "@iconify/vue";
 import MdEditor from "md-editor-v3";
@@ -97,6 +98,10 @@ const isLoading = ref(false);
 
 // Send Messsage
 const sendMessage = async () => {
+  if (isBlank(userMessage.value)) {
+    snackbarStore.showErrorMessage("prompt不能为空");
+    return
+  }
   if (userMessage.value) {
     // Add the message to the list
     messages.value.push({

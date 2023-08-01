@@ -24,6 +24,7 @@ import {useImageStore} from "@/stores/imageStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
+import {isBlank} from "@/utils/stringUtils";
 
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
@@ -140,7 +141,10 @@ function openImage(message) {
 // Send Messsage
 const sendMessage = async () => {
   // Clear the input
-
+  if (isBlank(userMessage.value)) {
+    snackbarStore.showErrorMessage("prompt不能为空");
+    return
+  }
   if (userMessage.value) {
     // 自己的韭菜广场的发送
     const request = new MidImagineRequest();
