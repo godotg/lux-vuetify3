@@ -214,6 +214,9 @@ const img2Img = async () => {
   imageFileUploadingRef.value = false;
   imageFileUploadValueRef.value = 0;
   imageFileRef.value = null;
+
+  userMessage.value = "https://jiucai.fun/" + ossPolicy.dir + " " + userMessage.value;
+  text2Img();
 };
 
 const reroll = async (midjourneyId) => {
@@ -439,16 +442,8 @@ const handleKeydown = (e) => {
         </template>
         <template v-slot:append-inner>
           <v-fade-transition leave-absolute>
-            <Icon
-              v-if="isLoading"
-              class="text-primary"
-              width="30"
-              icon="eos-icons:three-dots-loading"
-            />
-            <v-icon color="primary" v-else @click="text2Img"
-            >mdi-send
-            </v-icon
-            >
+            <Icon v-if="isLoading" class="text-primary" width="30" icon="eos-icons:three-dots-loading"/>
+            <v-icon color="primary" v-else @click="text2Img">mdi-send</v-icon>
           </v-fade-transition>
         </template>
       </v-textarea>
@@ -474,16 +469,8 @@ const handleKeydown = (e) => {
             </template>
             <template v-slot:append-inner>
               <v-fade-transition leave-absolute>
-                <Icon
-                  v-if="isLoading"
-                  class="text-primary"
-                  width="30"
-                  icon="eos-icons:three-dots-loading"
-                />
-                <v-icon color="primary" v-else @click="text2Img"
-                >mdi-send
-                </v-icon
-                >
+                <Icon v-if="isLoading" class="text-primary" width="30" icon="eos-icons:three-dots-loading"/>
+                <v-icon color="primary" v-else @click="text2Img">mdi-send</v-icon>
               </v-fade-transition>
             </template>
           </v-textarea>
@@ -576,7 +563,7 @@ const handleKeydown = (e) => {
           {{ imageFileUploadValueRef }}
         </v-progress-circular>
         <v-spacer/>
-        <v-btn :disabled="imageFileUploadingRef" prepend-icon="mdi-send" color="primary" variant="flat" @click="img2Img">
+        <v-btn :disabled="imageFileUploadingRef || isLoading" prepend-icon="mdi-send" color="primary" variant="flat" @click="img2Img">
           图生图
         </v-btn>
       </v-card-actions>
