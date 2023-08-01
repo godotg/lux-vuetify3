@@ -47,6 +47,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/sdApi/, ""),
       },
+      "/upload": {
+        target: "https://static.jiucai.fun",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/upload/, ""),
+      },
     },
   },
   css: {

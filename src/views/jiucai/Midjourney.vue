@@ -122,6 +122,8 @@ const imageUrlLowRef = ref<string>("");
 const imageUrlMiddleRef = ref<string>("");
 const imageUrlHighRef = ref<string>("");
 const imageFileRef = ref(null);
+const imageFileUploadingRef = ref<boolean>(false);
+const imageFileUploadValueRef = ref<number>(0);
 
 // User Input Message
 const userMessage = ref("");
@@ -178,6 +180,8 @@ const img2Img = async () => {
     return
   }
 
+  const file = _.first(imageFileRef.value);
+
   // 上传图片
   const formData = new FormData();
   formData.append('key', ossPolicy.dir);
@@ -186,16 +190,30 @@ const img2Img = async () => {
   formData.append('success_action_status', "200");
   formData.append('callback', '');
   formData.append('signature', ossPolicy.signature);
-  formData.append('file', imageFileRef.value);
+  formData.append('file', file);
 
-  console.log(imageFileRef.value)
-  const uploadImageResponse = await axios.postForm(ossPolicy.host, formData, {
+  imageFileUploadingRef.value = true;
+  imageFileUploadValueRef.value = 0;
+
+  // const uploadImageResponse = await axios.postForm("https://static.jiucai.fun", formData, {
+  //   onUploadProgress: (progressEvent) => {
+  //     const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
+  //     imageFileUploadValueRef.value = complete;
+  //   }
+  // });
+
+  const uploadImageResponse = await axios.create({baseURL: "/upload", timeout: 100000,}).postForm("", formData, {
     onUploadProgress: (progressEvent) => {
-      console.log(progressEvent);
+      console.log(progressEvent)
+      const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
+      imageFileUploadValueRef.value = complete;
     }
   });
 
-  console.log("aaaaaaaaaaaaaaaaaaaaaa")
+  dialogImg2ImgRef.value = false;
+  imageFileUploadingRef.value = false;
+  imageFileUploadValueRef.value = 0;
+  imageFileRef.value = null;
 };
 
 const reroll = async (midjourneyId) => {
@@ -511,6 +529,8 @@ const handleKeydown = (e) => {
     </v-row>
   </v-dialog>
 
+
+
   <v-dialog v-model="dialogImg2ImgRef" max-width="50%">
     <v-card>
       <v-card-text>
@@ -545,8 +565,18 @@ const handleKeydown = (e) => {
       </v-card-text>
 
       <v-card-actions>
+        <v-progress-circular
+          v-if="imageFileUploadingRef"
+          :rotate="-90"
+          :size="100"
+          :width="15"
+          :model-value="imageFileUploadValueRef"
+          color="primary"
+        >
+          {{ imageFileUploadValueRef }}
+        </v-progress-circular>
         <v-spacer/>
-        <v-btn prepend-icon="mdi-send" color="primary" variant="flat" @click="img2Img">
+        <v-btn :disabled="imageFileUploadingRef" prepend-icon="mdi-send" color="primary" variant="flat" @click="img2Img">
           图生图
         </v-btn>
       </v-card-actions>
