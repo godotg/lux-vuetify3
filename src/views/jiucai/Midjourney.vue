@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import axios from "axios";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import AnimationRun1 from "@/animation/AnimationRun1.vue";
 import AnimationRun2 from "@/animation/AnimationRun2.vue";
@@ -17,6 +18,9 @@ import MidHistoryRequest from "@/protocol/midjourney/MidHistoryRequest";
 import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
 import ImageDownloadRequest from "@/protocol/sdiffusion/ImageDownloadRequest";
 import ImageDownloadResponse from "@/protocol/sdiffusion/ImageDownloadResponse";
+import OssPolicyRequest from "@/protocol/auth/OssPolicyRequest";
+import OssPolicyResponse from "@/protocol/auth/OssPolicyResponse";
+import OssPolicyVO from "@/protocol/auth/OssPolicyVO";
 
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import {useNewsStore} from "@/stores/newsStore";
@@ -112,10 +116,12 @@ interface Message {
 // Message List
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
+const dialogImg2ImgRef = ref<boolean>(false);
 const imageUrlRef = ref<string>("");
 const imageUrlLowRef = ref<string>("");
 const imageUrlMiddleRef = ref<string>("");
 const imageUrlHighRef = ref<string>("");
+const imageFileRef = ref(null);
 
 // User Input Message
 const userMessage = ref("");
@@ -138,23 +144,58 @@ function openImage(message) {
   console.log(height.value)
 }
 
-// Send Messsage
-const sendMessage = async () => {
-  // Clear the input
+const text2Img = async () => {
   if (isBlank(userMessage.value)) {
     snackbarStore.showErrorMessage("prompt不能为空");
     return
   }
-  if (userMessage.value) {
-    // 自己的韭菜广场的发送
-    const request = new MidImagineRequest();
-    request.prompt = userMessage.value;
-    request.nonce = seed();
-    isLoading.value = true;
-    userMessage.value = "";
-    animationRunIndex = _.random(1, 5);
-    send(request);
+  // 自己的韭菜广场的发送
+  const request = new MidImagineRequest();
+  request.prompt = userMessage.value;
+  request.nonce = seed();
+  isLoading.value = true;
+  userMessage.value = "";
+  animationRunIndex = _.random(1, 5);
+  send(request);
+};
+
+const img2Img = async () => {
+  if (isBlank(userMessage.value)) {
+    snackbarStore.showErrorMessage("prompt不能为空");
+    return
   }
+
+  if (imageFileRef.value == null) {
+    snackbarStore.showErrorMessage("图片不能为空");
+    return
+  }
+
+  // 先获得oss policy
+  const response: OssPolicyResponse = await asyncAsk(new OssPolicyRequest());
+  const ossPolicy: OssPolicyVO | null = response.ossPolicy;
+  if (ossPolicy == null) {
+    snackbarStore.showErrorMessage("图片上传策略异常");
+    return
+  }
+
+  // 上传图片
+  const formData = new FormData();
+  formData.append('key', ossPolicy.dir);
+  formData.append('policy', ossPolicy.policy);
+  formData.append('OSSAccessKeyId', ossPolicy.accessKeyId);
+  formData.append('success_action_status', "200");
+  formData.append('callback', '');
+  formData.append('signature', ossPolicy.signature);
+  formData.append('file', imageFileRef.value);
+
+  console.log(imageFileRef.value)
+  const uploadImageResponse = await axios.postForm(ossPolicy.host, formData, {
+    onUploadProgress: (progressEvent) => {
+      console.log(progressEvent);
+    }
+  });
+
+  console.log("aaaaaaaaaaaaaaaaaaaaaa")
 };
 
 const reroll = async (midjourneyId) => {
@@ -261,7 +302,7 @@ const handleKeydown = (e) => {
   } else if (e.key === "Enter") {
     // 当只按下 enter 时，发送消息
     e.preventDefault();
-    sendMessage();
+    text2Img();
   }
 };
 
@@ -376,7 +417,7 @@ const handleKeydown = (e) => {
         auto-grow
       >
         <template #prepend-inner>
-          <v-icon color="primary">mdi-microphone</v-icon>
+          <v-icon color="primary" @click="dialogImg2ImgRef = !dialogImg2ImgRef">mdi-image-plus-outline</v-icon>
         </template>
         <template v-slot:append-inner>
           <v-fade-transition leave-absolute>
@@ -386,7 +427,7 @@ const handleKeydown = (e) => {
               width="30"
               icon="eos-icons:three-dots-loading"
             />
-            <v-icon color="primary" v-else @click="sendMessage"
+            <v-icon color="primary" v-else @click="text2Img"
             >mdi-send
             </v-icon
             >
@@ -411,7 +452,7 @@ const handleKeydown = (e) => {
             auto-grow
           >
             <template #prepend-inner>
-              <v-icon color="primary">mdi-microphone</v-icon>
+              <v-icon color="primary" @click="dialogImg2ImgRef = !dialogImg2ImgRef">mdi-image-plus-outline</v-icon>
             </template>
             <template v-slot:append-inner>
               <v-fade-transition leave-absolute>
@@ -421,7 +462,7 @@ const handleKeydown = (e) => {
                   width="30"
                   icon="eos-icons:three-dots-loading"
                 />
-                <v-icon color="primary" v-else @click="sendMessage"
+                <v-icon color="primary" v-else @click="text2Img"
                 >mdi-send
                 </v-icon
                 >
@@ -468,5 +509,47 @@ const handleKeydown = (e) => {
         <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
       </v-col>
     </v-row>
+  </v-dialog>
+
+  <v-dialog v-model="dialogImg2ImgRef" max-width="50%">
+    <v-card>
+      <v-card-text>
+        <v-file-input
+          v-model="imageFileRef"
+          label="image to image"
+          variant="solo-filled"
+          prepend-icon="mdi-image-outline"
+          accept="image/*"
+          color="primary"
+          chips
+          show-size
+          counter
+        ></v-file-input>
+      </v-card-text>
+
+      <v-card-text>
+        <v-textarea
+          color="primary"
+          type="text"
+          variant="solo"
+          ref="input"
+          v-model="userMessage"
+          placeholder="prompt"
+          hide-details
+          @keydown="handleKeydown"
+          rows="3"
+          max-rows="9"
+          auto-grow
+        >
+        </v-textarea>
+      </v-card-text>
+
+      <v-card-actions>
+        <v-spacer/>
+        <v-btn prepend-icon="mdi-send" color="primary" variant="flat" @click="img2Img">
+          图生图
+        </v-btn>
+      </v-card-actions>
+    </v-card>
   </v-dialog>
 </template>
