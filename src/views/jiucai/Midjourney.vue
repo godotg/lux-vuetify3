@@ -127,8 +127,7 @@ const imageFileUploadValueRef = ref<number>(0);
 
 // User Input Message
 const userMessage = ref("");
-
-const isLoading = ref(false);
+const isLoadingRef = ref(false);
 
 function seed(): string {
   const a = _.random(10_0000_0000, 20_0000_0000);
@@ -155,7 +154,7 @@ const text2Img = async () => {
   const request = new MidImagineRequest();
   request.prompt = userMessage.value;
   request.nonce = seed();
-  isLoading.value = true;
+  isLoadingRef.value = true;
   userMessage.value = "";
   animationRunIndex = _.random(1, 5);
   send(request);
@@ -223,7 +222,7 @@ const reroll = async (midjourneyId) => {
   const request = new MidRerollRequest();
   request.midjourneyId = midjourneyId;
   request.nonce = seed();
-  isLoading.value = true;
+  isLoadingRef.value = true;
   userMessage.value = "";
   animationRunIndex = _.random(1, 5);
   send(request);
@@ -235,7 +234,7 @@ const select = async (midjourneyId, index, category) => {
   request.index = index;
   request.category = category;
   request.nonce = seed();
-  isLoading.value = true;
+  isLoadingRef.value = true;
   userMessage.value = "";
   animationRunIndex++;
   send(request);
@@ -276,13 +275,13 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
   } else if (type === "complete") {
     updateMessage(packet);
     scrollToBottomDelay();
-    isLoading.value = false;
+    isLoadingRef.value = false;
   } else if (type === "stop") {
     updateMessage(packet);
-    isLoading.value = false;
+    isLoadingRef.value = false;
   } else if (type === "expire") {
     // 过期给一个提示
-    isLoading.value = false;
+    isLoadingRef.value = false;
     snackbarStore.showErrorMessage(content)
   }
 };
@@ -323,7 +322,15 @@ const handleKeydown = (e) => {
   } else if (e.key === "Enter") {
     // 当只按下 enter 时，发送消息
     e.preventDefault();
-    text2Img();
+    if (isLoadingRef.value) {
+      snackbarStore.showWarningMessage("等待一会");
+      return
+    }
+    if (dialogImg2ImgRef.value) {
+      img2Img()
+    } else {
+      text2Img();
+    }
   }
 };
 
@@ -411,7 +418,7 @@ const handleKeydown = (e) => {
       </v-row>
     </template>
 
-    <v-row v-if="isLoading">
+    <v-row v-if="isLoadingRef">
       <v-col cols="12">
         <AnimationRun1 v-if="animationRunIndex === 1" :size="300"/>
         <AnimationRun2 v-else-if="animationRunIndex === 2" :size="300"/>
@@ -442,7 +449,7 @@ const handleKeydown = (e) => {
         </template>
         <template v-slot:append-inner>
           <v-fade-transition leave-absolute>
-            <Icon v-if="isLoading" class="text-primary" width="30" icon="eos-icons:three-dots-loading"/>
+            <Icon v-if="isLoadingRef" class="text-primary" width="30" icon="eos-icons:three-dots-loading"/>
             <v-icon color="primary" v-else @click="text2Img">mdi-send</v-icon>
           </v-fade-transition>
         </template>
@@ -469,7 +476,7 @@ const handleKeydown = (e) => {
             </template>
             <template v-slot:append-inner>
               <v-fade-transition leave-absolute>
-                <Icon v-if="isLoading" class="text-primary" width="30" icon="eos-icons:three-dots-loading"/>
+                <Icon v-if="isLoadingRef" class="text-primary" width="30" icon="eos-icons:three-dots-loading"/>
                 <v-icon color="primary" v-else @click="text2Img">mdi-send</v-icon>
               </v-fade-transition>
             </template>
@@ -563,7 +570,7 @@ const handleKeydown = (e) => {
           {{ imageFileUploadValueRef }}
         </v-progress-circular>
         <v-spacer/>
-        <v-btn :disabled="imageFileUploadingRef || isLoading" prepend-icon="mdi-send" color="primary" variant="flat" @click="img2Img">
+        <v-btn :disabled="imageFileUploadingRef || isLoadingRef" prepend-icon="mdi-send" color="primary" variant="flat" @click="img2Img">
           图生图
         </v-btn>
       </v-card-actions>
