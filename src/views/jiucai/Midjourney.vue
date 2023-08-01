@@ -194,20 +194,20 @@ const img2Img = async () => {
   imageFileUploadingRef.value = true;
   imageFileUploadValueRef.value = 0;
 
-  // const uploadImageResponse = await axios.postForm("https://static.jiucai.fun", formData, {
-  //   onUploadProgress: (progressEvent) => {
-  //     const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
-  //     imageFileUploadValueRef.value = complete;
-  //   }
-  // });
-
-  const uploadImageResponse = await axios.create({baseURL: "/upload", timeout: 100000,}).postForm("", formData, {
+  const uploadImageResponse = await axios.postForm("https://static.jiucai.fun", formData, {
     onUploadProgress: (progressEvent) => {
-      console.log(progressEvent)
       const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
       imageFileUploadValueRef.value = complete;
     }
   });
+
+  // const uploadImageResponse = await axios.create({baseURL: "/upload", timeout: 100000,}).postForm("", formData, {
+  //   onUploadProgress: (progressEvent) => {
+  //     console.log(progressEvent)
+  //     const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
+  //     imageFileUploadValueRef.value = complete;
+  //   }
+  // });
 
   dialogImg2ImgRef.value = false;
   imageFileUploadingRef.value = false;
