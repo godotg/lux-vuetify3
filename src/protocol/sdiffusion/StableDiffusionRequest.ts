@@ -2,6 +2,7 @@
 
 class StableDiffusionRequest {
 
+    sampler_name: string = '';
     prompt: string = '';
     negative_prompt: string = '';
     seed: number = 0;
@@ -24,6 +25,7 @@ class StableDiffusionRequest {
         buffer.writeInt(packet.height);
         buffer.writeString(packet.negative_prompt);
         buffer.writeString(packet.prompt);
+        buffer.writeString(packet.sampler_name);
         buffer.writeLong(packet.seed);
         buffer.writeInt(packet.steps);
         buffer.writeInt(packet.width);
@@ -42,12 +44,14 @@ class StableDiffusionRequest {
         packet.negative_prompt = result2;
         const result3 = buffer.readString();
         packet.prompt = result3;
-        const result4 = buffer.readLong();
-        packet.seed = result4;
-        const result5 = buffer.readInt();
-        packet.steps = result5;
+        const result4 = buffer.readString();
+        packet.sampler_name = result4;
+        const result5 = buffer.readLong();
+        packet.seed = result5;
         const result6 = buffer.readInt();
-        packet.width = result6;
+        packet.steps = result6;
+        const result7 = buffer.readInt();
+        packet.width = result7;
         return packet;
     }
 }
