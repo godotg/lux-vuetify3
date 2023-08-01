@@ -194,7 +194,7 @@ const img2Img = async () => {
   imageFileUploadingRef.value = true;
   imageFileUploadValueRef.value = 0;
 
-  const uploadImageResponse = await axios.postForm("https://static.jiucai.fun", formData, {
+  const uploadImageResponse = await axios.postForm("https://jiucai.fun", formData, {
     onUploadProgress: (progressEvent) => {
       const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
       imageFileUploadValueRef.value = complete;
