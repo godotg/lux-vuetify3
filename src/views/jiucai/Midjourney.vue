@@ -525,7 +525,7 @@ const handleKeydown = (e) => {
 
 
 
-  <v-dialog v-model="dialogImg2ImgRef" max-width="50%">
+  <v-dialog v-model="dialogImg2ImgRef" max-width="700">
     <v-card>
       <v-card-text>
         <v-file-input
@@ -551,7 +551,7 @@ const handleKeydown = (e) => {
           placeholder="prompt"
           hide-details
           @keydown="handleKeydown"
-          rows="3"
+          rows="5"
           max-rows="9"
           auto-grow
         >
