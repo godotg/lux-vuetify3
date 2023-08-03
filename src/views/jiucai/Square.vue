@@ -228,12 +228,12 @@ const handleKeydown = (e) => {
                 </div>
               </v-card>
             </div>
-            <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px;color: black">
+            <v-card-subtitle class="ma-0 pa-0 text-center">
               {{ parseTime(message.timestamp) }} {{ message.region }}
             </v-card-subtitle>
           </div>
         </template>
-        <v-card-subtitle class="ma-0 pa-0 text-center" style="font-size: 1px;color: black">
+        <v-card-subtitle class="ma-0 pa-0 text-center">
           online user {{ onlineUsersRef }}
         </v-card-subtitle>
         <div v-if="isLoading">
