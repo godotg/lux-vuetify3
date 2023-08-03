@@ -230,7 +230,7 @@ function openImage(sdImage) {
 
 // Send Messsage
 const sendMessage = async () => {
-  if (isBlank(userMessage.value)) {
+  if (isBlank(promptRef.value)) {
     snackbarStore.showErrorMessage("prompt不能为空");
     return
   }
@@ -293,9 +293,11 @@ const sdSimulateNoticeRefresh = (packet: SdSimulateNotice) => {
     message.refreshTime = message.costTime + 3000;
     isLoading.value = false;
   } else {
-    const progress = images.length / message.batchSize * 100;
+    const progressRatio = images.length / message.batchSize;
+    const progress = progressRatio * 100;
     if (message.progress < progress) {
       message.progress = progress;
+      message.refreshTime = message.costTime * progressRatio;
     }
   }
 };
@@ -390,7 +392,7 @@ const handleKeydown = (e) => {
         auto-grow
       >
         <template #prepend-inner>
-          <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef" size="x-large" v-ripple>mdi-cog-outline
+          <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef" size="x-large" v-ripple>mdi-star
             mdi-spin
           </v-icon>
         </template>
@@ -428,7 +430,7 @@ const handleKeydown = (e) => {
           >
             <template #prepend-inner>
               <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef" size="x-large" v-ripple>
-                mdi-cog-outline
+                mdi-star
                 mdi-spin
               </v-icon>
             </template>
@@ -539,14 +541,14 @@ const handleKeydown = (e) => {
           </v-col>
         </v-row>
         <v-row>
-          <v-col :cols="mobile ? 12 : 5">
+          <v-col :cols="mobile ? 12 : 6">
             <v-slider
               v-model="batchSizeRef"
               thumb-color="primary"
               thumb-label
               step="1"
               min="1"
-              max="4"
+              max="16"
               label="张数(Batch)"
             ></v-slider>
           </v-col>

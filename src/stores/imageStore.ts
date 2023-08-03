@@ -9,9 +9,9 @@ export const useImageStore = defineStore("imageStore", {
       prompt: "",
       negativePrompt: "",
       style: 0,
-      step: 30,
-      batchSize: 1,
-      dimension: 0
+      step: 40,
+      batchSize: 4,
+      dimension: 1
     },
     sds: [],
     downloads: []

@@ -3,7 +3,7 @@ export default {
     news: "情报",
     chatgpt: "ChatGpt",
     spark: "星火认知",
-    diffusion: "Diffusion",
+    diffusion: "Stable Diffusion",
     square: "广场",
     midjourney: "Midjourney",
     profileDetails: "至尊vip韭菜账户",
