@@ -286,6 +286,10 @@ const sdSimulateNoticeRefresh = (packet: SdSimulateNotice) => {
   const nonce = packet.nonce;
   const images = packet.images;
   const message = _.find(messages.value, it => it.id == nonce);
+  if (_.isNil(message)) {
+    console.error("找不到消息", packet);
+    return;
+  }
   message.sdImages = images;
   images.forEach(it => imageStore.sds.push(it.id));
   imageStore.sds = _.takeRight(imageStore.sds, 2000);
