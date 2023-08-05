@@ -472,7 +472,10 @@ const handleKeydown = (e) => {
           </template>
         </v-img>
       </v-col>
-      <v-col cols="3" offset="9">
+      <v-col cols="3" offset="6">
+        <v-btn color="primary" icon="mdi-share-outline" size="large" @click="download(imageUrlRef)"></v-btn>
+      </v-col>
+      <v-col cols="3">
         <v-btn color="primary" icon="mdi-cloud-download-outline" size="large" @click="download(imageUrlRef)"></v-btn>
       </v-col>
     </v-row>
@@ -489,7 +492,10 @@ const handleKeydown = (e) => {
           </template>
         </v-img>
       </v-col>
-      <v-col cols="2" align-self="end">
+      <v-col cols="1" align-self="end">
+        <v-btn color="primary" icon="mdi-share-outline" size="x-large" @click="download(imageUrlRef)"></v-btn>
+      </v-col>
+      <v-col cols="1" align-self="end">
         <v-btn color="primary" icon="mdi-cloud-download-outline" size="x-large" @click="download(imageUrlRef)"></v-btn>
       </v-col>
     </v-row>

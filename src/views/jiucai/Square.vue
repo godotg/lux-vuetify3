@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { useSnackbarStore } from "@/stores/snackbarStore";
-import { useChatStore } from "@/views/app/chat/chatStore";
+import {useSnackbarStore} from "@/stores/snackbarStore";
+import {useChatStore} from "@/views/app/chat/chatStore";
 import AnimationAi from "@/animation/AnimationBot1.vue";
-import { Icon } from "@iconify/vue";
+import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-import { createCompletionApi } from "@/api/aiApi";
+import {createCompletionApi} from "@/api/aiApi";
+
 const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
 const route = useRoute();
@@ -14,7 +15,7 @@ import AnimationSquare from "@/animation/AnimationSquare.vue";
 import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
 import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
-import {registerPacketReceiver,isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
+import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import GroupChatNotice from "@/protocol/chat/GroupChatNotice";
 import ChatMessage from "@/protocol/chat/ChatMessage";
 import {useNewsStore, avatarAutoUrl} from "@/stores/newsStore";
@@ -60,15 +61,15 @@ const sendMessage = async () => {
     snackbarStore.showErrorMessage("prompt不能为空");
     return
   }
-  if (userMessage.value) {
 
-    // 自己的韭菜广场的发送
-    const request = new GroupChatRequest();
-    request.message = userMessage.value;
-    isLoading.value = true;
-    send(request);
-    userMessage.value = "";
-  }
+  // 自己的韭菜广场的发送
+  isLoading.value = true;
+
+  const request = new GroupChatRequest();
+  request.message = userMessage.value;
+  send(request);
+
+  userMessage.value = "";
 };
 
 // 下面的逻辑都是自己的
@@ -76,7 +77,7 @@ const groupChatNoticeCompletion = (packet: GroupChatNotice) => {
   isLoading.value = false;
   updateMessage(packet.messages);
   scrollToBottom();
-  if (_.isEqual(route.path,"/square")) {
+  if (_.isEqual(route.path, "/square")) {
     refreshMessageNotification();
     return;
   }
@@ -178,7 +179,7 @@ const handleKeydown = (e) => {
     <div class="messsage-area">
       <perfect-scrollbar v-if="messages.length > 0" class="message-container">
 
-<!--        自己的加载历史聊天记录的逻辑-->
+        <!--        自己的加载历史聊天记录的逻辑-->
         <v-container @click="moreHistory()">
           <v-row>
             <v-col v-ripple>
@@ -278,7 +279,8 @@ const handleKeydown = (e) => {
                 icon="eos-icons:three-dots-loading"
               />
               <v-icon color="primary" v-else @click="sendMessage"
-                >mdi-send</v-icon
+              >mdi-send
+              </v-icon
               >
             </v-fade-transition>
           </template>

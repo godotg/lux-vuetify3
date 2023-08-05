@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { useSnackbarStore } from "@/stores/snackbarStore";
+import {useSnackbarStore} from "@/stores/snackbarStore";
 import AnimationAI1 from "@/animation/AnimationAI1.vue";
 import AnimationAI2 from "@/animation/AnimationAI2.vue";
 import AnimationBot1 from "@/animation/AnimationBot1.vue";
-import { read, countAndCompleteCodeBlocks } from "@/utils/aiUtils";
-import { isBlank } from "@/utils/stringUtils";
-import { scrollToBottom } from "@/utils/common";
-import { Icon } from "@iconify/vue";
+import {read, countAndCompleteCodeBlocks} from "@/utils/aiUtils";
+import {isBlank} from "@/utils/stringUtils";
+import {scrollToBottom} from "@/utils/common";
+import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
-import { useChatGPTStore } from "@/stores/chatGPTStore";
+import {useChatGPTStore} from "@/stores/chatGPTStore";
 import "md-editor-v3/lib/style.css";
 import ApiKeyDialog from "@/components/ApiKeyDialog.vue";
+
 const snackbarStore = useSnackbarStore();
 const chatGPTStore = useChatGPTStore();
-
-
 
 
 import {sendChatgpt, forceStopChatgpt} from "@/utils/chatgptUtils";
@@ -23,6 +22,7 @@ import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
+
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
 
@@ -66,6 +66,7 @@ interface Message {
   content: string;
   role: "user" | "assistant" | "system";
 }
+
 // User Input Message
 const userMessage = ref("");
 
@@ -102,23 +103,21 @@ const sendMessage = async () => {
     snackbarStore.showErrorMessage("prompt不能为空");
     return
   }
-  if (userMessage.value) {
-    // Add the message to the list
-    messages.value.push({
-      requestId: 0,
-      rawContent: "",
-      content: userMessage.value,
-      role: "user",
-    });
+  // Add the message to the list
+  messages.value.push({
+    requestId: 0,
+    rawContent: "",
+    content: userMessage.value,
+    role: "user",
+  });
 
-    // Clear the input
-    userMessage.value = "";
+  // Clear the input
+  userMessage.value = "";
 
-    isLoading.value = true;
-    isGenerating.value = true;
-    // Create a completion
-    sendChatgpt(requestMessages.value, props.ai);
-  }
+  isLoading.value = true;
+  isGenerating.value = true;
+  // Create a completion
+  sendChatgpt(requestMessages.value, props.ai);
 };
 
 const createCompletion = (packet: ChatgptMessageNotice) => {
@@ -203,7 +202,7 @@ const handleKeydown = (e) => {
           <div v-if="message.role === 'user'">
             <div class="pa-4 user-message">
               <v-avatar class="ml-4" rounded="sm" variant="elevated">
-                <img :src="newsStore.myAvatar()" alt="alt" />
+                <img :src="newsStore.myAvatar()" alt="alt"/>
               </v-avatar>
               <v-card class="gradient gray text-pre-wrap" theme="dark">
                 <v-card-text>
@@ -239,7 +238,7 @@ const handleKeydown = (e) => {
               </v-avatar>
               <v-card>
                 <div>
-                  <md-editor v-model="message.content" class="font-1" previewOnly />
+                  <md-editor v-model="message.content" class="font-1" previewOnly/>
                 </div>
               </v-card>
             </div>
@@ -248,19 +247,20 @@ const handleKeydown = (e) => {
         <div v-if="isLoading">
           <div class="pa-6">
             <div class="message">
-              <AnimationBot1 :size="100" />
+              <AnimationBot1 :size="100"/>
             </div>
           </div>
         </div>
       </perfect-scrollbar>
       <div class="no-message-container" v-else>
-        <AnimationAI1 v-if="props.ai == 1" :size="props.size" />
-        <AnimationAI2 v-else :size="props.size" />
+        <AnimationAI1 v-if="props.ai == 1" :size="props.size"/>
+        <AnimationAI2 v-else :size="props.size"/>
       </div>
     </div>
     <div class="input-area">
       <v-sheet color="transparent" elevation="0" class="input-panel d-flex align-end pa-1">
-        <v-btn v-if="!mobile" size="x-small" class="mb-3 mr-1" variant="elevated" icon @click="chatGPTStore.configDialog = true">
+        <v-btn v-if="!mobile" size="x-small" class="mb-3 mr-1" variant="elevated" icon
+               @click="chatGPTStore.configDialog = true">
           <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
           <v-tooltip
             activator="parent"
@@ -299,7 +299,7 @@ const handleKeydown = (e) => {
           </template>
         </v-textarea>
       </v-sheet>
-      <ApiKeyDialog />
+      <ApiKeyDialog/>
     </div>
   </div>
 </template>
