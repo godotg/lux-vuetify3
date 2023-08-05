@@ -292,7 +292,6 @@ const handleKeydown = (e) => {
 
 <style scoped lang="scss">
 .chat-bot {
-  background-repeat: repeat;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -340,7 +339,6 @@ const handleKeydown = (e) => {
 
 .message-container {
   height: calc(100vh - 154px);
-  background-repeat: repeat;
 }
 
 .no-message-container {
