@@ -73,7 +73,6 @@ const updatePrimaryColor = (newColor: Color) => {
       v-model="themeDrawer"
       location="right"
       temporary
-      width="300"
       class="theme-drawer"
     >
       <div class="pa-5">

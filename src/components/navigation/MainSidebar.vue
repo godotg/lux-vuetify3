@@ -6,6 +6,7 @@
 <script setup lang="ts">
 import configs from "@/configs";
 import MainMenu from "@/components/navigation/MainMenu.vue";
+import CustomizationMenu from "@/components/CustomizationMenu.vue";
 import { useCustomizeThemeStore } from "@/stores/customizeTheme";
 import { Icon } from "@iconify/vue";
 const customizeTheme = useCustomizeThemeStore();
@@ -76,6 +77,7 @@ const scrollToBottom = () => {
     <template v-if="!customizeTheme.miniSidebar" v-slot:append>
     </template>
   </v-navigation-drawer>
+  <CustomizationMenu />
 </template>
 
 <style scoped lang="scss"></style>
