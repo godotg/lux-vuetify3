@@ -306,7 +306,6 @@ const handleKeydown = (e) => {
 
 <style scoped lang="scss">
 .chat-bot {
-  background-image: url("@/assets/images/chat-bg-2.png");
   background-repeat: repeat;
   height: 100%;
   display: flex;
@@ -355,7 +354,6 @@ const handleKeydown = (e) => {
 
 .message-container {
   height: calc(100vh - 154px);
-  background-image: url("@/assets/images/chat-bg-2.png");
   background-repeat: repeat;
 }
 
