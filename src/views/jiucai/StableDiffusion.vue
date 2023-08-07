@@ -13,6 +13,7 @@ import SdSimulateNotice from "@/protocol/sdiffusion/SdSimulateNotice";
 import SdHistoryRequest from "@/protocol/sdiffusion/SdHistoryRequest";
 import ImageDownloadRequest from "@/protocol/sdiffusion/ImageDownloadRequest";
 import ImageDownloadResponse from "@/protocol/sdiffusion/ImageDownloadResponse";
+import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import {useNewsStore} from "@/stores/newsStore";
@@ -89,6 +90,16 @@ async function download(url) {
   });
 }
 
+async function share(url) {
+  const imagePromptMd = `**${imagePromptRef.value}**`;
+  const imageUrlMd = `<img src="${url}" alt="${imagePromptRef.value}" width="300">`;
+  const request = new GroupChatRequest();
+  request.message = imagePromptMd + "\n" + imageUrlMd;
+  request.type = 1;
+  send(request);
+  snackbarStore.showSuccessMessage("成功分享图片到广场");
+}
+
 // Scroll to the bottom of the message container
 const scrollToBottomDelay = () => {
   setTimeout(() => {
@@ -161,6 +172,7 @@ const isLoading = ref(false);
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
 const dialogSettingRef = ref<boolean>(false);
+const imagePromptRef = ref<string>("");
 const imageUrlRef = ref<string>("");
 const imageUrlLowRef = ref<string>("");
 const imageUrlMiddleRef = ref<string>("");
@@ -220,8 +232,9 @@ watch(
 );
 
 
-function openImage(sdImage) {
+function openImage(prompt, sdImage) {
   dialogRef.value = true;
+  imagePromptRef.value = prompt;
   imageUrlRef.value = sdImage.imageUrl;
   imageUrlLowRef.value = sdImage.imageUrlLow;
   imageUrlMiddleRef.value = sdImage.imageUrlMiddle;
@@ -350,7 +363,7 @@ const handleKeydown = (e) => {
       <v-row v-if="!_.isEmpty(message.sdImages)">
         <v-col :cols="mobile ? 6 : 3" v-for="(sdImage, index) in message.sdImages" :key="index">
           <v-card max-width="500px">
-            <v-img :src="sdImage.imageUrlMiddle" @click="openImage(sdImage)" alt="alt">
+            <v-img :src="sdImage.imageUrlMiddle" @click="openImage(message.content, sdImage)" alt="alt">
               <template v-slot:placeholder>
                 <div class="d-flex align-center justify-center fill-height">
                   <v-progress-circular
@@ -473,7 +486,7 @@ const handleKeydown = (e) => {
         </v-img>
       </v-col>
       <v-col cols="3" offset="6">
-        <v-btn color="primary" icon="mdi-share-outline" size="large" @click="download(imageUrlRef)"></v-btn>
+        <v-btn color="primary" icon="mdi-share-outline" size="large" @click="share(imageUrlHighRef)"></v-btn>
       </v-col>
       <v-col cols="3">
         <v-btn color="primary" icon="mdi-cloud-download-outline" size="large" @click="download(imageUrlRef)"></v-btn>
@@ -493,7 +506,7 @@ const handleKeydown = (e) => {
         </v-img>
       </v-col>
       <v-col cols="1" align-self="end">
-        <v-btn color="primary" icon="mdi-share-outline" size="x-large" @click="download(imageUrlRef)"></v-btn>
+        <v-btn color="primary" icon="mdi-share-outline" size="x-large" @click="share(imageUrlHighRef)"></v-btn>
       </v-col>
       <v-col cols="1" align-self="end">
         <v-btn color="primary" icon="mdi-cloud-download-outline" size="x-large" @click="download(imageUrlRef)"></v-btn>

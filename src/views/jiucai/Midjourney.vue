@@ -21,6 +21,7 @@ import ImageDownloadResponse from "@/protocol/sdiffusion/ImageDownloadResponse";
 import OssPolicyRequest from "@/protocol/auth/OssPolicyRequest";
 import OssPolicyResponse from "@/protocol/auth/OssPolicyResponse";
 import OssPolicyVO from "@/protocol/auth/OssPolicyVO";
+import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import {useNewsStore} from "@/stores/newsStore";
@@ -92,6 +93,16 @@ async function download(url) {
   });
 }
 
+async function share(url) {
+  const imagePromptMd = `${imagePromptRef.value}`;
+  const imageUrlMd = `<img src="${url}" alt="${imagePromptRef.value}" width="300">`;
+  const request = new GroupChatRequest();
+  request.message = imagePromptMd + "\n" + imageUrlMd;
+  request.type = 2;
+  send(request);
+  snackbarStore.showSuccessMessage("成功分享图片到广场");
+}
+
 // Scroll to the bottom of the message container
 const scrollToBottomDelay = () => {
   setTimeout(() => {
@@ -117,6 +128,7 @@ interface Message {
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
 const dialogImg2ImgRef = ref<boolean>(false);
+const imagePromptRef = ref<string>("");
 const imageUrlRef = ref<string>("");
 const imageUrlLowRef = ref<string>("");
 const imageUrlMiddleRef = ref<string>("");
@@ -138,6 +150,7 @@ function seed(): string {
 
 function openImage(message) {
   dialogRef.value = true;
+  imagePromptRef.value = message.content;
   imageUrlRef.value = message.imageUrl;
   imageUrlLowRef.value = message.imageUrlLow;
   imageUrlMiddleRef.value = message.imageUrlMiddle;
@@ -500,8 +513,11 @@ const handleKeydown = (e) => {
           </template>
         </v-img>
       </v-col>
-      <v-col cols="3" offset="9">
-        <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
+      <v-col cols="3" offset="6">
+        <v-btn color="primary" icon="mdi-share-outline" size="large" @click="share(imageUrlMiddleRef)"></v-btn>
+      </v-col>
+      <v-col cols="3">
+        <v-btn color="primary" icon="mdi-cloud-download-outline" size="large" @click="download(imageUrlRef)"></v-btn>
       </v-col>
     </v-row>
     <v-row v-else>
@@ -518,7 +534,10 @@ const handleKeydown = (e) => {
         </v-img>
       </v-col>
       <v-col cols="1" align-self="end">
-        <v-btn color="primary" icon="mdi-cloud-download-outline" @click="download(imageUrlRef)"></v-btn>
+        <v-btn color="primary" icon="mdi-share-outline" size="x-large" @click="share(imageUrlMiddleRef)"></v-btn>
+      </v-col>
+      <v-col cols="1" align-self="end">
+        <v-btn color="primary" icon="mdi-cloud-download-outline" size="x-large" @click="download(imageUrlRef)"></v-btn>
       </v-col>
     </v-row>
   </v-dialog>
