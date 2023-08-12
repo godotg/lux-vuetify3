@@ -12,6 +12,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@chenfengyuan/vue-qrcode": "^2.0.0",
     "@mdi/font": "7.2.96",
     "@tiptap/pm": "^2.0.2",
     "@tiptap/starter-kit": "^2.0.2",
@@ -36,6 +37,7 @@
     "openai": "^3.2.1",
     "pinia": "^2.0.34",
     "pinia-plugin-persist": "^1.0.0",
+    "qrcode": "^1.5.3",
     "roboto-fontface": "*",
     "unsplash-js": "^7.0.15",
     "vite-plugin-pwa": "^0.15.1",

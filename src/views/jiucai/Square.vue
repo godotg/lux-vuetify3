@@ -227,7 +227,7 @@ const handleKeydown = (e) => {
         auto-grow
       >
         <template #prepend-inner>
-          <v-icon color="primary">mdi-microphone</v-icon>
+          <v-icon color="primary">mdi-file-gif-box</v-icon>
         </template>
         <template v-slot:append-inner>
           <v-fade-transition leave-absolute>
@@ -262,7 +262,7 @@ const handleKeydown = (e) => {
             auto-grow
           >
             <template #prepend-inner>
-              <v-icon color="primary">mdi-microphone</v-icon>
+              <v-icon color="primary">mdi-file-gif-box</v-icon>
             </template>
             <template v-slot:append-inner>
               <v-fade-transition leave-absolute>

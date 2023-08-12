@@ -191,6 +191,7 @@ const handleKeydown = (e) => {
         <AnimationAI2 v-else :size="props.size"/>
       </v-col>
     </v-row>
+<!--    <vue-qrcode value="weixin://wxpay/bizpayurl?pr=WtgZu2gzz" :options="{ width: 200 }"></vue-qrcode>-->
   </v-container>
   <v-container v-else>
     <template v-for="message in messages">
