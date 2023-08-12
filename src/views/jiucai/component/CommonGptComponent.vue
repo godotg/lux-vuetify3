@@ -196,11 +196,11 @@ const handleKeydown = (e) => {
   <v-container v-else>
     <template v-for="message in messages">
       <v-row>
-        <v-avatar class="mt-3 mb-1 ml-3" rounded="sm" variant="elevated">
+        <v-avatar class="mt-3 ml-3 mb-1" rounded="sm" variant="elevated">
           <img v-if="message.role === 'user'" :src="newsStore.myAvatar()" alt="alt"/>
           <img v-else :src="newsStore.aiAvatar()" alt="alt"/>
         </v-avatar>
-        <v-card class="mt-3 ml-3">
+        <v-card class="mt-3 mx-3">
           <md-editor v-if="message.role === 'user'" v-model="message.content" previewOnly/>
           <md-editor v-else v-model="message.content" previewOnly theme="dark"/>
         </v-card>

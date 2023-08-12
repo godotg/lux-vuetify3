@@ -234,7 +234,7 @@ const handleKeydown = (e) => {
         <v-avatar class="ml-3 mb-1" rounded="sm" variant="elevated">
           <img :src="message.avatar" alt="alt"/>
         </v-avatar>
-        <v-card class="ml-3">
+        <v-card class="mx-3">
           <md-editor v-model="message.content" previewOnly/>
         </v-card>
       </v-row>
