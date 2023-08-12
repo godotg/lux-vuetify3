@@ -371,7 +371,7 @@ const handleKeydown = (e) => {
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
         <v-card class="mt-3 ml-3">
-          <md-editor v-model="message.content" class="font-1" previewOnly/>
+          <md-editor v-model="message.content" previewOnly/>
         </v-card>
       </v-row>
       <v-row v-if="!_.isEmpty(message.imageUrl)">

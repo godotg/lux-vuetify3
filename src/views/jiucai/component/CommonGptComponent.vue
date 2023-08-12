@@ -22,6 +22,7 @@ import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
+import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
@@ -195,192 +196,110 @@ const handleKeydown = (e) => {
 </script>
 
 <template>
-  <div class="chat-bot">
-    <div class="messsage-area">
-      <perfect-scrollbar v-if="messages.length > 0" class="message-container">
-        <template v-for="message in messages">
-          <div v-if="message.role === 'user'">
-            <div class="pa-4 user-message">
-              <v-avatar class="ml-4" rounded="sm" variant="elevated">
-                <img :src="newsStore.myAvatar()" alt="alt"/>
-              </v-avatar>
-              <v-card class="gradient gray text-pre-wrap" theme="dark">
-                <v-card-text>
-                  <b> {{ message.content }}</b></v-card-text>
-              </v-card>
-            </div>
-          </div>
-          <div v-else>
-            <div v-if="mobile">
-              <div class="pa-2 pa-md-5 assistant-message">
-                <v-avatar class="mr-2 mr-md-4" rounded="sm" variant="elevated">
-                  <img :src="newsStore.aiAvatar()" alt="alt"/>
-                </v-avatar>
-              </div>
-              <div class="pa-2 pa-md-5 assistant-message">
-                <v-card>
-                  <div>
-                    <md-editor v-model="message.content" class="font-1" previewOnly/>
-                  </div>
-                </v-card>
-              </div>
-            </div>
-            <div v-else class="pa-2 pa-md-5 assistant-message">
-              <v-avatar
-                class="d-none d-md-block mr-2 mr-md-4"
-                rounded="sm"
-                variant="elevated"
-              >
-                <img
-                  :src="newsStore.aiAvatar()"
-                  alt="alt"
-                />
-              </v-avatar>
-              <v-card>
-                <div>
-                  <md-editor v-model="message.content" class="font-1" previewOnly/>
-                </div>
-              </v-card>
-            </div>
-          </div>
-        </template>
-        <div v-if="isLoading">
-          <div class="pa-6">
-            <div class="message">
-              <AnimationBot1 :size="100"/>
-            </div>
-          </div>
-        </div>
-      </perfect-scrollbar>
-      <div class="no-message-container" v-else>
+  <v-container v-if="messages.length <= 0">
+    <v-row>
+      <v-col>
         <AnimationAI1 v-if="props.ai == 1" :size="props.size"/>
         <AnimationAI2 v-else :size="props.size"/>
-      </div>
-    </div>
-    <div class="input-area">
-      <v-sheet color="transparent" elevation="0" class="input-panel d-flex align-end pa-1">
-        <v-btn v-if="!mobile" size="x-small" class="mb-3 mr-1" variant="elevated" icon
-               @click="chatGPTStore.configDialog = true">
-          <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
-          <v-tooltip
-            activator="parent"
-            location="top"
-            text="ChatGPT Config"
-          ></v-tooltip>
-        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-container v-else>
+    <template v-for="message in messages">
+      <v-row class="justify-start">
+        <v-avatar class="mt-3 mb-1 ml-3" rounded="sm" variant="elevated">
+          <img v-if="message.role === 'user'" :src="newsStore.myAvatar()" alt="alt"/>
+          <img v-else :src="newsStore.aiAvatar()" alt="alt"/>
+        </v-avatar>
+        <v-card class="mt-3 ml-3">
+          <md-editor v-if="message.role === 'user'" v-model="message.content" previewOnly/>
+          <md-editor v-else v-model="message.content" previewOnly theme="dark"/>
+        </v-card>
+      </v-row>
+    </template>
+    <v-row v-if="isLoading">
+      <v-col>
+        <AnimationBot1 :size="100"/>
+      </v-col>
+    </v-row>
+  </v-container>
 
-        <v-textarea
-          color="primary"
-          type="text"
-          variant="solo"
-          ref="input"
-          v-model="userMessage"
-          placeholder="Ask Anything"
-          hide-details
-          @keydown="handleKeydown"
-          rows="1"
-          max-rows="9"
-          auto-grow
-        >
-          <template v-slot:prepend-inner>
-            <v-icon v-if="isGenerating" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
-            <v-icon v-else v-ripple color="primary" @click="clearChatHistory">mdi-broom</v-icon>
-          </template>
-          <template v-slot:append-inner>
-            <v-fade-transition leave-absolute>
-              <Icon
-                v-if="isGenerating"
-                class="text-primary"
-                width="30"
-                icon="eos-icons:three-dots-loading"
-              />
-              <v-icon color="primary" v-else @click="sendMessage">mdi-send</v-icon>
-            </v-fade-transition>
-          </template>
-        </v-textarea>
-      </v-sheet>
-      <ApiKeyDialog/>
-    </div>
-  </div>
+  <v-footer color="transparent" app>
+    <template v-if="mobile">
+      <v-textarea
+        color="primary"
+        type="text"
+        variant="solo"
+        ref="input"
+        v-model="userMessage"
+        placeholder="Ask Anything"
+        hide-details
+        @keydown="handleKeydown"
+        rows="1"
+        max-rows="9"
+        auto-grow
+      >
+        <template v-slot:prepend-inner>
+          <v-icon v-if="isGenerating" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
+          <v-icon v-else v-ripple color="primary" @click="clearChatHistory">mdi-broom</v-icon>
+        </template>
+        <template v-slot:append-inner>
+          <v-fade-transition leave-absolute>
+            <Icon
+              v-if="isGenerating"
+              class="text-primary"
+              width="30"
+              icon="eos-icons:three-dots-loading"
+            />
+            <v-icon color="primary" v-else @click="sendMessage">mdi-send</v-icon>
+          </v-fade-transition>
+        </template>
+      </v-textarea>
+    </template>
+    <v-container v-else>
+      <v-row>
+        <v-col cols="8" offset="2">
+          <v-btn v-if="!mobile" size="x-small" class="mb-3 mr-1" variant="elevated" icon
+                 @click="chatGPTStore.configDialog = true">
+            <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
+            <v-tooltip
+              activator="parent"
+              location="top"
+              text="ChatGPT Config"
+            ></v-tooltip>
+          </v-btn>
+          <v-textarea
+            color="primary"
+            type="text"
+            variant="solo"
+            ref="input"
+            v-model="userMessage"
+            placeholder="Ask Anything"
+            hide-details
+            @keydown="handleKeydown"
+            rows="1"
+            max-rows="9"
+            auto-grow
+          >
+            <template v-slot:prepend-inner>
+              <v-icon v-if="isGenerating" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
+              <v-icon v-else v-ripple color="primary" @click="clearChatHistory">mdi-broom</v-icon>
+            </template>
+            <template v-slot:append-inner>
+              <v-fade-transition leave-absolute>
+                <Icon
+                  v-if="isGenerating"
+                  class="text-primary"
+                  width="30"
+                  icon="eos-icons:three-dots-loading"
+                />
+                <v-icon color="primary" v-else @click="sendMessage">mdi-send</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-textarea>
+        </v-col>
+      </v-row>
+    </v-container>
+    <ApiKeyDialog/>
+  </v-footer>
 </template>
-
-<style scoped lang="scss">
-.chat-bot {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  .messsage-area {
-    flex: 1;
-    height: 100%;
-  }
-
-  .input-area {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    padding: 1rem;
-    align-items: center;
-
-    .input-panel {
-      border-radius: 5px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-  }
-}
-
-.user-message {
-  display: flex;
-  align-content: center;
-  justify-content: end;
-  flex-direction: row-reverse;
-}
-
-.assistant-message {
-  display: flex;
-  align-content: center;
-  justify-content: start;
-  flex-direction: row;
-}
-
-.message {
-  margin: 0 auto;
-  max-width: 1200px;
-  display: flex;
-}
-
-.message-container {
-  height: calc(100vh - 154px);
-}
-
-.no-message-container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  h1 {
-    font-size: 2rem;
-    font-weight: 500;
-  }
-}
-
-:deep(.md-editor-preview-wrapper) {
-  padding: 5px 15px;
-}
-
-.font-1 {
-  font-size: 13px !important;
-}
-
-@media screen and (max-width: 768px) {
-
-  :deep(#md-editor-v3-preview),
-  .user-message {
-    font-size: 14px !important;
-  }
-}
-</style>

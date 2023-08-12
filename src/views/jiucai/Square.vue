@@ -223,7 +223,6 @@ const handleKeydown = (e) => {
                 <div>
                   <md-editor
                     v-model="message.content"
-                    class="font-1"
                     previewOnly
                   />
                 </div>
