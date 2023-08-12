@@ -171,10 +171,8 @@ function copyNews(news: News, event: Event) {
   } else {
     str = str + "\n"
   }
-  str = str + news.content;
-  if (!_.isEmpty(news.stocks) || !_.isEmpty(news.industries) || !_.isEmpty(news.subjects)) {
-    str = str + "\n";
-  }
+  str = str + news.content + "\n";
+
   if (!_.isEmpty(news.stocks)) {
     str = str + "\n🎯股票:";
     for (const stock of news.stocks) {
@@ -194,8 +192,7 @@ function copyNews(news: News, event: Event) {
       str = str + " " + subject;
     }
   }
-  str = str + "\n";
-  str = str + jokes[_.random(0, jokes.length - 1)];
+  str = str + "\n" + jokes[_.random(0, jokes.length - 1)];
   clipboard(str, event);
   snackbarStore.showSuccessMessage("复制成功");
 }
