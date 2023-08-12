@@ -360,7 +360,7 @@ const handleKeydown = (e) => {
         </v-card>
       </v-row>
       <v-row v-if="!_.isEmpty(message.sdImages)">
-        <v-col :cols="mobile ? 6 : 3" v-for="(sdImage, index) in message.sdImages" :key="index">
+        <v-col md="3" lg="2" cols="6"  v-for="(sdImage, index) in message.sdImages" :key="index">
           <v-card max-width="500px">
             <v-img :src="sdImage.imageUrlMiddle" @click="openImage(message.content, sdImage)" alt="alt">
               <template v-slot:placeholder>
@@ -570,7 +570,7 @@ const handleKeydown = (e) => {
               thumb-label
               step="1"
               min="1"
-              max="16"
+              max="18"
               label="张数(Batch)"
             ></v-slider>
           </v-col>

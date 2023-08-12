@@ -10,7 +10,7 @@ export const useImageStore = defineStore("imageStore", {
       negativePrompt: "",
       style: 0,
       step: 40,
-      batchSize: 4,
+      batchSize: 6,
       dimension: 1
     },
     sds: [],
