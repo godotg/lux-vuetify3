@@ -56,7 +56,8 @@ const dialogRef = ref<boolean>(false);
 // Send Messsage
 const sendMessage = async () => {
   // Clear the input
-  if (isBlank(userMessage.value)) {
+  const message = userMessage.value;
+  if (isBlank(message)) {
     snackbarStore.showErrorMessage("prompt不能为空");
     return
   }
@@ -65,8 +66,12 @@ const sendMessage = async () => {
   isLoading.value = true;
 
   const request = new GroupChatRequest();
-  const mdMessage = await convertMessage2Markdown(userMessage.value);
-  request.message = mdMessage;
+  try {
+    const mdMessage = await convertMessage2Markdown(message);
+    request.message = mdMessage;
+  } catch (error) {
+    request.message = message;
+  }
   send(request);
 
   userMessage.value = "";
