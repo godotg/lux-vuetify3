@@ -11,7 +11,8 @@ const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
 const route = useRoute();
 
-import AnimationSquare from "@/animation/AnimationSquare.vue";
+import AnimationSquare1 from "@/animation/AnimationSquare1.vue";
+import AnimationSquare2 from "@/animation/AnimationSquare2.vue";
 import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
 import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
@@ -151,13 +152,8 @@ async function moreHistory() {
 
 // Scroll to the bottom of the message container
 const scrollToBottom = () => {
-  const container = document.querySelector(".message-container");
-  console.log("container: ", container);
-
   setTimeout(() => {
-    container?.scrollTo({
-      top: container?.scrollHeight,
-    });
+    window.scrollTo({top: 999999, behavior: "smooth"});
   }, 100);
 };
 
@@ -175,6 +171,15 @@ const handleKeydown = (e) => {
 </script>
 
 <template>
+  <v-container v-if="messages.length <= 0">
+    <v-progress-linear indeterminate color="primary"></v-progress-linear>
+    <v-row justify="center">
+      <v-col>
+        <AnimationSquare1 :size="300"/>
+      </v-col>
+    </v-row>
+  </v-container>
+
   <div class="chat-bot">
     <div class="messsage-area">
       <perfect-scrollbar v-if="messages.length > 0" class="message-container">
@@ -187,7 +192,7 @@ const handleKeydown = (e) => {
                 <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
                   One more thing
                 </h1>
-                <AnimationSquare :size="300"/>
+                <AnimationSquare2 :size="300"/>
               </div>
             </v-col>
           </v-row>
@@ -244,12 +249,6 @@ const handleKeydown = (e) => {
           </div>
         </div>
       </perfect-scrollbar>
-      <div class="no-message-container" v-else>
-        <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
-          Loading...
-        </h1>
-        <AnimationSquare :size="300"/>
-      </div>
     </div>
     <div class="input-area">
       <v-sheet color="transparent" elevation="0" class="input-panel d-flex align-end pa-1">
@@ -288,84 +287,3 @@ const handleKeydown = (e) => {
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.chat-bot {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  .messsage-area {
-    flex: 1;
-    height: 100%;
-  }
-
-  .input-area {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    padding: 1rem;
-    align-items: center;
-
-    .input-panel {
-      border-radius: 5px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-  }
-}
-
-.user-message {
-  display: flex;
-  align-content: center;
-  justify-content: end;
-  flex-direction: row-reverse;
-}
-
-.assistant-message {
-  display: flex;
-  align-content: center;
-  justify-content: start;
-  flex-direction: row;
-}
-
-.message {
-  margin: 0 auto;
-  max-width: 1200px;
-  display: flex;
-}
-
-.message-container {
-  height: calc(100vh - 154px);
-}
-
-.no-message-container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  h1 {
-    font-size: 2rem;
-    font-weight: 500;
-  }
-}
-
-:deep(.md-editor-preview-wrapper) {
-  padding: 5px 15px;
-}
-
-.font-1 {
-  font-size: 13px !important;
-}
-
-@media screen and (max-width: 768px) {
-
-  :deep(#md-editor-v3-preview),
-  .user-message {
-    font-size: 14px !important;
-  }
-}
-</style>

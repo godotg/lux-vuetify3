@@ -366,7 +366,7 @@ const handleKeydown = (e) => {
   </v-container>
   <v-container v-else>
     <template v-for="message in messages">
-      <v-row class="justify-start">
+      <v-row>
         <v-avatar class="mt-3 mb-1 ml-3" rounded="sm" variant="elevated">
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
