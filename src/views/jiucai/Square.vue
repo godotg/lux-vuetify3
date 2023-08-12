@@ -25,7 +25,7 @@ import {useDisplay} from "vuetify";
 import _ from "lodash";
 import {isBlank} from "@/utils/stringUtils";
 
-const {mobile} = useDisplay();
+const {mobile, height, width} = useDisplay();
 const newsStore = useNewsStore();
 onMounted(() => {
   registerPacketReceiver(GroupChatNotice.PROTOCOL_ID, groupChatNoticeCompletion);
@@ -173,117 +173,111 @@ const handleKeydown = (e) => {
 <template>
   <v-container v-if="messages.length <= 0">
     <v-progress-linear indeterminate color="primary"></v-progress-linear>
-    <v-row justify="center">
-      <v-col>
-        <AnimationSquare1 :size="300"/>
+    <v-row justify="center" align="center">
+      <v-col cols="11">
+        <AnimationSquare1 :size="mobile ? width * 0.8 : height * 0.6"/>
       </v-col>
     </v-row>
   </v-container>
-
-  <div class="chat-bot">
-    <div class="messsage-area">
-      <perfect-scrollbar v-if="messages.length > 0" class="message-container">
-
-        <!--        自己的加载历史聊天记录的逻辑-->
-        <v-container @click="moreHistory()">
-          <v-row>
-            <v-col v-ripple>
-              <div class="no-message-container">
-                <h1 class="text-h4 text-md-h2 text-blue-lighten-1 font-weight-bold">
-                  One more thing
-                </h1>
-                <AnimationSquare2 :size="300"/>
-              </div>
-            </v-col>
-          </v-row>
-        </v-container>
-
-
-        <template v-for="message in messages">
-          <div v-if="message.role === 'user'">
-            <div class="pa-4 user-message">
-              <v-avatar class="ml-4" rounded="sm" variant="elevated">
-                <img :src="message.avatar" alt="alt"/>
-              </v-avatar>
-              <v-card class="gradient gray" theme="dark">
-                <v-card-text>
-                  <b> {{ message.content }}</b></v-card-text
-                >
-              </v-card>
-            </div>
+  <v-container v-else>
+    <v-row>
+      <v-col v-ripple @click="moreHistory()">
+        <div>
+          <div class="text-h4 text-md-h4 text-center text-blue-lighten-1 font-weight-bold">
+            One more thing
           </div>
-          <div v-else>
-            <div class="pa-2 pa-md-5 assistant-message">
-              <v-avatar
-                class="mr-2 mr-md-4"
-                rounded="sm"
-                variant="elevated"
-              >
-                <img
-                  :src="message.avatar"
-                  alt="alt"
-                />
-              </v-avatar>
-              <v-card>
-                <div>
-                  <md-editor
-                    v-model="message.content"
-                    previewOnly
-                  />
-                </div>
-              </v-card>
-            </div>
-            <div class="ma-0 pa-0 text-center text-caption font-weight-thin">
-              {{ parseTime(message.timestamp) }} {{ message.region }}
-            </div>
+          <AnimationSquare2 :size="200"/>
+        </div>
+      </v-col>
+    </v-row>
+
+    <template v-for="message in messages">
+      <v-row>
+        <v-avatar class="mt-3 mb-1 ml-3" rounded="sm" variant="elevated">
+          <img :src="message.avatar" alt="alt"/>
+        </v-avatar>
+        <v-card class="mt-3 ml-3">
+          <md-editor v-model="message.content" previewOnly/>
+        </v-card>
+      </v-row>
+      <v-row justify="center">
+        <v-col class="ma-0 pa-0">
+          <div class="ma-0 pa-0 text-center text-caption font-weight-thin">
+            {{ parseTime(message.timestamp) }} {{ message.region }}
           </div>
+        </v-col>
+      </v-row>
+    </template>
+  </v-container>
+
+
+  <v-footer color="transparent" app>
+    <template v-if="mobile">
+      <v-textarea
+        color="primary"
+        type="text"
+        variant="solo"
+        ref="input"
+        v-model="userMessage"
+        placeholder="Send Message"
+        hide-details
+        @keydown="handleKeydown"
+        rows="1"
+        max-rows="9"
+        auto-grow
+      >
+        <template #prepend-inner>
+          <v-icon color="primary">mdi-microphone</v-icon>
         </template>
-        <div class="ma-0 pa-0 text-center text-caption font-weight-thin">
-          online user {{ onlineUsersRef }}
-        </div>
-        <div v-if="isLoading">
-          <div class="pa-6">
-            <div class="message">
-              <AnimationAi :size="100"/>
-            </div>
-          </div>
-        </div>
-      </perfect-scrollbar>
-    </div>
-    <div class="input-area">
-      <v-sheet color="transparent" elevation="0" class="input-panel d-flex align-end pa-1">
-        <v-textarea
-          color="primary"
-          type="text"
-          variant="solo"
-          ref="input"
-          v-model="userMessage"
-          placeholder="Send Message"
-          hide-details
-          @keydown="handleKeydown"
-          rows="1"
-          max-rows="9"
-          auto-grow
-        >
-          <template #prepend-inner>
-            <v-icon color="primary">mdi-microphone</v-icon>
-          </template>
-          <template v-slot:append-inner>
-            <v-fade-transition leave-absolute>
-              <Icon
-                v-if="isLoading"
-                class="text-primary"
-                width="30"
-                icon="eos-icons:three-dots-loading"
-              />
-              <v-icon color="primary" v-else @click="sendMessage"
-              >mdi-send
-              </v-icon
-              >
-            </v-fade-transition>
-          </template>
-        </v-textarea>
-      </v-sheet>
-    </div>
-  </div>
+        <template v-slot:append-inner>
+          <v-fade-transition leave-absolute>
+            <Icon
+              v-if="isLoading"
+              class="text-primary"
+              width="30"
+              icon="eos-icons:three-dots-loading"
+            />
+            <v-icon color="primary" v-else @click="sendMessage"
+            >mdi-send
+            </v-icon
+            >
+          </v-fade-transition>
+        </template>
+      </v-textarea>
+    </template>
+    <v-container v-else>
+      <v-row>
+        <v-col cols="8" offset="2">
+          <v-textarea
+            color="primary"
+            type="text"
+            variant="solo"
+            ref="input"
+            v-model="userMessage"
+            placeholder="Send Message"
+            hide-details
+            @keydown="handleKeydown"
+            rows="1"
+            max-rows="9"
+            auto-grow
+          >
+            <template #prepend-inner>
+              <v-icon color="primary">mdi-microphone</v-icon>
+            </template>
+            <template v-slot:append-inner>
+              <v-fade-transition leave-absolute>
+                <Icon
+                  v-if="isLoading"
+                  class="text-primary"
+                  width="30"
+                  icon="eos-icons:three-dots-loading"
+                />
+                <v-icon color="primary" v-else @click="sendMessage">mdi-send</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-textarea>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-footer>
 </template>
