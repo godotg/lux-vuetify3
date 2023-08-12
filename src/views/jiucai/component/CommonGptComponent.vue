@@ -3,9 +3,7 @@ import {useSnackbarStore} from "@/stores/snackbarStore";
 import AnimationAI1 from "@/animation/AnimationAI1.vue";
 import AnimationAI2 from "@/animation/AnimationAI2.vue";
 import AnimationBot1 from "@/animation/AnimationBot1.vue";
-import {read, countAndCompleteCodeBlocks} from "@/utils/aiUtils";
 import {isBlank} from "@/utils/stringUtils";
-import {scrollToBottom} from "@/utils/common";
 import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import {useChatGPTStore} from "@/stores/chatGPTStore";
@@ -56,7 +54,7 @@ const isGenerating = ref(false);
 // Scroll to the bottom of the message container
 const scrollToBottomDelay = () => {
   setTimeout(() => {
-    scrollToBottom(document.querySelector(".message-container"));
+    window.scrollTo({top: 999999, behavior: "smooth"});
   }, 100);
 };
 
@@ -171,16 +169,6 @@ watch(
   }
 );
 
-const displayMessages = computed(() => {
-  const messagesCopy = messages.value.slice(); // 创建原始数组的副本
-  const lastMessage = messagesCopy[messagesCopy.length - 1];
-  const updatedLastMessage = {
-    ...lastMessage,
-    content: countAndCompleteCodeBlocks(lastMessage.content),
-  };
-  messagesCopy[messagesCopy.length - 1] = updatedLastMessage;
-  return messagesCopy;
-});
 
 const handleKeydown = (e) => {
   if (e.key === "Enter" && (e.altKey || e.shiftKey)) {
