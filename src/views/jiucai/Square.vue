@@ -231,10 +231,10 @@ const handleKeydown = (e) => {
 
     <template v-for="message in messages">
       <v-row>
-        <v-avatar class="mt-3 mb-1 ml-3" rounded="sm" variant="elevated">
+        <v-avatar class="ml-3 mb-1" rounded="sm" variant="elevated">
           <img :src="message.avatar" alt="alt"/>
         </v-avatar>
-        <v-card class="mt-3 ml-3">
+        <v-card class="ml-3">
           <md-editor v-model="message.content" previewOnly/>
         </v-card>
       </v-row>
@@ -246,6 +246,13 @@ const handleKeydown = (e) => {
         </v-col>
       </v-row>
     </template>
+    <v-row justify="center">
+      <v-col class="ma-0 pa-0">
+        <div class="ma-0 pa-0 text-center text-caption font-weight-thin">
+          online user {{ onlineUsersRef }}
+        </div>
+      </v-col>
+    </v-row>
   </v-container>
 
 
