@@ -1,29 +1,27 @@
 <script setup lang="ts">
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useChatStore} from "@/views/app/chat/chatStore";
-import AnimationAi from "@/animation/AnimationBot1.vue";
 import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-import {createCompletionApi} from "@/api/aiApi";
-
-const snackbarStore = useSnackbarStore();
-const chatStore = useChatStore();
-const route = useRoute();
-
 import AnimationSquare1 from "@/animation/AnimationSquare1.vue";
 import AnimationSquare2 from "@/animation/AnimationSquare2.vue";
 import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 import GroupHistoryMessageRequest from "@/protocol/chat/GroupHistoryMessageRequest";
 import GroupHistoryMessageResponse from "@/protocol/chat/GroupHistoryMessageResponse";
-import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
+import {asyncAsk, isWebsocketReady, registerPacketReceiver, send} from "@/utils/websocket";
 import GroupChatNotice from "@/protocol/chat/GroupChatNotice";
 import ChatMessage from "@/protocol/chat/ChatMessage";
-import {useNewsStore, avatarAutoUrl} from "@/stores/newsStore";
+import {avatarAutoUrl, useNewsStore} from "@/stores/newsStore";
 import {parseTime} from "@/utils/timeUtils";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import {isBlank} from "@/utils/stringUtils";
+import axios from "axios";
+
+const snackbarStore = useSnackbarStore();
+const chatStore = useChatStore();
+const route = useRoute();
 
 const {mobile, height, width} = useDisplay();
 const newsStore = useNewsStore();
@@ -54,7 +52,7 @@ const userMessage = ref("");
 const isLoading = ref(false);
 
 const onlineUsersRef = ref(0);
-
+const dialogRef = ref<boolean>(false);
 // Send Messsage
 const sendMessage = async () => {
   // Clear the input
@@ -67,7 +65,8 @@ const sendMessage = async () => {
   isLoading.value = true;
 
   const request = new GroupChatRequest();
-  request.message = userMessage.value;
+  const mdMessage = await convertMessage2Markdown(userMessage.value);
+  request.message = mdMessage;
   send(request);
 
   userMessage.value = "";
@@ -148,6 +147,40 @@ async function moreHistory() {
   }
   messages.value = _.concat(chatMessages.map(it => toMessage(it)), messages.value);
   snackbarStore.showSuccessMessage("加载成功");
+}
+
+async function convertMessage2Markdown(message: string) {
+  if (isBlank(message)) {
+    return message;
+  }
+  message = _.trim(message);
+  if (!(message.startsWith("http://") || message.startsWith("https://"))) {
+    return message;
+  }
+  // 正则匹配常见媒体类型的文件扩展名
+  const pattern = /\.(jpg|jpeg|png|gif|mp4|avi|mov)$/i;
+  if (pattern.test(message)) {
+    return toMediaMarkdown(message);
+  }
+
+  const response = await axios.get(message);
+  if (_.isNil(response) || _.isNil(response.headers)) {
+    return message;
+  }
+  const contentType = response.headers.get('content-type');
+  if (_.isNil(contentType)) {
+    return message;
+  }
+  if (contentType.includes('image/') || contentType.includes('video/')) {
+    return toMediaMarkdown(message);
+  }
+  return message;
+}
+
+// 当发现是url链接，则直接转换为markdown格式文档
+function toMediaMarkdown(message: string) {
+  const imageUrlMd = `![${message}](${message})`;
+  return imageUrlMd;
 }
 
 // Scroll to the bottom of the message container
@@ -280,4 +313,5 @@ const handleKeydown = (e) => {
       </v-row>
     </v-container>
   </v-footer>
+
 </template>
