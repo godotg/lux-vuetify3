@@ -42,6 +42,13 @@ export default [
     component: () => import("@/views/jiucai/StableDiffusion.vue"),
   },
   {
+    path: "/test",
+    meta: {
+      layout: "auth",
+    },
+    component: () => import("@/views/jiucai/Test.vue"),
+  },
+  {
     path: "/ac/:id",
     meta: {
       layout: "landing",

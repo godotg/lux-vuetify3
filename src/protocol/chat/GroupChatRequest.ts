@@ -3,6 +3,7 @@
 class GroupChatRequest {
 
     groupId: number = 0;
+    // 0为普通聊天，1为Stable Diffusion，2为Midjourney
     type: number = 0;
     message: string = '';
 
