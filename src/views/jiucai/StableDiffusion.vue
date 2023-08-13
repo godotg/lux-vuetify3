@@ -6,7 +6,6 @@ import "md-editor-v3/lib/style.css";
 import JsFileDownloader from "js-file-downloader";
 
 import AnimationStableDiffusion from "@/animation/AnimationStableDiffusion.vue";
-import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import SdSimulateRequest from "@/protocol/sdiffusion/SdSimulateRequest";
 import SdSimulateResponse from "@/protocol/sdiffusion/SdSimulateResponse";
 import SdSimulateNotice from "@/protocol/sdiffusion/SdSimulateNotice";

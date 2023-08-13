@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from "@iconify/vue";
-import { useAuthStore } from "@/stores/authStore";
+import {Icon} from "@iconify/vue";
+import {useAuthStore} from "@/stores/authStore";
 
 const authStore = useAuthStore();
 const isLoading = ref(false);
@@ -11,13 +11,12 @@ const email = ref("vuetify3-visitor@gmail.com");
 const password = ref("sfm12345");
 const isFormValid = ref(true);
 
-const weChatServiceLoginUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbbef399f260454ac&redirect_uri=http%3a%2f%2fwww.zfoo.com%2fapi%2fweChat%2fservice%2fsignIn&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect" + '&state=' + new Date().getTime();
 
 // show password field
 const showPassword = ref(false);
 
 const handleLogin = async () => {
-  const { valid } = await refLoginForm.value.validate();
+  const {valid} = await refLoginForm.value.validate();
   if (valid) {
     isLoading.value = true;
     isSignInDisabled.value = true;
@@ -54,9 +53,25 @@ const resetErrors = () => {
   errorMessages.value = "";
 };
 
-const signInWithFacebook = () => {
-  alert(authStore.isLoggedIn);
+
+import LoginByWeChatRequest from "@/protocol/auth/LoginByWeChatRequest";
+import LoginByWeChatResponse from "@/protocol/auth/LoginByWeChatResponse";
+import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
+import {useSnackbarStore} from "@/stores/snackbarStore";
+const snackbarStore = useSnackbarStore();
+
+const dialogLoginRef = ref<boolean>(false);
+const authUrlRef = ref<string>("");
+const signInWithWeChat = async () => {
+  if (!isWebsocketReady()) {
+    snackbarStore.showWarningMessage("服务器尚未连接，请等待")
+    return;
+  }
+  const response: LoginByWeChatResponse = await asyncAsk(new LoginByWeChatRequest());
+  authUrlRef.value = response.authUrl;
+  dialogLoginRef.value = true;
 };
+
 </script>
 <template>
   <v-card color="white" class="pa-3 ma-3" elevation="3">
@@ -120,7 +135,8 @@ const signInWithFacebook = () => {
           color="primary"
           @click="handleLogin"
           class="mt-2"
-        >{{ $t("login.button") }}</v-btn
+        >{{ $t("login.button") }}
+        </v-btn
         >
 
         <div
@@ -137,9 +153,8 @@ const signInWithFacebook = () => {
           block
           size="x-large"
           prepend-icon="mdi-wechat"
-          @click="signInWithGoolgle"
+          @click="signInWithWeChat"
           :disabled="isSignInDisabled"
-          :href="weChatServiceLoginUrl"
         >
           <template v-slot:prepend>
             <v-icon color="#71C926"></v-icon>
@@ -156,7 +171,8 @@ const signInWithFacebook = () => {
             {{ $t("login.forgot") }}
           </router-link>
         </div>
-      </v-form></v-card-text
+      </v-form>
+    </v-card-text
     >
   </v-card>
   <div class="text-center mt-6">
@@ -165,4 +181,14 @@ const signInWithFacebook = () => {
       {{ $t("login.create") }}
     </router-link>
   </div>
+
+  <v-dialog v-model="dialogLoginRef">
+    <v-card>
+      <v-container>
+        <v-row>
+          <vue-qrcode :value="authUrlRef" :options="{ width: 200 }"></vue-qrcode>
+        </v-row>
+      </v-container>
+    </v-card>
+  </v-dialog>
 </template>
