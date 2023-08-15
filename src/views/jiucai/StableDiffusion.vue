@@ -571,7 +571,7 @@ const handleKeydown = (e) => {
               thumb-label
               step="1"
               min="1"
-              max="18"
+              max="12"
               label="张数(Batch)"
             ></v-slider>
           </v-col>
