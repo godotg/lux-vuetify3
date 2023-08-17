@@ -455,7 +455,7 @@ const handleKeydown = (e) => {
         @keydown="handleKeydown"
         rows="1"
         max-rows="9"
-        autofocus
+        :autofocus="!mobile"
         auto-grow
       >
         <template #prepend-inner>
@@ -483,7 +483,7 @@ const handleKeydown = (e) => {
             @keydown="handleKeydown"
             rows="1"
             max-rows="9"
-            autofocus
+            :autofocus="!mobile"
             auto-grow
           >
             <template #prepend-inner>
