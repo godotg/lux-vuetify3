@@ -6,6 +6,7 @@ import AnimationRun2 from "@/animation/AnimationRun2.vue";
 import AnimationRun3 from "@/animation/AnimationRun3.vue";
 import AnimationRun4 from "@/animation/AnimationRun4.vue";
 import AnimationRun5 from "@/animation/AnimationRun5.vue";
+import AnimationRun6 from "@/animation/AnimationRun6.vue";
 import {Icon} from "@iconify/vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
@@ -39,6 +40,7 @@ const newsStore = useNewsStore();
 const imageStore = useImageStore();
 
 const MAX_HISTORY = 10;
+const maxAnimation = 6;
 let animationRunIndex = 1;
 
 onMounted(() => {
@@ -169,7 +171,7 @@ const text2Img = async () => {
   request.nonce = seed();
   isLoadingRef.value = true;
   userMessage.value = "";
-  animationRunIndex = _.random(1, 5);
+  animationRunIndex = _.random(1, maxAnimation);
   send(request);
 };
 
@@ -351,16 +353,9 @@ const handleKeydown = (e) => {
 
 <template>
   <v-container v-if="messages.length <= 0">
-    <v-row v-if="mobile">
-      <AnimationMidjourney :size="width * 0.7"/>
-      <AnimationMidjourney :size="width * 0.7" :delay="3000"/>
-    </v-row>
-    <v-row v-else>
-      <v-col cols="6">
-        <AnimationMidjourney :size="height * 0.8"/>
-      </v-col>
-      <v-col cols="6">
-        <AnimationMidjourney :size="height * 0.8" :delay="3000"/>
+    <v-row justify="center" align="center">
+      <v-col cols="11">
+        <AnimationMidjourney :size="mobile ? width * 0.8 : height * 0.6"/>
       </v-col>
     </v-row>
   </v-container>
@@ -437,7 +432,8 @@ const handleKeydown = (e) => {
         <AnimationRun2 v-else-if="animationRunIndex === 2" :size="300"/>
         <AnimationRun3 v-else-if="animationRunIndex === 3" :size="300"/>
         <AnimationRun4 v-else-if="animationRunIndex === 4" :size="300"/>
-        <AnimationRun5 v-else :size="300"/>
+        <AnimationRun5 v-else-if="animationRunIndex === 5" :size="300"/>
+        <AnimationRun6 v-else :size="300"/>
       </v-col>
     </v-row>
   </v-container>

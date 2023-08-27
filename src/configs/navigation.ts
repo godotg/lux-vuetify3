@@ -26,18 +26,18 @@ export default {
           key: "jiucai.midjourney",
           text: "Midjourney",
           link: "/midjourney",
-          icon: "mdi-shark-fin-outline",
-        },
-        {
-          key: "jiucai.diffusion",
-          text: "Diffusion",
-          link: "/diffusion",
           icon: "mdi-draw",
         },
         {
           key: "jiucai.diffusion",
           text: "Diffusion",
           link: "/diffusion",
+          icon: "mdi-face-mask",
+        },
+        {
+          key: "jiucai.lucky",
+          text: "Lucky",
+          link: "/lucky",
           icon: "mdi-head-heart-outline",
         },
         {
