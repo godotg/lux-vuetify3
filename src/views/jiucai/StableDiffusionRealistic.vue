@@ -119,44 +119,6 @@ interface Message {
   sdImages: Array<SdImage>;
 }
 
-const styleInfos = [
-  {
-    image: "aa/style/0.jpg",
-    style: 0,
-    description: "二次元"
-  },
-  {
-    image: "aa/style/1.jpg",
-    style: 0,
-    description: "二次元"
-  },
-  {
-    image: "aa/style/2.jpg",
-    style: 0,
-    description: "二次元"
-  },
-  {
-    image: "aa/style/3.jpg",
-    style: 0,
-    description: "二次元"
-  },
-  {
-    image: "aa/style/4.jpg",
-    style: 0,
-    description: "二次元"
-  },
-  {
-    image: "aa/style/5.jpg",
-    style: 0,
-    description: "二次元"
-  },
-  {
-    image: "aa/style/6.jpg",
-    style: 0,
-    description: "二次元"
-  },
-];
-
 const dimensionInfos = [
   {
     dimension: 0,
@@ -180,19 +142,6 @@ const imageUrlMiddleRef = ref<string>("");
 const imageUrlHighRef = ref<string>("");
 
 const promptRef = ref<string>("");
-const negativePromptRef = ref<string>("");
-const styleRef = ref<number>(0);
-const stepsRef = ref<number>(0);
-const batchSizeRef = ref<number>(0);
-const dimensionRef = ref<number>(0);
-
-function styleInfo(style) {
-  const ele = _.find(styleInfos, it => it.style == style);
-  if (_.isNil(ele)) {
-    return _.first(styleInfos);
-  }
-  return ele;
-}
 
 function loadConfigs() {
   const sdParameters = imageSdReStore.sdParameters;
@@ -200,21 +149,11 @@ function loadConfigs() {
     return;
   }
   promptRef.value = sdParameters.prompt;
-  negativePromptRef.value = sdParameters.negativePrompt;
-  styleRef.value = sdParameters.style;
-  stepsRef.value = sdParameters.step;
-  batchSizeRef.value = sdParameters.batchSize;
-  dimensionRef.value = sdParameters.dimension;
 }
 
 function saveConfigs() {
   imageSdReStore.sdParameters = {
     prompt: promptRef.value,
-    negativePrompt: negativePromptRef.value,
-    style: styleRef.value,
-    step: stepsRef.value,
-    batchSize: batchSizeRef.value,
-    dimension: dimensionRef.value
   };
 }
 
@@ -257,11 +196,11 @@ const sendMessage = async () => {
     const request = new SdSimulateRequest();
     request.nonce = _.random(0, 10_0000_0000);
     request.prompt = promptRef.value;
-    request.negativePrompt = negativePromptRef.value;
-    request.steps = stepsRef.value;
-    request.batchSize = batchSizeRef.value;
-    request.style = styleInfos[styleRef.value].style;
-    request.dimension = dimensionInfos[dimensionRef.value].dimension;
+    request.negativePrompt = "";
+    request.steps = 20;
+    request.batchSize = 6;
+    request.style = 1;
+    request.dimension = 99;
     request.ignores = imageSdReStore.sds;
     const response: SdSimulateResponse = await asyncAsk(request);
     const message = {
@@ -509,100 +448,5 @@ const handleKeydown = (e) => {
         <v-btn color="primary" icon="mdi-cloud-download-outline" size="x-large" @click="download(imageUrlRef)"></v-btn>
       </v-col>
     </v-row>
-  </v-dialog>
-
-  <v-dialog v-model="dialogSettingRef" :max-width="mobile ? width : width * 0.7">
-    <v-card>
-      <v-container>
-        <v-row>
-          <v-col>
-            <v-slide-group
-              v-model="styleRef"
-              center-active
-              show-arrows
-            >
-              <v-slide-group-item
-                v-for="(styleInfo, index) in styleInfos"
-                :key="index"
-                v-slot="{ isSelected, toggle }"
-              >
-                <v-img
-                  :src="styleInfo.image"
-                  cover
-                  :width="mobile ? 100 : 300"
-                  class="ma-2 text-right"
-                  @click="toggle"
-                >
-                  <v-btn v-if="isSelected" icon="mdi-check" color="cyan" size="small"></v-btn>
-                </v-img>
-              </v-slide-group-item>
-            </v-slide-group>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-chip color="primary" label size="large">
-              <v-icon start icon="mdi-heart-circle-outline"></v-icon>
-              {{ styleInfo(styleRef).description }}
-            </v-chip>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-slider
-              v-model="stepsRef"
-              thumb-color="primary"
-              thumb-label
-              step="1"
-              min="20"
-              max="150"
-              label="步数(Steps)"
-            ></v-slider>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col :cols="mobile ? 12 : 6">
-            <v-slider
-              v-model="batchSizeRef"
-              thumb-color="primary"
-              thumb-label
-              step="1"
-              min="1"
-              max="12"
-              label="张数(Batch)"
-            ></v-slider>
-          </v-col>
-          <v-col md="2">
-            <v-select
-              v-model="dimensionRef"
-              :items="dimensionInfos"
-              item-title="description"
-              item-value="dimension"
-              hint="分辨率(Resolution)"
-              persistent-hint
-              single-line
-              chips
-            ></v-select>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea
-              color="primary"
-              type="text"
-              variant="solo"
-              ref="input"
-              v-model="negativePromptRef"
-              placeholder="negative prompt"
-              hide-details
-              rows="3"
-              max-rows="9"
-              auto-grow
-            >
-            </v-textarea>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-card>
   </v-dialog>
 </template>
