@@ -185,8 +185,8 @@ const handleKeydown = (e) => {
 
 <template>
   <v-container v-if="messages.length <= 0">
-    <v-row>
-      <v-col>
+    <v-row justify="center" align="center">
+      <v-col cols="12">
         <AnimationAI1 v-if="props.ai == 1" :size="props.size"/>
         <AnimationAI2 v-else :size="props.size"/>
       </v-col>
@@ -249,7 +249,7 @@ const handleKeydown = (e) => {
     <v-container v-else>
       <v-row>
         <v-col cols="8" offset="2">
-          <v-btn v-if="!mobile" size="x-small" class="mb-3 mr-1" variant="elevated" icon
+          <v-btn v-if="!mobile && ai == 1" size="x-small" class="mb-3 mr-1" variant="elevated" icon
                  @click="chatGPTStore.configDialog = true">
             <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
             <v-tooltip

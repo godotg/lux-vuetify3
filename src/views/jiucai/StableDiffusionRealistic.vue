@@ -134,7 +134,6 @@ const dimensionInfos = [
 const isLoading = ref(false);
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
-const dialogSettingRef = ref<boolean>(false);
 const imagePromptRef = ref<string>("");
 const imageUrlRef = ref<string>("");
 const imageUrlLowRef = ref<string>("");
@@ -156,20 +155,6 @@ function saveConfigs() {
     prompt: promptRef.value,
   };
 }
-
-watch(
-  () => dialogSettingRef.value,
-  (val) => {
-    if (val) {
-      return;
-    }
-    // 持久化到本地
-    saveConfigs();
-  },
-  {
-    deep: true,
-  }
-);
 
 
 function openImage(prompt, sdImage) {
@@ -343,11 +328,6 @@ const handleKeydown = (e) => {
         :autofocus="!mobile"
         auto-grow
       >
-        <template #prepend-inner>
-          <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef" size="x-large" v-ripple>mdi-star
-            mdi-spin
-          </v-icon>
-        </template>
         <template v-slot:append-inner>
           <v-fade-transition leave-absolute>
             <Icon
@@ -381,12 +361,6 @@ const handleKeydown = (e) => {
             :autofocus="!mobile"
             auto-grow
           >
-            <template #prepend-inner>
-              <v-icon color="primary" @click="dialogSettingRef=!dialogSettingRef" size="x-large" v-ripple>
-                mdi-star
-                mdi-spin
-              </v-icon>
-            </template>
             <template v-slot:append-inner>
               <v-fade-transition leave-absolute>
                 <Icon

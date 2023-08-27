@@ -272,9 +272,9 @@ const handleKeydown = (e) => {
         :autofocus="!mobile"
         auto-grow
       >
-        <template #prepend-inner>
-          <v-icon color="primary">mdi-file-gif-box</v-icon>
-        </template>
+<!--        <template #prepend-inner>-->
+<!--          <v-icon color="primary">mdi-file-gif-box</v-icon>-->
+<!--        </template>-->
         <template v-slot:append-inner>
           <v-fade-transition leave-absolute>
             <Icon
@@ -308,9 +308,9 @@ const handleKeydown = (e) => {
             :autofocus="!mobile"
             auto-grow
           >
-            <template #prepend-inner>
-              <v-icon color="primary">mdi-file-gif-box</v-icon>
-            </template>
+<!--            <template #prepend-inner>-->
+<!--              <v-icon color="primary">mdi-file-gif-box</v-icon>-->
+<!--            </template>-->
             <template v-slot:append-inner>
               <v-fade-transition leave-absolute>
                 <Icon
