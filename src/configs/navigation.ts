@@ -17,6 +17,12 @@ export default {
           icon: "mdi-robot-confused-outline",
         },
         {
+          key: "jiucai.spark",
+          text: "Spark",
+          link: "/spark",
+          icon: "mdi-fire",
+        },
+        {
           key: "jiucai.midjourney",
           text: "Midjourney",
           link: "/midjourney",
@@ -26,14 +32,14 @@ export default {
           key: "jiucai.diffusion",
           text: "Diffusion",
           link: "/diffusion",
+          icon: "mdi-draw",
+        },
+        {
+          key: "jiucai.diffusion",
+          text: "Diffusion",
+          link: "/diffusion",
           icon: "mdi-head-heart-outline",
         },
-        // {
-        //   key: "jiucai.spark",
-        //   text: "Spark",
-        //   link: "/spark",
-        //   icon: "mdi-fire",
-        // },
         {
           key: "jiucai.square",
           text: "Square",

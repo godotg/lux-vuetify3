@@ -14,9 +14,6 @@ const props = defineProps({
 </script>
 
 <template>
-  <h1 class="text-h6 text-md-h4 text-blue-lighten-1 font-weight-bold mb-9">
-    星火认知大模型
-  </h1>
   <Vue3Lottie
     animationLink="/aa/ai-animation-2.json"
     :height="props.size"
