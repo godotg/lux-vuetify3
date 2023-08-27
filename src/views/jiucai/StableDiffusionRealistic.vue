@@ -5,7 +5,7 @@ import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import JsFileDownloader from "js-file-downloader";
 
-import AnimationStableDiffusion2 from "@/animation/AnimationStableDiffusion2.vue";
+import AnimationStableDiffusion from "@/animation/AnimationStableDiffusion.vue";
 import SdSimulateRequest from "@/protocol/sdiffusion/SdSimulateRequest";
 import SdSimulateResponse from "@/protocol/sdiffusion/SdSimulateResponse";
 import SdSimulateNotice from "@/protocol/sdiffusion/SdSimulateNotice";
@@ -339,12 +339,12 @@ const handleKeydown = (e) => {
   <v-container v-if="messages.length <= 0">
     <v-row v-if="mobile" class="mt-12">
       <v-col>
-        <AnimationStableDiffusion2 :size="width * 0.9"/>
+        <AnimationStableDiffusion :size="width * 0.9"/>
       </v-col>
     </v-row>
     <v-row v-else>
       <v-col>
-        <AnimationStableDiffusion2 :size="height * 0.7"/>
+        <AnimationStableDiffusion :size="height * 0.7"/>
       </v-col>
     </v-row>
   </v-container>
