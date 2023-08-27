@@ -354,7 +354,7 @@ const handleKeydown = (e) => {
 <template>
   <v-container v-if="messages.length <= 0">
     <v-row justify="center" align="center">
-      <v-col cols="11">
+      <v-col cols="12">
         <AnimationMidjourney :size="mobile ? width * 0.8 : height * 0.6"/>
       </v-col>
     </v-row>

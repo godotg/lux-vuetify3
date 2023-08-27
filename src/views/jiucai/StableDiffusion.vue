@@ -21,6 +21,7 @@ import {useDisplay} from "vuetify";
 import _ from "lodash";
 import SdImage from "@/protocol/sdiffusion/SdImage";
 import {isBlank} from "@/utils/stringUtils";
+import AnimationStableDiffusion from "@/animation/AnimationStableDiffusion.vue";
 
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
@@ -337,14 +338,9 @@ const handleKeydown = (e) => {
 
 <template>
   <v-container v-if="messages.length <= 0">
-    <v-row v-if="mobile" class="mt-12">
-      <v-col>
-        <AnimationStableDiffusion2 :size="width * 0.9"/>
-      </v-col>
-    </v-row>
-    <v-row v-else>
-      <v-col>
-        <AnimationStableDiffusion2 :size="height * 0.7"/>
+    <v-row justify="center" align="center">
+      <v-col cols="12">
+        <AnimationStableDiffusion2 :size="mobile ? width * 0.8 : height * 0.6"/>
       </v-col>
     </v-row>
   </v-container>

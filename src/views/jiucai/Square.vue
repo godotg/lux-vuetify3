@@ -212,7 +212,7 @@ const handleKeydown = (e) => {
   <v-container v-if="messages.length <= 0">
     <v-progress-linear indeterminate color="primary"></v-progress-linear>
     <v-row justify="center" align="center">
-      <v-col cols="11">
+      <v-col cols="12">
         <AnimationSquare1 :size="mobile ? width * 0.8 : height * 0.6"/>
       </v-col>
     </v-row>

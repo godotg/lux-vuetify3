@@ -337,14 +337,9 @@ const handleKeydown = (e) => {
 
 <template>
   <v-container v-if="messages.length <= 0">
-    <v-row v-if="mobile" class="mt-12">
-      <v-col>
-        <AnimationStableDiffusion :size="width * 0.9"/>
-      </v-col>
-    </v-row>
-    <v-row v-else>
-      <v-col>
-        <AnimationStableDiffusion :size="height * 0.7"/>
+    <v-row justify="center" align="center">
+      <v-col cols="12">
+        <AnimationStableDiffusion :size="mobile ? width * 0.8 : height * 0.6"/>
       </v-col>
     </v-row>
   </v-container>
