@@ -17,11 +17,11 @@ import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import {useNewsStore} from "@/stores/newsStore";
 import {useImageStore} from "@/stores/imageStore";
+import {useImageSdStore} from "@/stores/imageSdStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import SdImage from "@/protocol/sdiffusion/SdImage";
 import {isBlank} from "@/utils/stringUtils";
-import AnimationStableDiffusion from "@/animation/AnimationStableDiffusion.vue";
 
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
@@ -29,13 +29,14 @@ const route = useRoute();
 const {mobile, width, height} = useDisplay();
 const newsStore = useNewsStore();
 const imageStore = useImageStore();
+const imageSdStore = useImageSdStore();
 
 const MAX_HISTORY = 20;
 let animationRunIndex = 1;
 
 onMounted(() => {
   registerPacketReceiver(SdSimulateNotice.PROTOCOL_ID, sdSimulateNoticeRefresh);
-  messages.value = imageStore.sdPrompts;
+  messages.value = imageSdStore.sdPrompts;
   initHistory();
   setInterval(() => initHistory(), 10 * 1000);
   setTimeout(() => scrollToBottomDelay(), 100);
@@ -194,7 +195,7 @@ function styleInfo(style) {
 }
 
 function loadConfigs() {
-  const sdParameters = imageStore.sdParameters;
+  const sdParameters = imageSdStore.sdParameters;
   if (_.isNil(sdParameters)) {
     return;
   }
@@ -207,7 +208,7 @@ function loadConfigs() {
 }
 
 function saveConfigs() {
-  imageStore.sdParameters = {
+  imageSdStore.sdParameters = {
     prompt: promptRef.value,
     negativePrompt: negativePromptRef.value,
     style: styleRef.value,
@@ -261,7 +262,7 @@ const sendMessage = async () => {
     request.batchSize = batchSizeRef.value;
     request.style = styleInfos[styleRef.value].style;
     request.dimension = dimensionInfos[dimensionRef.value].dimension;
-    request.ignores = imageStore.sds;
+    request.ignores = imageSdStore.sds;
     const response: SdSimulateResponse = await asyncAsk(request);
     const message = {
       id: response.nonce,
@@ -274,7 +275,7 @@ const sendMessage = async () => {
     };
     setTimeout(() => refreshMessage(response.nonce), 100);
     messages.value.push(message);
-    imageStore.sdPrompts = _.takeRight(messages.value, MAX_HISTORY);
+    imageSdStore.sdPrompts = _.takeRight(messages.value, MAX_HISTORY);
     scrollToBottomDelay();
   }
 };
@@ -304,8 +305,8 @@ const sdSimulateNoticeRefresh = (packet: SdSimulateNotice) => {
     return;
   }
   message.sdImages = images;
-  images.forEach(it => imageStore.sds.push(it.id));
-  imageStore.sds = _.takeRight(imageStore.sds, 2000);
+  images.forEach(it => imageSdStore.sds.push(it.id));
+  imageSdStore.sds = _.takeRight(imageSdStore.sds, 2000);
   if (isFinished(message)) {
     message.refreshTime = message.costTime + 3000;
     isLoading.value = false;
