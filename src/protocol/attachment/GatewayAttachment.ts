@@ -1,16 +1,13 @@
 import SignalAttachment from './SignalAttachment';
-import SignalOnlyAttachment from './SignalOnlyAttachment';
 
 
 class GatewayAttachment {
 
     sid: number = 0;
     uid: number = 0;
-    useTaskExecutorHashParam: boolean = false;
-    taskExecutorHashParam: number = 0;
+    taskExecutorHash: number = 0;
     client: boolean = false;
     signalAttachment: SignalAttachment | null = null;
-    signalOnlyAttachment: SignalOnlyAttachment | null = null;
 
     static PROTOCOL_ID: number = 2;
 
@@ -25,10 +22,8 @@ class GatewayAttachment {
         buffer.writeBoolean(packet.client);
         buffer.writeLong(packet.sid);
         buffer.writePacket(packet.signalAttachment, 0);
-        buffer.writePacket(packet.signalOnlyAttachment, 1);
-        buffer.writeInt(packet.taskExecutorHashParam);
+        buffer.writeInt(packet.taskExecutorHash);
         buffer.writeLong(packet.uid);
-        buffer.writeBoolean(packet.useTaskExecutorHashParam);
     }
 
     static read(buffer: any): GatewayAttachment | null {
@@ -42,14 +37,10 @@ class GatewayAttachment {
         packet.sid = result1;
         const result2 = buffer.readPacket(0);
         packet.signalAttachment = result2;
-        const result3 = buffer.readPacket(1);
-        packet.signalOnlyAttachment = result3;
-        const result4 = buffer.readInt();
-        packet.taskExecutorHashParam = result4;
-        const result5 = buffer.readLong();
-        packet.uid = result5;
-        const result6 = buffer.readBoolean(); 
-        packet.useTaskExecutorHashParam = result6;
+        const result3 = buffer.readInt();
+        packet.taskExecutorHash = result3;
+        const result4 = buffer.readLong();
+        packet.uid = result4;
         return packet;
     }
 }

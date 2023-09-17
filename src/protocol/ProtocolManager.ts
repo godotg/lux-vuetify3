@@ -1,5 +1,4 @@
 import SignalAttachment from './attachment/SignalAttachment';
-import SignalOnlyAttachment from './attachment/SignalOnlyAttachment';
 import GatewayAttachment from './attachment/GatewayAttachment';
 import UdpAttachment from './attachment/UdpAttachment';
 import HttpAttachment from './attachment/HttpAttachment';
@@ -79,7 +78,6 @@ const protocols = new Map<number, any>();
 
 // initProtocol
 protocols.set(0, SignalAttachment);
-protocols.set(1, SignalOnlyAttachment);
 protocols.set(2, GatewayAttachment);
 protocols.set(3, UdpAttachment);
 protocols.set(4, HttpAttachment);

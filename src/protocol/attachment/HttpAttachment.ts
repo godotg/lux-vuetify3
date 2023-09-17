@@ -3,8 +3,7 @@
 class HttpAttachment {
 
     uid: number = 0;
-    useTaskExecutorHashParam: boolean = false;
-    taskExecutorHashParam: number = 0;
+    taskExecutorHash: number = 0;
 
     static PROTOCOL_ID: number = 4;
 
@@ -16,9 +15,8 @@ class HttpAttachment {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        buffer.writeInt(packet.taskExecutorHashParam);
+        buffer.writeInt(packet.taskExecutorHash);
         buffer.writeLong(packet.uid);
-        buffer.writeBoolean(packet.useTaskExecutorHashParam);
     }
 
     static read(buffer: any): HttpAttachment | null {
@@ -27,11 +25,9 @@ class HttpAttachment {
         }
         const packet = new HttpAttachment();
         const result0 = buffer.readInt();
-        packet.taskExecutorHashParam = result0;
+        packet.taskExecutorHash = result0;
         const result1 = buffer.readLong();
         packet.uid = result1;
-        const result2 = buffer.readBoolean(); 
-        packet.useTaskExecutorHashParam = result2;
         return packet;
     }
 }

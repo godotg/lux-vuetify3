@@ -4,7 +4,8 @@ class SignalAttachment {
 
     signalId: number = 0;
     taskExecutorHash: number = 0;
-    client: boolean = false;
+    // 0 for the server, 1 or 2 for the sync or async native client, 12 for the outside client such as browser, mobile
+    client: number = 0;
     timestamp: number = 0;
 
     static PROTOCOL_ID: number = 0;
@@ -17,7 +18,7 @@ class SignalAttachment {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        buffer.writeBoolean(packet.client);
+        buffer.writeByte(packet.client);
         buffer.writeInt(packet.signalId);
         buffer.writeInt(packet.taskExecutorHash);
         buffer.writeLong(packet.timestamp);
@@ -28,7 +29,7 @@ class SignalAttachment {
             return null;
         }
         const packet = new SignalAttachment();
-        const result0 = buffer.readBoolean(); 
+        const result0 = buffer.readByte();
         packet.client = result0;
         const result1 = buffer.readInt();
         packet.signalId = result1;

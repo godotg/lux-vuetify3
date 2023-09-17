@@ -1,5 +1,5 @@
 import ByteBuffer from '@/protocol/buffer/ByteBuffer';
-import SignalOnlyAttachment from '@/protocol/attachment/SignalOnlyAttachment';
+import SignalAttachment from '@/protocol/attachment/SignalAttachment';
 import ProtocolManager from '@/protocol/ProtocolManager.js';
 import Error from '@/protocol/common/Error';
 import Message from '@/protocol/common/Message';
@@ -184,16 +184,18 @@ export function send(packet: any, attachment: any = null) {
 class EncodedPacketInfo {
   promiseResolve: any;
   promiseReject: any;
-  attachment: SignalOnlyAttachment;
+  attachment: SignalAttachment;
 }
 
 export async function asyncAsk(packet: any): Promise<any> {
   const currentTime = new Date().getTime();
-  const attachment: SignalOnlyAttachment = new SignalOnlyAttachment();
+  const attachment: SignalAttachment = new SignalAttachment();
   uuid++;
   const signalId = uuid;
   attachment.timestamp = currentTime;
   attachment.signalId = signalId;
+  attachment.taskExecutorHash = -1;
+  attachment.client = 12;
   const encodedPacketInfo = new EncodedPacketInfo();
   encodedPacketInfo.attachment = attachment;
   const promise = new Promise((resolve, reject) => {

@@ -10,6 +10,11 @@ class StableDiffusionRequest {
     batch_size: number = 0;
     width: number = 0;
     height: number = 0;
+    cfg_scale: number = 0;
+    enable_hr: boolean = false;
+    hr_scale: number = 0;
+    denoising_strength: number = 0;
+    hr_upscaler: string = '';
 
     static PROTOCOL_ID: number = 330;
 
@@ -22,7 +27,12 @@ class StableDiffusionRequest {
             return;
         }
         buffer.writeInt(packet.batch_size);
+        buffer.writeInt(packet.cfg_scale);
+        buffer.writeDouble(packet.denoising_strength);
+        buffer.writeBoolean(packet.enable_hr);
         buffer.writeInt(packet.height);
+        buffer.writeInt(packet.hr_scale);
+        buffer.writeString(packet.hr_upscaler);
         buffer.writeString(packet.negative_prompt);
         buffer.writeString(packet.prompt);
         buffer.writeString(packet.sampler_name);
@@ -39,19 +49,29 @@ class StableDiffusionRequest {
         const result0 = buffer.readInt();
         packet.batch_size = result0;
         const result1 = buffer.readInt();
-        packet.height = result1;
-        const result2 = buffer.readString();
-        packet.negative_prompt = result2;
-        const result3 = buffer.readString();
-        packet.prompt = result3;
-        const result4 = buffer.readString();
-        packet.sampler_name = result4;
-        const result5 = buffer.readLong();
-        packet.seed = result5;
-        const result6 = buffer.readInt();
-        packet.steps = result6;
-        const result7 = buffer.readInt();
-        packet.width = result7;
+        packet.cfg_scale = result1;
+        const result2 = buffer.readDouble();
+        packet.denoising_strength = result2;
+        const result3 = buffer.readBoolean(); 
+        packet.enable_hr = result3;
+        const result4 = buffer.readInt();
+        packet.height = result4;
+        const result5 = buffer.readInt();
+        packet.hr_scale = result5;
+        const result6 = buffer.readString();
+        packet.hr_upscaler = result6;
+        const result7 = buffer.readString();
+        packet.negative_prompt = result7;
+        const result8 = buffer.readString();
+        packet.prompt = result8;
+        const result9 = buffer.readString();
+        packet.sampler_name = result9;
+        const result10 = buffer.readLong();
+        packet.seed = result10;
+        const result11 = buffer.readInt();
+        packet.steps = result11;
+        const result12 = buffer.readInt();
+        packet.width = result12;
         return packet;
     }
 }

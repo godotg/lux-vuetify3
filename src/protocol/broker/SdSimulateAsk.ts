@@ -1,4 +1,4 @@
-import SignalOnlyAttachment from '../attachment/SignalOnlyAttachment';
+import SignalAttachment from '../attachment/SignalAttachment';
 import SdSimulateRequest from '../sdiffusion/SdSimulateRequest';
 
 
@@ -6,7 +6,7 @@ class SdSimulateAsk {
 
     requestSid: number = 0;
     request: SdSimulateRequest | null = null;
-    attachment: SignalOnlyAttachment | null = null;
+    attachment: SignalAttachment | null = null;
 
     static PROTOCOL_ID: number = 307;
 
@@ -18,7 +18,7 @@ class SdSimulateAsk {
         if (buffer.writePacketFlag(packet) || packet == null) {
             return;
         }
-        buffer.writePacket(packet.attachment, 1);
+        buffer.writePacket(packet.attachment, 0);
         buffer.writePacket(packet.request, 340);
         buffer.writeLong(packet.requestSid);
     }
@@ -28,7 +28,7 @@ class SdSimulateAsk {
             return null;
         }
         const packet = new SdSimulateAsk();
-        const result0 = buffer.readPacket(1);
+        const result0 = buffer.readPacket(0);
         packet.attachment = result0;
         const result1 = buffer.readPacket(340);
         packet.request = result1;
