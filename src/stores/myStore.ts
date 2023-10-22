@@ -5,8 +5,7 @@ export const useMyStore = defineStore("myStore", {
     announce: {
       version: "",
       title: "",
-      content: "",
-      image: ""
+      content: ""
     }
   }),
 

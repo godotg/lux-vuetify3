@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {useMyStore} from "@/stores/myStore";
+import MdEditor from "md-editor-v3";
 import axios from "axios";
 import _ from "lodash";
 const myStore = useMyStore();
@@ -25,7 +26,7 @@ onMounted(async () => {
       <v-card>
         <v-toolbar color="primary" :title="myStore.announce.title"></v-toolbar>
         <v-card-text>
-          <div class="text-h4 pa-12">{{ myStore.announce.content }}</div>
+          <md-editor v-model="myStore.announce.content" previewOnly/>
         </v-card-text>
       </v-card>
     </template>
