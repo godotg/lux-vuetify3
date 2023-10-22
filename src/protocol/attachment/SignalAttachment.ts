@@ -15,9 +15,11 @@ class SignalAttachment {
     }
 
     static write(buffer: any, packet: SignalAttachment | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeByte(packet.client);
         buffer.writeInt(packet.signalId);
         buffer.writeInt(packet.taskExecutorHash);
@@ -25,9 +27,11 @@ class SignalAttachment {
     }
 
     static read(buffer: any): SignalAttachment | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new SignalAttachment();
         const result0 = buffer.readByte();
         packet.client = result0;
@@ -37,6 +41,9 @@ class SignalAttachment {
         packet.taskExecutorHash = result2;
         const result3 = buffer.readLong();
         packet.timestamp = result3;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

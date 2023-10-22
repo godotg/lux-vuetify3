@@ -16,9 +16,11 @@ class ChatMessage {
     }
 
     static write(buffer: any, packet: ChatMessage | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeLong(packet.id);
         buffer.writeString(packet.message);
         buffer.writeString(packet.region);
@@ -28,9 +30,11 @@ class ChatMessage {
     }
 
     static read(buffer: any): ChatMessage | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new ChatMessage();
         const result0 = buffer.readLong();
         packet.id = result0;
@@ -44,6 +48,9 @@ class ChatMessage {
         packet.timestamp = result4;
         const result5 = buffer.readByte();
         packet.type = result5;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

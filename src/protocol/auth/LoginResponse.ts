@@ -17,9 +17,11 @@ class LoginResponse {
     }
 
     static write(buffer: any, packet: LoginResponse | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeLong(packet.activeUid);
         buffer.writeLong(packet.chatMessageIdDiff);
         buffer.writeString(packet.ip);
@@ -30,9 +32,11 @@ class LoginResponse {
     }
 
     static read(buffer: any): LoginResponse | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new LoginResponse();
         const result0 = buffer.readLong();
         packet.activeUid = result0;
@@ -48,6 +52,9 @@ class LoginResponse {
         packet.region = result5;
         const result6 = buffer.readLong();
         packet.sid = result6;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

@@ -14,18 +14,22 @@ class GroupChatRequest {
     }
 
     static write(buffer: any, packet: GroupChatRequest | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeLong(packet.groupId);
         buffer.writeString(packet.message);
         buffer.writeByte(packet.type);
     }
 
     static read(buffer: any): GroupChatRequest | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new GroupChatRequest();
         const result0 = buffer.readLong();
         packet.groupId = result0;
@@ -33,6 +37,9 @@ class GroupChatRequest {
         packet.message = result1;
         const result2 = buffer.readByte();
         packet.type = result2;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

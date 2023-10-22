@@ -14,9 +14,11 @@ class ChatgptMessageRequest {
     }
 
     static write(buffer: any, packet: ChatgptMessageRequest | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeInt(packet.ai);
         buffer.writeStringList(packet.messages);
         buffer.writeBoolean(packet.mobile);
@@ -24,9 +26,11 @@ class ChatgptMessageRequest {
     }
 
     static read(buffer: any): ChatgptMessageRequest | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new ChatgptMessageRequest();
         const result0 = buffer.readInt();
         packet.ai = result0;
@@ -36,6 +40,9 @@ class ChatgptMessageRequest {
         packet.mobile = result2;
         const result3 = buffer.readInt();
         packet.requestId = result3;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

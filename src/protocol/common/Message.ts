@@ -13,18 +13,22 @@ class Message {
     }
 
     static write(buffer: any, packet: Message | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeInt(packet.code);
         buffer.writeString(packet.message);
         buffer.writeByte(packet.module);
     }
 
     static read(buffer: any): Message | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new Message();
         const result0 = buffer.readInt();
         packet.code = result0;
@@ -32,6 +36,9 @@ class Message {
         packet.message = result1;
         const result2 = buffer.readByte();
         packet.module = result2;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

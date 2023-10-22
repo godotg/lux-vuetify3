@@ -25,9 +25,11 @@ class MidImagineNotice {
     }
 
     static write(buffer: any, packet: MidImagineNotice | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeString(packet.content);
         buffer.writeString(packet.imageUrl);
         buffer.writeString(packet.imageUrlHigh);
@@ -41,9 +43,11 @@ class MidImagineNotice {
     }
 
     static read(buffer: any): MidImagineNotice | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new MidImagineNotice();
         const result0 = buffer.readString();
         packet.content = result0;
@@ -65,6 +69,9 @@ class MidImagineNotice {
         packet.reroll = result8;
         const result9 = buffer.readString();
         packet.type = result9;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

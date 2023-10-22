@@ -20,9 +20,11 @@ class StableDiffusionParameters {
     }
 
     static write(buffer: any, packet: StableDiffusionParameters | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeInt(packet.batch_size);
         buffer.writeInt(packet.cfg_scale);
         buffer.writeInt(packet.height);
@@ -36,9 +38,11 @@ class StableDiffusionParameters {
     }
 
     static read(buffer: any): StableDiffusionParameters | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new StableDiffusionParameters();
         const result0 = buffer.readInt();
         packet.batch_size = result0;
@@ -60,6 +64,9 @@ class StableDiffusionParameters {
         packet.tiling = result8;
         const result9 = buffer.readInt();
         packet.width = result9;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

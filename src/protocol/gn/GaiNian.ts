@@ -16,9 +16,11 @@ class GaiNian {
     }
 
     static write(buffer: any, packet: GaiNian | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeString(packet.content);
         buffer.writeString(packet.ctime);
         buffer.writeLong(packet.id);
@@ -28,9 +30,11 @@ class GaiNian {
     }
 
     static read(buffer: any): GaiNian | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new GaiNian();
         const result0 = buffer.readString();
         packet.content = result0;
@@ -44,6 +48,9 @@ class GaiNian {
         packet.title = result4;
         const result5 = buffer.readString();
         packet.url = result5;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

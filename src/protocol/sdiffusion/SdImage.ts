@@ -15,9 +15,11 @@ class SdImage {
     }
 
     static write(buffer: any, packet: SdImage | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeLong(packet.id);
         buffer.writeString(packet.imageUrl);
         buffer.writeString(packet.imageUrlHigh);
@@ -26,9 +28,11 @@ class SdImage {
     }
 
     static read(buffer: any): SdImage | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new SdImage();
         const result0 = buffer.readLong();
         packet.id = result0;
@@ -40,6 +44,9 @@ class SdImage {
         packet.imageUrlLow = result3;
         const result4 = buffer.readString();
         packet.imageUrlMiddle = result4;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

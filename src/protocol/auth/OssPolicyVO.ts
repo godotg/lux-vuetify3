@@ -16,9 +16,11 @@ class OssPolicyVO {
     }
 
     static write(buffer: any, packet: OssPolicyVO | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeString(packet.accessKeyId);
         buffer.writeString(packet.dir);
         buffer.writeString(packet.expire);
@@ -28,9 +30,11 @@ class OssPolicyVO {
     }
 
     static read(buffer: any): OssPolicyVO | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new OssPolicyVO();
         const result0 = buffer.readString();
         packet.accessKeyId = result0;
@@ -44,6 +48,9 @@ class OssPolicyVO {
         packet.policy = result4;
         const result5 = buffer.readString();
         packet.signature = result5;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

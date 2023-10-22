@@ -12,19 +12,26 @@ class NewsResponse {
     }
 
     static write(buffer: any, packet: NewsResponse | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writePacketList(packet.news, 200);
     }
 
     static read(buffer: any): NewsResponse | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new NewsResponse();
         const list0 = buffer.readPacketList(200);
         packet.news = list0;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

@@ -13,18 +13,22 @@ class InterrogatorPromptRequest {
     }
 
     static write(buffer: any, packet: InterrogatorPromptRequest | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeString(packet.clip_model_name);
         buffer.writeString(packet.image);
         buffer.writeString(packet.mode);
     }
 
     static read(buffer: any): InterrogatorPromptRequest | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new InterrogatorPromptRequest();
         const result0 = buffer.readString();
         packet.clip_model_name = result0;
@@ -32,6 +36,9 @@ class InterrogatorPromptRequest {
         packet.image = result1;
         const result2 = buffer.readString();
         packet.mode = result2;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

@@ -23,9 +23,11 @@ class StableDiffusionRequest {
     }
 
     static write(buffer: any, packet: StableDiffusionRequest | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeInt(packet.batch_size);
         buffer.writeInt(packet.cfg_scale);
         buffer.writeDouble(packet.denoising_strength);
@@ -42,9 +44,11 @@ class StableDiffusionRequest {
     }
 
     static read(buffer: any): StableDiffusionRequest | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new StableDiffusionRequest();
         const result0 = buffer.readInt();
         packet.batch_size = result0;
@@ -72,6 +76,9 @@ class StableDiffusionRequest {
         packet.steps = result11;
         const result12 = buffer.readInt();
         packet.width = result12;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

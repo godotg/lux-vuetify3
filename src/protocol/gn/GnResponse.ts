@@ -12,19 +12,26 @@ class GnResponse {
     }
 
     static write(buffer: any, packet: GnResponse | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writePacketList(packet.gns, 220);
     }
 
     static read(buffer: any): GnResponse | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new GnResponse();
         const list0 = buffer.readPacketList(220);
         packet.gns = list0;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

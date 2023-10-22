@@ -20,9 +20,11 @@ class SdSimulateRequest {
     }
 
     static write(buffer: any, packet: SdSimulateRequest | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeInt(packet.batchSize);
         buffer.writeInt(packet.dimension);
         buffer.writeLongList(packet.ignores);
@@ -34,9 +36,11 @@ class SdSimulateRequest {
     }
 
     static read(buffer: any): SdSimulateRequest | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new SdSimulateRequest();
         const result0 = buffer.readInt();
         packet.batchSize = result0;
@@ -54,6 +58,9 @@ class SdSimulateRequest {
         packet.steps = result6;
         const result7 = buffer.readInt();
         packet.style = result7;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

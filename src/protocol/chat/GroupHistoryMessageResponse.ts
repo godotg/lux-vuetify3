@@ -14,18 +14,22 @@ class GroupHistoryMessageResponse {
     }
 
     static write(buffer: any, packet: GroupHistoryMessageResponse | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeLong(packet.groupId);
         buffer.writePacketList(packet.messages, 240);
         buffer.writeInt(packet.onlineUsers);
     }
 
     static read(buffer: any): GroupHistoryMessageResponse | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new GroupHistoryMessageResponse();
         const result0 = buffer.readLong();
         packet.groupId = result0;
@@ -33,6 +37,9 @@ class GroupHistoryMessageResponse {
         packet.messages = list1;
         const result2 = buffer.readInt();
         packet.onlineUsers = result2;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

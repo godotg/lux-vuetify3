@@ -20,9 +20,11 @@ class News {
     }
 
     static write(buffer: any, packet: News | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeString(packet.content);
         buffer.writeString(packet.ctime);
         buffer.writeLong(packet.id);
@@ -34,9 +36,11 @@ class News {
     }
 
     static read(buffer: any): News | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new News();
         const result0 = buffer.readString();
         packet.content = result0;
@@ -54,6 +58,9 @@ class News {
         packet.subjects = list6;
         const result7 = buffer.readString();
         packet.title = result7;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

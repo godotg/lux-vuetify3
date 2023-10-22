@@ -16,9 +16,11 @@ class GatewayAttachment {
     }
 
     static write(buffer: any, packet: GatewayAttachment | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeBoolean(packet.client);
         buffer.writeLong(packet.sid);
         buffer.writePacket(packet.signalAttachment, 0);
@@ -27,9 +29,11 @@ class GatewayAttachment {
     }
 
     static read(buffer: any): GatewayAttachment | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new GatewayAttachment();
         const result0 = buffer.readBoolean(); 
         packet.client = result0;
@@ -41,6 +45,9 @@ class GatewayAttachment {
         packet.taskExecutorHash = result3;
         const result4 = buffer.readLong();
         packet.uid = result4;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

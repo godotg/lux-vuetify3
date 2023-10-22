@@ -14,9 +14,11 @@ class NewsStock {
     }
 
     static write(buffer: any, packet: NewsStock | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeInt(packet.code);
         buffer.writeString(packet.name);
         buffer.writeString(packet.price);
@@ -24,9 +26,11 @@ class NewsStock {
     }
 
     static read(buffer: any): NewsStock | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new NewsStock();
         const result0 = buffer.readInt();
         packet.code = result0;
@@ -36,6 +40,9 @@ class NewsStock {
         packet.price = result2;
         const result3 = buffer.readString();
         packet.rise = result3;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

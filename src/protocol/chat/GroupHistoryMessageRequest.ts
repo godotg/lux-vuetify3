@@ -12,22 +12,29 @@ class GroupHistoryMessageRequest {
     }
 
     static write(buffer: any, packet: GroupHistoryMessageRequest | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeLong(packet.groupId);
         buffer.writeLong(packet.lastMessageId);
     }
 
     static read(buffer: any): GroupHistoryMessageRequest | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new GroupHistoryMessageRequest();
         const result0 = buffer.readLong();
         packet.groupId = result0;
         const result1 = buffer.readLong();
         packet.lastMessageId = result1;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

@@ -15,18 +15,22 @@ class SdSimulateAnswer {
     }
 
     static write(buffer: any, packet: SdSimulateAnswer | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writePacket(packet.attachment, 0);
         buffer.writeLong(packet.noticeSid);
         buffer.writePacket(packet.response, 343);
     }
 
     static read(buffer: any): SdSimulateAnswer | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new SdSimulateAnswer();
         const result0 = buffer.readPacket(0);
         packet.attachment = result0;
@@ -34,6 +38,9 @@ class SdSimulateAnswer {
         packet.noticeSid = result1;
         const result2 = buffer.readPacket(343);
         packet.response = result2;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

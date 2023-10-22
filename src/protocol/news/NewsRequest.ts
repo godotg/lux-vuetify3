@@ -13,18 +13,22 @@ class NewsRequest {
     }
 
     static write(buffer: any, packet: NewsRequest | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeLong(packet.endId);
         buffer.writeString(packet.query);
         buffer.writeLong(packet.startId);
     }
 
     static read(buffer: any): NewsRequest | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new NewsRequest();
         const result0 = buffer.readLong();
         packet.endId = result0;
@@ -32,6 +36,9 @@ class NewsRequest {
         packet.query = result1;
         const result2 = buffer.readLong();
         packet.startId = result2;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

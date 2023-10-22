@@ -14,9 +14,11 @@ class MidSelectRequest {
     }
 
     static write(buffer: any, packet: MidSelectRequest | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeString(packet.category);
         buffer.writeInt(packet.index);
         buffer.writeLong(packet.midjourneyId);
@@ -24,9 +26,11 @@ class MidSelectRequest {
     }
 
     static read(buffer: any): MidSelectRequest | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new MidSelectRequest();
         const result0 = buffer.readString();
         packet.category = result0;
@@ -36,6 +40,9 @@ class MidSelectRequest {
         packet.midjourneyId = result2;
         const result3 = buffer.readString();
         packet.nonce = result3;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

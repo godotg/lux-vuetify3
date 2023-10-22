@@ -12,22 +12,29 @@ class HttpAttachment {
     }
 
     static write(buffer: any, packet: HttpAttachment | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeInt(packet.taskExecutorHash);
         buffer.writeLong(packet.uid);
     }
 
     static read(buffer: any): HttpAttachment | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new HttpAttachment();
         const result0 = buffer.readInt();
         packet.taskExecutorHash = result0;
         const result1 = buffer.readLong();
         packet.uid = result1;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }

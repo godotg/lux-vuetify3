@@ -11,19 +11,26 @@ class NoAnswerAttachment {
     }
 
     static write(buffer: any, packet: NoAnswerAttachment | null) {
-        if (buffer.writePacketFlag(packet) || packet == null) {
+        if (packet === null) {
+            buffer.writeInt(0);
             return;
         }
+        buffer.writeInt(-1);
         buffer.writeInt(packet.taskExecutorHash);
     }
 
     static read(buffer: any): NoAnswerAttachment | null {
-        if (!buffer.readBoolean()) {
+        const length = buffer.readInt();
+        if (length === 0) {
             return null;
         }
+        const beforeReadIndex = buffer.getReadOffset();
         const packet = new NoAnswerAttachment();
         const result0 = buffer.readInt();
         packet.taskExecutorHash = result0;
+        if (length > 0) {
+            buffer.setReadOffset(beforeReadIndex + length);
+        }
         return packet;
     }
 }
