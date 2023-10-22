@@ -134,10 +134,9 @@ async function doInitHistory() {
   const response: GroupHistoryMessageResponse = await asyncAsk(request);
   updateMessage(response.messages);
   refreshMessageNotification();
-  scrollToBottom();
   onlineUsersRef.value = response.onlineUsers;
-  setTimeout(() => scrollToBottom(), 300);
   snackbarStore.showSuccessMessage("聊天记录加载成功");
+  setTimeout(() => scrollToBottom(), 500);
 }
 
 async function moreHistory() {
