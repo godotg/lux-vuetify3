@@ -11,10 +11,10 @@ onMounted(async () => {
   const response = await axios.get("https://jiucai.fun/aa/config/myconfig.json");
   console.log(response);
   const announcement = response.data;
+  myStore.announce = announcement;
   if (_.isEqual(announcement.version, myStore.announce.version)) {
     return;
   }
-  myStore.announce = announcement;
   dialogRef.value = true;
 });
 

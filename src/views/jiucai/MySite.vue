@@ -9,12 +9,10 @@ import TodoCard from "@/components/dashboard/TodoCard.vue";
 import TaskCard from "@/components/dashboard/ChartCard.vue";
 import axios from "axios";
 import _ from "lodash";
+import {useMyStore} from "@/stores/myStore";
 
-onMounted(async () => {
-  const response = await axios.get("https://jiucai.fun/aa/config/myconfig.json");
-  console.log(response);
-});
 
+const myStore = useMyStore();
 
 </script>
 <template>
@@ -28,11 +26,11 @@ onMounted(async () => {
         <v-card class="card-shadow" height="420">
           <!-- <sales-card></sales-card> -->
           <my-sales-card
-            :value="-1837.32"
             class="h-100"
-            :percentage="3.2"
+            :total-cost="-12543"
+            :month-cost="-1046"
+            :percentage="-3.2"
             style="min-height: 380px"
-            :percentage-label="$t('dashboard.lastweek')"
             :action-label="$t('dashboard.viewReport')"
           ></my-sales-card>
         </v-card>
@@ -51,6 +49,22 @@ onMounted(async () => {
       </v-col>
     </v-row>
     <!-- ---------------------------------------------- -->
+    <!---Third Row -->
+    <!-- ---------------------------------------------- -->
+    <v-row class="card-shadow flex-grow-0" dense>
+      <v-col cols="12" xl="6">
+        <!-- Target Card-->
+        <v-card class="card-shadow" height="420"
+          ><todo-card></todo-card
+        ></v-card>
+      </v-col>
+      <v-col cols="12" xl="6">
+        <v-card class="card-shadow" height="420"
+          ><tickets-card></tickets-card>
+        </v-card>
+      </v-col>
+    </v-row>
+    <!-- ---------------------------------------------- -->
     <!---Second Row -->
     <!-- ---------------------------------------------- -->
     <v-row class="card-shadow flex-grow-0" dense>
@@ -64,22 +78,6 @@ onMounted(async () => {
         <!-- Task Card-->
         <v-card class="card-shadow" height="420">
           <task-card></task-card>
-        </v-card>
-      </v-col>
-    </v-row>
-    <!-- ---------------------------------------------- -->
-    <!---Third Row -->
-    <!-- ---------------------------------------------- -->
-    <v-row class="card-shadow flex-grow-0" dense>
-      <v-col cols="12" xl="6">
-        <!-- Target Card-->
-        <v-card class="card-shadow" height="420"
-          ><todo-card></todo-card
-        ></v-card>
-      </v-col>
-      <v-col cols="12" xl="6">
-        <v-card class="card-shadow" height="420"
-          ><tickets-card></tickets-card>
         </v-card>
       </v-col>
     </v-row>

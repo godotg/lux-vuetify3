@@ -13,13 +13,17 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  percentage: {
+  totalCost: {
     type: Number,
     default: 0,
   },
-  percentageLabel: {
-    type: String,
-    default: "vs. last week",
+  monthCost: {
+    type: Number,
+    default: 0,
+  },
+  percentage: {
+    type: Number,
+    default: 0,
   },
   series: {
     type: Array,
@@ -94,8 +98,8 @@ const chartOptions = computed(() => {
 
         return `<div class="rounded-lg pa-1 text-caption">
                 <div class="font-weight-bold">${formatDate(
-                  w.globals.categoryLabels[dataPointIndex]
-                )}</div>
+          w.globals.categoryLabels[dataPointIndex]
+        )}</div>
                 <div>${series[seriesIndex][dataPointIndex]} ${seriesName}</div>
               </div>`;
       },
@@ -129,17 +133,14 @@ onMounted(() => {
           color="primary"
           class="font-weight-bold"
           @click="$emit('action-clicked')"
-          >{{ actionLabel }}</v-btn
+        >{{ actionLabel }}</v-btn
         >
       </v-card-title>
 
       <div class="d-flex flex-column flex-grow-1">
         <div class="pa-2">
           <div class="text-h4">
-            -12145.49
-          </div>
-          <div class="text-primary mt-1">
-            -4275.21
+            {{ totalCost }}
           </div>
         </div>
 
@@ -147,18 +148,18 @@ onMounted(() => {
 
         <div class="px-2 pb-2">
           <div class="title mb-1 font-weight-bold">
-            {{ $t("dashboard.weeklySales") }}
+            每月支出
           </div>
           <div class="d-flex align-center">
             <div class="text-h4">
-              {{ formatCurrency(value) }}
+              {{ monthCost }}
             </div>
             <v-spacer></v-spacer>
             <div class="d-flex flex-column text-right">
               <div class="font-weight-bold">
                 <percent-trend :value="percentage" />
               </div>
-              <div class="text-caption">{{ percentageLabel }}</div>
+              <div class="text-caption">比上月</div>
             </div>
           </div>
         </div>
