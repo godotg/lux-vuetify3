@@ -13,12 +13,15 @@ const customizeTheme = useCustomizeThemeStore();
 const {mobile, width, height} = useDisplay();
 
 const thanksRef = ref(false);
+const randomThanks = _.random(0,10) > 5;
 
 watch(
   () => myStore.isShowReward,
   (val) => {
     if (!val) {
-      thanksRef.value = false;
+      setTimeout(() => {
+        thanksRef.value = false;
+      }, 1000);
     }
   },
   {
@@ -47,7 +50,8 @@ function complete() {
   <v-dialog transition="dialog-top-transition" max-width="500px" v-model="myStore.isShowReward">
     <template v-slot:default="{ isActive }">
       <v-card v-if="thanksRef">
-        <AnimationThanks :size="mobile ? width * 0.7 : width * 0.2"/>
+        <AnimationThanks v-if="randomThanks" :size="mobile ? width * 0.7 : width * 0.2"/>
+        <AnimationThanks1 v-else :size="mobile ? width * 0.7 : width * 0.2"/>
       </v-card>
       <v-card v-else prepend-icon="mdi-gift-outline">
         <template v-slot:title>
