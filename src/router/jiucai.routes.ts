@@ -56,6 +56,14 @@ export default [
     component: () => import("@/views/jiucai/StableDiffusionRealistic.vue"),
   },
   {
+    path: "/site",
+    meta: {
+      requiresAuth: true,
+      layout: "landing",
+    },
+    component: () => import("@/views/jiucai/MySite.vue"),
+  },
+  {
     path: "/test",
     meta: {
       layout: "auth",

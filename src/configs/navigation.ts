@@ -51,17 +51,11 @@ export default {
           text: "Square",
           link: "/square",
           icon: "mdi-gamepad-square-outline",
-        }
-      ],
-    },
-    {
-      text: "",
-      key: "",
-      items: [
+        },
         {
           key: "menu.dashboard",
           text: "Dashboard",
-          link: "/dashboard",
+          link: "/site",
           icon: "mdi-view-dashboard-outline",
         },
       ],
