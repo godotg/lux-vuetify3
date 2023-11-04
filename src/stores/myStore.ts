@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 
 export const useMyStore = defineStore("myStore", {
   state: () => ({
+    isShowReward: true,
     announce: {
       version: "",
       title: "",

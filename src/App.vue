@@ -6,6 +6,7 @@
     <BackToTop />
     <Snackbar />
     <Announcement />
+    <Reward />
   </v-app>
 </template>
 
@@ -18,6 +19,7 @@ import { useCustomizeThemeStore } from "@/stores/customizeTheme";
 import BackToTop from "@/components/common/BackToTop.vue";
 import Snackbar from "@/components/common/Snackbar.vue";
 import Announcement from "@/components/common/Announcement.vue";
+import Reward from "@/components/common/Reward.vue";
 
 const customizeTheme = useCustomizeThemeStore();
 const route = useRoute();
