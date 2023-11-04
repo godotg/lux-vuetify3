@@ -7,6 +7,15 @@ import TicketsCard from "@/components/dashboard/TicketsCard.vue";
 // import TrackCard from "@/components/dashboard/TrackCard.vue";
 import TodoCard from "@/components/dashboard/TodoCard.vue";
 import TaskCard from "@/components/dashboard/ChartCard.vue";
+import axios from "axios";
+import _ from "lodash";
+
+onMounted(async () => {
+  const response = await axios.get("https://jiucai.fun/aa/config/myconfig.json");
+  console.log(response);
+});
+
+
 </script>
 <template>
   <div class="pa-5">
