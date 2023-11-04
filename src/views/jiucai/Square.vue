@@ -2,8 +2,8 @@
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useChatStore} from "@/views/app/chat/chatStore";
 import {Icon} from "@iconify/vue";
-import MdEditor from "md-editor-v3";
-import "md-editor-v3/lib/style.css";
+import { MdPreview } from 'md-editor-v3';
+import 'md-editor-v3/lib/preview.css';
 import AnimationSquare1 from "@/animation/AnimationSquare1.vue";
 import AnimationSquare2 from "@/animation/AnimationSquare2.vue";
 import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
@@ -234,7 +234,7 @@ const handleKeydown = (e) => {
           <img :src="message.avatar" alt="alt"/>
         </v-avatar>
         <v-card class="mx-3">
-          <md-editor v-model="message.content" previewOnly/>
+          <md-preview v-model="message.content" editor-id="preview-only"/>
         </v-card>
       </v-row>
       <v-row justify="center">

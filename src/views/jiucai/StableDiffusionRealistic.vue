@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {Icon} from "@iconify/vue";
-import MdEditor from "md-editor-v3";
-import "md-editor-v3/lib/style.css";
+import { MdPreview } from 'md-editor-v3';
+import 'md-editor-v3/lib/preview.css';
 import JsFileDownloader from "js-file-downloader";
 
 import AnimationStableDiffusion from "@/animation/AnimationStableDiffusion.vue";
@@ -280,7 +280,7 @@ const handleKeydown = (e) => {
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
         <v-card class="mt-3 mx-3">
-          <md-editor v-model="message.content" previewOnly/>
+          <md-preview v-model="message.content" editor-id="preview-only"/>
         </v-card>
       </v-row>
       <v-row v-if="!_.isEmpty(message.sdImages)">

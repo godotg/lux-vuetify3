@@ -5,9 +5,9 @@ import AnimationAI2 from "@/animation/AnimationAI2.vue";
 import AnimationBot1 from "@/animation/AnimationBot1.vue";
 import {isBlank} from "@/utils/stringUtils";
 import {Icon} from "@iconify/vue";
-import MdEditor from "md-editor-v3";
+import { MdPreview } from 'md-editor-v3';
+import 'md-editor-v3/lib/preview.css';
 import {useChatGPTStore} from "@/stores/chatGPTStore";
-import "md-editor-v3/lib/style.css";
 import ApiKeyDialog from "@/components/ApiKeyDialog.vue";
 
 const snackbarStore = useSnackbarStore();
@@ -205,8 +205,8 @@ const handleKeydown = (e) => {
           <img v-else :src="newsStore.aiAvatar()" alt="alt"/>
         </v-avatar>
         <v-card class="mt-3 mx-3">
-          <md-editor v-if="message.role === 'user'" v-model="message.content" previewOnly/>
-          <md-editor v-else v-model="message.content" previewOnly theme="dark"/>
+          <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only"/>
+          <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark"/>
         </v-card>
       </v-row>
     </template>

@@ -3,7 +3,8 @@ import {useMyStore} from "@/stores/myStore";
 import {useDisplay} from "vuetify";
 import { useCustomizeThemeStore } from "@/stores/customizeTheme";
 
-import MdEditor from "md-editor-v3";
+import { MdPreview } from 'md-editor-v3';
+import 'md-editor-v3/lib/preview.css';
 import axios from "axios";
 import _ from "lodash";
 import AnimationThanks1 from "@/animation/AnimationThanks1.vue";
@@ -79,7 +80,7 @@ function complete() {
           {{ myStore.announce.title }}
         </template>
         <v-card-text>
-          <md-editor v-model="myStore.announce.content" previewOnly/>
+          <md-preview v-model="myStore.announce.content" editor-id="preview-only"/>
         </v-card-text>
       </v-card>
     </template>

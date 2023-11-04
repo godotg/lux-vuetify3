@@ -8,8 +8,8 @@ import AnimationRun4 from "@/animation/AnimationRun4.vue";
 import AnimationRun5 from "@/animation/AnimationRun5.vue";
 import AnimationRun6 from "@/animation/AnimationRun6.vue";
 import {Icon} from "@iconify/vue";
-import MdEditor from "md-editor-v3";
-import "md-editor-v3/lib/style.css";
+import { MdPreview } from 'md-editor-v3';
+import 'md-editor-v3/lib/preview.css';
 import JsFileDownloader from "js-file-downloader";
 
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
@@ -372,7 +372,7 @@ const handleKeydown = (e) => {
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
         <v-card class="mt-3 mx-3">
-          <md-editor v-model="message.content" previewOnly/>
+          <md-preview v-model="message.content" editor-id="preview-only"/>
         </v-card>
       </v-row>
       <v-row v-if="!_.isEmpty(message.imageUrl)">
