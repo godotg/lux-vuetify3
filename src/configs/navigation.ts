@@ -13,7 +13,7 @@ export default {
         {
           key: "jiucai.navigation",
           text: "Navigation",
-          link: "/map",
+          link: "/ai",
           icon: "mdi-sun-compass",
         },
         {

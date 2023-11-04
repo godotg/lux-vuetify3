@@ -4,20 +4,35 @@ import {useDisplay} from "vuetify";
 const {mobile, width, height} = useDisplay();
 
 const chatUrls = [{
-  "title": "腾讯混元",
-  "description": "腾讯混元大模型是由腾讯研发的大语言模型，具备跨领域知识和自然语言理解能力，实现基于人机自然语言对话的方式，理解用户指令并执行任务，帮助用户实现人获取信息，知识和灵感。",
-  "url": "https://hunyuan.tencent.com",
-  "image": "hunyuan.tencent.com.png"
-}, {
   "title": "讯飞星火认知大模型",
   "description": "由科大讯飞推出的新一代认知智能大模型，拥有跨领域的知识和语言理解能力，能够基于自然对话方式理解与执行任务，提供语言理解、知识问答、逻辑推理、数学题解答、代码理解与编写等多种能力。",
   "url": "https://xinghuo.xfyun.cn",
   "image": "xinghuo.xfyun.cn.png"
 }, {
+  "title": "腾讯混元",
+  "description": "腾讯混元大模型是由腾讯研发的大语言模型，具备跨领域知识和自然语言理解能力，实现基于人机自然语言对话的方式，理解用户指令并执行任务，帮助用户实现人获取信息，知识和灵感。",
+  "url": "https://hunyuan.tencent.com",
+  "image": "hunyuan.tencent.com.png"
+}, {
+  "title": "通义千问",
+  "description": "通义千问，阿里新AI语言模型",
+  "url": "https://qianwen.aliyun.com",
+  "image": "qianwen.aliyun.com.png"
+}, {
+  "title": "文心一言",
+  "description": "百度全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。",
+  "url": "https://yiyan.baidu.com",
+  "image": "1687852872-Pasted.png"
+}, {
   "title": "网易云AI智能助手",
   "description": "网易云AI聊天机器人",
   "url": "https://ke.study.163.com/nextChat",
   "image": "ke.study.163.com.png"
+}, {
+  "title": "豆包 字节跳动Ai",
+  "description": "你好，我是豆包！作为你的 AI 朋友，你可以向我寻求建议、答案，聊你想聊的任何事情。字节跳动Ai产品。",
+  "url": "https://www.doubao.com",
+  "image": "1692332410-Pasted.png"
 }, {
   "title": "天工AI助手",
   "description": "天工AI助手 — 双千亿级大语言模型",
@@ -28,11 +43,6 @@ const chatUrls = [{
   "description": "拥有独特的语言理解能力，通过实时对话，解答疑惑、探索灵感，用AI技术帮人类打开智慧的大门",
   "url": "https://chat.360.com",
   "image": "1698637929-Pasted.png"
-}, {
-  "title": "豆包 字节跳动Ai",
-  "description": "你好，我是豆包！作为你的 AI 朋友，你可以向我寻求建议、答案，聊你想聊的任何事情。字节跳动Ai产品。",
-  "url": "https://www.doubao.com",
-  "image": "1692332410-Pasted.png"
 }, {
   "title": "Pi",
   "description": "生成式人工智能聊天机器人。一个善良和支持的伴侣，Pi AI 能够以完全自然的方式与你进行讨论，询问，提供反馈，并与之交流知识。",
@@ -58,16 +68,6 @@ const chatUrls = [{
   "description": "Copilot Hub 是一个帮助你基于私有数据创建智能知识库 &amp; 人格化 AI 的平台。你可以基于文档、网站、Notion database 或其他数据源在几分钟内创建一个自定义的 ChatGPT。",
   "url": "https://app.copilothub.ai/home",
   "image": "1681395717-Pasted.png"
-}, {
-  "title": "通义千问",
-  "description": "通义千问，阿里新AI语言模型",
-  "url": "https://qianwen.aliyun.com",
-  "image": "qianwen.aliyun.com.png"
-}, {
-  "title": "文心一言",
-  "description": "百度全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。",
-  "url": "https://yiyan.baidu.com",
-  "image": "1687852872-Pasted.png"
 }, {
   "title": "ChatGPT",
   "description": "聊天生成型预训练变换模型简称ChatGPT，是由OpenAI开发的一个人工智能聊天机器人程序，于2022年11月推出。",

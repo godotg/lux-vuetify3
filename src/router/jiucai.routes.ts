@@ -7,7 +7,7 @@ export default [
     component: () => import("@/views/jiucai/News.vue"),
   },
   {
-    path: "/map",
+    path: "/ai",
     meta: {
       layout: "landing",
     },
