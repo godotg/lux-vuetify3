@@ -7,7 +7,6 @@ import TicketsCard from "@/components/dashboard/TicketsCard.vue";
 // import TrackCard from "@/components/dashboard/TrackCard.vue";
 import TodoCard from "@/components/dashboard/TodoCard.vue";
 import TaskCard from "@/components/dashboard/ChartCard.vue";
-import axios from "axios";
 import _ from "lodash";
 import {useMyStore} from "@/stores/myStore";
 
