@@ -21,7 +21,10 @@ import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
+import {useMyStore} from "@/stores/myStore";
 
+
+const myStore = useMyStore();
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
 
@@ -117,6 +120,7 @@ const sendMessage = async () => {
   isGenerating.value = true;
   // Create a completion
   sendChatgpt(requestMessages.value, props.ai);
+  myStore.account.cost += 1;
 };
 
 const createCompletion = (packet: ChatgptMessageNotice) => {

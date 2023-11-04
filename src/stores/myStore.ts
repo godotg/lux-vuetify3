@@ -6,12 +6,15 @@ export const useMyStore = defineStore("myStore", {
       version: "",
       title: "",
       content: ""
+    },
+    account: {
+      cost: 0
     }
   }),
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["announce"]}],
+    strategies: [{storage: localStorage, paths: ["announce", "account"]}],
   },
 
   getters: {},

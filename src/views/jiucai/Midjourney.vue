@@ -31,7 +31,10 @@ import {useDisplay} from "vuetify";
 import _ from "lodash";
 import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
 import {isBlank} from "@/utils/stringUtils";
+import {useMyStore} from "@/stores/myStore";
 
+
+const myStore = useMyStore();
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
 
@@ -173,6 +176,7 @@ const text2Img = async () => {
   userMessage.value = "";
   animationRunIndex = _.random(1, maxAnimation);
   send(request);
+  myStore.account.cost += 10;
 };
 
 const img2Img = async () => {
@@ -241,6 +245,7 @@ const reroll = async (midjourneyId) => {
   userMessage.value = "";
   animationRunIndex = _.random(1, 5);
   send(request);
+  myStore.account.cost += 10;
 };
 
 const select = async (midjourneyId, index, category) => {
@@ -253,6 +258,7 @@ const select = async (midjourneyId, index, category) => {
   userMessage.value = "";
   animationRunIndex++;
   send(request);
+  myStore.account.cost += 10;
 };
 
 // 下面的逻辑都是自己的

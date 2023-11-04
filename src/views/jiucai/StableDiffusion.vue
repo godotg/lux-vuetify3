@@ -22,7 +22,10 @@ import {useDisplay} from "vuetify";
 import _ from "lodash";
 import SdImage from "@/protocol/sdiffusion/SdImage";
 import {isBlank} from "@/utils/stringUtils";
+import {useMyStore} from "@/stores/myStore";
 
+
+const myStore = useMyStore();
 const snackbarStore = useSnackbarStore();
 const route = useRoute();
 
@@ -277,6 +280,7 @@ const sendMessage = async () => {
     messages.value.push(message);
     imageSdStore.sdPrompts = _.takeRight(messages.value, MAX_HISTORY);
     scrollToBottomDelay();
+    myStore.account.cost += 5;
   }
 };
 
