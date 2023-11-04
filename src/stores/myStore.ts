@@ -16,7 +16,7 @@ export const useMyStore = defineStore("myStore", {
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["announce", "account"]}],
+    strategies: [{storage: localStorage, paths: ["announce", "account", "lastForceShow"]}],
   },
 
   getters: {},
