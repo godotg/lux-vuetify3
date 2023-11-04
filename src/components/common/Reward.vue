@@ -29,6 +29,17 @@ watch(
   }
 );
 
+onMounted(async () => {
+  const now = new Date().getTime();
+  if (now - myStore.lastForceShow < 7 * 24 * 60 * 60 * 1000) {
+    return;
+  }
+  myStore.lastForceShow = now;
+  setTimeout(() => {
+    thanksRef.value = false;
+  }, 3000);
+});
+
 function reject() {
   customizeTheme.darkTheme = true;
   myStore.isShowReward = false;
