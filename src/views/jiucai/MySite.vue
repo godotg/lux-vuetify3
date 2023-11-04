@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SalesCard from "@/components/dashboard/SalesCard.vue";
+import MySalesCard from "./component/MySalesCard.vue";
 import SourcesCard from "@/components/dashboard/SourcesCard.vue";
 import ActivityCard from "@/components/dashboard/ActivityCard.vue";
 import TableCard from "@/components/dashboard/TableCard.vue";
@@ -18,14 +18,14 @@ import TaskCard from "@/components/dashboard/ChartCard.vue";
         <!-- Sales Card -->
         <v-card class="card-shadow" height="420">
           <!-- <sales-card></sales-card> -->
-          <sales-card
+          <my-sales-card
             :value="-1837.32"
             class="h-100"
             :percentage="3.2"
             style="min-height: 380px"
             :percentage-label="$t('dashboard.lastweek')"
             :action-label="$t('dashboard.viewReport')"
-          ></sales-card>
+          ></my-sales-card>
         </v-card>
       </v-col>
       <v-col cols="12" md="6" xl="4">
