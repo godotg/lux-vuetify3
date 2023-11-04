@@ -21,9 +21,9 @@ onMounted(async () => {
 
 </script>
 <template>
-  <v-dialog transition="dialog-top-transition" max-width="500px" v-model="dialogRef">
+  <v-dialog transition="dialog-top-transition" max-width="700px" v-model="dialogRef">
     <template v-slot:default="{ isActive }">
-      <v-card>
+      <v-card prepend-icon="mdi-trumpet">
         <v-toolbar color="primary" :title="myStore.announce.title"></v-toolbar>
         <v-card-text>
           <md-editor v-model="myStore.announce.content" previewOnly/>
