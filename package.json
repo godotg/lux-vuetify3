@@ -5,7 +5,7 @@
     "jiucai": "vite --host --mode jiucai",
     "zp": "vite --mode zp",
     "dev": "vite --mode dev",
-    "build": "vite build --mode pro",
+    "build": "vite build --base=/ --mode pro",
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
