@@ -20,7 +20,6 @@ onMounted(async () => {
   const response = await axios.get("https://jiucai.fun/aa/config/myconfig.json");
   console.log(response);
   const announcement = response.data;
-  myStore.announce = announcement;
   if (_.isEqual(announcement.version, myStore.announce.version)) {
     // 是否要弹出赞赏
     const now = new Date().getTime();
@@ -31,6 +30,7 @@ onMounted(async () => {
     myStore.lastForceShow = now;
     return;
   }
+  myStore.announce = announcement;
   dialogRef.value = true;
 });
 
