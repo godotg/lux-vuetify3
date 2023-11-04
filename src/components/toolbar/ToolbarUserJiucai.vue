@@ -9,6 +9,10 @@ import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
 import StatusMenuJiucai from "./StatusMenuJiucai.vue";
 import {useNewsStore} from "@/stores/newsStore";
+import {useMyStore} from "@/stores/myStore";
+
+
+const myStore = useMyStore();
 const newsStore = useNewsStore();
 
 const router = useRouter();
@@ -99,7 +103,7 @@ const navs = [
             </v-avatar>
           </template>
           <div>
-            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.profileDetails") }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.profileDetails") + " " + myStore.account.cost/100 }}</v-list-item-subtitle>
           </div>
         </v-list-item>
         <v-list-item

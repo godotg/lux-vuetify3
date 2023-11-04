@@ -9,7 +9,7 @@ export default {
     square: "Square",
     midjourney: "Midjourney",
     profileDetails: "leek account",
-    billing: "leek juice",
+    billing: "reward",
     team: "cutting leek team",
     ask: "how to cut leeks",
     frontendGithub: "frontend source",
