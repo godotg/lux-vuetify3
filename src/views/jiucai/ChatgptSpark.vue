@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CommonGptComponent from "./component/CommonGptComponent";
+import CommonGptComponent from "./component/CommonGptComponent.vue";
 import {useDisplay} from "vuetify";
 const {mobile, width, height} = useDisplay();
 </script>
