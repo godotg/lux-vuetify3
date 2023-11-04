@@ -41,6 +41,10 @@ const navs = [
     icon: "mdi-help-circle-outline",
   },
 ];
+
+function reward() {
+  myStore.isShowReward = true;
+}
 </script>
 
 <template>
@@ -96,7 +100,7 @@ const navs = [
       <!-- ---------------------------------------------- -->
 
       <v-list variant="flat" elevation="0" :lines="false" density="compact">
-        <v-list-item color="primary" href="https://github.com/zfoo-project/zfoo" link density="compact">
+        <v-list-item color="primary" density="compact" @click="reward()">
           <template v-slot:prepend>
             <v-avatar size="30">
               <v-icon>mdi-account-box-outline</v-icon>
@@ -110,9 +114,8 @@ const navs = [
           color="primary"
           v-for="(nav, i) in navs"
           :key="i"
-          :to="nav.link"
-          link
           density="compact"
+          @click="reward()"
         >
           <template v-slot:prepend>
             <v-avatar size="30">
