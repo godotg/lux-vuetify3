@@ -8,7 +8,7 @@ export default {
     realistic: "写实 AI",
     square: "广场",
     midjourney: "Midjourney",
-    profileDetails: "至尊vip韭菜账户",
+    profileDetails: "白嫖指数",
     billing: "韭菜汁剩余量",
     team: "专业的割韭菜团队",
     ask: "如何割韭菜",

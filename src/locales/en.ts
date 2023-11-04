@@ -8,7 +8,7 @@ export default {
     realistic: "Realistic AI",
     square: "Square",
     midjourney: "Midjourney",
-    profileDetails: "vvvip leek account",
+    profileDetails: "leek account",
     billing: "leek juice",
     team: "cutting leek team",
     ask: "how to cut leeks",

@@ -22,11 +22,6 @@ const handleLogout = () => {
 
 const navs = [
   {
-    title: "jiucai.profileDetails",
-    link: "/team",
-    icon: "mdi-account-box-outline",
-  },
-  {
     title: "jiucai.billing",
     link: "/team",
     icon: "mdi-credit-card-outline",
@@ -97,6 +92,16 @@ const navs = [
       <!-- ---------------------------------------------- -->
 
       <v-list variant="flat" elevation="0" :lines="false" density="compact">
+        <v-list-item color="primary" href="https://github.com/zfoo-project/zfoo" link density="compact">
+          <template v-slot:prepend>
+            <v-avatar size="30">
+              <v-icon>mdi-account-box-outline</v-icon>
+            </v-avatar>
+          </template>
+          <div>
+            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.profileDetails") }}</v-list-item-subtitle>
+          </div>
+        </v-list-item>
         <v-list-item
           color="primary"
           v-for="(nav, i) in navs"
