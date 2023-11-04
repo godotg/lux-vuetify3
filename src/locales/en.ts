@@ -1,6 +1,7 @@
 export default {
   jiucai: {
     news: "News",
+    navigation: "AI Navigation",
     chatgpt: "ChatGpt",
     spark: "Spark",
     diffusion: "Stable Diffusion",

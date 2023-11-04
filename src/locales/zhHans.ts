@@ -1,10 +1,11 @@
 export default {
   jiucai: {
     news: "情报",
+    navigation: "AI 导航",
     chatgpt: "ChatGpt",
     spark: "星火认知",
     diffusion: "Stable Diffusion",
-    realistic: "写实AI",
+    realistic: "写实 AI",
     square: "广场",
     midjourney: "Midjourney",
     profileDetails: "至尊vip韭菜账户",

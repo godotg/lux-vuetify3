@@ -7,6 +7,13 @@ export default [
     component: () => import("@/views/jiucai/News.vue"),
   },
   {
+    path: "/map",
+    meta: {
+      layout: "landing",
+    },
+    component: () => import("@/views/jiucai/Navigation.vue"),
+  },
+  {
     path: "/chatgpt",
     meta: {
       layout: "landing",

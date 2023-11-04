@@ -11,6 +11,12 @@ export default {
           icon: "mdi-format-font-size-increase",
         },
         {
+          key: "jiucai.navigation",
+          text: "Navigation",
+          link: "/map",
+          icon: "mdi-sun-compass",
+        },
+        {
           key: "jiucai.chatgpt",
           text: "ChatGpt",
           link: "/chatgpt",
