@@ -35,9 +35,9 @@ export default {
           icon: "mdi-face-mask",
         },
         {
-          key: "jiucai.lucky",
-          text: "Lucky",
-          link: "/lucky",
+          key: "jiucai.realistic",
+          text: "Realistic",
+          link: "/realistic",
           icon: "mdi-head-heart-outline",
         },
         {

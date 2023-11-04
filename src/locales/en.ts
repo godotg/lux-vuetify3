@@ -4,7 +4,7 @@ export default {
     chatgpt: "ChatGpt",
     spark: "Spark",
     diffusion: "Stable Diffusion",
-    lucky: "Good Lucky",
+    realistic: "Realistic AI",
     square: "Square",
     midjourney: "Midjourney",
     profileDetails: "vvvip leek account",

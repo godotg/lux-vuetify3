@@ -4,7 +4,7 @@ export default {
     chatgpt: "ChatGpt",
     spark: "星火认知",
     diffusion: "Stable Diffusion",
-    lucky: "Good Lucky",
+    realistic: "写实AI",
     square: "广场",
     midjourney: "Midjourney",
     profileDetails: "至尊vip韭菜账户",

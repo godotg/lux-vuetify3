@@ -42,7 +42,7 @@ export default [
     component: () => import("@/views/jiucai/StableDiffusion.vue"),
   },
   {
-    path: "/lucky",
+    path: "/realistic",
     meta: {
       layout: "landing",
     },
