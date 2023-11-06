@@ -1,6 +1,6 @@
 import ByteBuffer from '@/protocol/buffer/ByteBuffer';
 import SignalAttachment from '@/protocol/attachment/SignalAttachment';
-import ProtocolManager from '@/protocol/ProtocolManager.js';
+import ProtocolManager from '@/protocol/ProtocolManager';
 import Error from '@/protocol/common/Error';
 import Message from '@/protocol/common/Message';
 import Ping from '@/protocol/common/Ping';
@@ -79,7 +79,7 @@ function connect(desc): WebSocket {
     const data = event.data;
 
     const buffer = new ByteBuffer();
-    buffer.writeBytes(data);
+    buffer.writeBytes(data as ArrayBuffer);
     buffer.setReadOffset(4);
     const packet = ProtocolManager.read(buffer);
 
@@ -184,7 +184,7 @@ export function send(packet: any, attachment: any = null) {
 class EncodedPacketInfo {
   promiseResolve: any;
   promiseReject: any;
-  attachment: SignalAttachment;
+  attachment: SignalAttachment | null = null;
 }
 
 export async function asyncAsk(packet: any): Promise<any> {
@@ -203,12 +203,21 @@ export async function asyncAsk(packet: any): Promise<any> {
     encodedPacketInfo.promiseReject = reject;
   });
   // 遍历删除旧的attachment
-  for (const key of signalAttachmentMap.keys()) {
-    const value = signalAttachmentMap.get(key);
-    if ((value != null) && (currentTime - value.attachment.timestamp > 60000)) {
-      signalAttachmentMap.delete(key);
+  const deleteList = new Array<number>();
+  signalAttachmentMap.forEach((value, key) => {
+    if (value == null || value.attachment == null) {
+      deleteList.push(key);
     }
-  }
+    const att = value.attachment;
+    if (att == null) {
+      deleteList.push(key);
+    }
+    const time = att == null ? 0 : att.timestamp;
+    if (currentTime - time > 60000) {
+      deleteList.push(key);
+    }
+  });
+  deleteList.forEach(it => signalAttachmentMap.delete(it));
   signalAttachmentMap.set(signalId, encodedPacketInfo);
   send(packet, attachment);
   return promise;
@@ -227,7 +236,7 @@ function route(packet: any) {
     console.log(newsStore.chatMessageIdDiff);
   }
   if (receiver == null) {
-    console.log("路由不存在:", packet);
+    console.log("router not exist ", packet);
     return;
   }
   receiver(packet);
