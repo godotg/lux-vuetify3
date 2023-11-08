@@ -298,6 +298,7 @@ const videoUrls = [{
             <v-card :class="[selectedClass]"
                     :prepend-avatar="'https://jiucai.fun/aa/map/' + chatUrl.image"
                     :href="chatUrl.url"
+                    hover
                     @click="toggle">
               <template v-slot:title>
                 {{ chatUrl.title }}
@@ -327,6 +328,7 @@ const videoUrls = [{
             <v-card :class="[selectedClass]"
                     :prepend-avatar="'https://jiucai.fun/aa/map/' + chatUrl.image"
                     :href="chatUrl.url"
+                    hover
                     @click="toggle">
               <template v-slot:title>
                 {{ chatUrl.title }}
@@ -356,6 +358,7 @@ const videoUrls = [{
             <v-card :class="[selectedClass]"
                     :prepend-avatar="'https://jiucai.fun/aa/map/' + chatUrl.image"
                     :href="chatUrl.url"
+                    hover
                     @click="toggle">
               <template v-slot:title>
                 {{ chatUrl.title }}
@@ -385,6 +388,7 @@ const videoUrls = [{
             <v-card :class="[selectedClass]"
                     :prepend-avatar="'https://jiucai.fun/aa/map/' + chatUrl.image"
                     :href="chatUrl.url"
+                    hover
                     @click="toggle">
               <template v-slot:title>
                 {{ chatUrl.title }}
