@@ -4,10 +4,10 @@ import {useDisplay} from "vuetify";
 const {mobile, width, height} = useDisplay();
 
 const chatUrls = [{
-  "title": "讯飞星火认知大模型",
-  "description": "由科大讯飞推出的新一代认知智能大模型，拥有跨领域的知识和语言理解能力，能够基于自然对话方式理解与执行任务，提供语言理解、知识问答、逻辑推理、数学题解答、代码理解与编写等多种能力。",
-  "url": "https://xinghuo.xfyun.cn",
-  "image": "xinghuo.xfyun.cn.png"
+  "title": "文心一言",
+  "description": "百度全新一代知识增强大语言模型，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。",
+  "url": "https://yiyan.baidu.com",
+  "image": "1687852872-Pasted.png"
 }, {
   "title": "腾讯混元",
   "description": "腾讯混元大模型是由腾讯研发的大语言模型，具备跨领域知识和自然语言理解能力，实现基于人机自然语言对话的方式，理解用户指令并执行任务，帮助用户实现人获取信息，知识和灵感。",
@@ -15,15 +15,15 @@ const chatUrls = [{
   "image": "hunyuan.tencent.com.png"
 }, {
   "title": "通义千问",
-  "description": "通义千问，阿里新AI语言模型",
+  "description": "通义千问，阿里新AI语言模型，能理解人类语言、生成内容，是你生活和工作的智能助手。",
   "url": "https://qianwen.aliyun.com",
   "image": "qianwen.aliyun.com.png"
-}, {
-  "title": "文心一言",
-  "description": "百度全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。",
-  "url": "https://yiyan.baidu.com",
-  "image": "1687852872-Pasted.png"
-}, {
+},{
+  "title": "讯飞星火认知大模型",
+  "description": "新一代认知智能大模型，拥有跨领域知识和语言理解能力，能够基于自然对话方式理解与执行任务",
+  "url": "https://xinghuo.xfyun.cn",
+  "image": "xinghuo.xfyun.cn.png"
+},  {
   "title": "网易云AI智能助手",
   "description": "网易云AI聊天机器人",
   "url": "https://ke.study.163.com/nextChat",
