@@ -3,6 +3,7 @@ export default {
     news: "News",
     navigation: "AI Navigation",
     chatgpt: "ChatGpt",
+    chatgpt4: "ChatGpt 4",
     spark: "Spark",
     diffusion: "Stable Diffusion",
     realistic: "Realistic AI",

@@ -2,6 +2,7 @@
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import AnimationAI1 from "@/animation/AnimationAI1.vue";
 import AnimationAI2 from "@/animation/AnimationAI2.vue";
+import AnimationAI4 from "@/animation/AnimationAI4.vue";
 import AnimationBot1 from "@/animation/AnimationBot1.vue";
 import {isBlank} from "@/utils/stringUtils";
 import {Icon} from "@iconify/vue";
@@ -30,7 +31,7 @@ const newsStore = useNewsStore();
 
 
 const props = defineProps({
-  // 1表示chatgpt，2表示讯飞星火
+  // 1表示chatgpt，2表示讯飞星火，4表示Chatgpt4
   ai: {
     type: Number,
     default: 1,
@@ -192,7 +193,8 @@ const handleKeydown = (e) => {
     <v-row justify="center" align="center">
       <v-col cols="12">
         <AnimationAI1 v-if="props.ai == 1" :size="props.size"/>
-        <AnimationAI2 v-else :size="props.size"/>
+        <AnimationAI2 v-else-if="props.ai == 2" :size="props.size"/>
+        <AnimationAI4 v-else-if="props.ai == 4" :size="props.size"/>
       </v-col>
     </v-row>
 <!--    <vue-qrcode value="weixin://wxpay/bizpayurl?pr=WtgZu2gzz" :options="{ width: 200 }"></vue-qrcode>-->

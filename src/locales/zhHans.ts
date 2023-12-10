@@ -3,6 +3,7 @@ export default {
     news: "情报",
     navigation: "AI 导航",
     chatgpt: "ChatGpt",
+    chatgpt4: "ChatGpt 4",
     spark: "星火认知",
     diffusion: "Stable Diffusion",
     realistic: "写实 AI",

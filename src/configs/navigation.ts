@@ -22,6 +22,12 @@ export default {
           link: "/chatgpt",
           icon: "mdi-robot-confused-outline",
         },
+        // {
+        //   key: "jiucai.chatgpt4",
+        //   text: "ChatGpt 4",
+        //   link: "/chatgpt4",
+        //   icon: "mdi-lightbulb-question-outline",
+        // },
         {
           key: "jiucai.spark",
           text: "Spark",
