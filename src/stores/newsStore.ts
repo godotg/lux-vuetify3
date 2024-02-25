@@ -5,6 +5,7 @@ const newGnTimeout = 3 * 24 * 60 * 60 * 1000;
 const newNewsTimeout = 3 * 60 * 1000;
 const myAvatarDefault = avatarAutoUrl(1);
 const aiAvatarDefault = avatarAutoUrl(2);
+const aiAvatar2Default = avatarAutoUrl(3);
 
 export function avatarAutoUrl(id: number): string {
   const avatarId = id % 800 + 1;
@@ -99,6 +100,9 @@ export const useNewsStore = defineStore("newsStore", {
     },
     aiAvatar(): string {
       return this.ipLong == 0 ? aiAvatarDefault : avatarAutoUrl(this.ipLong + 1);
+    },
+    aiAvatar2(): string {
+      return this.ipLong == 0 ? aiAvatar2Default : avatarAutoUrl(this.ipLong + 2);
     },
 
     getMaxNewsId(): number {

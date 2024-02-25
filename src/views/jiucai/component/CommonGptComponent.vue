@@ -74,29 +74,28 @@ interface Message {
 // User Input Message
 const userMessage = ref("");
 
-// Prompt Message
-const promptMessage = computed(() => {
-  console.log("chatGPTStore.propmpt", chatGPTStore.propmpt);
-
-  return [
-    {
-      content: chatGPTStore.propmpt,
-      role: "system",
-    },
-  ];
-});
-
 // Message List
 const messages = ref<Message[]>([]);
 
 const requestMessages = computed(() => {
-  if (messages.value.length <= 10) {
-    return [...promptMessage.value, ...messages.value];
-  } else {
-    // 截取最新的10条信息
-    const slicedMessages = messages.value.slice(-10);
-    return [...promptMessage.value, ...slicedMessages];
+  let myMessages = new Array<Message>();
+  for (const message of messages.value) {
+    if (message.role === "system") {
+      continue;
+    }
+    myMessages.push(message);
   }
+  // 取最后10个
+  if (messages.value.length >= 10) {
+    myMessages = myMessages.slice(-10);
+  }
+  if (!_.isEmpty(chatGPTStore.propmpt)) {
+    const lastMessage = _.last(myMessages);
+    if (!_.isNil(lastMessage)) {
+      lastMessage.content = chatGPTStore.propmpt + ". " + lastMessage.content;
+    }
+  }
+  return myMessages;
 });
 
 const isLoading = ref(false);
@@ -127,23 +126,25 @@ const sendMessage = async () => {
 
 const createCompletion = (packet: ChatgptMessageNotice) => {
   // Check if the API key is set
-
+  const requestId = packet.requestId;
+  const choice = packet.choice;
+  const finishReason = packet.finishReason;
   try {
     isLoading.value = false;
-    if (packet.finishReason != 0) {
+    if (finishReason != 0) {
       isGenerating.value = false;
     }
 
     // Add the bot message
-    let message = _.find(messages.value, it => it.requestId == packet.requestId);
-    const choice = packet.choice;
+    let message = _.find(messages.value, it => it.requestId == requestId);
 
     if (_.isNil(message)) {
+      const role = requestId < 100000 ? "assistant" : "system";
       message = {
-        requestId: packet.requestId,
+        requestId: requestId,
         rawContent: choice,
         content: choice,
-        role: "assistant",
+        role: role,
       };
       messages.value.push(message);
     } else {
@@ -205,7 +206,8 @@ const handleKeydown = (e) => {
       <v-row>
         <v-avatar class="mt-3 ml-3 mb-1" rounded="sm" variant="elevated">
           <img v-if="message.role === 'user'" :src="newsStore.myAvatar()" alt="alt"/>
-          <img v-else :src="newsStore.aiAvatar()" alt="alt"/>
+          <img v-else-if="message.role === 'assistant'" :src="newsStore.aiAvatar()" alt="alt"/>
+          <img v-else :src="newsStore.aiAvatar2()" alt="alt"/>
         </v-avatar>
         <v-card class="mt-3 mx-3">
           <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only"/>
