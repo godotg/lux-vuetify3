@@ -57,12 +57,20 @@ const clearChatHistory = async () => {
 const isGenerating = ref(false);
 
 // Scroll to the bottom of the message container
+let scrollTime = new Date().getTime();
 const scrollToBottomDelay = () => {
+  const currentTime = new Date().getTime();
+  if (currentTime - scrollTime < 10000) {
+    return;
+  }
+  scrollTime = currentTime;
+  scrollToBottomNow();
+};
+const scrollToBottomNow = () => {
   setTimeout(() => {
     window.scrollTo({top: 999999, behavior: "smooth"});
   }, 100);
 };
-
 
 interface Message {
   requestId: number;
@@ -122,6 +130,7 @@ const sendMessage = async () => {
   // Create a completion
   sendChatgpt(requestMessages.value, props.ai);
   myStore.account.cost += 1;
+  scrollToBottomNow();
 };
 
 const createCompletion = (packet: ChatgptMessageNotice) => {
@@ -133,6 +142,7 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
     isLoading.value = false;
     if (finishReason != 0) {
       isGenerating.value = false;
+      scrollToBottomNow();
     }
 
     // Add the bot message
@@ -157,6 +167,7 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
       } else {
         message.content = message.rawContent + mdEnd;
       }
+      scrollToBottomDelay();
     }
   } catch (error) {
     isLoading.value = false;
@@ -164,17 +175,6 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
   }
 };
 
-watch(
-  () => messages.value,
-  (val) => {
-    if (val) {
-      scrollToBottomDelay();
-    }
-  },
-  {
-    deep: true,
-  }
-);
 
 
 const handleKeydown = (e) => {
@@ -211,7 +211,8 @@ const handleKeydown = (e) => {
         </v-avatar>
         <v-card class="mt-3 mx-3">
           <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only"/>
-          <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark"/>
+          <md-preview v-else-if="message.role === 'assistant'" v-model="message.content" editor-id="preview-only" theme="dark"/>
+          <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark" preview-theme="mk-cute" showCodeRowNumber/>
         </v-card>
       </v-row>
     </template>
