@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class ImageDownloadRequest {
@@ -10,7 +11,7 @@ class ImageDownloadRequest {
         return ImageDownloadRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: ImageDownloadRequest | null) {
+    static write(buffer: IByteBuffer, packet: ImageDownloadRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -19,7 +20,7 @@ class ImageDownloadRequest {
         buffer.writeString(packet.url);
     }
 
-    static read(buffer: any): ImageDownloadRequest | null {
+    static read(buffer: IByteBuffer): ImageDownloadRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

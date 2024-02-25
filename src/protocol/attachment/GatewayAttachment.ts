@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import SignalAttachment from './SignalAttachment';
 
 
@@ -15,7 +16,7 @@ class GatewayAttachment {
         return GatewayAttachment.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: GatewayAttachment | null) {
+    static write(buffer: IByteBuffer, packet: GatewayAttachment | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -28,7 +29,7 @@ class GatewayAttachment {
         buffer.writeLong(packet.uid);
     }
 
-    static read(buffer: any): GatewayAttachment | null {
+    static read(buffer: IByteBuffer): GatewayAttachment | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

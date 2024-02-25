@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class LoginByWeChatRequest {
@@ -10,7 +11,7 @@ class LoginByWeChatRequest {
         return LoginByWeChatRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: LoginByWeChatRequest | null) {
+    static write(buffer: IByteBuffer, packet: LoginByWeChatRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +19,7 @@ class LoginByWeChatRequest {
         buffer.writeInt(-1);
     }
 
-    static read(buffer: any): LoginByWeChatRequest | null {
+    static read(buffer: IByteBuffer): LoginByWeChatRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

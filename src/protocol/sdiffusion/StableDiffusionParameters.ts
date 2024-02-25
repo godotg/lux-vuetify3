@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class StableDiffusionParameters {
@@ -19,7 +20,7 @@ class StableDiffusionParameters {
         return StableDiffusionParameters.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: StableDiffusionParameters | null) {
+    static write(buffer: IByteBuffer, packet: StableDiffusionParameters | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -37,7 +38,7 @@ class StableDiffusionParameters {
         buffer.writeInt(packet.width);
     }
 
-    static read(buffer: any): StableDiffusionParameters | null {
+    static read(buffer: IByteBuffer): StableDiffusionParameters | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

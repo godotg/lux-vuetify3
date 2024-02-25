@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class UdpAttachment {
@@ -11,7 +12,7 @@ class UdpAttachment {
         return UdpAttachment.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: UdpAttachment | null) {
+    static write(buffer: IByteBuffer, packet: UdpAttachment | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +22,7 @@ class UdpAttachment {
         buffer.writeInt(packet.port);
     }
 
-    static read(buffer: any): UdpAttachment | null {
+    static read(buffer: IByteBuffer): UdpAttachment | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class MidHistoryRequest {
@@ -10,7 +11,7 @@ class MidHistoryRequest {
         return MidHistoryRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: MidHistoryRequest | null) {
+    static write(buffer: IByteBuffer, packet: MidHistoryRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -19,7 +20,7 @@ class MidHistoryRequest {
         buffer.writeString(packet.nonce);
     }
 
-    static read(buffer: any): MidHistoryRequest | null {
+    static read(buffer: IByteBuffer): MidHistoryRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

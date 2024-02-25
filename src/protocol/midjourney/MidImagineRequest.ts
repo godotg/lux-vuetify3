@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class MidImagineRequest {
@@ -11,7 +12,7 @@ class MidImagineRequest {
         return MidImagineRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: MidImagineRequest | null) {
+    static write(buffer: IByteBuffer, packet: MidImagineRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +22,7 @@ class MidImagineRequest {
         buffer.writeString(packet.prompt);
     }
 
-    static read(buffer: any): MidImagineRequest | null {
+    static read(buffer: IByteBuffer): MidImagineRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

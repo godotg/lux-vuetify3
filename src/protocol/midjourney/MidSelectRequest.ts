@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class MidSelectRequest {
@@ -13,7 +14,7 @@ class MidSelectRequest {
         return MidSelectRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: MidSelectRequest | null) {
+    static write(buffer: IByteBuffer, packet: MidSelectRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -25,7 +26,7 @@ class MidSelectRequest {
         buffer.writeString(packet.nonce);
     }
 
-    static read(buffer: any): MidSelectRequest | null {
+    static read(buffer: IByteBuffer): MidSelectRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

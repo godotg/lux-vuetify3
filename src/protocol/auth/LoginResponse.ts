@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class LoginResponse {
@@ -16,7 +17,7 @@ class LoginResponse {
         return LoginResponse.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: LoginResponse | null) {
+    static write(buffer: IByteBuffer, packet: LoginResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -31,7 +32,7 @@ class LoginResponse {
         buffer.writeLong(packet.sid);
     }
 
-    static read(buffer: any): LoginResponse | null {
+    static read(buffer: IByteBuffer): LoginResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

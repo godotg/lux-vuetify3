@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class InterrogatorPromptResponse {
@@ -10,7 +11,7 @@ class InterrogatorPromptResponse {
         return InterrogatorPromptResponse.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: InterrogatorPromptResponse | null) {
+    static write(buffer: IByteBuffer, packet: InterrogatorPromptResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -19,7 +20,7 @@ class InterrogatorPromptResponse {
         buffer.writeString(packet.prompt);
     }
 
-    static read(buffer: any): InterrogatorPromptResponse | null {
+    static read(buffer: IByteBuffer): InterrogatorPromptResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

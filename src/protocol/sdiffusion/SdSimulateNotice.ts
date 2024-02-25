@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import SdImage from './SdImage';
 
 
@@ -12,7 +13,7 @@ class SdSimulateNotice {
         return SdSimulateNotice.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: SdSimulateNotice | null) {
+    static write(buffer: IByteBuffer, packet: SdSimulateNotice | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -22,7 +23,7 @@ class SdSimulateNotice {
         buffer.writeLong(packet.nonce);
     }
 
-    static read(buffer: any): SdSimulateNotice | null {
+    static read(buffer: IByteBuffer): SdSimulateNotice | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

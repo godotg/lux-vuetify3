@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import SignalAttachment from '../attachment/SignalAttachment';
 import SdSimulateRequest from '../sdiffusion/SdSimulateRequest';
 
@@ -14,7 +15,7 @@ class SdSimulateAsk {
         return SdSimulateAsk.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: SdSimulateAsk | null) {
+    static write(buffer: IByteBuffer, packet: SdSimulateAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -25,7 +26,7 @@ class SdSimulateAsk {
         buffer.writeLong(packet.requestSid);
     }
 
-    static read(buffer: any): SdSimulateAsk | null {
+    static read(buffer: IByteBuffer): SdSimulateAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

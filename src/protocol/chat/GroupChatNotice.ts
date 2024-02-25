@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import ChatMessage from './ChatMessage';
 
 
@@ -11,7 +12,7 @@ class GroupChatNotice {
         return GroupChatNotice.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: GroupChatNotice | null) {
+    static write(buffer: IByteBuffer, packet: GroupChatNotice | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +21,7 @@ class GroupChatNotice {
         buffer.writePacketList(packet.messages, 240);
     }
 
-    static read(buffer: any): GroupChatNotice | null {
+    static read(buffer: IByteBuffer): GroupChatNotice | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

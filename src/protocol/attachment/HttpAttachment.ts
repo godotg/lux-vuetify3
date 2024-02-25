@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class HttpAttachment {
@@ -11,7 +12,7 @@ class HttpAttachment {
         return HttpAttachment.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: HttpAttachment | null) {
+    static write(buffer: IByteBuffer, packet: HttpAttachment | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +22,7 @@ class HttpAttachment {
         buffer.writeLong(packet.uid);
     }
 
-    static read(buffer: any): HttpAttachment | null {
+    static read(buffer: IByteBuffer): HttpAttachment | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

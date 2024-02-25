@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class MidImagineNotice {
@@ -24,7 +25,7 @@ class MidImagineNotice {
         return MidImagineNotice.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: MidImagineNotice | null) {
+    static write(buffer: IByteBuffer, packet: MidImagineNotice | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -42,7 +43,7 @@ class MidImagineNotice {
         buffer.writeString(packet.type);
     }
 
-    static read(buffer: any): MidImagineNotice | null {
+    static read(buffer: IByteBuffer): MidImagineNotice | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

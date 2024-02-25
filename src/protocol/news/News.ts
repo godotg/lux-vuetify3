@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import NewsStock from './NewsStock';
 import NewsIndustry from './NewsIndustry';
 
@@ -19,7 +20,7 @@ class News {
         return News.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: News | null) {
+    static write(buffer: IByteBuffer, packet: News | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -35,7 +36,7 @@ class News {
         buffer.writeString(packet.title);
     }
 
-    static read(buffer: any): News | null {
+    static read(buffer: IByteBuffer): News | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

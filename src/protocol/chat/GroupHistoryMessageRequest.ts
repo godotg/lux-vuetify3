@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class GroupHistoryMessageRequest {
@@ -11,7 +12,7 @@ class GroupHistoryMessageRequest {
         return GroupHistoryMessageRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: GroupHistoryMessageRequest | null) {
+    static write(buffer: IByteBuffer, packet: GroupHistoryMessageRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +22,7 @@ class GroupHistoryMessageRequest {
         buffer.writeLong(packet.lastMessageId);
     }
 
-    static read(buffer: any): GroupHistoryMessageRequest | null {
+    static read(buffer: IByteBuffer): GroupHistoryMessageRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

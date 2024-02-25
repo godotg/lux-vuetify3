@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import MidSelectRequest from '../midjourney/MidSelectRequest';
 
 
@@ -12,7 +13,7 @@ class MidSelectAsk {
         return MidSelectAsk.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: MidSelectAsk | null) {
+    static write(buffer: IByteBuffer, packet: MidSelectAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -22,7 +23,7 @@ class MidSelectAsk {
         buffer.writeLong(packet.requestSid);
     }
 
-    static read(buffer: any): MidSelectAsk | null {
+    static read(buffer: IByteBuffer): MidSelectAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

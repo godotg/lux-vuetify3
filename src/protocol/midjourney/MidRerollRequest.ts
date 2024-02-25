@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class MidRerollRequest {
@@ -11,7 +12,7 @@ class MidRerollRequest {
         return MidRerollRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: MidRerollRequest | null) {
+    static write(buffer: IByteBuffer, packet: MidRerollRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +22,7 @@ class MidRerollRequest {
         buffer.writeString(packet.nonce);
     }
 
-    static read(buffer: any): MidRerollRequest | null {
+    static read(buffer: IByteBuffer): MidRerollRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

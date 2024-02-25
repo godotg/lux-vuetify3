@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class GaiNian {
@@ -15,7 +16,7 @@ class GaiNian {
         return GaiNian.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: GaiNian | null) {
+    static write(buffer: IByteBuffer, packet: GaiNian | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -29,7 +30,7 @@ class GaiNian {
         buffer.writeString(packet.url);
     }
 
-    static read(buffer: any): GaiNian | null {
+    static read(buffer: IByteBuffer): GaiNian | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

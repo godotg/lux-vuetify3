@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class OssPolicyVO {
@@ -15,7 +16,7 @@ class OssPolicyVO {
         return OssPolicyVO.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: OssPolicyVO | null) {
+    static write(buffer: IByteBuffer, packet: OssPolicyVO | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -29,7 +30,7 @@ class OssPolicyVO {
         buffer.writeString(packet.signature);
     }
 
-    static read(buffer: any): OssPolicyVO | null {
+    static read(buffer: IByteBuffer): OssPolicyVO | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

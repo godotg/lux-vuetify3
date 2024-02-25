@@ -1,34 +1,38 @@
 import IByteBuffer from '../IByteBuffer';
 
 
-class ChatgptForceStopRequest {
+class LlamaMessageNotice {
 
     requestId: number = 0;
+    choice: string = '';
 
-    static PROTOCOL_ID: number = 232;
+    static PROTOCOL_ID: number = 401;
 
     protocolId(): number {
-        return ChatgptForceStopRequest.PROTOCOL_ID;
+        return LlamaMessageNotice.PROTOCOL_ID;
     }
 
-    static write(buffer: IByteBuffer, packet: ChatgptForceStopRequest | null) {
+    static write(buffer: IByteBuffer, packet: LlamaMessageNotice | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
+        buffer.writeString(packet.choice);
         buffer.writeInt(packet.requestId);
     }
 
-    static read(buffer: IByteBuffer): ChatgptForceStopRequest | null {
+    static read(buffer: IByteBuffer): LlamaMessageNotice | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new ChatgptForceStopRequest();
-        const result0 = buffer.readInt();
-        packet.requestId = result0;
+        const packet = new LlamaMessageNotice();
+        const result0 = buffer.readString();
+        packet.choice = result0;
+        const result1 = buffer.readInt();
+        packet.requestId = result1;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
@@ -36,4 +40,4 @@ class ChatgptForceStopRequest {
     }
 }
 
-export default ChatgptForceStopRequest;
+export default LlamaMessageNotice;

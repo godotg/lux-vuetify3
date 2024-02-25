@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import ChatMessage from './ChatMessage';
 
 
@@ -13,7 +14,7 @@ class GroupHistoryMessageResponse {
         return GroupHistoryMessageResponse.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: GroupHistoryMessageResponse | null) {
+    static write(buffer: IByteBuffer, packet: GroupHistoryMessageResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -24,7 +25,7 @@ class GroupHistoryMessageResponse {
         buffer.writeInt(packet.onlineUsers);
     }
 
-    static read(buffer: any): GroupHistoryMessageResponse | null {
+    static read(buffer: IByteBuffer): GroupHistoryMessageResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import StableDiffusionParameters from './StableDiffusionParameters';
 
 
@@ -12,7 +13,7 @@ class StableDiffusionResponse {
         return StableDiffusionResponse.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: StableDiffusionResponse | null) {
+    static write(buffer: IByteBuffer, packet: StableDiffusionResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -22,7 +23,7 @@ class StableDiffusionResponse {
         buffer.writePacket(packet.parameters, 332);
     }
 
-    static read(buffer: any): StableDiffusionResponse | null {
+    static read(buffer: IByteBuffer): StableDiffusionResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

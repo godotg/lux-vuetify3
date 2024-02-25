@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class BrokerRegisterAnswer {
@@ -10,7 +11,7 @@ class BrokerRegisterAnswer {
         return BrokerRegisterAnswer.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: BrokerRegisterAnswer | null) {
+    static write(buffer: IByteBuffer, packet: BrokerRegisterAnswer | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +19,7 @@ class BrokerRegisterAnswer {
         buffer.writeInt(-1);
     }
 
-    static read(buffer: any): BrokerRegisterAnswer | null {
+    static read(buffer: IByteBuffer): BrokerRegisterAnswer | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

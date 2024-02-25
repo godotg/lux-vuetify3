@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class NoAnswerAttachment {
@@ -10,7 +11,7 @@ class NoAnswerAttachment {
         return NoAnswerAttachment.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: NoAnswerAttachment | null) {
+    static write(buffer: IByteBuffer, packet: NoAnswerAttachment | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -19,7 +20,7 @@ class NoAnswerAttachment {
         buffer.writeInt(packet.taskExecutorHash);
     }
 
-    static read(buffer: any): NoAnswerAttachment | null {
+    static read(buffer: IByteBuffer): NoAnswerAttachment | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

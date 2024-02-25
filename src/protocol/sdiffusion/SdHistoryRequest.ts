@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class SdHistoryRequest {
@@ -10,7 +11,7 @@ class SdHistoryRequest {
         return SdHistoryRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: SdHistoryRequest | null) {
+    static write(buffer: IByteBuffer, packet: SdHistoryRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -19,7 +20,7 @@ class SdHistoryRequest {
         buffer.writeLong(packet.nonce);
     }
 
-    static read(buffer: any): SdHistoryRequest | null {
+    static read(buffer: IByteBuffer): SdHistoryRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

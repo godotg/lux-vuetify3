@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class GnRequest {
@@ -10,7 +11,7 @@ class GnRequest {
         return GnRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: GnRequest | null) {
+    static write(buffer: IByteBuffer, packet: GnRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +19,7 @@ class GnRequest {
         buffer.writeInt(-1);
     }
 
-    static read(buffer: any): GnRequest | null {
+    static read(buffer: IByteBuffer): GnRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

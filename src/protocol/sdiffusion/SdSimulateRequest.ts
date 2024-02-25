@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class SdSimulateRequest {
@@ -19,7 +20,7 @@ class SdSimulateRequest {
         return SdSimulateRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: SdSimulateRequest | null) {
+    static write(buffer: IByteBuffer, packet: SdSimulateRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -35,7 +36,7 @@ class SdSimulateRequest {
         buffer.writeInt(packet.style);
     }
 
-    static read(buffer: any): SdSimulateRequest | null {
+    static read(buffer: IByteBuffer): SdSimulateRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class NewsStock {
@@ -13,7 +14,7 @@ class NewsStock {
         return NewsStock.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: NewsStock | null) {
+    static write(buffer: IByteBuffer, packet: NewsStock | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -25,7 +26,7 @@ class NewsStock {
         buffer.writeString(packet.rise);
     }
 
-    static read(buffer: any): NewsStock | null {
+    static read(buffer: IByteBuffer): NewsStock | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

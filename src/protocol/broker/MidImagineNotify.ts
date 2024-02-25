@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import MidImagineNotice from '../midjourney/MidImagineNotice';
 
 
@@ -12,7 +13,7 @@ class MidImagineNotify {
         return MidImagineNotify.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: MidImagineNotify | null) {
+    static write(buffer: IByteBuffer, packet: MidImagineNotify | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -22,7 +23,7 @@ class MidImagineNotify {
         buffer.writeLong(packet.noticeSid);
     }
 
-    static read(buffer: any): MidImagineNotify | null {
+    static read(buffer: IByteBuffer): MidImagineNotify | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

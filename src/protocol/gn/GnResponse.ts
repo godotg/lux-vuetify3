@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import GaiNian from './GaiNian';
 
 
@@ -11,7 +12,7 @@ class GnResponse {
         return GnResponse.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: GnResponse | null) {
+    static write(buffer: IByteBuffer, packet: GnResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +21,7 @@ class GnResponse {
         buffer.writePacketList(packet.gns, 220);
     }
 
-    static read(buffer: any): GnResponse | null {
+    static read(buffer: IByteBuffer): GnResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class ChatMessage {
@@ -15,7 +16,7 @@ class ChatMessage {
         return ChatMessage.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: ChatMessage | null) {
+    static write(buffer: IByteBuffer, packet: ChatMessage | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -29,7 +30,7 @@ class ChatMessage {
         buffer.writeByte(packet.type);
     }
 
-    static read(buffer: any): ChatMessage | null {
+    static read(buffer: IByteBuffer): ChatMessage | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -3,11 +3,6 @@ import GatewayAttachment from './attachment/GatewayAttachment';
 import UdpAttachment from './attachment/UdpAttachment';
 import HttpAttachment from './attachment/HttpAttachment';
 import NoAnswerAttachment from './attachment/NoAnswerAttachment';
-import AuthUidToGatewayCheck from './model/AuthUidToGatewayCheck';
-import AuthUidToGatewayConfirm from './model/AuthUidToGatewayConfirm';
-import AuthUidAsk from './model/AuthUidAsk';
-import GatewaySessionInactiveAsk from './model/GatewaySessionInactiveAsk';
-import GatewaySynchronizeSidAsk from './model/GatewaySynchronizeSidAsk';
 import Message from './common/Message';
 import Error from './common/Error';
 import Heartbeat from './common/Heartbeat';
@@ -73,6 +68,11 @@ import SdImage from './sdiffusion/SdImage';
 import ImageDownloadRequest from './sdiffusion/ImageDownloadRequest';
 import ImageDownloadResponse from './sdiffusion/ImageDownloadResponse';
 import ImageDeleteAsk from './sdiffusion/ImageDeleteAsk';
+import LlamaMessageRequest from './llama/LlamaMessageRequest';
+import LlamaMessageNotice from './llama/LlamaMessageNotice';
+import LlamaMessageAsk from './llama/LlamaMessageAsk';
+import LlamaMessageNotify from './llama/LlamaMessageNotify';
+import IByteBuffer from "./IByteBuffer";
 
 const protocols = new Map<number, any>();
 
@@ -82,11 +82,6 @@ protocols.set(2, GatewayAttachment);
 protocols.set(3, UdpAttachment);
 protocols.set(4, HttpAttachment);
 protocols.set(5, NoAnswerAttachment);
-protocols.set(20, AuthUidToGatewayCheck);
-protocols.set(21, AuthUidToGatewayConfirm);
-protocols.set(22, AuthUidAsk);
-protocols.set(23, GatewaySessionInactiveAsk);
-protocols.set(24, GatewaySynchronizeSidAsk);
 protocols.set(100, Message);
 protocols.set(101, Error);
 protocols.set(102, Heartbeat);
@@ -152,6 +147,10 @@ protocols.set(344, SdImage);
 protocols.set(345, ImageDownloadRequest);
 protocols.set(346, ImageDownloadResponse);
 protocols.set(347, ImageDeleteAsk);
+protocols.set(400, LlamaMessageRequest);
+protocols.set(401, LlamaMessageNotice);
+protocols.set(402, LlamaMessageAsk);
+protocols.set(403, LlamaMessageNotify);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
@@ -162,14 +161,14 @@ class ProtocolManager {
         return protocol;
     }
 
-    static write(buffer: any, packet: any): void {
+    static write(buffer: IByteBuffer, packet: any): void {
         const protocolId = packet.protocolId();
         buffer.writeShort(protocolId);
         const protocol = ProtocolManager.getProtocol(protocolId);
         protocol.write(buffer, packet);
     }
 
-    static read(buffer: any): any {
+    static read(buffer: IByteBuffer): any {
         const protocolId = buffer.readShort();
         const protocol = ProtocolManager.getProtocol(protocolId);
         const packet = protocol.read(buffer);

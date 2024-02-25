@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class StableDiffusionRequest {
@@ -22,7 +23,7 @@ class StableDiffusionRequest {
         return StableDiffusionRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: StableDiffusionRequest | null) {
+    static write(buffer: IByteBuffer, packet: StableDiffusionRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -43,7 +44,7 @@ class StableDiffusionRequest {
         buffer.writeInt(packet.width);
     }
 
-    static read(buffer: any): StableDiffusionRequest | null {
+    static read(buffer: IByteBuffer): StableDiffusionRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

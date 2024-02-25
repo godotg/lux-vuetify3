@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class ChatgptMessageRequest {
@@ -13,7 +14,7 @@ class ChatgptMessageRequest {
         return ChatgptMessageRequest.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: ChatgptMessageRequest | null) {
+    static write(buffer: IByteBuffer, packet: ChatgptMessageRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -25,7 +26,7 @@ class ChatgptMessageRequest {
         buffer.writeInt(packet.requestId);
     }
 
-    static read(buffer: any): ChatgptMessageRequest | null {
+    static read(buffer: IByteBuffer): ChatgptMessageRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 
 
 class SdImage {
@@ -14,7 +15,7 @@ class SdImage {
         return SdImage.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: SdImage | null) {
+    static write(buffer: IByteBuffer, packet: SdImage | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -27,7 +28,7 @@ class SdImage {
         buffer.writeString(packet.imageUrlMiddle);
     }
 
-    static read(buffer: any): SdImage | null {
+    static read(buffer: IByteBuffer): SdImage | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import News from '../news/News';
 
 
@@ -11,7 +12,7 @@ class SeoAsk {
         return SeoAsk.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: SeoAsk | null) {
+    static write(buffer: IByteBuffer, packet: SeoAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +21,7 @@ class SeoAsk {
         buffer.writePacket(packet.news, 200);
     }
 
-    static read(buffer: any): SeoAsk | null {
+    static read(buffer: IByteBuffer): SeoAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

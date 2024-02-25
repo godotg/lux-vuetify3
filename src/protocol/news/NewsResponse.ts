@@ -1,3 +1,4 @@
+import IByteBuffer from '../IByteBuffer';
 import News from './News';
 
 
@@ -11,7 +12,7 @@ class NewsResponse {
         return NewsResponse.PROTOCOL_ID;
     }
 
-    static write(buffer: any, packet: NewsResponse | null) {
+    static write(buffer: IByteBuffer, packet: NewsResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +21,7 @@ class NewsResponse {
         buffer.writePacketList(packet.news, 200);
     }
 
-    static read(buffer: any): NewsResponse | null {
+    static read(buffer: IByteBuffer): NewsResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
