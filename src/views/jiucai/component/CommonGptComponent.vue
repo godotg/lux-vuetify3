@@ -18,6 +18,7 @@ const chatGPTStore = useChatGPTStore();
 import {sendChatgpt, forceStopChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
+import LlamaMessageNotice from "@/protocol/llama/LlamaMessageNotice";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
