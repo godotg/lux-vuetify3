@@ -1,11 +1,11 @@
 import IByteBuffer from '../IByteBuffer';
-import LlamaMessageNotice from './LlamaMessageNotice';
+import ChatgptMessageNotice from '../chatgpt/ChatgptMessageNotice';
 
 
 class LlamaMessageNotify {
 
     noticeSid: number = 0;
-    notice: LlamaMessageNotice | null = null;
+    notice: ChatgptMessageNotice | null = null;
 
     static PROTOCOL_ID: number = 403;
 
@@ -19,7 +19,7 @@ class LlamaMessageNotify {
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.notice, 401);
+        buffer.writePacket(packet.notice, 231);
         buffer.writeLong(packet.noticeSid);
     }
 
@@ -30,7 +30,7 @@ class LlamaMessageNotify {
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new LlamaMessageNotify();
-        const result0 = buffer.readPacket(401);
+        const result0 = buffer.readPacket(231);
         packet.notice = result0;
         const result1 = buffer.readLong();
         packet.noticeSid = result1;

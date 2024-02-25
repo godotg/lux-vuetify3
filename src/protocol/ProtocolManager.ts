@@ -68,8 +68,6 @@ import SdImage from './sdiffusion/SdImage';
 import ImageDownloadRequest from './sdiffusion/ImageDownloadRequest';
 import ImageDownloadResponse from './sdiffusion/ImageDownloadResponse';
 import ImageDeleteAsk from './sdiffusion/ImageDeleteAsk';
-import LlamaMessageRequest from './llama/LlamaMessageRequest';
-import LlamaMessageNotice from './llama/LlamaMessageNotice';
 import LlamaMessageAsk from './llama/LlamaMessageAsk';
 import LlamaMessageNotify from './llama/LlamaMessageNotify';
 import IByteBuffer from "./IByteBuffer";
@@ -147,8 +145,6 @@ protocols.set(344, SdImage);
 protocols.set(345, ImageDownloadRequest);
 protocols.set(346, ImageDownloadResponse);
 protocols.set(347, ImageDeleteAsk);
-protocols.set(400, LlamaMessageRequest);
-protocols.set(401, LlamaMessageNotice);
 protocols.set(402, LlamaMessageAsk);
 protocols.set(403, LlamaMessageNotify);
 

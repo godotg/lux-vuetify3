@@ -1,11 +1,11 @@
 import IByteBuffer from '../IByteBuffer';
-import LlamaMessageRequest from './LlamaMessageRequest';
 
 
 class LlamaMessageAsk {
 
     requestSid: number = 0;
-    request: LlamaMessageRequest | null = null;
+    requestId: number = 0;
+    messages: Array<string> = [];
 
     static PROTOCOL_ID: number = 402;
 
@@ -19,7 +19,8 @@ class LlamaMessageAsk {
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 400);
+        buffer.writeStringList(packet.messages);
+        buffer.writeInt(packet.requestId);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -30,10 +31,12 @@ class LlamaMessageAsk {
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new LlamaMessageAsk();
-        const result0 = buffer.readPacket(400);
-        packet.request = result0;
-        const result1 = buffer.readLong();
-        packet.requestSid = result1;
+        const list0 = buffer.readStringList();
+        packet.messages = list0;
+        const result1 = buffer.readInt();
+        packet.requestId = result1;
+        const result2 = buffer.readLong();
+        packet.requestSid = result2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
