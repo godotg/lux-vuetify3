@@ -146,9 +146,9 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
 
     // Add the bot message
     let message = _.find(messages.value, it => it.requestId == requestId);
-
+    const isSystem = requestId >= 100000;
     if (_.isNil(message)) {
-      const role = requestId < 100000 ? "assistant" : "system";
+      const role = isSystem ? "system" : "assistant";
       message = {
         requestId: requestId,
         rawContent: choice,
@@ -166,7 +166,9 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
       } else {
         message.content = message.rawContent + mdEnd;
       }
-      scrollToBottomDelay();
+      if (!isSystem) {
+        scrollToBottomDelay();
+      }
     }
   } catch (error) {
     isLoading.value = false;
