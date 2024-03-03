@@ -28,6 +28,13 @@ export default [
     component: () => import("@/views/jiucai/Chatgpt4.vue"),
   },
   {
+    path: "/llama",
+    meta: {
+      layout: "landing",
+    },
+    component: () => import("@/views/jiucai/ChatgptLlama.vue"),
+  },
+  {
     path: "/spark",
     meta: {
       layout: "landing",

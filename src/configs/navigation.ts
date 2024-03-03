@@ -22,6 +22,12 @@ export default {
           link: "/chatgpt",
           icon: "mdi-robot-confused-outline",
         },
+        {
+          key: "jiucai.llama",
+          text: "Llama 2",
+          link: "/llama",
+          icon: "mdi-sheep",
+        },
         // {
         //   key: "jiucai.chatgpt4",
         //   text: "ChatGpt 4",

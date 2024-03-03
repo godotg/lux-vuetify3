@@ -16,7 +16,7 @@ const props = defineProps({
 <!--chatgpt4-->
 <template>
   <Vue3Lottie
-    animationLink="/aa/ai-animation-4.json"
+    animationLink="/aa/ai-animation-6.json"
     :height="props.size"
     :width="props.size"
   />

@@ -3,6 +3,7 @@ import {useSnackbarStore} from "@/stores/snackbarStore";
 import AnimationAI1 from "@/animation/AnimationAI1.vue";
 import AnimationAI2 from "@/animation/AnimationAI2.vue";
 import AnimationAI4 from "@/animation/AnimationAI4.vue";
+import AnimationAILlama from "@/animation/AnimationAILlama.vue";
 import AnimationBot1 from "@/animation/AnimationBot1.vue";
 import {isBlank} from "@/utils/stringUtils";
 import {Icon} from "@iconify/vue";
@@ -198,6 +199,7 @@ const handleKeydown = (e) => {
         <AnimationAI1 v-if="props.ai == 1" :size="props.size"/>
         <AnimationAI2 v-else-if="props.ai == 2" :size="props.size"/>
         <AnimationAI4 v-else-if="props.ai == 4" :size="props.size"/>
+        <AnimationAILlama v-else-if="props.ai == 6" :size="props.size"/>
       </v-col>
     </v-row>
 <!--    <vue-qrcode value="weixin://wxpay/bizpayurl?pr=WtgZu2gzz" :options="{ width: 200 }"></vue-qrcode>-->
