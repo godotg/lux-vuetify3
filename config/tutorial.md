@@ -2,6 +2,13 @@
 
 因为run的快，所以是一个快乐的韭菜！
 
+
+## ☘️ Chatgpt教程
+
+> 快乐韭菜网使用的 chatgpt 3.5 模型
+
+- [如何让chatgpt给出更高质量的答案](https://zhuanlan.zhihu.com/p/667126116)
+
 ### 🤖 Midjourney教程
 
 快乐韭菜网集成了Midjourney的 **文生图**, <u>图生图</u>, 
@@ -13,8 +20,6 @@
 - [全网最全MJ指令整理](https://g1ywwvn4f0m.feishu.cn/base/ICczbk9CoauVdls9helcMOUzn3b?table=tblQ3qyA5AE16h7r&view=vewPND11b4)
 
 ## 🤗 Happy Code
-
-> quote: I Have a Dream
 
 1. So even though we face the difficulties of today and tomorrow, I still have a dream.
 2. It is a dream deeply rooted in the American dream.
@@ -72,5 +77,3 @@ flowchart TD
 note、abstract、info、tip、success、question、warning、failure、danger、bug、example、quote、hint、caution、error、attention
 
 !!!
-
-## ☘️ em...
