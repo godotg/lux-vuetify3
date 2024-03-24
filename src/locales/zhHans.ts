@@ -16,6 +16,7 @@ export default {
     ask: "如何割韭菜",
     frontendGithub: "前端开源地址",
     backendGithub: "后端开源地址",
+    tutorial: "教程"
   },
   common: {
     add: "新增",

@@ -15,6 +15,7 @@ export default {
     ask: "how to cut leeks",
     frontendGithub: "frontend source",
     backendGithub: "backend source",
+    tutorial: "Tutorial"
   },
   common: {
     add: "Add",

@@ -70,12 +70,12 @@ export default [
     component: () => import("@/views/jiucai/StableDiffusionRealistic.vue"),
   },
   {
-    path: "/site",
+    path: "/tutorial",
     meta: {
       requiresAuth: true,
       layout: "landing",
     },
-    component: () => import("@/views/jiucai/MySite.vue"),
+    component: () => import("@/views/jiucai/Tutorial.vue"),
   },
   {
     path: "/test",
