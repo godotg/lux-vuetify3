@@ -11,6 +11,7 @@ import { MdPreview } from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
 import {useChatGPTStore} from "@/stores/chatGPTStore";
 import ApiKeyDialog from "@/components/ApiKeyDialog.vue";
+import clipboard from "@/utils/clipboardUtils";
 
 const snackbarStore = useSnackbarStore();
 const chatGPTStore = useChatGPTStore();
@@ -22,7 +23,6 @@ import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
-import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import {useMyStore} from "@/stores/myStore";
 
 
@@ -177,7 +177,10 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
   }
 };
 
-
+const copyText = (txt, event) => {
+  clipboard(txt, event);
+  snackbarStore.showSuccessMessage("Markdown文档已复制到剪贴板");
+}
 
 const handleKeydown = (e) => {
   if (e.key === "Enter" && (e.altKey || e.shiftKey)) {
@@ -207,11 +210,18 @@ const handleKeydown = (e) => {
   <v-container v-else>
     <template v-for="message in messages">
       <v-row>
-        <v-avatar class="mt-3 ml-3 mb-1" rounded="sm" variant="elevated">
-          <img v-if="message.role === 'user'" :src="newsStore.myAvatar()" alt="alt"/>
-          <img v-else-if="message.role === 'assistant'" :src="newsStore.aiAvatar()" alt="alt"/>
-          <img v-else :src="newsStore.aiAvatar2()" alt="alt"/>
-        </v-avatar>
+        <v-hover close-delay="500">
+          <template v-slot:default="{ isHovering, props }">
+            <v-avatar v-bind="props" class="mt-3 ml-3 mb-1"
+                      color="success"
+                      :rounded="isHovering ? 'lg' : 'sm'"
+                      :variant="isHovering ? 'outlined' : 'elevated'" v-ripple @click="copyText(message.content, $event)">
+              <img v-if="message.role === 'user'" :src="newsStore.myAvatar()" alt="alt"/>
+              <img v-else-if="message.role === 'assistant'" :src="newsStore.aiAvatar()" alt="alt"/>
+              <img v-else :src="newsStore.aiAvatar2()" alt="alt"/>
+            </v-avatar>
+          </template>
+        </v-hover>
         <v-card class="mt-3 mx-3">
           <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only"/>
           <md-preview v-else-if="message.role === 'assistant'" v-model="message.content" editor-id="preview-only" theme="dark"/>
