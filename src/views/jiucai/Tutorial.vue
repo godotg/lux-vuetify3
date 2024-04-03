@@ -3,8 +3,10 @@ import { MdPreview } from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
 import axios from "axios";
 
+const tutorialUrl = import.meta.env.VITE_BASE_HTTP_URL + "/aa/config/tutorial.md";
+
 onMounted(async () => {
-  const response = await axios.get("https://jiucai.fun/aa/config/tutorial.md");
+  const response = await axios.get(tutorialUrl);
   console.log(response);
   const tutorialMd = response.data;
   tutorialRef.value = tutorialMd;

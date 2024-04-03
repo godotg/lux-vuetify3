@@ -16,8 +16,10 @@ const {mobile, width, height} = useDisplay();
 
 const dialogRef = ref<boolean>(false);
 
+const announcementUrl = import.meta.env.VITE_BASE_HTTP_URL + "/aa/config/myconfig.json";
+
 onMounted(async () => {
-  const response = await axios.get("https://jiucai.fun/aa/config/myconfig.json");
+  const response = await axios.get(announcementUrl);
   console.log(response);
   const announcement = response.data;
   if (_.isEqual(announcement.version, myStore.announce.version)) {
