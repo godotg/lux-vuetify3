@@ -5,6 +5,7 @@ import GaiNian from './GaiNian';
 class GnResponse {
 
     gns: Array<GaiNian> = [];
+    hotNotice: string = '';
 
     static PROTOCOL_ID: number = 222;
 
@@ -19,6 +20,7 @@ class GnResponse {
         }
         buffer.writeInt(-1);
         buffer.writePacketList(packet.gns, 220);
+        buffer.writeString(packet.hotNotice);
     }
 
     static read(buffer: IByteBuffer): GnResponse | null {
@@ -30,6 +32,8 @@ class GnResponse {
         const packet = new GnResponse();
         const list0 = buffer.readPacketList(220);
         packet.gns = list0;
+        const result1 = buffer.readString();
+        packet.hotNotice = result1;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

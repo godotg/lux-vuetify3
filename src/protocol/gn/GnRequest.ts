@@ -3,7 +3,7 @@ import IByteBuffer from '../IByteBuffer';
 
 class GnRequest {
 
-    
+    num: number = 0;
 
     static PROTOCOL_ID: number = 221;
 
@@ -17,6 +17,7 @@ class GnRequest {
             return;
         }
         buffer.writeInt(-1);
+        buffer.writeInt(packet.num);
     }
 
     static read(buffer: IByteBuffer): GnRequest | null {
@@ -26,7 +27,8 @@ class GnRequest {
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new GnRequest();
-        
+        const result0 = buffer.readInt();
+        packet.num = result0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

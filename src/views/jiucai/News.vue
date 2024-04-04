@@ -12,6 +12,7 @@ import {useDisplay} from "vuetify";
 import clipboard from "@/utils/clipboardUtils";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
+import gnRequest from "@/protocol/gn/GnRequest";
 
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
@@ -20,6 +21,7 @@ const {mobile, width, height} = useDisplay();
 
 const newsRef = ref<News[]>([]);
 const gnRef = ref<GaiNian[]>([]);
+const gnHotNoticeRef = ref<string>('');
 const loadingRef = ref(true);
 
 
@@ -68,10 +70,10 @@ onMounted(() => {
   console.log("news on mounted-----------------------------------------");
   initNews();
   setInterval(() => requestNews(), 15000);
-  setInterval(() => requestGn(), 600000);
+  setInterval(() => requestGn(30), 600000);
 });
 
-document.addEventListener("visibilitychange", function() {
+document.addEventListener("visibilitychange", function () {
   if (document.visibilityState === "visible") {
     requestNews();
   }
@@ -80,7 +82,7 @@ document.addEventListener("visibilitychange", function() {
 function initNews() {
   setTimeout(() => {
     doInitNews();
-    requestGn();
+    requestGn(30);
   }, 1000);
 }
 
@@ -113,10 +115,12 @@ async function requestNews() {
   }
 }
 
-async function requestGn() {
+async function requestGn(num: number) {
   const request = new GnRequest();
+  request.num = num;
   const response: GnResponse = await asyncAsk(request)
   gnRef.value = response.gns;
+  gnHotNoticeRef.value = response.hotNotice;
 }
 
 async function loadMoreNews() {
@@ -160,7 +164,7 @@ function copyGn(gn: GaiNian, event: Event) {
   str = str + gn.url + "\n\n";
   str = str + jokes[_.random(0, jokes.length - 1)];
   clipboard(str, event);
-  snackbarStore.showSuccessMessage("复制成功");
+  snackbarStore.showSuccessMessage(gn.content + "复制成功");
 }
 
 function copyNews(news: News, event: Event) {
@@ -203,26 +207,33 @@ function copyNews(news: News, event: Event) {
 <template>
   <v-container>
     <template v-if="mobile">
-      <v-card v-for="gnEle in gnRef" class="mt-3" v-ripple @click="copyGn(gnEle, $event)">
+      <v-card  v-if="!_.isEmpty(gnRef)" class="mt-3">
         <v-card-title>
-          <v-icon :color="levelMap[gnEle.level].color" :icon="levelMap[gnEle.level].icon"></v-icon>
-          级情报 {{ gnEle.ctime }}
-          <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
+          <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
+          &nbsp;
+          新概念
+          &nbsp;
+          <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestGn(108)"></v-icon>
         </v-card-title>
         <v-card-subtitle>
-          {{ gnEle.title }}
+          {{ gnHotNoticeRef }}
         </v-card-subtitle>
-        <v-card-text class="text-pre-wrap">
-          {{ gnEle.content }}
-        </v-card-text>
-        <v-card-text class="text-pre-wrap">
-          <a :href="gnEle.url" class="text-blue" target="_blank">
-            {{ gnEle.url }}
-          </a>
-        </v-card-text>
+        <template v-for="gnEle in gnRef">
+          <v-card-item class="text-pre-wrap" v-ripple @click="copyGn(gnEle, $event)">
+              <span class="font-weight-bold">
+                {{ gnEle.ctime }}
+              </span>
+            &nbsp;
+            <a :href="gnEle.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
+              {{ gnEle.content }}
+            </a>
+            <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
+          </v-card-item>
+        </template>
       </v-card>
       <template v-for="newsEle in newsRef">
-        <v-card v-if="newsStore.newsLevelFilterValue >= levelMap[newsEle.level].value" class="mt-3" v-ripple @click="copyNews(newsEle, $event)">
+        <v-card v-if="newsStore.newsLevelFilterValue >= levelMap[newsEle.level].value" class="mt-3" v-ripple
+                @click="copyNews(newsEle, $event)">
           <v-card-title>
             <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
             级情报 {{ newsEle.ctime }}
@@ -262,33 +273,39 @@ function copyNews(news: News, event: Event) {
       </template>
     </template>
     <v-timeline v-else density="compact" side="end">
-      <template v-for="gnEle in gnRef">
-        <v-timeline-item fill-dot :dot-color="levelMap[gnEle.level].color" :size="levelMap[gnEle.level].size">
-          <template v-slot:icon>
-            <span>{{ gnEle.level }}</span>
-          </template>
-          <v-card v-ripple @click="copyGn(gnEle, $event)" max-width="1100px">
-            <v-card-title>
-              <v-icon :color="levelMap[gnEle.level].color" :icon="levelMap[gnEle.level].icon"></v-icon>
-              级情报 {{ gnEle.ctime }}
-              <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
-            </v-card-title>
-            <v-card-subtitle>
-              {{ gnEle.title }}
-            </v-card-subtitle>
-            <v-card-text class="text-pre-wrap">
-              {{ gnEle.content }}
-            </v-card-text>
-            <v-card-text class="text-pre-wrap">
-              <a :href="gnEle.url" class="text-blue" target="_blank">
-                {{ gnEle.url }}
+      <v-timeline-item v-if="!_.isEmpty(gnRef)" fill-dot dot-color="purple" size="x-large">
+        <template v-slot:icon>
+          <span>SSR</span>
+        </template>
+        <v-card max-width="1100px" hover>
+          <v-card-title>
+            <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
+            &nbsp;
+            新概念
+            &nbsp;
+            <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestGn(108)"></v-icon>
+          </v-card-title>
+          <v-card-subtitle>
+            {{ gnHotNoticeRef }}
+          </v-card-subtitle>
+          <template v-for="gnEle in gnRef">
+            <v-card-item class="text-pre-wrap" v-ripple @click="copyGn(gnEle, $event)">
+              <span class="font-weight-bold">
+                {{ gnEle.ctime }}
+              </span>
+              &nbsp;
+              <a :href="gnEle.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
+                {{ gnEle.content }}
               </a>
-            </v-card-text>
-          </v-card>
-        </v-timeline-item>
-      </template>
+              {{ gnEle.title }}
+              <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
+            </v-card-item>
+          </template>
+        </v-card>
+      </v-timeline-item>
       <template v-for="newsEle in newsRef">
-        <v-timeline-item v-if="newsStore.newsLevelFilterValue >= levelMap[newsEle.level].value" fill-dot :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
+        <v-timeline-item v-if="newsStore.newsLevelFilterValue >= levelMap[newsEle.level].value" fill-dot
+                         :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
           <template v-slot:icon>
             <span>{{ newsEle.level }}</span>
           </template>
@@ -338,5 +355,5 @@ function copyNews(news: News, event: Event) {
     </v-footer>
   </v-container>
 
-  <AnimationLeek1 v-if="_.isEmpty(newsRef)" :size="width" />
+  <AnimationLeek1 v-if="_.isEmpty(newsRef)" :size="width"/>
 </template>
