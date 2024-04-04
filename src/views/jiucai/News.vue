@@ -211,7 +211,9 @@ function copyNews(news: News, event: Event) {
       <v-card  v-if="!_.isEmpty(gnRef)" class="mt-3">
         <v-card-title>
           <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
+          &nbsp;
           新概念
+          &nbsp;
           <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestGn(108)"></v-icon>
         </v-card-title>
         <v-card-subtitle>
@@ -221,6 +223,7 @@ function copyNews(news: News, event: Event) {
           <span class="font-weight-bold">
             {{ gnEle.ctime }}
           </span>
+          &nbsp;
           <a :href="gnEle.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
             {{ gnEle.content }}
           </a>
@@ -276,7 +279,9 @@ function copyNews(news: News, event: Event) {
         <v-card max-width="1100px" hover>
           <v-card-title>
             <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
+            &nbsp;
             新概念
+            &nbsp;
             <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestGn(108)"></v-icon>
           </v-card-title>
           <v-card-subtitle>
