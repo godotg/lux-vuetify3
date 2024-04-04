@@ -121,6 +121,7 @@ async function requestGn(num: number) {
   const response: GnResponse = await asyncAsk(request)
   gnRef.value = response.gns;
   gnHotNoticeRef.value = response.hotNotice;
+  gnRef.value.forEach(it => newsStore.updateGn(it.id));
 }
 
 async function loadMoreNews() {
@@ -210,26 +211,21 @@ function copyNews(news: News, event: Event) {
       <v-card  v-if="!_.isEmpty(gnRef)" class="mt-3">
         <v-card-title>
           <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
-          &nbsp;
           新概念
-          &nbsp;
           <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestGn(108)"></v-icon>
         </v-card-title>
         <v-card-subtitle>
           {{ gnHotNoticeRef }}
         </v-card-subtitle>
-        <template v-for="gnEle in gnRef">
-          <v-card-item class="text-pre-wrap" v-ripple @click="copyGn(gnEle, $event)">
-              <span class="font-weight-bold">
-                {{ gnEle.ctime }}
-              </span>
-            &nbsp;
-            <a :href="gnEle.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
-              {{ gnEle.content }}
-            </a>
-            <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
-          </v-card-item>
-        </template>
+        <v-card-item v-for="gnEle in gnRef" :key="gnEle.id" class="text-pre-wrap py-1" v-ripple @click="copyGn(gnEle, $event)">
+          <span class="font-weight-bold">
+            {{ gnEle.ctime }}
+          </span>
+          <a :href="gnEle.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
+            {{ gnEle.content }}
+          </a>
+          <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
+        </v-card-item>
       </v-card>
       <template v-for="newsEle in newsRef">
         <v-card v-if="newsStore.newsLevelFilterValue >= levelMap[newsEle.level].value" class="mt-3" v-ripple
@@ -280,27 +276,23 @@ function copyNews(news: News, event: Event) {
         <v-card max-width="1100px" hover>
           <v-card-title>
             <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
-            &nbsp;
             新概念
-            &nbsp;
             <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestGn(108)"></v-icon>
           </v-card-title>
           <v-card-subtitle>
             {{ gnHotNoticeRef }}
           </v-card-subtitle>
-          <template v-for="gnEle in gnRef">
-            <v-card-item class="text-pre-wrap" v-ripple @click="copyGn(gnEle, $event)">
-              <span class="font-weight-bold">
-                {{ gnEle.ctime }}
-              </span>
-              &nbsp;
-              <a :href="gnEle.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
-                {{ gnEle.content }}
-              </a>
-              {{ gnEle.title }}
-              <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
-            </v-card-item>
-          </template>
+          <v-card-item v-for="gnEle in gnRef" :key="gnEle.id" class="text-pre-wrap py-1" v-ripple @click="copyGn(gnEle, $event)">
+            <span class="font-weight-bold">
+              {{ gnEle.ctime }}
+            </span>
+            &nbsp;
+            <a :href="gnEle.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
+              {{ gnEle.content }}
+            </a>
+            {{ gnEle.title }}
+            <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
+          </v-card-item>
         </v-card>
       </v-timeline-item>
       <template v-for="newsEle in newsRef">

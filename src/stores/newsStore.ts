@@ -50,6 +50,14 @@ export const useNewsStore = defineStore("newsStore", {
           return false;
         }
       }
+      return true;
+    },
+
+    updateGn(id: number) {
+      const index = _.findIndex(this.gnInfos, it => it.id == id);
+      if (index >= 0) {
+        return;
+      }
 
       if (this.gnInfos.length >= 50) {
         this.gnInfos = _.drop(this.gnInfos, 10);
@@ -59,7 +67,6 @@ export const useNewsStore = defineStore("newsStore", {
         id: id,
         time: new Date().getTime()
       });
-      return true;
     },
 
     isNew(id: number): boolean {
