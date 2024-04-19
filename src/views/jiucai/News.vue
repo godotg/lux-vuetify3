@@ -12,7 +12,6 @@ import {useDisplay} from "vuetify";
 import clipboard from "@/utils/clipboardUtils";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
-import gnRequest from "@/protocol/gn/GnRequest";
 
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
