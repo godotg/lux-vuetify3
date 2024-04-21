@@ -70,6 +70,13 @@ import ImageDownloadResponse from './sdiffusion/ImageDownloadResponse';
 import ImageDeleteAsk from './sdiffusion/ImageDeleteAsk';
 import LlamaMessageAsk from './llama/LlamaMessageAsk';
 import LlamaMessageNotify from './llama/LlamaMessageNotify';
+import SpiderRegisterAsk from './bot/SpiderRegisterAsk';
+import SpiderRegisterAnswer from './bot/SpiderRegisterAnswer';
+import ChatBotAsk from './bot/ChatBotAsk';
+import ChatBotRequest from './bot/ChatBotRequest';
+import ChatBotNotice from './bot/ChatBotNotice';
+import ChatBotRegisterRequest from './bot/ChatBotRegisterRequest';
+import ChatBotRegisterResponse from './bot/ChatBotRegisterResponse';
 import IByteBuffer from "./IByteBuffer";
 
 const protocols = new Map<number, any>();
@@ -147,6 +154,13 @@ protocols.set(346, ImageDownloadResponse);
 protocols.set(347, ImageDeleteAsk);
 protocols.set(402, LlamaMessageAsk);
 protocols.set(403, LlamaMessageNotify);
+protocols.set(1000, SpiderRegisterAsk);
+protocols.set(1001, SpiderRegisterAnswer);
+protocols.set(1002, ChatBotAsk);
+protocols.set(1100, ChatBotRequest);
+protocols.set(1101, ChatBotNotice);
+protocols.set(1102, ChatBotRegisterRequest);
+protocols.set(1103, ChatBotRegisterResponse);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
