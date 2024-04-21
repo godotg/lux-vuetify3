@@ -209,7 +209,10 @@ const avatarFrom = (chatAI: number) => {
   if (roleAvatarMap.has(chatAI)) {
     return roleAvatarMap.get(chatAI);
   }
-  return newsStore.myAvatar();
+  if (chatAI < 0) {
+    return newsStore.myAvatar();
+  }
+  return newsStore.aiAvatar();
 }
 </script>
 

@@ -1,8 +1,6 @@
 import ByteBuffer from '@/protocol/buffer/ByteBuffer';
 import SignalAttachment from '@/protocol/attachment/SignalAttachment';
 import ProtocolManager from '@/protocol/ProtocolManager';
-import Error from '@/protocol/common/Error';
-import Message from '@/protocol/common/Message';
 import Ping from '@/protocol/common/Ping';
 import Pong from '@/protocol/common/Pong';
 import ChatBotRegisterRequest from '@/protocol/bot/ChatBotRegisterRequest';
@@ -10,10 +8,7 @@ import ChatBotRegisterResponse from '@/protocol/bot/ChatBotRegisterResponse';
 
 
 import {useSnackbarStore} from "@/stores/snackbarStore";
-import {useNewsStore} from "@/stores/newsStore";
-
 const snackbarStore = useSnackbarStore();
-const newsStore = useNewsStore();
 
 const wsUrl: string = import.meta.env.VITE_API_BASE_URL_CHAT_BOT;
 let pingTime: number = 0;
@@ -31,7 +26,7 @@ function reconnect() {
     send(new Ping())
     return;
   }
-  snackbarStore.showInfoMessage("正在连接服务器");
+  console.log("正在连接Chat Bot服务器");
   ws.close(3999);
   ws = connect("timeout and reconnect");
 }
@@ -55,8 +50,7 @@ function connect(desc): WebSocket {
     send(new Ping());
 
     pingTime = new Date().getTime();
-    snackbarStore.showSuccessMessage("连接服务器成功");
-    newsStore.online = true;
+    snackbarStore.showSuccessMessage("连接ChatBot服务器成功，开始白嫖之旅");
 
     // 登录
     const chatBotRegisterRequest = new ChatBotRegisterRequest();
@@ -73,25 +67,6 @@ function connect(desc): WebSocket {
     buffer.setReadOffset(4);
     const packet = ProtocolManager.read(buffer);
 
-    if (packet.protocolId() == Error.PROTOCOL_ID) {
-      snackbarStore.showErrorMessage(packet.messerrorMessageage);
-      return;
-    }
-
-    if (packet.protocolId() == Message.PROTOCOL_ID) {
-      if (packet.code == 0) {
-        snackbarStore.showErrorMessage(packet.message);
-      } else if (packet.code == 1) {
-        snackbarStore.showSuccessMessage(packet.message);
-      } else if (packet.code == 2) {
-        snackbarStore.showInfoMessage(packet.message);
-      } else if (packet.code == 3) {
-        snackbarStore.showWarningMessage(packet.message);
-      } else {
-        snackbarStore.showInfoMessage(packet.message);
-      }
-      return;
-    }
 
     let attachment: any = null;
     if (buffer.isReadable() && buffer.readBoolean()) {
@@ -119,12 +94,10 @@ function connect(desc): WebSocket {
 
   webSocket.onerror = function (event) {
     console.log(new Date(), 'websocket error', event);
-    newsStore.online = false;
   };
 
   webSocket.onclose = function (event) {
     console.log(new Date(), 'websocket close', event);
-    newsStore.online = false;
   };
   return webSocket;
 }
@@ -136,8 +109,7 @@ export function isWebsocketReady(): boolean {
 export function send(packet: any, attachment: any = null) {
   switch (ws.readyState) {
     case 0:
-      console.log(new Date(), "0, ws connecting server");
-      snackbarStore.showWarningMessage("正在连接服务器");
+      console.log(new Date(), "0, ws chatbot connecting server");
       break;
     case 1:
       const buffer = new ByteBuffer();
@@ -166,8 +138,7 @@ export function send(packet: any, attachment: any = null) {
       console.log(new Date(), "3, ws is closing, trying to reconnect");
       break;
     default:
-      console.log(new Date(), "4, server error");
-      snackbarStore.showErrorMessage("server error");
+      console.log(new Date(), "4, chat bot server error");
   }
 }
 
