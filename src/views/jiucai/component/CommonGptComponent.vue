@@ -80,7 +80,7 @@ interface Message {
   rawContent: string;
   content: string;
   role: "user" | "assistant" | "system";
-  chatBot: number;
+  chatAI: number;
 }
 
 // User Input Message
@@ -124,6 +124,7 @@ const sendMessage = async () => {
     rawContent: "",
     content: userMessage.value,
     role: "user",
+    chatAI: -1
   });
 
   // Clear the input
@@ -140,6 +141,7 @@ const sendMessage = async () => {
 const createCompletion = (packet: ChatgptMessageNotice) => {
   // Check if the API key is set
   const requestId = packet.requestId;
+  const chatAI = packet.chatAI;
   const choice = packet.choice;
   const finishReason = packet.finishReason;
   try {
@@ -159,6 +161,7 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
         rawContent: choice,
         content: choice,
         role: role,
+        chatAI: chatAI
       };
       messages.value.push(message);
     } else {
@@ -181,6 +184,7 @@ const createCompletion = (packet: ChatgptMessageNotice) => {
   }
 };
 
+
 const copyText = (txt, event) => {
   clipboard(txt, event);
   snackbarStore.showSuccessMessage("Markdown文档已复制到剪贴板");
@@ -197,6 +201,16 @@ const handleKeydown = (e) => {
     sendMessage();
   }
 };
+
+// ---------------------------------------------------------------------------------------------------------------------
+const roleAvatarMap = new Map<number, string>();
+roleAvatarMap.set(1, "aa/map/chat.openai.com.png");
+const avatarFrom = (chatAI: number) => {
+  if (roleAvatarMap.has(chatAI)) {
+    return roleAvatarMap.get(chatAI);
+  }
+  return newsStore.myAvatar();
+}
 </script>
 
 <template>
@@ -220,16 +234,13 @@ const handleKeydown = (e) => {
                       color="success"
                       :rounded="isHovering ? 'lg' : 'sm'"
                       :variant="isHovering ? 'outlined' : 'elevated'" v-ripple @click="copyText(message.content, $event)">
-              <img v-if="message.role === 'user'" :src="newsStore.myAvatar()" alt="alt"/>
-              <img v-else-if="message.role === 'assistant'" :src="newsStore.aiAvatar()" alt="alt"/>
-              <img v-else :src="newsStore.aiAvatar2()" alt="alt"/>
+              <img :src="avatarFrom(message.chatAI)" alt="alt"/>
             </v-avatar>
           </template>
         </v-hover>
         <v-card class="mt-3 mx-3">
           <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only"/>
-          <md-preview v-else-if="message.role === 'assistant'" v-model="message.content" editor-id="preview-only" theme="dark"/>
-          <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark" preview-theme="mk-cute" showCodeRowNumber/>
+          <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark"/>
         </v-card>
       </v-row>
     </template>
