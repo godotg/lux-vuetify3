@@ -46,8 +46,8 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  registerPacketReceiver(ChatgptMessageNotice.PROTOCOL_ID, createCompletion);
-  registerPacketReceiverChatBot(ChatBotNotice.PROTOCOL_ID, createCompletion);
+  registerPacketReceiver(ChatgptMessageNotice.PROTOCOL_ID, atChatgptMessageNotice);
+  registerPacketReceiverChatBot(ChatBotNotice.PROTOCOL_ID, atChatBotNotice);
 });
 const forceStop = async () => {
   forceStopChatgpt();
@@ -138,12 +138,14 @@ const sendMessage = async () => {
   scrollToBottomNow();
 };
 
-const createCompletion = (packet: ChatgptMessageNotice) => {
+const atChatBotNotice = (packet: ChatBotNotice) => {
+  createCompletion(packet.requestId, packet.spider, packet.choice, packet.finishReason);
+}
+const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
+  createCompletion(packet.requestId, packet.chatAI, packet.choice, packet.finishReason);
+}
+const createCompletion = (requestId: number, chatAI: number, choice: string, finishReason: number) => {
   // Check if the API key is set
-  const requestId = packet.requestId;
-  const chatAI = packet.chatAI;
-  const choice = packet.choice;
-  const finishReason = packet.finishReason;
   try {
     isLoading.value = false;
     if (finishReason != 0) {
