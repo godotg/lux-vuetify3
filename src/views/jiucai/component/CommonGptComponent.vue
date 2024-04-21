@@ -7,7 +7,7 @@ import AnimationAILlama from "@/animation/AnimationAILlama.vue";
 import AnimationBot1 from "@/animation/AnimationBot1.vue";
 import {isBlank} from "@/utils/stringUtils";
 import {Icon} from "@iconify/vue";
-import { MdPreview } from 'md-editor-v3';
+import {MdPreview} from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
 import {useChatGPTStore} from "@/stores/chatGPTStore";
 import ApiKeyDialog from "@/components/ApiKeyDialog.vue";
@@ -140,14 +140,33 @@ const sendMessage = async () => {
 };
 
 const atChatBotNotice = (packet: ChatBotNotice) => {
-  createCompletion(packet.requestId, packet.spider, packet.choice, packet.finishReason);
+  // Check if the API key is set
+  const requestId = packet.requestId;
+  const chatAI = packet.spider;
+  const choice = packet.choice;
+
+  // Add the bot message
+  let message = _.find(messages.value, it => it.requestId == requestId);
+  if (_.isNil(message)) {
+    message = {
+      requestId: requestId,
+      rawContent: "",
+      content: choice,
+      role: "system",
+      chatAI: chatAI
+    };
+    messages.value.push(message);
+  } else {
+    message.content = choice;
+  }
 }
 const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
-  createCompletion(packet.requestId, packet.chatAI, packet.choice, packet.finishReason);
-}
-const createCompletion = (requestId: number, chatAI: number, choice: string, finishReason: number) => {
   // Check if the API key is set
   try {
+    const requestId = packet.requestId;
+    const chatAI = packet.chatAI;
+    const choice = packet.choice;
+    const finishReason = packet.finishReason;
     isLoading.value = false;
     if (finishReason != 0) {
       isGenerating.value = false;
@@ -156,9 +175,8 @@ const createCompletion = (requestId: number, chatAI: number, choice: string, fin
 
     // Add the bot message
     let message = _.find(messages.value, it => it.requestId == requestId);
-    const isSystem = requestId >= 100000;
+    const role = chatAI === 300 ? "system" : "assistant";
     if (_.isNil(message)) {
-      const role = isSystem ? "system" : "assistant";
       message = {
         requestId: requestId,
         rawContent: choice,
@@ -177,7 +195,7 @@ const createCompletion = (requestId: number, chatAI: number, choice: string, fin
       } else {
         message.content = message.rawContent + mdEnd;
       }
-      if (!isSystem) {
+      if (role === "assistant") {
         scrollToBottomDelay();
       }
     }
@@ -185,7 +203,7 @@ const createCompletion = (requestId: number, chatAI: number, choice: string, fin
     isLoading.value = false;
     snackbarStore.showErrorMessage(error.message);
   }
-};
+}
 
 
 const copyText = (txt, event) => {
@@ -208,6 +226,7 @@ const handleKeydown = (e) => {
 // ---------------------------------------------------------------------------------------------------------------------
 const roleAvatarMap = new Map<number, string>();
 roleAvatarMap.set(1, "aa/map/chat.openai.com.png");
+roleAvatarMap.set(200, "aa/map/1687852872-Pasted.png");
 const avatarFrom = (chatAI: number) => {
   if (roleAvatarMap.has(chatAI)) {
     return roleAvatarMap.get(chatAI);
@@ -229,7 +248,7 @@ const avatarFrom = (chatAI: number) => {
         <AnimationAILlama v-else-if="props.ai == 6" :size="props.size"/>
       </v-col>
     </v-row>
-<!--    <vue-qrcode value="weixin://wxpay/bizpayurl?pr=WtgZu2gzz" :options="{ width: 200 }"></vue-qrcode>-->
+    <!--    <vue-qrcode value="weixin://wxpay/bizpayurl?pr=WtgZu2gzz" :options="{ width: 200 }"></vue-qrcode>-->
   </v-container>
   <v-container v-else>
     <template v-for="message in messages">
@@ -239,7 +258,8 @@ const avatarFrom = (chatAI: number) => {
             <v-avatar v-bind="props" class="mt-3 ml-3 mb-1"
                       color="success"
                       :rounded="isHovering ? 'lg' : 'sm'"
-                      :variant="isHovering ? 'outlined' : 'elevated'" v-ripple @click="copyText(message.content, $event)">
+                      :variant="isHovering ? 'outlined' : 'elevated'" v-ripple
+                      @click="copyText(message.content, $event)">
               <img :src="avatarFrom(message.chatAI)" alt="alt"/>
             </v-avatar>
           </template>
