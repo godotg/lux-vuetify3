@@ -12,7 +12,7 @@ const snackbarStore = useSnackbarStore();
 
 const wsUrl: string = import.meta.env.VITE_API_BASE_URL_CHAT_BOT;
 let pingTime: number = 0;
-let ws: WebSocket = connect("init websocket");
+let ws: WebSocket = connect("init chat bot websocket");
 let uuid: number = 0;
 
 const signalAttachmentMap: Map<number, EncodedPacketInfo> = new Map<number, EncodedPacketInfo>();
@@ -23,12 +23,12 @@ setInterval(() => reconnect(), 30 * 1000);
 function reconnect() {
   if (new Date().getTime() - pingTime < 3 * 60 * 1000) {
     // 每30秒发送一次心跳包
-    send(new Ping())
+    sendChatBot(new Ping())
     return;
   }
   console.log("正在连接Chat Bot服务器");
   ws.close(3999);
-  ws = connect("timeout and reconnect");
+  ws = connect("timeout and reconnect chat bot");
 }
 
 // readyState的状态码定义
@@ -37,20 +37,20 @@ function reconnect() {
 // 2 (CLOSING)，连接正在关闭
 // 3 (CLOSED)，连接已关闭或者没有链接成功
 function connect(desc): WebSocket {
-  console.log(new Date(), 'start connect websocket: ' + desc);
+  console.log(new Date(), 'start connect chat bot websocket: ' + desc);
 
   const webSocket = new WebSocket(wsUrl);
 
   webSocket.binaryType = 'arraybuffer';
 
   webSocket.onopen = async function () {
-    console.log(new Date(), 'websocket open success');
+    console.log(new Date(), 'chat bot websocket open success');
 
     // websocket连接成功过后，先发送ping同步服务器时间，再发送登录请求
-    send(new Ping());
+    sendChatBot(new Ping());
 
     pingTime = new Date().getTime();
-    snackbarStore.showSuccessMessage("连接ChatBot服务器成功，开始白嫖之旅");
+    setTimeout(() => snackbarStore.showInfoMessage("连接ChatBot服务器成功，开始白嫖之旅"), 3 * 1000);
 
     // 登录
     const chatBotRegisterRequest = new ChatBotRegisterRequest();
@@ -70,16 +70,16 @@ function connect(desc): WebSocket {
 
     let attachment: any = null;
     if (buffer.isReadable() && buffer.readBoolean()) {
-      console.log(new Date(), "Websocket收到异步response <-- ", packet);
+      console.log(new Date(), "Chat Bot Websocket收到异步response <-- ", packet);
       attachment = ProtocolManager.read(buffer);
       const encodedPacketInfo = signalAttachmentMap.get(attachment.signalId);
       if (encodedPacketInfo == undefined) {
-        throw "可能消息超时找不到对应的SignalAttachment:" + attachment;
+        throw "Chat Bot可能消息超时找不到对应的SignalAttachment:" + attachment;
       }
       encodedPacketInfo.promiseResolve(packet);
       return;
     }
-    console.log(new Date(), "Websocket收到同步response <-- ", packet);
+    console.log(new Date(), "Chat Bot Websocket收到同步response <-- ", packet);
     if (packet.protocolId() == Pong.PROTOCOL_ID) {
       if (Number.isInteger(packet.time)) {
         pingTime = packet.time;
@@ -93,20 +93,20 @@ function connect(desc): WebSocket {
   };
 
   webSocket.onerror = function (event) {
-    console.log(new Date(), 'websocket error', event);
+    console.log(new Date(), 'chat bot websocket error', event);
   };
 
   webSocket.onclose = function (event) {
-    console.log(new Date(), 'websocket close', event);
+    console.log(new Date(), 'chat bot websocket close', event);
   };
   return webSocket;
 }
 
-export function isWebsocketReady(): boolean {
+export function isWebsocketReadyChatBot(): boolean {
   return ws.readyState == 1;
 }
 
-export function send(packet: any, attachment: any = null) {
+export function sendChatBot(packet: any, attachment: any = null) {
   switch (ws.readyState) {
     case 0:
       console.log(new Date(), "0, ws chatbot connecting server");
@@ -117,11 +117,11 @@ export function send(packet: any, attachment: any = null) {
       ProtocolManager.write(buffer, packet);
       if (attachment == null) {
         buffer.writeBoolean(false);
-        console.log(new Date(), "Websocket发送同步request --> ", packet)
+        console.log(new Date(), "Chat Bot Websocket发送同步request --> ", packet)
       } else {
         buffer.writeBoolean(true);
         ProtocolManager.write(buffer, attachment)
-        console.log(new Date(), "Websocket发送异步request --> ", packet)
+        console.log(new Date(), "Chat BOt Websocket发送异步request --> ", packet)
       }
       const writeOffset = buffer.writeOffset;
       buffer.setWriteOffset(0);
@@ -131,14 +131,14 @@ export function send(packet: any, attachment: any = null) {
       break;
     case 2:
       pingTime = pingTime - 60 * 1000;
-      console.log(new Date(), "2, ws is closing, trying to reconnect");
+      console.log(new Date(), "2, chat bot ws is closing, trying to reconnect");
       break;
     case 3:
       pingTime = pingTime - 60 * 1000;
-      console.log(new Date(), "3, ws is closing, trying to reconnect");
+      console.log(new Date(), "3, chat bot ws is closing, trying to reconnect");
       break;
     default:
-      console.log(new Date(), "4, chat bot server error");
+      console.log(new Date(), "4, chat bot chat bot server error");
   }
 }
 
@@ -180,21 +180,21 @@ export async function asyncAsk(packet: any): Promise<any> {
   });
   deleteList.forEach(it => signalAttachmentMap.delete(it));
   signalAttachmentMap.set(signalId, encodedPacketInfo);
-  send(packet, attachment);
+  sendChatBot(packet, attachment);
   return promise;
 }
 
 const receiverMap = new Map<number, any>();
-
-export function registerPacketReceiverChatBot(protocolId: number, fun: any) {
-  receiverMap.set(protocolId, fun);
-}
-
 function route(packet: any) {
   const receiver = receiverMap.get(packet.protocolId());
   if (receiver == null) {
-    console.log("router not exist ", packet);
+    console.log("chat bot router not exist ", packet);
     return;
   }
   receiver(packet);
+}
+
+
+export function registerPacketReceiverChatBot(protocolId: number, fun: any) {
+  receiverMap.set(protocolId, fun);
 }

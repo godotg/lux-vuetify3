@@ -34,7 +34,7 @@ const newsStore = useNewsStore();
 
 
 const props = defineProps({
-  // 1表示chatgpt，2表示讯飞星火，4表示Chatgpt4
+  // 1表示chatgpt，4表示Chatgpt4，100表示讯飞星火，200表示百度，300表示llama
   ai: {
     type: Number,
     default: 1,
@@ -118,11 +118,12 @@ const sendMessage = async () => {
     snackbarStore.showErrorMessage("prompt不能为空");
     return
   }
+  const userInputMessage = userMessage.value;
   // Add the message to the list
   messages.value.push({
     requestId: 0,
     rawContent: "",
-    content: userMessage.value,
+    content: userInputMessage,
     role: "user",
     chatAI: -1
   });
@@ -133,7 +134,7 @@ const sendMessage = async () => {
   isLoading.value = true;
   isGenerating.value = true;
   // Create a completion
-  sendChatgpt(requestMessages.value, props.ai);
+  sendChatgpt(requestMessages.value, userInputMessage, props.ai);
   myStore.account.cost += 1;
   scrollToBottomNow();
 };
