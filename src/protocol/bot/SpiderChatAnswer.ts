@@ -1,38 +1,38 @@
 import IByteBuffer from '../IByteBuffer';
 
 
-class ChatBotAsk {
+class SpiderChatAnswer {
 
-    requestId: number = 0;
-    message: string = '';
+    spider: number = 0;
+    html: string = '';
 
-    static PROTOCOL_ID: number = 1002;
+    static PROTOCOL_ID: number = 1011;
 
     protocolId(): number {
-        return ChatBotAsk.PROTOCOL_ID;
+        return SpiderChatAnswer.PROTOCOL_ID;
     }
 
-    static write(buffer: IByteBuffer, packet: ChatBotAsk | null) {
+    static write(buffer: IByteBuffer, packet: SpiderChatAnswer | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writeString(packet.message);
-        buffer.writeInt(packet.requestId);
+        buffer.writeString(packet.html);
+        buffer.writeInt(packet.spider);
     }
 
-    static read(buffer: IByteBuffer): ChatBotAsk | null {
+    static read(buffer: IByteBuffer): SpiderChatAnswer | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new ChatBotAsk();
+        const packet = new SpiderChatAnswer();
         const result0 = buffer.readString();
-        packet.message = result0;
+        packet.html = result0;
         const result1 = buffer.readInt();
-        packet.requestId = result1;
+        packet.spider = result1;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
@@ -40,4 +40,4 @@ class ChatBotAsk {
     }
 }
 
-export default ChatBotAsk;
+export default SpiderChatAnswer;
