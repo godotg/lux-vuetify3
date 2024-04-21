@@ -19,11 +19,13 @@ const chatGPTStore = useChatGPTStore();
 
 import {sendChatgpt, forceStopChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
+import {registerPacketReceiverChatBot} from "@/utils/websocketChatBot";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import {useMyStore} from "@/stores/myStore";
+import ChatBotNotice from "@/protocol/bot/ChatBotNotice";
 
 
 const myStore = useMyStore();
@@ -45,6 +47,7 @@ const props = defineProps({
 
 onMounted(() => {
   registerPacketReceiver(ChatgptMessageNotice.PROTOCOL_ID, createCompletion);
+  registerPacketReceiverChatBot(ChatBotNotice.PROTOCOL_ID, createCompletion);
 });
 const forceStop = async () => {
   forceStopChatgpt();
@@ -77,6 +80,7 @@ interface Message {
   rawContent: string;
   content: string;
   role: "user" | "assistant" | "system";
+  chatBot: number;
 }
 
 // User Input Message

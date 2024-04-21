@@ -4,6 +4,7 @@ import IByteBuffer from '../IByteBuffer';
 class ChatgptMessageNotice {
 
     requestId: number = 0;
+    chatAI: number = 0;
     choice: string = '';
     finishReason: number = 0;
 
@@ -19,6 +20,7 @@ class ChatgptMessageNotice {
             return;
         }
         buffer.writeInt(-1);
+        buffer.writeInt(packet.chatAI);
         buffer.writeString(packet.choice);
         buffer.writeInt(packet.finishReason);
         buffer.writeInt(packet.requestId);
@@ -31,12 +33,14 @@ class ChatgptMessageNotice {
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new ChatgptMessageNotice();
-        const result0 = buffer.readString();
-        packet.choice = result0;
-        const result1 = buffer.readInt();
-        packet.finishReason = result1;
+        const result0 = buffer.readInt();
+        packet.chatAI = result0;
+        const result1 = buffer.readString();
+        packet.choice = result1;
         const result2 = buffer.readInt();
-        packet.requestId = result2;
+        packet.finishReason = result2;
+        const result3 = buffer.readInt();
+        packet.requestId = result3;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

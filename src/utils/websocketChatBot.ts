@@ -5,14 +5,12 @@ import Error from '@/protocol/common/Error';
 import Message from '@/protocol/common/Message';
 import Ping from '@/protocol/common/Ping';
 import Pong from '@/protocol/common/Pong';
-import LoginRequest from '@/protocol/auth/LoginRequest';
-import LoginResponse from '@/protocol/auth/LoginResponse';
-import GroupChatNotice from '@/protocol/chat/GroupChatNotice';
+import ChatBotRegisterRequest from '@/protocol/bot/ChatBotRegisterRequest';
+import ChatBotRegisterResponse from '@/protocol/bot/ChatBotRegisterResponse';
 
 
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
-import _ from "lodash";
 
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
@@ -61,17 +59,9 @@ function connect(desc): WebSocket {
     newsStore.online = true;
 
     // 登录
-    const loginRequest = new LoginRequest();
-    loginRequest.newsId = newsStore.getMaxNewsId();
-    loginRequest.chatMessageId = newsStore.chatMessageId;
-    const loginResponse: LoginResponse = await asyncAsk(loginRequest);
-    newsStore.ip = loginResponse.ip;
-    newsStore.ipLong = loginResponse.ipLong;
-    newsStore.region = loginResponse.region;
-    newsStore.sid = loginResponse.sid;
-    newsStore.activeUid = loginResponse.activeUid;
-    newsStore.newsIdDiff = loginResponse.newsIdDiff;
-    newsStore.chatMessageIdDiff = loginResponse.chatMessageIdDiff;
+    const chatBotRegisterRequest = new ChatBotRegisterRequest();
+    const chatBotRegisterResponse: ChatBotRegisterResponse = await asyncAsk(chatBotRegisterRequest);
+    console.log("机器人注册成功", chatBotRegisterResponse);
   };
 
 
@@ -225,16 +215,12 @@ export async function asyncAsk(packet: any): Promise<any> {
 
 const receiverMap = new Map<number, any>();
 
-export function registerPacketReceiver(protocolId: number, fun: any) {
+export function registerPacketReceiverChatBot(protocolId: number, fun: any) {
   receiverMap.set(protocolId, fun);
 }
 
 function route(packet: any) {
   const receiver = receiverMap.get(packet.protocolId());
-  if (packet.protocolId() == GroupChatNotice.PROTOCOL_ID) {
-    newsStore.chatMessageIdDiff = _.first(packet.messages).id - newsStore.chatMessageId;
-    console.log(newsStore.chatMessageIdDiff);
-  }
   if (receiver == null) {
     console.log("router not exist ", packet);
     return;
