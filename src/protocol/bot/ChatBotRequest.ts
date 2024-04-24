@@ -19,7 +19,7 @@ class ChatBotRequest {
         }
         buffer.writeInt(-1);
         buffer.writeStringList(packet.messages);
-        buffer.writeInt(packet.requestId);
+        buffer.writeLong(packet.requestId);
     }
 
     static read(buffer: IByteBuffer): ChatBotRequest | null {
@@ -31,7 +31,7 @@ class ChatBotRequest {
         const packet = new ChatBotRequest();
         const list0 = buffer.readStringList();
         packet.messages = list0;
-        const result1 = buffer.readInt();
+        const result1 = buffer.readLong();
         packet.requestId = result1;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

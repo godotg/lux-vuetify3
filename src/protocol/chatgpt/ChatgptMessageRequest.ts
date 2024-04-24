@@ -23,7 +23,7 @@ class ChatgptMessageRequest {
         buffer.writeInt(packet.ai);
         buffer.writeStringList(packet.messages);
         buffer.writeBoolean(packet.mobile);
-        buffer.writeInt(packet.requestId);
+        buffer.writeLong(packet.requestId);
     }
 
     static read(buffer: IByteBuffer): ChatgptMessageRequest | null {
@@ -39,7 +39,7 @@ class ChatgptMessageRequest {
         packet.messages = list1;
         const result2 = buffer.readBoolean(); 
         packet.mobile = result2;
-        const result3 = buffer.readInt();
+        const result3 = buffer.readLong();
         packet.requestId = result3;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

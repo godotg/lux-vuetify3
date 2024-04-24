@@ -20,7 +20,7 @@ class LlamaMessageAsk {
         }
         buffer.writeInt(-1);
         buffer.writeStringList(packet.messages);
-        buffer.writeInt(packet.requestId);
+        buffer.writeLong(packet.requestId);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -33,7 +33,7 @@ class LlamaMessageAsk {
         const packet = new LlamaMessageAsk();
         const list0 = buffer.readStringList();
         packet.messages = list0;
-        const result1 = buffer.readInt();
+        const result1 = buffer.readLong();
         packet.requestId = result1;
         const result2 = buffer.readLong();
         packet.requestSid = result2;

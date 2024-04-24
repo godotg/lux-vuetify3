@@ -17,7 +17,7 @@ class ChatgptForceStopRequest {
             return;
         }
         buffer.writeInt(-1);
-        buffer.writeInt(packet.requestId);
+        buffer.writeLong(packet.requestId);
     }
 
     static read(buffer: IByteBuffer): ChatgptForceStopRequest | null {
@@ -27,7 +27,7 @@ class ChatgptForceStopRequest {
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new ChatgptForceStopRequest();
-        const result0 = buffer.readInt();
+        const result0 = buffer.readLong();
         packet.requestId = result0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
