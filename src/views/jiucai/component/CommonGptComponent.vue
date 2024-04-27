@@ -51,6 +51,8 @@ onMounted(() => {
 });
 const forceStop = async () => {
   forceStopChatgpt();
+  isGenerating.value = false;
+  isLoading.value = false;
 }
 const clearChatHistory = async () => {
   userMessage.value = "";
@@ -227,6 +229,8 @@ const handleKeydown = (e) => {
 const roleAvatarMap = new Map<number, string>();
 roleAvatarMap.set(1, "aa/map/chat.openai.com.png");
 roleAvatarMap.set(200, "aa/map/1687852872-Pasted.png");
+roleAvatarMap.set(300, "aa/map/hunyuan.tencent.com.png");
+roleAvatarMap.set(400, "aa/map/qianwen.aliyun.com.png");
 const avatarFrom = (chatAI: number) => {
   if (roleAvatarMap.has(chatAI)) {
     return roleAvatarMap.get(chatAI);
@@ -256,7 +260,6 @@ const avatarFrom = (chatAI: number) => {
         <v-hover close-delay="500">
           <template v-slot:default="{ isHovering, props }">
             <v-avatar v-bind="props" class="mt-3 ml-3 mb-1"
-                      color="success"
                       :rounded="isHovering ? 'lg' : 'sm'"
                       :variant="isHovering ? 'outlined' : 'elevated'" v-ripple
                       @click="copyText(message.content, $event)">

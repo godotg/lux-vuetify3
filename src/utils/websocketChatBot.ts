@@ -50,7 +50,7 @@ function connect(desc): WebSocket {
     sendChatBot(new Ping());
 
     pingTime = new Date().getTime();
-    setTimeout(() => snackbarStore.showInfoMessage("连接ChatBot服务器成功，开始白嫖之旅"), 3 * 1000);
+    setTimeout(() => snackbarStore.showSuccessMessage("连接ChatBot服务器成功，开始白嫖之旅"), 3 * 1000);
 
     // 登录
     const chatBotRegisterRequest = new ChatBotRegisterRequest();

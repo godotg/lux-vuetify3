@@ -1,4 +1,4 @@
-import {isWebsocketReady, send} from "@/utils/websocket";
+import {asyncAsk, isWebsocketReady, send} from "@/utils/websocket";
 import {isWebsocketReadyChatBot, sendChatBot} from "@/utils/websocketChatBot";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {isMobile} from "@/utils/common";
@@ -6,6 +6,7 @@ import _ from "lodash";
 
 import ChatgptMessageRequest from "@/protocol/chatgpt/ChatgptMessageRequest";
 import ChatgptForceStopRequest from "@/protocol/chatgpt/ChatgptForceStopRequest";
+import ChatgptForceStopResponse from "@/protocol/chatgpt/ChatgptForceStopResponse";
 import ChatBotRequest from "@/protocol/bot/ChatBotRequest";
 
 const snackbarStore = useSnackbarStore();
@@ -49,11 +50,12 @@ export function sendChatgpt(messages, userInputMessage, ai) {
 }
 
 
-export function forceStopChatgpt() {
+export async function forceStopChatgpt() {
   if (requestId <= 0) {
     return;
   }
   const request = new ChatgptForceStopRequest();
   request.requestId = requestId;
-  send(request);
+  const answer: ChatgptForceStopResponse = await asyncAsk(request);
+  console.log(answer);
 }
