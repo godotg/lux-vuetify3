@@ -1,20 +1,20 @@
 import IByteBuffer from '../IByteBuffer';
 
 
-class SpiderChatAnswer {
+class SimulatorChatAnswer {
 
     requestId: number = 0;
-    spider: number = 0;
+    simulator: number = 0;
     html: string = '';
     markdown: string = '';
 
     static PROTOCOL_ID: number = 1011;
 
     protocolId(): number {
-        return SpiderChatAnswer.PROTOCOL_ID;
+        return SimulatorChatAnswer.PROTOCOL_ID;
     }
 
-    static write(buffer: IByteBuffer, packet: SpiderChatAnswer | null) {
+    static write(buffer: IByteBuffer, packet: SimulatorChatAnswer | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -23,16 +23,16 @@ class SpiderChatAnswer {
         buffer.writeString(packet.html);
         buffer.writeString(packet.markdown);
         buffer.writeLong(packet.requestId);
-        buffer.writeInt(packet.spider);
+        buffer.writeInt(packet.simulator);
     }
 
-    static read(buffer: IByteBuffer): SpiderChatAnswer | null {
+    static read(buffer: IByteBuffer): SimulatorChatAnswer | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new SpiderChatAnswer();
+        const packet = new SimulatorChatAnswer();
         const result0 = buffer.readString();
         packet.html = result0;
         const result1 = buffer.readString();
@@ -40,7 +40,7 @@ class SpiderChatAnswer {
         const result2 = buffer.readLong();
         packet.requestId = result2;
         const result3 = buffer.readInt();
-        packet.spider = result3;
+        packet.simulator = result3;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
@@ -48,4 +48,4 @@ class SpiderChatAnswer {
     }
 }
 
-export default SpiderChatAnswer;
+export default SimulatorChatAnswer;

@@ -1,32 +1,34 @@
 import IByteBuffer from '../IByteBuffer';
 
 
-class SpiderRegisterAnswer {
+class SimulatorStatusAsk {
 
-    
+    message: string = '';
 
-    static PROTOCOL_ID: number = 1001;
+    static PROTOCOL_ID: number = 1021;
 
     protocolId(): number {
-        return SpiderRegisterAnswer.PROTOCOL_ID;
+        return SimulatorStatusAsk.PROTOCOL_ID;
     }
 
-    static write(buffer: IByteBuffer, packet: SpiderRegisterAnswer | null) {
+    static write(buffer: IByteBuffer, packet: SimulatorStatusAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
+        buffer.writeString(packet.message);
     }
 
-    static read(buffer: IByteBuffer): SpiderRegisterAnswer | null {
+    static read(buffer: IByteBuffer): SimulatorStatusAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new SpiderRegisterAnswer();
-        
+        const packet = new SimulatorStatusAsk();
+        const result0 = buffer.readString();
+        packet.message = result0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
@@ -34,4 +36,4 @@ class SpiderRegisterAnswer {
     }
 }
 
-export default SpiderRegisterAnswer;
+export default SimulatorStatusAsk;
