@@ -25,7 +25,7 @@ import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import {useMyStore} from "@/stores/myStore";
-import ChatBotNotice from "@/protocol/bot/ChatBotNotice";
+import ChatBotNotice from "@/protocol/simulator/ChatBotNotice";
 
 
 const myStore = useMyStore();
@@ -144,7 +144,7 @@ const sendMessage = async () => {
 const atChatBotNotice = (packet: ChatBotNotice) => {
   // Check if the API key is set
   const requestId = packet.requestId;
-  const chatAI = packet.spider;
+  const chatAI = packet.simulator;
   const choice = packet.choice;
 
   // Add the bot message

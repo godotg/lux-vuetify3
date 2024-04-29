@@ -3,8 +3,8 @@ import SignalAttachment from '@/protocol/attachment/SignalAttachment';
 import ProtocolManager from '@/protocol/ProtocolManager';
 import Ping from '@/protocol/common/Ping';
 import Pong from '@/protocol/common/Pong';
-import ChatBotRegisterRequest from '@/protocol/bot/ChatBotRegisterRequest';
-import ChatBotRegisterResponse from '@/protocol/bot/ChatBotRegisterResponse';
+import ChatBotRegisterRequest from '@/protocol/simulator/ChatBotRegisterRequest';
+import ChatBotRegisterResponse from '@/protocol/simulator/ChatBotRegisterResponse';
 
 
 import {useSnackbarStore} from "@/stores/snackbarStore";
