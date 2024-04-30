@@ -7,7 +7,7 @@ import _ from "lodash";
 import ChatgptMessageRequest from "@/protocol/chatgpt/ChatgptMessageRequest";
 import ChatgptForceStopRequest from "@/protocol/chatgpt/ChatgptForceStopRequest";
 import ChatgptForceStopResponse from "@/protocol/chatgpt/ChatgptForceStopResponse";
-import ChatBotRequest from "@/protocol/bot/ChatBotRequest";
+import ChatBotRequest from "@/protocol/simulator/ChatBotRequest";
 
 const snackbarStore = useSnackbarStore();
 let requestId = 0;
