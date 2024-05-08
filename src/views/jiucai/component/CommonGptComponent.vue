@@ -155,50 +155,8 @@ const atChatBotNotice = (packet: ChatBotNotice) => {
     messages.value.push(message);
   } else {
     message.content = choice;
-  }
-}
-const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
-  // Check if the API key is set
-  try {
-    const requestId = packet.requestId;
-    const chatAI = packet.chatAI;
-    const choice = packet.choice;
-    const finishReason = packet.finishReason;
     isLoading.value = false;
-    if (finishReason != 0) {
-      isGenerating.value = false;
-      scrollToBottomNow();
-    }
-
-    // Add the bot message
-    let message = _.find(messages.value, it => it.requestId == requestId);
-    const role = chatAI === 300 ? "system" : "assistant";
-    if (_.isNil(message)) {
-      message = {
-        requestId: requestId,
-        rawContent: choice,
-        content: choice,
-        role: role,
-        chatAI: chatAI
-      };
-      messages.value.push(message);
-    } else {
-      // 记录一个原始的字符串返回，判断这个原始的字符串包含多少个  ``` 符号md的符号，奇数手动补齐md文档的格式就行了
-      message.rawContent = message.rawContent + choice;
-      const mdEnd = "\n```\n";
-      const count = message.rawContent.split("```").length - 1;
-      if (count % 2 == 0) {
-        message.content = message.rawContent;
-      } else {
-        message.content = message.rawContent + mdEnd;
-      }
-      if (role === "assistant") {
-        scrollToBottomDelay();
-      }
-    }
-  } catch (error) {
-    isLoading.value = false;
-    snackbarStore.showErrorMessage(error.message);
+    isGenerating.value = false;
   }
 }
 

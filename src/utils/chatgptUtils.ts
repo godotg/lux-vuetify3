@@ -43,10 +43,7 @@ export function sendChatgpt(messages, userInputMessage, ai) {
 
     messages.forEach(it => request.messages.push(it.content));
     send(request);
-  } else {
-    snackbarStore.showErrorMessage("请稍等，无法连接服务器");
   }
-
 }
 
 
