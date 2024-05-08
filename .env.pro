@@ -1,6 +1,6 @@
 VITE_API_BASE_URL=ws://127.0.0.1:19001/websocket
 VITE_API_BASE_URL_CHAT_BOT=ws://127.0.0.1:17313/websocket
-VITE_BASE_HTTP_URL=http://localhost:4399
+VITE_BASE_HTTP_URL=http://localhost
 
 
 # Firebase 🔥
