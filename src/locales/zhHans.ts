@@ -1,4 +1,7 @@
 export default {
+  ai: {
+    simulator: "AI模拟器"
+  },
   jiucai: {
     news: "情报",
     navigation: "AI 导航",

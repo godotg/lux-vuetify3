@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import {useSnackbarStore} from "@/stores/snackbarStore";
-import AnimationAI1 from "@/animation/AnimationAI1.vue";
 import AnimationAI2 from "@/animation/AnimationAI2.vue";
-import AnimationAI4 from "@/animation/AnimationAI4.vue";
-import AnimationAILlama from "@/animation/AnimationAILlama.vue";
 import AnimationBot1 from "@/animation/AnimationBot1.vue";
 import {isBlank} from "@/utils/stringUtils";
 import {Icon} from "@iconify/vue";
@@ -18,7 +15,6 @@ const chatGPTStore = useChatGPTStore();
 
 
 import {sendChatgpt, forceStopChatgpt} from "@/utils/chatgptUtils";
-import {registerPacketReceiver} from "@/utils/websocket";
 import {registerPacketReceiverChatBot} from "@/utils/websocketChatBot";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore} from "@/stores/newsStore";
@@ -46,7 +42,6 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  registerPacketReceiver(ChatgptMessageNotice.PROTOCOL_ID, atChatgptMessageNotice);
   registerPacketReceiverChatBot(ChatBotNotice.PROTOCOL_ID, atChatBotNotice);
 });
 const forceStop = async () => {
@@ -247,10 +242,7 @@ const avatarFrom = (chatAI: number) => {
   <v-container v-if="messages.length <= 0">
     <v-row justify="center" align="center">
       <v-col cols="12">
-        <AnimationAI1 v-if="props.ai == 1" :size="props.size"/>
-        <AnimationAI2 v-else-if="props.ai == 2" :size="props.size"/>
-        <AnimationAI4 v-else-if="props.ai == 4" :size="props.size"/>
-        <AnimationAILlama v-else-if="props.ai == 6" :size="props.size"/>
+        <AnimationAI2 :size="props.size"/>
       </v-col>
     </v-row>
     <!--    <vue-qrcode value="weixin://wxpay/bizpayurl?pr=WtgZu2gzz" :options="{ width: 200 }"></vue-qrcode>-->

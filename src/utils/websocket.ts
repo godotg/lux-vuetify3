@@ -24,7 +24,6 @@ let uuid: number = 0;
 
 const signalAttachmentMap: Map<number, EncodedPacketInfo> = new Map<number, EncodedPacketInfo>();
 
-setInterval(() => reconnect(), 30 * 1000);
 
 // 如果服务器长时间没有回应，则重新连接
 function reconnect() {
@@ -129,12 +128,10 @@ function connect(desc): WebSocket {
 
   webSocket.onerror = function (event) {
     console.log(new Date(), 'websocket error', event);
-    newsStore.online = false;
   };
 
   webSocket.onclose = function (event) {
     console.log(new Date(), 'websocket close', event);
-    newsStore.online = false;
   };
   return webSocket;
 }

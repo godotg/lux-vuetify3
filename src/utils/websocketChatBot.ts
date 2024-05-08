@@ -8,7 +8,9 @@ import ChatBotRegisterResponse from '@/protocol/simulator/ChatBotRegisterRespons
 
 
 import {useSnackbarStore} from "@/stores/snackbarStore";
+import {useNewsStore} from "@/stores/newsStore";
 const snackbarStore = useSnackbarStore();
+const newsStore = useNewsStore();
 
 const wsUrl: string = import.meta.env.VITE_API_BASE_URL_CHAT_BOT;
 let pingTime: number = 0;
@@ -50,7 +52,8 @@ function connect(desc): WebSocket {
     sendChatBot(new Ping());
 
     pingTime = new Date().getTime();
-    setTimeout(() => snackbarStore.showSuccessMessage("连接ChatBot服务器成功，开始白嫖之旅"), 3 * 1000);
+    snackbarStore.showSuccessMessage("连接ChatBot服务器成功，开始白嫖之旅");
+    newsStore.online = true;
 
     // 登录
     const chatBotRegisterRequest = new ChatBotRegisterRequest();

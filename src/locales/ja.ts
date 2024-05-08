@@ -1,4 +1,7 @@
 export default {
+  ai: {
+    simulator: "ai simulator"
+  },
   common: {
     add: "追加",
     cancel: "キャンセル",
