@@ -177,20 +177,11 @@ const handleKeydown = (e) => {
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
-const roleAvatarMap = new Map<number, string>();
-roleAvatarMap.set(1, "aa/map/chat.openai.com.png");
-roleAvatarMap.set(200, "aa/map/1687852872-Pasted.png");
-roleAvatarMap.set(300, "aa/map/hunyuan.tencent.com.png");
-roleAvatarMap.set(400, "aa/map/qianwen.aliyun.com.png");
-roleAvatarMap.set(1500, "aa/map/gemini.google.com.png");
 const avatarFrom = (chatAI: number) => {
-  if (roleAvatarMap.has(chatAI)) {
-    return roleAvatarMap.get(chatAI);
-  }
   if (chatAI < 0) {
     return newsStore.myAvatar();
   }
-  return newsStore.aiAvatar();
+  return `aa/map/${chatAI}.png`;
 }
 </script>
 
