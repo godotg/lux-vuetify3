@@ -8,7 +8,7 @@ const aiAvatarDefault = avatarAutoUrl(2);
 const aiAvatar2Default = avatarAutoUrl(3);
 
 export function avatarAutoUrl(id: number): string {
-  const avatarId = id % 800 + 1;
+  const avatarId = id % 100 + 1;
   const avatar = import.meta.env.VITE_BASE_HTTP_URL + "/ab/" + avatarId + ".jpg";
   return avatar;
 }
