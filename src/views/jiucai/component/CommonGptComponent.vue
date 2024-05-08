@@ -7,7 +7,6 @@ import {Icon} from "@iconify/vue";
 import {MdPreview} from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
 import {useChatGPTStore} from "@/stores/chatGPTStore";
-import ApiKeyDialog from "@/components/ApiKeyDialog.vue";
 import clipboard from "@/utils/clipboardUtils";
 
 const snackbarStore = useSnackbarStore();
@@ -16,7 +15,6 @@ const chatGPTStore = useChatGPTStore();
 
 import {sendChatgpt, forceStopChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiverChatBot} from "@/utils/websocketChatBot";
-import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
@@ -309,6 +307,5 @@ const avatarFrom = (chatAI: number) => {
         </v-col>
       </v-row>
     </v-container>
-    <ApiKeyDialog/>
   </v-footer>
 </template>
