@@ -256,15 +256,6 @@ const avatarFrom = (chatAI: string) => {
     <v-container v-else>
       <v-row>
         <v-col cols="8" offset="2">
-          <v-btn v-if="!mobile && ai == 1" size="x-small" class="mb-3 mr-1" variant="elevated" icon
-                 @click="chatGPTStore.configDialog = true">
-            <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
-            <v-tooltip
-              activator="parent"
-              location="top"
-              text="ChatGPT Config"
-            ></v-tooltip>
-          </v-btn>
           <v-textarea
             color="primary"
             type="text"

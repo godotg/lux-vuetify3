@@ -97,10 +97,12 @@ function connect(desc): WebSocket {
 
   webSocket.onerror = function (event) {
     console.log(new Date(), 'chat bot websocket error', event);
+    newsStore.online = true;
   };
 
   webSocket.onclose = function (event) {
     console.log(new Date(), 'chat bot websocket close', event);
+    newsStore.online = true;
   };
   return webSocket;
 }
