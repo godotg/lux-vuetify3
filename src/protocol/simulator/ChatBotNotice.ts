@@ -4,7 +4,7 @@ import IByteBuffer from '../IByteBuffer';
 class ChatBotNotice {
 
     requestId: number = 0;
-    simulator: number = 0;
+    simulator: string = '';
     choice: string = '';
 
     static PROTOCOL_ID: number = 1101;
@@ -21,7 +21,7 @@ class ChatBotNotice {
         buffer.writeInt(-1);
         buffer.writeString(packet.choice);
         buffer.writeLong(packet.requestId);
-        buffer.writeInt(packet.simulator);
+        buffer.writeString(packet.simulator);
     }
 
     static read(buffer: IByteBuffer): ChatBotNotice | null {
@@ -35,7 +35,7 @@ class ChatBotNotice {
         packet.choice = result0;
         const result1 = buffer.readLong();
         packet.requestId = result1;
-        const result2 = buffer.readInt();
+        const result2 = buffer.readString();
         packet.simulator = result2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

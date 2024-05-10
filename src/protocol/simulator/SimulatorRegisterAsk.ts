@@ -3,7 +3,7 @@ import IByteBuffer from '../IByteBuffer';
 
 class SimulatorRegisterAsk {
 
-    simulator: number = 0;
+    simulator: string = '';
 
     static PROTOCOL_ID: number = 1000;
 
@@ -17,7 +17,7 @@ class SimulatorRegisterAsk {
             return;
         }
         buffer.writeInt(-1);
-        buffer.writeInt(packet.simulator);
+        buffer.writeString(packet.simulator);
     }
 
     static read(buffer: IByteBuffer): SimulatorRegisterAsk | null {
@@ -27,7 +27,7 @@ class SimulatorRegisterAsk {
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new SimulatorRegisterAsk();
-        const result0 = buffer.readInt();
+        const result0 = buffer.readString();
         packet.simulator = result0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

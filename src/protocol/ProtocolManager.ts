@@ -80,6 +80,10 @@ import ChatBotRequest from './simulator/ChatBotRequest';
 import ChatBotNotice from './simulator/ChatBotNotice';
 import ChatBotRegisterRequest from './simulator/ChatBotRegisterRequest';
 import ChatBotRegisterResponse from './simulator/ChatBotRegisterResponse';
+import ClipboardLockAsk from './simulator/ClipboardLockAsk';
+import ClipboardLockAnswer from './simulator/ClipboardLockAnswer';
+import ClipboardUnlockAsk from './simulator/ClipboardUnlockAsk';
+import ClipboardUnlockAnswer from './simulator/ClipboardUnlockAnswer';
 import IByteBuffer from "./IByteBuffer";
 
 const protocols = new Map<number, any>();
@@ -167,6 +171,10 @@ protocols.set(1100, ChatBotRequest);
 protocols.set(1101, ChatBotNotice);
 protocols.set(1102, ChatBotRegisterRequest);
 protocols.set(1103, ChatBotRegisterResponse);
+protocols.set(1200, ClipboardLockAsk);
+protocols.set(1201, ClipboardLockAnswer);
+protocols.set(1202, ClipboardUnlockAsk);
+protocols.set(1203, ClipboardUnlockAnswer);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
