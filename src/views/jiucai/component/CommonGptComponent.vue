@@ -75,7 +75,7 @@ interface Message {
   rawContent: string;
   content: string;
   role: "user" | "assistant" | "system";
-  chatAI: number;
+  chatAI: string;
 }
 
 // User Input Message
@@ -120,7 +120,7 @@ const sendMessage = async () => {
     rawContent: "",
     content: userInputMessage,
     role: "user",
-    chatAI: -1
+    chatAI: ""
   });
 
   // Clear the input
@@ -177,8 +177,8 @@ const handleKeydown = (e) => {
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
-const avatarFrom = (chatAI: number) => {
-  if (chatAI < 0) {
+const avatarFrom = (chatAI: string) => {
+  if (isBlank(chatAI)) {
     return newsStore.myAvatar();
   }
   return `aa/map/${chatAI}.png`;

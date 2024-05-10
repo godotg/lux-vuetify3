@@ -1,5 +1,0 @@
-{
-  "version": "1.1.1",
-  "title": "重新出发",
-  "content": "- 修复了Midjourney生成多个version有些出不来的bug\n- 更换了快到期https证书，后续如果发现登录不上请清理浏览器缓存再登录\n- 加入了Mj的使用教程\n- Llama只在工作日开放\n"
-}
