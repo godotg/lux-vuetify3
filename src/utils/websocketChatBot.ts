@@ -73,7 +73,7 @@ function connect(desc): WebSocket {
 
     let attachment: any = null;
     if (buffer.isReadable() && buffer.readBoolean()) {
-      console.log(new Date(), "Chat Bot Websocket收到异步response <-- ", packet);
+      console.log(new Date(), "Chat Bot Websocket收到异步answer <-- ", packet);
       attachment = ProtocolManager.read(buffer);
       const encodedPacketInfo = signalAttachmentMap.get(attachment.signalId);
       if (encodedPacketInfo == undefined) {
