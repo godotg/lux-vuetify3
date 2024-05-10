@@ -181,7 +181,7 @@ const avatarFrom = (chatAI: string) => {
   if (isBlank(chatAI)) {
     return newsStore.myAvatar();
   }
-  return `aa/map/${chatAI}.png`;
+  return `aa/avatar/${chatAI}.png`;
 }
 </script>
 
