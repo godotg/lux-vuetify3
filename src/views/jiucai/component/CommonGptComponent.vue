@@ -177,8 +177,8 @@ const handleKeydown = (e) => {
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
-const avatarFrom = (chatAI: string, requestId: number) => {
-  if (requestId < 0) {
+const avatarFrom = (chatAI: string) => {
+  if (chatAI === "zfoo") {
     return newsStore.aiAvatar();
   }
   if (isBlank(chatAI)) {
@@ -206,7 +206,7 @@ const avatarFrom = (chatAI: string, requestId: number) => {
                       :rounded="isHovering ? 'lg' : 'sm'"
                       :variant="isHovering ? 'outlined' : 'elevated'" v-ripple
                       @click="copyText(message.content, $event)">
-              <img :src="avatarFrom(message.chatAI, message.requestId)" alt="alt"/>
+              <img :src="avatarFrom(message.chatAI)" alt="alt"/>
             </v-avatar>
           </template>
         </v-hover>
