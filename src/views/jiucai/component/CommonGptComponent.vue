@@ -209,6 +209,7 @@ const avatarFrom = (chatAI: string) => {
         </v-hover>
         <v-card class="mt-3 mx-3">
           <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only"/>
+          <md-preview v-else-if="message.requestId < 0" v-model="message.content" editor-id="preview-only" theme="dark" preview-theme="mk-cute" showCodeRowNumber/>
           <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark"/>
         </v-card>
       </v-row>
