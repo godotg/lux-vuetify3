@@ -7,7 +7,7 @@ const chatUrls = [{
   "title": "文心一言",
   "description": "百度全新一代知识增强大语言模型，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。",
   "url": "https://yiyan.baidu.com",
-  "image": "1687852872-Pasted.png"
+  "image": "baidu.png"
 }, {
   "title": "腾讯混元",
   "description": "腾讯混元大模型是由腾讯研发的大语言模型，具备跨领域知识和自然语言理解能力，实现基于人机自然语言对话的方式，理解用户指令并执行任务，帮助用户实现人获取信息，知识和灵感。",
@@ -22,7 +22,7 @@ const chatUrls = [{
   "title": "讯飞星火认知大模型",
   "description": "新一代认知智能大模型，拥有跨领域知识和语言理解能力，能够基于自然对话方式理解与执行任务",
   "url": "https://xinghuo.xfyun.cn",
-  "image": "xinghuo.xfyun.cn.png"
+  "image": "xunfei.png"
 },  {
   "title": "网易云AI智能助手",
   "description": "网易云AI聊天机器人",
@@ -296,7 +296,7 @@ const videoUrls = [{
         >
           <v-item v-slot="{ isSelected, selectedClass, toggle }">
             <v-card :class="[selectedClass]"
-                    :prepend-avatar="'https://jiucai.fun/aa/map/' + chatUrl.image"
+                    :prepend-avatar="'/aa/map/' + chatUrl.image"
                     :href="chatUrl.url"
                     hover
                     @click="toggle">
@@ -326,7 +326,7 @@ const videoUrls = [{
         >
           <v-item v-slot="{ isSelected, selectedClass, toggle }">
             <v-card :class="[selectedClass]"
-                    :prepend-avatar="'https://jiucai.fun/aa/map/' + chatUrl.image"
+                    :prepend-avatar="'/aa/map/' + chatUrl.image"
                     :href="chatUrl.url"
                     hover
                     @click="toggle">
@@ -356,7 +356,7 @@ const videoUrls = [{
         >
           <v-item v-slot="{ isSelected, selectedClass, toggle }">
             <v-card :class="[selectedClass]"
-                    :prepend-avatar="'https://jiucai.fun/aa/map/' + chatUrl.image"
+                    :prepend-avatar="'/aa/map/' + chatUrl.image"
                     :href="chatUrl.url"
                     hover
                     @click="toggle">
@@ -386,7 +386,7 @@ const videoUrls = [{
         >
           <v-item v-slot="{ isSelected, selectedClass, toggle }">
             <v-card :class="[selectedClass]"
-                    :prepend-avatar="'https://jiucai.fun/aa/map/' + chatUrl.image"
+                    :prepend-avatar="'/aa/map/' + chatUrl.image"
                     :href="chatUrl.url"
                     hover
                     @click="toggle">
