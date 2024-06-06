@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class InterrogatorPromptRequest {
-
     image: string = '';
     clip_model_name: string = '';
     mode: string = '';

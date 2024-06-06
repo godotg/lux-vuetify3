@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import News from './News';
 
-
 class NewsOneResponse {
-
     news: News | null = null;
 
     static PROTOCOL_ID: number = 206;

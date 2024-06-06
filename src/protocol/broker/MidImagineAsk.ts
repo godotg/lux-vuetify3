@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import MidImagineRequest from '../midjourney/MidImagineRequest';
 
-
 class MidImagineAsk {
-
     requestSid: number = 0;
     request: MidImagineRequest | null = null;
 

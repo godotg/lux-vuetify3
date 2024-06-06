@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import MidImagineNotice from '../midjourney/MidImagineNotice';
 
-
 class MidImagineNotify {
-
     noticeSid: number = 0;
     notice: MidImagineNotice | null = null;
 

@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import SdSimulateNotice from '../sdiffusion/SdSimulateNotice';
 
-
 class SdSimulateNotify {
-
     noticeSid: number = 0;
     notice: SdSimulateNotice | null = null;
 

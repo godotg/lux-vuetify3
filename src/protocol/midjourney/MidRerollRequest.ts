@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class MidRerollRequest {
-
     nonce: string = '';
     midjourneyId: number = 0;
 

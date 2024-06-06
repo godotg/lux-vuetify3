@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class MidSelectRequest {
-
     category: string = '';
     index: number = 0;
     nonce: string = '';

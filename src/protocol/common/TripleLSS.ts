@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class TripleLSS {
-
     left: number = 0;
     middle: string = '';
     right: string = '';

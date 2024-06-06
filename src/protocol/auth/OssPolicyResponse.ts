@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import OssPolicyVO from './OssPolicyVO';
 
-
 class OssPolicyResponse {
-
     ossPolicy: OssPolicyVO | null = null;
 
     static PROTOCOL_ID: number = 253;

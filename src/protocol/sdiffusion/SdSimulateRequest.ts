@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class SdSimulateRequest {
-
     nonce: number = 0;
     prompt: string = '';
     negativePrompt: string = '';

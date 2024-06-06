@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class ChatMessage {
-
     id: number = 0;
     type: number = 0;
     sendId: number = 0;

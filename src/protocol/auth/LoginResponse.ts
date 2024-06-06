@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class LoginResponse {
-
     ip: string = '';
     ipLong: number = 0;
     sid: number = 0;

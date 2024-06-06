@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class NewsRequest {
-
     query: string = '';
     startId: number = 0;
     endId: number = 0;

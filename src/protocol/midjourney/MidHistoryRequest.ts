@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class MidHistoryRequest {
-
     nonce: string = '';
 
     static PROTOCOL_ID: number = 271;

@@ -69,17 +69,8 @@ import SdImage from './sdiffusion/SdImage';
 import ImageDownloadRequest from './sdiffusion/ImageDownloadRequest';
 import ImageDownloadResponse from './sdiffusion/ImageDownloadResponse';
 import ImageDeleteAsk from './sdiffusion/ImageDeleteAsk';
-import LlamaMessageAsk from './llama/LlamaMessageAsk';
-import LlamaMessageNotify from './llama/LlamaMessageNotify';
-import SimulatorRegisterAsk from './simulator/SimulatorRegisterAsk';
-import SimulatorRegisterAnswer from './simulator/SimulatorRegisterAnswer';
-import SimulatorChatAsk from './simulator/SimulatorChatAsk';
-import SimulatorChatAnswer from './simulator/SimulatorChatAnswer';
-import SimulatorStatusAsk from './simulator/SimulatorStatusAsk';
-import ChatBotRequest from './simulator/ChatBotRequest';
-import ChatBotNotice from './simulator/ChatBotNotice';
-import ChatBotRegisterRequest from './simulator/ChatBotRegisterRequest';
-import ChatBotRegisterResponse from './simulator/ChatBotRegisterResponse';
+import TransferChatgptAsk from './chatgpt/TransferChatgptAsk';
+import TransferChatgptNotify from './chatgpt/TransferChatgptNotify';
 import IByteBuffer from "./IByteBuffer";
 
 const protocols = new Map<number, any>();
@@ -156,23 +147,14 @@ protocols.set(344, SdImage);
 protocols.set(345, ImageDownloadRequest);
 protocols.set(346, ImageDownloadResponse);
 protocols.set(347, ImageDeleteAsk);
-protocols.set(402, LlamaMessageAsk);
-protocols.set(403, LlamaMessageNotify);
-protocols.set(1000, SimulatorRegisterAsk);
-protocols.set(1001, SimulatorRegisterAnswer);
-protocols.set(1010, SimulatorChatAsk);
-protocols.set(1011, SimulatorChatAnswer);
-protocols.set(1021, SimulatorStatusAsk);
-protocols.set(1100, ChatBotRequest);
-protocols.set(1101, ChatBotNotice);
-protocols.set(1102, ChatBotRegisterRequest);
-protocols.set(1103, ChatBotRegisterResponse);
+protocols.set(402, TransferChatgptAsk);
+protocols.set(403, TransferChatgptNotify);
 
 class ProtocolManager {
     static getProtocol(protocolId: number): any {
         const protocol = protocols.get(protocolId);
         if (protocol === null) {
-            throw '[protocolId:' + protocolId + ']协议不存在';
+            throw '[protocolId:' + protocolId + '] not exist';
         }
         return protocol;
     }

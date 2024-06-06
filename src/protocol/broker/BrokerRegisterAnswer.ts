@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class BrokerRegisterAnswer {
-
     
 
     static PROTOCOL_ID: number = 301;

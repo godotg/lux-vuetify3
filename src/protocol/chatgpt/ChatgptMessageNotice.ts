@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class ChatgptMessageNotice {
-
     requestId: number = 0;
     chatAI: number = 0;
     choice: string = '';

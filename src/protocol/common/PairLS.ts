@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class PairLS {
-
     key: number = 0;
     value: string = '';
 

@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class SignalAttachment {
-
     signalId: number = 0;
     taskExecutorHash: number = 0;
     // 0 for the server, 1 or 2 for the sync or async native client, 12 for the outside client such as browser, mobile

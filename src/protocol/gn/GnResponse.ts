@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import GaiNian from './GaiNian';
 
-
 class GnResponse {
-
     gns: Array<GaiNian> = [];
     hotNotice: string = '';
 

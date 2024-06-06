@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class HttpAttachment {
-
     uid: number = 0;
     taskExecutorHash: number = 0;
 

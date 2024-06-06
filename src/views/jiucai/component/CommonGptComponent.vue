@@ -19,13 +19,11 @@ const chatGPTStore = useChatGPTStore();
 
 import {sendChatgpt, forceStopChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
-import {registerPacketReceiverChatBot} from "@/utils/websocketChatBot";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import {useMyStore} from "@/stores/myStore";
-import ChatBotNotice from "@/protocol/simulator/ChatBotNotice";
 
 
 const myStore = useMyStore();
@@ -47,7 +45,6 @@ const props = defineProps({
 
 onMounted(() => {
   registerPacketReceiver(ChatgptMessageNotice.PROTOCOL_ID, atChatgptMessageNotice);
-  registerPacketReceiverChatBot(ChatBotNotice.PROTOCOL_ID, atChatBotNotice);
 });
 const forceStop = async () => {
   forceStopChatgpt();
@@ -141,27 +138,6 @@ const sendMessage = async () => {
   scrollToBottomNow();
 };
 
-const atChatBotNotice = (packet: ChatBotNotice) => {
-  // Check if the API key is set
-  const requestId = packet.requestId;
-  const chatAI = packet.simulator;
-  const choice = packet.choice;
-
-  // Add the bot message
-  let message = _.find(messages.value, it => it.requestId == requestId);
-  if (_.isNil(message)) {
-    message = {
-      requestId: requestId,
-      rawContent: "",
-      content: choice,
-      role: "system",
-      chatAI: chatAI
-    };
-    messages.value.push(message);
-  } else {
-    message.content = choice;
-  }
-}
 const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
   // Check if the API key is set
   try {

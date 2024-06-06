@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class GroupHistoryMessageRequest {
-
     groupId: number = 0;
     lastMessageId: number = 0;
 

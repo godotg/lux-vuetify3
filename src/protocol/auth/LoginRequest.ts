@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class LoginRequest {
-
     newsId: number = 0;
     chatMessageId: number = 0;
 

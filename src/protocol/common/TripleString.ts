@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class TripleString {
-
     left: string = '';
     middle: string = '';
     right: string = '';

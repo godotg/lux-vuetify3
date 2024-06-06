@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class OssPolicyVO {
-
     policy: string = '';
     accessKeyId: string = '';
     signature: string = '';

@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import ChatMessage from './ChatMessage';
 
-
 class GroupChatNotice {
-
     messages: Array<ChatMessage> = [];
 
     static PROTOCOL_ID: number = 241;

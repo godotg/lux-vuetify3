@@ -2,9 +2,7 @@ import IByteBuffer from '../IByteBuffer';
 import NewsStock from './NewsStock';
 import NewsIndustry from './NewsIndustry';
 
-
 class News {
-
     id: number = 0;
     level: string = '';
     title: string = '';

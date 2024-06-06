@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import ChatMessage from './ChatMessage';
 
-
 class GroupHistoryMessageResponse {
-
     groupId: number = 0;
     messages: Array<ChatMessage> = [];
     onlineUsers: number = 0;

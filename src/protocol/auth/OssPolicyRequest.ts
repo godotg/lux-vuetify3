@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class OssPolicyRequest {
-
     type: number = 0;
 
     static PROTOCOL_ID: number = 252;

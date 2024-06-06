@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class MidImagineRequest {
-
     nonce: string = '';
     prompt: string = '';
 

@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class Heartbeat {
-
     
 
     static PROTOCOL_ID: number = 102;

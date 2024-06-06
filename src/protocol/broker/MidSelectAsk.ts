@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import MidSelectRequest from '../midjourney/MidSelectRequest';
 
-
 class MidSelectAsk {
-
     requestSid: number = 0;
     request: MidSelectRequest | null = null;
 

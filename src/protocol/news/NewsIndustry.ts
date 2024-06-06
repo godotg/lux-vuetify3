@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class NewsIndustry {
-
     name: string = '';
     code: number = 0;
     rise: string = '';

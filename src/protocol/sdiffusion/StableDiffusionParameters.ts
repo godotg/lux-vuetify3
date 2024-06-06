@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class StableDiffusionParameters {
-
     prompt: string = '';
     sampler_index: string = '';
     seed: number = 0;

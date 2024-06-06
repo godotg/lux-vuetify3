@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class Ping {
-
     
 
     static PROTOCOL_ID: number = 103;

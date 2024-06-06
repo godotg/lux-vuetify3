@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class UdpAttachment {
-
     host: string = '';
     port: number = 0;
 

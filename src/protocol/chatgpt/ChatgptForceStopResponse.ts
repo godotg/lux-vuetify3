@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class ChatgptForceStopResponse {
-
     requestId: number = 0;
 
     static PROTOCOL_ID: number = 233;

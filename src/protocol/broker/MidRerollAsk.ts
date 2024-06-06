@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import MidRerollRequest from '../midjourney/MidRerollRequest';
 
-
 class MidRerollAsk {
-
     requestSid: number = 0;
     request: MidRerollRequest | null = null;
 

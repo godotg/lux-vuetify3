@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class StableDiffusionRequest {
-
     sampler_name: string = '';
     prompt: string = '';
     negative_prompt: string = '';

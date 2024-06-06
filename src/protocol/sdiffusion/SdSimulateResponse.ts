@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class SdSimulateResponse {
-
     nonce: number = 0;
     costTime: number = 0;
     enPrompt: string = '';

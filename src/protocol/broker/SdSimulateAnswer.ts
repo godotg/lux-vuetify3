@@ -2,9 +2,7 @@ import IByteBuffer from '../IByteBuffer';
 import SignalAttachment from '../attachment/SignalAttachment';
 import SdSimulateResponse from '../sdiffusion/SdSimulateResponse';
 
-
 class SdSimulateAnswer {
-
     noticeSid: number = 0;
     attachment: SignalAttachment | null = null;
     response: SdSimulateResponse | null = null;

@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class SdImage {
-
     id: number = 0;
     imageUrl: string = '';
     imageUrlLow: string = '';

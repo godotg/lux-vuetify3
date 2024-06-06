@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class NewsStock {
-
     name: string = '';
     code: number = 0;
     price: string = '';

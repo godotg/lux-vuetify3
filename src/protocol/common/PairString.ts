@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class PairString {
-
     key: string = '';
     value: string = '';
 

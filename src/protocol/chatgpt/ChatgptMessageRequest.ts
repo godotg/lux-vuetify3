@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class ChatgptMessageRequest {
-
     requestId: number = 0;
     ai: number = 0;
     mobile: boolean = false;

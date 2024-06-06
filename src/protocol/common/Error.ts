@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class Error {
-
     code: number = 0;
     message: string = '';
 

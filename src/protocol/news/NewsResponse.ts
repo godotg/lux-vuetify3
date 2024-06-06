@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import News from './News';
 
-
 class NewsResponse {
-
     news: Array<News> = [];
 
     static PROTOCOL_ID: number = 204;

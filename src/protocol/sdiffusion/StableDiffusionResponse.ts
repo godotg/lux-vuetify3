@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import StableDiffusionParameters from './StableDiffusionParameters';
 
-
 class StableDiffusionResponse {
-
     images: Array<string> = [];
     parameters: StableDiffusionParameters | null = null;
 

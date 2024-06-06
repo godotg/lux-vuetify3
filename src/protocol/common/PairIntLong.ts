@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class PairIntLong {
-
     key: number = 0;
     value: number = 0;
 

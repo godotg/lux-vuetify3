@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class TripleLong {
-
     left: number = 0;
     middle: number = 0;
     right: number = 0;

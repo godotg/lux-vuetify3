@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class GaiNian {
-
     id: number = 0;
     level: string = '';
     title: string = '';

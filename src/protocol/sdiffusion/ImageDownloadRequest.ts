@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class ImageDownloadRequest {
-
     url: string = '';
 
     static PROTOCOL_ID: number = 345;

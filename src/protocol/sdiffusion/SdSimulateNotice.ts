@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import SdImage from './SdImage';
 
-
 class SdSimulateNotice {
-
     nonce: number = 0;
     images: Array<SdImage> = [];
 

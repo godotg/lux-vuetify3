@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import News from '../news/News';
 
-
 class SeoAsk {
-
     news: News | null = null;
 
     static PROTOCOL_ID: number = 306;

@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class LoginByWeChatRequest {
-
     
 
     static PROTOCOL_ID: number = 255;

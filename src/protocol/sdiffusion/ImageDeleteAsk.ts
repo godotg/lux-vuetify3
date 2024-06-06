@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class ImageDeleteAsk {
-
     realUrl: string = '';
 
     static PROTOCOL_ID: number = 347;

@@ -1,9 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
 import SignalAttachment from './SignalAttachment';
 
-
 class GatewayAttachment {
-
     sid: number = 0;
     uid: number = 0;
     taskExecutorHash: number = 0;

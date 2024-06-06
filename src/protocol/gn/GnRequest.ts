@@ -1,8 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 
-
 class GnRequest {
-
     num: number = 0;
 
     static PROTOCOL_ID: number = 221;
