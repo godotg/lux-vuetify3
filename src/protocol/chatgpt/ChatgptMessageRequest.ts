@@ -1,10 +1,11 @@
 import IByteBuffer from '../IByteBuffer';
+import ChatgptMessage from './ChatgptMessage';
 
 class ChatgptMessageRequest {
     requestId: number = 0;
     ai: number = 0;
     mobile: boolean = false;
-    messages: Array<string> = [];
+    messages: Array<ChatgptMessage> = [];
 
     static PROTOCOL_ID: number = 230;
 
@@ -19,7 +20,7 @@ class ChatgptMessageRequest {
         }
         buffer.writeInt(-1);
         buffer.writeInt(packet.ai);
-        buffer.writeStringList(packet.messages);
+        buffer.writePacketList(packet.messages, 234);
         buffer.writeBoolean(packet.mobile);
         buffer.writeLong(packet.requestId);
     }
@@ -33,7 +34,7 @@ class ChatgptMessageRequest {
         const packet = new ChatgptMessageRequest();
         const result0 = buffer.readInt();
         packet.ai = result0;
-        const list1 = buffer.readStringList();
+        const list1 = buffer.readPacketList(234);
         packet.messages = list1;
         const result2 = buffer.readBoolean(); 
         packet.mobile = result2;

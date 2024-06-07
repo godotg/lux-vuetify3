@@ -20,6 +20,7 @@ const chatGPTStore = useChatGPTStore();
 import {sendChatgpt, forceStopChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
+import ChatgptMessage from "@/protocol/chatgpt/ChatgptMessage";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
@@ -89,24 +90,75 @@ const userMessage = ref("");
 const messages = ref<Message[]>([]);
 
 const requestMessages = computed(() => {
-  let myMessages = new Array<Message>();
-  for (const message of messages.value) {
-    if (message.role === "system") {
+  let myMessages = new Array<ChatgptMessage>();
+
+  // 寻找第一个user
+  for (let i = messages.value.length - 1; i >= 0; i--) {
+    const message = messages.value[i];
+    if (message.role === "user") {
+      myMessages.push(messageToChatgptMessage(message));
+      break;
+    }
+  }
+
+  // 寻找第一个assistant，chatgpt优先
+  for (let i = messages.value.length - 1; i >= 0; i--) {
+    const message = messages.value[i];
+    if (message.role !== "assistant") {
       continue;
     }
-    myMessages.push(message);
+
+    if (isChatgpt(message)) {
+      myMessages.push(messageToChatgptMessage(message));
+      break;
+    }
+
+    if (i - 2 >= 0) {
+      const message1 = messages.value[i - 1];
+      if (isChatgpt(message1)) {
+        myMessages.push(messageToChatgptMessage(message1));
+        break;
+      }
+      const message2 = messages.value[i - 2];
+      if (isChatgpt(message2)) {
+        myMessages.push(messageToChatgptMessage(message2));
+        break;
+      }
+    }
+
+    if (i - 1 >= 0) {
+      const message1 = messages.value[i - 1];
+      if (isChatgpt(message1)) {
+        myMessages.push(messageToChatgptMessage(message1));
+        break;
+      }
+    }
+
+    myMessages.push(messageToChatgptMessage(message));
+    break;
   }
-  // 取最后10个
-  if (messages.value.length >= 10) {
-    myMessages = myMessages.slice(-10);
-  }
-  if (!_.isEmpty(chatGPTStore.propmpt)) {
-    const lastMessage = _.last(myMessages);
-    if (!_.isNil(lastMessage)) {
-      lastMessage.content = chatGPTStore.propmpt + ". " + lastMessage.content;
+
+  // 寻找第二个user
+  let first = false;
+  for (let i = messages.value.length - 1; i >= 0; i--) {
+    const message = messages.value[i];
+    if (message.role === "user") {
+      if (first) {
+        myMessages.push(messageToChatgptMessage(message));
+        break;
+      }
+      first = true;
     }
   }
-  return myMessages;
+
+  if (!_.isEmpty(chatGPTStore.propmpt)) {
+    const chatgptMessage = new ChatgptMessage();
+    chatgptMessage.role = "system";
+    chatgptMessage.content = chatGPTStore.propmpt;
+    myMessages.push(chatgptMessage);
+  }
+
+  return myMessages.reverse();
 });
 
 const isLoading = ref(false);
@@ -133,7 +185,7 @@ const sendMessage = async () => {
   isLoading.value = true;
   isGenerating.value = true;
   // Create a completion
-  sendChatgpt(requestMessages.value, userInputMessage, props.ai);
+  sendChatgpt(requestMessages.value, props.ai);
   myStore.account.cost += 1;
   scrollToBottomNow();
 };
@@ -153,13 +205,12 @@ const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
 
     // Add the bot message
     let message = _.find(messages.value, it => it.requestId == requestId);
-    const role = chatAI === 300 ? "system" : "assistant";
     if (_.isNil(message)) {
       message = {
         requestId: requestId,
         rawContent: choice,
         content: choice,
-        role: role,
+        role: "assistant",
         chatAI: chatAI
       };
       messages.value.push(message);
@@ -173,9 +224,7 @@ const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
       } else {
         message.content = message.rawContent + mdEnd;
       }
-      if (role === "assistant") {
-        scrollToBottomDelay();
-      }
+      scrollToBottomDelay();
     }
   } catch (error) {
     isLoading.value = false;
@@ -218,6 +267,18 @@ const avatarFrom = (chatAI: number) => {
   }
   return newsStore.aiAvatar();
 }
+
+const isChatgpt = (message: Message) => {
+  return message.chatAI == 1 || message.chatAI == 4;
+}
+
+const messageToChatgptMessage = (message: Message) => {
+  const chatgptMessage = new ChatgptMessage();
+  chatgptMessage.role = message.role;
+  chatgptMessage.content = message.content;
+  return chatgptMessage;
+}
+
 </script>
 
 <template>
