@@ -6,8 +6,8 @@ export const useMyStore = defineStore("myStore", {
     lastForceShow: 0,
     announce: {
       version: "",
-      title: "",
-      content: ""
+      name: "",
+      board: ""
     },
     account: {
       cost: 0

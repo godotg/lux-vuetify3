@@ -15,6 +15,7 @@ const {mobile, width, height} = useDisplay();
 
 
 const dialogRef = ref<boolean>(false);
+const boardRef = ref<string>("");
 
 const announcementUrl = import.meta.env.VITE_BASE_HTTP_URL + "/aa/config/myconfig.json";
 
@@ -33,6 +34,11 @@ onMounted(async () => {
     return;
   }
   myStore.announce = announcement;
+
+  // 拉去公告
+  const boardResponse = await axios.get(import.meta.env.VITE_BASE_HTTP_URL + announcement.board);
+  const boardMd = boardResponse.data;
+  boardRef.value = boardMd;
   dialogRef.value = true;
 });
 
@@ -79,10 +85,10 @@ function complete() {
     <template v-slot:default="{ isActive }">
       <v-card prepend-icon="mdi-trumpet">
         <template v-slot:title>
-          {{ myStore.announce.title }}
+          {{ myStore.announce.name }}
         </template>
         <v-card-text>
-          <md-preview v-model="myStore.announce.content" editor-id="preview-only"/>
+          <md-preview v-model="boardRef" editor-id="preview-only"/>
         </v-card-text>
       </v-card>
     </template>
