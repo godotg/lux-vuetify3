@@ -255,6 +255,7 @@ const roleAvatarMap = new Map<number, string>();
 roleAvatarMap.set(1, "aa/map/chat.openai.com.png");
 roleAvatarMap.set(1000, "aa/map/xunfei.png");
 roleAvatarMap.set(2000, "aa/map/baidu.png");
+roleAvatarMap.set(14000, "aa/map/llama.jpg");
 roleAvatarMap.set(300, "aa/map/hunyuan.tencent.com.png");
 roleAvatarMap.set(400, "aa/map/qianwen.aliyun.com.png");
 roleAvatarMap.set(1500, "aa/map/gemini.google.com.png");
