@@ -455,6 +455,7 @@ const handleKeydown = (e) => {
             <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'upsample_v6_2x_creative')" prepend-icon="mdi-arrow-expand-all">Upscale(Creative)</v-btn>
             <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'low_variation')" prepend-icon="mdi-magic-staff">Vary(Subtle)</v-btn>
             <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'high_variation')" prepend-icon="mdi-magic-staff">Vary(Strong)</v-btn>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'high_variation')" prepend-icon="mdi-fountain-pen">Vary(Region)</v-btn>
           </v-btn-toggle>
           <br/>
           <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
