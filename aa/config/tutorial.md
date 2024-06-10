@@ -13,7 +13,7 @@
 
 快乐韭菜网集成了Midjourney的 **文生图**, <u>图生图</u>, 
 
-- [详细教程](https://www.yuque.com/jinjidegabengcui)
+- [按键介绍](https://blog.csdn.net/ygxfbpkn/article/details/138727851)
 
 - [视频教程](https://www.bilibili.com/video/BV1vm4y1B7gP)
 
