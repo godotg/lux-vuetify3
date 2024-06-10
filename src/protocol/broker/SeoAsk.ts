@@ -4,7 +4,7 @@ import News from '../news/News';
 class SeoAsk {
     news: News | null = null;
 
-    static PROTOCOL_ID: number = 306;
+    static PROTOCOL_ID: number = 320;
 
     protocolId(): number {
         return SeoAsk.PROTOCOL_ID;

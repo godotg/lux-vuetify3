@@ -16,6 +16,9 @@ import AnimationMidjourney from "@/animation/AnimationMidjourney.vue";
 import MidImagineRequest from "@/protocol/midjourney/MidImagineRequest";
 import MidRerollRequest from "@/protocol/midjourney/MidRerollRequest";
 import MidHistoryRequest from "@/protocol/midjourney/MidHistoryRequest";
+import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
+import MidUpscaleRequest from "@/protocol/midjourney/MidUpscaleRequest";
+import MidZoomRequest from "@/protocol/midjourney/MidZoomRequest";
 import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
 import ImageDownloadRequest from "@/protocol/sdiffusion/ImageDownloadRequest";
 import ImageDownloadResponse from "@/protocol/sdiffusion/ImageDownloadResponse";
@@ -29,7 +32,6 @@ import {useNewsStore} from "@/stores/newsStore";
 import {useImageStore} from "@/stores/imageStore";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
-import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
 import {isBlank} from "@/utils/stringUtils";
 import {useMyStore} from "@/stores/myStore";
 
@@ -125,8 +127,10 @@ interface Message {
   imageUrlMiddle: string;
   imageUrlHigh: string;
   progress: number;
-  reroll: boolean;
   midjourneyId: number;
+  reroll: boolean;
+  upsample: boolean;
+  upscale: boolean;
 }
 
 // Message List
@@ -261,6 +265,29 @@ const select = async (midjourneyId, index, category) => {
   myStore.account.cost += 10;
 };
 
+const upscale = async (midjourneyId, category) => {
+  const request = new MidUpscaleRequest();
+  request.midjourneyId = midjourneyId;
+  request.category = category;
+  request.nonce = seed();
+  isLoadingRef.value = true;
+  userMessage.value = "";
+  animationRunIndex++;
+  send(request);
+  myStore.account.cost += 10;
+};
+const zoom = async (midjourneyId, zoom) => {
+  const request = new MidZoomRequest();
+  request.midjourneyId = midjourneyId;
+  request.zoom = zoom;
+  request.nonce = seed();
+  isLoadingRef.value = true;
+  userMessage.value = "";
+  animationRunIndex++;
+  send(request);
+  myStore.account.cost += 10;
+};
+
 // 下面的逻辑都是自己的
 const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
   const id = packet.nonce;
@@ -281,8 +308,10 @@ const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
         imageUrlHigh: packet.imageUrlHigh,
         content: packet.content,
         progress: packet.progress,
-        reroll: false,
         midjourneyId: midjourneyId,
+        reroll: false,
+        upsample: false,
+        upscale: false
       });
     }
     updateMessage(packet);
@@ -317,6 +346,8 @@ function updateMessage(packet: MidImagineNotice) {
   const content = packet.content;
   const progress = packet.progress;
   const reroll = packet.reroll;
+  const upsample = packet.upsample;
+  const upscale = packet.upscale;
   const midjourneyId = packet.midjourneyId;
   const message = _.find(messages.value, it => it.id == id);
   if (message == null) {
@@ -329,8 +360,10 @@ function updateMessage(packet: MidImagineNotice) {
   message.imageUrlHigh = imageUrlHigh;
   message.content = content;
   message.progress = progress;
-  message.reroll = reroll;
   message.midjourneyId = midjourneyId;
+  message.reroll = reroll;
+  message.upsample = upsample;
+  message.upscale = upscale;
   // 保存到本地
   imageStore.midPrompts = _.takeRight(messages.value, MAX_HISTORY);
 }
@@ -413,8 +446,31 @@ const handleKeydown = (e) => {
           </v-btn-toggle>
         </v-col>
       </v-row>
-      <v-row
-        v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'">
+      <v-row v-else-if="message.upsample" class="my-0 py-0">
+        <v-avatar v-if="!mobile" class="ml-3">
+        </v-avatar>
+        <v-col cols="12" md="11" class="my-0 py-0">
+          <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'upsample_v6_2x_subtle')" prepend-icon="mdi-arrow-expand-all">Upscale(Subtle)</v-btn>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'upsample_v6_2x_creative')" prepend-icon="mdi-arrow-expand-all">Upscale(Creative)</v-btn>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'low_variation')" prepend-icon="mdi-magic-staff">Vary(Subtle)</v-btn>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'high_variation')" prepend-icon="mdi-magic-staff">Vary(Strong)</v-btn>
+          </v-btn-toggle>
+          <br/>
+          <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
+            <v-btn class="font-weight-bold" @click="zoom(message.midjourneyId, '50')" prepend-icon="mdi-magnify">Zoom Out 2x</v-btn>
+            <v-btn class="font-weight-bold" @click="zoom(message.midjourneyId, '75')" prepend-icon="mdi-magnify">Zoom Out 1.5x</v-btn>
+          </v-btn-toggle>
+          <br/>
+          <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'pan_left')" prepend-icon="mdi-arrow-left-bold"></v-btn>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'pan_right')" prepend-icon="mdi-arrow-right-bold"></v-btn>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'pan_up')" prepend-icon="mdi-arrow-up-bold"></v-btn>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'pan_down')" prepend-icon="mdi-arrow-down-bold"></v-btn>
+          </v-btn-toggle>
+        </v-col>
+      </v-row>
+      <v-row v-if="message.type === 'provider' || message.type === 'consumer' || message.type === 'create' || message.type === 'update'">
         <v-col cols="12" md="11">
           <v-progress-linear
             v-model="message.progress"

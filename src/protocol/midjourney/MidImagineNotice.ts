@@ -16,6 +16,8 @@ class MidImagineNotice {
     progress: number = 0;
     // 只有type为complete状态才有意义
     reroll: boolean = false;
+    upsample: boolean = false;
+    upscale: boolean = false;
 
     static PROTOCOL_ID: number = 272;
 
@@ -28,7 +30,8 @@ class MidImagineNotice {
             buffer.writeInt(0);
             return;
         }
-        buffer.writeInt(-1);
+        const beforeWriteIndex = buffer.getWriteOffset();
+        buffer.writeInt(172);
         buffer.writeString(packet.content);
         buffer.writeString(packet.imageUrl);
         buffer.writeString(packet.imageUrlHigh);
@@ -39,6 +42,9 @@ class MidImagineNotice {
         buffer.writeInt(packet.progress);
         buffer.writeBoolean(packet.reroll);
         buffer.writeString(packet.type);
+        buffer.writeBoolean(packet.upsample);
+        buffer.writeBoolean(packet.upscale);
+        buffer.adjustPadding(172, beforeWriteIndex);
     }
 
     static read(buffer: IByteBuffer): MidImagineNotice | null {
@@ -68,6 +74,14 @@ class MidImagineNotice {
         packet.reroll = result8;
         const result9 = buffer.readString();
         packet.type = result9;
+        if (buffer.compatibleRead(beforeReadIndex, length)) {
+            const result10 = buffer.readBoolean(); 
+            packet.upsample = result10;
+        }
+        if (buffer.compatibleRead(beforeReadIndex, length)) {
+            const result11 = buffer.readBoolean(); 
+            packet.upscale = result11;
+        }
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

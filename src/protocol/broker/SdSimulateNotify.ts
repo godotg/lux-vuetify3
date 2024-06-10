@@ -5,7 +5,7 @@ class SdSimulateNotify {
     noticeSid: number = 0;
     notice: SdSimulateNotice | null = null;
 
-    static PROTOCOL_ID: number = 309;
+    static PROTOCOL_ID: number = 323;
 
     protocolId(): number {
         return SdSimulateNotify.PROTOCOL_ID;

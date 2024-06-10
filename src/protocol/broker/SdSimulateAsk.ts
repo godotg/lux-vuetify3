@@ -7,7 +7,7 @@ class SdSimulateAsk {
     request: SdSimulateRequest | null = null;
     attachment: SignalAttachment | null = null;
 
-    static PROTOCOL_ID: number = 307;
+    static PROTOCOL_ID: number = 321;
 
     protocolId(): number {
         return SdSimulateAsk.PROTOCOL_ID;
