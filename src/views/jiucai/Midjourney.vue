@@ -19,6 +19,7 @@ import MidHistoryRequest from "@/protocol/midjourney/MidHistoryRequest";
 import MidSelectRequest from "@/protocol/midjourney/MidSelectRequest";
 import MidUpscaleRequest from "@/protocol/midjourney/MidUpscaleRequest";
 import MidZoomRequest from "@/protocol/midjourney/MidZoomRequest";
+import MidInpaintRequest from "@/protocol/midjourney/MidInpaintRequest";
 import MidImagineNotice from "@/protocol/midjourney/MidImagineNotice";
 import ImageDownloadRequest from "@/protocol/sdiffusion/ImageDownloadRequest";
 import ImageDownloadResponse from "@/protocol/sdiffusion/ImageDownloadResponse";
@@ -288,6 +289,17 @@ const zoom = async (midjourneyId, zoom) => {
   myStore.account.cost += 10;
 };
 
+const inpaint = async (midjourneyId) => {
+  const request = new MidInpaintRequest();
+  request.midjourneyId = midjourneyId;
+  request.nonce = seed();
+  isLoadingRef.value = true;
+  userMessage.value = "";
+  animationRunIndex++;
+  send(request);
+  myStore.account.cost += 10;
+};
+
 // 下面的逻辑都是自己的
 const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
   const id = packet.nonce;
@@ -455,7 +467,7 @@ const handleKeydown = (e) => {
             <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'upsample_v6_2x_creative')" prepend-icon="mdi-arrow-expand-all">Upscale(Creative)</v-btn>
             <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'low_variation')" prepend-icon="mdi-magic-staff">Vary(Subtle)</v-btn>
             <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'high_variation')" prepend-icon="mdi-magic-staff">Vary(Strong)</v-btn>
-            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'high_variation')" prepend-icon="mdi-fountain-pen">Vary(Region)</v-btn>
+            <v-btn class="font-weight-bold" @click="inpaint(message.midjourneyId)" prepend-icon="mdi-fountain-pen">Vary(Region)</v-btn>
           </v-btn-toggle>
           <br/>
           <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
