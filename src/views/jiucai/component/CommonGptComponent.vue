@@ -17,7 +17,6 @@ import ChatgptMessage from "@/protocol/chatgpt/ChatgptMessage";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import {useMyStore} from "@/stores/myStore";
-import prompts from "@/data/ai/prompts-zh.json";
 import _ from "lodash";
 
 
@@ -353,18 +352,18 @@ const dialogRef = ref(false);
   <v-footer color="transparent" app>
     <template v-if="mobile">
       <v-textarea
-        color="primary"
-        type="text"
-        variant="solo"
-        ref="input"
-        v-model="userMessage"
-        placeholder="Ask Anything"
-        hide-details
-        @keydown="handleKeydown"
-        rows="1"
-        max-rows="9"
-        :autofocus="!mobile"
-        auto-grow
+          color="primary"
+          type="text"
+          variant="solo"
+          ref="input"
+          v-model="userMessage"
+          placeholder="Ask Anything"
+          hide-details
+          @keydown="handleKeydown"
+          rows="1"
+          max-rows="9"
+          :autofocus="!mobile"
+          auto-grow
       >
         <template v-slot:prepend-inner>
           <v-icon v-if="isGenerating" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
@@ -373,10 +372,10 @@ const dialogRef = ref(false);
         <template v-slot:append-inner>
           <v-fade-transition leave-absolute>
             <Icon
-              v-if="isGenerating"
-              class="text-primary"
-              width="30"
-              icon="eos-icons:three-dots-loading"
+                v-if="isGenerating"
+                class="text-primary"
+                width="30"
+                icon="eos-icons:three-dots-loading"
             />
             <v-icon color="primary" v-else @click="sendMessage">mdi-send</v-icon>
           </v-fade-transition>
@@ -387,27 +386,28 @@ const dialogRef = ref(false);
       <v-row>
         <v-col cols="8" offset="2">
 
-          <v-btn v-if="!mobile && ai == 1" size="x-small" class="mb-3 mr-1" variant="elevated" icon @click="dialogRef = true">
+          <v-btn v-if="!mobile && ai == 1" size="x-small" class="mb-3 mr-1" variant="elevated" icon
+                 @click="dialogRef = true">
             <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
             <v-tooltip
-              activator="parent"
-              location="top"
-              text="ChatGPT Config"
+                activator="parent"
+                location="top"
+                text="ChatGPT Config"
             ></v-tooltip>
           </v-btn>
           <v-textarea
-            color="primary"
-            type="text"
-            variant="solo"
-            ref="input"
-            v-model="userMessage"
-            placeholder="Ask Anything"
-            hide-details
-            @keydown="handleKeydown"
-            rows="1"
-            max-rows="9"
-            :autofocus="!mobile"
-            auto-grow
+              color="primary"
+              type="text"
+              variant="solo"
+              ref="input"
+              v-model="userMessage"
+              placeholder="Ask Anything"
+              hide-details
+              @keydown="handleKeydown"
+              rows="1"
+              max-rows="9"
+              :autofocus="!mobile"
+              auto-grow
           >
             <template v-slot:prepend-inner>
               <v-icon v-if="isGenerating" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
@@ -416,10 +416,10 @@ const dialogRef = ref(false);
             <template v-slot:append-inner>
               <v-fade-transition leave-absolute>
                 <Icon
-                  v-if="isGenerating"
-                  class="text-primary"
-                  width="30"
-                  icon="eos-icons:three-dots-loading"
+                    v-if="isGenerating"
+                    class="text-primary"
+                    width="30"
+                    icon="eos-icons:three-dots-loading"
                 />
                 <v-icon color="primary" v-else @click="sendMessage">mdi-send</v-icon>
               </v-fade-transition>
@@ -433,31 +433,24 @@ const dialogRef = ref(false);
   <v-dialog v-model="dialogRef" width="600">
     <v-card>
       <v-card-title class="font-weight-bold pa-5">{{ $t("chatgpt.config.title") }}</v-card-title>
-      <v-divider />
+      <v-divider/>
       <v-card-text>
         <v-switch v-model="myStore.baidu" label="文心一言" hide-details color="teal" inset></v-switch>
         <v-switch v-model="myStore.xunfei" label="讯飞星火大模型" hide-details color="teal" inset></v-switch>
         <v-switch v-model="myStore.llama" label="meta llama" hide-details color="teal" inset></v-switch>
 
-        <v-label class="font-weight-medium mb-2 ml-2 mt-5">{{$t("chatgpt.config.model")}}</v-label>
+        <v-label class="font-weight-medium mb-2 ml-2 mt-5">角色扮演</v-label>
 
-
-        <v-label class="font-weight-medium mb-2 ml-2 mt-5">{{$t("chatgpt.config.role")}}</v-label>
-
-        <v-select
-            class="ml-2"
+        <v-textarea
             v-model="myStore.propmpt"
-            :items="prompts"
-            item-title="act"
-            item-value="prompt"
-            label="Select"
-            single-line
-        ></v-select>
+            placeholder="如：我要让你来充当英语翻译，你的目标是把任何语言翻译成英文，请翻译时不要带翻译腔，而是要翻译得自然、流畅和地道，使用优美和高雅的表达方式。"
+            auto-grow
+        ></v-textarea>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn variant="flat" color="primary" @click="close">OK</v-btn>
+        <v-btn variant="flat" color="primary" @click="dialogRef = false">OK</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
