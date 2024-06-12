@@ -6,6 +6,8 @@ class ChatgptMessageRequest {
     ai: number = 0;
     mobile: boolean = false;
     messages: Array<ChatgptMessage> = [];
+    // 不需要哪些AI
+    ignoreAIs: Set<number> = new Set();
 
     static PROTOCOL_ID: number = 230;
 
@@ -18,11 +20,14 @@ class ChatgptMessageRequest {
             buffer.writeInt(0);
             return;
         }
-        buffer.writeInt(-1);
+        const beforeWriteIndex = buffer.getWriteOffset();
+        buffer.writeInt(121);
         buffer.writeInt(packet.ai);
         buffer.writePacketList(packet.messages, 234);
         buffer.writeBoolean(packet.mobile);
         buffer.writeLong(packet.requestId);
+        buffer.writeIntSet(packet.ignoreAIs);
+        buffer.adjustPadding(121, beforeWriteIndex);
     }
 
     static read(buffer: IByteBuffer): ChatgptMessageRequest | null {
@@ -40,6 +45,10 @@ class ChatgptMessageRequest {
         packet.mobile = result2;
         const result3 = buffer.readLong();
         packet.requestId = result3;
+        if (buffer.compatibleRead(beforeReadIndex, length)) {
+            const set4 = buffer.readIntSet();
+            packet.ignoreAIs = set4;
+        }
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

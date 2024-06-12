@@ -9,28 +9,22 @@ import {isBlank} from "@/utils/stringUtils";
 import {Icon} from "@iconify/vue";
 import {MdPreview} from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
-import {useChatGPTStore} from "@/stores/chatGPTStore";
-import ApiKeyDialog from "@/components/ApiKeyDialog.vue";
 import clipboard from "@/utils/clipboardUtils";
-
-const snackbarStore = useSnackbarStore();
-const chatGPTStore = useChatGPTStore();
-
-
 import {sendChatgpt, forceStopChatgpt} from "@/utils/chatgptUtils";
 import {registerPacketReceiver} from "@/utils/websocket";
 import ChatgptMessageNotice from "@/protocol/chatgpt/ChatgptMessageNotice";
 import ChatgptMessage from "@/protocol/chatgpt/ChatgptMessage";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
-import _ from "lodash";
 import {useMyStore} from "@/stores/myStore";
+import prompts from "@/data/ai/prompts-zh.json";
+import _ from "lodash";
 
 
 const myStore = useMyStore();
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
-
+const snackbarStore = useSnackbarStore();
 
 const props = defineProps({
   // 1表示chatgpt，4表示Chatgpt4，100表示讯飞星火，200表示百度，300表示llama
@@ -152,10 +146,10 @@ const requestMessages = computed(() => {
     }
   }
 
-  if (!_.isEmpty(chatGPTStore.propmpt)) {
+  if (!_.isEmpty(myStore.propmpt)) {
     const chatgptMessage = new ChatgptMessage();
     chatgptMessage.role = "system";
-    chatgptMessage.content = chatGPTStore.propmpt;
+    chatgptMessage.content = myStore.propmpt;
     myMessages.push(chatgptMessage);
   }
 
@@ -288,6 +282,9 @@ const searchOnline = (url: string) => {
   window.open(url + encodedStr, '_blank');
 }
 
+// ------------------------------------------------------------------------------------------------------------------------
+const dialogRef = ref(false);
+
 </script>
 
 <template>
@@ -389,8 +386,8 @@ const searchOnline = (url: string) => {
     <v-container v-else>
       <v-row>
         <v-col cols="8" offset="2">
-          <v-btn v-if="!mobile && ai == 1" size="x-small" class="mb-3 mr-1" variant="elevated" icon
-                 @click="chatGPTStore.configDialog = true">
+
+          <v-btn v-if="!mobile && ai == 1" size="x-small" class="mb-3 mr-1" variant="elevated" icon @click="dialogRef = true">
             <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
             <v-tooltip
               activator="parent"
@@ -431,6 +428,37 @@ const searchOnline = (url: string) => {
         </v-col>
       </v-row>
     </v-container>
-    <ApiKeyDialog/>
   </v-footer>
+
+  <v-dialog v-model="dialogRef" width="600">
+    <v-card>
+      <v-card-title class="font-weight-bold pa-5">{{ $t("chatgpt.config.title") }}</v-card-title>
+      <v-divider />
+      <v-card-text>
+        <v-switch v-model="myStore.baidu" label="文心一言" hide-details color="teal" inset></v-switch>
+        <v-switch v-model="myStore.xunfei" label="讯飞星火大模型" hide-details color="teal" inset></v-switch>
+        <v-switch v-model="myStore.llama" label="meta llama" hide-details color="teal" inset></v-switch>
+
+        <v-label class="font-weight-medium mb-2 ml-2 mt-5">{{$t("chatgpt.config.model")}}</v-label>
+
+
+        <v-label class="font-weight-medium mb-2 ml-2 mt-5">{{$t("chatgpt.config.role")}}</v-label>
+
+        <v-select
+            class="ml-2"
+            v-model="myStore.propmpt"
+            :items="prompts"
+            item-title="act"
+            item-value="prompt"
+            label="Select"
+            single-line
+        ></v-select>
+      </v-card-text>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn variant="flat" color="primary" @click="close">OK</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
