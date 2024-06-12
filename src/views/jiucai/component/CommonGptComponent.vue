@@ -85,6 +85,7 @@ interface Message {
 
 // User Input Message
 const userMessage = ref("");
+const userMessageLast = ref("");
 
 // Message List
 const messages = ref<Message[]>([]);
@@ -180,6 +181,7 @@ const sendMessage = async () => {
   });
 
   // Clear the input
+  userMessageLast.value = userMessage.value;
   userMessage.value = "";
 
   isLoading.value = true;
@@ -280,6 +282,12 @@ const messageToChatgptMessage = (message: Message) => {
   return chatgptMessage;
 }
 
+const searchOnline = (url: string) => {
+  // hello::dsf sdfsfd 说的话覅 // 第三方
+  const encodedStr = encodeURIComponent(userMessageLast.value);
+  window.open(url + encodedStr, '_blank');
+}
+
 </script>
 
 <template>
@@ -295,27 +303,52 @@ const messageToChatgptMessage = (message: Message) => {
     <!--    <vue-qrcode value="weixin://wxpay/bizpayurl?pr=WtgZu2gzz" :options="{ width: 200 }"></vue-qrcode>-->
   </v-container>
   <v-container v-else>
-    <template v-for="message in messages">
-      <v-row>
-        <v-hover close-delay="500">
-          <template v-slot:default="{ isHovering, props }">
-            <v-avatar v-bind="props" class="mt-3 ml-3 mb-1"
-                      :rounded="isHovering ? 'lg' : 'sm'"
-                      :variant="isHovering ? 'outlined' : 'elevated'" v-ripple
-                      @click="copyText(message.content, $event)">
-              <img :src="avatarFrom(message.chatAI)" alt="alt"/>
-            </v-avatar>
-          </template>
-        </v-hover>
-        <v-card class="mt-3 mx-3">
-          <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only"/>
-          <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark"/>
-        </v-card>
-      </v-row>
-    </template>
+    <v-row v-for="message in messages">
+      <v-hover close-delay="500">
+        <template v-slot:default="{ isHovering, props }">
+          <v-avatar v-bind="props" class="mt-3 ml-3 mb-1"
+                    :rounded="isHovering ? 'lg' : 'sm'"
+                    :variant="isHovering ? 'outlined' : 'elevated'" v-ripple
+                    @click="copyText(message.content, $event)">
+            <img :src="avatarFrom(message.chatAI)" alt="alt"/>
+          </v-avatar>
+        </template>
+      </v-hover>
+      <v-card class="mt-3 mx-3">
+        <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only"/>
+        <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark"/>
+      </v-card>
+    </v-row>
     <v-row v-if="isLoading">
       <v-col>
         <AnimationBot1 :size="100"/>
+      </v-col>
+    </v-row>
+    <v-row v-if="!isLoading && !mobile">
+      <v-col cols="1">
+        <v-chip color="indigo" prepend-icon="mdi-google" @click="searchOnline('https://www.google.com/search?q=')">
+          google
+        </v-chip>
+      </v-col>
+      <v-col cols="1">
+        <v-chip color="blue" prepend-icon="mdi-microsoft-bing" @click="searchOnline('https://www.bing.com/search?q=')">
+          bing搜索
+        </v-chip>
+      </v-col>
+      <v-col cols="1">
+        <v-chip color="teal" prepend-icon="mdi-paw" @click="searchOnline('https://www.baidu.com/s?wd=')">
+          百度一下
+        </v-chip>
+      </v-col>
+      <v-col cols="1">
+        <v-chip prepend-icon="mdi-music-note" @click="searchOnline('https://www.douyin.com/search/')">
+          抖音
+        </v-chip>
+      </v-col>
+      <v-col cols="1">
+        <v-chip color="blue-grey" prepend-icon="mdi-television-pause" @click="searchOnline('https://search.bilibili.com/all?keyword=')">
+          B站
+        </v-chip>
       </v-col>
     </v-row>
   </v-container>
