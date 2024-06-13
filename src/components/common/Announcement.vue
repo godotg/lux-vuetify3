@@ -18,6 +18,7 @@ const dialogRef = ref<boolean>(false);
 const boardRef = ref<string>("");
 
 const announcementUrl = import.meta.env.VITE_BASE_HTTP_URL + "/aa/config/myconfig.json";
+const currentVersion = myStore.announce.version;
 
 onMounted(async () => {
   const response = await axios.get(announcementUrl);
