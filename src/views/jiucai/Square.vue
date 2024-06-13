@@ -89,7 +89,10 @@ const groupChatNoticeCompletion = (packet: GroupChatNotice) => {
 };
 
 function refreshMessageNotification() {
-  newsStore.chatMessageId = _.maxBy(messages.value, it => it.id).id;
+  const maxMessage = _.maxBy(messages.value, it => it.id);
+  if (!_.isNil(maxMessage)) {
+    newsStore.chatMessageId = maxMessage.id;
+  }
   newsStore.chatMessageIdDiff = 0;
 }
 
