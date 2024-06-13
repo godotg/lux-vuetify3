@@ -133,9 +133,9 @@ async function doInitHistory() {
   request.lastMessageId = firstMessageId;
   const response: GroupHistoryMessageResponse = await asyncAsk(request);
   updateMessage(response.messages);
-  refreshMessageNotification();
   onlineUsersRef.value = response.onlineUsers;
   snackbarStore.showSuccessMessage("聊天记录加载成功");
+  refreshMessageNotification();
   setTimeout(() => scrollToBottom(), 500);
 }
 
@@ -208,7 +208,7 @@ const handleKeydown = (e) => {
 </script>
 
 <template>
-  <v-container v-if="messages.length <= 0">
+  <v-container v-if="messages.length < 0">
     <v-progress-linear indeterminate color="primary"></v-progress-linear>
     <v-row justify="center" align="center">
       <v-col cols="12">
