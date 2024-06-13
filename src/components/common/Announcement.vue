@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import {useMyStore} from "@/stores/myStore";
-import {useDisplay} from "vuetify";
-import { useCustomizeThemeStore } from "@/stores/customizeTheme";
-
 import { MdPreview } from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
 import axios from "axios";
 import _ from "lodash";
 import AnimationThanks1 from "@/animation/AnimationThanks1.vue";
 import AnimationThanks from "@/animation/AnimationThanks.vue";
+import {useMyStore} from "@/stores/myStore";
+import {useDisplay} from "vuetify";
+import {useSnackbarStore} from "@/stores/snackbarStore";
+import { useCustomizeThemeStore } from "@/stores/customizeTheme";
+
+const {mobile, width, height} = useDisplay();
 const myStore = useMyStore();
 const customizeTheme = useCustomizeThemeStore();
-const {mobile, width, height} = useDisplay();
-
+const snackbarStore = useSnackbarStore();
 
 const dialogRef = ref<boolean>(false);
 const boardRef = ref<string>("");
@@ -43,7 +44,14 @@ onMounted(async () => {
   dialogRef.value = true;
 });
 
+setInterval(() => checkUpdate(), 3 * 1000);
 
+const checkUpdate = () => {
+  if (currentVersion === myStore.announce.version) {
+    return;
+  }
+  snackbarStore.showWarningMessage(`当前版本 ${currentVersion} 低于最新版本 ${myStore.announce.version}，请关闭整个浏览器然后重新访问本网站`);
+};
 
 // 赞赏逻辑----------------------------------------------------------------------------------------------------------------
 const thanksRef = ref(false);
