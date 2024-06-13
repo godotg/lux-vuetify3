@@ -322,7 +322,7 @@ const dialogRef = ref(false);
     </v-row>
     <v-row v-if="!isLoading && !mobile">
       <v-col cols="1">
-        <v-chip color="indigo" prepend-icon="mdi-google" @click="searchOnline('https://www.google.com/search?q=')">
+        <v-chip color="teal" prepend-icon="mdi-google" @click="searchOnline('https://www.google.com/search?q=')">
           google
         </v-chip>
       </v-col>
@@ -332,7 +332,7 @@ const dialogRef = ref(false);
         </v-chip>
       </v-col>
       <v-col cols="1">
-        <v-chip color="teal" prepend-icon="mdi-paw" @click="searchOnline('https://www.baidu.com/s?wd=')">
+        <v-chip color="indigo" prepend-icon="mdi-paw" @click="searchOnline('https://www.baidu.com/s?wd=')">
           百度一下
         </v-chip>
       </v-col>
