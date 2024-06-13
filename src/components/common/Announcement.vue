@@ -44,13 +44,11 @@ onMounted(async () => {
   dialogRef.value = true;
 });
 
-setInterval(() => checkUpdate(), 3 * 1000);
+setInterval(() => checkUpdate(), 1 * 1000);
 
 const checkUpdate = () => {
-  if (currentVersion === myStore.announce.version) {
-    return;
-  }
-  snackbarStore.showWarningMessage(`当前版本 ${currentVersion} 低于最新版本 ${myStore.announce.version}，请关闭整个浏览器然后重新访问本网站`);
+
+  snackbarStore.showWarningMessage(`当前版本 ${currentVersion} 低于最新版本 ${myStore.announce.version}，请关闭浏览器并重启。本站使用了 Service Worker 浏览器本地缓存技术来降低网络流量，需要重启浏览器来加载最新的页面。`);
 };
 
 // 赞赏逻辑----------------------------------------------------------------------------------------------------------------
