@@ -201,6 +201,9 @@ const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
     // Add the bot message
     let message = _.find(messages.value, it => it.requestId == requestId);
     if (_.isNil(message)) {
+      const lastUserMessageIndex = _.findLastIndex(messages.value, it => it.role === "user");
+      const left = _.take(messages.value, lastUserMessageIndex + 1);
+      let right = _.takeRight(messages.value, messages.value.length - lastUserMessageIndex - 1);
       message = {
         requestId: requestId,
         rawContent: choice,
@@ -208,7 +211,10 @@ const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
         role: "assistant",
         chatAI: chatAI
       };
-      messages.value.push(message);
+      right.push(message);
+      right = _.sortBy(right, it => it.chatAI);
+      right = _.reverse(right);
+      messages.value = _.concat(left, right);
     } else {
       // 记录一个原始的字符串返回，判断这个原始的字符串包含多少个  ``` 符号md的符号，奇数手动补齐md文档的格式就行了
       message.rawContent = message.rawContent + choice;
@@ -435,9 +441,38 @@ const dialogRef = ref(false);
       <v-card-title class="font-weight-bold pa-5">{{ $t("chatgpt.config.title") }}</v-card-title>
       <v-divider/>
       <v-card-text>
-        <v-switch v-model="myStore.baidu" label="文心一言" hide-details color="teal" inset></v-switch>
-        <v-switch v-model="myStore.xunfei" label="讯飞星火大模型" hide-details color="teal" inset></v-switch>
-        <v-switch v-model="myStore.llama" label="meta llama" hide-details color="teal" inset></v-switch>
+        <v-container>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
+                <v-img src="aa/map/baidu.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.baidu" label="文心一言" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
+                <v-img src="aa/map/xunfei.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.xunfei" label="讯飞星火大模型" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
+                <v-img src="aa/map/llama.jpg"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.llama" label="meta llama" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+        </v-container>
 
         <v-label class="font-weight-medium mb-2 ml-2 mt-5">角色扮演</v-label>
 
