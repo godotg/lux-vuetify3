@@ -1,5 +1,6 @@
 import {asyncAsk, isWebsocketReady, send} from "@/utils/websocket";
 import {useSnackbarStore} from "@/stores/snackbarStore";
+import {useMyStore} from "@/stores/myStore";
 import {isMobile} from "@/utils/common";
 import _ from "lodash";
 
@@ -9,6 +10,8 @@ import ChatgptForceStopResponse from "@/protocol/chatgpt/ChatgptForceStopRespons
 import ChatgptMessage from "@/protocol/chatgpt/ChatgptMessage";
 
 const snackbarStore = useSnackbarStore();
+const myStore = useMyStore();
+
 let requestId = 0;
 
 export function sendChatgpt(messages: Array<ChatgptMessage>, ai) {
@@ -22,11 +25,23 @@ export function sendChatgpt(messages: Array<ChatgptMessage>, ai) {
     return;
   }
 
+  const ignoreAIs = new Set();
+  if (!myStore.baidu) {
+    ignoreAIs.add(2000);
+  }
+  if (!myStore.xunfei) {
+    ignoreAIs.add(1000);
+  }
+  if (!myStore.llama) {
+    ignoreAIs.add(14000);
+  }
+
   const request = new ChatgptMessageRequest();
   request.mobile = isMobile();
   request.requestId = ++requestId;
   request.ai = ai;
   request.messages = messages;
+
   send(request);
 }
 
