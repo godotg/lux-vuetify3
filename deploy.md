@@ -13,4 +13,5 @@ https://jiucai.fun/workbox-fc255c04.js
 - 目录
 ```
 https://jiucai.fun/assets/
+https://jiucai.fun/config/
 ```
