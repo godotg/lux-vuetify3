@@ -211,7 +211,7 @@ const handleKeydown = (e) => {
 </script>
 
 <template>
-  <v-container v-if="messages.length < 0">
+  <v-container v-if="messages.length <= 0">
     <v-progress-linear indeterminate color="primary"></v-progress-linear>
     <v-row justify="center" align="center">
       <v-col cols="12">
@@ -224,7 +224,7 @@ const handleKeydown = (e) => {
       <v-col v-ripple @click="moreHistory()">
         <div>
           <div class="text-h4 text-md-h4 text-center text-blue-lighten-1 font-weight-bold">
-            One more thing
+            点击这里加载更多聊天记录
           </div>
           <AnimationSquare2 :size="200"/>
         </div>
