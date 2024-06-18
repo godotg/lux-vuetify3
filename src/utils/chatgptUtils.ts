@@ -25,7 +25,7 @@ export function sendChatgpt(messages: Array<ChatgptMessage>, ai) {
     return;
   }
 
-  const ignoreAIs = new Set();
+  const ignoreAIs = new Set<number>();
   if (!myStore.baidu) {
     ignoreAIs.add(2000);
   }
@@ -41,6 +41,7 @@ export function sendChatgpt(messages: Array<ChatgptMessage>, ai) {
   request.requestId = ++requestId;
   request.ai = ai;
   request.messages = messages;
+  request.ignoreAIs = ignoreAIs;
 
   send(request);
 }

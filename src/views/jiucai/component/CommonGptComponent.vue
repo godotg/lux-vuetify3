@@ -212,7 +212,15 @@ const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
         chatAI: chatAI
       };
       right.push(message);
-      right = _.sortBy(right, it => it.chatAI);
+      right = right.sort((a, b) => {
+        if (a.chatAI === 1000) {
+          return 1;
+        }
+        if (b.chatAI === 1000) {
+          return -1;
+        }
+        return a.chatAI - b.chatAI;
+      });
       right = _.reverse(right);
       messages.value = _.concat(left, right);
     } else {
