@@ -47,6 +47,9 @@ onMounted(async () => {
 setInterval(() => checkUpdate(), 3 * 1000);
 
 const checkUpdate = () => {
+  if (_.isEmpty(currentVersion)) {
+    return;
+  }
   if (currentVersion === myStore.announce.version) {
     return;
   }
