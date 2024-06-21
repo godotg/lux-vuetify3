@@ -224,7 +224,7 @@ const handleKeydown = (e) => {
       <v-col v-ripple @click="moreHistory()">
         <div>
           <div class="text-h4 text-md-h4 text-center text-blue-lighten-1 font-weight-bold">
-            点击这里加载更多聊天记录
+            加载更多聊天记录
           </div>
           <AnimationSquare2 :size="200"/>
         </div>
