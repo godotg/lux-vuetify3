@@ -334,50 +334,23 @@ const dialogRef = ref(false);
         <AnimationBot1 :size="100"/>
       </v-col>
     </v-row>
-    <v-row v-if="!isLoading && !mobile">
-      <v-col cols="1">
-        <v-chip color="teal" prepend-icon="mdi-google" @click="searchOnline('https://www.google.com/search?q=')">
-          google
-        </v-chip>
-      </v-col>
-      <v-col cols="1">
-        <v-chip color="blue" prepend-icon="mdi-microsoft-bing" @click="searchOnline('https://www.bing.com/search?q=')">
-          bing搜索
-        </v-chip>
-      </v-col>
-      <v-col cols="1">
-        <v-chip color="indigo" prepend-icon="mdi-paw" @click="searchOnline('https://www.baidu.com/s?wd=')">
-          百度一下
-        </v-chip>
-      </v-col>
-      <v-col cols="1">
-        <v-chip prepend-icon="mdi-music-note" @click="searchOnline('https://www.douyin.com/search/')">
-          抖音
-        </v-chip>
-      </v-col>
-      <v-col cols="1">
-        <v-chip color="blue-grey" prepend-icon="mdi-television-pause" @click="searchOnline('https://search.bilibili.com/all?keyword=')">
-          B站
-        </v-chip>
-      </v-col>
-    </v-row>
   </v-container>
 
   <v-footer color="transparent" app>
     <template v-if="mobile">
       <v-textarea
-          color="primary"
-          type="text"
-          variant="solo"
-          ref="input"
-          v-model="userMessage"
-          placeholder="Ask Anything"
-          hide-details
-          @keydown="handleKeydown"
-          rows="1"
-          max-rows="9"
-          :autofocus="!mobile"
-          auto-grow
+        color="primary"
+        type="text"
+        variant="solo"
+        ref="input"
+        v-model="userMessage"
+        placeholder="Ask Anything"
+        hide-details
+        @keydown="handleKeydown"
+        rows="1"
+        max-rows="9"
+        :autofocus="!mobile"
+        auto-grow
       >
         <template v-slot:prepend-inner>
           <v-icon v-if="isGenerating" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
@@ -386,10 +359,10 @@ const dialogRef = ref(false);
         <template v-slot:append-inner>
           <v-fade-transition leave-absolute>
             <Icon
-                v-if="isGenerating"
-                class="text-primary"
-                width="30"
-                icon="eos-icons:three-dots-loading"
+              v-if="isGenerating"
+              class="text-primary"
+              width="30"
+              icon="eos-icons:three-dots-loading"
             />
             <v-icon color="primary" v-else @click="sendMessage">mdi-send</v-icon>
           </v-fade-transition>
@@ -404,24 +377,46 @@ const dialogRef = ref(false);
                  @click="dialogRef = true">
             <v-icon size="30" class="text-primary">mdi-cog-outline</v-icon>
             <v-tooltip
-                activator="parent"
-                location="top"
-                text="ChatGPT Config"
+              activator="parent"
+              location="top"
+              text="ChatGPT Config"
             ></v-tooltip>
           </v-btn>
+
+          <template v-if="!mobile">
+            <v-chip color="teal" prepend-icon="mdi-google" class="ml-16 mb-3" @click="searchOnline('https://www.google.com/search?q=')">
+              google
+            </v-chip>
+            <v-chip color="blue" prepend-icon="mdi-microsoft-bing" class="ml-16 mb-3" @click="searchOnline('https://www.bing.com/search?q=')">
+              bing搜索
+            </v-chip>
+            <v-chip color="indigo" prepend-icon="mdi-paw" class="ml-16 mb-3" @click="searchOnline('https://www.baidu.com/s?wd=')">
+              百度一下
+            </v-chip>
+            <v-chip prepend-icon="mdi-music-note" class="ml-16 mb-3" @click="searchOnline('https://www.douyin.com/search/')">
+              抖音
+            </v-chip>
+            <v-chip color="blue-grey" prepend-icon="mdi-television-pause" class="ml-16 mb-3" @click="searchOnline('https://search.bilibili.com/all?keyword=')">
+              B站大学
+            </v-chip>
+            <v-chip color="red-lighten-2" prepend-icon="mdi-book-open-variant" class="ml-16 mb-3" @click="searchOnline('https://www.xiaohongshu.com/search_result?keyword=')">
+              生活小红书
+            </v-chip>
+          </template>
+
           <v-textarea
-              color="primary"
-              type="text"
-              variant="solo"
-              ref="input"
-              v-model="userMessage"
-              placeholder="Ask Anything"
-              hide-details
-              @keydown="handleKeydown"
-              rows="1"
-              max-rows="9"
-              :autofocus="!mobile"
-              auto-grow
+            color="primary"
+            type="text"
+            variant="solo"
+            ref="input"
+            v-model="userMessage"
+            placeholder="Ask Anything"
+            hide-details
+            @keydown="handleKeydown"
+            rows="1"
+            max-rows="9"
+            :autofocus="!mobile"
+            auto-grow
           >
             <template v-slot:prepend-inner>
               <v-icon v-if="isGenerating" v-ripple color="error" @click="forceStop">mdi-stop-circle-outline</v-icon>
@@ -430,10 +425,10 @@ const dialogRef = ref(false);
             <template v-slot:append-inner>
               <v-fade-transition leave-absolute>
                 <Icon
-                    v-if="isGenerating"
-                    class="text-primary"
-                    width="30"
-                    icon="eos-icons:three-dots-loading"
+                  v-if="isGenerating"
+                  class="text-primary"
+                  width="30"
+                  icon="eos-icons:three-dots-loading"
                 />
                 <v-icon color="primary" v-else @click="sendMessage">mdi-send</v-icon>
               </v-fade-transition>
@@ -485,9 +480,9 @@ const dialogRef = ref(false);
         <v-label class="font-weight-medium mb-2 ml-2 mt-5">角色扮演</v-label>
 
         <v-textarea
-            v-model="myStore.propmpt"
-            placeholder="如：我要让你来充当英语翻译，你的目标是把任何语言翻译成英文，请翻译时不要带翻译腔，而是要翻译得自然、流畅和地道，使用优美和高雅的表达方式。"
-            auto-grow
+          v-model="myStore.propmpt"
+          placeholder="如：我要让你来充当英语翻译，你的目标是把任何语言翻译成英文，请翻译时不要带翻译腔，而是要翻译得自然、流畅和地道，使用优美和高雅的表达方式。"
+          auto-grow
         ></v-textarea>
       </v-card-text>
 
