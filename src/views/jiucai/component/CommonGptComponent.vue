@@ -384,22 +384,22 @@ const dialogRef = ref(false);
           </v-btn>
 
           <template v-if="!mobile">
-            <v-chip color="teal" prepend-icon="mdi-google" class="ml-16 mb-3" @click="searchOnline('https://www.google.com/search?q=')">
+            <v-chip color="teal" prepend-icon="mdi-google" class="ml-6 mb-3" @click="searchOnline('https://www.google.com/search?q=')">
               google
             </v-chip>
-            <v-chip color="blue" prepend-icon="mdi-microsoft-bing" class="ml-16 mb-3" @click="searchOnline('https://www.bing.com/search?q=')">
+            <v-chip color="blue" prepend-icon="mdi-microsoft-bing" class="ml-6 mb-3" @click="searchOnline('https://www.bing.com/search?q=')">
               bing搜索
             </v-chip>
-            <v-chip color="indigo" prepend-icon="mdi-paw" class="ml-16 mb-3" @click="searchOnline('https://www.baidu.com/s?wd=')">
+            <v-chip color="indigo" prepend-icon="mdi-paw" class="ml-6 mb-3" @click="searchOnline('https://www.baidu.com/s?wd=')">
               百度一下
             </v-chip>
-            <v-chip prepend-icon="mdi-music-note" class="ml-16 mb-3" @click="searchOnline('https://www.douyin.com/search/')">
+            <v-chip prepend-icon="mdi-music-note" class="ml-6 mb-3" @click="searchOnline('https://www.douyin.com/search/')">
               抖音
             </v-chip>
-            <v-chip color="blue-grey" prepend-icon="mdi-television-pause" class="ml-16 mb-3" @click="searchOnline('https://search.bilibili.com/all?keyword=')">
+            <v-chip color="blue-grey" prepend-icon="mdi-television-pause" class="ml-6 mb-3" @click="searchOnline('https://search.bilibili.com/all?keyword=')">
               B站大学
             </v-chip>
-            <v-chip color="red-lighten-2" prepend-icon="mdi-book-open-variant" class="ml-16 mb-3" @click="searchOnline('https://www.xiaohongshu.com/search_result?keyword=')">
+            <v-chip color="red-lighten-2" prepend-icon="mdi-book-open-variant" class="ml-6 mb-3" @click="searchOnline('https://www.xiaohongshu.com/search_result?keyword=')">
               生活小红书
             </v-chip>
           </template>
