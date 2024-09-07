@@ -463,8 +463,8 @@ const handleKeydown = (e) => {
         </v-avatar>
         <v-col cols="12" md="11" class="my-0 py-0">
           <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
-            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'upsample_v6_2x_subtle')" prepend-icon="mdi-arrow-expand-all">Upscale(Subtle)</v-btn>
-            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'upsample_v6_2x_creative')" prepend-icon="mdi-arrow-expand-all">Upscale(Creative)</v-btn>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'upsample_v6r1_2x_subtle')" prepend-icon="mdi-arrow-expand-all">Upscale(Subtle)</v-btn>
+            <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'upsample_v6r1_2x_creative')" prepend-icon="mdi-arrow-expand-all">Upscale(Creative)</v-btn>
             <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'low_variation')" prepend-icon="mdi-magic-staff">Vary(Subtle)</v-btn>
             <v-btn class="font-weight-bold" @click="upscale(message.midjourneyId, 'high_variation')" prepend-icon="mdi-magic-staff">Vary(Strong)</v-btn>
 <!--            <v-btn class="font-weight-bold" @click="inpaint(message.midjourneyId)" prepend-icon="mdi-fountain-pen">Vary(Region)</v-btn>-->
