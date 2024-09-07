@@ -265,7 +265,7 @@ roleAvatarMap.set(1, "aa/map/chat.openai.com.png");
 roleAvatarMap.set(1000, "aa/map/xunfei.png");
 roleAvatarMap.set(2000, "aa/map/baidu.png");
 roleAvatarMap.set(14000, "aa/map/llama.jpg");
-roleAvatarMap.set(3000, "aa/map/hunyuan.tencent.com.png");
+roleAvatarMap.set(3000, "aa/map/tencent.png");
 roleAvatarMap.set(400, "aa/map/qianwen.aliyun.com.png");
 roleAvatarMap.set(1500, "aa/map/gemini.google.com.png");
 const avatarFrom = (chatAI: number) => {
@@ -468,7 +468,7 @@ const dialogRef = ref(false);
           <v-row>
             <v-col cols="1">
               <v-avatar>
-                <v-img src="aa/map/hunyuan.tencent.com.png"/>
+                <v-img src="aa/map/tencent.png"/>
               </v-avatar>
             </v-col>
             <v-col class="py-0 my-1" offset="1">
