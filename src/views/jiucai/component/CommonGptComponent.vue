@@ -195,7 +195,7 @@ const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
     isLoading.value = false;
     if (finishReason != 0) {
       isGenerating.value = false;
-      scrollToBottomNow();
+      // scrollToBottomNow();
     }
 
     // Add the bot message
@@ -233,7 +233,7 @@ const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
       } else {
         message.content = message.rawContent + mdEnd;
       }
-      scrollToBottomDelay();
+      // scrollToBottomDelay();
     }
   } catch (error) {
     isLoading.value = false;
@@ -265,7 +265,7 @@ roleAvatarMap.set(1, "aa/map/chat.openai.com.png");
 roleAvatarMap.set(1000, "aa/map/xunfei.png");
 roleAvatarMap.set(2000, "aa/map/baidu.png");
 roleAvatarMap.set(14000, "aa/map/llama.jpg");
-roleAvatarMap.set(300, "aa/map/hunyuan.tencent.com.png");
+roleAvatarMap.set(3000, "aa/map/hunyuan.tencent.com.png");
 roleAvatarMap.set(400, "aa/map/qianwen.aliyun.com.png");
 roleAvatarMap.set(1500, "aa/map/gemini.google.com.png");
 const avatarFrom = (chatAI: number) => {
@@ -463,6 +463,16 @@ const dialogRef = ref(false);
             </v-col>
             <v-col class="py-0 my-1" offset="1">
               <v-switch v-model="myStore.xunfei" label="讯飞星火大模型" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
+                <v-img src="aa/map/hunyuan.tencent.com.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.tencent" label="腾讯混元" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
           <v-row>

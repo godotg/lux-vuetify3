@@ -15,6 +15,7 @@ export const useMyStore = defineStore("myStore", {
     propmpt: "",
     baidu: true,
     xunfei: true,
+    tencent: true,
     llama: true
   }),
 
