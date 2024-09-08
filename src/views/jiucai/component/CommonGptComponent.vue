@@ -213,13 +213,13 @@ const atChatgptMessageNotice = (packet: ChatgptMessageNotice) => {
       };
       right.push(message);
       right = right.sort((a, b) => {
-        if (a.chatAI === 1000) {
-          return 1;
-        }
-        if (b.chatAI === 1000) {
+        if (a.chatAI === 1) {
           return -1;
         }
-        return a.chatAI - b.chatAI;
+        if (b.chatAI === 1) {
+          return 1;
+        }
+        return b.chatAI - a.chatAI;
       });
       right = _.reverse(right);
       messages.value = _.concat(left, right);
@@ -265,10 +265,9 @@ roleAvatarMap.set(1, "aa/map/chat.openai.com.png");
 roleAvatarMap.set(1000, "aa/map/xunfei.png");
 roleAvatarMap.set(2000, "aa/map/baidu.png");
 roleAvatarMap.set(3000, "aa/map/tencent.png");
+roleAvatarMap.set(4000, "aa/map/qianwen.aliyun.com.png");
 roleAvatarMap.set(14000, "aa/map/llama.jpg");
 roleAvatarMap.set(15000, "aa/map/gemini.google.com.png");
-
-roleAvatarMap.set(400, "aa/map/qianwen.aliyun.com.png");
 const avatarFrom = (chatAI: number) => {
   if (roleAvatarMap.has(chatAI)) {
     return roleAvatarMap.get(chatAI);
@@ -326,8 +325,8 @@ const dialogRef = ref(false);
         </template>
       </v-hover>
       <v-card class="mt-3 mx-3">
-        <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only" auto-fold-threshold="100000" />
-        <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark" auto-fold-threshold="100000" />
+        <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only" :auto-fold-threshold="3000" />
+        <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark" :auto-fold-threshold="3000" />
       </v-card>
     </v-row>
     <v-row v-if="isLoading">
@@ -449,21 +448,21 @@ const dialogRef = ref(false);
           <v-row>
             <v-col cols="1">
               <v-avatar>
-                <v-img src="aa/map/baidu.png"/>
-              </v-avatar>
-            </v-col>
-            <v-col class="py-0 my-1" offset="1">
-              <v-switch v-model="myStore.baidu" label="文心一言" hide-details color="teal" inset></v-switch>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="1">
-              <v-avatar>
                 <v-img src="aa/map/xunfei.png"/>
               </v-avatar>
             </v-col>
             <v-col class="py-0 my-1" offset="1">
               <v-switch v-model="myStore.xunfei" label="讯飞星火大模型" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
+                <v-img src="aa/map/baidu.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.baidu" label="文心一言" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
           <v-row>
@@ -479,11 +478,11 @@ const dialogRef = ref(false);
           <v-row>
             <v-col cols="1">
               <v-avatar>
-                <v-img src="aa/map/gemini.google.com.png"/>
+                <v-img src="aa/map/qianwen.aliyun.com.png"/>
               </v-avatar>
             </v-col>
             <v-col class="py-0 my-1" offset="1">
-              <v-switch v-model="myStore.google" label="google gemini" hide-details color="teal" inset></v-switch>
+              <v-switch v-model="myStore.alibaba" label="通义千文" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
           <v-row>
@@ -494,6 +493,16 @@ const dialogRef = ref(false);
             </v-col>
             <v-col class="py-0 my-1" offset="1">
               <v-switch v-model="myStore.llama" label="meta llama" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
+                <v-img src="aa/map/gemini.google.com.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.google" label="google gemini" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
         </v-container>

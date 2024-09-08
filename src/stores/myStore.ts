@@ -16,6 +16,7 @@ export const useMyStore = defineStore("myStore", {
     baidu: true,
     xunfei: true,
     tencent: true,
+    alibaba: true,
     google: true,
     llama: true
   }),
