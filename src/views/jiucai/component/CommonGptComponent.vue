@@ -264,10 +264,11 @@ const roleAvatarMap = new Map<number, string>();
 roleAvatarMap.set(1, "aa/map/chat.openai.com.png");
 roleAvatarMap.set(1000, "aa/map/xunfei.png");
 roleAvatarMap.set(2000, "aa/map/baidu.png");
-roleAvatarMap.set(14000, "aa/map/llama.jpg");
 roleAvatarMap.set(3000, "aa/map/tencent.png");
+roleAvatarMap.set(14000, "aa/map/llama.jpg");
+roleAvatarMap.set(15000, "aa/map/gemini.google.com.png");
+
 roleAvatarMap.set(400, "aa/map/qianwen.aliyun.com.png");
-roleAvatarMap.set(1500, "aa/map/gemini.google.com.png");
 const avatarFrom = (chatAI: number) => {
   if (roleAvatarMap.has(chatAI)) {
     return roleAvatarMap.get(chatAI);
@@ -325,8 +326,8 @@ const dialogRef = ref(false);
         </template>
       </v-hover>
       <v-card class="mt-3 mx-3">
-        <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only"/>
-        <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark"/>
+        <md-preview v-if="message.role === 'user'" v-model="message.content" editor-id="preview-only" auto-fold-threshold="100000" />
+        <md-preview v-else v-model="message.content" editor-id="preview-only" theme="dark" auto-fold-threshold="100000" />
       </v-card>
     </v-row>
     <v-row v-if="isLoading">
@@ -473,6 +474,16 @@ const dialogRef = ref(false);
             </v-col>
             <v-col class="py-0 my-1" offset="1">
               <v-switch v-model="myStore.tencent" label="腾讯混元" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
+                <v-img src="aa/map/gemini.google.com.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.google" label="google gemini" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
           <v-row>
