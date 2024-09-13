@@ -19,6 +19,8 @@
 
 - [全网最全MJ指令整理](https://g1ywwvn4f0m.feishu.cn/base/ICczbk9CoauVdls9helcMOUzn3b?table=tblQ3qyA5AE16h7r&view=vewPND11b4)
 
+- [Midjourney 参数合集](https://zhuanlan.zhihu.com/p/618360220)
+
 ## 🤗 Happy Code
 
 1. So even though we face the difficulties of today and tomorrow, I still have a dream.

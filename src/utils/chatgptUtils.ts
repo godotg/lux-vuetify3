@@ -26,14 +26,23 @@ export function sendChatgpt(messages: Array<ChatgptMessage>, ai) {
   }
 
   const ignoreAIs = new Set<number>();
-  if (!myStore.baidu) {
-    ignoreAIs.add(2000);
-  }
   if (!myStore.xunfei) {
     ignoreAIs.add(1000);
   }
+  if (!myStore.baidu) {
+    ignoreAIs.add(2000);
+  }
+  if (!myStore.tencent) {
+    ignoreAIs.add(3000);
+  }
+  if (!myStore.alibaba) {
+    ignoreAIs.add(4000);
+  }
   if (!myStore.llama) {
     ignoreAIs.add(14000);
+  }
+  if (!myStore.google) {
+    ignoreAIs.add(15000);
   }
 
   const request = new ChatgptMessageRequest();
