@@ -85,12 +85,12 @@ function connect(desc): WebSocket {
     buffer.setReadOffset(4);
     const packet = ProtocolManager.read(buffer);
 
-    if (packet.protocolId() == Error.PROTOCOL_ID) {
+    if (packet.constructor == Error) {
       snackbarStore.showErrorMessage(packet.message);
       return;
     }
 
-    if (packet.protocolId() == Message.PROTOCOL_ID) {
+    if (packet.constructor == Message) {
       if (packet.code == 0) {
         snackbarStore.showErrorMessage(packet.message);
       } else if (packet.code == 1) {
@@ -106,7 +106,7 @@ function connect(desc): WebSocket {
     }
 
     let attachment: any = null;
-    if (buffer.isReadable() && buffer.readBoolean()) {
+    if (buffer.isReadable() && buffer.readBool()) {
       if (process.env.NODE_ENV === "development") {
         console.log(new Date(), "Websocket收到异步response <-- ", packet);
       }
@@ -121,7 +121,7 @@ function connect(desc): WebSocket {
     if (process.env.NODE_ENV === "development") {
       console.log(new Date(), "Websocket收到同步response <-- ", packet);
     }
-    if (packet.protocolId() == Pong.PROTOCOL_ID) {
+    if (packet.constructor == Pong) {
       if (Number.isInteger(packet.time)) {
         pingTime = packet.time;
       } else {
@@ -163,12 +163,12 @@ export function send(packet: any, attachment: any = null) {
       buffer.setWriteOffset(4);
       ProtocolManager.write(buffer, packet);
       if (attachment == null) {
-        buffer.writeBoolean(false);
+        buffer.writeBool(false);
         if (process.env.NODE_ENV === "development") {
           console.log(new Date(), "Websocket发送同步request --> ", packet)
         }
       } else {
-        buffer.writeBoolean(true);
+        buffer.writeBool(true);
         ProtocolManager.write(buffer, attachment)
         if (process.env.NODE_ENV === "development") {
           console.log(new Date(), "Websocket发送异步request --> ", packet)
@@ -244,7 +244,7 @@ export function registerPacketReceiver(protocolId: number, fun: any) {
 
 function route(packet: any) {
   const receiver = receiverMap.get(packet.protocolId());
-  if (packet.protocolId() == GroupChatNotice.PROTOCOL_ID) {
+  if (packet.constructor == GroupChatNotice) {
     const newsStore = useNewsStore();
     newsStore.chatMessageIdDiff = _.first(packet.messages).id - newsStore.chatMessageId;
     console.log(newsStore.chatMessageIdDiff);
