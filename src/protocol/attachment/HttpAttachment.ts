@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class HttpAttachment {
     uid: number = 0;
     taskExecutorHash: number = 0;
+}
 
-    static PROTOCOL_ID: number = 4;
-
+export class HttpAttachmentRegistration implements IProtocolRegistration<HttpAttachment> {
     protocolId(): number {
-        return HttpAttachment.PROTOCOL_ID;
+        return 4;
     }
 
-    static write(buffer: IByteBuffer, packet: HttpAttachment | null) {
+    write(buffer: IByteBuffer, packet: HttpAttachment | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +22,7 @@ class HttpAttachment {
         buffer.writeLong(packet.uid);
     }
 
-    static read(buffer: IByteBuffer): HttpAttachment | null {
+    read(buffer: IByteBuffer): HttpAttachment | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

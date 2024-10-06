@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class LoginByWeChatRequest {
     
+}
 
-    static PROTOCOL_ID: number = 255;
-
+export class LoginByWeChatRequestRegistration implements IProtocolRegistration<LoginByWeChatRequest> {
     protocolId(): number {
-        return LoginByWeChatRequest.PROTOCOL_ID;
+        return 255;
     }
 
-    static write(buffer: IByteBuffer, packet: LoginByWeChatRequest | null) {
+    write(buffer: IByteBuffer, packet: LoginByWeChatRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -17,7 +19,7 @@ class LoginByWeChatRequest {
         buffer.writeInt(-1);
     }
 
-    static read(buffer: IByteBuffer): LoginByWeChatRequest | null {
+    read(buffer: IByteBuffer): LoginByWeChatRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

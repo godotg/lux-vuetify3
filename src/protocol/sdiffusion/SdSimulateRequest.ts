@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class SdSimulateRequest {
     nonce: number = 0;
@@ -11,14 +13,14 @@ class SdSimulateRequest {
     // 图片的尺寸，0->768*768，1->768*1024
     dimension: number = 0;
     ignores: Array<number> = [];
+}
 
-    static PROTOCOL_ID: number = 340;
-
+export class SdSimulateRequestRegistration implements IProtocolRegistration<SdSimulateRequest> {
     protocolId(): number {
-        return SdSimulateRequest.PROTOCOL_ID;
+        return 340;
     }
 
-    static write(buffer: IByteBuffer, packet: SdSimulateRequest | null) {
+    write(buffer: IByteBuffer, packet: SdSimulateRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -34,7 +36,7 @@ class SdSimulateRequest {
         buffer.writeInt(packet.style);
     }
 
-    static read(buffer: IByteBuffer): SdSimulateRequest | null {
+    read(buffer: IByteBuffer): SdSimulateRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

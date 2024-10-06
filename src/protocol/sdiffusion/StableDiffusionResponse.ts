@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import StableDiffusionParameters from './StableDiffusionParameters';
+
 
 class StableDiffusionResponse {
     images: Array<string> = [];
     parameters: StableDiffusionParameters | null = null;
+}
 
-    static PROTOCOL_ID: number = 331;
-
+export class StableDiffusionResponseRegistration implements IProtocolRegistration<StableDiffusionResponse> {
     protocolId(): number {
-        return StableDiffusionResponse.PROTOCOL_ID;
+        return 331;
     }
 
-    static write(buffer: IByteBuffer, packet: StableDiffusionResponse | null) {
+    write(buffer: IByteBuffer, packet: StableDiffusionResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +23,7 @@ class StableDiffusionResponse {
         buffer.writePacket(packet.parameters, 332);
     }
 
-    static read(buffer: IByteBuffer): StableDiffusionResponse | null {
+    read(buffer: IByteBuffer): StableDiffusionResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

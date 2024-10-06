@@ -1,18 +1,20 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class ChatgptMessageNotice {
     requestId: number = 0;
     chatAI: number = 0;
     choice: string = '';
     finishReason: number = 0;
+}
 
-    static PROTOCOL_ID: number = 231;
-
+export class ChatgptMessageNoticeRegistration implements IProtocolRegistration<ChatgptMessageNotice> {
     protocolId(): number {
-        return ChatgptMessageNotice.PROTOCOL_ID;
+        return 231;
     }
 
-    static write(buffer: IByteBuffer, packet: ChatgptMessageNotice | null) {
+    write(buffer: IByteBuffer, packet: ChatgptMessageNotice | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -24,7 +26,7 @@ class ChatgptMessageNotice {
         buffer.writeLong(packet.requestId);
     }
 
-    static read(buffer: IByteBuffer): ChatgptMessageNotice | null {
+    read(buffer: IByteBuffer): ChatgptMessageNotice | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

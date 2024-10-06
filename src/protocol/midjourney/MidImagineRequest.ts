@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class MidImagineRequest {
     nonce: string = '';
     prompt: string = '';
+}
 
-    static PROTOCOL_ID: number = 270;
-
+export class MidImagineRequestRegistration implements IProtocolRegistration<MidImagineRequest> {
     protocolId(): number {
-        return MidImagineRequest.PROTOCOL_ID;
+        return 270;
     }
 
-    static write(buffer: IByteBuffer, packet: MidImagineRequest | null) {
+    write(buffer: IByteBuffer, packet: MidImagineRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +22,7 @@ class MidImagineRequest {
         buffer.writeString(packet.prompt);
     }
 
-    static read(buffer: IByteBuffer): MidImagineRequest | null {
+    read(buffer: IByteBuffer): MidImagineRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

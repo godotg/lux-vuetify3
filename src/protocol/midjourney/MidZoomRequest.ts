@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class MidZoomRequest {
     zoom: string = '';
     nonce: string = '';
     midjourneyId: number = 0;
+}
 
-    static PROTOCOL_ID: number = 276;
-
+export class MidZoomRequestRegistration implements IProtocolRegistration<MidZoomRequest> {
     protocolId(): number {
-        return MidZoomRequest.PROTOCOL_ID;
+        return 276;
     }
 
-    static write(buffer: IByteBuffer, packet: MidZoomRequest | null) {
+    write(buffer: IByteBuffer, packet: MidZoomRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -22,7 +24,7 @@ class MidZoomRequest {
         buffer.writeString(packet.zoom);
     }
 
-    static read(buffer: IByteBuffer): MidZoomRequest | null {
+    read(buffer: IByteBuffer): MidZoomRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

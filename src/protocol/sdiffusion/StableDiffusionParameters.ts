@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class StableDiffusionParameters {
     prompt: string = '';
@@ -11,14 +13,14 @@ class StableDiffusionParameters {
     height: number = 0;
     restore_faces: boolean = false;
     tiling: boolean = false;
+}
 
-    static PROTOCOL_ID: number = 332;
-
+export class StableDiffusionParametersRegistration implements IProtocolRegistration<StableDiffusionParameters> {
     protocolId(): number {
-        return StableDiffusionParameters.PROTOCOL_ID;
+        return 332;
     }
 
-    static write(buffer: IByteBuffer, packet: StableDiffusionParameters | null) {
+    write(buffer: IByteBuffer, packet: StableDiffusionParameters | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -28,15 +30,15 @@ class StableDiffusionParameters {
         buffer.writeInt(packet.cfg_scale);
         buffer.writeInt(packet.height);
         buffer.writeString(packet.prompt);
-        buffer.writeBoolean(packet.restore_faces);
+        buffer.writeBool(packet.restore_faces);
         buffer.writeString(packet.sampler_index);
         buffer.writeInt(packet.seed);
         buffer.writeInt(packet.steps);
-        buffer.writeBoolean(packet.tiling);
+        buffer.writeBool(packet.tiling);
         buffer.writeInt(packet.width);
     }
 
-    static read(buffer: IByteBuffer): StableDiffusionParameters | null {
+    read(buffer: IByteBuffer): StableDiffusionParameters | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
@@ -51,7 +53,7 @@ class StableDiffusionParameters {
         packet.height = result2;
         const result3 = buffer.readString();
         packet.prompt = result3;
-        const result4 = buffer.readBoolean(); 
+        const result4 = buffer.readBool(); 
         packet.restore_faces = result4;
         const result5 = buffer.readString();
         packet.sampler_index = result5;
@@ -59,7 +61,7 @@ class StableDiffusionParameters {
         packet.seed = result6;
         const result7 = buffer.readInt();
         packet.steps = result7;
-        const result8 = buffer.readBoolean(); 
+        const result8 = buffer.readBool(); 
         packet.tiling = result8;
         const result9 = buffer.readInt();
         packet.width = result9;

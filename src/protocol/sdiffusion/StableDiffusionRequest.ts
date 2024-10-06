@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class StableDiffusionRequest {
     sampler_name: string = '';
@@ -14,14 +16,14 @@ class StableDiffusionRequest {
     hr_scale: number = 0;
     denoising_strength: number = 0;
     hr_upscaler: string = '';
+}
 
-    static PROTOCOL_ID: number = 330;
-
+export class StableDiffusionRequestRegistration implements IProtocolRegistration<StableDiffusionRequest> {
     protocolId(): number {
-        return StableDiffusionRequest.PROTOCOL_ID;
+        return 330;
     }
 
-    static write(buffer: IByteBuffer, packet: StableDiffusionRequest | null) {
+    write(buffer: IByteBuffer, packet: StableDiffusionRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -30,7 +32,7 @@ class StableDiffusionRequest {
         buffer.writeInt(packet.batch_size);
         buffer.writeInt(packet.cfg_scale);
         buffer.writeDouble(packet.denoising_strength);
-        buffer.writeBoolean(packet.enable_hr);
+        buffer.writeBool(packet.enable_hr);
         buffer.writeInt(packet.height);
         buffer.writeInt(packet.hr_scale);
         buffer.writeString(packet.hr_upscaler);
@@ -42,7 +44,7 @@ class StableDiffusionRequest {
         buffer.writeInt(packet.width);
     }
 
-    static read(buffer: IByteBuffer): StableDiffusionRequest | null {
+    read(buffer: IByteBuffer): StableDiffusionRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
@@ -55,7 +57,7 @@ class StableDiffusionRequest {
         packet.cfg_scale = result1;
         const result2 = buffer.readDouble();
         packet.denoising_strength = result2;
-        const result3 = buffer.readBoolean(); 
+        const result3 = buffer.readBool(); 
         packet.enable_hr = result3;
         const result4 = buffer.readInt();
         packet.height = result4;

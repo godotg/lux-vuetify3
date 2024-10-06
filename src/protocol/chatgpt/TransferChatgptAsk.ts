@@ -1,5 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import ChatgptMessage from './ChatgptMessage';
+
 
 class TransferChatgptAsk {
     requestSid: number = 0;
@@ -7,14 +9,14 @@ class TransferChatgptAsk {
     chatAI: number = 0;
     messages: Array<ChatgptMessage> = [];
     ignoreAIs: Set<number> = new Set();
+}
 
-    static PROTOCOL_ID: number = 402;
-
+export class TransferChatgptAskRegistration implements IProtocolRegistration<TransferChatgptAsk> {
     protocolId(): number {
-        return TransferChatgptAsk.PROTOCOL_ID;
+        return 402;
     }
 
-    static write(buffer: IByteBuffer, packet: TransferChatgptAsk | null) {
+    write(buffer: IByteBuffer, packet: TransferChatgptAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -27,7 +29,7 @@ class TransferChatgptAsk {
         buffer.writeLong(packet.requestSid);
     }
 
-    static read(buffer: IByteBuffer): TransferChatgptAsk | null {
+    read(buffer: IByteBuffer): TransferChatgptAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

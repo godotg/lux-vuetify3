@@ -1,18 +1,20 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import ChatMessage from './ChatMessage';
+
 
 class GroupHistoryMessageResponse {
     groupId: number = 0;
     messages: Array<ChatMessage> = [];
     onlineUsers: number = 0;
+}
 
-    static PROTOCOL_ID: number = 244;
-
+export class GroupHistoryMessageResponseRegistration implements IProtocolRegistration<GroupHistoryMessageResponse> {
     protocolId(): number {
-        return GroupHistoryMessageResponse.PROTOCOL_ID;
+        return 244;
     }
 
-    static write(buffer: IByteBuffer, packet: GroupHistoryMessageResponse | null) {
+    write(buffer: IByteBuffer, packet: GroupHistoryMessageResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -23,7 +25,7 @@ class GroupHistoryMessageResponse {
         buffer.writeInt(packet.onlineUsers);
     }
 
-    static read(buffer: IByteBuffer): GroupHistoryMessageResponse | null {
+    read(buffer: IByteBuffer): GroupHistoryMessageResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

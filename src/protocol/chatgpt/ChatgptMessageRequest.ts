@@ -1,5 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import ChatgptMessage from './ChatgptMessage';
+
 
 class ChatgptMessageRequest {
     requestId: number = 0;
@@ -8,14 +10,14 @@ class ChatgptMessageRequest {
     messages: Array<ChatgptMessage> = [];
     // 不需要哪些AI
     ignoreAIs: Set<number> = new Set();
+}
 
-    static PROTOCOL_ID: number = 230;
-
+export class ChatgptMessageRequestRegistration implements IProtocolRegistration<ChatgptMessageRequest> {
     protocolId(): number {
-        return ChatgptMessageRequest.PROTOCOL_ID;
+        return 230;
     }
 
-    static write(buffer: IByteBuffer, packet: ChatgptMessageRequest | null) {
+    write(buffer: IByteBuffer, packet: ChatgptMessageRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -24,13 +26,13 @@ class ChatgptMessageRequest {
         buffer.writeInt(121);
         buffer.writeInt(packet.ai);
         buffer.writePacketList(packet.messages, 234);
-        buffer.writeBoolean(packet.mobile);
+        buffer.writeBool(packet.mobile);
         buffer.writeLong(packet.requestId);
         buffer.writeIntSet(packet.ignoreAIs);
         buffer.adjustPadding(121, beforeWriteIndex);
     }
 
-    static read(buffer: IByteBuffer): ChatgptMessageRequest | null {
+    read(buffer: IByteBuffer): ChatgptMessageRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
@@ -41,7 +43,7 @@ class ChatgptMessageRequest {
         packet.ai = result0;
         const list1 = buffer.readPacketList(234);
         packet.messages = list1;
-        const result2 = buffer.readBoolean(); 
+        const result2 = buffer.readBool(); 
         packet.mobile = result2;
         const result3 = buffer.readLong();
         packet.requestId = result3;

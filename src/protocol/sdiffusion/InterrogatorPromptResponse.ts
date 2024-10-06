@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class InterrogatorPromptResponse {
     prompt: string = '';
+}
 
-    static PROTOCOL_ID: number = 334;
-
+export class InterrogatorPromptResponseRegistration implements IProtocolRegistration<InterrogatorPromptResponse> {
     protocolId(): number {
-        return InterrogatorPromptResponse.PROTOCOL_ID;
+        return 334;
     }
 
-    static write(buffer: IByteBuffer, packet: InterrogatorPromptResponse | null) {
+    write(buffer: IByteBuffer, packet: InterrogatorPromptResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class InterrogatorPromptResponse {
         buffer.writeString(packet.prompt);
     }
 
-    static read(buffer: IByteBuffer): InterrogatorPromptResponse | null {
+    read(buffer: IByteBuffer): InterrogatorPromptResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

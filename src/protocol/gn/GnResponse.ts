@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import GaiNian from './GaiNian';
+
 
 class GnResponse {
     gns: Array<GaiNian> = [];
     hotNotice: string = '';
+}
 
-    static PROTOCOL_ID: number = 222;
-
+export class GnResponseRegistration implements IProtocolRegistration<GnResponse> {
     protocolId(): number {
-        return GnResponse.PROTOCOL_ID;
+        return 222;
     }
 
-    static write(buffer: IByteBuffer, packet: GnResponse | null) {
+    write(buffer: IByteBuffer, packet: GnResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +23,7 @@ class GnResponse {
         buffer.writeString(packet.hotNotice);
     }
 
-    static read(buffer: IByteBuffer): GnResponse | null {
+    read(buffer: IByteBuffer): GnResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

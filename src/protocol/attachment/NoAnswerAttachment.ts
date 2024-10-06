@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class NoAnswerAttachment {
     taskExecutorHash: number = 0;
+}
 
-    static PROTOCOL_ID: number = 5;
-
+export class NoAnswerAttachmentRegistration implements IProtocolRegistration<NoAnswerAttachment> {
     protocolId(): number {
-        return NoAnswerAttachment.PROTOCOL_ID;
+        return 5;
     }
 
-    static write(buffer: IByteBuffer, packet: NoAnswerAttachment | null) {
+    write(buffer: IByteBuffer, packet: NoAnswerAttachment | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class NoAnswerAttachment {
         buffer.writeInt(packet.taskExecutorHash);
     }
 
-    static read(buffer: IByteBuffer): NoAnswerAttachment | null {
+    read(buffer: IByteBuffer): NoAnswerAttachment | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

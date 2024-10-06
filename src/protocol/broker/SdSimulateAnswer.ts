@@ -1,19 +1,21 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import SignalAttachment from '../attachment/SignalAttachment';
 import SdSimulateResponse from '../sdiffusion/SdSimulateResponse';
+
 
 class SdSimulateAnswer {
     noticeSid: number = 0;
     attachment: SignalAttachment | null = null;
     response: SdSimulateResponse | null = null;
+}
 
-    static PROTOCOL_ID: number = 322;
-
+export class SdSimulateAnswerRegistration implements IProtocolRegistration<SdSimulateAnswer> {
     protocolId(): number {
-        return SdSimulateAnswer.PROTOCOL_ID;
+        return 322;
     }
 
-    static write(buffer: IByteBuffer, packet: SdSimulateAnswer | null) {
+    write(buffer: IByteBuffer, packet: SdSimulateAnswer | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -24,7 +26,7 @@ class SdSimulateAnswer {
         buffer.writePacket(packet.response, 343);
     }
 
-    static read(buffer: IByteBuffer): SdSimulateAnswer | null {
+    read(buffer: IByteBuffer): SdSimulateAnswer | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

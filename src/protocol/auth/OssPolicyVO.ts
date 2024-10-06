@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class OssPolicyVO {
     policy: string = '';
@@ -7,14 +9,14 @@ class OssPolicyVO {
     dir: string = '';
     host: string = '';
     expire: string = '';
+}
 
-    static PROTOCOL_ID: number = 254;
-
+export class OssPolicyVORegistration implements IProtocolRegistration<OssPolicyVO> {
     protocolId(): number {
-        return OssPolicyVO.PROTOCOL_ID;
+        return 254;
     }
 
-    static write(buffer: IByteBuffer, packet: OssPolicyVO | null) {
+    write(buffer: IByteBuffer, packet: OssPolicyVO | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -28,7 +30,7 @@ class OssPolicyVO {
         buffer.writeString(packet.signature);
     }
 
-    static read(buffer: IByteBuffer): OssPolicyVO | null {
+    read(buffer: IByteBuffer): OssPolicyVO | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

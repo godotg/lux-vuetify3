@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class ChatgptMessage {
     role: string = '';
     content: string = '';
+}
 
-    static PROTOCOL_ID: number = 234;
-
+export class ChatgptMessageRegistration implements IProtocolRegistration<ChatgptMessage> {
     protocolId(): number {
-        return ChatgptMessage.PROTOCOL_ID;
+        return 234;
     }
 
-    static write(buffer: IByteBuffer, packet: ChatgptMessage | null) {
+    write(buffer: IByteBuffer, packet: ChatgptMessage | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +22,7 @@ class ChatgptMessage {
         buffer.writeString(packet.role);
     }
 
-    static read(buffer: IByteBuffer): ChatgptMessage | null {
+    read(buffer: IByteBuffer): ChatgptMessage | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

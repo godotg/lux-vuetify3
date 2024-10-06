@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class MidUpscaleRequest {
     category: string = '';
     nonce: string = '';
     midjourneyId: number = 0;
+}
 
-    static PROTOCOL_ID: number = 275;
-
+export class MidUpscaleRequestRegistration implements IProtocolRegistration<MidUpscaleRequest> {
     protocolId(): number {
-        return MidUpscaleRequest.PROTOCOL_ID;
+        return 275;
     }
 
-    static write(buffer: IByteBuffer, packet: MidUpscaleRequest | null) {
+    write(buffer: IByteBuffer, packet: MidUpscaleRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -22,7 +24,7 @@ class MidUpscaleRequest {
         buffer.writeString(packet.nonce);
     }
 
-    static read(buffer: IByteBuffer): MidUpscaleRequest | null {
+    read(buffer: IByteBuffer): MidUpscaleRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

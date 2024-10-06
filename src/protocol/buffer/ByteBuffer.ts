@@ -73,6 +73,7 @@ class ByteBuffer implements IByteBuffer{
             this.writeInt(length);
             this.setWriteOffset(currentWriteIndex);
         } else {
+            // ArrayBuffer slice is deep clone
             const retainedByteBuf = this.buffer.slice(currentWriteIndex - length, currentWriteIndex);
             this.setWriteOffset(beforeWriteIndex);
             this.writeInt(length);
@@ -84,26 +85,30 @@ class ByteBuffer implements IByteBuffer{
         return length !== -1 && this.getReadOffset() < length + beforeReadIndex;
     }
 
-    setWriteOffset(writeOffset: number): void {
-        if (writeOffset > this.buffer.byteLength) {
-            throw new Error('index out of bounds exception:readerIndex:' + this.readOffset +
-                ', writerIndex:' + this.writeOffset +
-                '(expected:0 <= readerIndex <= writerIndex <= capacity:' + this.buffer.byteLength);
+    getBuffer(): ArrayBuffer {
+        return this.buffer;
+    }
+
+    setWriteOffset(writeIndex: number): void {
+        if (writeIndex > this.buffer.byteLength) {
+            throw new Error('writeIndex out of bounds exception:readOffset:' + this.readOffset +
+                ', writeOffset:' + this.writeOffset +
+                '(expected:0 <= readOffset <= writeOffset <= capacity:' + this.buffer.byteLength + ')');
         }
-        this.writeOffset = writeOffset;
+        this.writeOffset = writeIndex;
     }
 
     getWriteOffset(): number {
         return this.writeOffset;
     }
 
-    setReadOffset(readOffset: number): void {
-        if (readOffset > this.writeOffset) {
-            throw new Error('index out of bounds exception:readerIndex:' + this.readOffset +
-                ', writerIndex:' + this.writeOffset +
-                '(expected:0 <= readerIndex <= writerIndex <= capacity:' + this.buffer.byteLength);
+    setReadOffset(readIndex: number): void {
+        if (readIndex > this.writeOffset) {
+            throw new Error('readIndex out of bounds exception:readIndex:' + this.readOffset +
+                ', writeOffset:' + this.writeOffset +
+                '(expected:0 <= readOffset <= writeOffset <= capacity:' + this.buffer.byteLength + ')');
         }
-        this.readOffset = readOffset;
+        this.readOffset = readIndex;
     }
 
     getReadOffset(): number {
@@ -142,7 +147,7 @@ class ByteBuffer implements IByteBuffer{
         return result;
     }
 
-    writeBoolean(value: boolean): void {
+    writeBool(value: boolean): void {
         if (!(value === true || value === false)) {
             throw new Error('value must be true of false');
         }
@@ -155,7 +160,7 @@ class ByteBuffer implements IByteBuffer{
         this.writeOffset++;
     }
 
-    readBoolean(): boolean {
+    readBool(): boolean {
         const value = this.bufferView.getInt8(this.readOffset);
         this.readOffset++;
         return (value === 1);
@@ -403,23 +408,23 @@ class ByteBuffer implements IByteBuffer{
         return protocolRegistration.read(this);
     }
 
-    writeBooleanArray(array: Array<boolean> | null) {
+    writeBoolArray(array: Array<boolean> | null) {
         if (array === null) {
             this.writeInt(0);
         } else {
             this.writeInt(array.length);
             array.forEach(element => {
-                this.writeBoolean(element);
+                this.writeBool(element);
             });
         }
     }
 
-    readBooleanArray(): Array<boolean> {
+    readBoolArray(): Array<boolean> {
         const array: boolean[] = [];
         const length = this.readInt();
         if (length > 0) {
             for (let index = 0; index < length; index++) {
-                array.push(this.readBoolean());
+                array.push(this.readBool());
             }
         }
         return array;
@@ -604,12 +609,12 @@ class ByteBuffer implements IByteBuffer{
     }
 
     // ---------------------------------------------list-------------------------------------------
-    writeBooleanList(list: Array<boolean> | null): void {
-        this.writeBooleanArray(list);
+    writeBoolList(list: Array<boolean> | null): void {
+        this.writeBoolArray(list);
     }
 
-    readBooleanList(): boolean[] {
-        return this.readBooleanArray();
+    readBoolList(): boolean[] {
+        return this.readBoolArray();
     }
 
     writeByteList(list: Array<number> | null): void {
@@ -677,19 +682,19 @@ class ByteBuffer implements IByteBuffer{
     }
 
     // ---------------------------------------------set-------------------------------------------
-    writeBooleanSet(set: Set<boolean> | null): void {
+    writeBoolSet(set: Set<boolean> | null): void {
         if (set === null) {
             this.writeInt(0);
         } else {
             this.writeInt(set.size);
             set.forEach(element => {
-                this.writeBoolean(element);
+                this.writeBool(element);
             });
         }
     }
 
-    readBooleanSet(): Set<boolean> {
-        return new Set(this.readBooleanArray());
+    readBoolSet(): Set<boolean> {
+        return new Set(this.readBoolArray());
     }
 
     writeByteSet(set: Set<number> | null): void {

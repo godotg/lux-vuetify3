@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class OssPolicyRequest {
     type: number = 0;
+}
 
-    static PROTOCOL_ID: number = 252;
-
+export class OssPolicyRequestRegistration implements IProtocolRegistration<OssPolicyRequest> {
     protocolId(): number {
-        return OssPolicyRequest.PROTOCOL_ID;
+        return 252;
     }
 
-    static write(buffer: IByteBuffer, packet: OssPolicyRequest | null) {
+    write(buffer: IByteBuffer, packet: OssPolicyRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class OssPolicyRequest {
         buffer.writeInt(packet.type);
     }
 
-    static read(buffer: IByteBuffer): OssPolicyRequest | null {
+    read(buffer: IByteBuffer): OssPolicyRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

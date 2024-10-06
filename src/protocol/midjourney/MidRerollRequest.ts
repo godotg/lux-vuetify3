@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class MidRerollRequest {
     nonce: string = '';
     midjourneyId: number = 0;
+}
 
-    static PROTOCOL_ID: number = 273;
-
+export class MidRerollRequestRegistration implements IProtocolRegistration<MidRerollRequest> {
     protocolId(): number {
-        return MidRerollRequest.PROTOCOL_ID;
+        return 273;
     }
 
-    static write(buffer: IByteBuffer, packet: MidRerollRequest | null) {
+    write(buffer: IByteBuffer, packet: MidRerollRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +22,7 @@ class MidRerollRequest {
         buffer.writeString(packet.nonce);
     }
 
-    static read(buffer: IByteBuffer): MidRerollRequest | null {
+    read(buffer: IByteBuffer): MidRerollRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class GaiNian {
     id: number = 0;
@@ -7,14 +9,14 @@ class GaiNian {
     content: string = '';
     url: string = '';
     ctime: string = '';
+}
 
-    static PROTOCOL_ID: number = 220;
-
+export class GaiNianRegistration implements IProtocolRegistration<GaiNian> {
     protocolId(): number {
-        return GaiNian.PROTOCOL_ID;
+        return 220;
     }
 
-    static write(buffer: IByteBuffer, packet: GaiNian | null) {
+    write(buffer: IByteBuffer, packet: GaiNian | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -28,7 +30,7 @@ class GaiNian {
         buffer.writeString(packet.url);
     }
 
-    static read(buffer: IByteBuffer): GaiNian | null {
+    read(buffer: IByteBuffer): GaiNian | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class SdHistoryRequest {
     nonce: number = 0;
+}
 
-    static PROTOCOL_ID: number = 342;
-
+export class SdHistoryRequestRegistration implements IProtocolRegistration<SdHistoryRequest> {
     protocolId(): number {
-        return SdHistoryRequest.PROTOCOL_ID;
+        return 342;
     }
 
-    static write(buffer: IByteBuffer, packet: SdHistoryRequest | null) {
+    write(buffer: IByteBuffer, packet: SdHistoryRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class SdHistoryRequest {
         buffer.writeLong(packet.nonce);
     }
 
-    static read(buffer: IByteBuffer): SdHistoryRequest | null {
+    read(buffer: IByteBuffer): SdHistoryRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

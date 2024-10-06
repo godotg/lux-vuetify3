@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class SignalAttachment {
     signalId: number = 0;
@@ -6,14 +8,14 @@ class SignalAttachment {
     // 0 for the server, 1 or 2 for the sync or async native client, 12 for the outside client such as browser, mobile
     client: number = 0;
     timestamp: number = 0;
+}
 
-    static PROTOCOL_ID: number = 0;
-
+export class SignalAttachmentRegistration implements IProtocolRegistration<SignalAttachment> {
     protocolId(): number {
-        return SignalAttachment.PROTOCOL_ID;
+        return 0;
     }
 
-    static write(buffer: IByteBuffer, packet: SignalAttachment | null) {
+    write(buffer: IByteBuffer, packet: SignalAttachment | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -25,7 +27,7 @@ class SignalAttachment {
         buffer.writeLong(packet.timestamp);
     }
 
-    static read(buffer: IByteBuffer): SignalAttachment | null {
+    read(buffer: IByteBuffer): SignalAttachment | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

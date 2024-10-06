@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class NewsIndustry {
     name: string = '';
     code: number = 0;
     rise: string = '';
+}
 
-    static PROTOCOL_ID: number = 202;
-
+export class NewsIndustryRegistration implements IProtocolRegistration<NewsIndustry> {
     protocolId(): number {
-        return NewsIndustry.PROTOCOL_ID;
+        return 202;
     }
 
-    static write(buffer: IByteBuffer, packet: NewsIndustry | null) {
+    write(buffer: IByteBuffer, packet: NewsIndustry | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -22,7 +24,7 @@ class NewsIndustry {
         buffer.writeString(packet.rise);
     }
 
-    static read(buffer: IByteBuffer): NewsIndustry | null {
+    read(buffer: IByteBuffer): NewsIndustry | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

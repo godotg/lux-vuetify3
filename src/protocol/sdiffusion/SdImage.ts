@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class SdImage {
     id: number = 0;
@@ -6,14 +8,14 @@ class SdImage {
     imageUrlLow: string = '';
     imageUrlMiddle: string = '';
     imageUrlHigh: string = '';
+}
 
-    static PROTOCOL_ID: number = 344;
-
+export class SdImageRegistration implements IProtocolRegistration<SdImage> {
     protocolId(): number {
-        return SdImage.PROTOCOL_ID;
+        return 344;
     }
 
-    static write(buffer: IByteBuffer, packet: SdImage | null) {
+    write(buffer: IByteBuffer, packet: SdImage | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -26,7 +28,7 @@ class SdImage {
         buffer.writeString(packet.imageUrlMiddle);
     }
 
-    static read(buffer: IByteBuffer): SdImage | null {
+    read(buffer: IByteBuffer): SdImage | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

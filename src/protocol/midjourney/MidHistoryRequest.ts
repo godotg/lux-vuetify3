@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class MidHistoryRequest {
     nonce: string = '';
+}
 
-    static PROTOCOL_ID: number = 271;
-
+export class MidHistoryRequestRegistration implements IProtocolRegistration<MidHistoryRequest> {
     protocolId(): number {
-        return MidHistoryRequest.PROTOCOL_ID;
+        return 271;
     }
 
-    static write(buffer: IByteBuffer, packet: MidHistoryRequest | null) {
+    write(buffer: IByteBuffer, packet: MidHistoryRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class MidHistoryRequest {
         buffer.writeString(packet.nonce);
     }
 
-    static read(buffer: IByteBuffer): MidHistoryRequest | null {
+    read(buffer: IByteBuffer): MidHistoryRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

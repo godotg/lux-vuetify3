@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import MidUpscaleRequest from '../midjourney/MidUpscaleRequest';
+
 
 class MidUpscaleAsk {
     requestSid: number = 0;
     request: MidUpscaleRequest | null = null;
+}
 
-    static PROTOCOL_ID: number = 306;
-
+export class MidUpscaleAskRegistration implements IProtocolRegistration<MidUpscaleAsk> {
     protocolId(): number {
-        return MidUpscaleAsk.PROTOCOL_ID;
+        return 306;
     }
 
-    static write(buffer: IByteBuffer, packet: MidUpscaleAsk | null) {
+    write(buffer: IByteBuffer, packet: MidUpscaleAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +23,7 @@ class MidUpscaleAsk {
         buffer.writeLong(packet.requestSid);
     }
 
-    static read(buffer: IByteBuffer): MidUpscaleAsk | null {
+    read(buffer: IByteBuffer): MidUpscaleAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

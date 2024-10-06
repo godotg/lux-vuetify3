@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class ImageDownloadResponse {
     realUrl: string = '';
+}
 
-    static PROTOCOL_ID: number = 346;
-
+export class ImageDownloadResponseRegistration implements IProtocolRegistration<ImageDownloadResponse> {
     protocolId(): number {
-        return ImageDownloadResponse.PROTOCOL_ID;
+        return 346;
     }
 
-    static write(buffer: IByteBuffer, packet: ImageDownloadResponse | null) {
+    write(buffer: IByteBuffer, packet: ImageDownloadResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class ImageDownloadResponse {
         buffer.writeString(packet.realUrl);
     }
 
-    static read(buffer: IByteBuffer): ImageDownloadResponse | null {
+    read(buffer: IByteBuffer): ImageDownloadResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

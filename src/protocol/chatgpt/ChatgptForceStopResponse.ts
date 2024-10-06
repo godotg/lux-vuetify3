@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class ChatgptForceStopResponse {
     requestId: number = 0;
+}
 
-    static PROTOCOL_ID: number = 233;
-
+export class ChatgptForceStopResponseRegistration implements IProtocolRegistration<ChatgptForceStopResponse> {
     protocolId(): number {
-        return ChatgptForceStopResponse.PROTOCOL_ID;
+        return 233;
     }
 
-    static write(buffer: IByteBuffer, packet: ChatgptForceStopResponse | null) {
+    write(buffer: IByteBuffer, packet: ChatgptForceStopResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class ChatgptForceStopResponse {
         buffer.writeLong(packet.requestId);
     }
 
-    static read(buffer: IByteBuffer): ChatgptForceStopResponse | null {
+    read(buffer: IByteBuffer): ChatgptForceStopResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import ChatgptMessageNotice from './ChatgptMessageNotice';
+
 
 class TransferChatgptNotify {
     requestSid: number = 0;
     notice: ChatgptMessageNotice | null = null;
+}
 
-    static PROTOCOL_ID: number = 403;
-
+export class TransferChatgptNotifyRegistration implements IProtocolRegistration<TransferChatgptNotify> {
     protocolId(): number {
-        return TransferChatgptNotify.PROTOCOL_ID;
+        return 403;
     }
 
-    static write(buffer: IByteBuffer, packet: TransferChatgptNotify | null) {
+    write(buffer: IByteBuffer, packet: TransferChatgptNotify | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +23,7 @@ class TransferChatgptNotify {
         buffer.writeLong(packet.requestSid);
     }
 
-    static read(buffer: IByteBuffer): TransferChatgptNotify | null {
+    read(buffer: IByteBuffer): TransferChatgptNotify | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

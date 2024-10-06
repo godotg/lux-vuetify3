@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class BrokerRegisterAsk {
     brokerType: number = 0;
+}
 
-    static PROTOCOL_ID: number = 300;
-
+export class BrokerRegisterAskRegistration implements IProtocolRegistration<BrokerRegisterAsk> {
     protocolId(): number {
-        return BrokerRegisterAsk.PROTOCOL_ID;
+        return 300;
     }
 
-    static write(buffer: IByteBuffer, packet: BrokerRegisterAsk | null) {
+    write(buffer: IByteBuffer, packet: BrokerRegisterAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class BrokerRegisterAsk {
         buffer.writeInt(packet.brokerType);
     }
 
-    static read(buffer: IByteBuffer): BrokerRegisterAsk | null {
+    read(buffer: IByteBuffer): BrokerRegisterAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import MidImagineRequest from '../midjourney/MidImagineRequest';
+
 
 class MidImagineAsk {
     requestSid: number = 0;
     request: MidImagineRequest | null = null;
+}
 
-    static PROTOCOL_ID: number = 302;
-
+export class MidImagineAskRegistration implements IProtocolRegistration<MidImagineAsk> {
     protocolId(): number {
-        return MidImagineAsk.PROTOCOL_ID;
+        return 302;
     }
 
-    static write(buffer: IByteBuffer, packet: MidImagineAsk | null) {
+    write(buffer: IByteBuffer, packet: MidImagineAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +23,7 @@ class MidImagineAsk {
         buffer.writeLong(packet.requestSid);
     }
 
-    static read(buffer: IByteBuffer): MidImagineAsk | null {
+    read(buffer: IByteBuffer): MidImagineAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

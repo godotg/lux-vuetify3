@@ -1,18 +1,20 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class NewsStock {
     name: string = '';
     code: number = 0;
     price: string = '';
     rise: string = '';
+}
 
-    static PROTOCOL_ID: number = 201;
-
+export class NewsStockRegistration implements IProtocolRegistration<NewsStock> {
     protocolId(): number {
-        return NewsStock.PROTOCOL_ID;
+        return 201;
     }
 
-    static write(buffer: IByteBuffer, packet: NewsStock | null) {
+    write(buffer: IByteBuffer, packet: NewsStock | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -24,7 +26,7 @@ class NewsStock {
         buffer.writeString(packet.rise);
     }
 
-    static read(buffer: IByteBuffer): NewsStock | null {
+    read(buffer: IByteBuffer): NewsStock | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

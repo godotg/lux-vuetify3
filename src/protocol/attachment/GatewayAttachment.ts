@@ -1,5 +1,7 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import SignalAttachment from './SignalAttachment';
+
 
 class GatewayAttachment {
     sid: number = 0;
@@ -7,34 +9,34 @@ class GatewayAttachment {
     taskExecutorHash: number = 0;
     client: boolean = false;
     signalAttachment: SignalAttachment | null = null;
+}
 
-    static PROTOCOL_ID: number = 2;
-
+export class GatewayAttachmentRegistration implements IProtocolRegistration<GatewayAttachment> {
     protocolId(): number {
-        return GatewayAttachment.PROTOCOL_ID;
+        return 2;
     }
 
-    static write(buffer: IByteBuffer, packet: GatewayAttachment | null) {
+    write(buffer: IByteBuffer, packet: GatewayAttachment | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writeBoolean(packet.client);
+        buffer.writeBool(packet.client);
         buffer.writeLong(packet.sid);
         buffer.writePacket(packet.signalAttachment, 0);
         buffer.writeInt(packet.taskExecutorHash);
         buffer.writeLong(packet.uid);
     }
 
-    static read(buffer: IByteBuffer): GatewayAttachment | null {
+    read(buffer: IByteBuffer): GatewayAttachment | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new GatewayAttachment();
-        const result0 = buffer.readBoolean(); 
+        const result0 = buffer.readBool(); 
         packet.client = result0;
         const result1 = buffer.readLong();
         packet.sid = result1;

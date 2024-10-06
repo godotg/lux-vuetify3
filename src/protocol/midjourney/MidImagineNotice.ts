@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class MidImagineNotice {
     // provider为加入到了providers队列，consumer为开始消费任务，create为创建消息，update为更新消息，complete为创建完成，stop为发生错误停止生成，expire图片过期
@@ -18,14 +20,14 @@ class MidImagineNotice {
     reroll: boolean = false;
     upsample: boolean = false;
     upscale: boolean = false;
+}
 
-    static PROTOCOL_ID: number = 272;
-
+export class MidImagineNoticeRegistration implements IProtocolRegistration<MidImagineNotice> {
     protocolId(): number {
-        return MidImagineNotice.PROTOCOL_ID;
+        return 272;
     }
 
-    static write(buffer: IByteBuffer, packet: MidImagineNotice | null) {
+    write(buffer: IByteBuffer, packet: MidImagineNotice | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -40,14 +42,14 @@ class MidImagineNotice {
         buffer.writeLong(packet.midjourneyId);
         buffer.writeString(packet.nonce);
         buffer.writeInt(packet.progress);
-        buffer.writeBoolean(packet.reroll);
+        buffer.writeBool(packet.reroll);
         buffer.writeString(packet.type);
-        buffer.writeBoolean(packet.upsample);
-        buffer.writeBoolean(packet.upscale);
+        buffer.writeBool(packet.upsample);
+        buffer.writeBool(packet.upscale);
         buffer.adjustPadding(172, beforeWriteIndex);
     }
 
-    static read(buffer: IByteBuffer): MidImagineNotice | null {
+    read(buffer: IByteBuffer): MidImagineNotice | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
@@ -70,16 +72,16 @@ class MidImagineNotice {
         packet.nonce = result6;
         const result7 = buffer.readInt();
         packet.progress = result7;
-        const result8 = buffer.readBoolean(); 
+        const result8 = buffer.readBool(); 
         packet.reroll = result8;
         const result9 = buffer.readString();
         packet.type = result9;
         if (buffer.compatibleRead(beforeReadIndex, length)) {
-            const result10 = buffer.readBoolean(); 
+            const result10 = buffer.readBool(); 
             packet.upsample = result10;
         }
         if (buffer.compatibleRead(beforeReadIndex, length)) {
-            const result11 = buffer.readBoolean(); 
+            const result11 = buffer.readBool(); 
             packet.upscale = result11;
         }
         if (length > 0) {

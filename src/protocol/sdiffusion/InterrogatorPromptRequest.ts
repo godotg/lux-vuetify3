@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class InterrogatorPromptRequest {
     image: string = '';
     clip_model_name: string = '';
     mode: string = '';
+}
 
-    static PROTOCOL_ID: number = 333;
-
+export class InterrogatorPromptRequestRegistration implements IProtocolRegistration<InterrogatorPromptRequest> {
     protocolId(): number {
-        return InterrogatorPromptRequest.PROTOCOL_ID;
+        return 333;
     }
 
-    static write(buffer: IByteBuffer, packet: InterrogatorPromptRequest | null) {
+    write(buffer: IByteBuffer, packet: InterrogatorPromptRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -22,7 +24,7 @@ class InterrogatorPromptRequest {
         buffer.writeString(packet.mode);
     }
 
-    static read(buffer: IByteBuffer): InterrogatorPromptRequest | null {
+    read(buffer: IByteBuffer): InterrogatorPromptRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

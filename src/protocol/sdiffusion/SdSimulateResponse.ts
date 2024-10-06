@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class SdSimulateResponse {
     nonce: number = 0;
     costTime: number = 0;
     enPrompt: string = '';
+}
 
-    static PROTOCOL_ID: number = 343;
-
+export class SdSimulateResponseRegistration implements IProtocolRegistration<SdSimulateResponse> {
     protocolId(): number {
-        return SdSimulateResponse.PROTOCOL_ID;
+        return 343;
     }
 
-    static write(buffer: IByteBuffer, packet: SdSimulateResponse | null) {
+    write(buffer: IByteBuffer, packet: SdSimulateResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -22,7 +24,7 @@ class SdSimulateResponse {
         buffer.writeLong(packet.nonce);
     }
 
-    static read(buffer: IByteBuffer): SdSimulateResponse | null {
+    read(buffer: IByteBuffer): SdSimulateResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

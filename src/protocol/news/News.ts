@@ -1,6 +1,8 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import NewsStock from './NewsStock';
 import NewsIndustry from './NewsIndustry';
+
 
 class News {
     id: number = 0;
@@ -11,14 +13,14 @@ class News {
     stocks: Array<NewsStock> = [];
     industries: Array<NewsIndustry> = [];
     subjects: Array<string> = [];
+}
 
-    static PROTOCOL_ID: number = 200;
-
+export class NewsRegistration implements IProtocolRegistration<News> {
     protocolId(): number {
-        return News.PROTOCOL_ID;
+        return 200;
     }
 
-    static write(buffer: IByteBuffer, packet: News | null) {
+    write(buffer: IByteBuffer, packet: News | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -34,7 +36,7 @@ class News {
         buffer.writeString(packet.title);
     }
 
-    static read(buffer: IByteBuffer): News | null {
+    read(buffer: IByteBuffer): News | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

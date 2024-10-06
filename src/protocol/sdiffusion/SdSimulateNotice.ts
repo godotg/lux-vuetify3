@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import SdImage from './SdImage';
+
 
 class SdSimulateNotice {
     nonce: number = 0;
     images: Array<SdImage> = [];
+}
 
-    static PROTOCOL_ID: number = 341;
-
+export class SdSimulateNoticeRegistration implements IProtocolRegistration<SdSimulateNotice> {
     protocolId(): number {
-        return SdSimulateNotice.PROTOCOL_ID;
+        return 341;
     }
 
-    static write(buffer: IByteBuffer, packet: SdSimulateNotice | null) {
+    write(buffer: IByteBuffer, packet: SdSimulateNotice | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +23,7 @@ class SdSimulateNotice {
         buffer.writeLong(packet.nonce);
     }
 
-    static read(buffer: IByteBuffer): SdSimulateNotice | null {
+    read(buffer: IByteBuffer): SdSimulateNotice | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

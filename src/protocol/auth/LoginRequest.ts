@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class LoginRequest {
     newsId: number = 0;
     chatMessageId: number = 0;
+}
 
-    static PROTOCOL_ID: number = 250;
-
+export class LoginRequestRegistration implements IProtocolRegistration<LoginRequest> {
     protocolId(): number {
-        return LoginRequest.PROTOCOL_ID;
+        return 250;
     }
 
-    static write(buffer: IByteBuffer, packet: LoginRequest | null) {
+    write(buffer: IByteBuffer, packet: LoginRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +22,7 @@ class LoginRequest {
         buffer.writeLong(packet.newsId);
     }
 
-    static read(buffer: IByteBuffer): LoginRequest | null {
+    read(buffer: IByteBuffer): LoginRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

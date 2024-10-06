@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class UdpAttachment {
     host: string = '';
     port: number = 0;
+}
 
-    static PROTOCOL_ID: number = 3;
-
+export class UdpAttachmentRegistration implements IProtocolRegistration<UdpAttachment> {
     protocolId(): number {
-        return UdpAttachment.PROTOCOL_ID;
+        return 3;
     }
 
-    static write(buffer: IByteBuffer, packet: UdpAttachment | null) {
+    write(buffer: IByteBuffer, packet: UdpAttachment | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +22,7 @@ class UdpAttachment {
         buffer.writeInt(packet.port);
     }
 
-    static read(buffer: IByteBuffer): UdpAttachment | null {
+    read(buffer: IByteBuffer): UdpAttachment | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import MidSelectRequest from '../midjourney/MidSelectRequest';
+
 
 class MidSelectAsk {
     requestSid: number = 0;
     request: MidSelectRequest | null = null;
+}
 
-    static PROTOCOL_ID: number = 305;
-
+export class MidSelectAskRegistration implements IProtocolRegistration<MidSelectAsk> {
     protocolId(): number {
-        return MidSelectAsk.PROTOCOL_ID;
+        return 305;
     }
 
-    static write(buffer: IByteBuffer, packet: MidSelectAsk | null) {
+    write(buffer: IByteBuffer, packet: MidSelectAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +23,7 @@ class MidSelectAsk {
         buffer.writeLong(packet.requestSid);
     }
 
-    static read(buffer: IByteBuffer): MidSelectAsk | null {
+    read(buffer: IByteBuffer): MidSelectAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

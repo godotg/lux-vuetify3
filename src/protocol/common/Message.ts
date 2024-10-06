@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class Message {
     code: number = 0;
     message: string = '';
+}
 
-    static PROTOCOL_ID: number = 100;
-
+export class MessageRegistration implements IProtocolRegistration<Message> {
     protocolId(): number {
-        return Message.PROTOCOL_ID;
+        return 100;
     }
 
-    static write(buffer: IByteBuffer, packet: Message | null) {
+    write(buffer: IByteBuffer, packet: Message | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +22,7 @@ class Message {
         buffer.writeString(packet.message);
     }
 
-    static read(buffer: IByteBuffer): Message | null {
+    read(buffer: IByteBuffer): Message | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

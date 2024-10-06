@@ -1,17 +1,19 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import MidInpaintRequest from '../midjourney/MidInpaintRequest';
+
 
 class MidInpaintAsk {
     requestSid: number = 0;
     request: MidInpaintRequest | null = null;
+}
 
-    static PROTOCOL_ID: number = 308;
-
+export class MidInpaintAskRegistration implements IProtocolRegistration<MidInpaintAsk> {
     protocolId(): number {
-        return MidInpaintAsk.PROTOCOL_ID;
+        return 308;
     }
 
-    static write(buffer: IByteBuffer, packet: MidInpaintAsk | null) {
+    write(buffer: IByteBuffer, packet: MidInpaintAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -21,7 +23,7 @@ class MidInpaintAsk {
         buffer.writeLong(packet.requestSid);
     }
 
-    static read(buffer: IByteBuffer): MidInpaintAsk | null {
+    read(buffer: IByteBuffer): MidInpaintAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

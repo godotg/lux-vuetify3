@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class GnRequest {
     num: number = 0;
+}
 
-    static PROTOCOL_ID: number = 221;
-
+export class GnRequestRegistration implements IProtocolRegistration<GnRequest> {
     protocolId(): number {
-        return GnRequest.PROTOCOL_ID;
+        return 221;
     }
 
-    static write(buffer: IByteBuffer, packet: GnRequest | null) {
+    write(buffer: IByteBuffer, packet: GnRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class GnRequest {
         buffer.writeInt(packet.num);
     }
 
-    static read(buffer: IByteBuffer): GnRequest | null {
+    read(buffer: IByteBuffer): GnRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class GroupHistoryMessageRequest {
     groupId: number = 0;
     lastMessageId: number = 0;
+}
 
-    static PROTOCOL_ID: number = 243;
-
+export class GroupHistoryMessageRequestRegistration implements IProtocolRegistration<GroupHistoryMessageRequest> {
     protocolId(): number {
-        return GroupHistoryMessageRequest.PROTOCOL_ID;
+        return 243;
     }
 
-    static write(buffer: IByteBuffer, packet: GroupHistoryMessageRequest | null) {
+    write(buffer: IByteBuffer, packet: GroupHistoryMessageRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,7 +22,7 @@ class GroupHistoryMessageRequest {
         buffer.writeLong(packet.lastMessageId);
     }
 
-    static read(buffer: IByteBuffer): GroupHistoryMessageRequest | null {
+    read(buffer: IByteBuffer): GroupHistoryMessageRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

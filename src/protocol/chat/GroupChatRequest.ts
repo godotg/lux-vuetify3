@@ -1,18 +1,20 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class GroupChatRequest {
     groupId: number = 0;
     // 0为普通聊天，1为Stable Diffusion，2为Midjourney
     type: number = 0;
     message: string = '';
+}
 
-    static PROTOCOL_ID: number = 242;
-
+export class GroupChatRequestRegistration implements IProtocolRegistration<GroupChatRequest> {
     protocolId(): number {
-        return GroupChatRequest.PROTOCOL_ID;
+        return 242;
     }
 
-    static write(buffer: IByteBuffer, packet: GroupChatRequest | null) {
+    write(buffer: IByteBuffer, packet: GroupChatRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -23,7 +25,7 @@ class GroupChatRequest {
         buffer.writeByte(packet.type);
     }
 
-    static read(buffer: IByteBuffer): GroupChatRequest | null {
+    read(buffer: IByteBuffer): GroupChatRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

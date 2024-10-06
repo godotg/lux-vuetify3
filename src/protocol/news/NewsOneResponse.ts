@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import News from './News';
+
 
 class NewsOneResponse {
     news: News | null = null;
+}
 
-    static PROTOCOL_ID: number = 206;
-
+export class NewsOneResponseRegistration implements IProtocolRegistration<NewsOneResponse> {
     protocolId(): number {
-        return NewsOneResponse.PROTOCOL_ID;
+        return 206;
     }
 
-    static write(buffer: IByteBuffer, packet: NewsOneResponse | null) {
+    write(buffer: IByteBuffer, packet: NewsOneResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -19,7 +21,7 @@ class NewsOneResponse {
         buffer.writePacket(packet.news, 200);
     }
 
-    static read(buffer: IByteBuffer): NewsOneResponse | null {
+    read(buffer: IByteBuffer): NewsOneResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

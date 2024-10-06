@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import News from '../news/News';
+
 
 class SeoAsk {
     news: News | null = null;
+}
 
-    static PROTOCOL_ID: number = 320;
-
+export class SeoAskRegistration implements IProtocolRegistration<SeoAsk> {
     protocolId(): number {
-        return SeoAsk.PROTOCOL_ID;
+        return 320;
     }
 
-    static write(buffer: IByteBuffer, packet: SeoAsk | null) {
+    write(buffer: IByteBuffer, packet: SeoAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -19,7 +21,7 @@ class SeoAsk {
         buffer.writePacket(packet.news, 200);
     }
 
-    static read(buffer: IByteBuffer): SeoAsk | null {
+    read(buffer: IByteBuffer): SeoAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

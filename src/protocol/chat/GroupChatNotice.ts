@@ -1,16 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
 import ChatMessage from './ChatMessage';
+
 
 class GroupChatNotice {
     messages: Array<ChatMessage> = [];
+}
 
-    static PROTOCOL_ID: number = 241;
-
+export class GroupChatNoticeRegistration implements IProtocolRegistration<GroupChatNotice> {
     protocolId(): number {
-        return GroupChatNotice.PROTOCOL_ID;
+        return 241;
     }
 
-    static write(buffer: IByteBuffer, packet: GroupChatNotice | null) {
+    write(buffer: IByteBuffer, packet: GroupChatNotice | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -19,7 +21,7 @@ class GroupChatNotice {
         buffer.writePacketList(packet.messages, 240);
     }
 
-    static read(buffer: IByteBuffer): GroupChatNotice | null {
+    read(buffer: IByteBuffer): GroupChatNotice | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

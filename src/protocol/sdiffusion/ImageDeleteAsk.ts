@@ -1,15 +1,17 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class ImageDeleteAsk {
     realUrl: string = '';
+}
 
-    static PROTOCOL_ID: number = 347;
-
+export class ImageDeleteAskRegistration implements IProtocolRegistration<ImageDeleteAsk> {
     protocolId(): number {
-        return ImageDeleteAsk.PROTOCOL_ID;
+        return 347;
     }
 
-    static write(buffer: IByteBuffer, packet: ImageDeleteAsk | null) {
+    write(buffer: IByteBuffer, packet: ImageDeleteAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -18,7 +20,7 @@ class ImageDeleteAsk {
         buffer.writeString(packet.realUrl);
     }
 
-    static read(buffer: IByteBuffer): ImageDeleteAsk | null {
+    read(buffer: IByteBuffer): ImageDeleteAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

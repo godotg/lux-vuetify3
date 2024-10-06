@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class LoginResponse {
     ip: string = '';
@@ -8,14 +10,14 @@ class LoginResponse {
     region: string = '';
     newsIdDiff: number = 0;
     chatMessageIdDiff: number = 0;
+}
 
-    static PROTOCOL_ID: number = 251;
-
+export class LoginResponseRegistration implements IProtocolRegistration<LoginResponse> {
     protocolId(): number {
-        return LoginResponse.PROTOCOL_ID;
+        return 251;
     }
 
-    static write(buffer: IByteBuffer, packet: LoginResponse | null) {
+    write(buffer: IByteBuffer, packet: LoginResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -30,7 +32,7 @@ class LoginResponse {
         buffer.writeLong(packet.sid);
     }
 
-    static read(buffer: IByteBuffer): LoginResponse | null {
+    read(buffer: IByteBuffer): LoginResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;

@@ -1,4 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
+import IProtocolRegistration from '../IProtocolRegistration';
+
 
 class ChatMessage {
     id: number = 0;
@@ -7,14 +9,14 @@ class ChatMessage {
     region: string = '';
     message: string = '';
     timestamp: number = 0;
+}
 
-    static PROTOCOL_ID: number = 240;
-
+export class ChatMessageRegistration implements IProtocolRegistration<ChatMessage> {
     protocolId(): number {
-        return ChatMessage.PROTOCOL_ID;
+        return 240;
     }
 
-    static write(buffer: IByteBuffer, packet: ChatMessage | null) {
+    write(buffer: IByteBuffer, packet: ChatMessage | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -28,7 +30,7 @@ class ChatMessage {
         buffer.writeByte(packet.type);
     }
 
-    static read(buffer: IByteBuffer): ChatMessage | null {
+    read(buffer: IByteBuffer): ChatMessage | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
