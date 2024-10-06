@@ -78,7 +78,7 @@ watch(
 function reject() {
   customizeTheme.darkTheme = true;
   myStore.isShowReward = false;
-  myStore.account.cost += 10;
+  myStore.user.cost += 10;
 }
 
 function wait() {
@@ -87,7 +87,7 @@ function wait() {
 
 function complete() {
   customizeTheme.darkTheme = false;
-  myStore.account.cost = 0;
+  myStore.user.cost = 0;
   thanksRef.value = true;
 }
 

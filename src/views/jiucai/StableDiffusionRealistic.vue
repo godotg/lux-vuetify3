@@ -204,7 +204,7 @@ const sendMessage = async () => {
     messages.value.push(message);
     imageSdReStore.sdPrompts = _.takeRight(messages.value, MAX_HISTORY);
     scrollToBottomDelay();
-    myStore.account.cost += 5;
+    myStore.user.cost += 5;
   }
 };
 

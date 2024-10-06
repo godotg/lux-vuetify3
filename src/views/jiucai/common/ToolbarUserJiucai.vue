@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
 import StatusMenuJiucai from "./StatusMenuJiucai.vue";
 import {useNewsStore} from "@/stores/newsStore";
@@ -11,30 +10,6 @@ const newsStore = useNewsStore();
 
 const router = useRouter();
 
-const authStore = useAuthStore();
-const handleLogout = () => {
-  authStore.logout();
-  console.log("---");
-  console.log(router);
-};
-
-const navs = [
-  {
-    title: "jiucai.billing",
-    link: "/team",
-    icon: "mdi-credit-card-outline",
-  },
-  {
-    title: "jiucai.team",
-    link: "/team",
-    icon: "mdi-account-group-outline",
-  },
-  {
-    title: "jiucai.ask",
-    link: "/ask-the-community",
-    icon: "mdi-help-circle-outline",
-  },
-];
 
 function reward() {
   myStore.isShowReward = true;
@@ -98,30 +73,21 @@ function reward() {
         <v-list-item color="primary" density="compact" @click="reward()">
           <template v-slot:prepend>
             <v-avatar size="30">
-              <v-icon>mdi-account-box-outline</v-icon>
+              <v-icon>mdi-credit-card-outline</v-icon>
             </v-avatar>
           </template>
           <div>
-            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.profileDetails") + " " + myStore.account.cost/100 }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.profileDetails") + " " + myStore.user.cost/100 }}</v-list-item-subtitle>
           </div>
         </v-list-item>
-        <v-list-item
-          color="primary"
-          v-for="(nav, i) in navs"
-          :key="i"
-          density="compact"
-          @click="reward()"
-        >
+        <v-list-item color="primary" density="compact" @click="reward()">
           <template v-slot:prepend>
             <v-avatar size="30">
-              <v-icon>{{ nav.icon }}</v-icon>
+              <v-icon>mdi-bitcoin</v-icon>
             </v-avatar>
           </template>
-
           <div>
-            <v-list-item-subtitle class="text-body-2">{{
-              $t(nav.title)
-            }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.billing") }}</v-list-item-subtitle>
           </div>
         </v-list-item>
         <v-list-item color="primary" href="https://github.com/yangjiakai/lux-admin-vuetify3" link density="compact">
@@ -144,7 +110,17 @@ function reward() {
             <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.backendGithub") }}</v-list-item-subtitle>
           </div>
         </v-list-item>
-        <v-list-item color="primary" density="compact" @click="myStore.loginDialog = true">
+        <v-list-item v-if="myStore.token" color="primary" density="compact" to="profile">
+          <template v-slot:prepend>
+            <v-avatar size="30">
+              <v-icon>mdi-credit-card-outline</v-icon>
+            </v-avatar>
+          </template>
+          <div>
+            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.profile") }}</v-list-item-subtitle>
+          </div>
+        </v-list-item>
+        <v-list-item v-else color="primary" density="compact" @click="myStore.loginDialog = true">
           <template v-slot:prepend>
             <v-avatar size="30">
               <v-icon>mdi-qrcode-scan</v-icon>

@@ -11,9 +11,12 @@ export const useMyStore = defineStore("myStore", {
     },
 
     loginDialog: false,
-    accountId: "",
-    account: {
-      cost: 0,
+    token: "",
+    user: {
+      id: 0,
+      name: "",
+      ctime: 0,
+      cost: 0
     },
     propmpt: "",
     baidu: true,
@@ -26,7 +29,7 @@ export const useMyStore = defineStore("myStore", {
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["announce", "account", "lastForceShow", "propmpt", "baidu", "xunfei", "llama"]}],
+    strategies: [{storage: localStorage, paths: ["announce", "token", "user", "lastForceShow", "propmpt", "baidu", "xunfei", "llama"]}],
   },
 
   getters: {},

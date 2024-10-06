@@ -17,6 +17,7 @@ export default {
     frontendGithub: "前端开源地址",
     backendGithub: "后端开源地址",
     login: "登录",
+    profile: "我的主页",
     tutorial: "教程"
   },
   common: {

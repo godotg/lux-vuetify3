@@ -181,7 +181,7 @@ const text2Img = async () => {
   userMessage.value = "";
   animationRunIndex = _.random(1, maxAnimation);
   send(request);
-  myStore.account.cost += 10;
+  myStore.user.cost += 10;
 };
 
 const img2Img = async () => {
@@ -250,7 +250,7 @@ const reroll = async (midjourneyId) => {
   userMessage.value = "";
   animationRunIndex = _.random(1, 5);
   send(request);
-  myStore.account.cost += 10;
+  myStore.user.cost += 10;
 };
 
 const select = async (midjourneyId, index, category) => {
@@ -263,7 +263,7 @@ const select = async (midjourneyId, index, category) => {
   userMessage.value = "";
   animationRunIndex++;
   send(request);
-  myStore.account.cost += 10;
+  myStore.user.cost += 10;
 };
 
 const upscale = async (midjourneyId, category) => {
@@ -275,7 +275,7 @@ const upscale = async (midjourneyId, category) => {
   userMessage.value = "";
   animationRunIndex++;
   send(request);
-  myStore.account.cost += 10;
+  myStore.user.cost += 10;
 };
 const zoom = async (midjourneyId, zoom) => {
   const request = new MidZoomRequest();
@@ -286,7 +286,7 @@ const zoom = async (midjourneyId, zoom) => {
   userMessage.value = "";
   animationRunIndex++;
   send(request);
-  myStore.account.cost += 10;
+  myStore.user.cost += 10;
 };
 
 const inpaint = async (midjourneyId) => {
@@ -297,7 +297,7 @@ const inpaint = async (midjourneyId) => {
   userMessage.value = "";
   animationRunIndex++;
   send(request);
-  myStore.account.cost += 10;
+  myStore.user.cost += 10;
 };
 
 // 下面的逻辑都是自己的

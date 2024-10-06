@@ -23,8 +23,10 @@ onMounted(() => {
 });
 
 function atUserProfileNotice(packet: UserProfileNotice) {
-  console.log("0000000000000000000000000000000000000000")
-  console.log(packet);
+  myStore.token = packet.token;
+  myStore.user.id = packet.user.id;
+  myStore.user.name = packet.user.name;
+  myStore.user.ctime = packet.user.ctime;
   myStore.loginDialog = false;
 }
 

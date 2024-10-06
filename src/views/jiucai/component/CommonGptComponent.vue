@@ -181,7 +181,7 @@ const sendMessage = async () => {
   isGenerating.value = true;
   // Create a completion
   sendChatgpt(requestMessages.value, props.ai);
-  myStore.account.cost += 1;
+  myStore.user.cost += 1;
   scrollToBottomNow();
 };
 
