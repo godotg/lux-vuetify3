@@ -9,8 +9,11 @@ export const useMyStore = defineStore("myStore", {
       name: "",
       board: ""
     },
+
+    loginDialog: false,
+    accountId: "",
     account: {
-      cost: 0
+      cost: 0,
     },
     propmpt: "",
     baidu: true,

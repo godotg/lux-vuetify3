@@ -14,8 +14,6 @@ import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
 import _ from "lodash";
 
-const snackbarStore = useSnackbarStore();
-const newsStore = useNewsStore();
 
 const wsUrl: string = import.meta.env.VITE_API_BASE_URL;
 let pingTime: number = 0;
@@ -33,6 +31,7 @@ function reconnect() {
     send(new Ping())
     return;
   }
+  const snackbarStore = useSnackbarStore();
   snackbarStore.showInfoMessage("正在连接服务器");
   ws.close(3999);
   ws = connect("timeout and reconnect");
@@ -51,6 +50,8 @@ function connect(desc): WebSocket {
   webSocket.binaryType = 'arraybuffer';
 
   webSocket.onopen = async function () {
+    const snackbarStore = useSnackbarStore();
+    const newsStore = useNewsStore();
     console.log(new Date(), 'websocket open success');
 
     // websocket连接成功过后，先发送ping同步服务器时间，再发送登录请求
@@ -76,6 +77,7 @@ function connect(desc): WebSocket {
 
 
   webSocket.onmessage = function (event) {
+    const snackbarStore = useSnackbarStore();
     const data = event.data;
 
     const buffer = new ByteBuffer();
@@ -84,7 +86,7 @@ function connect(desc): WebSocket {
     const packet = ProtocolManager.read(buffer);
 
     if (packet.protocolId() == Error.PROTOCOL_ID) {
-      snackbarStore.showErrorMessage(packet.messerrorMessageage);
+      snackbarStore.showErrorMessage(packet.message);
       return;
     }
 
@@ -133,11 +135,13 @@ function connect(desc): WebSocket {
 
   webSocket.onerror = function (event) {
     console.log(new Date(), 'websocket error', event);
+    const newsStore = useNewsStore();
     newsStore.online = false;
   };
 
   webSocket.onclose = function (event) {
     console.log(new Date(), 'websocket close', event);
+    const newsStore = useNewsStore();
     newsStore.online = false;
   };
   return webSocket;
@@ -148,6 +152,7 @@ export function isWebsocketReady(): boolean {
 }
 
 export function send(packet: any, attachment: any = null) {
+  const snackbarStore = useSnackbarStore();
   switch (ws.readyState) {
     case 0:
       console.log(new Date(), "0, ws connecting server");
@@ -240,6 +245,7 @@ export function registerPacketReceiver(protocolId: number, fun: any) {
 function route(packet: any) {
   const receiver = receiverMap.get(packet.protocolId());
   if (packet.protocolId() == GroupChatNotice.PROTOCOL_ID) {
+    const newsStore = useNewsStore();
     newsStore.chatMessageIdDiff = _.first(packet.messages).id - newsStore.chatMessageId;
     console.log(newsStore.chatMessageIdDiff);
   }

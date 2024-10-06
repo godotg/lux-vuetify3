@@ -1,10 +1,4 @@
-<!--
-* @Component: ToolbarNotifications
-* @Maintainer: J.K. Yang
-* @Description:
--->
 <script setup lang="ts">
-import StatusMenu from "./StatusMenu.vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
 import StatusMenuJiucai from "./StatusMenuJiucai.vue";
@@ -45,6 +39,7 @@ const navs = [
 function reward() {
   myStore.isShowReward = true;
 }
+
 </script>
 
 <template>
@@ -149,15 +144,18 @@ function reward() {
             <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.backendGithub") }}</v-list-item-subtitle>
           </div>
         </v-list-item>
+        <v-list-item color="primary" density="compact" @click="myStore.loginDialog = true">
+          <template v-slot:prepend>
+            <v-avatar size="30">
+              <v-icon>mdi-qrcode-scan</v-icon>
+            </v-avatar>
+          </template>
+          <div>
+            <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.login") }}</v-list-item-subtitle>
+          </div>
+        </v-list-item>
       </v-list>
       <v-divider />
     </v-card>
   </v-menu>
 </template>
-
-<style scoped lang="scss">
-// ::v-deep .v-list-item__append,
-// ::v-deep .v-list-item__prepend {
-//   height: 100%;
-// }
-</style>
