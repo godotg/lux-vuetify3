@@ -28,7 +28,7 @@ onMounted(async () => {
   if (_.isEqual(announcement.version, currentVersion)) {
     // 是否要弹出赞赏
     const now = new Date().getTime();
-    if (now - myStore.lastForceShow < 7 * 24 * 60 * 60 * 1000) {
+    if (now - myStore.lastForceShow < 3 * 24 * 60 * 60 * 1000) {
       return;
     }
     myStore.rewardTipDialog = true;

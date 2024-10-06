@@ -9,8 +9,9 @@ import { useCustomizeThemeStore } from "@/stores/customizeTheme";
 import ToolbarLanguage from "@/components/toolbar/ToolbarLanguage.vue";
 import ToolbarNewsLevel from "@/views/jiucai/common/ToolbarNewsLevel.vue";
 import ToolbarUserJiucai from "@/views/jiucai/common/ToolbarUserJiucai.vue";
+import ToolbarNewsNotifications from "@/views/jiucai/common/ToolbarNewsNotifications.vue";
+import ToolbarAccountLogin from "@/views/jiucai/common/ToolbarAccountLogin.vue";
 import ToolbarNotifications from "./ToolbarNotifications.vue";
-import ToolbarNewsNotifications from "../../views/jiucai/common/ToolbarNewsNotifications.vue";
 import ToolbarUser from "./ToolbarUser.vue";
 import { useTodoStore } from "@/views/app/todo/todoStore";
 const { mdAndUp } = useDisplay();
@@ -62,6 +63,7 @@ const showMobileSearch = ref(false);
       <v-spacer></v-spacer>
 
       <div class="d-flex">
+        <ToolbarAccountLogin />
         <ToolbarNewsNotifications />
         <ToolbarNewsLevel />
         <ToolbarLanguage />
