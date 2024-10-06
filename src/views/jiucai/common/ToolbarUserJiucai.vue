@@ -113,7 +113,7 @@ function reward() {
         <v-list-item v-if="myStore.token" color="primary" density="compact" to="profile">
           <template v-slot:prepend>
             <v-avatar size="30">
-              <v-icon>mdi-credit-card-outline</v-icon>
+              <v-icon>mdi-account-box-outline</v-icon>
             </v-avatar>
           </template>
           <div>
