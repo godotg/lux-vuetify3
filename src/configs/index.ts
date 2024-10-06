@@ -1,4 +1,4 @@
-import navigation from "./navigation";
+import navigation from "../views/jiucai/common/navigation";
 import locales from "./locales";
 import currency from "./currencies";
 export default {
