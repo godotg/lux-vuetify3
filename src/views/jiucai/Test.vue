@@ -186,7 +186,7 @@ const signInWithWeChat = async () => {
     <v-card>
       <v-container>
         <v-row>
-          <vue-qrcode :value="authUrlRef" :options="{ width: 200 }"></vue-qrcode>
+          <vue-qrcode :value="authUrlRef" :options="{ width: 200 }" tag="img"></vue-qrcode>
         </v-row>
       </v-container>
     </v-card>

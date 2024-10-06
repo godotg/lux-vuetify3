@@ -24,8 +24,10 @@ const currentVersion = myStore.announce.version;
 onMounted(async () => {
   const response = await axios.get(announcementUrl);
   console.log(response);
+  const currentVersion = myStore.announce.version;
   const announcement = response.data;
-  if (_.isEqual(announcement.version, myStore.announce.version)) {
+  myStore.announce = announcement;
+  if (_.isEqual(announcement.version, currentVersion)) {
     // 是否要弹出赞赏
     const now = new Date().getTime();
     if (now - myStore.lastForceShow < 7 * 24 * 60 * 60 * 1000) {
@@ -35,7 +37,6 @@ onMounted(async () => {
     myStore.lastForceShow = now;
     return;
   }
-  myStore.announce = announcement;
 
   // 拉去公告
   const boardResponse = await axios.get(import.meta.env.VITE_BASE_HTTP_URL + announcement.board);
