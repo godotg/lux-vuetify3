@@ -482,7 +482,7 @@ const dialogRef = ref(false);
               </v-avatar>
             </v-col>
             <v-col class="py-0 my-1" offset="1">
-              <v-switch v-model="myStore.alibaba" label="通义千文" hide-details color="teal" inset></v-switch>
+              <v-switch v-model="myStore.alibaba" label="通义千问" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
           <v-row>
