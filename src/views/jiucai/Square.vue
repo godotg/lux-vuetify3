@@ -26,7 +26,7 @@ const route = useRoute();
 const {mobile, height, width} = useDisplay();
 const newsStore = useNewsStore();
 onMounted(() => {
-  registerPacketReceiver(GroupChatNotice.PROTOCOL_ID, groupChatNoticeCompletion);
+  registerPacketReceiver(GroupChatNotice, atGroupChatNotice);
   initHistory();
 });
 
@@ -78,7 +78,7 @@ const sendMessage = async () => {
 };
 
 // 下面的逻辑都是自己的
-const groupChatNoticeCompletion = (packet: GroupChatNotice) => {
+const atGroupChatNotice = (packet: GroupChatNotice) => {
   isLoading.value = false;
   updateMessage(packet.messages);
   scrollToBottom();

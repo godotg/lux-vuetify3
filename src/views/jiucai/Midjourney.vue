@@ -50,7 +50,7 @@ const maxAnimation = 6;
 let animationRunIndex = 1;
 
 onMounted(() => {
-  registerPacketReceiver(MidImagineNotice.PROTOCOL_ID, midjourneyNoticeRefresh);
+  registerPacketReceiver(MidImagineNotice, atMidImagineNotice);
   messages.value = imageStore.midPrompts;
   initHistory();
   setInterval(() => initHistory(), 10 * 1000);
@@ -301,7 +301,7 @@ const inpaint = async (midjourneyId) => {
 };
 
 // 下面的逻辑都是自己的
-const midjourneyNoticeRefresh = (packet: MidImagineNotice) => {
+const atMidImagineNotice = (packet: MidImagineNotice) => {
   const id = packet.nonce;
   const type = packet.type;
   const imageUrl = packet.imageUrl;

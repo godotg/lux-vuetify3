@@ -38,7 +38,7 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  registerPacketReceiver(ChatgptMessageNotice.PROTOCOL_ID, atChatgptMessageNotice);
+  registerPacketReceiver(ChatgptMessageNotice, atChatgptMessageNotice);
 });
 const forceStop = async () => {
   forceStopChatgpt();

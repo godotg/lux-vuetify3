@@ -236,14 +236,14 @@ export async function asyncAsk(packet: any): Promise<any> {
   return promise;
 }
 
-const receiverMap = new Map<number, any>();
+const receiverMap = new Map<any, any>();
 
-export function registerPacketReceiver(protocolId: number, fun: any) {
-  receiverMap.set(protocolId, fun);
+export function registerPacketReceiver(protocol: any, fun: any) {
+  receiverMap.set(protocol, fun);
 }
 
 function route(packet: any) {
-  const receiver = receiverMap.get(packet.protocolId());
+  const receiver = receiverMap.get(packet.constructor);
   if (packet.constructor == GroupChatNotice) {
     const newsStore = useNewsStore();
     newsStore.chatMessageIdDiff = _.first(packet.messages).id - newsStore.chatMessageId;

@@ -6,18 +6,27 @@ import {useMyStore} from "@/stores/myStore";
 import {useDisplay} from "vuetify";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useCustomizeThemeStore} from "@/stores/customizeTheme";
+import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import LoginByWeChatRequest from "@/protocol/auth/LoginByWeChatRequest";
 import LoginByWeChatResponse from "@/protocol/auth/LoginByWeChatResponse";
-import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
-import axios from "axios";
-import _ from "lodash";
+import UserProfileNotice from "@/protocol/user/UserProfileNotice";
 
 const {mobile, width, height} = useDisplay();
 const myStore = useMyStore();
 const customizeTheme = useCustomizeThemeStore();
 const snackbarStore = useSnackbarStore();
 
-const authUrlRef = ref<string>("http:\\/\\/weixin.qq.com\\/q\\/02raM6dORDcV415ey21Dc-");
+const authUrlRef = ref<string>("");
+
+onMounted(() => {
+  registerPacketReceiver(UserProfileNotice, atUserProfileNotice);
+});
+
+function atUserProfileNotice(packet: UserProfileNotice) {
+  console.log("0000000000000000000000000000000000000000")
+  console.log(packet);
+  myStore.loginDialog = false;
+}
 
 watch(
   () => myStore.loginDialog,

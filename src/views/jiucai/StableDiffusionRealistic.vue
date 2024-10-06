@@ -38,7 +38,7 @@ const MAX_HISTORY = 20;
 let animationRunIndex = 1;
 
 onMounted(() => {
-  registerPacketReceiver(SdSimulateNotice.PROTOCOL_ID, sdSimulateNoticeRefresh);
+  registerPacketReceiver(SdSimulateNotice, atSdSimulateNotice);
   messages.value = imageSdReStore.sdPrompts;
   initHistory();
   setInterval(() => initHistory(), 10 * 1000);
@@ -223,7 +223,7 @@ function refreshMessage(id) {
 
 
 // 下面的逻辑都是自己的
-const sdSimulateNoticeRefresh = (packet: SdSimulateNotice) => {
+const atSdSimulateNotice = (packet: SdSimulateNotice) => {
 
   const nonce = packet.nonce;
   const images = packet.images;
