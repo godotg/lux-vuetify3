@@ -69,13 +69,7 @@ export default {
           text: "Tutorial",
           link: "/tutorial",
           icon: "mdi-book-open-page-variant-outline",
-        },
-        {
-          key: "jiucai.profile",
-          text: "Profile",
-          link: "/profile",
-          icon: "mdi-account-box-outline",
-        },
+        }
       ],
     },
   ],

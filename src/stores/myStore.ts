@@ -2,7 +2,7 @@ import {defineStore} from "pinia";
 
 export const useMyStore = defineStore("myStore", {
   state: () => ({
-    isShowReward: false,
+    rewardTipDialog: false,
     lastForceShow: 0,
     announce: {
       version: "",

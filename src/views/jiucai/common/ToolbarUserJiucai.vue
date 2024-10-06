@@ -11,10 +11,6 @@ const newsStore = useNewsStore();
 const router = useRouter();
 
 
-function reward() {
-  myStore.isShowReward = true;
-}
-
 </script>
 
 <template>
@@ -70,7 +66,7 @@ function reward() {
       <!-- ---------------------------------------------- -->
 
       <v-list variant="flat" elevation="0" :lines="false" density="compact">
-        <v-list-item color="primary" density="compact" @click="reward()">
+        <v-list-item color="primary" density="compact" @click="myStore.rewardTipDialog = true">
           <template v-slot:prepend>
             <v-avatar size="30">
               <v-icon>mdi-credit-card-outline</v-icon>
@@ -80,7 +76,7 @@ function reward() {
             <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.profileDetails") + " " + myStore.user.cost/100 }}</v-list-item-subtitle>
           </div>
         </v-list-item>
-        <v-list-item color="primary" density="compact" @click="reward()">
+        <v-list-item color="primary" density="compact" @click="myStore.rewardTipDialog = true">
           <template v-slot:prepend>
             <v-avatar size="30">
               <v-icon>mdi-bitcoin</v-icon>

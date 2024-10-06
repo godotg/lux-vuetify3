@@ -6,6 +6,7 @@
     <BackToTop />
     <Snackbar />
     <Announcement />
+    <RewardTip />
     <WeChatLogin />
   </v-app>
 </template>
@@ -18,8 +19,9 @@ import AuthLayout from "@/layouts/AuthLayout.vue";
 import { useCustomizeThemeStore } from "@/stores/customizeTheme";
 import BackToTop from "@/components/common/BackToTop.vue";
 import Snackbar from "@/components/common/Snackbar.vue";
-import Announcement from "@/views/jiucai/common/Announcement.vue";
-import WeChatLogin from "@/views/jiucai/common/WeChatLogin.vue";
+import Announcement from "@/views/jiucai/dialog/Announcement.vue";
+import RewardTip from "@/views/jiucai/dialog/RewardTip.vue";
+import WeChatLogin from "@/views/jiucai/dialog/WeChatLogin.vue";
 
 const customizeTheme = useCustomizeThemeStore();
 const route = useRoute();
