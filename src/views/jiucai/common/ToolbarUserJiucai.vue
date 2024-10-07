@@ -7,8 +7,21 @@ import {useMyStore} from "@/stores/myStore";
 
 const myStore = useMyStore();
 const newsStore = useNewsStore();
-
 const router = useRouter();
+
+const countRef = ref<number>(0);
+
+function adminManager() {
+  const count = countRef.value + 1;
+  countRef.value = count;
+  if (count >= 10) {
+    myStore.adminDialog = true;
+  }
+}
+
+setTimeout(() => {
+  countRef.value = 0;
+}, 30000)
 
 
 </script>
@@ -38,7 +51,7 @@ const router = useRouter();
         <!-- ---------------------------------------------- -->
         <!-- Profile Area -->
         <!-- ---------------------------------------------- -->
-        <v-list-item to="/profile">
+        <v-list-item @click="adminManager">
           <template v-slot:prepend>
             <v-avatar size="40">
               <v-img
