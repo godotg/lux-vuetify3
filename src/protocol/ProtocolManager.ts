@@ -170,6 +170,20 @@ import TransferChatgptAsk from './chatgpt/TransferChatgptAsk';
 import { TransferChatgptAskRegistration } from './chatgpt/TransferChatgptAsk';
 import TransferChatgptNotify from './chatgpt/TransferChatgptNotify';
 import { TransferChatgptNotifyRegistration } from './chatgpt/TransferChatgptNotify';
+import AdminInfoRequest from './admin/AdminInfoRequest';
+import { AdminInfoRequestRegistration } from './admin/AdminInfoRequest';
+import AdminInfoResponse from './admin/AdminInfoResponse';
+import { AdminInfoResponseRegistration } from './admin/AdminInfoResponse';
+import Broadcast from './admin/Broadcast';
+import { BroadcastRegistration } from './admin/Broadcast';
+import DoBroadcastRequest from './admin/DoBroadcastRequest';
+import { DoBroadcastRequestRegistration } from './admin/DoBroadcastRequest';
+import DoBroadcastResponse from './admin/DoBroadcastResponse';
+import { DoBroadcastResponseRegistration } from './admin/DoBroadcastResponse';
+import DeleteBroadcastRequest from './admin/DeleteBroadcastRequest';
+import { DeleteBroadcastRequestRegistration } from './admin/DeleteBroadcastRequest';
+import DeleteBroadcastResponse from './admin/DeleteBroadcastResponse';
+import { DeleteBroadcastResponseRegistration } from './admin/DeleteBroadcastResponse';
 import IByteBuffer from "./IByteBuffer";
 import IProtocolRegistration from "./IProtocolRegistration";
 
@@ -349,6 +363,20 @@ protocols.set(402, new TransferChatgptAskRegistration());
 protocolIdMap.set(TransferChatgptAsk, 402);
 protocols.set(403, new TransferChatgptNotifyRegistration());
 protocolIdMap.set(TransferChatgptNotify, 403);
+protocols.set(10000, new AdminInfoRequestRegistration());
+protocolIdMap.set(AdminInfoRequest, 10000);
+protocols.set(10001, new AdminInfoResponseRegistration());
+protocolIdMap.set(AdminInfoResponse, 10001);
+protocols.set(10002, new BroadcastRegistration());
+protocolIdMap.set(Broadcast, 10002);
+protocols.set(10003, new DoBroadcastRequestRegistration());
+protocolIdMap.set(DoBroadcastRequest, 10003);
+protocols.set(10004, new DoBroadcastResponseRegistration());
+protocolIdMap.set(DoBroadcastResponse, 10004);
+protocols.set(10005, new DeleteBroadcastRequestRegistration());
+protocolIdMap.set(DeleteBroadcastRequest, 10005);
+protocols.set(10006, new DeleteBroadcastResponseRegistration());
+protocolIdMap.set(DeleteBroadcastResponse, 10006);
 
 class ProtocolManager {
     static getProtocolId(clazz: any): number {
