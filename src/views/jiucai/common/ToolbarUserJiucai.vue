@@ -64,15 +64,15 @@ setTimeout(() => {
             {{ newsStore.activeUid }}
             <StatusMenuJiucai />
           </v-list-item-title>
-          <v-list-item-subtitle v-if="myStore.user.name">
-            {{ myStore.user.name }}
-          </v-list-item-subtitle>
           <v-list-item-subtitle>
             <!-- {{ $store.state.user.email  }} -->
             {{ newsStore.ip }}
           </v-list-item-subtitle>
           <v-list-item-subtitle style="font-size: 9px">
             {{ newsStore.region }}
+          </v-list-item-subtitle>
+          <v-list-item-subtitle style="font-size: 8px" v-if="myStore.user.name">
+            {{ myStore.user.name }}
           </v-list-item-subtitle>
         </v-list-item>
       </v-list>
