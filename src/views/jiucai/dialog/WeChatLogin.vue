@@ -24,10 +24,9 @@ onMounted(() => {
 
 function atUserProfileNotice(packet: UserProfileNotice) {
   myStore.token = packet.token;
-  myStore.user.id = packet.user.id;
-  myStore.user.name = packet.user.name;
-  myStore.user.ctime = packet.user.ctime;
+  myStore.updateUser(packet.user);
   myStore.loginDialog = false;
+  snackbarStore.showSuccessMessage("微信登录成功");
 }
 
 watch(
@@ -35,7 +34,7 @@ watch(
   async (val) => {
     if (val) {
       if (!isWebsocketReady()) {
-        snackbarStore.showWarningMessage("服务器尚未连接，请等待")
+        snackbarStore.showWarningMessage("服务器尚未连接，请等待");
         return;
       }
       const response: LoginByWeChatResponse = await asyncAsk(new LoginByWeChatRequest());

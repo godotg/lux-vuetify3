@@ -12,6 +12,7 @@ import GroupChatNotice from '@/protocol/chat/GroupChatNotice';
 
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
+import {useMyStore} from "@/stores/myStore";
 import _ from "lodash";
 
 
@@ -52,6 +53,8 @@ function connect(desc): WebSocket {
   webSocket.onopen = async function () {
     const snackbarStore = useSnackbarStore();
     const newsStore = useNewsStore();
+    const myStore = useMyStore();
+
     console.log(new Date(), 'websocket open success');
 
     // websocket连接成功过后，先发送ping同步服务器时间，再发送登录请求
@@ -65,6 +68,8 @@ function connect(desc): WebSocket {
     const loginRequest = new LoginRequest();
     loginRequest.newsId = newsStore.getMaxNewsId();
     loginRequest.chatMessageId = newsStore.chatMessageId;
+    loginRequest.token = myStore.token;
+
     const loginResponse: LoginResponse = await asyncAsk(loginRequest);
     newsStore.ip = loginResponse.ip;
     newsStore.ipLong = loginResponse.ipLong;
@@ -73,6 +78,7 @@ function connect(desc): WebSocket {
     newsStore.activeUid = loginResponse.activeUid;
     newsStore.newsIdDiff = loginResponse.newsIdDiff;
     newsStore.chatMessageIdDiff = loginResponse.chatMessageIdDiff;
+    myStore.updateUser(loginResponse.user)
   };
 
 

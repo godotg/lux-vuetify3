@@ -1,4 +1,6 @@
 import {defineStore} from "pinia";
+import User from "@/protocol/user/User";
+import _ from "lodash";
 
 export const useMyStore = defineStore("myStore", {
   state: () => ({
@@ -17,6 +19,10 @@ export const useMyStore = defineStore("myStore", {
       id: 0,
       name: "",
       ctime: 0,
+      phoneNumber: "",
+      ask: 0,
+      draw: 0,
+      login: 0,
       cost: 0
     },
     propmpt: "",
@@ -35,5 +41,21 @@ export const useMyStore = defineStore("myStore", {
 
   getters: {},
 
-  actions: {}
+  actions: {
+
+    updateUser(user: User | null) {
+      if (user == null) {
+        return;
+      }
+      this.user.id = user.id;
+      this.user.name = user.name;
+      this.user.ctime = user.ctime;
+      this.user.phoneNumber = user.phoneNumber == 0 ? "" : _.toString(user.phoneNumber);
+      this.user.ask = user.ask;
+      this.user.draw = user.draw;
+      this.user.login = user.login;
+      this.user.cost = user.cost;
+    }
+
+  }
 });
