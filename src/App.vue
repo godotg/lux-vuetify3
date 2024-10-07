@@ -8,6 +8,7 @@
     <Announcement />
     <RewardTip />
     <WeChatLogin />
+    <Profile />
   </v-app>
 </template>
 
@@ -22,6 +23,7 @@ import Snackbar from "@/components/common/Snackbar.vue";
 import Announcement from "@/views/jiucai/dialog/Announcement.vue";
 import RewardTip from "@/views/jiucai/dialog/RewardTip.vue";
 import WeChatLogin from "@/views/jiucai/dialog/WeChatLogin.vue";
+import Profile from "@/views/jiucai/dialog/Profile.vue";
 
 const customizeTheme = useCustomizeThemeStore();
 const route = useRoute();

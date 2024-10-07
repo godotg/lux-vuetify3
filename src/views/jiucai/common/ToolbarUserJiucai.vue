@@ -106,7 +106,7 @@ const router = useRouter();
             <v-list-item-subtitle class="text-body-2">{{ $t("jiucai.backendGithub") }}</v-list-item-subtitle>
           </div>
         </v-list-item>
-        <v-list-item v-if="myStore.token" color="primary" density="compact" to="profile">
+        <v-list-item v-if="myStore.token" color="primary" density="compact" @click="myStore.profileDialog = true">
           <template v-slot:prepend>
             <v-avatar size="30">
               <v-icon>mdi-account-box-outline</v-icon>
