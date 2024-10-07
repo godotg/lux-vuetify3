@@ -7,6 +7,8 @@ import {useCustomizeThemeStore} from "@/stores/customizeTheme";
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import UpdateUserProfileRequest from "@/protocol/user/UpdateUserProfileRequest";
 import UpdateUserProfileResponse from "@/protocol/user/UpdateUserProfileResponse";
+import GetUserProfileRequest from "@/protocol/user/GetUserProfileRequest";
+import GetUserProfileResponse from "@/protocol/user/GetUserProfileResponse";
 
 const {mobile, width, height} = useDisplay();
 const myStore = useMyStore();
@@ -20,6 +22,8 @@ watch(
   () => myStore.profileDialog,
   async (val) => {
     if (val) {
+      const answer: GetUserProfileResponse = await asyncAsk(new GetUserProfileRequest());
+      myStore.updateUser(answer.user);
       phoneNumberRef.value = myStore.user.phoneNumber;
     }
   },
