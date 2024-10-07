@@ -5,6 +5,8 @@ import IProtocolRegistration from '../IProtocolRegistration';
 class Broadcast {
     id: number = 0;
     content: string = '';
+    weChatResult: string = '';
+    smsResult: string = '';
 }
 
 export class BroadcastRegistration implements IProtocolRegistration<Broadcast> {
@@ -20,6 +22,8 @@ export class BroadcastRegistration implements IProtocolRegistration<Broadcast> {
         buffer.writeInt(-1);
         buffer.writeString(packet.content);
         buffer.writeLong(packet.id);
+        buffer.writeString(packet.smsResult);
+        buffer.writeString(packet.weChatResult);
     }
 
     read(buffer: IByteBuffer): Broadcast | null {
@@ -33,6 +37,10 @@ export class BroadcastRegistration implements IProtocolRegistration<Broadcast> {
         packet.content = result0;
         const result1 = buffer.readLong();
         packet.id = result1;
+        const result2 = buffer.readString();
+        packet.smsResult = result2;
+        const result3 = buffer.readString();
+        packet.weChatResult = result3;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

@@ -1,9 +1,10 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
+import Broadcast from './Broadcast';
 
 
 class DoBroadcastResponse {
-    
+    broadcasts: Array<Broadcast> = [];
 }
 
 export class DoBroadcastResponseRegistration implements IProtocolRegistration<DoBroadcastResponse> {
@@ -17,6 +18,7 @@ export class DoBroadcastResponseRegistration implements IProtocolRegistration<Do
             return;
         }
         buffer.writeInt(-1);
+        buffer.writePacketList(packet.broadcasts, 10002);
     }
 
     read(buffer: IByteBuffer): DoBroadcastResponse | null {
@@ -26,7 +28,8 @@ export class DoBroadcastResponseRegistration implements IProtocolRegistration<Do
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new DoBroadcastResponse();
-        
+        const list0 = buffer.readPacketList(10002);
+        packet.broadcasts = list0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

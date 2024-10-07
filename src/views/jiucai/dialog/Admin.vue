@@ -35,10 +35,12 @@ watch(
   }
 );
 
-async function doBroadcast(id: number) {
+async function doBroadcast(id: number, type: string) {
   const request = new DoBroadcastRequest();
   request.id = id;
+  request.type = type;
   const answer: DoBroadcastResponse = await asyncAsk(request);
+  broadcastsRef.value = answer.broadcasts;
   snackbarStore.showSuccessMessage("开始广播消息，请查收信息");
 }
 
@@ -65,12 +67,16 @@ async function deleteBroadcast(id: number) {
             <v-list-subheader>广播消息</v-list-subheader>
             <v-list-item v-for="broadcast in broadcastsRef" :key="broadcast.id">
               <template v-slot:prepend>
-                <v-icon v-ripple icon="mdi-bullhorn-variant-outline" @click="doBroadcast(broadcast.id)"></v-icon>
+                <v-icon icon="mdi-bullhorn-variant-outline"></v-icon>
               </template>
-              <v-list-item-title v-text="broadcast.content"></v-list-item-title>
-              <template v-slot:append>
-                <v-icon v-ripple icon="mdi-delete-alert-outline" @click="deleteBroadcast(broadcast.id)"></v-icon>
-              </template>
+              <v-list-item-title>
+                {{ broadcast.content }}
+                <v-btn icon="mdi-delete-alert-outline" size="x-small" class="mx-1" color="error" @click="deleteBroadcast(broadcast.id)" />
+                <v-btn icon="mdi-wechat" color="primary" size="x-small" class="mx-1" @click="doBroadcast(broadcast.id, 'wechat')" />
+                <v-btn icon="mdi-cellphone-nfc" color="primary" size="x-small" class="mx-1" @click="doBroadcast(broadcast.id, 'sms')" />
+              </v-list-item-title>
+              <v-list-item-subtitle>微信->{{ broadcast.weChatResult }}</v-list-item-subtitle>
+              <v-list-item-subtitle>短信->{{ broadcast.smsResult }}</v-list-item-subtitle>
             </v-list-item>
           </v-list>
         </v-card-text>
