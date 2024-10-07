@@ -1,5 +1,6 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
+import User from '../user/User';
 
 
 class LoginResponse {
@@ -10,6 +11,7 @@ class LoginResponse {
     region: string = '';
     newsIdDiff: number = 0;
     chatMessageIdDiff: number = 0;
+    user: User | null = null;
 }
 
 export class LoginResponseRegistration implements IProtocolRegistration<LoginResponse> {
@@ -22,7 +24,8 @@ export class LoginResponseRegistration implements IProtocolRegistration<LoginRes
             buffer.writeInt(0);
             return;
         }
-        buffer.writeInt(-1);
+        const beforeWriteIndex = buffer.getWriteOffset();
+        buffer.writeInt(84);
         buffer.writeLong(packet.activeUid);
         buffer.writeLong(packet.chatMessageIdDiff);
         buffer.writeString(packet.ip);
@@ -30,6 +33,8 @@ export class LoginResponseRegistration implements IProtocolRegistration<LoginRes
         buffer.writeLong(packet.newsIdDiff);
         buffer.writeString(packet.region);
         buffer.writeLong(packet.sid);
+        buffer.writePacket(packet.user, 260);
+        buffer.adjustPadding(84, beforeWriteIndex);
     }
 
     read(buffer: IByteBuffer): LoginResponse | null {
@@ -53,6 +58,10 @@ export class LoginResponseRegistration implements IProtocolRegistration<LoginRes
         packet.region = result5;
         const result6 = buffer.readLong();
         packet.sid = result6;
+        if (buffer.compatibleRead(beforeReadIndex, length)) {
+            const result7 = buffer.readPacket(260);
+            packet.user = result7;
+        }
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
