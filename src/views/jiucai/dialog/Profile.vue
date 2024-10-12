@@ -94,7 +94,7 @@ async function updateProfile() {
               <template v-slot:prepend>
                 <v-icon icon="mdi-currency-jpy"></v-icon>
               </template>
-              <v-list-item-title v-text="myStore.user.cost"></v-list-item-title>
+              <v-list-item-title v-text="myStore.user.cost / 100"></v-list-item-title>
               <v-list-item-subtitle>白嫖指数</v-list-item-subtitle>
             </v-list-item>
           </v-list>
