@@ -22,6 +22,8 @@ const newsRef = ref<News[]>([]);
 const gnRef = ref<GaiNian[]>([]);
 const gnHotNoticeRef = ref<string>('');
 const loadingRef = ref(true);
+let endId = -1;
+let startId = -1;
 
 
 const levelMap = {
@@ -91,7 +93,6 @@ async function doInitNews() {
     return;
   }
   const request = new NewsRequest();
-  request.startId = -1;
   request.endId = -1;
   const response: NewsResponse = await asyncAsk(request);
   loadingRef.value = false;
@@ -150,7 +151,6 @@ function updateNewsRef(news: Array<News>) {
   if (_.isEmpty(news)) {
     return;
   }
-  newsStore.newsIdDiff = 0;
   news = _.filter(news, (it) => {
     return _.findIndex(newsRef.value, (it1) => it1.id == it.id) < 0;
   });

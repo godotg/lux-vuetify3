@@ -27,8 +27,6 @@ export const useNewsStore = defineStore("newsStore", {
     ipLong: 0,
     sid: 0,
     activeUid: 0,
-    // 仅在登录有用，后面基本上没用
-    newsIdDiff: 0,
     chatMessageIdDiff: 0,
   }),
 
@@ -89,12 +87,6 @@ export const useNewsStore = defineStore("newsStore", {
         time: new Date().getTime()
       });
       return true;
-    },
-
-    totalNewNews(): number {
-      const currentTime = new Date().getTime();
-      const total = this.newsInfos.filter(it => currentTime - it.time < newNewsTimeout).length;
-      return total;
     },
 
     updateNewsLevelFilter(level: string, value: number) {

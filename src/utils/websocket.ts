@@ -76,7 +76,6 @@ function connect(desc): WebSocket {
     newsStore.region = loginResponse.region;
     newsStore.sid = loginResponse.sid;
     newsStore.activeUid = loginResponse.activeUid;
-    newsStore.newsIdDiff = loginResponse.newsIdDiff;
     newsStore.chatMessageIdDiff = loginResponse.chatMessageIdDiff;
     myStore.updateUser(loginResponse.user)
   };

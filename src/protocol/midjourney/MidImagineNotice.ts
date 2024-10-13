@@ -32,8 +32,7 @@ export class MidImagineNoticeRegistration implements IProtocolRegistration<MidIm
             buffer.writeInt(0);
             return;
         }
-        const beforeWriteIndex = buffer.getWriteOffset();
-        buffer.writeInt(172);
+        buffer.writeInt(-1);
         buffer.writeString(packet.content);
         buffer.writeString(packet.imageUrl);
         buffer.writeString(packet.imageUrlHigh);
@@ -46,7 +45,6 @@ export class MidImagineNoticeRegistration implements IProtocolRegistration<MidIm
         buffer.writeString(packet.type);
         buffer.writeBool(packet.upsample);
         buffer.writeBool(packet.upscale);
-        buffer.adjustPadding(172, beforeWriteIndex);
     }
 
     read(buffer: IByteBuffer): MidImagineNotice | null {
@@ -76,14 +74,10 @@ export class MidImagineNoticeRegistration implements IProtocolRegistration<MidIm
         packet.reroll = result8;
         const result9 = buffer.readString();
         packet.type = result9;
-        if (buffer.compatibleRead(beforeReadIndex, length)) {
-            const result10 = buffer.readBool(); 
-            packet.upsample = result10;
-        }
-        if (buffer.compatibleRead(beforeReadIndex, length)) {
-            const result11 = buffer.readBool(); 
-            packet.upscale = result11;
-        }
+        const result10 = buffer.readBool(); 
+        packet.upsample = result10;
+        const result11 = buffer.readBool(); 
+        packet.upscale = result11;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

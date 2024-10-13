@@ -18,12 +18,10 @@ export class LoginRequestRegistration implements IProtocolRegistration<LoginRequ
             buffer.writeInt(0);
             return;
         }
-        const beforeWriteIndex = buffer.getWriteOffset();
-        buffer.writeInt(33);
+        buffer.writeInt(-1);
         buffer.writeLong(packet.chatMessageId);
         buffer.writeLong(packet.newsId);
         buffer.writeString(packet.token);
-        buffer.adjustPadding(33, beforeWriteIndex);
     }
 
     read(buffer: IByteBuffer): LoginRequest | null {
@@ -37,10 +35,8 @@ export class LoginRequestRegistration implements IProtocolRegistration<LoginRequ
         packet.chatMessageId = result0;
         const result1 = buffer.readLong();
         packet.newsId = result1;
-        if (buffer.compatibleRead(beforeReadIndex, length)) {
-            const result2 = buffer.readString();
-            packet.token = result2;
-        }
+        const result2 = buffer.readString();
+        packet.token = result2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
