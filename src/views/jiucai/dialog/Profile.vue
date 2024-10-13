@@ -112,7 +112,7 @@ async function updateProfile() {
         </v-card-text>
 
         <v-card-subtitle>
-          手机号码用来推送最新的概念和S级行情
+          手机号码用来推送最新的S级行情和SSR新概念
         </v-card-subtitle>
 
         <v-card-actions>

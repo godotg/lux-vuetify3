@@ -27,6 +27,7 @@ function atUserProfileNotice(packet: UserProfileNotice) {
   myStore.updateUser(packet.user);
   myStore.loginDialog = false;
   snackbarStore.showSuccessMessage("微信登录成功");
+  setTimeout(() => myStore.profileDialog = true, 1000);
 }
 
 watch(
@@ -39,7 +40,6 @@ watch(
       }
       const response: LoginByWeChatResponse = await asyncAsk(new LoginByWeChatRequest());
       authUrlRef.value = response.authUrl;
-      myStore.loginDialog = true;
     }
   },
   {
