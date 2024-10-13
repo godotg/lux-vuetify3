@@ -55,7 +55,7 @@ async function deleteBroadcast(id: number) {
 
 </script>
 <template>
-  <v-dialog transition="dialog-top-transition" max-width="600px" v-model="myStore.adminDialog">
+  <v-dialog transition="dialog-top-transition" max-width="888px" v-model="myStore.adminDialog">
     <template v-slot:default="{ isActive }">
       <v-card prepend-icon="mdi-skull-crossbones-outline">
         <template v-slot:title>
@@ -65,19 +65,24 @@ async function deleteBroadcast(id: number) {
         <v-card-text>
           <v-list density="compact">
             <v-list-subheader>广播消息</v-list-subheader>
-            <v-list-item v-for="broadcast in broadcastsRef" :key="broadcast.id">
-              <template v-slot:prepend>
-                <v-icon icon="mdi-bullhorn-variant-outline"></v-icon>
-              </template>
-              <v-list-item-title>
-                {{ broadcast.content }}
-                <v-btn icon="mdi-delete-alert-outline" size="x-small" class="mx-1" color="error" @click="deleteBroadcast(broadcast.id)" />
-                <v-btn icon="mdi-wechat" color="primary" size="x-small" class="mx-1" @click="doBroadcast(broadcast.id, 'wechat')" />
-                <v-btn icon="mdi-cellphone-nfc" color="primary" size="x-small" class="mx-1" @click="doBroadcast(broadcast.id, 'sms')" />
-              </v-list-item-title>
-              <v-list-item-subtitle>微信->{{ broadcast.weChatResult }}</v-list-item-subtitle>
-              <v-list-item-subtitle>短信->{{ broadcast.smsResult }}</v-list-item-subtitle>
-            </v-list-item>
+            <template v-for="broadcast in broadcastsRef" :key="broadcast.id">
+              <v-list-item>
+                <template v-slot:prepend>
+                  <v-icon icon="mdi-bullhorn-variant-outline"></v-icon>
+                </template>
+                <v-list-item-title>
+                  {{ broadcast.content }}
+                </v-list-item-title>
+                <v-list-item-subtitle>微信->{{ broadcast.weChatResult }}</v-list-item-subtitle>
+                <v-list-item-subtitle>短信->{{ broadcast.smsResult }}</v-list-item-subtitle>
+                <v-list-item-action>
+                  <v-btn icon="mdi-delete-alert-outline" size="x-small" class="mx-1" color="error" @click="deleteBroadcast(broadcast.id)" />
+                  <v-btn icon="mdi-wechat" color="primary" size="x-small" class="mx-1" @click="doBroadcast(broadcast.id, 'wechat')" />
+                  <v-btn icon="mdi-cellphone-nfc" color="primary" size="x-small" class="mx-1" @click="doBroadcast(broadcast.id, 'sms')" />
+                </v-list-item-action>
+              </v-list-item>
+              <hr>
+            </template>
           </v-list>
         </v-card-text>
       </v-card>
