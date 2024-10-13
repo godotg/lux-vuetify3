@@ -9,7 +9,7 @@ class DeleteBroadcastResponse {
 
 export class DeleteBroadcastResponseRegistration implements IProtocolRegistration<DeleteBroadcastResponse> {
     protocolId(): number {
-        return 10006;
+        return 10011;
     }
 
     write(buffer: IByteBuffer, packet: DeleteBroadcastResponse | null) {

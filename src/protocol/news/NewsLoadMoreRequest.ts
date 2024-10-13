@@ -2,41 +2,41 @@ import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
 
 
-class NewsRequest {
+class NewsLoadMoreRequest {
     query: string = '';
-    endId: number = 0;
+    startId: number = 0;
     level: number = 0;
 }
 
-export class NewsRequestRegistration implements IProtocolRegistration<NewsRequest> {
+export class NewsLoadMoreRequestRegistration implements IProtocolRegistration<NewsLoadMoreRequest> {
     protocolId(): number {
-        return 203;
+        return 207;
     }
 
-    write(buffer: IByteBuffer, packet: NewsRequest | null) {
+    write(buffer: IByteBuffer, packet: NewsLoadMoreRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writeLong(packet.endId);
         buffer.writeInt(packet.level);
         buffer.writeString(packet.query);
+        buffer.writeLong(packet.startId);
     }
 
-    read(buffer: IByteBuffer): NewsRequest | null {
+    read(buffer: IByteBuffer): NewsLoadMoreRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new NewsRequest();
-        const result0 = buffer.readLong();
-        packet.endId = result0;
-        const result1 = buffer.readInt();
-        packet.level = result1;
-        const result2 = buffer.readString();
-        packet.query = result2;
+        const packet = new NewsLoadMoreRequest();
+        const result0 = buffer.readInt();
+        packet.level = result0;
+        const result1 = buffer.readString();
+        packet.query = result1;
+        const result2 = buffer.readLong();
+        packet.startId = result2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
@@ -44,4 +44,4 @@ export class NewsRequestRegistration implements IProtocolRegistration<NewsReques
     }
 }
 
-export default NewsRequest;
+export default NewsLoadMoreRequest;

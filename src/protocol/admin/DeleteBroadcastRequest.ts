@@ -8,7 +8,7 @@ class DeleteBroadcastRequest {
 
 export class DeleteBroadcastRequestRegistration implements IProtocolRegistration<DeleteBroadcastRequest> {
     protocolId(): number {
-        return 10005;
+        return 10010;
     }
 
     write(buffer: IByteBuffer, packet: DeleteBroadcastRequest | null) {

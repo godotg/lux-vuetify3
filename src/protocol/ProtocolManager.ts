@@ -46,6 +46,10 @@ import NewsOneRequest from './news/NewsOneRequest';
 import { NewsOneRequestRegistration } from './news/NewsOneRequest';
 import NewsOneResponse from './news/NewsOneResponse';
 import { NewsOneResponseRegistration } from './news/NewsOneResponse';
+import NewsLoadMoreRequest from './news/NewsLoadMoreRequest';
+import { NewsLoadMoreRequestRegistration } from './news/NewsLoadMoreRequest';
+import NewsLoadMoreResponse from './news/NewsLoadMoreResponse';
+import { NewsLoadMoreResponseRegistration } from './news/NewsLoadMoreResponse';
 import GaiNian from './gn/GaiNian';
 import { GaiNianRegistration } from './gn/GaiNian';
 import GnRequest from './gn/GnRequest';
@@ -239,6 +243,10 @@ protocols.set(205, new NewsOneRequestRegistration());
 protocolIdMap.set(NewsOneRequest, 205);
 protocols.set(206, new NewsOneResponseRegistration());
 protocolIdMap.set(NewsOneResponse, 206);
+protocols.set(207, new NewsLoadMoreRequestRegistration());
+protocolIdMap.set(NewsLoadMoreRequest, 207);
+protocols.set(208, new NewsLoadMoreResponseRegistration());
+protocolIdMap.set(NewsLoadMoreResponse, 208);
 protocols.set(220, new GaiNianRegistration());
 protocolIdMap.set(GaiNian, 220);
 protocols.set(221, new GnRequestRegistration());
@@ -373,10 +381,10 @@ protocols.set(10003, new DoBroadcastRequestRegistration());
 protocolIdMap.set(DoBroadcastRequest, 10003);
 protocols.set(10004, new DoBroadcastResponseRegistration());
 protocolIdMap.set(DoBroadcastResponse, 10004);
-protocols.set(10005, new DeleteBroadcastRequestRegistration());
-protocolIdMap.set(DeleteBroadcastRequest, 10005);
-protocols.set(10006, new DeleteBroadcastResponseRegistration());
-protocolIdMap.set(DeleteBroadcastResponse, 10006);
+protocols.set(10010, new DeleteBroadcastRequestRegistration());
+protocolIdMap.set(DeleteBroadcastRequest, 10010);
+protocols.set(10011, new DeleteBroadcastResponseRegistration());
+protocolIdMap.set(DeleteBroadcastResponse, 10011);
 
 class ProtocolManager {
     static getProtocolId(clazz: any): number {
