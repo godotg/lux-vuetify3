@@ -4,6 +4,8 @@ import AnimationLeek1 from "@/animation/AnimationLeek1.vue";
 import News from "@/protocol/news/News";
 import NewsRequest from "@/protocol/news/NewsRequest";
 import NewsResponse from "@/protocol/news/NewsResponse";
+import NewsLoadMoreRequest from "@/protocol/news/NewsLoadMoreRequest";
+import NewsLoadMoreResponse from "@/protocol/news/NewsLoadMoreResponse";
 import GaiNian from "@/protocol/gn/GaiNian";
 import GnRequest from "@/protocol/gn/GnRequest";
 import GnResponse from "@/protocol/gn/GnResponse";
@@ -74,6 +76,16 @@ onMounted(() => {
   setInterval(() => requestGn(30), 600000);
 });
 
+watch(
+  () => newsStore.newsLevelFilterValue,
+  async (val) => {
+    initNews();
+  },
+  {
+    deep: true,
+  }
+);
+
 document.addEventListener("visibilitychange", function () {
   if (document.visibilityState === "visible") {
     requestNews();
@@ -94,56 +106,48 @@ async function doInitNews() {
   }
   const request = new NewsRequest();
   request.endId = -1;
+  request.level = newsStore.newsLevelFilterValue;
+  console.log("news init ----------------------------------------");
   const response: NewsResponse = await asyncAsk(request);
   loadingRef.value = false;
-  console.log("news init ----------------------------------------");
-  updateNewsRef(response.news)
+  newsRef.value = response.news;
+  startId = _.last(response.news).id;
+  endId = response.endId;
+  snackbarStore.showSuccessMessage("情报初始化成功");
 }
 
 async function requestNews() {
-  const firstNews = _.first(newsRef.value);
-  if (_.isEmpty(firstNews)) {
+  if (endId < 0) {
     return;
   }
   const request = new NewsRequest();
-  request.startId = firstNews.id + 1;
-  request.endId = -1;
+  request.endId = endId;
+  request.level = newsStore.newsLevelFilterValue;
   const response: NewsResponse = await asyncAsk(request);
   console.log("news request response ----------------------------------");
-  if (document.visibilityState === "visible") {
-    updateNewsRef(response.news);
+  if (response.endId == endId) {
+    return;
   }
-}
-
-async function requestGn(num: number, notice: boolean = false) {
-  const request = new GnRequest();
-  request.num = num;
-  const response: GnResponse = await asyncAsk(request)
-  gnRef.value = response.gns;
-  gnHotNoticeRef.value = response.hotNotice;
-  gnRef.value.forEach(it => newsStore.updateGn(it.id));
-  if (notice) {
-    snackbarStore.showSuccessMessage("加载了更多的新概念");
-  }
+  const newNews = _.concat(response.news, newsRef.value);
+  newsRef.value = newNews;
+  endId = response.endId;
 }
 
 async function loadMoreNews() {
-  const lastNews = _.last(newsRef.value);
-  if (_.isEmpty(lastNews)) {
+  loadingRef.value = true;
+  const request = new NewsLoadMoreRequest();
+  request.startId = startId;
+  request.level = newsStore.newsLevelFilterValue;
+  console.log("news loadMore --------------------------------------");
+  const response: NewsLoadMoreResponse = await asyncAsk(request)
+  loadingRef.value = false;
+  if (_.isEmpty(response.news)) {
     snackbarStore.showErrorMessage("没有更多了");
     return;
   }
-  loadingRef.value = true;
-  const request = new NewsRequest();
-  request.startId = -1;
-  request.endId = lastNews.id - 1;
-  setTimeout(() => {
-    loadingRef.value = false;
-  }, 10000);
-  console.log("news loadMore --------------------------------------");
-  const response: NewsResponse = await asyncAsk(request)
-  loadingRef.value = false;
-  updateNewsRef(response.news);
+  const newNews = _.concat(newsRef.value, response.news);
+  newsRef.value = newNews;
+  startId = response.startId;
 }
 
 
@@ -158,6 +162,20 @@ function updateNewsRef(news: Array<News>) {
   newNews = _.sortBy(newNews, (it) => it.id);
   newNews = _.reverse(newNews);
   newsRef.value = newNews;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+async function requestGn(num: number, notice: boolean = false) {
+  const request = new GnRequest();
+  request.num = num;
+  const response: GnResponse = await asyncAsk(request)
+  gnRef.value = response.gns;
+  gnHotNoticeRef.value = response.hotNotice;
+  gnRef.value.forEach(it => newsStore.updateGn(it.id));
+  if (notice) {
+    snackbarStore.showSuccessMessage("加载了更多的新概念");
+  }
 }
 
 function copyGn(gn: GaiNian, event: Event) {
@@ -236,8 +254,7 @@ function copyNews(news: News, event: Event) {
         </v-card-item>
       </v-card>
       <template v-for="newsEle in newsRef">
-        <v-card v-if="newsStore.newsLevelFilterValue >= levelMap[newsEle.level].value" class="mt-3" v-ripple
-                @click="copyNews(newsEle, $event)">
+        <v-card class="mt-3" v-ripple @click="copyNews(newsEle, $event)">
           <v-card-title>
             <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
             级情报 {{ newsEle.ctime }}
@@ -309,8 +326,7 @@ function copyNews(news: News, event: Event) {
         </v-card>
       </v-timeline-item>
       <template v-for="newsEle in newsRef">
-        <v-timeline-item v-if="newsStore.newsLevelFilterValue >= levelMap[newsEle.level].value" fill-dot
-                         :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
+        <v-timeline-item fill-dot :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
           <template v-slot:icon>
             <span>{{ newsEle.level }}</span>
           </template>

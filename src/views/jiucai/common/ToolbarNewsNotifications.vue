@@ -4,7 +4,9 @@
 * @Description:
 -->
 <script setup lang="ts">
+import {useNewsStore} from "@/stores/newsStore";
 
+const newsStore = useNewsStore();
 </script>
 
 <template>
