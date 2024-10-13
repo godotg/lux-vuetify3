@@ -9,12 +9,10 @@ const myStore = useMyStore();
 const newsStore = useNewsStore();
 const router = useRouter();
 
-const countRef = ref<number>(0);
 
 function adminManager() {
-  const count = countRef.value + 1;
-  countRef.value = count;
-  if (count >= 10) {
+  const name = myStore.user.name;
+  if (name == "127.0.0.1" || name == "o9Sc5xEtAB0Mcjgd3O-Dfg1tCRJc") {
     myStore.adminDialog = true;
   }
 }
