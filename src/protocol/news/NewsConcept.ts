@@ -2,18 +2,18 @@ import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
 
 
-class NewsIndustry {
+class NewsConcept {
     name: string = '';
     code: number = 0;
     rise: string = '';
 }
 
-export class NewsIndustryRegistration implements IProtocolRegistration<NewsIndustry> {
+export class NewsConceptRegistration implements IProtocolRegistration<NewsConcept> {
     protocolId(): number {
         return 202;
     }
 
-    write(buffer: IByteBuffer, packet: NewsIndustry | null) {
+    write(buffer: IByteBuffer, packet: NewsConcept | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -24,13 +24,13 @@ export class NewsIndustryRegistration implements IProtocolRegistration<NewsIndus
         buffer.writeString(packet.rise);
     }
 
-    read(buffer: IByteBuffer): NewsIndustry | null {
+    read(buffer: IByteBuffer): NewsConcept | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new NewsIndustry();
+        const packet = new NewsConcept();
         const result0 = buffer.readInt();
         packet.code = result0;
         const result1 = buffer.readString();
@@ -44,4 +44,4 @@ export class NewsIndustryRegistration implements IProtocolRegistration<NewsIndus
     }
 }
 
-export default NewsIndustry;
+export default NewsConcept;

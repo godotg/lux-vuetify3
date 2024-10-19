@@ -205,10 +205,10 @@ function copyNews(news: News, event: Event) {
     }
   }
   // 🐳
-  if (!_.isEmpty(news.industries)) {
+  if (!_.isEmpty(news.concepts)) {
     str = str + "\n🐠概念:";
-    for (const industry of news.industries) {
-      str = str + " " + industry.name + "(" + industry.rise + ")";
+    for (const concept of news.concepts) {
+      str = str + " " + concept.name + "(" + concept.rise + ")";
     }
   }
   if (!_.isEmpty(news.subjects)) {
@@ -267,22 +267,22 @@ function copyNews(news: News, event: Event) {
             {{ newsEle.content }}
           </v-card-text>
           <v-card-actions
-            v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
+            v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts) || !_.isEmpty(newsEle.subjects)">
             <div>
               <template v-if="!_.isEmpty(newsEle.stocks)">
                 <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small" class="mr-1">
                   {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
                 </v-chip>
               </template>
-              <template v-if="!_.isEmpty(newsEle.industries)">
+              <template v-if="!_.isEmpty(newsEle.concepts)">
                 <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward" color="primary"></v-icon>
-                <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined"
+                <v-chip v-for="concept in newsEle.concepts" color="primary" size="x-small" variant="outlined"
                         class="mr-1">
-                  {{ industry.name }} {{ industry.rise }}
+                  {{ concept.name }} {{ concept.rise }}
                 </v-chip>
               </template>
               <template v-if="!_.isEmpty(newsEle.subjects)">
-                <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries)" icon="mdi-slash-forward"
+                <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts)" icon="mdi-slash-forward"
                         color="primary"></v-icon>
                 <v-chip v-for="subject in newsEle.subjects" size="x-small" class="mr-1">
                   {{ subject }}
@@ -343,22 +343,22 @@ function copyNews(news: News, event: Event) {
               {{ newsEle.content }}
             </v-card-text>
             <v-card-actions
-              v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries) || !_.isEmpty(newsEle.subjects)">
+              v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts) || !_.isEmpty(newsEle.subjects)">
               <div>
                 <template v-if="!_.isEmpty(newsEle.stocks)">
                   <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small" class="mr-1">
                     {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
                   </v-chip>
                 </template>
-                <template v-if="!_.isEmpty(newsEle.industries)">
+                <template v-if="!_.isEmpty(newsEle.concepts)">
                   <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward" color="primary"></v-icon>
-                  <v-chip v-for="industry in newsEle.industries" color="primary" size="x-small" variant="outlined"
+                  <v-chip v-for="concept in newsEle.concepts" color="primary" size="x-small" variant="outlined"
                           class="mr-1">
-                    {{ industry.name }} {{ industry.rise }}
+                    {{ concept.name }} {{ concept.rise }}
                   </v-chip>
                 </template>
                 <template v-if="!_.isEmpty(newsEle.subjects)">
-                  <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.industries)" icon="mdi-slash-forward"
+                  <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts)" icon="mdi-slash-forward"
                           color="primary"></v-icon>
                   <v-chip v-for="subject in newsEle.subjects" size="x-small" class="mr-1">
                     {{ subject }}

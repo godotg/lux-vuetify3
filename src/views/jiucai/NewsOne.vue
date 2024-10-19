@@ -79,22 +79,22 @@ async function doInitNewsByHttp() {
         {{ newsRef.content }}
       </v-card-text>
       <v-card-actions
-        v-if="!_.isEmpty(newsRef.stocks) || !_.isEmpty(newsRef.industries) || !_.isEmpty(newsRef.subjects)">
+        v-if="!_.isEmpty(newsRef.stocks) || !_.isEmpty(newsRef.concepts) || !_.isEmpty(newsRef.subjects)">
         <div>
           <template v-if="!_.isEmpty(newsRef.stocks)">
             <v-chip v-for="stock in newsRef.stocks" color="primary" size="x-small" class="mr-1">
               {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
             </v-chip>
           </template>
-          <template v-if="!_.isEmpty(newsRef.industries)">
+          <template v-if="!_.isEmpty(newsRef.concepts)">
             <v-icon v-if="!_.isEmpty(newsRef.stocks)" icon="mdi-slash-forward" color="primary"></v-icon>
-            <v-chip v-for="industry in newsRef.industries" color="primary" size="x-small" variant="outlined"
+            <v-chip v-for="concept in newsRef.concepts" color="primary" size="x-small" variant="outlined"
                     class="mr-1">
-              {{ industry.name }} {{ industry.rise }}
+              {{ concept.name }} {{ concept.rise }}
             </v-chip>
           </template>
           <template v-if="!_.isEmpty(newsRef.subjects)">
-            <v-icon v-if="!_.isEmpty(newsRef.stocks) || !_.isEmpty(newsRef.industries)" icon="mdi-slash-forward"
+            <v-icon v-if="!_.isEmpty(newsRef.stocks) || !_.isEmpty(newsRef.concepts)" icon="mdi-slash-forward"
                     color="primary"></v-icon>
             <v-chip v-for="subject in newsRef.subjects" size="x-small" class="mr-1">
               {{ subject }}
