@@ -1,37 +1,37 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
-import GaiNian from './GaiNian';
+import Concept from './Concept';
 
 
-class GnResponse {
-    gns: Array<GaiNian> = [];
+class ConceptResponse {
+    concepts: Array<Concept> = [];
     hotNotice: string = '';
 }
 
-export class GnResponseRegistration implements IProtocolRegistration<GnResponse> {
+export class ConceptResponseRegistration implements IProtocolRegistration<ConceptResponse> {
     protocolId(): number {
         return 222;
     }
 
-    write(buffer: IByteBuffer, packet: GnResponse | null) {
+    write(buffer: IByteBuffer, packet: ConceptResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacketList(packet.gns, 220);
+        buffer.writePacketList(packet.concepts, 220);
         buffer.writeString(packet.hotNotice);
     }
 
-    read(buffer: IByteBuffer): GnResponse | null {
+    read(buffer: IByteBuffer): ConceptResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new GnResponse();
+        const packet = new ConceptResponse();
         const list0 = buffer.readPacketList(220);
-        packet.gns = list0;
+        packet.concepts = list0;
         const result1 = buffer.readString();
         packet.hotNotice = result1;
         if (length > 0) {
@@ -41,4 +41,4 @@ export class GnResponseRegistration implements IProtocolRegistration<GnResponse>
     }
 }
 
-export default GnResponse;
+export default ConceptResponse;

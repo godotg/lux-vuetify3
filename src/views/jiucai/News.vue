@@ -6,9 +6,9 @@ import NewsRequest from "@/protocol/news/NewsRequest";
 import NewsResponse from "@/protocol/news/NewsResponse";
 import NewsLoadMoreRequest from "@/protocol/news/NewsLoadMoreRequest";
 import NewsLoadMoreResponse from "@/protocol/news/NewsLoadMoreResponse";
-import GaiNian from "@/protocol/gn/GaiNian";
-import GnRequest from "@/protocol/gn/GnRequest";
-import GnResponse from "@/protocol/gn/GnResponse";
+import Concept from "@/protocol/concept/Concept";
+import ConceptRequest from "@/protocol/concept/ConceptRequest";
+import ConceptResponse from "@/protocol/concept/ConceptResponse";
 import _ from "lodash";
 import {useDisplay} from "vuetify";
 import clipboard from "@/utils/clipboardUtils";
@@ -21,8 +21,8 @@ const {mobile, width, height} = useDisplay();
 
 
 const newsRef = ref<News[]>([]);
-const gnRef = ref<GaiNian[]>([]);
-const gnHotNoticeRef = ref<string>('');
+const conceptRef = ref<Concept[]>([]);
+const conceptHotNoticeRef = ref<string>('');
 const loadingRef = ref(true);
 let endId = -1;
 let startId = -1;
@@ -73,7 +73,7 @@ onMounted(() => {
   console.log("news on mounted-----------------------------------------");
   initNews();
   setInterval(() => requestNews(), 15000);
-  setInterval(() => requestGn(30), 600000);
+  setInterval(() => requestConcept(30), 600000);
 });
 
 watch(
@@ -95,7 +95,7 @@ document.addEventListener("visibilitychange", function () {
 function initNews() {
   setTimeout(() => {
     doInitNews();
-    requestGn(30);
+    requestConcept(30);
   }, 1000);
 }
 
@@ -166,26 +166,26 @@ function updateNewsRef(news: Array<News>) {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-async function requestGn(num: number, notice: boolean = false) {
-  const request = new GnRequest();
+async function requestConcept(num: number, notice: boolean = false) {
+  const request = new ConceptRequest();
   request.num = num;
-  const response: GnResponse = await asyncAsk(request)
-  gnRef.value = response.gns;
-  gnHotNoticeRef.value = response.hotNotice;
-  gnRef.value.forEach(it => newsStore.updateGn(it.id));
+  const response: ConceptResponse = await asyncAsk(request)
+  conceptRef.value = response.concepts;
+  conceptHotNoticeRef.value = response.hotNotice;
+  conceptRef.value.forEach(it => newsStore.updateConcept(it.id));
   if (notice) {
     snackbarStore.showSuccessMessage("加载了更多的新概念");
   }
 }
 
-function copyGn(gn: GaiNian, event: Event) {
+function copyConcept(concept: Concept, event: Event) {
   let str = "";
-  str = str + gn.level + "级电报 " + gn.ctime + "\n";
-  str = str + "⚡" + gn.title + "\n\n" + gn.content + "\n\n";
-  str = str + gn.url + "\n\n";
+  str = str + concept.level + "级电报 " + concept.ctime + "\n";
+  str = str + "⚡" + concept.title + "\n\n" + concept.content + "\n\n";
+  str = str + concept.url + "\n\n";
   str = str + jokes[_.random(0, jokes.length - 1)];
   clipboard(str, event);
-  snackbarStore.showSuccessMessage(gn.content + "复制成功");
+  snackbarStore.showSuccessMessage(concept.content + "复制成功");
 }
 
 function copyNews(news: News, event: Event) {
@@ -228,27 +228,27 @@ function copyNews(news: News, event: Event) {
 <template>
   <v-container>
     <template v-if="mobile">
-      <v-card  v-if="!_.isEmpty(gnRef)" class="mt-3">
+      <v-card v-if="!_.isEmpty(conceptRef)" class="mt-3">
         <v-card-title>
           <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
           &nbsp;
           新概念
           &nbsp;
-          <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestGn(108, true)"></v-icon>
+          <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestConcept(108, true)"></v-icon>
         </v-card-title>
         <v-card-subtitle>
-          {{ gnHotNoticeRef }}
+          {{ conceptHotNoticeRef }}
         </v-card-subtitle>
-        <v-card-item v-for="gnEle in gnRef" :key="gnEle.id" class="text-pre-wrap py-1" v-ripple @click="copyGn(gnEle, $event)">
+        <v-card-item v-for="concept in conceptRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple @click="copyConcept(concept, $event)">
           <v-row>
             <v-col class="font-weight-bold" cols="4">
-              {{ gnEle.ctime }}
+              {{ concept.ctime }}
             </v-col>
             <v-col class="font-weight-bold px-0 mx-0">
-              <a :href="gnEle.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
-                {{ gnEle.content }}
+              <a :href="concept.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
+                {{ concept.content }}
               </a>
-              <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
+              <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
             </v-col>
           </v-row>
         </v-card-item>
@@ -294,7 +294,7 @@ function copyNews(news: News, event: Event) {
       </template>
     </template>
     <v-timeline v-else density="compact" side="end">
-      <v-timeline-item v-if="!_.isEmpty(gnRef)" fill-dot dot-color="purple" size="x-large">
+      <v-timeline-item v-if="!_.isEmpty(conceptRef)" fill-dot dot-color="purple" size="x-large">
         <template v-slot:icon>
           <span>SSR</span>
         </template>
@@ -304,22 +304,22 @@ function copyNews(news: News, event: Event) {
             &nbsp;
             新概念
             &nbsp;
-            <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestGn(108, true)"></v-icon>
+            <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestConcept(108, true)"></v-icon>
           </v-card-title>
           <v-card-subtitle>
-            {{ gnHotNoticeRef }}
+            {{ conceptHotNoticeRef }}
           </v-card-subtitle>
-          <v-card-item v-for="gnEle in gnRef" :key="gnEle.id" class="text-pre-wrap py-1" v-ripple @click="copyGn(gnEle, $event)">
+          <v-card-item v-for="concept in conceptRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple @click="copyConcept(concept, $event)">
             <v-row>
               <v-col class="font-weight-bold" cols="3">
-                {{ gnEle.ctime }}
+                {{ concept.ctime }}
               </v-col>
               <v-col class="font-weight-bold">
-                <a :href="gnEle.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
-                  {{ gnEle.content }}
+                <a :href="concept.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
+                  {{ concept.content }}
                 </a>
-                {{ gnEle.title }}
-                <v-icon v-if="newsStore.isNewGn(gnEle.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
+                {{ concept.title }}
+                <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
               </v-col>
             </v-row>
           </v-card-item>

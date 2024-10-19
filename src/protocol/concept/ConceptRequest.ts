@@ -2,16 +2,16 @@ import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
 
 
-class GnRequest {
+class ConceptRequest {
     num: number = 0;
 }
 
-export class GnRequestRegistration implements IProtocolRegistration<GnRequest> {
+export class ConceptRequestRegistration implements IProtocolRegistration<ConceptRequest> {
     protocolId(): number {
         return 221;
     }
 
-    write(buffer: IByteBuffer, packet: GnRequest | null) {
+    write(buffer: IByteBuffer, packet: ConceptRequest | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -20,13 +20,13 @@ export class GnRequestRegistration implements IProtocolRegistration<GnRequest> {
         buffer.writeInt(packet.num);
     }
 
-    read(buffer: IByteBuffer): GnRequest | null {
+    read(buffer: IByteBuffer): ConceptRequest | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new GnRequest();
+        const packet = new ConceptRequest();
         const result0 = buffer.readInt();
         packet.num = result0;
         if (length > 0) {
@@ -36,4 +36,4 @@ export class GnRequestRegistration implements IProtocolRegistration<GnRequest> {
     }
 }
 
-export default GnRequest;
+export default ConceptRequest;

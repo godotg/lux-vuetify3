@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import _ from "lodash";
 
-const newGnTimeout = 3 * 24 * 60 * 60 * 1000;
+const newConceptTimeout = 3 * 24 * 60 * 60 * 1000;
 const newNewsTimeout = 3 * 60 * 1000;
 const myAvatarDefault = avatarAutoUrl(1);
 const aiAvatarDefault = avatarAutoUrl(2);
@@ -15,7 +15,7 @@ export function avatarAutoUrl(id: number): string {
 
 export const useNewsStore = defineStore("newsStore", {
   state: () => ({
-    gnInfos: [],
+    concepts: [],
     newsInfos: [],
     newsLevelFilter: "D",
     newsLevelFilterValue: 5,
@@ -32,17 +32,17 @@ export const useNewsStore = defineStore("newsStore", {
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["newsInfos", "gnInfos", "newsLevelFilter", "newsLevelFilterValue", "chatMessageId"]}],
+    strategies: [{storage: localStorage, paths: ["newsInfos", "concepts", "newsLevelFilter", "newsLevelFilterValue", "chatMessageId"]}],
   },
 
   getters: {},
 
   actions: {
-    isNewGn(id: number): boolean {
-      const index = _.findIndex(this.gnInfos, it => it.id == id);
+    isNewConcept(id: number): boolean {
+      const index = _.findIndex(this.concepts, it => it.id == id);
       if (index >= 0) {
-        const gn = this.gnInfos[index];
-        if (new Date().getTime() - gn.time < newGnTimeout) {
+        const concept = this.concepts[index];
+        if (new Date().getTime() - concept.time < newConceptTimeout) {
           return true;
         } else {
           return false;
@@ -51,17 +51,17 @@ export const useNewsStore = defineStore("newsStore", {
       return true;
     },
 
-    updateGn(id: number) {
-      const index = _.findIndex(this.gnInfos, it => it.id == id);
+    updateConcept(id: number) {
+      const index = _.findIndex(this.concepts, it => it.id == id);
       if (index >= 0) {
         return;
       }
 
-      if (this.gnInfos.length >= 50) {
-        this.gnInfos = _.drop(this.gnInfos, 10);
+      if (this.concepts.length >= 50) {
+        this.concepts = _.drop(this.concepts, 10);
       }
 
-      this.gnInfos.push({
+      this.concepts.push({
         id: id,
         time: new Date().getTime()
       });

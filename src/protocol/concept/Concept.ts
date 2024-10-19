@@ -2,7 +2,7 @@ import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
 
 
-class GaiNian {
+class Concept {
     id: number = 0;
     level: string = '';
     title: string = '';
@@ -11,12 +11,12 @@ class GaiNian {
     ctime: string = '';
 }
 
-export class GaiNianRegistration implements IProtocolRegistration<GaiNian> {
+export class ConceptRegistration implements IProtocolRegistration<Concept> {
     protocolId(): number {
         return 220;
     }
 
-    write(buffer: IByteBuffer, packet: GaiNian | null) {
+    write(buffer: IByteBuffer, packet: Concept | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -30,13 +30,13 @@ export class GaiNianRegistration implements IProtocolRegistration<GaiNian> {
         buffer.writeString(packet.url);
     }
 
-    read(buffer: IByteBuffer): GaiNian | null {
+    read(buffer: IByteBuffer): Concept | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new GaiNian();
+        const packet = new Concept();
         const result0 = buffer.readString();
         packet.content = result0;
         const result1 = buffer.readString();
@@ -56,4 +56,4 @@ export class GaiNianRegistration implements IProtocolRegistration<GaiNian> {
     }
 }
 
-export default GaiNian;
+export default Concept;
