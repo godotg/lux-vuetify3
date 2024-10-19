@@ -17,11 +17,6 @@ function adminManager() {
   }
 }
 
-setTimeout(() => {
-  countRef.value = 0;
-}, 30000)
-
-
 </script>
 
 <template>

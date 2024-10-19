@@ -254,8 +254,8 @@ function copyNews(news: News, event: Event) {
         </v-card-item>
       </v-card>
       <template v-for="newsEle in newsRef">
-        <v-card class="mt-3" v-ripple @click="copyNews(newsEle, $event)">
-          <v-card-title>
+        <v-card class="mt-3">
+          <v-card-title v-ripple @click="copyNews(newsEle, $event)">
             <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
             级情报 {{ newsEle.ctime }}
             <v-icon v-if="newsStore.isNew(newsEle.id)" color="primary" icon="mdi-new-box"></v-icon>
@@ -330,8 +330,8 @@ function copyNews(news: News, event: Event) {
           <template v-slot:icon>
             <span>{{ newsEle.level }}</span>
           </template>
-          <v-card v-ripple @click="copyNews(newsEle, $event)" max-width="1100px">
-            <v-card-title>
+          <v-card max-width="1100px">
+            <v-card-title class="cursor-pointer" v-tooltip:start="'复制'" v-ripple @click="copyNews(newsEle, $event)">
               <v-icon :color="levelMap[newsEle.level].color" :icon="levelMap[newsEle.level].icon"></v-icon>
               级情报 {{ newsEle.ctime }}
               <v-icon v-if="newsStore.isNew(newsEle.id)" color="primary" icon="mdi-new-box"></v-icon>
