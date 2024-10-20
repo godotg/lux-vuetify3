@@ -31,7 +31,7 @@ watch(
     if (val) {
       const response: AdminInfoResponse = await asyncAsk(new AdminInfoRequest());
       broadcastsRef.value = response.broadcasts;
-      statisticsRef.value = response.statics;
+      statisticsRef.value = response.stats;
     }
   },
   {
