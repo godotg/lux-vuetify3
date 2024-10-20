@@ -1,7 +1,7 @@
 export default {
   jiucai: {
     news: "News",
-    navigation: "AI Navigation",
+    navigation: "Dark Wukong Navigation",
     chatgpt: "ChatGpt",
     chatgpt4: "ChatGpt 4",
     llama: "Llama 2",
