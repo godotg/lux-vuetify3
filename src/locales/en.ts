@@ -16,7 +16,22 @@ export default {
     ask: "how to cut leeks",
     frontendGithub: "frontend source",
     backendGithub: "backend source",
-    tutorial: "Tutorial"
+    tutorial: "Tutorial",
+    nav: {
+      n1: "Movies/TV/Cartoon",
+      n2: "Comics/eBooks/Music/Audiobooks",
+      n3: "BT Magnet Search & Download",
+      n4: "AI tools",
+      n5: "PC",
+      n6: "Phone",
+      n7: "PC Phone Other",
+      n8: "Hot Website",
+      n9: "Unpopular Website",
+      n10: "Learning Website",
+      n11: "General",
+      n12: "Design/Film Post",
+      n13: "Certification",
+    }
   },
   common: {
     add: "Add",

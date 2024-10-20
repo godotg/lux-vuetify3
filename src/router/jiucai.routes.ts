@@ -7,11 +7,11 @@ export default [
     component: () => import("@/views/jiucai/News.vue"),
   },
   {
-    path: "/ai",
+    path: "/navigation/:id",
     meta: {
       layout: "landing",
     },
-    component: () => import("@/views/jiucai/Navigation.vue"),
+    component: () => import("@/views/jiucai/navigation/Navigation.vue"),
   },
   {
     path: "/chatgpt",
