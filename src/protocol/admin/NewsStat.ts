@@ -2,7 +2,7 @@ import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
 
 
-class NewsStatics {
+class NewsStat {
     newsS: number = 0;
     newsA: number = 0;
     newsB: number = 0;
@@ -10,12 +10,12 @@ class NewsStatics {
     newsD: number = 0;
 }
 
-export class NewsStaticsRegistration implements IProtocolRegistration<NewsStatics> {
+export class NewsStatRegistration implements IProtocolRegistration<NewsStat> {
     protocolId(): number {
         return 10051;
     }
 
-    write(buffer: IByteBuffer, packet: NewsStatics | null) {
+    write(buffer: IByteBuffer, packet: NewsStat | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
@@ -28,13 +28,13 @@ export class NewsStaticsRegistration implements IProtocolRegistration<NewsStatic
         buffer.writeInt(packet.newsS);
     }
 
-    read(buffer: IByteBuffer): NewsStatics | null {
+    read(buffer: IByteBuffer): NewsStat | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new NewsStatics();
+        const packet = new NewsStat();
         const result0 = buffer.readInt();
         packet.newsA = result0;
         const result1 = buffer.readInt();
@@ -52,4 +52,4 @@ export class NewsStaticsRegistration implements IProtocolRegistration<NewsStatic
     }
 }
 
-export default NewsStatics;
+export default NewsStat;

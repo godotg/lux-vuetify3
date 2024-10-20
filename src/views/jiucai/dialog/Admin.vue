@@ -9,7 +9,7 @@ import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/
 import AdminInfoRequest from "@/protocol/admin/AdminInfoRequest";
 import AdminInfoResponse from "@/protocol/admin/AdminInfoResponse";
 import Broadcast from "@/protocol/admin/Broadcast";
-import SystemStatics from "@/protocol/admin/SystemStatics";
+import Statistics from "@/protocol/admin/Statistics";
 import DoBroadcastRequest from "@/protocol/admin/DoBroadcastRequest";
 import DoBroadcastResponse from "@/protocol/admin/DoBroadcastResponse";
 import DeleteBroadcastRequest from "@/protocol/admin/DeleteBroadcastRequest";
@@ -23,7 +23,7 @@ const snackbarStore = useSnackbarStore();
 import _ from "lodash";
 
 const broadcastsRef = ref<Broadcast[]>([]);
-const staticsRef = ref<SystemStatics[]>([]);
+const statisticsRef = ref<Statistics[]>([]);
 
 watch(
   () => myStore.adminDialog,
@@ -31,7 +31,7 @@ watch(
     if (val) {
       const response: AdminInfoResponse = await asyncAsk(new AdminInfoRequest());
       broadcastsRef.value = response.broadcasts;
-      staticsRef.value = response.statics;
+      statisticsRef.value = response.statics;
     }
   },
   {
@@ -113,6 +113,9 @@ async function deleteBroadcast(id: number) {
                 midjourney
               </th>
               <th>
+                导航
+              </th>
+              <th>
                 stable diffusion
               </th>
               <th>
@@ -136,20 +139,21 @@ async function deleteBroadcast(id: number) {
             </tr>
             </thead>
             <tbody>
-            <tr v-for="statics in staticsRef" :key="statics.id">
-              <td>{{ getFormatDate(statics.time) }}</td>
-              <td>{{ statics.ips }}</td>
-              <td>{{ statics.active }}</td>
-              <td>{{ statics.v2raySwitch }}</td>
-              <td>{{ statics.chatgptRequest }}</td>
-              <td>{{ statics.midImagineRequest }}</td>
-              <td>{{ statics.sdSimulateRequest }}</td>
-              <td>{{ statics.newsStatics.newsS + statics.newsStatics.newsA + statics.newsStatics.newsB + statics.newsStatics.newsC + statics.newsStatics.newsD }}</td>
-              <td>{{ statics.newsStatics.newsS }}</td>
-              <td>{{ statics.newsStatics.newsA }}</td>
-              <td>{{ statics.newsStatics.newsB }}</td>
-              <td>{{ statics.newsStatics.newsC }}</td>
-              <td>{{ statics.newsStatics.newsD }}</td>
+            <tr v-for="stat in statisticsRef" :key="stat.id">
+              <td>{{ getFormatDate(stat.time) }}</td>
+              <td>{{ stat.ips }}</td>
+              <td>{{ stat.active }}</td>
+              <td>{{ stat.v2raySwitch }}</td>
+              <td>{{ stat.chatgptRequest }}</td>
+              <td>{{ stat.midImagineRequest }}</td>
+              <td>{{ stat.navigation }}</td>
+              <td>{{ stat.sdSimulateRequest }}</td>
+              <td>{{ stat.newsStat.newsS + stat.newsStat.newsA + stat.newsStat.newsB + stat.newsStat.newsC + stat.newsStat.newsD }}</td>
+              <td>{{ stat.newsStat.newsS }}</td>
+              <td>{{ stat.newsStat.newsA }}</td>
+              <td>{{ stat.newsStat.newsB }}</td>
+              <td>{{ stat.newsStat.newsC }}</td>
+              <td>{{ stat.newsStat.newsD }}</td>
             </tr>
             </tbody>
           </v-table>

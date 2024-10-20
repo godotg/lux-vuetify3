@@ -1,12 +1,12 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
 import Broadcast from './Broadcast';
-import SystemStatics from './SystemStatics';
+import Statistics from './Statistics';
 
 
 class AdminInfoResponse {
     broadcasts: Array<Broadcast> = [];
-    statics: Array<SystemStatics> = [];
+    stats: Array<Statistics> = [];
 }
 
 export class AdminInfoResponseRegistration implements IProtocolRegistration<AdminInfoResponse> {
@@ -21,7 +21,7 @@ export class AdminInfoResponseRegistration implements IProtocolRegistration<Admi
         }
         buffer.writeInt(-1);
         buffer.writePacketList(packet.broadcasts, 10002);
-        buffer.writePacketList(packet.statics, 10050);
+        buffer.writePacketList(packet.stats, 10050);
     }
 
     read(buffer: IByteBuffer): AdminInfoResponse | null {
@@ -34,7 +34,7 @@ export class AdminInfoResponseRegistration implements IProtocolRegistration<Admi
         const list0 = buffer.readPacketList(10002);
         packet.broadcasts = list0;
         const list1 = buffer.readPacketList(10050);
-        packet.statics = list1;
+        packet.stats = list1;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

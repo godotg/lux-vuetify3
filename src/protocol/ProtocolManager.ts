@@ -188,10 +188,12 @@ import DeleteBroadcastRequest from './admin/DeleteBroadcastRequest';
 import { DeleteBroadcastRequestRegistration } from './admin/DeleteBroadcastRequest';
 import DeleteBroadcastResponse from './admin/DeleteBroadcastResponse';
 import { DeleteBroadcastResponseRegistration } from './admin/DeleteBroadcastResponse';
-import SystemStatics from './admin/SystemStatics';
-import { SystemStaticsRegistration } from './admin/SystemStatics';
-import NewsStatics from './admin/NewsStatics';
-import { NewsStaticsRegistration } from './admin/NewsStatics';
+import Statistics from './admin/Statistics';
+import { StatisticsRegistration } from './admin/Statistics';
+import NewsStat from './admin/NewsStat';
+import { NewsStatRegistration } from './admin/NewsStat';
+import StatisticsRequest from './admin/StatisticsRequest';
+import { StatisticsRequestRegistration } from './admin/StatisticsRequest';
 import IByteBuffer from "./IByteBuffer";
 import IProtocolRegistration from "./IProtocolRegistration";
 
@@ -389,10 +391,12 @@ protocols.set(10010, new DeleteBroadcastRequestRegistration());
 protocolIdMap.set(DeleteBroadcastRequest, 10010);
 protocols.set(10011, new DeleteBroadcastResponseRegistration());
 protocolIdMap.set(DeleteBroadcastResponse, 10011);
-protocols.set(10050, new SystemStaticsRegistration());
-protocolIdMap.set(SystemStatics, 10050);
-protocols.set(10051, new NewsStaticsRegistration());
-protocolIdMap.set(NewsStatics, 10051);
+protocols.set(10050, new StatisticsRegistration());
+protocolIdMap.set(Statistics, 10050);
+protocols.set(10051, new NewsStatRegistration());
+protocolIdMap.set(NewsStat, 10051);
+protocols.set(10060, new StatisticsRequestRegistration());
+protocolIdMap.set(StatisticsRequest, 10060);
 
 class ProtocolManager {
     static getProtocolId(clazz: any): number {
