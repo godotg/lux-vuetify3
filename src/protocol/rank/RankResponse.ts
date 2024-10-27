@@ -7,6 +7,7 @@ import ThsRank from './ThsRank';
 class RankResponse {
     eastMoneyRanks: Array<EastMoneyRank> = [];
     thsRanks: Array<ThsRank> = [];
+    core: string = '';
 }
 
 export class RankResponseRegistration implements IProtocolRegistration<RankResponse> {
@@ -20,6 +21,7 @@ export class RankResponseRegistration implements IProtocolRegistration<RankRespo
             return;
         }
         buffer.writeInt(-1);
+        buffer.writeString(packet.core);
         buffer.writePacketList(packet.eastMoneyRanks, 225);
         buffer.writePacketList(packet.thsRanks, 226);
     }
@@ -31,10 +33,12 @@ export class RankResponseRegistration implements IProtocolRegistration<RankRespo
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new RankResponse();
-        const list0 = buffer.readPacketList(225);
-        packet.eastMoneyRanks = list0;
-        const list1 = buffer.readPacketList(226);
-        packet.thsRanks = list1;
+        const result0 = buffer.readString();
+        packet.core = result0;
+        const list1 = buffer.readPacketList(225);
+        packet.eastMoneyRanks = list1;
+        const list2 = buffer.readPacketList(226);
+        packet.thsRanks = list2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

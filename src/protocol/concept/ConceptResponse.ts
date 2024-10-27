@@ -5,7 +5,7 @@ import Concept from './Concept';
 
 class ConceptResponse {
     concepts: Array<Concept> = [];
-    hotNotice: string = '';
+    core: string = '';
 }
 
 export class ConceptResponseRegistration implements IProtocolRegistration<ConceptResponse> {
@@ -20,7 +20,7 @@ export class ConceptResponseRegistration implements IProtocolRegistration<Concep
         }
         buffer.writeInt(-1);
         buffer.writePacketList(packet.concepts, 220);
-        buffer.writeString(packet.hotNotice);
+        buffer.writeString(packet.core);
     }
 
     read(buffer: IByteBuffer): ConceptResponse | null {
@@ -33,7 +33,7 @@ export class ConceptResponseRegistration implements IProtocolRegistration<Concep
         const list0 = buffer.readPacketList(220);
         packet.concepts = list0;
         const result1 = buffer.readString();
-        packet.hotNotice = result1;
+        packet.core = result1;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

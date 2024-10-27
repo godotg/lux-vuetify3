@@ -6,6 +6,7 @@ class ThsRank {
     code: number = 0;
     name: string = '';
     rate: number = 0;
+    rankChange: number = 0;
     analyse: string = '';
 }
 
@@ -23,6 +24,7 @@ export class ThsRankRegistration implements IProtocolRegistration<ThsRank> {
         buffer.writeString(packet.analyse);
         buffer.writeInt(packet.code);
         buffer.writeString(packet.name);
+        buffer.writeInt(packet.rankChange);
         buffer.writeInt(packet.rate);
     }
 
@@ -40,7 +42,9 @@ export class ThsRankRegistration implements IProtocolRegistration<ThsRank> {
         const result2 = buffer.readString();
         packet.name = result2;
         const result3 = buffer.readInt();
-        packet.rate = result3;
+        packet.rankChange = result3;
+        const result4 = buffer.readInt();
+        packet.rate = result4;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

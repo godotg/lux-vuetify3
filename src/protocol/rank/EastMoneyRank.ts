@@ -5,6 +5,7 @@ import IProtocolRegistration from '../IProtocolRegistration';
 class EastMoneyRank {
     code: number = 0;
     name: string = '';
+    rankChange: number = 0;
 }
 
 export class EastMoneyRankRegistration implements IProtocolRegistration<EastMoneyRank> {
@@ -20,6 +21,7 @@ export class EastMoneyRankRegistration implements IProtocolRegistration<EastMone
         buffer.writeInt(-1);
         buffer.writeInt(packet.code);
         buffer.writeString(packet.name);
+        buffer.writeInt(packet.rankChange);
     }
 
     read(buffer: IByteBuffer): EastMoneyRank | null {
@@ -33,6 +35,8 @@ export class EastMoneyRankRegistration implements IProtocolRegistration<EastMone
         packet.code = result0;
         const result1 = buffer.readString();
         packet.name = result1;
+        const result2 = buffer.readInt();
+        packet.rankChange = result2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

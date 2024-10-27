@@ -9,11 +9,16 @@ import NewsLoadMoreResponse from "@/protocol/news/NewsLoadMoreResponse";
 import Concept from "@/protocol/concept/Concept";
 import ConceptRequest from "@/protocol/concept/ConceptRequest";
 import ConceptResponse from "@/protocol/concept/ConceptResponse";
+import ThsRank from "@/protocol/rank/ThsRank";
+import EastMoneyRank from "@/protocol/rank/EastMoneyRank";
+import RankRequest from "@/protocol/rank/RankRequest";
+import RankResponse from "@/protocol/rank/RankResponse";
 import _ from "lodash";
 import {useDisplay} from "vuetify";
 import clipboard from "@/utils/clipboardUtils";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
+import {getFormatDate} from "@/utils/timeUtils";
 
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
@@ -21,8 +26,11 @@ const {mobile, width, height} = useDisplay();
 
 
 const newsRef = ref<News[]>([]);
-const conceptRef = ref<Concept[]>([]);
-const conceptHotNoticeRef = ref<string>('');
+const conceptsRef = ref<Concept[]>([]);
+const thsRanksRef = ref<ThsRank[]>([]);
+const eastMoneyRanksRef = ref<EastMoneyRank[]>([]);
+const conceptCoreRef = ref<string>('');
+const rankCoreCoreRef = ref<string>('');
 const loadingRef = ref(true);
 let endId = -1;
 let startId = -1;
@@ -73,7 +81,6 @@ onMounted(() => {
   console.log("news on mounted-----------------------------------------");
   initNews();
   setInterval(() => requestNews(), 15000);
-  setInterval(() => requestConcept(30), 600000);
 });
 
 watch(
@@ -95,7 +102,8 @@ document.addEventListener("visibilitychange", function () {
 function initNews() {
   setTimeout(() => {
     doInitNews();
-    requestConcept(30);
+    requestConcepts(20);
+    requestRanks(40);
   }, 1000);
 }
 
@@ -151,30 +159,83 @@ async function loadMoreNews() {
 }
 
 
-function updateNewsRef(news: Array<News>) {
-  if (_.isEmpty(news)) {
-    return;
-  }
-  news = _.filter(news, (it) => {
-    return _.findIndex(newsRef.value, (it1) => it1.id == it.id) < 0;
-  });
-  let newNews = _.concat(newsRef.value, news);
-  newNews = _.sortBy(newNews, (it) => it.id);
-  newNews = _.reverse(newNews);
-  newsRef.value = newNews;
-}
-
 // ---------------------------------------------------------------------------------------------------------------------
 
-async function requestConcept(num: number, notice: boolean = false) {
+async function requestConcepts(num: number, notice: boolean = false) {
   const request = new ConceptRequest();
   request.num = num;
   const response: ConceptResponse = await asyncAsk(request)
-  conceptRef.value = response.concepts;
-  conceptHotNoticeRef.value = response.hotNotice;
-  conceptRef.value.forEach(it => newsStore.updateConcept(it.id));
+  conceptsRef.value = response.concepts;
+  conceptCoreRef.value = response.core;
+  conceptsRef.value.forEach(it => newsStore.updateConcept(it.id));
   if (notice) {
     snackbarStore.showSuccessMessage("加载了更多的新概念");
+  }
+}
+
+async function requestRanks(num: number) {
+  const request = new RankRequest();
+  request.num = num;
+  const response: RankResponse = await asyncAsk(request)
+  thsRanksRef.value = response.thsRanks;
+  eastMoneyRanksRef.value = response.eastMoneyRanks;
+  rankCoreCoreRef.value = response.core;
+  snackbarStore.showSuccessMessage("股票热度排名");
+}
+
+function formatCode(code: number) {
+  let stockCode = _.toString(code);
+  switch (stockCode.length) {
+    case 0:
+      stockCode = "000000";
+      break;
+    case 1:
+      stockCode = `00000${stockCode}`;
+      break;
+    case 2:
+      stockCode = `0000${stockCode}`;
+      break;
+    case 3:
+      stockCode = `000${stockCode}`;
+      break;
+    case 4:
+      stockCode = `00${stockCode}`;
+      break;
+    case 5:
+      stockCode = `0${stockCode}`;
+      break;
+    case 6:
+      break;
+    default:
+  }
+  return stockCode;
+}
+
+async function gotToEastMoney(code: number) {
+  const stockCode = formatCode(code);
+  if (stockCode.startsWith("8")) {
+    window.open(`https://quote.eastmoney.com/bj/${stockCode}.html`, '_blank');
+  } else if (stockCode.startsWith("688")) {
+    window.open(`https://quote.eastmoney.com/kcb/${stockCode}.html`, '_blank');
+  } else if (stockCode.startsWith("3") || stockCode.startsWith("0")) {
+    window.open(`https://quote.eastmoney.com/sz${stockCode}.html`, '_blank');
+  } else if (stockCode.startsWith("6")) {
+    window.open(`https://quote.eastmoney.com/sh${stockCode}.html`, '_blank');
+  } else {
+    snackbarStore.showErrorMessage(`无法识别的代码[${stockCode}]`);
+  }
+}
+
+async function gotToThs(code: number) {
+  const stockCode = formatCode(code);
+  window.open(`https://stockpage.10jqka.com.cn/${stockCode}/`, '_blank');
+}
+
+function hotRankChange(rankChange: number) {
+  if (rankChange > 0) {
+    return `+${rankChange}`;
+  } else {
+    return _.toString(rankChange);
   }
 }
 
@@ -228,18 +289,18 @@ function copyNews(news: News, event: Event) {
 <template>
   <v-container>
     <template v-if="mobile">
-      <v-card v-if="!_.isEmpty(conceptRef)" class="mt-3">
-        <v-card-title>
+      <v-card v-if="!_.isEmpty(conceptsRef)" class="mt-3">
+        <v-card-title v-ripple @click="requestConcepts(108, true)">
           <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
           &nbsp;
           新概念
           &nbsp;
-          <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestConcept(108, true)"></v-icon>
+          <v-icon color="primary" icon="mdi-format-list-bulleted" size="small"></v-icon>
         </v-card-title>
         <v-card-subtitle>
-          {{ conceptHotNoticeRef }}
+          {{ conceptCoreRef }}
         </v-card-subtitle>
-        <v-card-item v-for="concept in conceptRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple @click="copyConcept(concept, $event)">
+        <v-card-item v-for="concept in conceptsRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple @click="copyConcept(concept, $event)">
           <v-row>
             <v-col class="font-weight-bold" cols="4">
               {{ concept.ctime }}
@@ -248,10 +309,47 @@ function copyNews(news: News, event: Event) {
               <a :href="concept.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
                 {{ concept.content }}
               </a>
-              <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
+              <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary" icon="mdi-alert-octagram-outline" size="small"></v-icon>
             </v-col>
           </v-row>
         </v-card-item>
+      </v-card>
+      <v-card v-if="!_.isEmpty(eastMoneyRanksRef)" class="mt-3">
+        <v-card-title v-ripple @click="requestRanks(100)">
+          <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
+          &nbsp;
+          Top排行
+          &nbsp;
+          <v-icon color="primary" icon="mdi-format-list-bulleted" size="small"></v-icon>
+        </v-card-title>
+        <v-card-text>
+          <v-table density="compact">
+            <thead>
+            <tr>
+              <th>
+                排名
+              </th>
+              <th>
+                东方财富
+              </th>
+              <th>
+                升降
+              </th>
+              <th>
+                同花顺
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
+              <td>{{ i + 1 }}</td>
+              <td class="cursor-pointer" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">{{ rank.name }}</td>
+              <td>{{ hotRankChange(rank.rankChange) }}</td>
+              <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">{{ thsRanksRef[i].name }}</td>
+            </tr>
+            </tbody>
+          </v-table>
+        </v-card-text>
       </v-card>
       <template v-for="newsEle in newsRef">
         <v-card class="mt-3">
@@ -294,22 +392,22 @@ function copyNews(news: News, event: Event) {
       </template>
     </template>
     <v-timeline v-else density="compact" side="end">
-      <v-timeline-item v-if="!_.isEmpty(conceptRef)" fill-dot dot-color="purple" size="x-large">
+      <v-timeline-item v-if="!_.isEmpty(conceptsRef)" fill-dot dot-color="primary" size="x-large">
         <template v-slot:icon>
           <span>SSR</span>
         </template>
         <v-card min-width="580px">
-          <v-card-title>
+          <v-card-title class="cursor-pointer" v-tooltip:start="'更多概念'" v-ripple @click="requestConcepts(108, true)">
             <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
             &nbsp;
             新概念
             &nbsp;
-            <v-icon v-ripple color="primary" icon="mdi-format-list-bulleted" size="small" @click="requestConcept(108, true)"></v-icon>
+            <v-icon color="primary" icon="mdi-format-list-bulleted" size="small"></v-icon>
           </v-card-title>
-          <v-card-subtitle>
-            {{ conceptHotNoticeRef }}
+          <v-card-subtitle class="text-wrap">
+            {{ conceptCoreRef }}
           </v-card-subtitle>
-          <v-card-item v-for="concept in conceptRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple @click="copyConcept(concept, $event)">
+          <v-card-item v-for="concept in conceptsRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple @click="copyConcept(concept, $event)">
             <v-row>
               <v-col class="font-weight-bold" cols="3">
                 {{ concept.ctime }}
@@ -323,6 +421,56 @@ function copyNews(news: News, event: Event) {
               </v-col>
             </v-row>
           </v-card-item>
+        </v-card>
+      </v-timeline-item>
+      <v-timeline-item v-if="!_.isEmpty(eastMoneyRanksRef)" fill-dot dot-color="primary" size="x-large">
+        <template v-slot:icon>
+          <span>Rank</span>
+        </template>
+        <v-card>
+          <v-card-title class="cursor-pointer" v-tooltip:start="'更多排名'" v-ripple @click="requestRanks(100)">
+            <v-icon color="primary" icon="mdi-chili-hot" size="x-large"></v-icon>
+            &nbsp;
+            Top排行
+            &nbsp;
+            <v-icon color="primary" icon="mdi-format-list-bulleted" size="small"></v-icon>
+          </v-card-title>
+          <v-card-text>
+            <v-table density="compact">
+              <thead>
+              <tr>
+                <th>
+                  排名
+                </th>
+                <th>
+                  东方财富
+                </th>
+                <th>
+                  升降
+                </th>
+                <th>
+                  同花顺
+                </th>
+                <th>
+                  升降
+                </th>
+                <th>
+                  热度
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
+                <td>{{ i + 1 }}</td>
+                <td class="cursor-pointer" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">{{ rank.name }}</td>
+                <td>{{ hotRankChange(rank.rankChange) }}</td>
+                <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">{{ thsRanksRef[i].name }}</td>
+                <td>{{ hotRankChange(thsRanksRef[i].rankChange) }}</td>
+                <td>{{ _.ceil(thsRanksRef[i].rate / 1000) }}</td>
+              </tr>
+              </tbody>
+            </v-table>
+          </v-card-text>
         </v-card>
       </v-timeline-item>
       <template v-for="newsEle in newsRef">
