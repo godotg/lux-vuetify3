@@ -316,7 +316,7 @@ function copyNews(news: News, event: Event) {
       </v-card>
       <v-card v-if="!_.isEmpty(eastMoneyRanksRef)" class="mt-3">
         <v-card-title v-ripple @click="requestRanks(100)">
-          <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
+          <v-icon color="primary" icon="mdi-chili-hot" size="x-large"></v-icon>
           &nbsp;
           Top排行
           &nbsp;
