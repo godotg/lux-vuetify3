@@ -102,8 +102,8 @@ document.addEventListener("visibilitychange", function () {
 function initNews() {
   setTimeout(() => {
     doInitNews();
-    requestConcepts(20);
-    requestRanks(40);
+    requestConcepts(27);
+    requestRanks(37);
   }, 1000);
 }
 
@@ -449,13 +449,16 @@ function copyNews(news: News, event: Event) {
                   升降
                 </th>
                 <th>
-                  同花顺
+                  同花顺列
                 </th>
                 <th>
                   升降
                 </th>
                 <th>
                   热度
+                </th>
+                <th>
+                  AI解析
                 </th>
               </tr>
               </thead>
@@ -467,6 +470,7 @@ function copyNews(news: News, event: Event) {
                 <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">{{ thsRanksRef[i].name }}</td>
                 <td>{{ hotRankChange(thsRanksRef[i].rankChange) }}</td>
                 <td>{{ _.ceil(thsRanksRef[i].rate / 1000) }}</td>
+                <td>{{ thsRanksRef[i].analyse }}</td>
               </tr>
               </tbody>
             </v-table>
