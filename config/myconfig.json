@@ -1,5 +1,5 @@
 {
-  "version": "3.1.1",
-  "name": "ai热点分析",
+  "version": "3.2.0",
+  "name": "行情指数",
   "board": "/config/board.md"
 }
