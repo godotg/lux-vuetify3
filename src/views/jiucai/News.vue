@@ -21,97 +21,8 @@ import clipboard from "@/utils/clipboardUtils";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
 import {getFormatDate, getFormatMonth} from "@/utils/timeUtils";
-
-// ---------------------------------------------------------------------------------------------------------------------
 import Chart from 'chart.js/auto';
 
-async function requestMarkets() {
-  const request = new MarketRequest();
-  request.num = 90;
-  const response: MarketResponse = await asyncAsk(request);
-
-  new Chart(document.getElementById('exchangeChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
-          label: '量能（亿）',
-          data: response.markets.map(it => it.exchange)
-        },
-        {
-          type: 'bubble',
-          label: '总流通市值（百亿）',
-          data: response.markets.map(it => it.amount / 100)
-        },
-      ],
-    },
-  });
-
-  new Chart(document.getElementById('shChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
-          label: '上海主板（亿）',
-          data: response.markets.map(it => it.shAmount)
-        },
-      ],
-    },
-  });
-
-  new Chart(document.getElementById('kcChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
-          label: '科创板（亿）',
-          data: response.markets.map(it => it.kcAmount)
-        },
-      ],
-    },
-  });
-  new Chart(document.getElementById('szChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
-          label: '深圳主板（亿）',
-          data: response.markets.map(it => it.szAmount)
-        },
-      ],
-    },
-  });
-  new Chart(document.getElementById('cyChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
-          label: '创业板（亿）',
-          data: response.markets.map(it => it.cyAmount)
-        },
-      ],
-    },
-  });
-  new Chart(document.getElementById('bjChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
-          label: '北交所（亿）',
-          data: response.markets.map(it => it.bjAmount)
-        },
-      ],
-    },
-  });
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
 const {mobile, width, height} = useDisplay();
@@ -275,6 +186,99 @@ async function requestRanks(num: number) {
   rankCoreCoreRef.value = response.core;
   snackbarStore.showSuccessMessage("股票热度排名");
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+async function requestMarkets() {
+  if (mobile.value) {
+    return;
+  }
+  const request = new MarketRequest();
+  request.num = 90;
+  const response: MarketResponse = await asyncAsk(request);
+
+  new Chart(document.getElementById('exchangeChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '量能（亿）',
+          data: response.markets.map(it => it.exchange)
+        },
+        {
+          type: 'bubble',
+          label: '总流通市值（百亿）',
+          data: response.markets.map(it => it.amount / 100)
+        },
+      ],
+    },
+  });
+
+  new Chart(document.getElementById('shChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '上海主板（亿）',
+          data: response.markets.map(it => it.shAmount)
+        },
+      ],
+    },
+  });
+
+  new Chart(document.getElementById('kcChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '科创板（亿）',
+          data: response.markets.map(it => it.kcAmount)
+        },
+      ],
+    },
+  });
+  new Chart(document.getElementById('szChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '深圳主板（亿）',
+          data: response.markets.map(it => it.szAmount)
+        },
+      ],
+    },
+  });
+  new Chart(document.getElementById('cyChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '创业板（亿）',
+          data: response.markets.map(it => it.cyAmount)
+        },
+      ],
+    },
+  });
+  new Chart(document.getElementById('bjChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '北交所（亿）',
+          data: response.markets.map(it => it.bjAmount)
+        },
+      ],
+    },
+  });
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
 
 function formatCode(code: number) {
   let stockCode = _.toString(code);
