@@ -591,7 +591,7 @@ function copyNews(news: News, event: Event) {
         <template v-slot:icon>
           <span>量能</span>
         </template>
-        <v-card min-width="80vw">
+        <v-card width="1100px">
           <v-card-text>
             <canvas id="exchangeChart"></canvas>
           </v-card-text>
@@ -601,7 +601,7 @@ function copyNews(news: News, event: Event) {
         <template v-slot:icon>
           <span>Data</span>
         </template>
-        <v-card min-width="80vw">
+        <v-card width="1100px">
           <v-card-text>
             <canvas id="shChart"></canvas>
           </v-card-text>
@@ -611,7 +611,7 @@ function copyNews(news: News, event: Event) {
         <template v-slot:icon>
           <span>Data</span>
         </template>
-        <v-card min-width="80vw">
+        <v-card width="1100px">
           <v-card-text>
             <canvas id="kcChart"></canvas>
           </v-card-text>
@@ -621,7 +621,7 @@ function copyNews(news: News, event: Event) {
         <template v-slot:icon>
           <span>Data</span>
         </template>
-        <v-card min-width="80vw">
+        <v-card width="1100px">
           <v-card-text>
             <canvas id="szChart"></canvas>
           </v-card-text>
@@ -631,7 +631,7 @@ function copyNews(news: News, event: Event) {
         <template v-slot:icon>
           <span>Data</span>
         </template>
-        <v-card min-width="80vw">
+        <v-card width="1100px">
           <v-card-text>
             <canvas id="cyChart"></canvas>
           </v-card-text>
@@ -641,7 +641,7 @@ function copyNews(news: News, event: Event) {
         <template v-slot:icon>
           <span>Data</span>
         </template>
-        <v-card min-width="80vw">
+        <v-card width="1100px">
           <v-card-text>
             <canvas id="bjChart"></canvas>
           </v-card-text>
