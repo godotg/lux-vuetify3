@@ -30,6 +30,13 @@ export function getFormatDate(time) {
   return date.getFullYear() + '-' + month + '-' + day;
 }
 
+export function getFormatMonth(time) {
+  const date = new Date(time);
+  const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+  const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  return month + '-' + day;
+}
+
 /**
  * @param time 时间戳
  * @returns {string} yy-mm-dd hh:mm:ss

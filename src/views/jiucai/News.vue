@@ -13,13 +13,105 @@ import ThsRank from "@/protocol/rank/ThsRank";
 import EastMoneyRank from "@/protocol/rank/EastMoneyRank";
 import RankRequest from "@/protocol/rank/RankRequest";
 import RankResponse from "@/protocol/rank/RankResponse";
+import MarketRequest from "@/protocol/stock/MarketRequest";
+import MarketResponse from "@/protocol/stock/MarketResponse";
 import _ from "lodash";
 import {useDisplay} from "vuetify";
 import clipboard from "@/utils/clipboardUtils";
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
-import {getFormatDate} from "@/utils/timeUtils";
+import {getFormatDate, getFormatMonth} from "@/utils/timeUtils";
 
+// ---------------------------------------------------------------------------------------------------------------------
+import Chart from 'chart.js/auto';
+
+async function requestMarkets() {
+  const request = new MarketRequest();
+  request.num = 90;
+  const response: MarketResponse = await asyncAsk(request);
+
+  new Chart(document.getElementById('exchangeChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '量能（亿）',
+          data: response.markets.map(it => it.exchange)
+        },
+        {
+          type: 'bubble',
+          label: '总流通市值（百亿）',
+          data: response.markets.map(it => it.amount / 100)
+        },
+      ],
+    },
+  });
+
+  new Chart(document.getElementById('shChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '上海主板（亿）',
+          data: response.markets.map(it => it.shAmount)
+        },
+      ],
+    },
+  });
+
+  new Chart(document.getElementById('kcChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '科创板（亿）',
+          data: response.markets.map(it => it.kcAmount)
+        },
+      ],
+    },
+  });
+  new Chart(document.getElementById('szChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '深圳主板（亿）',
+          data: response.markets.map(it => it.szAmount)
+        },
+      ],
+    },
+  });
+  new Chart(document.getElementById('cyChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '创业板（亿）',
+          data: response.markets.map(it => it.cyAmount)
+        },
+      ],
+    },
+  });
+  new Chart(document.getElementById('bjChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'bar',
+          label: '北交所（亿）',
+          data: response.markets.map(it => it.bjAmount)
+        },
+      ],
+    },
+  });
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
 const {mobile, width, height} = useDisplay();
@@ -79,14 +171,14 @@ const jokes = [
 
 onMounted(() => {
   console.log("news on mounted-----------------------------------------");
-  initNews();
+  init();
   setInterval(() => requestNews(), 15000);
 });
 
 watch(
   () => newsStore.newsLevelFilterValue,
   async (val) => {
-    initNews();
+    init();
   },
   {
     deep: true,
@@ -99,19 +191,20 @@ document.addEventListener("visibilitychange", function () {
   }
 });
 
-function initNews() {
-  setTimeout(() => {
-    doInitNews();
-    requestConcepts(27);
-    requestRanks(37);
-  }, 1000);
+function init() {
+  if (!isWebsocketReady()) {
+    setTimeout(() => {
+      init();
+    }, 100);
+  }
+
+  doInitNews();
+  requestConcepts(27);
+  requestRanks(37);
+  requestMarkets();
 }
 
 async function doInitNews() {
-  if (!isWebsocketReady()) {
-    initNews();
-    return;
-  }
   const request = new NewsRequest();
   request.endId = -1;
   request.level = newsStore.newsLevelFilterValue;
@@ -300,7 +393,8 @@ function copyNews(news: News, event: Event) {
         <v-card-subtitle>
           {{ conceptCoreRef }}
         </v-card-subtitle>
-        <v-card-item v-for="concept in conceptsRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple @click="copyConcept(concept, $event)">
+        <v-card-item v-for="concept in conceptsRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple
+                     @click="copyConcept(concept, $event)">
           <v-row>
             <v-col class="font-weight-bold" cols="4">
               {{ concept.ctime }}
@@ -309,7 +403,8 @@ function copyNews(news: News, event: Event) {
               <a :href="concept.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
                 {{ concept.content }}
               </a>
-              <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary" icon="mdi-alert-octagram-outline" size="small"></v-icon>
+              <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary" icon="mdi-alert-octagram-outline"
+                      size="small"></v-icon>
             </v-col>
           </v-row>
         </v-card-item>
@@ -343,9 +438,13 @@ function copyNews(news: News, event: Event) {
             <tbody>
             <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
               <td>{{ i + 1 }}</td>
-              <td class="cursor-pointer" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">{{ rank.name }}</td>
+              <td class="cursor-pointer" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
+                {{ rank.name }}
+              </td>
               <td>{{ hotRankChange(rank.rankChange) }}</td>
-              <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">{{ thsRanksRef[i].name }}</td>
+              <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">
+                {{ thsRanksRef[i].name }}
+              </td>
             </tr>
             </tbody>
           </v-table>
@@ -397,7 +496,8 @@ function copyNews(news: News, event: Event) {
           <span>SSR</span>
         </template>
         <v-card min-width="580px">
-          <v-card-title class="cursor-pointer" v-tooltip:start="'更多概念'" v-ripple @click="requestConcepts(108, true)">
+          <v-card-title class="cursor-pointer" v-tooltip:start="'更多概念'" v-ripple
+                        @click="requestConcepts(108, true)">
             <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
             &nbsp;
             新概念
@@ -407,7 +507,8 @@ function copyNews(news: News, event: Event) {
           <v-card-subtitle class="text-wrap">
             {{ conceptCoreRef }}
           </v-card-subtitle>
-          <v-card-item v-for="concept in conceptsRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple @click="copyConcept(concept, $event)">
+          <v-card-item v-for="concept in conceptsRef" :key="concept.id" class="text-pre-wrap py-1" v-ripple
+                       @click="copyConcept(concept, $event)">
             <v-row>
               <v-col class="font-weight-bold" cols="3">
                 {{ concept.ctime }}
@@ -417,7 +518,8 @@ function copyNews(news: News, event: Event) {
                   {{ concept.content }}
                 </a>
                 {{ concept.title }}
-                <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary" icon="mdi-alert-octagram-outline"></v-icon>
+                <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary"
+                        icon="mdi-alert-octagram-outline"></v-icon>
               </v-col>
             </v-row>
           </v-card-item>
@@ -465,15 +567,79 @@ function copyNews(news: News, event: Event) {
               <tbody>
               <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
                 <td>{{ i + 1 }}</td>
-                <td class="cursor-pointer" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">{{ rank.name }}</td>
+                <td class="cursor-pointer" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
+                  {{ rank.name }}
+                </td>
                 <td>{{ hotRankChange(rank.rankChange) }}</td>
-                <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">{{ thsRanksRef[i].name }}</td>
+                <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">
+                  {{ thsRanksRef[i].name }}
+                </td>
                 <td>{{ hotRankChange(thsRanksRef[i].rankChange) }}</td>
                 <td>{{ _.ceil(thsRanksRef[i].rate / 1000) }}</td>
                 <td>{{ thsRanksRef[i].analyse }}</td>
               </tr>
               </tbody>
             </v-table>
+          </v-card-text>
+        </v-card>
+      </v-timeline-item>
+      <v-timeline-item fill-dot dot-color="primary" size="x-large">
+        <template v-slot:icon>
+          <span>量能</span>
+        </template>
+        <v-card min-width="80vw">
+          <v-card-text>
+            <canvas id="exchangeChart"></canvas>
+          </v-card-text>
+        </v-card>
+      </v-timeline-item>
+      <v-timeline-item fill-dot dot-color="primary" size="x-large">
+        <template v-slot:icon>
+          <span>Data</span>
+        </template>
+        <v-card min-width="80vw">
+          <v-card-text>
+            <canvas id="shChart"></canvas>
+          </v-card-text>
+        </v-card>
+      </v-timeline-item>
+      <v-timeline-item fill-dot dot-color="primary" size="x-large">
+        <template v-slot:icon>
+          <span>Data</span>
+        </template>
+        <v-card min-width="80vw">
+          <v-card-text>
+            <canvas id="kcChart"></canvas>
+          </v-card-text>
+        </v-card>
+      </v-timeline-item>
+      <v-timeline-item fill-dot dot-color="primary" size="x-large">
+        <template v-slot:icon>
+          <span>Data</span>
+        </template>
+        <v-card min-width="80vw">
+          <v-card-text>
+            <canvas id="szChart"></canvas>
+          </v-card-text>
+        </v-card>
+      </v-timeline-item>
+      <v-timeline-item fill-dot dot-color="primary" size="x-large">
+        <template v-slot:icon>
+          <span>Data</span>
+        </template>
+        <v-card min-width="80vw">
+          <v-card-text>
+            <canvas id="cyChart"></canvas>
+          </v-card-text>
+        </v-card>
+      </v-timeline-item>
+      <v-timeline-item fill-dot dot-color="primary" size="x-large">
+        <template v-slot:icon>
+          <span>Data</span>
+        </template>
+        <v-card min-width="80vw">
+          <v-card-text>
+            <canvas id="bjChart"></canvas>
           </v-card-text>
         </v-card>
       </v-timeline-item>
