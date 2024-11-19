@@ -197,6 +197,51 @@ async function requestMarkets() {
   request.num = 90;
   const response: MarketResponse = await asyncAsk(request);
 
+  const firstMarket = _.first(response.markets);
+  const shMarketIndex = firstMarket.shMarketIndex / 100;
+  const marketIndexRatio = firstMarket?.marketIndex / shMarketIndex;
+  const kcMarketIndexRatio = firstMarket?.kcMarketIndex / shMarketIndex;
+  const szMarketIndexRatio = firstMarket?.szMarketIndex / shMarketIndex;
+  const cyMarketIndexRatio = firstMarket?.cyMarketIndex / shMarketIndex;
+  const bjMarketIndexRatio = firstMarket?.bjMarketIndex / shMarketIndex;
+  new Chart(document.getElementById('indexChart'), {
+    data: {
+      labels: response.markets.map(it => getFormatMonth(it.date)),
+      datasets: [
+        {
+          type: 'line',
+          label: '韭菜指数',
+          data: response.markets.map(it => it.marketIndex / marketIndexRatio)
+        },
+        {
+          type: 'line',
+          label: '上海主板',
+          data: response.markets.map(it => it.shMarketIndex / 100)
+        },
+        {
+          type: 'line',
+          label: '科创板',
+          data: response.markets.map(it => it.kcMarketIndex / kcMarketIndexRatio)
+        },
+        {
+          type: 'line',
+          label: '深圳主板',
+          data: response.markets.map(it => it.szMarketIndex / szMarketIndexRatio)
+        },
+        {
+          type: 'line',
+          label: '创业板',
+          data: response.markets.map(it => it.cyMarketIndex / cyMarketIndexRatio)
+        },
+        {
+          type: 'line',
+          label: '北交所',
+          data: response.markets.map(it => it.bjMarketIndex / bjMarketIndexRatio)
+        },
+      ],
+    },
+  });
+
   new Chart(document.getElementById('exchangeChart'), {
     data: {
       labels: response.markets.map(it => getFormatMonth(it.date)),
@@ -207,7 +252,7 @@ async function requestMarkets() {
           data: response.markets.map(it => it.exchange)
         },
         {
-          type: 'bubble',
+          type: 'line',
           label: '总流通市值（百亿）',
           data: response.markets.map(it => it.amount / 100)
         },
@@ -221,8 +266,13 @@ async function requestMarkets() {
       datasets: [
         {
           type: 'bar',
-          label: '上海主板（亿）',
-          data: response.markets.map(it => it.shAmount)
+          label: '上海主板/量能（亿）',
+          data: response.markets.map(it => it.shExchange)
+        },
+        {
+          type: 'line',
+          label: '上海主板/总流通市值（百亿）',
+          data: response.markets.map(it => it.shAmount / 100)
         },
       ],
     },
@@ -234,8 +284,13 @@ async function requestMarkets() {
       datasets: [
         {
           type: 'bar',
-          label: '科创板（亿）',
-          data: response.markets.map(it => it.kcAmount)
+          label: '科创板/量能（亿）',
+          data: response.markets.map(it => it.kcExchange)
+        },
+        {
+          type: 'line',
+          label: '科创板/总流通市值（百亿）',
+          data: response.markets.map(it => it.kcAmount / 100)
         },
       ],
     },
@@ -246,8 +301,13 @@ async function requestMarkets() {
       datasets: [
         {
           type: 'bar',
-          label: '深圳主板（亿）',
-          data: response.markets.map(it => it.szAmount)
+          label: '深圳主板/量能（亿）',
+          data: response.markets.map(it => it.szExchange)
+        },
+        {
+          type: 'line',
+          label: '深圳主板/总流通市值（百亿）',
+          data: response.markets.map(it => it.szAmount / 100)
         },
       ],
     },
@@ -258,8 +318,13 @@ async function requestMarkets() {
       datasets: [
         {
           type: 'bar',
-          label: '创业板（亿）',
-          data: response.markets.map(it => it.cyAmount)
+          label: '创业板/量能（亿）',
+          data: response.markets.map(it => it.cyExchange)
+        },
+        {
+          type: 'line',
+          label: '创业板/总流通市值（百亿）',
+          data: response.markets.map(it => it.cyAmount / 100)
         },
       ],
     },
@@ -270,8 +335,13 @@ async function requestMarkets() {
       datasets: [
         {
           type: 'bar',
-          label: '北交所（亿）',
-          data: response.markets.map(it => it.bjAmount)
+          label: '北交所/量能（亿）',
+          data: response.markets.map(it => it.bjExchange)
+        },
+        {
+          type: 'line',
+          label: '北交所/总流通市值（百亿）',
+          data: response.markets.map(it => it.bjAmount / 100)
         },
       ],
     },
@@ -589,6 +659,16 @@ function copyNews(news: News, event: Event) {
       </v-timeline-item>
       <v-timeline-item fill-dot dot-color="primary" size="x-large">
         <template v-slot:icon>
+          <span>韭指</span>
+        </template>
+        <v-card width="1100px">
+          <v-card-text>
+            <canvas id="indexChart"></canvas>
+          </v-card-text>
+        </v-card>
+      </v-timeline-item>
+      <v-timeline-item fill-dot dot-color="primary" size="x-large">
+        <template v-slot:icon>
           <span>量能</span>
         </template>
         <v-card width="1100px">
@@ -599,7 +679,7 @@ function copyNews(news: News, event: Event) {
       </v-timeline-item>
       <v-timeline-item fill-dot dot-color="primary" size="x-large">
         <template v-slot:icon>
-          <span>Data</span>
+          <span>主板</span>
         </template>
         <v-card width="1100px">
           <v-card-text>
@@ -609,7 +689,7 @@ function copyNews(news: News, event: Event) {
       </v-timeline-item>
       <v-timeline-item fill-dot dot-color="primary" size="x-large">
         <template v-slot:icon>
-          <span>Data</span>
+          <span>科创</span>
         </template>
         <v-card width="1100px">
           <v-card-text>
@@ -619,7 +699,7 @@ function copyNews(news: News, event: Event) {
       </v-timeline-item>
       <v-timeline-item fill-dot dot-color="primary" size="x-large">
         <template v-slot:icon>
-          <span>Data</span>
+          <span>深圳</span>
         </template>
         <v-card width="1100px">
           <v-card-text>
@@ -629,7 +709,7 @@ function copyNews(news: News, event: Event) {
       </v-timeline-item>
       <v-timeline-item fill-dot dot-color="primary" size="x-large">
         <template v-slot:icon>
-          <span>Data</span>
+          <span>创业</span>
         </template>
         <v-card width="1100px">
           <v-card-text>
@@ -639,7 +719,7 @@ function copyNews(news: News, event: Event) {
       </v-timeline-item>
       <v-timeline-item fill-dot dot-color="primary" size="x-large">
         <template v-slot:icon>
-          <span>Data</span>
+          <span>北交所</span>
         </template>
         <v-card width="1100px">
           <v-card-text>
