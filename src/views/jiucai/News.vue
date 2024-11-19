@@ -198,45 +198,76 @@ async function requestMarkets() {
   const response: MarketResponse = await asyncAsk(request);
 
   const firstMarket = _.first(response.markets);
-  const shMarketIndex = firstMarket.shMarketIndex / 100;
+  const shMarketIndex = firstMarket?.shMarketIndex / 100;
   const marketIndexRatio = firstMarket?.marketIndex / shMarketIndex;
   const kcMarketIndexRatio = firstMarket?.kcMarketIndex / shMarketIndex;
   const szMarketIndexRatio = firstMarket?.szMarketIndex / shMarketIndex;
   const cyMarketIndexRatio = firstMarket?.cyMarketIndex / shMarketIndex;
   const bjMarketIndexRatio = firstMarket?.bjMarketIndex / shMarketIndex;
   new Chart(document.getElementById('indexChart'), {
+    options: {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const y = _.ceil(context.parsed.y, 2);
+              const currentRawValue = context.dataset.rawData[context.dataIndex];
+              const currentRawValueCeil = _.ceil(currentRawValue / 10000, 2);
+              if (context.dataIndex == 0) {
+                return `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿`;
+              }
+              const lastRawValue = context.dataset.rawData[context.dataIndex - 1];
+              const riseRawCeil = _.ceil((currentRawValue - lastRawValue))
+
+              const lastValue = context.dataset.data[context.dataIndex - 1];
+              const rise = _.ceil((context.parsed.y - lastValue) / lastValue * 100, 2);
+              const result = riseRawCeil > 0
+                ? `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 增加:${riseRawCeil}亿 / 相对昨日涨跌幅: ${rise}%`
+                : `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 蒸发:${riseRawCeil}亿 / 相对昨日涨跌幅: ${rise}%`;
+              return result;
+            }
+          }
+        }
+      }
+    },
     data: {
       labels: response.markets.map(it => getFormatMonth(it.date)),
       datasets: [
         {
           type: 'line',
-          label: '韭菜指数',
-          data: response.markets.map(it => it.marketIndex / marketIndexRatio)
+          label: `韭菜指数`,
+          data: response.markets.map(it => it.marketIndex / marketIndexRatio),
+          rawData: response.markets.map(it => it.amount)
         },
         {
           type: 'line',
-          label: '上海主板',
-          data: response.markets.map(it => it.shMarketIndex / 100)
+          label: '上海主板/核心参照物（百亿）',
+          data: response.markets.map(it => it.shMarketIndex / 100),
+          rawData: response.markets.map(it => it.shAmount)
         },
         {
           type: 'line',
           label: '科创板',
-          data: response.markets.map(it => it.kcMarketIndex / kcMarketIndexRatio)
+          data: response.markets.map(it => it.kcMarketIndex / kcMarketIndexRatio),
+          rawData: response.markets.map(it => it.kcAmount)
         },
         {
           type: 'line',
           label: '深圳主板',
-          data: response.markets.map(it => it.szMarketIndex / szMarketIndexRatio)
+          data: response.markets.map(it => it.szMarketIndex / szMarketIndexRatio),
+          rawData: response.markets.map(it => it.szAmount)
         },
         {
           type: 'line',
           label: '创业板',
-          data: response.markets.map(it => it.cyMarketIndex / cyMarketIndexRatio)
+          data: response.markets.map(it => it.cyMarketIndex / cyMarketIndexRatio),
+          rawData: response.markets.map(it => it.cyAmount)
         },
         {
           type: 'line',
           label: '北交所',
-          data: response.markets.map(it => it.bjMarketIndex / bjMarketIndexRatio)
+          data: response.markets.map(it => it.bjMarketIndex / bjMarketIndexRatio),
+          rawData: response.markets.map(it => it.bjAmount)
         },
       ],
     },
@@ -665,6 +696,9 @@ function copyNews(news: News, event: Event) {
           <v-card-text>
             <canvas id="indexChart"></canvas>
           </v-card-text>
+          <v-card-subtitle>
+            上海主板的核心参照物是累加了上海主板所有股票的流通市值（去除了银行）
+          </v-card-subtitle>
         </v-card>
       </v-timeline-item>
       <v-timeline-item fill-dot dot-color="primary" size="x-large">
