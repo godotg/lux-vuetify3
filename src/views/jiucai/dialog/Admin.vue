@@ -104,9 +104,6 @@ async function deleteBroadcast(id: number) {
                 tcp active
               </th>
               <th>
-                v2ray
-              </th>
-              <th>
                 chatgpt
               </th>
               <th>
@@ -143,7 +140,6 @@ async function deleteBroadcast(id: number) {
               <td>{{ getFormatDate(stat.time) }}</td>
               <td>{{ stat.ips }}</td>
               <td>{{ stat.active }}</td>
-              <td>{{ stat.v2raySwitch }}</td>
               <td>{{ stat.chatgptRequest }}</td>
               <td>{{ stat.midImagineRequest }}</td>
               <td>{{ stat.navigation }}</td>

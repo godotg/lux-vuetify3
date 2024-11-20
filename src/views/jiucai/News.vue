@@ -222,8 +222,8 @@ async function requestMarkets() {
               const lastValue = context.dataset.data[context.dataIndex - 1];
               const rise = _.ceil((context.parsed.y - lastValue) / lastValue * 100, 2);
               const result = riseRawCeil > 0
-                ? `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 增加:${riseRawCeil}亿 / 相对昨日涨跌幅: ${rise}%`
-                : `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 蒸发:${riseRawCeil}亿 / 相对昨日涨跌幅: ${rise}%`;
+                ? `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 增加:${riseRawCeil}亿 / 涨跌幅:${rise}%`
+                : `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 蒸发:${riseRawCeil}亿 / 涨跌幅:${rise}%`;
               return result;
             }
           }
