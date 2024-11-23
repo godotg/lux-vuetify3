@@ -339,7 +339,7 @@ const dialogRef = ref(false);
       <v-col>
         <v-card>
           <IframeResizer
-            license="jiucai.fun"
+            license="bing license"
             :src="`https://www.bing.com/search?q=${encodeURIComponent(userMessageLast)}`"
             @on-ready="() => console.log('onReady')"
           />
@@ -350,7 +350,7 @@ const dialogRef = ref(false);
       <v-col>
         <v-card>
           <IframeResizer
-            license="jiucai.fun"
+            license="bilibili license"
             :src="`https://search.bilibili.com/all?keyword=${encodeURIComponent(userMessageLast)}`"
             @on-ready="() => console.log('onReady')"
           />
