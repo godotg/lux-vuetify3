@@ -17,6 +17,7 @@ import ChatgptMessage from "@/protocol/chatgpt/ChatgptMessage";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import {useMyStore} from "@/stores/myStore";
+import IframeResizer from "@iframe-resizer/vue/iframe-resizer.vue";
 import _ from "lodash";
 
 
@@ -334,6 +335,28 @@ const dialogRef = ref(false);
         <AnimationBot1 :size="100"/>
       </v-col>
     </v-row>
+    <v-row v-if="myStore.bing">
+      <v-col>
+        <v-card>
+          <IframeResizer
+            license="jiucai.fun"
+            :src="`https://www.bing.com/search?q=${encodeURIComponent(userMessageLast)}`"
+            @on-ready="() => console.log('onReady')"
+          />
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row v-if="myStore.bilibili">
+      <v-col>
+        <v-card>
+          <IframeResizer
+            license="jiucai.fun"
+            :src="`https://search.bilibili.com/all?keyword=${encodeURIComponent(userMessageLast)}`"
+            @on-ready="() => console.log('onReady')"
+          />
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 
   <v-footer color="transparent" app>
@@ -505,6 +528,26 @@ const dialogRef = ref(false);
               <v-switch v-model="myStore.google" label="google gemini" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
+                <v-img src="aa/map/bing.com.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.bing" label="bing 联网搜索" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
+                <v-img src="aa/map/bilibili.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.bilibili" label="bilibili 联网搜索" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
         </v-container>
 
         <v-label class="font-weight-medium mb-2 ml-2 mt-5">角色扮演</v-label>
@@ -523,3 +566,10 @@ const dialogRef = ref(false);
     </v-card>
   </v-dialog>
 </template>
+
+<style scoped>
+iframe {
+  width: 100%;
+  height: 100vh;
+}
+</style>
