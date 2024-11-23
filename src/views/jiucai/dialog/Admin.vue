@@ -107,6 +107,9 @@ async function deleteBroadcast(id: number) {
                 chatgpt
               </th>
               <th>
+                google
+              </th>
+              <th>
                 bing
               </th>
               <th>
@@ -147,6 +150,7 @@ async function deleteBroadcast(id: number) {
               <td>{{ stat.ips }}</td>
               <td>{{ stat.active }}</td>
               <td>{{ stat.chatgptRequest }}</td>
+              <td>{{ stat.googleSearch }}</td>
               <td>{{ stat.bingSearch }}</td>
               <td>{{ stat.bilibiliSearch }}</td>
               <td>{{ stat.midImagineRequest }}</td>
