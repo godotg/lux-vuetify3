@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import 'md-editor-v3/lib/preview.css';
-import {getFormatDate} from "@/utils/timeUtils";
+import {getFormatDate, getFormatMonth} from "@/utils/timeUtils";
 import {useMyStore} from "@/stores/myStore";
 import {useDisplay} from "vuetify";
 import {useSnackbarStore} from "@/stores/snackbarStore";
@@ -14,7 +14,7 @@ import DoBroadcastRequest from "@/protocol/admin/DoBroadcastRequest";
 import DoBroadcastResponse from "@/protocol/admin/DoBroadcastResponse";
 import DeleteBroadcastRequest from "@/protocol/admin/DeleteBroadcastRequest";
 import DeleteBroadcastResponse from "@/protocol/admin/DeleteBroadcastResponse";
-
+import Chart from 'chart.js/auto';
 
 const {mobile, width, height} = useDisplay();
 const myStore = useMyStore();
@@ -24,6 +24,8 @@ import _ from "lodash";
 
 const broadcastsRef = ref<Broadcast[]>([]);
 const statisticsRef = ref<Statistics[]>([]);
+const tcpActivateLabelRef = ref<string[]>([]);
+const tcpActivateRef = ref<number[]>([]);
 
 watch(
   () => myStore.adminDialog,
@@ -32,6 +34,21 @@ watch(
       const response: AdminInfoResponse = await asyncAsk(new AdminInfoRequest());
       broadcastsRef.value = response.broadcasts;
       statisticsRef.value = response.stats;
+      tcpActivateLabelRef.value = response.stats.map(it => getFormatDate(it.time).toString());
+      tcpActivateRef.value = response.stats.map(it => it.active);
+
+      new Chart(document.getElementById('tcpActivateChart'), {
+        data: {
+          labels: response.stats.sort((a, b) => a.time - b.time).map(it => getFormatDate(it.time).toString()),
+          datasets: [
+            {
+              type: 'line',
+              label: 'tcp activate',
+              data: response.stats.sort((a, b) => a.time - b.time).map(it => it.active)
+            },
+          ],
+        },
+      });
     }
   },
   {
@@ -88,6 +105,10 @@ async function deleteBroadcast(id: number) {
               <hr>
             </template>
           </v-list>
+        </v-card-text>
+
+        <v-card-text>
+          <canvas id="tcpActivateChart"></canvas>
         </v-card-text>
 
         <v-card-text>
