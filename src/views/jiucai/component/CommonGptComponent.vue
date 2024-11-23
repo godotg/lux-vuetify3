@@ -424,14 +424,14 @@ const dialogRef = ref(false);
             <v-chip color="blue" prepend-icon="mdi-microsoft-bing" class="ml-6 mb-3" @click="searchOnline('https://www.bing.com/search?q=')">
               bing搜索
             </v-chip>
+            <v-chip color="blue-grey" prepend-icon="mdi-television-pause" class="ml-6 mb-3" @click="searchOnline('https://search.bilibili.com/all?keyword=')">
+              B站大学
+            </v-chip>
             <v-chip color="indigo" prepend-icon="mdi-paw" class="ml-6 mb-3" @click="searchOnline('https://www.baidu.com/s?wd=')">
               百度一下
             </v-chip>
             <v-chip prepend-icon="mdi-music-note" class="ml-6 mb-3" @click="searchOnline('https://www.douyin.com/search/')">
               抖音
-            </v-chip>
-            <v-chip color="blue-grey" prepend-icon="mdi-television-pause" class="ml-6 mb-3" @click="searchOnline('https://search.bilibili.com/all?keyword=')">
-              B站大学
             </v-chip>
             <v-chip color="red-lighten-2" prepend-icon="mdi-book-open-variant" class="ml-6 mb-3" @click="searchOnline('https://www.xiaohongshu.com/search_result?keyword=')">
               生活小红书
@@ -542,11 +542,21 @@ const dialogRef = ref(false);
           <v-row>
             <v-col cols="1">
               <v-avatar>
+                <v-img src="aa/map/google.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.googleSearch" label="Google 联网搜索" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar>
                 <v-img src="aa/map/bing.com.png"/>
               </v-avatar>
             </v-col>
             <v-col class="py-0 my-1" offset="1">
-              <v-switch v-model="myStore.bing" label="bing 联网搜索" hide-details color="teal" inset></v-switch>
+              <v-switch v-model="myStore.bingSearch" label="bing 联网搜索" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
           <v-row>
@@ -556,7 +566,7 @@ const dialogRef = ref(false);
               </v-avatar>
             </v-col>
             <v-col class="py-0 my-1" offset="1">
-              <v-switch v-model="myStore.bilibili" label="bilibili 联网搜索" hide-details color="teal" inset></v-switch>
+              <v-switch v-model="myStore.bilibiliSearch" label="bilibili 联网搜索" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
         </v-container>
