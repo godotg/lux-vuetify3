@@ -58,7 +58,7 @@ const checkUpdate = () => {
 
 </script>
 <template>
-  <v-dialog transition="dialog-top-transition" max-width="1200px" v-model="dialogRef">
+  <v-dialog transition="dialog-top-transition" width="888px" v-model="dialogRef">
     <template v-slot:default="{ isActive }">
       <v-card prepend-icon="mdi-trumpet">
         <template v-slot:title>
