@@ -33,13 +33,15 @@ export const useMyStore = defineStore("myStore", {
     alibaba: true,
     llama: true,
     google: true,
-    bing: true,
-    bilibili: true
+    googleSearch: true,
+    bingSearch: true,
+    bilibiliSearch: true
   }),
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["announce", "token", "user", "lastForceShow", "propmpt", "baidu", "xunfei", "llama", "bing", "bilibili"]}],
+    strategies: [{storage: localStorage, paths: ["announce", "token", "user", "lastForceShow", "propmpt", "baidu", "xunfei"
+        , "llama", "googleSearch", "bingSearch", "bilibiliSearch"]}],
   },
 
   getters: {},

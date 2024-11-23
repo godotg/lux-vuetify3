@@ -51,8 +51,9 @@ export function sendChatgpt(messages: Array<ChatgptMessage>, ai) {
   request.ai = ai;
   request.messages = messages;
   request.ignoreAIs = ignoreAIs;
-  request.bingSearch = myStore.bing;
-  request.bilibiliSearch = myStore.bilibili;
+  request.googleSearch = myStore.googleSearch;
+  request.bingSearch = myStore.bingSearch;
+  request.bilibiliSearch = myStore.bilibiliSearch;
 
   send(request);
 }

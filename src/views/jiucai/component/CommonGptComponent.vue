@@ -335,24 +335,35 @@ const dialogRef = ref(false);
         <AnimationBot1 :size="100"/>
       </v-col>
     </v-row>
-    <v-row v-if="myStore.bing">
+    <v-row v-if="myStore.googleSearch">
+      <v-col>
+        <v-card>
+          <IframeResizer
+            license="google license"
+            :src="`https://www.google.com/search?igu=1&q=${encodeURIComponent(userMessageLast)}`"
+            @on-ready="() => console.log('google onReady')"
+          />
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row v-if="myStore.bingSearch">
       <v-col>
         <v-card>
           <IframeResizer
             license="bing license"
             :src="`https://www.bing.com/search?q=${encodeURIComponent(userMessageLast)}`"
-            @on-ready="() => console.log('onReady')"
+            @on-ready="() => console.log('bing onReady')"
           />
         </v-card>
       </v-col>
     </v-row>
-    <v-row v-if="myStore.bilibili">
+    <v-row v-if="myStore.bilibiliSearch">
       <v-col>
         <v-card>
           <IframeResizer
             license="bilibili license"
             :src="`https://search.bilibili.com/all?keyword=${encodeURIComponent(userMessageLast)}`"
-            @on-ready="() => console.log('onReady')"
+            @on-ready="() => console.log('bilibili onReady')"
           />
         </v-card>
       </v-col>
