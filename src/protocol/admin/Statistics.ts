@@ -5,11 +5,12 @@ import NewsStat from './NewsStat';
 
 class Statistics {
     time: number = 0;
-    v2raySwitch: number = 0;
     ips: number = 0;
     active: number = 0;
     newsRequest: number = 0;
     chatgptRequest: number = 0;
+    bingSearch: number = 0;
+    bilibiliSearch: number = 0;
     midImagineRequest: number = 0;
     sdSimulateRequest: number = 0;
     navigation: number = 0;
@@ -28,6 +29,8 @@ export class StatisticsRegistration implements IProtocolRegistration<Statistics>
         }
         buffer.writeInt(-1);
         buffer.writeInt(packet.active);
+        buffer.writeInt(packet.bilibiliSearch);
+        buffer.writeInt(packet.bingSearch);
         buffer.writeInt(packet.chatgptRequest);
         buffer.writeInt(packet.ips);
         buffer.writeInt(packet.midImagineRequest);
@@ -36,7 +39,6 @@ export class StatisticsRegistration implements IProtocolRegistration<Statistics>
         buffer.writePacket(packet.newsStat, 10051);
         buffer.writeInt(packet.sdSimulateRequest);
         buffer.writeLong(packet.time);
-        buffer.writeInt(packet.v2raySwitch);
     }
 
     read(buffer: IByteBuffer): Statistics | null {
@@ -49,23 +51,25 @@ export class StatisticsRegistration implements IProtocolRegistration<Statistics>
         const result0 = buffer.readInt();
         packet.active = result0;
         const result1 = buffer.readInt();
-        packet.chatgptRequest = result1;
+        packet.bilibiliSearch = result1;
         const result2 = buffer.readInt();
-        packet.ips = result2;
+        packet.bingSearch = result2;
         const result3 = buffer.readInt();
-        packet.midImagineRequest = result3;
+        packet.chatgptRequest = result3;
         const result4 = buffer.readInt();
-        packet.navigation = result4;
+        packet.ips = result4;
         const result5 = buffer.readInt();
-        packet.newsRequest = result5;
-        const result6 = buffer.readPacket(10051);
-        packet.newsStat = result6;
+        packet.midImagineRequest = result5;
+        const result6 = buffer.readInt();
+        packet.navigation = result6;
         const result7 = buffer.readInt();
-        packet.sdSimulateRequest = result7;
-        const result8 = buffer.readLong();
-        packet.time = result8;
+        packet.newsRequest = result7;
+        const result8 = buffer.readPacket(10051);
+        packet.newsStat = result8;
         const result9 = buffer.readInt();
-        packet.v2raySwitch = result9;
+        packet.sdSimulateRequest = result9;
+        const result10 = buffer.readLong();
+        packet.time = result10;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

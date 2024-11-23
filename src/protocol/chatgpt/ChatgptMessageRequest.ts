@@ -10,6 +10,10 @@ class ChatgptMessageRequest {
     messages: Array<ChatgptMessage> = [];
     // 不需要哪些AI
     ignoreAIs: Set<number> = new Set();
+    // bing联网搜索
+    bingSearch: boolean = false;
+    // bilibili联网搜索
+    bilibiliSearch: boolean = false;
 }
 
 export class ChatgptMessageRequestRegistration implements IProtocolRegistration<ChatgptMessageRequest> {
@@ -22,12 +26,16 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
             buffer.writeInt(0);
             return;
         }
-        buffer.writeInt(-1);
+        const beforeWriteIndex = buffer.getWriteOffset();
+        buffer.writeInt(123);
         buffer.writeInt(packet.ai);
         buffer.writeIntSet(packet.ignoreAIs);
         buffer.writePacketList(packet.messages, 234);
         buffer.writeBool(packet.mobile);
         buffer.writeLong(packet.requestId);
+        buffer.writeBool(packet.bingSearch);
+        buffer.writeBool(packet.bilibiliSearch);
+        buffer.adjustPadding(123, beforeWriteIndex);
     }
 
     read(buffer: IByteBuffer): ChatgptMessageRequest | null {
@@ -47,6 +55,14 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
         packet.mobile = result3;
         const result4 = buffer.readLong();
         packet.requestId = result4;
+        if (buffer.compatibleRead(beforeReadIndex, length)) {
+            const result5 = buffer.readBool(); 
+            packet.bingSearch = result5;
+        }
+        if (buffer.compatibleRead(beforeReadIndex, length)) {
+            const result6 = buffer.readBool(); 
+            packet.bilibiliSearch = result6;
+        }
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
