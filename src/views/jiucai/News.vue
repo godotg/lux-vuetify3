@@ -84,6 +84,8 @@ onMounted(() => {
   console.log("news on mounted-----------------------------------------");
   init();
   setInterval(() => requestNews(), 15000);
+  setInterval(() => requestRanks(37), 10 * 60 * 1000);
+  setInterval(() => requestConcepts(27), 30 * 60 * 1000);
 });
 
 watch(

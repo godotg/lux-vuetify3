@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "scripts": {
     "jiucai": "vite --host --mode jiucai",
-    "zp": "vite --mode zp",
     "dev": "vite --mode dev",
     "build": "vite build --mode pro",
     "preview": "vite preview",
