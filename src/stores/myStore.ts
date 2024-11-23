@@ -33,7 +33,7 @@ export const useMyStore = defineStore("myStore", {
     alibaba: true,
     llama: true,
     google: true,
-    googleSearch: true,
+    googleSearch: false,
     bingSearch: true,
     bilibiliSearch: true
   }),
