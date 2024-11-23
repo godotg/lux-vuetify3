@@ -24,8 +24,6 @@ import _ from "lodash";
 
 const broadcastsRef = ref<Broadcast[]>([]);
 const statisticsRef = ref<Statistics[]>([]);
-const tcpActivateLabelRef = ref<string[]>([]);
-const tcpActivateRef = ref<number[]>([]);
 
 watch(
   () => myStore.adminDialog,
@@ -34,17 +32,17 @@ watch(
       const response: AdminInfoResponse = await asyncAsk(new AdminInfoRequest());
       broadcastsRef.value = response.broadcasts;
       statisticsRef.value = response.stats;
-      tcpActivateLabelRef.value = response.stats.map(it => getFormatDate(it.time).toString());
-      tcpActivateRef.value = response.stats.map(it => it.active);
+
+      const stats = response.stats.filter(it => it.active > 0).sort((a, b) => a.time - b.time);
 
       new Chart(document.getElementById('tcpActivateChart'), {
         data: {
-          labels: response.stats.sort((a, b) => a.time - b.time).map(it => getFormatDate(it.time).toString()),
+          labels: stats.map(it => getFormatDate(it.time).toString()),
           datasets: [
             {
               type: 'line',
               label: 'tcp activate',
-              data: response.stats.sort((a, b) => a.time - b.time).map(it => it.active)
+              data: stats.map(it => it.active)
             },
           ],
         },
