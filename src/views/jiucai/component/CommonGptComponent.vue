@@ -357,7 +357,7 @@ const dialogRef = ref(false);
         </v-card>
       </v-col>
     </v-row>
-    <v-row v-if="myStore.bilibiliSearch">
+    <v-row v-if="myStore.bilibiliSearch && !mobile">
       <v-col>
         <v-card>
           <IframeResizer
