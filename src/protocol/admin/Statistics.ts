@@ -11,6 +11,7 @@ class Statistics {
     chatgptRequest: number = 0;
     googleSearch: number = 0;
     bingSearch: number = 0;
+    weixinSearch: number = 0;
     bilibiliSearch: number = 0;
     midImagineRequest: number = 0;
     sdSimulateRequest: number = 0;
@@ -41,6 +42,7 @@ export class StatisticsRegistration implements IProtocolRegistration<Statistics>
         buffer.writePacket(packet.newsStat, 10051);
         buffer.writeInt(packet.sdSimulateRequest);
         buffer.writeLong(packet.time);
+        buffer.writeInt(packet.weixinSearch);
     }
 
     read(buffer: IByteBuffer): Statistics | null {
@@ -74,6 +76,8 @@ export class StatisticsRegistration implements IProtocolRegistration<Statistics>
         packet.sdSimulateRequest = result10;
         const result11 = buffer.readLong();
         packet.time = result11;
+        const result12 = buffer.readInt();
+        packet.weixinSearch = result12;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

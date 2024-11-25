@@ -357,6 +357,17 @@ const dialogRef = ref(false);
         </v-card>
       </v-col>
     </v-row>
+    <v-row v-if="myStore.weixinSearch">
+      <v-col>
+        <v-card>
+          <IframeResizer
+            license="weixin license"
+            :src="`https://weixin.sogou.com/weixin?type=2&query=${encodeURIComponent(userMessageLast)}`"
+            @on-ready="() => console.log('weixin onReady')"
+          />
+        </v-card>
+      </v-col>
+    </v-row>
     <v-row v-if="myStore.bilibiliSearch && !mobile">
       <v-col>
         <v-card>
@@ -521,7 +532,7 @@ const dialogRef = ref(false);
           </v-row>
           <v-row>
             <v-col cols="1">
-              <v-avatar>
+              <v-avatar rounded="0">
                 <v-img src="aa/map/llama.jpg"/>
               </v-avatar>
             </v-col>
@@ -557,6 +568,16 @@ const dialogRef = ref(false);
             </v-col>
             <v-col class="py-0 my-1" offset="1">
               <v-switch v-model="myStore.bingSearch" label="bing 联网搜索" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar rounded="0">
+                <v-img src="aa/map/weixin.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.weixinSearch" label="微信联网搜索" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
           <v-row>

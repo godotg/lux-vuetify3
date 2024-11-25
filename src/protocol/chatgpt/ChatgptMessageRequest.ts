@@ -16,6 +16,8 @@ class ChatgptMessageRequest {
     bingSearch: boolean = false;
     // bilibili联网搜索
     bilibiliSearch: boolean = false;
+    // 微信联网搜索
+    weixinSearch: boolean = false;
 }
 
 export class ChatgptMessageRequestRegistration implements IProtocolRegistration<ChatgptMessageRequest> {
@@ -29,7 +31,7 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
             return;
         }
         const beforeWriteIndex = buffer.getWriteOffset();
-        buffer.writeInt(124);
+        buffer.writeInt(125);
         buffer.writeInt(packet.ai);
         buffer.writeIntSet(packet.ignoreAIs);
         buffer.writePacketList(packet.messages, 234);
@@ -38,7 +40,8 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
         buffer.writeBool(packet.googleSearch);
         buffer.writeBool(packet.bingSearch);
         buffer.writeBool(packet.bilibiliSearch);
-        buffer.adjustPadding(124, beforeWriteIndex);
+        buffer.writeBool(packet.weixinSearch);
+        buffer.adjustPadding(125, beforeWriteIndex);
     }
 
     read(buffer: IByteBuffer): ChatgptMessageRequest | null {
@@ -69,6 +72,10 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
         if (buffer.compatibleRead(beforeReadIndex, length)) {
             const result7 = buffer.readBool(); 
             packet.bilibiliSearch = result7;
+        }
+        if (buffer.compatibleRead(beforeReadIndex, length)) {
+            const result8 = buffer.readBool(); 
+            packet.weixinSearch = result8;
         }
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
