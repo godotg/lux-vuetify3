@@ -203,8 +203,6 @@ const img2Img = async () => {
     return
   }
 
-  const file = _.first(imageFileRef.value);
-
   // 上传图片
   const formData = new FormData();
   formData.append('key', ossPolicy.dir);
@@ -213,7 +211,7 @@ const img2Img = async () => {
   formData.append('success_action_status', "200");
   formData.append('callback', '');
   formData.append('signature', ossPolicy.signature);
-  formData.append('file', file);
+  formData.append('file', imageFileRef.value);
 
   imageFileUploadingRef.value = true;
   imageFileUploadValueRef.value = 0;
