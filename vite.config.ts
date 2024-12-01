@@ -4,7 +4,6 @@ import vue from "@vitejs/plugin-vue";
 import vuetify from "vite-plugin-vuetify";
 
 import AutoImport from "unplugin-auto-import/vite";
-import { VitePWA } from 'vite-plugin-pwa'
 
 // Utilities
 import { defineConfig } from "vite";
@@ -22,7 +21,6 @@ export default defineConfig({
     AutoImport({
       imports: ["vue", "vue-router", "pinia"],
     }),
-    VitePWA(),
   ],
   define: { "process.env": {} },
   test: {

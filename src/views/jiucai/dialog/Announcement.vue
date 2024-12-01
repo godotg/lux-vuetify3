@@ -17,7 +17,6 @@ const dialogRef = ref<boolean>(false);
 const boardRef = ref<string>("");
 
 const announcementUrl = import.meta.env.VITE_BASE_HTTP_URL + "/config/myconfig.json";
-const currentVersion = myStore.announce.version;
 
 onMounted(async () => {
   const response = await axios.get(announcementUrl);
@@ -42,19 +41,6 @@ onMounted(async () => {
   boardRef.value = boardMd;
   dialogRef.value = true;
 });
-
-setInterval(() => checkUpdate(), 3 * 1000);
-
-const checkUpdate = () => {
-  if (_.isEmpty(currentVersion)) {
-    return;
-  }
-  if (currentVersion === myStore.announce.version) {
-    return;
-  }
-  snackbarStore.showWarningMessage(`当前版本 ${currentVersion} 低于最新版本 ${myStore.announce.version}，请关闭浏览器并重启。本站使用了 Service Worker 浏览器本地缓存技术来降低网络流量，需要重启浏览器来加载最新的页面。`);
-};
-
 
 </script>
 <template>
