@@ -132,6 +132,9 @@ async function deleteBroadcast(id: number) {
                 bing
               </th>
               <th>
+                微信
+              </th>
+              <th>
                 bilibili
               </th>
               <th>
@@ -171,6 +174,7 @@ async function deleteBroadcast(id: number) {
               <td>{{ stat.chatgptRequest }}</td>
               <td>{{ stat.googleSearch }}</td>
               <td>{{ stat.bingSearch }}</td>
+              <td>{{ stat.weixinSearch }}</td>
               <td>{{ stat.bilibiliSearch }}</td>
               <td>{{ stat.midImagineRequest }}</td>
               <td>{{ stat.navigation }}</td>
