@@ -549,7 +549,7 @@ function copyNews(news: News, event: Event) {
                 {{ rank.name }}
               </td>
               <td>{{ hotRankChange(rank.rankChange) }}</td>
-              <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">
+              <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(thsRanksRef[i].code)">
                 {{ thsRanksRef[i].name }}
               </td>
             </tr>
