@@ -7,11 +7,45 @@ const myAvatarDefault = avatarAutoUrl(1);
 const aiAvatarDefault = avatarAutoUrl(2);
 const aiAvatar2Default = avatarAutoUrl(3);
 
+export const levelMap = {
+  "S": {
+    value: 1,
+    icon: "mdi-alpha-s-circle-outline",
+    color: "error",
+    size: "x-large"
+  },
+  "A": {
+    value: 2,
+    icon: "mdi-alpha-a-circle-outline",
+    color: "warning",
+    size: "large"
+  },
+  "B": {
+    value: 3,
+    icon: "mdi-alpha-b-circle-outline",
+    color: "success",
+    size: "default"
+  },
+  "C": {
+    value: 4,
+    icon: "mdi-alpha-c-circle-outline",
+    color: "info",
+    size: "small"
+  },
+  "D": {
+    value: 5,
+    icon: "mdi-alpha-d-circle-outline",
+    color: "blue-grey",
+    size: "x-small"
+  },
+};
+
 export function avatarAutoUrl(id: number): string {
   const avatarId = id % 800 + 1;
   const avatar = import.meta.env.VITE_BASE_HTTP_URL + "/ab/" + avatarId + ".jpg";
   return avatar;
 }
+
 
 export const useNewsStore = defineStore("newsStore", {
   state: () => ({
@@ -28,6 +62,7 @@ export const useNewsStore = defineStore("newsStore", {
     sid: 0,
     activeUid: 0,
     chatMessageIdDiff: 0,
+    newsSearchDialog: false,
   }),
 
   persist: {

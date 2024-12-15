@@ -9,6 +9,7 @@
     <RewardTip />
     <WeChatLogin />
     <Profile />
+    <NewsSearch />
     <Admin />
   </v-app>
 </template>
@@ -25,6 +26,7 @@ import Announcement from "@/views/jiucai/dialog/Announcement.vue";
 import RewardTip from "@/views/jiucai/dialog/RewardTip.vue";
 import WeChatLogin from "@/views/jiucai/dialog/WeChatLogin.vue";
 import Profile from "@/views/jiucai/dialog/Profile.vue";
+import NewsSearch from "@/views/jiucai/dialog/NewsSearch.vue";
 import Admin from "@/views/jiucai/dialog/Admin.vue";
 
 const customizeTheme = useCustomizeThemeStore();

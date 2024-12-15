@@ -19,7 +19,7 @@ import _ from "lodash";
 import {useDisplay} from "vuetify";
 import clipboard from "@/utils/clipboardUtils";
 import {useSnackbarStore} from "@/stores/snackbarStore";
-import {useNewsStore} from "@/stores/newsStore";
+import {useNewsStore, levelMap} from "@/stores/newsStore";
 import {getFormatDate, getFormatMonth} from "@/utils/timeUtils";
 import Chart from 'chart.js/auto';
 
@@ -37,40 +37,6 @@ const rankCoreCoreRef = ref<string>('');
 const loadingRef = ref(true);
 let endId = -1;
 let startId = -1;
-
-
-const levelMap = {
-  "S": {
-    value: 1,
-    icon: "mdi-alpha-s-circle-outline",
-    color: "error",
-    size: "x-large"
-  },
-  "A": {
-    value: 2,
-    icon: "mdi-alpha-a-circle-outline",
-    color: "warning",
-    size: "large"
-  },
-  "B": {
-    value: 3,
-    icon: "mdi-alpha-b-circle-outline",
-    color: "success",
-    size: "default"
-  },
-  "C": {
-    value: 4,
-    icon: "mdi-alpha-c-circle-outline",
-    color: "info",
-    size: "small"
-  },
-  "D": {
-    value: 5,
-    icon: "mdi-alpha-d-circle-outline",
-    color: "blue-grey",
-    size: "x-small"
-  },
-};
 
 const jokes = [
   "🌴快乐韭菜网，做一个快乐的韭菜，https://jiucai.fun",

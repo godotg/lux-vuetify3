@@ -18,6 +18,23 @@ const { mdAndUp } = useDisplay();
 const todoStore = useTodoStore();
 const customizeTheme = useCustomizeThemeStore();
 const showMobileSearch = ref(false);
+
+import _ from "lodash";
+import {send} from "@/utils/websocket";
+import NewsSearchRequest from "@/protocol/news/NewsSearchRequest";
+import {useSnackbarStore} from "@/stores/snackbarStore";
+const snackbarStore = useSnackbarStore();
+const searchRef = ref<string>('');
+function search() {
+  if (_.isEmpty(searchRef.value)) {
+    snackbarStore.showErrorMessage("搜索内容不能为空");
+    return;
+  }
+  const request = new NewsSearchRequest();
+  request.query = searchRef.value;
+  send(request);
+}
+
 </script>
 
 <template>
@@ -49,14 +66,17 @@ const showMobileSearch = ref(false);
       <div>
         <v-text-field
           v-if="mdAndUp"
+          v-model="searchRef"
           class="ml-2"
-          style="width: 400px"
+          style="width: 500px"
           color="primary"
           variant="solo"
           density="compact"
-          prepend-inner-icon="mdi-magnify"
+          append-inner-icon="mdi-magnify"
           hide-details
           placeholder="Search"
+          @click:append-inner="search()"
+          @keyup.enter="search()"
         ></v-text-field>
       </div>
 
