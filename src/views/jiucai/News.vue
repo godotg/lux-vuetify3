@@ -84,7 +84,7 @@ onMounted(() => {
   console.log("news on mounted-----------------------------------------");
   init();
   setInterval(() => requestNews(), 15000);
-  setInterval(() => requestRanks(37), 10 * 60 * 1000);
+  setInterval(() => requestRanks(100), 10 * 60 * 1000);
   setInterval(() => requestConcepts(27), 30 * 60 * 1000);
 });
 
@@ -113,7 +113,7 @@ function init() {
 
   doInitNews();
   requestConcepts(27);
-  requestRanks(37);
+  requestRanks(100);
   requestMarkets();
 }
 
@@ -192,9 +192,6 @@ async function requestRanks(num: number) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 async function requestMarkets() {
-  if (mobile.value) {
-    return;
-  }
   const request = new MarketRequest();
   request.num = 90;
   const response: MarketResponse = await asyncAsk(request);
@@ -208,6 +205,14 @@ async function requestMarkets() {
   const bjMarketIndexRatio = firstMarket?.bjMarketIndex / shMarketIndex;
   new Chart(document.getElementById('indexChart'), {
     options: {
+      animations: {
+        tension: {
+          duration: 1000,
+          easing: 'linear',
+          from: 0,
+          to: 0.3,
+        }
+      },
       plugins: {
         tooltip: {
           callbacks: {
@@ -286,95 +291,28 @@ async function requestMarkets() {
         },
         {
           type: 'line',
-          label: '总流通市值（百亿）',
-          data: response.markets.map(it => it.amount / 100)
-        },
-      ],
-    },
-  });
-
-  new Chart(document.getElementById('shChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
           label: '上海主板/量能（亿）',
           data: response.markets.map(it => it.shExchange)
         },
         {
           type: 'line',
-          label: '上海主板/总流通市值（百亿）',
-          data: response.markets.map(it => it.shAmount / 100)
-        },
-      ],
-    },
-  });
-
-  new Chart(document.getElementById('kcChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
           label: '科创板/量能（亿）',
           data: response.markets.map(it => it.kcExchange)
         },
         {
           type: 'line',
-          label: '科创板/总流通市值（百亿）',
-          data: response.markets.map(it => it.kcAmount / 100)
-        },
-      ],
-    },
-  });
-  new Chart(document.getElementById('szChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
           label: '深圳主板/量能（亿）',
           data: response.markets.map(it => it.szExchange)
         },
         {
           type: 'line',
-          label: '深圳主板/总流通市值（百亿）',
-          data: response.markets.map(it => it.szAmount / 100)
-        },
-      ],
-    },
-  });
-  new Chart(document.getElementById('cyChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
           label: '创业板/量能（亿）',
           data: response.markets.map(it => it.cyExchange)
         },
         {
           type: 'line',
-          label: '创业板/总流通市值（百亿）',
-          data: response.markets.map(it => it.cyAmount / 100)
-        },
-      ],
-    },
-  });
-  new Chart(document.getElementById('bjChart'), {
-    data: {
-      labels: response.markets.map(it => getFormatMonth(it.date)),
-      datasets: [
-        {
-          type: 'bar',
           label: '北交所/量能（亿）',
           data: response.markets.map(it => it.bjExchange)
-        },
-        {
-          type: 'line',
-          label: '北交所/总流通市值（百亿）',
-          data: response.markets.map(it => it.bjAmount / 100)
         },
       ],
     },
@@ -491,11 +429,11 @@ function copyNews(news: News, event: Event) {
     <template v-if="mobile">
       <v-card v-if="!_.isEmpty(conceptsRef)" class="mt-3">
         <v-card-title v-ripple @click="requestConcepts(108, true)">
-          <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
+          <v-icon icon="mdi-wind-power" size="x-large"></v-icon>
           &nbsp;
           新概念
           &nbsp;
-          <v-icon color="primary" icon="mdi-format-list-bulleted" size="small"></v-icon>
+          <v-icon icon="mdi-format-list-bulleted" size="small" color="primary"></v-icon>
         </v-card-title>
         <v-card-subtitle>
           {{ conceptCoreRef }}
@@ -510,19 +448,17 @@ function copyNews(news: News, event: Event) {
               <a :href="concept.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
                 {{ concept.content }}
               </a>
-              <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary" icon="mdi-alert-octagram-outline"
-                      size="small"></v-icon>
+              <v-icon v-if="newsStore.isNewConcept(concept.id)" color="red" icon="mdi-alert-octagram-outline" size="small"></v-icon>
             </v-col>
           </v-row>
         </v-card-item>
       </v-card>
       <v-card v-if="!_.isEmpty(eastMoneyRanksRef)" class="mt-3">
-        <v-card-title v-ripple @click="requestRanks(100)">
-          <v-icon color="primary" icon="mdi-chili-hot" size="x-large"></v-icon>
+        <v-card-title v-ripple>
+          <v-icon icon="mdi-chili-hot" size="x-large"></v-icon>
           &nbsp;
           Top排行
           &nbsp;
-          <v-icon color="primary" icon="mdi-format-list-bulleted" size="small"></v-icon>
         </v-card-title>
         <v-card-text>
           <v-table density="compact">
@@ -557,6 +493,19 @@ function copyNews(news: News, event: Event) {
           </v-table>
         </v-card-text>
       </v-card>
+      <v-card class="mt-3">
+        <v-card-text>
+          <canvas id="indexChart"></canvas>
+        </v-card-text>
+        <v-card-subtitle>
+          上海主板的核心参照物是累加了上海主板所有股票的流通市值（去除了银行）
+        </v-card-subtitle>
+      </v-card>
+      <v-card class="mt-3">
+        <v-card-text>
+          <canvas id="exchangeChart"></canvas>
+        </v-card-text>
+      </v-card>
       <template v-for="newsEle in newsRef">
         <v-card class="mt-3">
           <v-card-title v-ripple @click="copyNews(newsEle, $event)">
@@ -574,20 +523,19 @@ function copyNews(news: News, event: Event) {
             v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts) || !_.isEmpty(newsEle.subjects)">
             <div>
               <template v-if="!_.isEmpty(newsEle.stocks)">
-                <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small" class="mr-1">
+                <v-chip v-for="stock in newsEle.stocks" :color="_.toNumber(stock.rise) > 8 ? 'primary' : ''" size="x-small" class="mr-1">
                   {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
                 </v-chip>
               </template>
               <template v-if="!_.isEmpty(newsEle.concepts)">
-                <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward" color="primary"></v-icon>
-                <v-chip v-for="concept in newsEle.concepts" color="primary" size="x-small" variant="outlined"
+                <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward"></v-icon>
+                <v-chip v-for="concept in newsEle.concepts" :color="_.toNumber(concept.rise) > 2 ? 'primary' : ''" size="x-small" variant="outlined"
                         class="mr-1">
                   {{ concept.name }} {{ concept.rise }}
                 </v-chip>
               </template>
               <template v-if="!_.isEmpty(newsEle.subjects)">
-                <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts)" icon="mdi-slash-forward"
-                        color="primary"></v-icon>
+                <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts)" icon="mdi-slash-forward"></v-icon>
                 <v-chip v-for="subject in newsEle.subjects" size="x-small" class="mr-1">
                   {{ subject }}
                 </v-chip>
@@ -598,18 +546,18 @@ function copyNews(news: News, event: Event) {
       </template>
     </template>
     <v-timeline v-else density="compact" side="end">
-      <v-timeline-item v-if="!_.isEmpty(conceptsRef)" fill-dot dot-color="primary" size="x-large">
+      <v-timeline-item v-if="!_.isEmpty(conceptsRef)" fill-dot dot-color="grey" size="x-large">
         <template v-slot:icon>
           <span>SSR</span>
         </template>
         <v-card min-width="580px">
           <v-card-title class="cursor-pointer" v-tooltip:start="'更多概念'" v-ripple
                         @click="requestConcepts(108, true)">
-            <v-icon color="primary" icon="mdi-wind-power" size="x-large"></v-icon>
+            <v-icon icon="mdi-wind-power" size="x-large"></v-icon>
             &nbsp;
             新概念
             &nbsp;
-            <v-icon color="primary" icon="mdi-format-list-bulleted" size="small"></v-icon>
+            <v-icon icon="mdi-format-list-bulleted" size="small" color="primary"></v-icon>
           </v-card-title>
           <v-card-subtitle class="text-wrap">
             {{ conceptCoreRef }}
@@ -625,24 +573,22 @@ function copyNews(news: News, event: Event) {
                   {{ concept.content }}
                 </a>
                 {{ concept.title }}
-                <v-icon v-if="newsStore.isNewConcept(concept.id)" color="primary"
-                        icon="mdi-alert-octagram-outline"></v-icon>
+                <v-icon v-if="newsStore.isNewConcept(concept.id)" color="red" icon="mdi-alert-octagram-outline"></v-icon>
               </v-col>
             </v-row>
           </v-card-item>
         </v-card>
       </v-timeline-item>
-      <v-timeline-item v-if="!_.isEmpty(eastMoneyRanksRef)" fill-dot dot-color="primary" size="x-large">
+      <v-timeline-item v-if="!_.isEmpty(eastMoneyRanksRef)" fill-dot dot-color="grey" size="x-large">
         <template v-slot:icon>
           <span>Rank</span>
         </template>
         <v-card>
-          <v-card-title class="cursor-pointer" v-tooltip:start="'更多排名'" v-ripple @click="requestRanks(100)">
-            <v-icon color="primary" icon="mdi-chili-hot" size="x-large"></v-icon>
+          <v-card-title v-tooltip:start="'红色为最近两周新出现在前100的股票'">
+            <v-icon icon="mdi-chili-hot" size="x-large"></v-icon>
             &nbsp;
             Top排行
             &nbsp;
-            <v-icon color="primary" icon="mdi-format-list-bulleted" size="small"></v-icon>
           </v-card-title>
           <v-card-text>
             <v-table density="compact">
@@ -671,11 +617,11 @@ function copyNews(news: News, event: Event) {
               <tbody>
               <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
                 <td>{{ i + 1 }}</td>
-                <td :class="rank.primary ? 'cursor-pointer font-weight-black text-primary' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
+                <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
                   {{ rank.name }}
                 </td>
                 <td>{{ hotRankChange(rank.rankChange) }}</td>
-                <td :class="rank.primary ? 'cursor-pointer font-weight-black text-primary' : 'cursor-pointer'" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">
+                <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">
                   {{ thsRanksRef[i].name }}
                 </td>
                 <td>{{ hotRankChange(thsRanksRef[i].rankChange) }}</td>
@@ -710,56 +656,6 @@ function copyNews(news: News, event: Event) {
           </v-card-text>
         </v-card>
       </v-timeline-item>
-      <v-timeline-item fill-dot dot-color="primary" size="x-large">
-        <template v-slot:icon>
-          <span>主板</span>
-        </template>
-        <v-card width="1100px">
-          <v-card-text>
-            <canvas id="shChart"></canvas>
-          </v-card-text>
-        </v-card>
-      </v-timeline-item>
-      <v-timeline-item fill-dot dot-color="primary" size="x-large">
-        <template v-slot:icon>
-          <span>科创</span>
-        </template>
-        <v-card width="1100px">
-          <v-card-text>
-            <canvas id="kcChart"></canvas>
-          </v-card-text>
-        </v-card>
-      </v-timeline-item>
-      <v-timeline-item fill-dot dot-color="primary" size="x-large">
-        <template v-slot:icon>
-          <span>深圳</span>
-        </template>
-        <v-card width="1100px">
-          <v-card-text>
-            <canvas id="szChart"></canvas>
-          </v-card-text>
-        </v-card>
-      </v-timeline-item>
-      <v-timeline-item fill-dot dot-color="primary" size="x-large">
-        <template v-slot:icon>
-          <span>创业</span>
-        </template>
-        <v-card width="1100px">
-          <v-card-text>
-            <canvas id="cyChart"></canvas>
-          </v-card-text>
-        </v-card>
-      </v-timeline-item>
-      <v-timeline-item fill-dot dot-color="primary" size="x-large">
-        <template v-slot:icon>
-          <span>北交所</span>
-        </template>
-        <v-card width="1100px">
-          <v-card-text>
-            <canvas id="bjChart"></canvas>
-          </v-card-text>
-        </v-card>
-      </v-timeline-item>
       <template v-for="newsEle in newsRef">
         <v-timeline-item fill-dot :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
           <template v-slot:icon>
@@ -781,20 +677,19 @@ function copyNews(news: News, event: Event) {
               v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts) || !_.isEmpty(newsEle.subjects)">
               <div>
                 <template v-if="!_.isEmpty(newsEle.stocks)">
-                  <v-chip v-for="stock in newsEle.stocks" color="primary" size="x-small" class="mr-1">
+                  <v-chip v-for="stock in newsEle.stocks" :color="_.toNumber(stock.rise) > 8 ? 'primary' : ''" size="x-small" class="mr-1">
                     {{ stock.name }} {{ stock.price }} / {{ stock.rise }}
                   </v-chip>
                 </template>
                 <template v-if="!_.isEmpty(newsEle.concepts)">
-                  <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward" color="primary"></v-icon>
-                  <v-chip v-for="concept in newsEle.concepts" color="primary" size="x-small" variant="outlined"
+                  <v-icon v-if="!_.isEmpty(newsEle.stocks)" icon="mdi-slash-forward"></v-icon>
+                  <v-chip v-for="concept in newsEle.concepts" :color="_.toNumber(concept.rise) > 2 ? 'primary' : ''" size="x-small" variant="outlined"
                           class="mr-1">
                     {{ concept.name }} {{ concept.rise }}
                   </v-chip>
                 </template>
                 <template v-if="!_.isEmpty(newsEle.subjects)">
-                  <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts)" icon="mdi-slash-forward"
-                          color="primary"></v-icon>
+                  <v-icon v-if="!_.isEmpty(newsEle.stocks) || !_.isEmpty(newsEle.concepts)" icon="mdi-slash-forward"></v-icon>
                   <v-chip v-for="subject in newsEle.subjects" size="x-small" class="mr-1">
                     {{ subject }}
                   </v-chip>
