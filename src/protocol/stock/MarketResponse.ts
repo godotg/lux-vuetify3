@@ -9,7 +9,7 @@ class MarketResponse {
 
 export class MarketResponseRegistration implements IProtocolRegistration<MarketResponse> {
     protocolId(): number {
-        return 214;
+        return 304;
     }
 
     write(buffer: IByteBuffer, packet: MarketResponse | null) {
@@ -18,7 +18,7 @@ export class MarketResponseRegistration implements IProtocolRegistration<MarketR
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacketList(packet.markets, 210);
+        buffer.writePacketList(packet.markets, 300);
     }
 
     read(buffer: IByteBuffer): MarketResponse | null {
@@ -28,7 +28,7 @@ export class MarketResponseRegistration implements IProtocolRegistration<MarketR
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new MarketResponse();
-        const list0 = buffer.readPacketList(210);
+        const list0 = buffer.readPacketList(300);
         packet.markets = list0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

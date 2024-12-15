@@ -13,7 +13,7 @@ class ThsRank {
 
 export class ThsRankRegistration implements IProtocolRegistration<ThsRank> {
     protocolId(): number {
-        return 226;
+        return 401;
     }
 
     write(buffer: IByteBuffer, packet: ThsRank | null) {

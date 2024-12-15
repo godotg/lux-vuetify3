@@ -10,7 +10,7 @@ class MidRerollAsk {
 
 export class MidRerollAskRegistration implements IProtocolRegistration<MidRerollAsk> {
     protocolId(): number {
-        return 304;
+        return 854;
     }
 
     write(buffer: IByteBuffer, packet: MidRerollAsk | null) {
@@ -19,7 +19,7 @@ export class MidRerollAskRegistration implements IProtocolRegistration<MidReroll
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 273);
+        buffer.writePacket(packet.request, 803);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -30,7 +30,7 @@ export class MidRerollAskRegistration implements IProtocolRegistration<MidReroll
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new MidRerollAsk();
-        const result0 = buffer.readPacket(273);
+        const result0 = buffer.readPacket(803);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;

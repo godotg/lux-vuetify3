@@ -11,7 +11,7 @@ class GroupChatRequest {
 
 export class GroupChatRequestRegistration implements IProtocolRegistration<GroupChatRequest> {
     protocolId(): number {
-        return 242;
+        return 602;
     }
 
     write(buffer: IByteBuffer, packet: GroupChatRequest | null) {

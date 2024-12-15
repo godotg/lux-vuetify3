@@ -10,7 +10,7 @@ class SdSimulateNotice {
 
 export class SdSimulateNoticeRegistration implements IProtocolRegistration<SdSimulateNotice> {
     protocolId(): number {
-        return 341;
+        return 1051;
     }
 
     write(buffer: IByteBuffer, packet: SdSimulateNotice | null) {
@@ -19,7 +19,7 @@ export class SdSimulateNoticeRegistration implements IProtocolRegistration<SdSim
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacketList(packet.images, 344);
+        buffer.writePacketList(packet.images, 1054);
         buffer.writeLong(packet.nonce);
     }
 
@@ -30,7 +30,7 @@ export class SdSimulateNoticeRegistration implements IProtocolRegistration<SdSim
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new SdSimulateNotice();
-        const list0 = buffer.readPacketList(344);
+        const list0 = buffer.readPacketList(1054);
         packet.images = list0;
         const result1 = buffer.readLong();
         packet.nonce = result1;

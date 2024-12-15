@@ -8,7 +8,7 @@ class ImageDownloadRequest {
 
 export class ImageDownloadRequestRegistration implements IProtocolRegistration<ImageDownloadRequest> {
     protocolId(): number {
-        return 345;
+        return 1055;
     }
 
     write(buffer: IByteBuffer, packet: ImageDownloadRequest | null) {

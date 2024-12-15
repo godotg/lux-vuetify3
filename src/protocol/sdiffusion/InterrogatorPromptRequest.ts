@@ -10,7 +10,7 @@ class InterrogatorPromptRequest {
 
 export class InterrogatorPromptRequestRegistration implements IProtocolRegistration<InterrogatorPromptRequest> {
     protocolId(): number {
-        return 333;
+        return 1003;
     }
 
     write(buffer: IByteBuffer, packet: InterrogatorPromptRequest | null) {

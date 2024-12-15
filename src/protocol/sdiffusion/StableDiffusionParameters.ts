@@ -17,7 +17,7 @@ class StableDiffusionParameters {
 
 export class StableDiffusionParametersRegistration implements IProtocolRegistration<StableDiffusionParameters> {
     protocolId(): number {
-        return 332;
+        return 1002;
     }
 
     write(buffer: IByteBuffer, packet: StableDiffusionParameters | null) {

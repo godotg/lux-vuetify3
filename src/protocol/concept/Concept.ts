@@ -13,7 +13,7 @@ class Concept {
 
 export class ConceptRegistration implements IProtocolRegistration<Concept> {
     protocolId(): number {
-        return 220;
+        return 350;
     }
 
     write(buffer: IByteBuffer, packet: Concept | null) {

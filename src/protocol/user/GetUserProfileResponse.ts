@@ -9,7 +9,7 @@ class GetUserProfileResponse {
 
 export class GetUserProfileResponseRegistration implements IProtocolRegistration<GetUserProfileResponse> {
     protocolId(): number {
-        return 265;
+        return 755;
     }
 
     write(buffer: IByteBuffer, packet: GetUserProfileResponse | null) {
@@ -18,7 +18,7 @@ export class GetUserProfileResponseRegistration implements IProtocolRegistration
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.user, 260);
+        buffer.writePacket(packet.user, 750);
     }
 
     read(buffer: IByteBuffer): GetUserProfileResponse | null {
@@ -28,7 +28,7 @@ export class GetUserProfileResponseRegistration implements IProtocolRegistration
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new GetUserProfileResponse();
-        const result0 = buffer.readPacket(260);
+        const result0 = buffer.readPacket(750);
         packet.user = result0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

@@ -8,7 +8,7 @@ class LoginByWeChatResponse {
 
 export class LoginByWeChatResponseRegistration implements IProtocolRegistration<LoginByWeChatResponse> {
     protocolId(): number {
-        return 256;
+        return 706;
     }
 
     write(buffer: IByteBuffer, packet: LoginByWeChatResponse | null) {

@@ -31,7 +31,7 @@ class Market {
 
 export class MarketRegistration implements IProtocolRegistration<Market> {
     protocolId(): number {
-        return 210;
+        return 300;
     }
 
     write(buffer: IByteBuffer, packet: Market | null) {

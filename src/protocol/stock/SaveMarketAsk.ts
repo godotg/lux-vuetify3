@@ -9,7 +9,7 @@ class SaveMarketAsk {
 
 export class SaveMarketAskRegistration implements IProtocolRegistration<SaveMarketAsk> {
     protocolId(): number {
-        return 211;
+        return 301;
     }
 
     write(buffer: IByteBuffer, packet: SaveMarketAsk | null) {
@@ -18,7 +18,7 @@ export class SaveMarketAskRegistration implements IProtocolRegistration<SaveMark
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacketList(packet.markets, 210);
+        buffer.writePacketList(packet.markets, 300);
     }
 
     read(buffer: IByteBuffer): SaveMarketAsk | null {
@@ -28,7 +28,7 @@ export class SaveMarketAskRegistration implements IProtocolRegistration<SaveMark
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new SaveMarketAsk();
-        const list0 = buffer.readPacketList(210);
+        const list0 = buffer.readPacketList(300);
         packet.markets = list0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

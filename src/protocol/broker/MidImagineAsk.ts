@@ -10,7 +10,7 @@ class MidImagineAsk {
 
 export class MidImagineAskRegistration implements IProtocolRegistration<MidImagineAsk> {
     protocolId(): number {
-        return 302;
+        return 852;
     }
 
     write(buffer: IByteBuffer, packet: MidImagineAsk | null) {
@@ -19,7 +19,7 @@ export class MidImagineAskRegistration implements IProtocolRegistration<MidImagi
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 270);
+        buffer.writePacket(packet.request, 800);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -30,7 +30,7 @@ export class MidImagineAskRegistration implements IProtocolRegistration<MidImagi
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new MidImagineAsk();
-        const result0 = buffer.readPacket(270);
+        const result0 = buffer.readPacket(800);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;

@@ -9,7 +9,7 @@ class GroupHistoryMessageRequest {
 
 export class GroupHistoryMessageRequestRegistration implements IProtocolRegistration<GroupHistoryMessageRequest> {
     protocolId(): number {
-        return 243;
+        return 603;
     }
 
     write(buffer: IByteBuffer, packet: GroupHistoryMessageRequest | null) {

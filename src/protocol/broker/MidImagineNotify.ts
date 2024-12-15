@@ -10,7 +10,7 @@ class MidImagineNotify {
 
 export class MidImagineNotifyRegistration implements IProtocolRegistration<MidImagineNotify> {
     protocolId(): number {
-        return 303;
+        return 853;
     }
 
     write(buffer: IByteBuffer, packet: MidImagineNotify | null) {
@@ -19,7 +19,7 @@ export class MidImagineNotifyRegistration implements IProtocolRegistration<MidIm
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.notice, 272);
+        buffer.writePacket(packet.notice, 802);
         buffer.writeLong(packet.noticeSid);
     }
 
@@ -30,7 +30,7 @@ export class MidImagineNotifyRegistration implements IProtocolRegistration<MidIm
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new MidImagineNotify();
-        const result0 = buffer.readPacket(272);
+        const result0 = buffer.readPacket(802);
         packet.notice = result0;
         const result1 = buffer.readLong();
         packet.noticeSid = result1;

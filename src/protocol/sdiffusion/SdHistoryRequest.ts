@@ -8,7 +8,7 @@ class SdHistoryRequest {
 
 export class SdHistoryRequestRegistration implements IProtocolRegistration<SdHistoryRequest> {
     protocolId(): number {
-        return 342;
+        return 1052;
     }
 
     write(buffer: IByteBuffer, packet: SdHistoryRequest | null) {

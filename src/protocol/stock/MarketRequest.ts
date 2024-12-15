@@ -8,7 +8,7 @@ class MarketRequest {
 
 export class MarketRequestRegistration implements IProtocolRegistration<MarketRequest> {
     protocolId(): number {
-        return 213;
+        return 303;
     }
 
     write(buffer: IByteBuffer, packet: MarketRequest | null) {

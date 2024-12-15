@@ -9,7 +9,7 @@ class MidImagineRequest {
 
 export class MidImagineRequestRegistration implements IProtocolRegistration<MidImagineRequest> {
     protocolId(): number {
-        return 270;
+        return 800;
     }
 
     write(buffer: IByteBuffer, packet: MidImagineRequest | null) {

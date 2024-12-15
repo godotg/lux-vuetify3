@@ -8,7 +8,7 @@ class BrokerRegisterAsk {
 
 export class BrokerRegisterAskRegistration implements IProtocolRegistration<BrokerRegisterAsk> {
     protocolId(): number {
-        return 300;
+        return 850;
     }
 
     write(buffer: IByteBuffer, packet: BrokerRegisterAsk | null) {

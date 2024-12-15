@@ -11,7 +11,7 @@ class EastMoneyRank {
 
 export class EastMoneyRankRegistration implements IProtocolRegistration<EastMoneyRank> {
     protocolId(): number {
-        return 225;
+        return 400;
     }
 
     write(buffer: IByteBuffer, packet: EastMoneyRank | null) {

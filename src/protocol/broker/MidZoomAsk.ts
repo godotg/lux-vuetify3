@@ -10,7 +10,7 @@ class MidZoomAsk {
 
 export class MidZoomAskRegistration implements IProtocolRegistration<MidZoomAsk> {
     protocolId(): number {
-        return 307;
+        return 857;
     }
 
     write(buffer: IByteBuffer, packet: MidZoomAsk | null) {
@@ -19,7 +19,7 @@ export class MidZoomAskRegistration implements IProtocolRegistration<MidZoomAsk>
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 276);
+        buffer.writePacket(packet.request, 806);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -30,7 +30,7 @@ export class MidZoomAskRegistration implements IProtocolRegistration<MidZoomAsk>
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new MidZoomAsk();
-        const result0 = buffer.readPacket(276);
+        const result0 = buffer.readPacket(806);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;

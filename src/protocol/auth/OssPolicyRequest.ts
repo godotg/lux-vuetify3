@@ -8,7 +8,7 @@ class OssPolicyRequest {
 
 export class OssPolicyRequestRegistration implements IProtocolRegistration<OssPolicyRequest> {
     protocolId(): number {
-        return 252;
+        return 702;
     }
 
     write(buffer: IByteBuffer, packet: OssPolicyRequest | null) {

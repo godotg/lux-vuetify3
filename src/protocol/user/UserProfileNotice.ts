@@ -10,7 +10,7 @@ class UserProfileNotice {
 
 export class UserProfileNoticeRegistration implements IProtocolRegistration<UserProfileNotice> {
     protocolId(): number {
-        return 261;
+        return 751;
     }
 
     write(buffer: IByteBuffer, packet: UserProfileNotice | null) {
@@ -20,7 +20,7 @@ export class UserProfileNoticeRegistration implements IProtocolRegistration<User
         }
         buffer.writeInt(-1);
         buffer.writeString(packet.token);
-        buffer.writePacket(packet.user, 260);
+        buffer.writePacket(packet.user, 750);
     }
 
     read(buffer: IByteBuffer): UserProfileNotice | null {
@@ -32,7 +32,7 @@ export class UserProfileNoticeRegistration implements IProtocolRegistration<User
         const packet = new UserProfileNotice();
         const result0 = buffer.readString();
         packet.token = result0;
-        const result1 = buffer.readPacket(260);
+        const result1 = buffer.readPacket(750);
         packet.user = result1;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

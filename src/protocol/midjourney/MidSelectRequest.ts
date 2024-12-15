@@ -11,7 +11,7 @@ class MidSelectRequest {
 
 export class MidSelectRequestRegistration implements IProtocolRegistration<MidSelectRequest> {
     protocolId(): number {
-        return 274;
+        return 804;
     }
 
     write(buffer: IByteBuffer, packet: MidSelectRequest | null) {

@@ -9,7 +9,7 @@ class ChatgptMessage {
 
 export class ChatgptMessageRegistration implements IProtocolRegistration<ChatgptMessage> {
     protocolId(): number {
-        return 234;
+        return 504;
     }
 
     write(buffer: IByteBuffer, packet: ChatgptMessage | null) {

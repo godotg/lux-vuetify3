@@ -11,7 +11,7 @@ class ChatgptMessageNotice {
 
 export class ChatgptMessageNoticeRegistration implements IProtocolRegistration<ChatgptMessageNotice> {
     protocolId(): number {
-        return 231;
+        return 501;
     }
 
     write(buffer: IByteBuffer, packet: ChatgptMessageNotice | null) {

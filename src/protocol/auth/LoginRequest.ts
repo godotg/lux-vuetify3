@@ -10,7 +10,7 @@ class LoginRequest {
 
 export class LoginRequestRegistration implements IProtocolRegistration<LoginRequest> {
     protocolId(): number {
-        return 250;
+        return 700;
     }
 
     write(buffer: IByteBuffer, packet: LoginRequest | null) {

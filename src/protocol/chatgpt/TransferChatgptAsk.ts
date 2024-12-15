@@ -13,7 +13,7 @@ class TransferChatgptAsk {
 
 export class TransferChatgptAskRegistration implements IProtocolRegistration<TransferChatgptAsk> {
     protocolId(): number {
-        return 402;
+        return 510;
     }
 
     write(buffer: IByteBuffer, packet: TransferChatgptAsk | null) {
@@ -24,7 +24,7 @@ export class TransferChatgptAskRegistration implements IProtocolRegistration<Tra
         buffer.writeInt(-1);
         buffer.writeInt(packet.chatAI);
         buffer.writeIntSet(packet.ignoreAIs);
-        buffer.writePacketList(packet.messages, 234);
+        buffer.writePacketList(packet.messages, 504);
         buffer.writeLong(packet.requestId);
         buffer.writeLong(packet.requestSid);
     }
@@ -40,7 +40,7 @@ export class TransferChatgptAskRegistration implements IProtocolRegistration<Tra
         packet.chatAI = result0;
         const set1 = buffer.readIntSet();
         packet.ignoreAIs = set1;
-        const list2 = buffer.readPacketList(234);
+        const list2 = buffer.readPacketList(504);
         packet.messages = list2;
         const result3 = buffer.readLong();
         packet.requestId = result3;

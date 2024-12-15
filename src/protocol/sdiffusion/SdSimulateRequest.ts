@@ -17,7 +17,7 @@ class SdSimulateRequest {
 
 export class SdSimulateRequestRegistration implements IProtocolRegistration<SdSimulateRequest> {
     protocolId(): number {
-        return 340;
+        return 1050;
     }
 
     write(buffer: IByteBuffer, packet: SdSimulateRequest | null) {

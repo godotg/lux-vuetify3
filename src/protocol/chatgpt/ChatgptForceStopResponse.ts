@@ -8,7 +8,7 @@ class ChatgptForceStopResponse {
 
 export class ChatgptForceStopResponseRegistration implements IProtocolRegistration<ChatgptForceStopResponse> {
     protocolId(): number {
-        return 233;
+        return 503;
     }
 
     write(buffer: IByteBuffer, packet: ChatgptForceStopResponse | null) {

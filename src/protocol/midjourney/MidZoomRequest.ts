@@ -10,7 +10,7 @@ class MidZoomRequest {
 
 export class MidZoomRequestRegistration implements IProtocolRegistration<MidZoomRequest> {
     protocolId(): number {
-        return 276;
+        return 806;
     }
 
     write(buffer: IByteBuffer, packet: MidZoomRequest | null) {

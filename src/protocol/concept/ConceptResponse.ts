@@ -10,7 +10,7 @@ class ConceptResponse {
 
 export class ConceptResponseRegistration implements IProtocolRegistration<ConceptResponse> {
     protocolId(): number {
-        return 222;
+        return 352;
     }
 
     write(buffer: IByteBuffer, packet: ConceptResponse | null) {
@@ -19,7 +19,7 @@ export class ConceptResponseRegistration implements IProtocolRegistration<Concep
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacketList(packet.concepts, 220);
+        buffer.writePacketList(packet.concepts, 350);
         buffer.writeString(packet.core);
     }
 
@@ -30,7 +30,7 @@ export class ConceptResponseRegistration implements IProtocolRegistration<Concep
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new ConceptResponse();
-        const list0 = buffer.readPacketList(220);
+        const list0 = buffer.readPacketList(350);
         packet.concepts = list0;
         const result1 = buffer.readString();
         packet.core = result1;

@@ -12,7 +12,7 @@ class SdSimulateAsk {
 
 export class SdSimulateAskRegistration implements IProtocolRegistration<SdSimulateAsk> {
     protocolId(): number {
-        return 321;
+        return 901;
     }
 
     write(buffer: IByteBuffer, packet: SdSimulateAsk | null) {
@@ -22,7 +22,7 @@ export class SdSimulateAskRegistration implements IProtocolRegistration<SdSimula
         }
         buffer.writeInt(-1);
         buffer.writePacket(packet.attachment, 0);
-        buffer.writePacket(packet.request, 340);
+        buffer.writePacket(packet.request, 1050);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -35,7 +35,7 @@ export class SdSimulateAskRegistration implements IProtocolRegistration<SdSimula
         const packet = new SdSimulateAsk();
         const result0 = buffer.readPacket(0);
         packet.attachment = result0;
-        const result1 = buffer.readPacket(340);
+        const result1 = buffer.readPacket(1050);
         packet.request = result1;
         const result2 = buffer.readLong();
         packet.requestSid = result2;

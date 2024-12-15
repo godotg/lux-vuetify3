@@ -10,7 +10,7 @@ class MidSelectAsk {
 
 export class MidSelectAskRegistration implements IProtocolRegistration<MidSelectAsk> {
     protocolId(): number {
-        return 305;
+        return 855;
     }
 
     write(buffer: IByteBuffer, packet: MidSelectAsk | null) {
@@ -19,7 +19,7 @@ export class MidSelectAskRegistration implements IProtocolRegistration<MidSelect
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 274);
+        buffer.writePacket(packet.request, 804);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -30,7 +30,7 @@ export class MidSelectAskRegistration implements IProtocolRegistration<MidSelect
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new MidSelectAsk();
-        const result0 = buffer.readPacket(274);
+        const result0 = buffer.readPacket(804);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;

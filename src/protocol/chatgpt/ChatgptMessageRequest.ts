@@ -22,7 +22,7 @@ class ChatgptMessageRequest {
 
 export class ChatgptMessageRequestRegistration implements IProtocolRegistration<ChatgptMessageRequest> {
     protocolId(): number {
-        return 230;
+        return 500;
     }
 
     write(buffer: IByteBuffer, packet: ChatgptMessageRequest | null) {
@@ -34,7 +34,7 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
         buffer.writeInt(125);
         buffer.writeInt(packet.ai);
         buffer.writeIntSet(packet.ignoreAIs);
-        buffer.writePacketList(packet.messages, 234);
+        buffer.writePacketList(packet.messages, 504);
         buffer.writeBool(packet.mobile);
         buffer.writeLong(packet.requestId);
         buffer.writeBool(packet.googleSearch);
@@ -55,7 +55,7 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
         packet.ai = result0;
         const set1 = buffer.readIntSet();
         packet.ignoreAIs = set1;
-        const list2 = buffer.readPacketList(234);
+        const list2 = buffer.readPacketList(504);
         packet.messages = list2;
         const result3 = buffer.readBool(); 
         packet.mobile = result3;

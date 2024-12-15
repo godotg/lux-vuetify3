@@ -10,7 +10,7 @@ class MidInpaintAsk {
 
 export class MidInpaintAskRegistration implements IProtocolRegistration<MidInpaintAsk> {
     protocolId(): number {
-        return 308;
+        return 858;
     }
 
     write(buffer: IByteBuffer, packet: MidInpaintAsk | null) {
@@ -19,7 +19,7 @@ export class MidInpaintAskRegistration implements IProtocolRegistration<MidInpai
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 277);
+        buffer.writePacket(packet.request, 807);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -30,7 +30,7 @@ export class MidInpaintAskRegistration implements IProtocolRegistration<MidInpai
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new MidInpaintAsk();
-        const result0 = buffer.readPacket(277);
+        const result0 = buffer.readPacket(807);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;

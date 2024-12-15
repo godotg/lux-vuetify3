@@ -8,7 +8,7 @@ class ConceptRequest {
 
 export class ConceptRequestRegistration implements IProtocolRegistration<ConceptRequest> {
     protocolId(): number {
-        return 221;
+        return 351;
     }
 
     write(buffer: IByteBuffer, packet: ConceptRequest | null) {

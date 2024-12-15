@@ -13,7 +13,7 @@ class OssPolicyVO {
 
 export class OssPolicyVORegistration implements IProtocolRegistration<OssPolicyVO> {
     protocolId(): number {
-        return 254;
+        return 704;
     }
 
     write(buffer: IByteBuffer, packet: OssPolicyVO | null) {

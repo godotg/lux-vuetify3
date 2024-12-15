@@ -12,7 +12,7 @@ class RankResponse {
 
 export class RankResponseRegistration implements IProtocolRegistration<RankResponse> {
     protocolId(): number {
-        return 228;
+        return 403;
     }
 
     write(buffer: IByteBuffer, packet: RankResponse | null) {
@@ -22,8 +22,8 @@ export class RankResponseRegistration implements IProtocolRegistration<RankRespo
         }
         buffer.writeInt(-1);
         buffer.writeString(packet.core);
-        buffer.writePacketList(packet.eastMoneyRanks, 225);
-        buffer.writePacketList(packet.thsRanks, 226);
+        buffer.writePacketList(packet.eastMoneyRanks, 400);
+        buffer.writePacketList(packet.thsRanks, 401);
     }
 
     read(buffer: IByteBuffer): RankResponse | null {
@@ -35,9 +35,9 @@ export class RankResponseRegistration implements IProtocolRegistration<RankRespo
         const packet = new RankResponse();
         const result0 = buffer.readString();
         packet.core = result0;
-        const list1 = buffer.readPacketList(225);
+        const list1 = buffer.readPacketList(400);
         packet.eastMoneyRanks = list1;
-        const list2 = buffer.readPacketList(226);
+        const list2 = buffer.readPacketList(401);
         packet.thsRanks = list2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

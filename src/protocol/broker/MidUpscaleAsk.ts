@@ -10,7 +10,7 @@ class MidUpscaleAsk {
 
 export class MidUpscaleAskRegistration implements IProtocolRegistration<MidUpscaleAsk> {
     protocolId(): number {
-        return 306;
+        return 856;
     }
 
     write(buffer: IByteBuffer, packet: MidUpscaleAsk | null) {
@@ -19,7 +19,7 @@ export class MidUpscaleAskRegistration implements IProtocolRegistration<MidUpsca
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 275);
+        buffer.writePacket(packet.request, 805);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -30,7 +30,7 @@ export class MidUpscaleAskRegistration implements IProtocolRegistration<MidUpsca
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new MidUpscaleAsk();
-        const result0 = buffer.readPacket(275);
+        const result0 = buffer.readPacket(805);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;

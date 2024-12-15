@@ -20,7 +20,7 @@ class StableDiffusionRequest {
 
 export class StableDiffusionRequestRegistration implements IProtocolRegistration<StableDiffusionRequest> {
     protocolId(): number {
-        return 330;
+        return 1000;
     }
 
     write(buffer: IByteBuffer, packet: StableDiffusionRequest | null) {

@@ -13,7 +13,7 @@ class ChatMessage {
 
 export class ChatMessageRegistration implements IProtocolRegistration<ChatMessage> {
     protocolId(): number {
-        return 240;
+        return 600;
     }
 
     write(buffer: IByteBuffer, packet: ChatMessage | null) {

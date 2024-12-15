@@ -8,7 +8,7 @@ class MidHistoryRequest {
 
 export class MidHistoryRequestRegistration implements IProtocolRegistration<MidHistoryRequest> {
     protocolId(): number {
-        return 271;
+        return 801;
     }
 
     write(buffer: IByteBuffer, packet: MidHistoryRequest | null) {

@@ -10,7 +10,7 @@ class StableDiffusionResponse {
 
 export class StableDiffusionResponseRegistration implements IProtocolRegistration<StableDiffusionResponse> {
     protocolId(): number {
-        return 331;
+        return 1001;
     }
 
     write(buffer: IByteBuffer, packet: StableDiffusionResponse | null) {
@@ -20,7 +20,7 @@ export class StableDiffusionResponseRegistration implements IProtocolRegistratio
         }
         buffer.writeInt(-1);
         buffer.writeStringList(packet.images);
-        buffer.writePacket(packet.parameters, 332);
+        buffer.writePacket(packet.parameters, 1002);
     }
 
     read(buffer: IByteBuffer): StableDiffusionResponse | null {
@@ -32,7 +32,7 @@ export class StableDiffusionResponseRegistration implements IProtocolRegistratio
         const packet = new StableDiffusionResponse();
         const list0 = buffer.readStringList();
         packet.images = list0;
-        const result1 = buffer.readPacket(332);
+        const result1 = buffer.readPacket(1002);
         packet.parameters = result1;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

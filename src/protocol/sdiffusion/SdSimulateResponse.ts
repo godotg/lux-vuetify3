@@ -10,7 +10,7 @@ class SdSimulateResponse {
 
 export class SdSimulateResponseRegistration implements IProtocolRegistration<SdSimulateResponse> {
     protocolId(): number {
-        return 343;
+        return 1053;
     }
 
     write(buffer: IByteBuffer, packet: SdSimulateResponse | null) {

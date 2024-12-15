@@ -24,7 +24,7 @@ class MidImagineNotice {
 
 export class MidImagineNoticeRegistration implements IProtocolRegistration<MidImagineNotice> {
     protocolId(): number {
-        return 272;
+        return 802;
     }
 
     write(buffer: IByteBuffer, packet: MidImagineNotice | null) {

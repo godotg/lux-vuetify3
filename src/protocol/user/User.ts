@@ -15,7 +15,7 @@ class User {
 
 export class UserRegistration implements IProtocolRegistration<User> {
     protocolId(): number {
-        return 260;
+        return 750;
     }
 
     write(buffer: IByteBuffer, packet: User | null) {

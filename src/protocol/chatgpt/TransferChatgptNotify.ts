@@ -10,7 +10,7 @@ class TransferChatgptNotify {
 
 export class TransferChatgptNotifyRegistration implements IProtocolRegistration<TransferChatgptNotify> {
     protocolId(): number {
-        return 403;
+        return 511;
     }
 
     write(buffer: IByteBuffer, packet: TransferChatgptNotify | null) {
@@ -19,7 +19,7 @@ export class TransferChatgptNotifyRegistration implements IProtocolRegistration<
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.notice, 231);
+        buffer.writePacket(packet.notice, 501);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -30,7 +30,7 @@ export class TransferChatgptNotifyRegistration implements IProtocolRegistration<
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new TransferChatgptNotify();
-        const result0 = buffer.readPacket(231);
+        const result0 = buffer.readPacket(501);
         packet.notice = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;

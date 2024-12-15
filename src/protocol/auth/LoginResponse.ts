@@ -15,7 +15,7 @@ class LoginResponse {
 
 export class LoginResponseRegistration implements IProtocolRegistration<LoginResponse> {
     protocolId(): number {
-        return 251;
+        return 701;
     }
 
     write(buffer: IByteBuffer, packet: LoginResponse | null) {
@@ -30,7 +30,7 @@ export class LoginResponseRegistration implements IProtocolRegistration<LoginRes
         buffer.writeLong(packet.ipLong);
         buffer.writeString(packet.region);
         buffer.writeLong(packet.sid);
-        buffer.writePacket(packet.user, 260);
+        buffer.writePacket(packet.user, 750);
     }
 
     read(buffer: IByteBuffer): LoginResponse | null {
@@ -52,7 +52,7 @@ export class LoginResponseRegistration implements IProtocolRegistration<LoginRes
         packet.region = result4;
         const result5 = buffer.readLong();
         packet.sid = result5;
-        const result6 = buffer.readPacket(260);
+        const result6 = buffer.readPacket(750);
         packet.user = result6;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

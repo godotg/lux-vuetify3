@@ -9,7 +9,7 @@ class GroupChatNotice {
 
 export class GroupChatNoticeRegistration implements IProtocolRegistration<GroupChatNotice> {
     protocolId(): number {
-        return 241;
+        return 601;
     }
 
     write(buffer: IByteBuffer, packet: GroupChatNotice | null) {
@@ -18,7 +18,7 @@ export class GroupChatNoticeRegistration implements IProtocolRegistration<GroupC
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacketList(packet.messages, 240);
+        buffer.writePacketList(packet.messages, 600);
     }
 
     read(buffer: IByteBuffer): GroupChatNotice | null {
@@ -28,7 +28,7 @@ export class GroupChatNoticeRegistration implements IProtocolRegistration<GroupC
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new GroupChatNotice();
-        const list0 = buffer.readPacketList(240);
+        const list0 = buffer.readPacketList(600);
         packet.messages = list0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

@@ -11,7 +11,7 @@ class GroupHistoryMessageResponse {
 
 export class GroupHistoryMessageResponseRegistration implements IProtocolRegistration<GroupHistoryMessageResponse> {
     protocolId(): number {
-        return 244;
+        return 604;
     }
 
     write(buffer: IByteBuffer, packet: GroupHistoryMessageResponse | null) {
@@ -21,7 +21,7 @@ export class GroupHistoryMessageResponseRegistration implements IProtocolRegistr
         }
         buffer.writeInt(-1);
         buffer.writeLong(packet.groupId);
-        buffer.writePacketList(packet.messages, 240);
+        buffer.writePacketList(packet.messages, 600);
         buffer.writeInt(packet.onlineUsers);
     }
 
@@ -34,7 +34,7 @@ export class GroupHistoryMessageResponseRegistration implements IProtocolRegistr
         const packet = new GroupHistoryMessageResponse();
         const result0 = buffer.readLong();
         packet.groupId = result0;
-        const list1 = buffer.readPacketList(240);
+        const list1 = buffer.readPacketList(600);
         packet.messages = list1;
         const result2 = buffer.readInt();
         packet.onlineUsers = result2;

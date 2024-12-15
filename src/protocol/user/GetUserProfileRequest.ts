@@ -8,7 +8,7 @@ class GetUserProfileRequest {
 
 export class GetUserProfileRequestRegistration implements IProtocolRegistration<GetUserProfileRequest> {
     protocolId(): number {
-        return 264;
+        return 754;
     }
 
     write(buffer: IByteBuffer, packet: GetUserProfileRequest | null) {

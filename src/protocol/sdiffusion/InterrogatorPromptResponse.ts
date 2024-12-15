@@ -8,7 +8,7 @@ class InterrogatorPromptResponse {
 
 export class InterrogatorPromptResponseRegistration implements IProtocolRegistration<InterrogatorPromptResponse> {
     protocolId(): number {
-        return 334;
+        return 1004;
     }
 
     write(buffer: IByteBuffer, packet: InterrogatorPromptResponse | null) {

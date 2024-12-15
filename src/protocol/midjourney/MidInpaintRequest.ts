@@ -9,7 +9,7 @@ class MidInpaintRequest {
 
 export class MidInpaintRequestRegistration implements IProtocolRegistration<MidInpaintRequest> {
     protocolId(): number {
-        return 277;
+        return 807;
     }
 
     write(buffer: IByteBuffer, packet: MidInpaintRequest | null) {

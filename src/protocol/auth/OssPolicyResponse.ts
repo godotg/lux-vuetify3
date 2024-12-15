@@ -9,7 +9,7 @@ class OssPolicyResponse {
 
 export class OssPolicyResponseRegistration implements IProtocolRegistration<OssPolicyResponse> {
     protocolId(): number {
-        return 253;
+        return 703;
     }
 
     write(buffer: IByteBuffer, packet: OssPolicyResponse | null) {
@@ -18,7 +18,7 @@ export class OssPolicyResponseRegistration implements IProtocolRegistration<OssP
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.ossPolicy, 254);
+        buffer.writePacket(packet.ossPolicy, 704);
     }
 
     read(buffer: IByteBuffer): OssPolicyResponse | null {
@@ -28,7 +28,7 @@ export class OssPolicyResponseRegistration implements IProtocolRegistration<OssP
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new OssPolicyResponse();
-        const result0 = buffer.readPacket(254);
+        const result0 = buffer.readPacket(704);
         packet.ossPolicy = result0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);

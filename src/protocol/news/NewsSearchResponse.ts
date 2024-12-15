@@ -1,34 +1,35 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
+import News from './News';
 
 
-class ImageDeleteAsk {
-    realUrl: string = '';
+class NewsSearchResponse {
+    news: Array<News> = [];
 }
 
-export class ImageDeleteAskRegistration implements IProtocolRegistration<ImageDeleteAsk> {
+export class NewsSearchResponseRegistration implements IProtocolRegistration<NewsSearchResponse> {
     protocolId(): number {
-        return 1057;
+        return 210;
     }
 
-    write(buffer: IByteBuffer, packet: ImageDeleteAsk | null) {
+    write(buffer: IByteBuffer, packet: NewsSearchResponse | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writeString(packet.realUrl);
+        buffer.writePacketList(packet.news, 200);
     }
 
-    read(buffer: IByteBuffer): ImageDeleteAsk | null {
+    read(buffer: IByteBuffer): NewsSearchResponse | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new ImageDeleteAsk();
-        const result0 = buffer.readString();
-        packet.realUrl = result0;
+        const packet = new NewsSearchResponse();
+        const list0 = buffer.readPacketList(200);
+        packet.news = list0;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
@@ -36,4 +37,4 @@ export class ImageDeleteAskRegistration implements IProtocolRegistration<ImageDe
     }
 }
 
-export default ImageDeleteAsk;
+export default NewsSearchResponse;

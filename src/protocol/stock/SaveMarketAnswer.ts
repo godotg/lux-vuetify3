@@ -8,7 +8,7 @@ class SaveMarketAnswer {
 
 export class SaveMarketAnswerRegistration implements IProtocolRegistration<SaveMarketAnswer> {
     protocolId(): number {
-        return 212;
+        return 302;
     }
 
     write(buffer: IByteBuffer, packet: SaveMarketAnswer | null) {

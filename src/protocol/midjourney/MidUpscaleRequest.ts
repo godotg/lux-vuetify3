@@ -10,7 +10,7 @@ class MidUpscaleRequest {
 
 export class MidUpscaleRequestRegistration implements IProtocolRegistration<MidUpscaleRequest> {
     protocolId(): number {
-        return 275;
+        return 805;
     }
 
     write(buffer: IByteBuffer, packet: MidUpscaleRequest | null) {

@@ -8,7 +8,7 @@ class LoginByWeChatRequest {
 
 export class LoginByWeChatRequestRegistration implements IProtocolRegistration<LoginByWeChatRequest> {
     protocolId(): number {
-        return 255;
+        return 705;
     }
 
     write(buffer: IByteBuffer, packet: LoginByWeChatRequest | null) {

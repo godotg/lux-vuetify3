@@ -12,7 +12,7 @@ class SdImage {
 
 export class SdImageRegistration implements IProtocolRegistration<SdImage> {
     protocolId(): number {
-        return 344;
+        return 1054;
     }
 
     write(buffer: IByteBuffer, packet: SdImage | null) {

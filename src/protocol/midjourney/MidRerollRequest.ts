@@ -9,7 +9,7 @@ class MidRerollRequest {
 
 export class MidRerollRequestRegistration implements IProtocolRegistration<MidRerollRequest> {
     protocolId(): number {
-        return 273;
+        return 803;
     }
 
     write(buffer: IByteBuffer, packet: MidRerollRequest | null) {

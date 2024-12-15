@@ -9,7 +9,7 @@ class UpdateUserProfileRequest {
 
 export class UpdateUserProfileRequestRegistration implements IProtocolRegistration<UpdateUserProfileRequest> {
     protocolId(): number {
-        return 262;
+        return 752;
     }
 
     write(buffer: IByteBuffer, packet: UpdateUserProfileRequest | null) {
