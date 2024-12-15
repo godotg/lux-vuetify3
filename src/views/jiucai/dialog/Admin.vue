@@ -147,6 +147,9 @@ async function deleteBroadcast(id: number) {
                 stable diffusion
               </th>
               <th>
+                搜索
+              </th>
+              <th>
                 新闻总数
               </th>
               <th>
@@ -179,6 +182,7 @@ async function deleteBroadcast(id: number) {
               <td>{{ stat.midImagineRequest }}</td>
               <td>{{ stat.navigation }}</td>
               <td>{{ stat.sdSimulateRequest }}</td>
+              <td>{{ stat.newsSearchRequest }}</td>
               <td>{{ stat.newsStat.newsS + stat.newsStat.newsA + stat.newsStat.newsB + stat.newsStat.newsC + stat.newsStat.newsD }}</td>
               <td>{{ stat.newsStat.newsS }}</td>
               <td>{{ stat.newsStat.newsA }}</td>

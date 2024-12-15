@@ -30,18 +30,16 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
             buffer.writeInt(0);
             return;
         }
-        const beforeWriteIndex = buffer.getWriteOffset();
-        buffer.writeInt(125);
+        buffer.writeInt(-1);
         buffer.writeInt(packet.ai);
+        buffer.writeBool(packet.bilibiliSearch);
+        buffer.writeBool(packet.bingSearch);
+        buffer.writeBool(packet.googleSearch);
         buffer.writeIntSet(packet.ignoreAIs);
         buffer.writePacketList(packet.messages, 504);
         buffer.writeBool(packet.mobile);
         buffer.writeLong(packet.requestId);
-        buffer.writeBool(packet.googleSearch);
-        buffer.writeBool(packet.bingSearch);
-        buffer.writeBool(packet.bilibiliSearch);
         buffer.writeBool(packet.weixinSearch);
-        buffer.adjustPadding(125, beforeWriteIndex);
     }
 
     read(buffer: IByteBuffer): ChatgptMessageRequest | null {
@@ -53,30 +51,22 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
         const packet = new ChatgptMessageRequest();
         const result0 = buffer.readInt();
         packet.ai = result0;
-        const set1 = buffer.readIntSet();
-        packet.ignoreAIs = set1;
-        const list2 = buffer.readPacketList(504);
-        packet.messages = list2;
+        const result1 = buffer.readBool(); 
+        packet.bilibiliSearch = result1;
+        const result2 = buffer.readBool(); 
+        packet.bingSearch = result2;
         const result3 = buffer.readBool(); 
-        packet.mobile = result3;
-        const result4 = buffer.readLong();
-        packet.requestId = result4;
-        if (buffer.compatibleRead(beforeReadIndex, length)) {
-            const result5 = buffer.readBool(); 
-            packet.googleSearch = result5;
-        }
-        if (buffer.compatibleRead(beforeReadIndex, length)) {
-            const result6 = buffer.readBool(); 
-            packet.bingSearch = result6;
-        }
-        if (buffer.compatibleRead(beforeReadIndex, length)) {
-            const result7 = buffer.readBool(); 
-            packet.bilibiliSearch = result7;
-        }
-        if (buffer.compatibleRead(beforeReadIndex, length)) {
-            const result8 = buffer.readBool(); 
-            packet.weixinSearch = result8;
-        }
+        packet.googleSearch = result3;
+        const set4 = buffer.readIntSet();
+        packet.ignoreAIs = set4;
+        const list5 = buffer.readPacketList(504);
+        packet.messages = list5;
+        const result6 = buffer.readBool(); 
+        packet.mobile = result6;
+        const result7 = buffer.readLong();
+        packet.requestId = result7;
+        const result8 = buffer.readBool(); 
+        packet.weixinSearch = result8;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
