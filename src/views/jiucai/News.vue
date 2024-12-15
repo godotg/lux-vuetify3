@@ -545,11 +545,11 @@ function copyNews(news: News, event: Event) {
             <tbody>
             <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
               <td>{{ i + 1 }}</td>
-              <td class="cursor-pointer" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
+              <td :class="rank.primary ? 'cursor-pointer font-weight-black text-primary' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
                 {{ rank.name }}
               </td>
               <td>{{ hotRankChange(rank.rankChange) }}</td>
-              <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(thsRanksRef[i].code)">
+              <td :class="rank.primary ? 'cursor-pointer font-weight-black text-primary' : 'cursor-pointer'" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(thsRanksRef[i].code)">
                 {{ thsRanksRef[i].name }}
               </td>
             </tr>
@@ -661,9 +661,6 @@ function copyNews(news: News, event: Event) {
                   同花顺列
                 </th>
                 <th>
-                  升降
-                </th>
-                <th>
                   热度
                 </th>
                 <th>
@@ -674,11 +671,11 @@ function copyNews(news: News, event: Event) {
               <tbody>
               <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
                 <td>{{ i + 1 }}</td>
-                <td class="cursor-pointer" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
+                <td :class="rank.primary ? 'cursor-pointer font-weight-black text-primary' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
                   {{ rank.name }}
                 </td>
                 <td>{{ hotRankChange(rank.rankChange) }}</td>
-                <td class="cursor-pointer" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">
+                <td :class="rank.primary ? 'cursor-pointer font-weight-black text-primary' : 'cursor-pointer'" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(rank.code)">
                   {{ thsRanksRef[i].name }}
                 </td>
                 <td>{{ hotRankChange(thsRanksRef[i].rankChange) }}</td>
