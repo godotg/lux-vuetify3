@@ -19,10 +19,10 @@ export const useCustomizeThemeStore = defineStore({
   state: (): State => ({
     miniSidebar: false,
     darkTheme: false,
-    primaryColor: {
-      colorId: 5,
-      colorName: "warning",
-      colorValue: "#F2825A",
+    primaryColor:   {
+      colorId: 3,
+      colorName: "info",
+      colorValue: "#17C1E8",
     },
     localCode: "zhHans",
     mainSidebar: true,
