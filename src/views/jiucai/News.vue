@@ -447,11 +447,11 @@ function copyNews(news: News, event: Event) {
             <tbody>
             <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
               <td>{{ i + 1 }}</td>
-              <td :class="rank.primary ? 'cursor-pointer font-weight-black text-primary' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
+              <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
                 {{ rank.name }}
               </td>
               <td>{{ hotRankChange(rank.rankChange) }}</td>
-              <td :class="rank.primary ? 'cursor-pointer font-weight-black text-primary' : 'cursor-pointer'" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(thsRanksRef[i].code)">
+              <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(thsRanksRef[i].code)">
                 {{ thsRanksRef[i].name }}
               </td>
             </tr>
