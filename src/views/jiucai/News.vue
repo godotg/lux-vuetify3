@@ -603,7 +603,7 @@ function copyNews(news: News, event: Event) {
         <template v-slot:icon>
           <span>韭指</span>
         </template>
-        <v-card width="1100px">
+        <v-card width="1800px">
           <v-card-text>
             <canvas id="indexChart"></canvas>
           </v-card-text>
@@ -616,7 +616,7 @@ function copyNews(news: News, event: Event) {
         <template v-slot:icon>
           <span>量能</span>
         </template>
-        <v-card width="1100px">
+        <v-card width="1800px">
           <v-card-text>
             <canvas id="exchangeChart"></canvas>
           </v-card-text>
