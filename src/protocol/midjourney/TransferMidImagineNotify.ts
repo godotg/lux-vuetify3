@@ -1,36 +1,36 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
-import SdSimulateNotice from '../sdiffusion/SdSimulateNotice';
+import MidImagineNotice from './MidImagineNotice';
 
 
-class SdSimulateNotify {
+class TransferMidImagineNotify {
     noticeSid: number = 0;
-    notice: SdSimulateNotice | null = null;
+    notice: MidImagineNotice | null = null;
 }
 
-export class SdSimulateNotifyRegistration implements IProtocolRegistration<SdSimulateNotify> {
+export class TransferMidImagineNotifyRegistration implements IProtocolRegistration<TransferMidImagineNotify> {
     protocolId(): number {
-        return 903;
+        return 821;
     }
 
-    write(buffer: IByteBuffer, packet: SdSimulateNotify | null) {
+    write(buffer: IByteBuffer, packet: TransferMidImagineNotify | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.notice, 1051);
+        buffer.writePacket(packet.notice, 802);
         buffer.writeLong(packet.noticeSid);
     }
 
-    read(buffer: IByteBuffer): SdSimulateNotify | null {
+    read(buffer: IByteBuffer): TransferMidImagineNotify | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new SdSimulateNotify();
-        const result0 = buffer.readPacket(1051);
+        const packet = new TransferMidImagineNotify();
+        const result0 = buffer.readPacket(802);
         packet.notice = result0;
         const result1 = buffer.readLong();
         packet.noticeSid = result1;
@@ -41,4 +41,4 @@ export class SdSimulateNotifyRegistration implements IProtocolRegistration<SdSim
     }
 }
 
-export default SdSimulateNotify;
+export default TransferMidImagineNotify;

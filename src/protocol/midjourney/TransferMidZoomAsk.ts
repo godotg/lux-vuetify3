@@ -1,36 +1,36 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
-import MidRerollRequest from '../midjourney/MidRerollRequest';
+import MidZoomRequest from './MidZoomRequest';
 
 
-class MidRerollAsk {
+class TransferMidZoomAsk {
     requestSid: number = 0;
-    request: MidRerollRequest | null = null;
+    request: MidZoomRequest | null = null;
 }
 
-export class MidRerollAskRegistration implements IProtocolRegistration<MidRerollAsk> {
+export class TransferMidZoomAskRegistration implements IProtocolRegistration<TransferMidZoomAsk> {
     protocolId(): number {
-        return 854;
+        return 826;
     }
 
-    write(buffer: IByteBuffer, packet: MidRerollAsk | null) {
+    write(buffer: IByteBuffer, packet: TransferMidZoomAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 803);
+        buffer.writePacket(packet.request, 806);
         buffer.writeLong(packet.requestSid);
     }
 
-    read(buffer: IByteBuffer): MidRerollAsk | null {
+    read(buffer: IByteBuffer): TransferMidZoomAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new MidRerollAsk();
-        const result0 = buffer.readPacket(803);
+        const packet = new TransferMidZoomAsk();
+        const result0 = buffer.readPacket(806);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;
@@ -41,4 +41,4 @@ export class MidRerollAskRegistration implements IProtocolRegistration<MidReroll
     }
 }
 
-export default MidRerollAsk;
+export default TransferMidZoomAsk;

@@ -1,44 +1,44 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
 import SignalAttachment from '../attachment/SignalAttachment';
-import SdSimulateResponse from '../sdiffusion/SdSimulateResponse';
+import SdSimulateRequest from './SdSimulateRequest';
 
 
-class SdSimulateAnswer {
-    noticeSid: number = 0;
+class SdSimulateAsk {
+    requestSid: number = 0;
+    request: SdSimulateRequest | null = null;
     attachment: SignalAttachment | null = null;
-    response: SdSimulateResponse | null = null;
 }
 
-export class SdSimulateAnswerRegistration implements IProtocolRegistration<SdSimulateAnswer> {
+export class SdSimulateAskRegistration implements IProtocolRegistration<SdSimulateAsk> {
     protocolId(): number {
-        return 902;
+        return 1070;
     }
 
-    write(buffer: IByteBuffer, packet: SdSimulateAnswer | null) {
+    write(buffer: IByteBuffer, packet: SdSimulateAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
         buffer.writePacket(packet.attachment, 0);
-        buffer.writeLong(packet.noticeSid);
-        buffer.writePacket(packet.response, 1053);
+        buffer.writePacket(packet.request, 1050);
+        buffer.writeLong(packet.requestSid);
     }
 
-    read(buffer: IByteBuffer): SdSimulateAnswer | null {
+    read(buffer: IByteBuffer): SdSimulateAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new SdSimulateAnswer();
+        const packet = new SdSimulateAsk();
         const result0 = buffer.readPacket(0);
         packet.attachment = result0;
-        const result1 = buffer.readLong();
-        packet.noticeSid = result1;
-        const result2 = buffer.readPacket(1053);
-        packet.response = result2;
+        const result1 = buffer.readPacket(1050);
+        packet.request = result1;
+        const result2 = buffer.readLong();
+        packet.requestSid = result2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
@@ -46,4 +46,4 @@ export class SdSimulateAnswerRegistration implements IProtocolRegistration<SdSim
     }
 }
 
-export default SdSimulateAnswer;
+export default SdSimulateAsk;

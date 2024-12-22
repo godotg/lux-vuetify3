@@ -1,36 +1,36 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
-import MidInpaintRequest from '../midjourney/MidInpaintRequest';
+import MidImagineRequest from './MidImagineRequest';
 
 
-class MidInpaintAsk {
+class TransferMidImagineAsk {
     requestSid: number = 0;
-    request: MidInpaintRequest | null = null;
+    request: MidImagineRequest | null = null;
 }
 
-export class MidInpaintAskRegistration implements IProtocolRegistration<MidInpaintAsk> {
+export class TransferMidImagineAskRegistration implements IProtocolRegistration<TransferMidImagineAsk> {
     protocolId(): number {
-        return 858;
+        return 820;
     }
 
-    write(buffer: IByteBuffer, packet: MidInpaintAsk | null) {
+    write(buffer: IByteBuffer, packet: TransferMidImagineAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 807);
+        buffer.writePacket(packet.request, 800);
         buffer.writeLong(packet.requestSid);
     }
 
-    read(buffer: IByteBuffer): MidInpaintAsk | null {
+    read(buffer: IByteBuffer): TransferMidImagineAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new MidInpaintAsk();
-        const result0 = buffer.readPacket(807);
+        const packet = new TransferMidImagineAsk();
+        const result0 = buffer.readPacket(800);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;
@@ -41,4 +41,4 @@ export class MidInpaintAskRegistration implements IProtocolRegistration<MidInpai
     }
 }
 
-export default MidInpaintAsk;
+export default TransferMidImagineAsk;

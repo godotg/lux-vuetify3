@@ -9,7 +9,7 @@ class SeoAsk {
 
 export class SeoAskRegistration implements IProtocolRegistration<SeoAsk> {
     protocolId(): number {
-        return 900;
+        return 860;
     }
 
     write(buffer: IByteBuffer, packet: SeoAsk | null) {

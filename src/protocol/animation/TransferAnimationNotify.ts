@@ -1,37 +1,37 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
-import MidZoomRequest from '../midjourney/MidZoomRequest';
+import AnimationNotice from './AnimationNotice';
 
 
-class MidZoomAsk {
+class TransferAnimationNotify {
     requestSid: number = 0;
-    request: MidZoomRequest | null = null;
+    notice: AnimationNotice | null = null;
 }
 
-export class MidZoomAskRegistration implements IProtocolRegistration<MidZoomAsk> {
+export class TransferAnimationNotifyRegistration implements IProtocolRegistration<TransferAnimationNotify> {
     protocolId(): number {
-        return 857;
+        return 1203;
     }
 
-    write(buffer: IByteBuffer, packet: MidZoomAsk | null) {
+    write(buffer: IByteBuffer, packet: TransferAnimationNotify | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 806);
+        buffer.writePacket(packet.notice, 1201);
         buffer.writeLong(packet.requestSid);
     }
 
-    read(buffer: IByteBuffer): MidZoomAsk | null {
+    read(buffer: IByteBuffer): TransferAnimationNotify | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new MidZoomAsk();
-        const result0 = buffer.readPacket(806);
-        packet.request = result0;
+        const packet = new TransferAnimationNotify();
+        const result0 = buffer.readPacket(1201);
+        packet.notice = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;
         if (length > 0) {
@@ -41,4 +41,4 @@ export class MidZoomAskRegistration implements IProtocolRegistration<MidZoomAsk>
     }
 }
 
-export default MidZoomAsk;
+export default TransferAnimationNotify;

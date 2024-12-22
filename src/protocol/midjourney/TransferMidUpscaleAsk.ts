@@ -1,36 +1,36 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
-import MidSelectRequest from '../midjourney/MidSelectRequest';
+import MidUpscaleRequest from './MidUpscaleRequest';
 
 
-class MidSelectAsk {
+class TransferMidUpscaleAsk {
     requestSid: number = 0;
-    request: MidSelectRequest | null = null;
+    request: MidUpscaleRequest | null = null;
 }
 
-export class MidSelectAskRegistration implements IProtocolRegistration<MidSelectAsk> {
+export class TransferMidUpscaleAskRegistration implements IProtocolRegistration<TransferMidUpscaleAsk> {
     protocolId(): number {
-        return 855;
+        return 825;
     }
 
-    write(buffer: IByteBuffer, packet: MidSelectAsk | null) {
+    write(buffer: IByteBuffer, packet: TransferMidUpscaleAsk | null) {
         if (packet === null) {
             buffer.writeInt(0);
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 804);
+        buffer.writePacket(packet.request, 805);
         buffer.writeLong(packet.requestSid);
     }
 
-    read(buffer: IByteBuffer): MidSelectAsk | null {
+    read(buffer: IByteBuffer): TransferMidUpscaleAsk | null {
         const length = buffer.readInt();
         if (length === 0) {
             return null;
         }
         const beforeReadIndex = buffer.getReadOffset();
-        const packet = new MidSelectAsk();
-        const result0 = buffer.readPacket(804);
+        const packet = new TransferMidUpscaleAsk();
+        const result0 = buffer.readPacket(805);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;
@@ -41,4 +41,4 @@ export class MidSelectAskRegistration implements IProtocolRegistration<MidSelect
     }
 }
 
-export default MidSelectAsk;
+export default TransferMidUpscaleAsk;
