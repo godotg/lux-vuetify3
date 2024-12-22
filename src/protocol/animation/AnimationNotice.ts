@@ -3,11 +3,10 @@ import IProtocolRegistration from '../IProtocolRegistration';
 
 
 class AnimationNotice {
+    nonce: string = '';
     requestId: string = '';
-    imageUrl: string = '';
-    imageUrlLow: string = '';
-    imageUrlMiddle: string = '';
-    imageUrlHigh: string = '';
+    originImageUrl: string = '';
+    imageUrls: Array<string> = [];
 }
 
 export class AnimationNoticeRegistration implements IProtocolRegistration<AnimationNotice> {
@@ -21,10 +20,9 @@ export class AnimationNoticeRegistration implements IProtocolRegistration<Animat
             return;
         }
         buffer.writeInt(-1);
-        buffer.writeString(packet.imageUrl);
-        buffer.writeString(packet.imageUrlHigh);
-        buffer.writeString(packet.imageUrlLow);
-        buffer.writeString(packet.imageUrlMiddle);
+        buffer.writeStringList(packet.imageUrls);
+        buffer.writeString(packet.nonce);
+        buffer.writeString(packet.originImageUrl);
         buffer.writeString(packet.requestId);
     }
 
@@ -35,16 +33,14 @@ export class AnimationNoticeRegistration implements IProtocolRegistration<Animat
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new AnimationNotice();
-        const result0 = buffer.readString();
-        packet.imageUrl = result0;
+        const list0 = buffer.readStringList();
+        packet.imageUrls = list0;
         const result1 = buffer.readString();
-        packet.imageUrlHigh = result1;
+        packet.nonce = result1;
         const result2 = buffer.readString();
-        packet.imageUrlLow = result2;
+        packet.originImageUrl = result2;
         const result3 = buffer.readString();
-        packet.imageUrlMiddle = result3;
-        const result4 = buffer.readString();
-        packet.requestId = result4;
+        packet.requestId = result3;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

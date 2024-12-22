@@ -3,7 +3,7 @@ import IProtocolRegistration from '../IProtocolRegistration';
 
 
 class AnimationRequest {
-    requestId: string = '';
+    nonce: string = '';
     imageUrl: string = '';
     prompts: Array<string> = [];
 }
@@ -20,8 +20,8 @@ export class AnimationRequestRegistration implements IProtocolRegistration<Anima
         }
         buffer.writeInt(-1);
         buffer.writeString(packet.imageUrl);
+        buffer.writeString(packet.nonce);
         buffer.writeStringArray(packet.prompts);
-        buffer.writeString(packet.requestId);
     }
 
     read(buffer: IByteBuffer): AnimationRequest | null {
@@ -33,10 +33,10 @@ export class AnimationRequestRegistration implements IProtocolRegistration<Anima
         const packet = new AnimationRequest();
         const result0 = buffer.readString();
         packet.imageUrl = result0;
-        const array1 = buffer.readStringArray();
-        packet.prompts = array1;
-        const result2 = buffer.readString();
-        packet.requestId = result2;
+        const result1 = buffer.readString();
+        packet.nonce = result1;
+        const array2 = buffer.readStringArray();
+        packet.prompts = array2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

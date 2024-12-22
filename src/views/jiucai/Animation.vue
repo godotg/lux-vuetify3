@@ -10,6 +10,7 @@ import OssPolicyRequest from "@/protocol/auth/OssPolicyRequest";
 import OssPolicyVO from "@/protocol/auth/OssPolicyVO";
 import AnimationRequest from "@/protocol/animation/AnimationRequest";
 import AnimationNotice from "@/protocol/animation/AnimationNotice";
+import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
 import {useNewsStore} from "@/stores/newsStore";
@@ -46,12 +47,8 @@ async function download(url) {
     snackbarStore.showErrorMessage("已经下载过该图片");
     return;
   }
-  const request: ImageDownloadRequest = new ImageDownloadRequest();
-  request.url = url;
-  const response: ImageDownloadResponse = await asyncAsk(request);
-  const realUrl = response.realUrl;
   new JsFileDownloader({
-    url: realUrl
+    url: url
   }).then(function () {
     // Called when download ended
     imageStore.downloads.push(url);
@@ -63,8 +60,8 @@ async function download(url) {
 }
 
 async function share(url) {
-  const imagePromptMd = `**${imagePromptRef.value}**`;
-  const imageUrlMd = `<img src="${url}" alt="${imagePromptRef.value}" width="300">`;
+  const imagePromptMd = `**Animation Freedom**`;
+  const imageUrlMd = `<img src="${url}" alt="${imageUrlRef.value}" width="300">`;
   const request = new GroupChatRequest();
   request.message = imagePromptMd + "\n" + imageUrlMd;
   request.type = 1;
@@ -74,15 +71,15 @@ async function share(url) {
 
 
 interface Message {
-  id: number;
+  nonce: string;
+  requestId: string;
+  progress: number;
   originImageUrl: string;
   imageUrls: number[];
   prompts: number[];
-  refreshTime: number;
 }
 
 // Message List
-const isLoading = ref(false);
 const messages = ref<Message[]>([]);
 const dialogRef = ref<boolean>(false);
 const imageUrlRef = ref<string>("");
@@ -93,42 +90,39 @@ function openImage(imageUrl) {
 }
 
 
+const MAX_IMAGE_LENGTH = 5;
 // 下面的逻辑都是自己的
 const atAnimationNotice = (packet: AnimationNotice) => {
-
   const nonce = packet.nonce;
-  const images = packet.images;
-  const message = _.find(messages.value, it => it.id == nonce);
+  const requestId = packet.requestId;
+  const originImageUrl = packet.originImageUrl;
+  let imageUrls = [];
+  imageUrls.push(originImageUrl);
+  imageUrls = imageUrls.concat(packet.imageUrls);
+  const message = _.find(messages.value, it => it.nonce == nonce);
   if (_.isNil(message)) {
     console.error("找不到消息", packet);
     return;
   }
-  message.sdImages = images;
-  images.forEach(it => imageSdStore.sds.push(it.id));
-  imageSdStore.sds = _.takeRight(imageSdStore.sds, 2000);
-  if (isFinished(message)) {
-    message.refreshTime = message.costTime + 3000;
-    isLoading.value = false;
-  } else {
-    const progressRatio = images.length / message.batchSize;
-    const progress = progressRatio * 100;
-    if (message.progress < progress) {
-      message.progress = progress;
-      message.refreshTime = message.costTime * progressRatio;
-    }
-  }
+  message.requestId = requestId;
+  message.originImageUrl = originImageUrl;
+  message.progress = imageUrls.length / MAX_IMAGE_LENGTH * 100;
+  message.imageUrls = imageUrls;
 };
 
 
 // Send Messsage
 const sendMessage = (imageUrl) => {
-  isLoading.value = true;
-  animationRunIndex = _.random(1, 5);
-
+  const nonce = _.toString(_.random(0, 10_0000_0000));
   const request = new AnimationRequest();
-  request.requestId = _.random(0, 10_0000_0000);
+  request.nonce = nonce;
   request.imageUrl = imageUrl;
   send(request);
+  messages.value.push({
+    nonce: nonce,
+    progress: 10,
+    imageUrls: [imageUrl],
+  });
 }
 
 const img2Animation = async () => {
@@ -169,7 +163,8 @@ const img2Animation = async () => {
   imageFileUploadValueRef.value = 0;
   imageFileRef.value = null;
 
-  const imageUrl = "https://jiucai.fun/" + ossPolicy.dir + " " + userMessage.value;
+  const imageUrl = "https://jiucai.fun/" + ossPolicy.dir;
+  console.log(imageUrl);
   sendMessage(imageUrl);
 };
 
@@ -186,6 +181,9 @@ const img2Animation = async () => {
   <v-container v-else>
     <template v-for="message in messages">
       <v-row v-if="message.imageUrls">
+        <v-avatar class="mt-3 ml-3 mb-1" rounded="sm" variant="elevated">
+          <img :src="newsStore.myAvatar()" alt="alt"/>
+        </v-avatar>
         <v-col md="3" lg="2" cols="6" v-for="(imageUrl, index) in message.imageUrls" :key="index">
           <v-card max-width="500px">
             <v-img :src="imageUrl" @click="openImage(imageUrl)" alt="alt">
@@ -201,7 +199,20 @@ const img2Animation = async () => {
           </v-card>
         </v-col>
       </v-row>
-      <v-row v-if="message.imageUrls.length < 4">
+      <v-row class="my-0 py-0">
+        <v-avatar v-if="!mobile" class="ml-3">
+        </v-avatar>
+        <v-col cols="12" md="11" class="my-0 py-0">
+          <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
+            <v-btn class="font-weight-bold" @click="sendMessage(message.originImageUrl)">V1</v-btn>
+            <v-btn class="font-weight-bold" @click="sendMessage(message.originImageUrl)">V2</v-btn>
+            <v-btn class="font-weight-bold" @click="sendMessage(message.originImageUrl)">V3</v-btn>
+            <v-btn class="font-weight-bold" @click="sendMessage(message.originImageUrl)">V4</v-btn>
+            <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
+          </v-btn-toggle>
+        </v-col>
+      </v-row>
+      <v-row v-if="message.imageUrls.length < MAX_IMAGE_LENGTH">
         <v-col>
           <v-progress-linear
             v-model="message.progress"
@@ -266,4 +277,46 @@ const img2Animation = async () => {
     </v-container>
   </v-footer>
 
+  <v-dialog v-model="dialogRef" @click="dialogRef=!dialogRef">
+    <v-row v-if="mobile">
+      <v-col cols="12">
+        <v-img :src="imageUrlRef" :lazy-src="imageUrlRef">
+          <template v-slot:placeholder>
+            <div class="d-flex align-center justify-center fill-height">
+              <v-progress-circular
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+            </div>
+          </template>
+        </v-img>
+      </v-col>
+      <v-col cols="3" offset="6">
+        <v-btn color="primary" icon="mdi-share-outline" size="large" @click="share(imageUrlRef)"></v-btn>
+      </v-col>
+      <v-col cols="3">
+        <v-btn color="primary" icon="mdi-cloud-download-outline" size="large" @click="download(imageUrlRef)"></v-btn>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col offset="2">
+        <v-img :src="imageUrlRef" :lazy-src="imageUrlRef" :max-height="height * 0.8">
+          <template v-slot:placeholder>
+            <div class="d-flex align-center justify-center fill-height">
+              <v-progress-circular
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+            </div>
+          </template>
+        </v-img>
+      </v-col>
+      <v-col cols="1" align-self="end">
+        <v-btn color="primary" icon="mdi-share-outline" size="x-large" @click="share(imageUrlRef)"></v-btn>
+      </v-col>
+      <v-col cols="1" align-self="end">
+        <v-btn color="primary" icon="mdi-cloud-download-outline" size="x-large" @click="download(imageUrlRef)"></v-btn>
+      </v-col>
+    </v-row>
+  </v-dialog>
 </template>
