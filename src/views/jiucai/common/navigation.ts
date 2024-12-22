@@ -138,12 +138,12 @@ export default {
           link: "/realistic",
           icon: "mdi-head-heart-outline",
         },
-        {
-          key: "jiucai.animation",
-          text: "Animation",
-          link: "/animation",
-          icon: "mdi-snowboard",
-        },
+        // {
+        //   key: "jiucai.animation",
+        //   text: "Animation",
+        //   link: "/animation",
+        //   icon: "mdi-snowboard",
+        // },
         {
           key: "jiucai.square",
           text: "Square",
