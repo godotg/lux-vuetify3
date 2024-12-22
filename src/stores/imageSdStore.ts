@@ -4,6 +4,7 @@ import {defineStore} from "pinia";
 export const useImageSdStore = defineStore("imageSdStore", {
   state: () => ({
     sdPrompts: [],
+    animations: [],
     sdParameters: {
       prompt: "",
       negativePrompt: "",
@@ -17,7 +18,7 @@ export const useImageSdStore = defineStore("imageSdStore", {
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["sdPrompts", "sdParameters", "sds"]}],
+    strategies: [{storage: localStorage, paths: ["sdPrompts", "sdParameters", "sds", "animations"]}],
   },
 
   getters: {},

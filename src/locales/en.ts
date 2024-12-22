@@ -8,6 +8,7 @@ export default {
     spark: "Spark",
     diffusion: "Stable Diffusion",
     realistic: "Realistic AI",
+    animation: "Animation",
     square: "Square",
     midjourney: "Midjourney",
     profileDetails: "leek account",

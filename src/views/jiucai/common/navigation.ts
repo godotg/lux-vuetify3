@@ -139,6 +139,12 @@ export default {
           icon: "mdi-head-heart-outline",
         },
         {
+          key: "jiucai.animation",
+          text: "Animation",
+          link: "/animation",
+          icon: "mdi-snowboard",
+        },
+        {
           key: "jiucai.square",
           text: "Square",
           link: "/square",

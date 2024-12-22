@@ -70,6 +70,13 @@ export default [
     component: () => import("@/views/jiucai/StableDiffusionRealistic.vue"),
   },
   {
+    path: "/animation",
+    meta: {
+      layout: "landing",
+    },
+    component: () => import("@/views/jiucai/Animation.vue"),
+  },
+  {
     path: "/tutorial",
     meta: {
       requiresAuth: true,
