@@ -177,7 +177,6 @@ const img2Animation = async () => {
   imageFileRef.value = null;
 
   const imageUrl = "https://jiucai.fun/" + ossPolicy.dir;
-  console.log(imageUrl);
   sendMessage(imageUrl);
 };
 
