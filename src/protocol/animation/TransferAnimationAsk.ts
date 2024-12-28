@@ -10,7 +10,7 @@ class TransferAnimationAsk {
 
 export class TransferAnimationAskRegistration implements IProtocolRegistration<TransferAnimationAsk> {
     protocolId(): number {
-        return 1202;
+        return 1213;
     }
 
     write(buffer: IByteBuffer, packet: TransferAnimationAsk | null) {
@@ -19,7 +19,7 @@ export class TransferAnimationAskRegistration implements IProtocolRegistration<T
             return;
         }
         buffer.writeInt(-1);
-        buffer.writePacket(packet.request, 1200);
+        buffer.writePacket(packet.request, 1211);
         buffer.writeLong(packet.requestSid);
     }
 
@@ -30,7 +30,7 @@ export class TransferAnimationAskRegistration implements IProtocolRegistration<T
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new TransferAnimationAsk();
-        const result0 = buffer.readPacket(1200);
+        const result0 = buffer.readPacket(1211);
         packet.request = result0;
         const result1 = buffer.readLong();
         packet.requestSid = result1;

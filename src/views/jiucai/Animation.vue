@@ -10,6 +10,7 @@ import OssPolicyRequest from "@/protocol/auth/OssPolicyRequest";
 import OssPolicyVO from "@/protocol/auth/OssPolicyVO";
 import AnimationRequest from "@/protocol/animation/AnimationRequest";
 import AnimationNotice from "@/protocol/animation/AnimationNotice";
+import AnimationImage from "@/protocol/animation/AnimationImage";
 import GroupChatRequest from "@/protocol/chat/GroupChatRequest";
 
 import {registerPacketReceiver, isWebsocketReady, send, asyncAsk} from "@/utils/websocket";
@@ -75,7 +76,8 @@ interface Message {
   requestId: string;
   progress: number;
   originImageUrl: string;
-  imageUrls: number[];
+  originImageUrlCompression: string;
+  images: AnimationImage[];
   prompts: number[];
 }
 
@@ -90,15 +92,14 @@ function openImage(imageUrl) {
 }
 
 
-const MAX_IMAGE_LENGTH = 5;
+const MAX_IMAGE_LENGTH = 4;
 // 下面的逻辑都是自己的
 const atAnimationNotice = (packet: AnimationNotice) => {
   const nonce = packet.nonce;
   const requestId = packet.requestId;
   const originImageUrl = packet.originImageUrl;
-  let imageUrls = [];
-  imageUrls.push(originImageUrl);
-  imageUrls = imageUrls.concat(packet.imageUrls);
+  const originImageUrlCompression = packet.originImageUrlCompression;
+  const images = packet.images;
   const message = _.find(messages.value, it => it.nonce == nonce);
   if (_.isNil(message)) {
     console.error("找不到消息", packet);
@@ -106,8 +107,9 @@ const atAnimationNotice = (packet: AnimationNotice) => {
   }
   message.requestId = requestId;
   message.originImageUrl = originImageUrl;
-  message.progress = imageUrls.length / MAX_IMAGE_LENGTH * 100;
-  message.imageUrls = imageUrls;
+  message.originImageUrlCompression = originImageUrlCompression;
+  message.progress = images.length / MAX_IMAGE_LENGTH * 100;
+  message.images = images;
 };
 
 
@@ -121,7 +123,21 @@ const sendMessage = (imageUrl) => {
   messages.value.push({
     nonce: nonce,
     progress: 10,
-    imageUrls: [imageUrl],
+    images: [],
+  });
+}
+
+const sendMessageRefresh = (imageUrl) => {
+  const nonce = _.toString(_.random(0, 10_0000_0000));
+  const request = new AnimationRequest();
+  request.nonce = nonce;
+  request.imageUrl = imageUrl;
+  request.type = "refresh";
+  send(request);
+  messages.value.push({
+    nonce: nonce,
+    progress: 10,
+    images: [],
   });
 }
 
@@ -152,12 +168,12 @@ const img2Animation = async () => {
   imageFileUploadingRef.value = true;
   imageFileUploadValueRef.value = 0;
 
-  const uploadImageResponse = await axios.postForm("https://jiucai.fun", formData, {
-    onUploadProgress: (progressEvent) => {
-      const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
-      imageFileUploadValueRef.value = complete;
-    }
-  });
+  // const uploadImageResponse = await axios.postForm("https://jiucai.fun", formData, {
+  //   onUploadProgress: (progressEvent) => {
+  //     const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
+  //     imageFileUploadValueRef.value = complete;
+  //   }
+  // });
 
   imageFileUploadingRef.value = false;
   imageFileUploadValueRef.value = 0;
@@ -180,13 +196,32 @@ const img2Animation = async () => {
   </v-container>
   <v-container v-else>
     <template v-for="message in messages">
-      <v-row v-if="message.imageUrls">
+      <v-row v-if="message.originImageUrl">
         <v-avatar class="mt-3 ml-3 mb-1" rounded="sm" variant="elevated">
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
-        <v-col md="3" lg="2" cols="6" v-for="(imageUrl, index) in message.imageUrls" :key="index">
+        <v-col md="3" lg="2" cols="6">
           <v-card max-width="500px">
-            <v-img :src="imageUrl" @click="openImage(imageUrl)" alt="alt">
+            <v-img :src="message.originImageUrlCompression" alt="alt">
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular
+                    color="primary"
+                    indeterminate
+                  ></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row v-if="message.images">
+        <v-avatar class="mt-3 ml-3 mb-1" rounded="sm" variant="elevated">
+          <img :src="newsStore.aiAvatar()" alt="alt"/>
+        </v-avatar>
+        <v-col md="3" lg="2" cols="6" v-for="(image, index) in message.images" :key="index">
+          <v-card max-width="500px">
+            <v-img :src="image.imageUrlLow" @click="openImage(image.imageUrl)" alt="alt">
               <template v-slot:placeholder>
                 <div class="d-flex align-center justify-center fill-height">
                   <v-progress-circular
@@ -204,15 +239,15 @@ const img2Animation = async () => {
         </v-avatar>
         <v-col cols="12" md="11" class="my-0 py-0">
           <v-btn-toggle color="primary" variant="outlined" multiple rounded divided>
-            <v-btn class="font-weight-bold" @click="sendMessage(message.originImageUrl)">V1</v-btn>
-            <v-btn class="font-weight-bold" @click="sendMessage(message.originImageUrl)">V2</v-btn>
-            <v-btn class="font-weight-bold" @click="sendMessage(message.originImageUrl)">V3</v-btn>
-            <v-btn class="font-weight-bold" @click="sendMessage(message.originImageUrl)">V4</v-btn>
+            <v-btn class="font-weight-bold" @click="sendMessageRefresh(message.originImageUrl)">V1</v-btn>
+            <v-btn class="font-weight-bold" @click="sendMessageRefresh(message.originImageUrl)">V2</v-btn>
+            <v-btn class="font-weight-bold" @click="sendMessageRefresh(message.originImageUrl)">V3</v-btn>
+            <v-btn class="font-weight-bold" @click="sendMessageRefresh(message.originImageUrl)">V4</v-btn>
             <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
           </v-btn-toggle>
         </v-col>
       </v-row>
-      <v-row v-if="message.imageUrls.length < MAX_IMAGE_LENGTH">
+      <v-row v-if="message.images.length < MAX_IMAGE_LENGTH">
         <v-col>
           <v-progress-linear
             v-model="message.progress"
