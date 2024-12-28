@@ -73,7 +73,6 @@ async function share(url) {
 
 interface Message {
   nonce: string;
-  requestId: string;
   progress: number;
   originImageUrl: string;
   originImageUrlCompression: string;
@@ -96,7 +95,6 @@ const MAX_IMAGE_LENGTH = 4;
 // 下面的逻辑都是自己的
 const atAnimationNotice = (packet: AnimationNotice) => {
   const nonce = packet.nonce;
-  const requestId = packet.requestId;
   const originImageUrl = packet.originImageUrl;
   const originImageUrlCompression = packet.originImageUrlCompression;
   const images = packet.images;
@@ -105,7 +103,6 @@ const atAnimationNotice = (packet: AnimationNotice) => {
     console.error("找不到消息", packet);
     return;
   }
-  message.requestId = requestId;
   message.originImageUrl = originImageUrl;
   message.originImageUrlCompression = originImageUrlCompression;
   message.progress = images.length / MAX_IMAGE_LENGTH * 100;
@@ -168,12 +165,12 @@ const img2Animation = async () => {
   imageFileUploadingRef.value = true;
   imageFileUploadValueRef.value = 0;
 
-  // const uploadImageResponse = await axios.postForm("https://jiucai.fun", formData, {
-  //   onUploadProgress: (progressEvent) => {
-  //     const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
-  //     imageFileUploadValueRef.value = complete;
-  //   }
-  // });
+  const uploadImageResponse = await axios.postForm("https://jiucai.fun", formData, {
+    onUploadProgress: (progressEvent) => {
+      const complete = progressEvent.loaded / progressEvent.total * 100 | 0;
+      imageFileUploadValueRef.value = complete;
+    }
+  });
 
   imageFileUploadingRef.value = false;
   imageFileUploadValueRef.value = 0;

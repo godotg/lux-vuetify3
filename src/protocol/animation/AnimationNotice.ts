@@ -5,7 +5,6 @@ import AnimationImage from './AnimationImage';
 
 class AnimationNotice {
     nonce: string = '';
-    requestId: string = '';
     originImageUrl: string = '';
     originImageUrlCompression: string = '';
     images: Array<AnimationImage> = [];
@@ -26,7 +25,6 @@ export class AnimationNoticeRegistration implements IProtocolRegistration<Animat
         buffer.writeString(packet.nonce);
         buffer.writeString(packet.originImageUrl);
         buffer.writeString(packet.originImageUrlCompression);
-        buffer.writeString(packet.requestId);
     }
 
     read(buffer: IByteBuffer): AnimationNotice | null {
@@ -44,8 +42,6 @@ export class AnimationNoticeRegistration implements IProtocolRegistration<Animat
         packet.originImageUrl = result2;
         const result3 = buffer.readString();
         packet.originImageUrlCompression = result3;
-        const result4 = buffer.readString();
-        packet.requestId = result4;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
