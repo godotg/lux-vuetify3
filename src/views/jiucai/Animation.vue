@@ -144,6 +144,11 @@ const img2Animation = async () => {
     return
   }
 
+  if (imageFileUploadingRef.value) {
+    snackbarStore.showSuccessMessage("正在上传图片请稍等");
+    return
+  }
+
   // 先获得oss policy
   const response: OssPolicyResponse = await asyncAsk(new OssPolicyRequest());
   const ossPolicy: OssPolicyVO | null = response.ossPolicy;
@@ -164,6 +169,7 @@ const img2Animation = async () => {
 
   imageFileUploadingRef.value = true;
   imageFileUploadValueRef.value = 0;
+  snackbarStore.showSuccessMessage("开始上传");
 
   const uploadImageResponse = await axios.postForm("https://jiucai.fun", formData, {
     onUploadProgress: (progressEvent) => {
@@ -257,18 +263,22 @@ const img2Animation = async () => {
           </v-progress-linear>
         </v-col>
       </v-row>
+
+      <v-row v-if="imageFileUploadingRef">
+        <v-col>
+          <v-progress-circular
+            :rotate="-90"
+            :size="100"
+            :width="15"
+            :model-value="imageFileUploadValueRef"
+            color="primary"
+          >
+            {{ imageFileUploadValueRef }}
+          </v-progress-circular>
+        </v-col>
+      </v-row>
     </template>
 
-    <v-progress-circular
-      v-if="imageFileUploadingRef"
-      :rotate="-90"
-      :size="100"
-      :width="15"
-      :model-value="imageFileUploadValueRef"
-      color="primary"
-    >
-      {{ imageFileUploadValueRef }}
-    </v-progress-circular>
   </v-container>
 
   <v-footer color="transparent" app>
