@@ -239,7 +239,7 @@ const img2Animation = async () => {
           </v-card>
         </v-col>
       </v-row>
-      <v-row v-if="message.images.length < MAX_IMAGE_LENGTH" class="my-0 py-0">
+      <v-row v-if="message.images.length >= MAX_IMAGE_LENGTH" class="my-0 py-0">
         <v-avatar v-if="!mobile" class="ml-3">
         </v-avatar>
         <v-col cols="12" md="11" class="my-0 py-0">
