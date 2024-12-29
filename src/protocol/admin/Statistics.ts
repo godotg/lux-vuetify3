@@ -16,6 +16,7 @@ class Statistics {
     bilibiliSearch: number = 0;
     midImagineRequest: number = 0;
     sdSimulateRequest: number = 0;
+    animationRequest: number = 0;
     navigation: number = 0;
     newsStat: NewsStat | null = null;
 }
@@ -32,6 +33,7 @@ export class StatisticsRegistration implements IProtocolRegistration<Statistics>
         }
         buffer.writeInt(-1);
         buffer.writeInt(packet.active);
+        buffer.writeInt(packet.animationRequest);
         buffer.writeInt(packet.bilibiliSearch);
         buffer.writeInt(packet.bingSearch);
         buffer.writeInt(packet.chatgptRequest);
@@ -57,31 +59,33 @@ export class StatisticsRegistration implements IProtocolRegistration<Statistics>
         const result0 = buffer.readInt();
         packet.active = result0;
         const result1 = buffer.readInt();
-        packet.bilibiliSearch = result1;
+        packet.animationRequest = result1;
         const result2 = buffer.readInt();
-        packet.bingSearch = result2;
+        packet.bilibiliSearch = result2;
         const result3 = buffer.readInt();
-        packet.chatgptRequest = result3;
+        packet.bingSearch = result3;
         const result4 = buffer.readInt();
-        packet.googleSearch = result4;
+        packet.chatgptRequest = result4;
         const result5 = buffer.readInt();
-        packet.ips = result5;
+        packet.googleSearch = result5;
         const result6 = buffer.readInt();
-        packet.midImagineRequest = result6;
+        packet.ips = result6;
         const result7 = buffer.readInt();
-        packet.navigation = result7;
+        packet.midImagineRequest = result7;
         const result8 = buffer.readInt();
-        packet.newsRequest = result8;
+        packet.navigation = result8;
         const result9 = buffer.readInt();
-        packet.newsSearchRequest = result9;
-        const result10 = buffer.readPacket(10051);
-        packet.newsStat = result10;
-        const result11 = buffer.readInt();
-        packet.sdSimulateRequest = result11;
-        const result12 = buffer.readLong();
-        packet.time = result12;
-        const result13 = buffer.readInt();
-        packet.weixinSearch = result13;
+        packet.newsRequest = result9;
+        const result10 = buffer.readInt();
+        packet.newsSearchRequest = result10;
+        const result11 = buffer.readPacket(10051);
+        packet.newsStat = result11;
+        const result12 = buffer.readInt();
+        packet.sdSimulateRequest = result12;
+        const result13 = buffer.readLong();
+        packet.time = result13;
+        const result14 = buffer.readInt();
+        packet.weixinSearch = result14;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

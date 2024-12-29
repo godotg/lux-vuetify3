@@ -201,7 +201,7 @@ const img2Animation = async () => {
   </v-container>
   <v-container v-else>
     <template v-for="message in messages">
-      <v-row v-if="message.type && message.originImageUrlCompression">
+      <v-row v-if="!message.type && message.originImageUrl">
         <v-avatar class="mt-3 ml-3 mb-1" rounded="sm" variant="elevated">
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
@@ -239,7 +239,7 @@ const img2Animation = async () => {
           </v-card>
         </v-col>
       </v-row>
-      <v-row class="my-0 py-0">
+      <v-row v-if="message.images.length < MAX_IMAGE_LENGTH" class="my-0 py-0">
         <v-avatar v-if="!mobile" class="ml-3">
         </v-avatar>
         <v-col cols="12" md="11" class="my-0 py-0">
@@ -266,22 +266,23 @@ const img2Animation = async () => {
           </v-progress-linear>
         </v-col>
       </v-row>
-
-      <v-row v-if="imageFileUploadingRef">
-        <v-col>
-          <v-progress-circular
-            :rotate="-90"
-            :size="100"
-            :width="15"
-            :model-value="imageFileUploadValueRef"
-            color="primary"
-          >
-            {{ imageFileUploadValueRef }}
-          </v-progress-circular>
-        </v-col>
-      </v-row>
     </template>
+  </v-container>
 
+  <v-container>
+    <v-row v-if="imageFileUploadingRef">
+      <v-col>
+        <v-progress-circular
+          :rotate="-90"
+          :size="100"
+          :width="15"
+          :model-value="imageFileUploadValueRef"
+          color="primary"
+        >
+          {{ imageFileUploadValueRef }}
+        </v-progress-circular>
+      </v-col>
+    </v-row>
   </v-container>
 
   <v-footer color="transparent" app>
