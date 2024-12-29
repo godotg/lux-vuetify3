@@ -74,6 +74,7 @@ async function share(url) {
 interface Message {
   nonce: string;
   progress: number;
+  type: string;
   originImageUrl: string;
   originImageUrlCompression: string;
   images: AnimationImage[];
@@ -98,6 +99,7 @@ const atAnimationNotice = (packet: AnimationNotice) => {
   const originImageUrl = packet.originImageUrl;
   const originImageUrlCompression = packet.originImageUrlCompression;
   const images = packet.images;
+  const type = packet.type;
   const message = _.find(messages.value, it => it.nonce == nonce);
   if (_.isNil(message)) {
     console.error("找不到消息", packet);
@@ -106,6 +108,7 @@ const atAnimationNotice = (packet: AnimationNotice) => {
   message.originImageUrl = originImageUrl;
   message.originImageUrlCompression = originImageUrlCompression;
   message.progress = images.length / MAX_IMAGE_LENGTH * 100;
+  message.type = type;
   message.images = images;
 };
 
@@ -198,7 +201,7 @@ const img2Animation = async () => {
   </v-container>
   <v-container v-else>
     <template v-for="message in messages">
-      <v-row v-if="message.originImageUrl">
+      <v-row v-if="message.type && message.originImageUrlCompression">
         <v-avatar class="mt-3 ml-3 mb-1" rounded="sm" variant="elevated">
           <img :src="newsStore.myAvatar()" alt="alt"/>
         </v-avatar>
@@ -245,7 +248,7 @@ const img2Animation = async () => {
             <v-btn class="font-weight-bold" @click="sendMessageRefresh(message.originImageUrl)">V2</v-btn>
             <v-btn class="font-weight-bold" @click="sendMessageRefresh(message.originImageUrl)">V3</v-btn>
             <v-btn class="font-weight-bold" @click="sendMessageRefresh(message.originImageUrl)">V4</v-btn>
-            <v-btn icon="mdi-reload" @click="reroll(message.midjourneyId)"></v-btn>
+            <v-btn icon="mdi-reload" @click="sendMessageRefresh(message.originImageUrl)"></v-btn>
           </v-btn-toggle>
         </v-col>
       </v-row>

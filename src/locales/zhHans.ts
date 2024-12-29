@@ -8,7 +8,7 @@ export default {
     spark: "星火认知",
     diffusion: "Stable Diffusion",
     realistic: "写实 AI",
-    animation: "Animation Freedom",
+    animation: "Animation",
     square: "广场",
     midjourney: "Midjourney",
     profileDetails: "白嫖指数",
