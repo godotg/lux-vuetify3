@@ -169,6 +169,7 @@ async function requestMarkets() {
   const szMarketIndexRatio = firstMarket?.szMarketIndex / shMarketIndex;
   const cyMarketIndexRatio = firstMarket?.cyMarketIndex / shMarketIndex;
   const bjMarketIndexRatio = firstMarket?.bjMarketIndex / shMarketIndex;
+  const exchangeIndexRatio = firstMarket?.exchange / shMarketIndex;
   new Chart(document.getElementById('indexChart'), {
     options: {
       animations: {
@@ -194,10 +195,17 @@ async function requestMarkets() {
 
               const lastValue = context.dataset.data[context.dataIndex - 1];
               const rise = _.ceil((context.parsed.y - lastValue) / lastValue * 100, 2);
-              const result = riseRawCeil > 0
-                ? `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 增加:${riseRawCeil}亿 / 涨跌幅:${rise}%`
-                : `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 蒸发:${riseRawCeil}亿 / 涨跌幅:${rise}%`;
-              return result;
+              if (context.dataset.exchange) {
+                const result = riseRawCeil > 0
+                  ? `${context.dataset.label}:${y} / 成交量:${currentRawValueCeil}万亿 / 增加:${riseRawCeil}亿 / 涨跌幅:${rise}%`
+                  : `${context.dataset.label}:${y} / 成交量:${currentRawValueCeil}万亿 / 蒸发:${riseRawCeil}亿 / 涨跌幅:${rise}%`;
+                return result;
+              } else {
+                const result = riseRawCeil > 0
+                  ? `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 增加:${riseRawCeil}亿 / 涨跌幅:${rise}%`
+                  : `${context.dataset.label}:${y} / 总流通市值:${currentRawValueCeil}万亿 / 蒸发:${riseRawCeil}亿 / 涨跌幅:${rise}%`;
+                return result;
+              }
             }
           }
         }
@@ -242,43 +250,96 @@ async function requestMarkets() {
           data: response.markets.map(it => it.bjMarketIndex / bjMarketIndexRatio),
           rawData: response.markets.map(it => it.bjAmount)
         },
+        {
+          type: 'line',
+          label: '量能指数',
+          exchange: true,
+          data: response.markets.map(it => it.exchange / exchangeIndexRatio),
+          rawData: response.markets.map(it => it.exchange)
+        },
       ],
     },
   });
 
+  // -------------------------------------------------------------------------------------------------------------------
+  const exchangeIndex = firstMarket?.exchange;
+  const shExchangeRatio = firstMarket?.shExchange / exchangeIndex;
+  const kcExchangeRatio = firstMarket?.kcExchange / exchangeIndex;
+  const szExchangeRatio = firstMarket?.szExchange / exchangeIndex;
+  const cyExchangeRatio = firstMarket?.cyExchange / exchangeIndex;
+  const bjExchangeRatio = firstMarket?.bjExchange / exchangeIndex;
+
   new Chart(document.getElementById('exchangeChart'), {
+    options: {
+      animations: {
+        tension: {
+          duration: 1000,
+          easing: 'linear',
+          from: 0,
+          to: 0.3,
+        }
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const currentRawValue = context.dataset.rawData[context.dataIndex];
+              const currentRawValueCeil = _.ceil(currentRawValue, 2);
+              if (context.dataIndex == 0) {
+                return `${context.dataset.label}:${currentRawValueCeil}亿`;
+              }
+              const lastRawValue = context.dataset.rawData[context.dataIndex - 1];
+              const riseRawCeil = _.ceil((currentRawValue - lastRawValue))
+
+              const lastValue = context.dataset.data[context.dataIndex - 1];
+              const rise = _.ceil((context.parsed.y - lastValue) / lastValue * 100, 2);
+              const result = riseRawCeil > 0
+                ? `${context.dataset.label}: ${currentRawValueCeil}亿 / 增加:${riseRawCeil}亿 / 涨跌幅:${rise}%`
+                : `${context.dataset.label}: ${currentRawValueCeil}亿 / 蒸发:${riseRawCeil}亿 / 涨跌幅:${rise}%`;
+              return result;
+            }
+          }
+        }
+      }
+    },
     data: {
       labels: response.markets.map(it => getFormatMonth(it.date)),
       datasets: [
         {
           type: 'bar',
           label: '量能（亿）',
-          data: response.markets.map(it => it.exchange)
+          data: response.markets.map(it => it.exchange),
+          rawData: response.markets.map(it => it.exchange)
         },
         {
           type: 'line',
-          label: '上海主板/量能（亿）',
-          data: response.markets.map(it => it.shExchange)
+          label: '上海主板/量能指数',
+          data: response.markets.map(it => it.shExchange / shExchangeRatio),
+          rawData: response.markets.map(it => it.shExchange)
         },
         {
           type: 'line',
-          label: '科创板/量能（亿）',
-          data: response.markets.map(it => it.kcExchange)
+          label: '科创板/量能指数',
+          data: response.markets.map(it => it.kcExchange / kcExchangeRatio),
+          rawData: response.markets.map(it => it.kcExchange)
         },
         {
           type: 'line',
-          label: '深圳主板/量能（亿）',
-          data: response.markets.map(it => it.szExchange)
+          label: '深圳主板/量能指数',
+          data: response.markets.map(it => it.szExchange / szExchangeRatio),
+          rawData: response.markets.map(it => it.szExchange)
         },
         {
           type: 'line',
-          label: '创业板/量能（亿）',
-          data: response.markets.map(it => it.cyExchange)
+          label: '创业板/量能指数',
+          data: response.markets.map(it => it.cyExchange / cyExchangeRatio),
+          rawData: response.markets.map(it => it.cyExchange)
         },
         {
           type: 'line',
-          label: '北交所/量能（亿）',
-          data: response.markets.map(it => it.bjExchange)
+          label: '北交所/量能指数',
+          data: response.markets.map(it => it.bjExchange / bjExchangeRatio),
+          rawData: response.markets.map(it => it.bjExchange)
         },
       ],
     },
