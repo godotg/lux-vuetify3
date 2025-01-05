@@ -38,6 +38,9 @@ export function sendChatgpt(messages: Array<ChatgptMessage>, ai) {
   if (!myStore.alibaba) {
     ignoreAIs.add(4000);
   }
+  if (!myStore.deepseek) {
+    ignoreAIs.add(5000);
+  }
   if (!myStore.llama) {
     ignoreAIs.add(14000);
   }

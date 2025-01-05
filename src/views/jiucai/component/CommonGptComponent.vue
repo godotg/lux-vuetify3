@@ -267,6 +267,7 @@ roleAvatarMap.set(1000, "aa/map/xunfei.png");
 roleAvatarMap.set(2000, "aa/map/baidu.png");
 roleAvatarMap.set(3000, "aa/map/tencent.png");
 roleAvatarMap.set(4000, "aa/map/qianwen.aliyun.com.png");
+roleAvatarMap.set(5000, "aa/map/deepseek.png");
 roleAvatarMap.set(14000, "aa/map/llama.jpg");
 roleAvatarMap.set(15000, "aa/map/gemini.google.com.png");
 const avatarFrom = (chatAI: number) => {
@@ -538,6 +539,16 @@ const dialogRef = ref(false);
             </v-col>
             <v-col class="py-0 my-1" offset="1">
               <v-switch v-model="myStore.llama" label="meta llama" hide-details color="teal" inset></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar rounded="0">
+                <v-img src="aa/map/deepseek.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" offset="1">
+              <v-switch v-model="myStore.deepseek" label="deepseek" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
           <v-row>
