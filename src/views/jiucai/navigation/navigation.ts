@@ -1,4 +1,5 @@
-const navigation = {
+const navigation =
+  {
     "children": [{
       "href": "",
       "content": "01　电影／电视剧／动漫／纪录片",
@@ -29,48 +30,40 @@ const navigation = {
           "href": "https://kpkuang.sbs/",
           "content": "🥇看片狂人（有短剧）",
           "children": []
-        }, {"href": "https://www.055552.xyz/", "content": "🥇403影视", "children": []}, {
-          "href": "https://lkvod.me/",
-          "content": "🥇来看点播",
+        }, {
+          "href": "https://www.ncat22.com/",
+          "content": "🥇网飞猫（有短剧）",
           "children": []
-        }, {"href": "https://www.haoyatv.com/", "content": "🥇好鸭TV", "children": []}, {
-          "href": "https://www.mtyy1.com/",
-          "content": "🥇麦田影院",
-          "children": []
-        }, {"href": "https://rebozj.pro/", "content": "🥇热播之家", "children": []}, {
-          "href": "https://a8ys.vip/",
-          "content": "🥇A8影视（有短剧）",
+        }, {"href": "https://lkvod.me/", "content": "🥇来看点播", "children": []}, {
+          "href": "https://www.055552.xyz/",
+          "content": "🥇403影视",
           "children": []
         }, {
-          "href": "https://www.jinman6.com/",
-          "content": "🥇金曼TV（有短剧）",
+          "href": "https://www.moyuyy.com/",
+          "content": "🥇墨雨影院",
           "children": []
-        }, {"href": "https://www.libhd.com/", "content": "🥈LIBHD", "children": []}, {
-          "href": "https://kanb.tv/",
-          "content": "🥈看B站",
+        }, {"href": "https://www.mtyy1.com/", "content": "🥇麦田影院", "children": []}, {
+          "href": "https://a8ys.com/",
+          "content": "🥈A8影视（有短剧）",
           "children": []
-        }, {"href": "https://kmeiju.com/", "content": "🥈看美剧（有短剧）", "children": []}, {
-          "href": "https://miao101.com/",
-          "content": "🥈旋风视频",
-          "children": []
-        }, {
+        }, {"href": "https://miao101.com/", "content": "🥈旋风视频", "children": []}, {
           "href": "https://www.czys.pro/",
           "content": "🥈厂长资源",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/USvQbx7AwyEVkMDTPnzbQA",
-          "content": "👍上网必学之网页广告拦截教程",
+          "content": "上网必学之网页广告拦截教程👍",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/ohcOGOGwPczZeJ4fWmSHLg",
-          "content": "👍不屏蔽网页的投屏浏览器推荐",
+          "content": "不屏蔽网页的投屏浏览器推荐👍",
           "children": []
-        }, {"href": "https://vidhub.icu/", "content": "🥇Vidhub", "children": []}, {
+        }, {
           "href": "https://www.jiaozi.me/",
           "content": "🥇饺子影院（国产剧少）",
           "children": []
         }, {
-          "href": "https://libvio.link/",
+          "href": "https://www.libvio.art/",
           "content": "🥇LIBVIO（无国产剧）",
           "children": []
         }, {
@@ -122,7 +115,7 @@ const navigation = {
           "content": "🥈4K世界",
           "children": []
         }, {
-          "href": "https://www.btnull.fun/",
+          "href": "https://www.gying.in/",
           "content": "🥈片库Btnull",
           "children": []
         }, {"href": "https://t-rex.tzfile.com/", "content": "🥈团长资源", "children": []}, {
@@ -181,7 +174,11 @@ const navigation = {
           "href": "https://www.gjw4.com/",
           "content": "仅港剧－港剧发烧友",
           "children": []
-        }, {"href": "http://www.dsmi.cc/", "content": "仅港剧－电视迷", "children": []}, {
+        }, {
+          "href": "http://www.dsmi.cc/",
+          "content": "仅港剧－电视迷",
+          "children": []
+        }, {
           "href": "http://www.tvyb03.com/",
           "content": "仅港剧－TVB云播",
           "children": []
@@ -279,11 +276,11 @@ const navigation = {
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/USvQbx7AwyEVkMDTPnzbQA",
-          "content": "👍在线看动漫必学之网页广告拦截",
+          "content": "在线看动漫必学之网页广告拦截👍",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/ohcOGOGwPczZeJ4fWmSHLg",
-          "content": "👍不屏蔽网页的投屏浏览器推荐",
+          "content": "不屏蔽网页的投屏浏览器推荐👍",
           "children": []
         }, {"href": "https://www.sssfun.cc/", "content": "嘶哩嘶哩", "children": []}, {
           "href": "https://www.dmla4.com/",
@@ -297,15 +294,15 @@ const navigation = {
           "href": "http://www.bimiacg11.net/",
           "content": "哔咪动漫",
           "children": []
-        }, {"href": "http://www.yhdmba.net/", "content": "樱花动漫", "children": []}, {
-          "href": "http://www.iyinghua.io/",
+        }, {
+          "href": "http://www.yhdmba.net/",
           "content": "樱花动漫",
           "children": []
-        }, {"href": "http://v1.nicotv.bet/", "content": "妮可动漫", "children": []}, {
-          "href": "http://www.qimiqimi.net/",
-          "content": "奇米奇米",
+        }, {"href": "http://www.iyinghua.io/", "content": "樱花动漫", "children": []}, {
+          "href": "http://v1.nicotv.bet/",
+          "content": "妮可动漫",
           "children": []
-        }]
+        }, {"href": "http://www.qimiqimi.net/", "content": "奇米奇米", "children": []}]
       }, {
         "href": "",
         "content": "07.网页　动漫（仅下载）",
@@ -426,7 +423,7 @@ const navigation = {
           "content": "Firefox TV 4.8",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/o17240",
+          "href": "https://www.123pan.com/s/bjcA-L2Lw",
           "content": "JioPagesTV",
           "children": []
         }, {
@@ -442,34 +439,26 @@ const navigation = {
           "content": "稳定永久免费看电视直播方案👍",
           "children": []
         }, {
-          "href": "https://url67.ctfile.com/f/14869667-1009230574-526feb?p=kyon",
-          "content": "电视直播 1.0.25（可看直播）",
+          "href": "https://flowus.cn/share/c1117034-e047-4e96-bd8e-b517ff8c28b6?code=CZ3ECT",
+          "content": "WebViewTvLive 👍",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1150631",
-          "content": "海星TV 2.1.0（可看直播）",
+          "href": "https://file.uhsea.com/2411/8b0cd0624e036ad957aaa12d1bf059b8AI.apk",
+          "content": "CCTV Viewer 1.7.3👍",
           "children": []
         }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008082631-fafe4f?p=kyon",
-          "content": "高清电视 2.92（可看直播）",
+          "href": "https://flowus.cn/share/d049e3fe-d830-46c1-9f23-47da4919a696?code=CZ3ECT",
+          "content": "天光云影",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1150634",
-          "content": "野火直播 3.3.3（可看直播）",
+          "href": "https://file.uhsea.com/2411/53f6d50c738896f69b2ea463ad596f112S.apk",
+          "content": "OurTV 3.4.0",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1150630",
-          "content": "龙门影视 2.3.1（可看直播）",
+          "href": "https://flowus.cn/share/89d474c0-8caf-43a4-803e-e5cdc695c0e2?code=CZ3ECT",
+          "content": "我的电视 2.25",
           "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1150629",
-          "content": "小薇直播 2.5.0.4（可看直播）",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008082745-fa501e?p=kyon",
-          "content": "星火电视海外版 1.0.28 去广告（可看直播）",
-          "children": []
-        }]
+        }, {"href": "https://www.123865.com/s/bjcA-0Odg", "content": "野火直播 3.3.3", "children": []}]
       }, {
         "href": "",
         "content": "09.电脑　ＶIP影视／直播",
@@ -481,11 +470,7 @@ const navigation = {
           "href": "https://www.jianpian12.com/",
           "content": "荐片播放器",
           "children": []
-        }, {
-          "href": "https://guihet.com/blackbird-player.html",
-          "content": "黑鸟播放器（电视直播）",
-          "children": []
-        }, {"href": "https://www.douyin.com/downloadpage/app", "content": "抖音", "children": []}]
+        }, {"href": "https://www.douyin.com/downloadpage/pc", "content": "抖音", "children": []}]
       }, {
         "href": "",
         "content": "10.安卓　ＶIP影视／直播",
@@ -541,11 +526,11 @@ const navigation = {
           "href": "https://www.doozhibo.com/",
           "content": "JRS直播",
           "children": []
-        }, {"href": "https://www.zhibo8.com/", "content": "直播吧", "children": []}, {
-          "href": "https://www.98zhibo.com/",
-          "content": "98直播",
-          "children": []
         }, {
+          "href": "https://www.zhibo8.com/",
+          "content": "直播吧",
+          "children": []
+        }, {"href": "https://www.98zhibo.com/", "content": "98直播", "children": []}, {
           "href": "http://www.qm5.cc/",
           "content": "球迷网（比赛录像下载）",
           "children": []
@@ -561,7 +546,11 @@ const navigation = {
           "href": "https://www.iqiyi.com/jilupian/",
           "content": "爱奇艺",
           "children": []
-        }, {"href": "https://jilupian.youku.com/", "content": "优酷", "children": []}, {
+        }, {
+          "href": "https://jilupian.youku.com/",
+          "content": "优酷",
+          "children": []
+        }, {
           "href": "https://v.qq.com/doco/",
           "content": "腾讯",
           "children": []
@@ -725,11 +714,7 @@ const navigation = {
           "href": "https://mp.weixin.qq.com/s/USvQbx7AwyEVkMDTPnzbQA",
           "content": "网页广告拦截规则+扩展教程👍",
           "children": []
-        }, {
-          "href": "https://zhuanlan.zhihu.com/p/42949969",
-          "content": "网页广告拦截：全平台网页去广告规则+使用教程👍",
-          "children": []
-        }]
+        }, {"href": "https://zhuanlan.zhihu.com/p/42949969", "content": "网页去广告规则+软件使用教程👍", "children": []}]
       }]
     }, {
       "href": "",
@@ -738,22 +723,22 @@ const navigation = {
         "href": "",
         "content": "- 101.聚合搜索",
         "children": [{
-          "href": "https://www.jiumodiary.com/",
-          "content": "鸠摩搜书",
+          "href": "https://book.tstrs.me/",
+          "content": "SaltyLeo 的书架👍",
           "children": []
-        }, {"href": "https://zhiso.cc/", "content": "知搜", "children": []}, {
-          "href": "https://shuzhou.cc/",
-          "content": "书舟搜索",
+        }, {"href": "https://www.jiumodiary.com/", "content": "鸠摩搜书", "children": []}, {
+          "href": "https://zhiso.cc/",
+          "content": "知搜",
           "children": []
-        }, {"href": "https://taolinks.cc/s/", "content": "淘链客", "children": []}, {
-          "href": "https://bks.thefuture.top/",
-          "content": "TheFuture",
-          "children": []
-        }, {"href": "https://yuedu.pro/", "content": "阅读链", "children": []}]
+        }, {"href": "https://bks.thefuture.top/", "content": "TheFuture", "children": []}]
       }, {
         "href": "",
         "content": "- 102.优质书站",
         "children": [{
+          "href": "https://url67.ctfile.com/f/14869667-1431919810-c1f708?p=kyon",
+          "content": "🥇Anna’s Archive 直连访问工具👍",
+          "children": []
+        }, {
           "href": "https://annas-archive.se/",
           "content": "🥇Anna’s Archive👍",
           "children": []
@@ -766,7 +751,7 @@ const navigation = {
           "content": "🥇zlibrary 1800万册离线种子与使用方法👍",
           "children": []
         }, {
-          "href": "https://singlelogin.re/",
+          "href": "https://z-library.sk/",
           "content": "🥇zlibrary官方",
           "children": []
         }, {
@@ -774,7 +759,7 @@ const navigation = {
           "content": "🥇zlibrary地址发布页",
           "children": []
         }, {
-          "href": "https://24hbook.store/",
+          "href": "https://book.daohangxie.com/",
           "content": "🥇24h搜书（IPFS）",
           "children": []
         }, {
@@ -915,7 +900,7 @@ const navigation = {
         "content": "- 106.轻小说",
         "children": [{
           "href": "",
-          "content": "多数轻小说你都能在对应的「百度贴吧」找到下载地址，甚至会有贴吧大佬翻译",
+          "content": "多数轻小说你都能在对应的百度贴吧找到下载地址，甚至会有贴吧大佬翻译",
           "children": []
         }, {
           "href": "https://www.linovelib.com/",
@@ -929,15 +914,19 @@ const navigation = {
           "href": "https://www.lightnovel.us/",
           "content": "轻之国度",
           "children": []
-        }, {"href": "https://book.sfacg.com/", "content": "SF轻小说", "children": []}, {
-          "href": "https://www.esjzone.cc/",
-          "content": "ESJ Zone",
+        }, {
+          "href": "https://book.sfacg.com/",
+          "content": "SF轻小说",
           "children": []
-        }]
+        }, {"href": "https://www.esjzone.cc/", "content": "ESJ Zone", "children": []}]
       }, {
         "href": "",
         "content": "- 107.杂志",
         "children": [{
+          "href": "https://flowus.cn/share/f35316bd-0af5-490a-a755-ff3538e868f3?code=CZ3ECT",
+          "content": "名刊汇（最新知名外刊杂志）👍",
+          "children": []
+        }, {
           "href": "https://mp.weixin.qq.com/s/0ZfMZyFFG9NGHknFRcA3KQ#:~:text=2-,%E5%9B%BE%E4%B9%A6%E9%A6%86%E8%B5%84%E6%BA%90,-%E9%99%A4%E4%BA%86%E4%BB%A5%E4%B8%8A%E5%9C%B0%E6%96%B9",
           "content": "白嫖图书馆资源免费看杂志方法👍",
           "children": []
@@ -1218,11 +1207,11 @@ const navigation = {
           "content": "🥇开源阅读（安卓最强小说APP）👍",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1208210",
+          "href": "https://www.123865.com/s/bjcA-Pk3g",
           "content": "🥈简阅（内置340+书源）",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1208204",
+          "href": "https://www.123865.com/s/bjcA-Gk3g",
           "content": "🥈奇迹书屋（内置250+书源）",
           "children": []
         }, {
@@ -1230,24 +1219,32 @@ const navigation = {
           "content": "🥈小书包（内置170+书源）",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1208077",
+          "href": "https://www.123865.com/s/bjcA-nk3g",
           "content": "🥈东南小说（内置120+书源）",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1208190",
+          "href": "https://www.123865.com/s/bjcA-sk3g",
           "content": "🥈笔趣阅读（内置书源）",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1152638",
+          "href": "https://www.123865.com/s/bjcA-Xk3g",
           "content": "🥈几何小说（内置210+书源）",
           "children": []
-        }, {"href": "https://kyon.118pan.com/b1152633", "content": "🥈海猫小说（内置书源）", "children": []}]
+        }, {
+          "href": "https://www.123865.com/s/bjcA-2k3g",
+          "content": "🥈海猫小说（内置书源）",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/fdf07d29-9050-4842-a521-9b47c0debe80?code=CZ3ECT",
+          "content": "🥈网易蜗牛读书破解版",
+          "children": []
+        }]
       }, {
         "href": "",
         "content": "03.网页　在线漫画",
         "children": [{
           "href": "https://mp.weixin.qq.com/s/USvQbx7AwyEVkMDTPnzbQA",
-          "content": "👍在线看漫画必学之网页广告拦截",
+          "content": "在线看漫画必学之网页广告拦截👍",
           "children": []
         }, {
           "href": "https://komiic.com/",
@@ -1310,34 +1307,14 @@ const navigation = {
           "content": "腾讯动漫／看漫画会员低价购买🔥",
           "children": []
         }, {
+          "href": "https://flowus.cn/share/107a313d-9396-4ebc-bb2b-6dde2547a460?code=CZ3ECT",
+          "content": "海阔视界👍",
+          "children": []
+        }, {
           "href": "https://flowus.cn/share/73b97e8d-1463-4642-b9cb-a9a2a4e26874?code=CZ3ECT",
-          "content": "异次元漫画APP+图源👍",
+          "content": "异次元漫画APP+图源",
           "children": []
-        }, {
-          "href": "https://apps.apple.com/us/app/id1451949669",
-          "content": "荟聚漫画",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/bb7deecfed65821e",
-          "content": "Cimoc👍",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/c3fae1bb4ead3c06",
-          "content": "全是漫画",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/e5ddb3a1e72c4fcb",
-          "content": "漫画迷",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/92019ef4537d26f7",
-          "content": "漫客栈",
-          "children": []
-        }, {
-          "href": "https://axu.lanzoue.com/ipT81nbm0hi",
-          "content": "免费漫画人3.0.21 去广告版",
-          "children": []
-        }, {"href": "https://apps.apple.com/cn/app/id1324470182", "content": "漫画砖家", "children": []}]
+        }, {"href": "https://apps.apple.com/us/app/id1451949669", "content": "荟聚漫画", "children": []}]
       }, {
         "href": "",
         "content": "05.通用　本地漫画",
@@ -1364,10 +1341,6 @@ const navigation = {
         }, {
           "href": "https://cloud.189.cn/t/YneInurYfuMz",
           "content": "985G PDF漫画 （ DC / 日本动漫等都有）访问码 ：e1ri",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1XAZaJXZfyCd99alISqycGA",
-          "content": "300G mobi 漫画打包",
           "children": []
         }, {"href": "https://mox.moe/", "content": "MOX.MOE👍", "children": []}, {
           "href": "https://mhx12.com/",
@@ -1405,19 +1378,23 @@ const navigation = {
           "href": "https://tool.liumingye.cn/music/?page=searchPage#/",
           "content": "MYFREEMP3👍",
           "children": []
-        }, {"href": "https://pt.sayqz.com/", "content": "简繁音乐", "children": []}, {
+        }, {"href": "https://tunefree.fun/", "content": "简繁音乐", "children": []}, {
           "href": "https://www.xmwav.com/",
           "content": "熊猫无损音乐",
           "children": []
         }, {
-          "href": "https://music.ghxi.com/",
+          "href": "https://ghyinyue.com//#/home",
           "content": "果核音乐搜搜",
           "children": []
         }, {"href": "https://biu.moe/#/Index/home", "content": "Biu", "children": []}, {
           "href": "http://www.acgjc.com/",
           "content": "ACG漫音社",
           "children": []
-        }, {"href": "https://www.gequbao.com/", "content": "歌曲宝", "children": []}, {
+        }, {
+          "href": "https://www.gequbao.com/",
+          "content": "歌曲宝",
+          "children": []
+        }, {
           "href": "https://www.fangpi.net/",
           "content": "放屁音乐网",
           "children": []
@@ -1491,10 +1468,10 @@ const navigation = {
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1243221658-3b79dd?p=kyon",
-          "content": "音乐标签（用于给音乐添加歌词封面专辑等信息）",
+          "content": "音乐标签（用于给音频添加歌词封面专辑等信息）",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1164338",
+          "href": "https://www.123865.com/s/bjcA-Wk3g",
           "content": "蛋播音乐（仅在线听不支持下载）",
           "children": []
         }, {
@@ -1510,7 +1487,7 @@ const navigation = {
           "content": "天天悦听 2.7.0正式版",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1150399",
+          "href": "https://www.123865.com/s/bjcA-FQ3g",
           "content": "潮音乐",
           "children": []
         }, {
@@ -1518,15 +1495,15 @@ const navigation = {
           "content": "聆听音乐",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1164787",
+          "href": "https://www.123865.com/s/bjcA-YQ3g",
           "content": "速悦音乐",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1164786",
+          "href": "https://www.123865.com/s/bjcA-5E3g",
           "content": "DX云音乐",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1164790",
+          "href": "https://www.123865.com/s/bjcA-LE3g",
           "content": "岸听音乐",
           "children": []
         }, {
@@ -1546,10 +1523,6 @@ const navigation = {
         "href": "",
         "content": "08.网页　音乐资源分享论坛／网站",
         "children": [{
-          "href": "http://www.xiyangxiaozhan.top/html/29518/",
-          "content": "华语优质歌星偶像音乐资源全集（110位歌星合集）－百度云资源👍",
-          "children": []
-        }, {
           "href": "https://www.hifini.com/",
           "content": "音乐磁场👍",
           "children": []
@@ -1573,7 +1546,11 @@ const navigation = {
           "href": "https://fair-youth.club/",
           "content": "轰轰猪音乐馆",
           "children": []
-        }, {"href": "http://www.ape-flac.com/", "content": "APE-FLAC", "children": []}, {
+        }, {
+          "href": "http://www.ape-flac.com/",
+          "content": "APE-FLAC",
+          "children": []
+        }, {
           "href": "https://www.cdbao.net/",
           "content": "CD包音乐论坛",
           "children": []
@@ -1594,16 +1571,20 @@ const navigation = {
           "content": "昊昊听书",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1220195",
+          "href": "https://www.123865.com/s/bjcA-6E3g",
           "content": "飞鸟听书 2.185高级版",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1164885",
+          "href": "https://www.123865.com/s/bjcA-qE3g",
           "content": "听小说 解锁版",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1162390",
-          "content": "免费听书王 解锁版",
+          "href": "https://www.123865.com/s/bjcA-Ck3g",
+          "content": "免费听书王 解锁版 ¹",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Nk3g",
+          "content": "免费听书王 解锁版 ²",
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008082361-bb6758?p=kyon",
@@ -1625,15 +1606,27 @@ const navigation = {
           "href": "https://www.ysts.cc/",
           "content": "有声听书网",
           "children": []
-        }, {"href": "http://www.ting74.org/", "content": "74听书网", "children": []}, {
+        }, {
+          "href": "http://www.ting74.org/",
+          "content": "74听书网",
+          "children": []
+        }, {
           "href": "https://www.ting17.com/",
           "content": "一起听书",
           "children": []
-        }, {"href": "http://www.yuetingba.cn/", "content": "悦听吧", "children": []}, {
+        }, {
+          "href": "http://www.yuetingba.cn/",
+          "content": "悦听吧",
+          "children": []
+        }, {
           "href": "https://www.tingzh.com/",
           "content": "中文听书网",
           "children": []
-        }, {"href": "https://www.tingbook.cc/", "content": "听书网", "children": []}, {
+        }, {
+          "href": "https://www.tingbook.cc/",
+          "content": "听书网",
+          "children": []
+        }, {
           "href": "http://ting.bquge.info/",
           "content": "泡泡听书网",
           "children": []
@@ -1676,10 +1669,10 @@ const navigation = {
         "href": "",
         "content": "01.国内BT磁力搜索🔎",
         "children": [{
-          "href": "https://www.cilise.cc/?ref=axutongxue",
-          "content": "🥇磁力搜索神器",
+          "href": "https://bt.pyth.onl/",
+          "content": "🥇Yiove 磁力搜索",
           "children": []
-        }, {"href": "https://bt.pyth.onl/", "content": "🥇Yiove 磁力搜索", "children": []}, {
+        }, {
           "href": "https://cili.st/",
           "content": "🥇无极磁力－发布页",
           "children": []
@@ -1708,11 +1701,15 @@ const navigation = {
           "content": "🥉雨花阁－发布页",
           "children": []
         }, {
+          "href": "https://url67.ctfile.com/f/14869667-1423647973-0f2896?p=kyon",
+          "content": "一起搜",
+          "children": []
+        }, {
           "href": "https://url67.ctfile.com/f/14869667-1050164528-9a0e92?p=kyon",
           "content": "乐搜",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1164791",
+          "href": "https://www.123865.com/s/bjcA-yE3g",
           "content": "资源大师Plus 高级版",
           "children": []
         }, {
@@ -1811,7 +1808,11 @@ const navigation = {
           "href": "https://www.anirena.com/?__cf_chl_jschl_tk__=pmd_8KwucYUzcAPfoSlQ_Z1iho.GCw_wAZ1H_8kVFwXKlkg-1630219374-0-gqNtZGzNAdCjcnBszQjl",
           "content": "AniRena（动漫种子站）",
           "children": []
-        }, {"href": "https://rutracker.org/forum/index.php", "content": "rutracker（俄国最大的破解论坛）", "children": []}]
+        }, {
+          "href": "https://rutracker.org/forum/index.php",
+          "content": "rutracker（俄国最大的破解论坛）",
+          "children": []
+        }]
       }, {
         "href": "",
         "content": "03.BT磁力下载软件⏬",
@@ -1861,23 +1862,19 @@ const navigation = {
         "content": "04.国内外离线下载⏬",
         "children": [{
           "href": "https://flowus.cn/share/3b2b0026-afe1-4396-92eb-005da8a662f6",
-          "content": "PikPak（6G空间／支持离线下载／不屏蔽资源）👍",
+          "content": "PikPak",
           "children": []
         }, {
           "href": "https://flowus.cn/share/1b79d09e-378f-4a22-a331-fe95f04c1ffe?code=CZ3ECT",
-          "content": "迅雷云盘（500G）",
+          "content": "迅雷云盘",
           "children": []
-        }, {
-          "href": "https://txt.fyi/c05fd99abcb5ce1c",
-          "content": "夸克网盘（15月／122年）",
-          "children": []
-        }, {
+        }, {"href": "#", "content": "夸克网盘", "children": []}, {
           "href": "http://cilikongjian.com/",
-          "content": "磁力空间（手机号注册／不支持ed2k／每天2个额度）",
+          "content": "磁力空间",
           "children": []
         }, {
           "href": "https://pan.bitqiu.com/cn/9f19cad48c2b7b08",
-          "content": "比特球云盘（200G／标准会员38月198年／超级会员58月／298年）",
+          "content": "比特球云盘",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/t8miNEeW9tea2FZGE0iaeA",
@@ -1885,13 +1882,13 @@ const navigation = {
           "children": []
         }, {
           "href": "https://dash.sonicbit.net/reff?id=83264",
-          "content": "Sonicbit（4G空间）",
+          "content": "Sonicbit",
           "children": []
         }, {
           "href": "https://www.seedr.cc/?r=983684",
-          "content": "Seedr（2G空间／每邀请1人增加500MB空间／最多4G空间／可自己邀请自己）",
+          "content": "Seedr",
           "children": []
-        }, {"href": "https://offcloud.com/?=fdc97339", "content": "Offcloud（10G空间／每个月3次）", "children": []}]
+        }, {"href": "https://offcloud.com/?=fdc97339", "content": "Offcloud", "children": []}]
       }, {
         "href": "",
         "content": "05.磁力转种子",
@@ -1919,22 +1916,26 @@ const navigation = {
         "content": "01.ChatGPT",
         "children": [{
           "href": "https://wws.lanzoul.com/b0czfctyd",
-          "content": "【王炸更新】永久激活AI4.0，有效期至2999年！！",
+          "content": "【DeepSeek R1满血版上线】永久激活最强GPT4.0、4o、preview、kimi、文心、讯飞、通义、智谱等大模型，更有100+超强AI办公、图片、音频、视频插件！",
           "children": []
         }, {
           "href": "https://nav.imyaigc.com/",
-          "content": "【最全AI聚合平台】GPT4 | Claude | MJ | Suno | Luma等100+款AI模型【即开即用】👍",
+          "content": "【超强AIGC创作平台】GPT4o、o1、Claude、MJ、Flux、Suno等无限制使用，AI文本、绘画、音乐、视频百宝箱，超级生产力工具！【即开即用】【强烈推荐】👍",
           "children": []
         }, {
           "href": "https://chat.uyanai.com/?user_sn=31129222",
-          "content": "免费ChatGPT中文版丨GPT4.0／Dalle-3／MJ绘画【免梯子】【高速率】🚀",
+          "content": "【超稳定免费体验】🚀 畅用GPT-4、Claude、Gemini／🎨 MJ绘画、Dall-E3 ／📚 AI写作神器：一键搞定 小说、论文、降重、PPT、自媒体等！【高速率】【墙裂推荐】 🔥",
+          "children": []
+        }, {
+          "href": "https://chat.aibox365.cn/",
+          "content": "ChatGPT中文版 | Claude3.5中文版 | Midjourney | GPT4o | AI-PPT 一站式AI平台【强烈推荐🚀】",
           "children": []
         }, {
           "href": "https://nf.video/yinhe/web?sharedId=129693",
-          "content": "银河录像局－稳定ChatGPT4合租／GPT3.5独立账号购买🔥",
+          "content": "稳定GPT Plus镜像／GPT3.5独立账号购买🔥",
           "children": []
         }, {
-          "href": "https://mp.weixin.qq.com/s/yt25IdiI0xO2M4RTmSE7Fw",
+          "href": "https://mp.weixin.qq.com/s/L8Mrw4e-yOV95Q3DvwSG9g",
           "content": "一键批量提问多个AI大模型教程👍",
           "children": []
         }, {
@@ -1950,11 +1951,11 @@ const navigation = {
           "content": "TalkAI",
           "children": []
         }, {
-          "href": "https://chat18.aichatos.xyz/",
+          "href": "https://x.aichatoszx.com/",
           "content": "AIchatOS",
           "children": []
         }, {
-          "href": "https://ai27.gptforlove.com/",
+          "href": "https://ai28.gptforlove.com/",
           "content": "GPT公益站",
           "children": []
         }, {
@@ -1974,12 +1975,12 @@ const navigation = {
           "content": "海鲸AI",
           "children": []
         }, {
-          "href": "https://txt.fyi/141e2ae0c23180e5",
-          "content": "Sider（浏览器扩展）",
+          "href": "#",
+          "content": "Sider",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/tUQMO4VAt6Cxjv0ndN6EXA",
-          "content": "Walles AI（浏览器扩展）",
+          "content": "Walles AI",
           "children": []
         }, {
           "href": "https://aigcfun.com/app-download",
@@ -2022,32 +2023,32 @@ const navigation = {
         "href": "",
         "content": "02.ChatGPT替代",
         "children": [{
-          "href": "https://volctrack.com/w/10EOmD7R",
-          "content": "月之暗面－Kimi👍",
-          "children": []
-        }, {
-          "href": "https://chatglm.cn/apps?image=https%3A%2F%2Fsfile.chatglm.cn%2Factiveimg%2Fbdms%2F66b97e348217030036f486f1&open_from=ads_web_aitool&fr=ads_web_aitool",
+          "href": "https://chatglm.paluai.com/axutongxue",
           "content": "智谱－清言👍",
           "children": []
         }, {
-          "href": "https://www.doubao.com/chat/",
-          "content": "抖音－豆包",
+          "href": "https://m.paluai.com/?code=dh68",
+          "content": "抖音－豆包👍",
+          "children": []
+        }, {
+          "href": "https://chat.deepseek.com/",
+          "content": "深度求索－DeepSeek",
+          "children": []
+        }, {
+          "href": "https://kimi.moonshot.cn/",
+          "content": "月之暗面－Kimi",
           "children": []
         }, {
           "href": "https://qianwen.aliyun.com/",
           "content": "阿里－通义千问",
           "children": []
         }, {
-          "href": "https://xinghuo.xfyun.cn/desk",
-          "content": "讯飞－星火",
-          "children": []
-        }, {
           "href": "https://yuanbao.tencent.com/chat/",
           "content": "腾讯－混元",
           "children": []
         }, {
-          "href": "https://yiyan.baidu.com/",
-          "content": "百度－文心一言",
+          "href": "https://yuewen.cn/chats/new",
+          "content": "阶跃星辰－跃问",
           "children": []
         }, {
           "href": "https://www.baichuan-ai.com/home",
@@ -2058,8 +2059,12 @@ const navigation = {
           "content": "MiniMax－海螺",
           "children": []
         }, {
-          "href": "https://yuewen.cn/chats/new",
-          "content": "阶跃星辰－跃问",
+          "href": "https://xinghuo.xfyun.cn/desk",
+          "content": "讯飞－星火",
+          "children": []
+        }, {
+          "href": "https://yiyan.baidu.com/",
+          "content": "百度－文心一言",
           "children": []
         }, {
           "href": "https://chat.360.com/",
@@ -2085,9 +2090,13 @@ const navigation = {
           "href": "https://arena.lmsys.org/",
           "content": "Chatbot Arena",
           "children": []
-        }, {"href": "https://claude.ai/chats", "content": "Claude", "children": []}, {
-          "href": "https://bard.google.com/",
-          "content": "Google Bard",
+        }, {
+          "href": "https://claude.ai/chats",
+          "content": "Claude",
+          "children": []
+        }, {
+          "href": "https://gemini.google.com/",
+          "content": "Google Gemini",
           "children": []
         }, {
           "href": "https://www.opera.com/zh-cn/features/browser-ai",
@@ -2125,9 +2134,9 @@ const navigation = {
       }, {
         "href": "",
         "content": "04.AI 搜索",
-        "children": [{"href": "https://metaso.cn/", "content": "秘塔AI", "children": []}, {
-          "href": "https://so.360.com/",
-          "content": "360AI搜索",
+        "children": [{"href": "https://metaso.cn/", "content": "秘塔AI👍", "children": []}, {
+          "href": "https://www.n.cn/",
+          "content": "360纳米AI搜索👍",
           "children": []
         }, {
           "href": "https://www.tiangong.cn/",
@@ -2190,30 +2199,46 @@ const navigation = {
           "content": "LiblibAI·哩布哩布AI",
           "children": []
         }, {
-          "href": "https://tusiart.com/images/617693482049549036?post_id=617705074162097747&source_id=nz-xoFHglkWwrPQsYHz28hIj",
+          "href": "https://tusiart.com/?utm_source=axu&source_id=axu",
           "content": "吐司",
           "children": []
         }, {
-          "href": "https://www.hotiq.cn/category/aimx",
+          "href": "https://hotiq.cn/category/aimx",
           "content": "HOTIQ 烧脑社区",
-          "children": []
-        }, {
-          "href": "https://www.esheep.com/",
-          "content": "eSheep",
           "children": []
         }, {
           "href": "https://cyberes.github.io/stable-diffusion-models/",
           "content": "Stable Diffusion Models",
           "children": []
-        }, {"href": "https://huggingface.co/", "content": "Huggingface", "children": []}]
+        }, {"href": "http://www.sdziyuan.cn/", "content": "SD资源", "children": []}, {
+          "href": "https://huggingface.co/",
+          "content": "Huggingface",
+          "children": []
+        }]
       }, {
         "href": "",
         "content": "- 503.AI绘画关键词",
         "children": [{
-          "href": "https://kalos.art/discovery",
-          "content": "Kalos🐢",
+          "href": "https://thereisnospon.github.io/NovelAiTag/",
+          "content": "NovelAI魔导书",
           "children": []
-        }, {"href": "https://unprompt.ai/", "content": "Unprompt🐢", "children": []}, {
+        }, {
+          "href": "https://www.aigallery.top/",
+          "content": "Ai画廊 - AI关键词生成器",
+          "children": []
+        }, {
+          "href": "https://community.hua-der.com/artwork",
+          "content": "片绘",
+          "children": []
+        }, {"href": "https://aitags.fun/", "content": "AI FUN", "children": []}, {
+          "href": "https://tags.novelai.dev/",
+          "content": "标签超市",
+          "children": []
+        }, {
+          "href": "https://ai-creator.net/arts",
+          "content": "AI Creator",
+          "children": []
+        }, {"href": "https://lib.kalos.art/", "content": "Kalos", "children": []}, {
           "href": "https://prompthero.com/",
           "content": "Prompthero",
           "children": []
@@ -2222,27 +2247,23 @@ const navigation = {
           "content": "OpenArt",
           "children": []
         }, {
-          "href": "https://www.aigallery.top/",
-          "content": "Ai画廊 - AI关键词生成器",
-          "children": []
-        }, {
-          "href": "https://thereisnospon.github.io/NovelAiTag/",
-          "content": "NovelAI魔导书",
-          "children": []
-        }, {
           "href": "https://nf.video/yinhe/web/?sharedId=129693",
-          "content": "长期大量使用建议考虑：Midjourney 稳定合租",
+          "content": "长期大量使用建议考虑：Midjourney／PS AI 稳定合租",
           "children": []
         }, {
-          "href": "https://www.gaoding.com/utms/6af75c983d8d4b089c0660ce5461042e",
-          "content": "稿定AI（每日每账号20次）",
+          "href": "https://www.gaoding.com/utms/aef493b5abaa4fa9826b23337b0c3000",
+          "content": "【免费AI工具箱】汇集AI一键抠图、AI背景消除、AI变清晰、AI扩图、AI文生图等一站式图片处理与智能设计的效率工具箱👍",
           "children": []
         }, {
-          "href": "https://wework.qpic.cn/wwpic/3472_Fj_BFbajS5urPgy_1682591701",
+          "href": "https://d.design/?sharecode=oC45sWsR0e",
+          "content": "堆友（每日80堆豆）",
+          "children": []
+        }, {
+          "href": "https://www.yjai.art/invite_new/?invite_code=90BE3F",
           "content": "意间AI（每日可免费获取65以上积分）",
           "children": []
         }, {
-          "href": "https://wework.qpic.cn/wwpic/209356_aEz4ksSmQmuIWK5_1682837868",
+          "href": "https://mewx.art/?invite_code=tFBuncKV",
           "content": "MewXAI（签到等可以免费获取次数／𝑴𝑱模型）",
           "children": []
         }, {
@@ -2256,6 +2277,10 @@ const navigation = {
         }, {
           "href": "https://tusiart.com/?utm_source=axu&source_id=axu",
           "content": "吐司AI（每日免费100算力）",
+          "children": []
+        }, {
+          "href": "https://tongyi.aliyun.com/wanxiang/creation",
+          "content": "通义万象（每日签到50灵感值）",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/0oH78JXW7YYor-7qbThwBQ",
@@ -2314,7 +2339,7 @@ const navigation = {
         "href": "",
         "content": "07.AI Excel",
         "children": [{
-          "href": "https://raccoon.sensetime.com/login?utm_source=bljuly35",
+          "href": "https://www.xiaohuanxiong.com/officev2?utm_source=bljuly35",
           "content": "办公小浣熊👍",
           "children": []
         }, {"href": "https://chatexcel.com/", "content": "ChatExcel", "children": []}, {
@@ -2337,12 +2362,16 @@ const navigation = {
           "href": "https://www.aipaperpass.com/?pic=5R6e",
           "content": "AI一键论文－AIPassPaPer：全网首家免费无限论文改稿／aigc超25%退费／5分钟5万字！包含图、表、数据、代码、公式",
           "children": []
+        }, {
+          "href": "https://gaoyiai.com/",
+          "content": "稿易AI论文 - 3分钟完成万字论文初稿，论文查重率15%左右，超出可申请退款👍",
+          "children": []
         }]
       }, {
         "href": "",
         "content": "09.AI 视频",
         "children": [{
-          "href": "https://chatglm.cn/apps?image=https%3A%2F%2Fsfile.chatglm.cn%2Factiveimg%2Fbdms%2F66b97e348217030036f486f1&open_from=ads_web_aitool&fr=ads_web_aitool",
+          "href": "https://chatglm.paluai.com/axutongxue",
           "content": "智谱清影👍",
           "children": []
         }, {
@@ -2350,16 +2379,16 @@ const navigation = {
           "content": "可灵AI👍",
           "children": []
         }, {
-          "href": "https://youyan.xyz/platform/home/prime?from=axutongxue",
-          "content": "有言AI👍",
+          "href": "https://jimeng.jianying.com/",
+          "content": "即梦AI👍",
+          "children": []
+        }, {
+          "href": "https://www.youyan3d.com/platform/?utm_source=zhanwaidaoliu&utm_campaign=zwj&utm_content=axutongxue&from=axutongxue",
+          "content": "有言AI",
           "children": []
         }, {"href": "https://runwayml.com/", "content": "Runway", "children": []}, {
           "href": "https://pika.art/",
           "content": "Pika",
-          "children": []
-        }, {
-          "href": "https://jimeng.jianying.com/",
-          "content": "即梦AI",
           "children": []
         }, {
           "href": "https://xunguang.damo-vision.com/",
@@ -2418,10 +2447,6 @@ const navigation = {
         "href": "",
         "content": "10.AI 写作",
         "children": [{
-          "href": "https://huixie.iflyrec.com/list?from=ai-bot",
-          "content": "讯飞写作（免费全能）👍",
-          "children": []
-        }, {
           "href": "https://cp.baidu.com/",
           "content": "百度橙篇（长文）",
           "children": []
@@ -2458,24 +2483,28 @@ const navigation = {
           "content": "免费专业AI写作工具：社媒公文、小说论文、作业教案、商业计划书等多场景文案一键生成👍",
           "children": []
         }, {
-          "href": "https://volctrack.com/w/10EOmD7R",
-          "content": "【Kimi智能助手】Kimi，深入文本，洞察每一个细节——长篇阅读，轻松掌握！👍",
+          "href": "https://chatglm.paluai.com/axutongxue",
+          "content": "【智谱清言】免费全能的AI助手，阅读总结、深度推理、视频生成、PPT生成一应俱全👍",
           "children": []
         }, {
           "href": "https://ilingban.com/chat/?type=translate&from=axtxbjlm",
-          "content": "【免费PDF文档对照翻译】翻译结果快速预览，双语对照，网页翻译，词典翻译，对话翻译，一键搞定！更支持对话问答、全文概述、总结分析、文章摘要、生成思维导图等功能！",
+          "content": "【免费PDF文档对照翻译】翻译结果快速预览，双语对照，网页/词典/对话翻译，一键搞定！更支持对话问答、全文概述、总结分析、文章摘要、生成思维导图等！",
           "children": []
         }, {
-          "href": "https://turbodesk.xfyun.cn/?channelid=gj99",
-          "content": "【免费AI写作助手】通用稿件5分钟生成，深度稿件编辑效率翻番👍",
+          "href": "https://www.marscode.cn/?utm_source=advertising&utm_medium=axutongxue.com_ug_cpa&utm_term=hw_marscode_axutongxue&utm_content=home",
+          "content": "【豆包MarsCode】字节旗下的免费AI编程神器：一站式编程学习、AI陪练、辅助开发👍",
           "children": []
         }, {
           "href": "https://www.gaoding.com/utms/aef493b5abaa4fa9826b23337b0c3000",
           "content": "【免费AI工具箱】汇集AI一键抠图、AI背景消除、AI变清晰、AI扩图、AI文生图等一站式图片处理与智能设计的效率工具箱👍",
           "children": []
         }, {
-          "href": "https://chatglm.cn/apps?image=https%3A%2F%2Fsfile.chatglm.cn%2Factiveimg%2Fbdms%2F66b97e348217030036f486f1&open_from=ads_web_aitool&fr=ads_web_aitool",
-          "content": "【智谱清影】AI文生视频／图生视频，免费使用不限次数👍",
+          "href": "https://www.visdoc.cn/?utm_type=Navweb&utm_source=axu&utm_page=visdoc&utm_plan=visdoc&utm_unit=visdoc&utm_keyword=13",
+          "content": "【Ai免费生成图表】一键免费生成专业图表，只需输入文字，即可让文档与图表创作更高效👍",
+          "children": []
+        }, {
+          "href": "https://www.doudou.fun/?channel=web_aitool16",
+          "content": "逗逗AI－陪你游戏、可互动的二次元AI桌宠😁",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/AibgJX-cOH_HfArKhrQGLQ",
@@ -2498,22 +2527,14 @@ const navigation = {
     }, {"href": "", "content": "05　特惠福利精选🔥", "children": []}, {
       "href": "",
       "content": "06　电脑常用",
-      "children": [{"href": "", "content": "01.电脑软件大全", "children": []}, {
+      "children": [{"href": "", "content": "01.软件大全", "children": []}, {
         "href": "",
         "content": "- 101.Win软件下载站",
         "children": [{
-          "href": "https://shejishow.cn/",
-          "content": "设计秀",
-          "children": []
-        }, {
-          "href": "https://www.qitabbs.com/10426.html",
-          "content": "奇它博客（天翼云／阿里云）",
-          "children": []
-        }, {
           "href": "https://www.ruancang.net/",
           "content": "软仓（百度云）",
           "children": []
-        }, {
+        }, {"href": "https://shejishow.cn/", "content": "设计秀", "children": []}, {
           "href": "http://www.rjsos.com/",
           "content": "软件SOS",
           "children": []
@@ -2618,29 +2639,33 @@ const navigation = {
           "content": "Adobe Dreamweaver CS6 一键安装版",
           "children": []
         }, {
-          "href": "https://www.123pan.com/s/bjcA-vI6w.html",
+          "href": "https://www.mediafire.com/file/oyha59yot0lwlqy",
           "content": "Adobe Premiere Pro CC 一键安装版",
           "children": []
         }, {
-          "href": "https://www.123pan.com/s/bjcA-TI6w.html",
+          "href": "https://www.mediafire.com/file/qyc4f3l2snvagw5",
           "content": "Adobe After Effects CC 一键安装版",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1058371",
+          "href": "https://www.123865.com/s/bjcA-Rk3g",
           "content": "Adobe Photoshop CC 一键安装版",
           "children": []
         }, {
-          "href": "https://www.123pan.com/s/bjcA-Ubzw",
+          "href": "https://www.mediafire.com/file/7xw01zkbhasy5tl",
           "content": "Adobe Illustrator CS6一键安装版",
           "children": []
         }, {
           "href": "https://axu.lanzoui.com/iD2OTuu0lof",
           "content": "Adobe Audition CC 一键安装版",
           "children": []
-        }, {"href": "https://kyon.118pan.com/b1144813", "content": "Adobe Flash CS6 一键安装版", "children": []}]
+        }, {
+          "href": "https://www.mediafire.com/file/o0s2ilbzixnbdb4",
+          "content": "Adobe Flash CS6 一键安装版",
+          "children": []
+        }]
       }, {
         "href": "",
-        "content": "- 202.PS在线版",
+        "content": "- 202.PS在线网页版",
         "children": [{
           "href": "https://www.photopea.com/",
           "content": "Photopea－原版",
@@ -2679,180 +2704,104 @@ const navigation = {
           "children": []
         }, {
           "href": "https://flowus.cn/share/ab4b6b86-34a6-4aa0-a679-b4a221b8e41d?code=CZ3ECT",
-          "content": "Adobe 系列软件 2017－2024高速下载🔥",
+          "content": "Adobe 系列软件 2017－2025高速下载直链🔥",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/hwlMcGfctY0EfytF3F_MxQ",
           "content": "全套PS插件、PR插件、AE插件汉化插件一键安装包",
           "children": []
         }]
-      }, {"href": "", "content": "03.Office／WPS", "children": []}, {
+      }, {"href": "", "content": "03.浏览器相关", "children": []}, {
         "href": "",
-        "content": "01.Office修复",
+        "content": "01.浏览器扩展推荐",
         "children": [{
-          "href": "https://www.mediafire.com/file/wv8nhl75mlrwq8w",
-          "content": "Stellar Toolkit for File Repair 2.0.0.0 破解版（可修复Excel／Word／PPT和PDF）",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/ngycr3xpmhil8gk",
-          "content": "OfficeFIX 6.110 破解版（可修复Excel／Word／Access和Outlook）",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/wxl6x61yv0a914z",
-          "content": "DataNumen Word Repair 3.4.0.1 破解版（可修复Word）",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/fv4e1kzf0somqsp",
-          "content": "PowerPointRecoveryFree（可修复PPT）",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/sfchs67uju67g2y",
-          "content": "ExcelRecovery 3.0（可修复Excel）",
-          "children": []
-        }, {
-          "href": "https://my.syncplicity.com/share/n0odcm9069ztsbh/",
-          "content": "DataNumen Excel Repair 2.8 破解版（可修复Excel）",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/b10tsl1w9c8uby1",
-          "content": "Recovery Toolbox For PowerPoint（可修复PPT）",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "02.Office插件",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/8lYFPLcx9VVckTRPhDvJ3g",
-          "content": "Word／PPT／Excel插件推荐（Office／WPS通用）👍",
-          "children": []
-        }, {
-          "href": "https://www.islide.cc/ai-beta?mtm_campaign=axtx",
-          "content": "iSlide PPT 设计美化插件（现有AI PPT功能）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/-qkjnrj3MCoMx02qo6l7lg",
-          "content": "2024最新WPS政府版／教育版公开下载地址合集👍",
-          "children": []
-        }, {
-          "href": "https://otp.landian.vip/zh-cn/",
-          "content": "Office Tool Plus（一键部署 Office）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/f06968cd-1751-4aec-8c92-c0ea6e88eb73?code=CZ3ECT",
-          "content": "Office完整版／一键安装版合集",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "04.社交聊天",
-        "children": [{
-          "href": "https://flowus.cn/share/223e1818-ff8f-4f72-a455-700663f454eb?code=CZ3ECT",
-          "content": "腾讯QQ／腾讯TIM 去广告版",
-          "children": []
-        }, {
-          "href": "https://i.getspace.eu/cloud/s/M2b6jnWDy75KYN2",
-          "content": "微信 3.9.12.17 多开防撤回免安装（换版本注意备份聊天记录）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/062dd65e-3c5c-46fe-a879-769b0011417c?code=CZ3ECT",
-          "content": "YY语音 绿色／多开／去广告版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/91a9c078-3f72-4c23-bd36-ed24a3ba82ae?code=CZ3ECT",
-          "content": "阿里旺旺 精简／去广告版",
-          "children": []
-        }, {
-          "href": "https://github.com/huiyadanli/RevokeMsgPatcher",
-          "content": "微信 防撤回补丁（官方版可用）",
-          "children": []
-        }, {
-          "href": "https://github.com/xh321/LiteLoaderQQNT-Anti-Recall",
-          "content": "QQ NT版防撤回补丁（官方版可用）",
-          "children": []
-        }]
-      }, {"href": "", "content": "05.浏览器", "children": []}, {
-        "href": "",
-        "content": "- 501.常用扩展推荐",
-        "children": [{
-          "href": "https://txt.fyi/a51674a5c5084d1b",
-          "content": "关于 Firefox 无法安装uBlock Origin、AdGuard 等广告过滤扩展的解决办法",
-          "children": []
-        }, {
-          "href": "https://microsoftedge.microsoft.com/addons/detail/enhanced-github/eibibhailjcnbpjmemmcaakcookdleon",
-          "content": "Enhanced GitHub（加速Github访问）",
+          "href": "",
+          "content": "必备",
           "children": []
         }, {
           "href": "https://chrome.zzzmh.cn/info?token=jinjaccalgkegednnccohejagnlnfdag",
-          "content": "ViolentMonkey（暴力猴）－油猴脚本管理工具－必备✅（暴力猴、篡改猴2选1）",
+          "content": "ViolentMonkey（暴力猴）",
           "children": []
         }, {
           "href": "https://chrome.zzzmh.cn/info?token=dhdgffkkebhmkfjojejmpbldmpobfkfo",
-          "content": "Tampermonkey（篡改猴）－油猴脚本管理工具－必备✅（暴力猴、篡改猴2选1）",
+          "content": "Tampermonkey（篡改猴）",
           "children": []
         }, {
           "href": "https://chrome.zzzmh.cn/info?token=cjpalhdlnbpafiamejdnhcphjbkeiagm",
-          "content": "Ublock origin－屏蔽网页广告－必备✅",
+          "content": "Ublock origin",
           "children": []
         }, {
-          "href": "https://plug.lingfengyun.com/",
-          "content": "凌风云网盘助手（还可用的网盘密码共享插件）👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/HPignWTRc7Af0-RR2dbO0Q#:~:text=%E5%BF%AB%E9%80%9F%E5%88%87%E6%8D%A2%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%89%A9%E5%B1%95",
-          "content": "Search All－快速切换搜索引擎（见5.3节）",
-          "children": []
-        }, {
-          "href": "https://www.gugeapps.net/webstore/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle",
-          "content": "SingleFile－永久网站保存网页（已更新iOS端浏览器扩展）",
-          "children": []
-        }, {
-          "href": "https://www.jingtaozhushou.com/",
-          "content": "京淘助手－10大平台历史价格查询／方便淘宝京东自推自买",
-          "children": []
-        }, {
-          "href": "https://chrome.zzzmh.cn/info?token=emhohdghchmjepmigjojkehidlielknj",
-          "content": "SimpleUndoClose－给Chrome添加一个「恢复刚刚关闭的网页」的按钮",
-          "children": []
-        }, {
-          "href": "https://chrome.zzzmh.cn/info?token=mciiogijehkdemklbdcbfkefimifhecn",
-          "content": "Chrono－最好用的Chrome下载管理（支持资源嗅探）👍",
-          "children": []
-        }, {
-          "href": "https://saladict.crimx.com/",
-          "content": "沙拉查词－大概是目前划词翻译扩展中体验最好的",
-          "children": []
-        }, {
-          "href": "https://chrome.zzzmh.cn/info?token=jlgkpaicikihijadgifklkbpdajbkhjo",
-          "content": "crxMouse－让Chrome可使用自定义的鼠标手势（比如左滑为后退，下滑为刷新）提高工作效率👍",
+          "href": "",
+          "content": "视频",
           "children": []
         }, {
           "href": "https://chrome.zzzmh.cn/info?token=nffaoalbilbmmfgbnbgppjihopabppdk",
           "content": "Video Speed Controller－让html5视频支持倍速播放，最快可达16倍",
           "children": []
         }, {
-          "href": "https://chrome.zzzmh.cn/info?token=mcbpblocgmgfnpjjppndjkmgjaogfceg",
-          "content": "FireShot－一键滚动截屏整个网页",
+          "href": "https://csser.top/",
+          "content": "Bilibili下载助手－帮你下载B站版权受限（能看不能缓存）的 番剧",
           "children": []
         }, {
-          "href": "https://www.gugeapps.net/webstore/detail/easy-qr-code-generator/emlhjldmodkejoblhpbldpbddilijblk",
-          "content": "轻松二维码－点击扩展即可生成当前网址的二维码，同时可以主动输入网址生成二维码",
+          "href": "https://mp.weixin.qq.com/s/IAxhGqnVL9ieowIZLR_LYA",
+          "content": "B站哔哩哔哩广告自动跳过",
           "children": []
         }, {
-          "href": "https://ainoob.com/zh/project/nooboss",
-          "content": "二管家－扩展管理",
+          "href": "https://mp.weixin.qq.com/s/e_UCcBbf3agRpuoCe18knw",
+          "content": "B站哔哩哔哩弹幕过滤器",
           "children": []
         }, {
+          "href": "https://mp.weixin.qq.com/s/f-ZEac96Q3DGnYa89I2ggQ",
+          "content": "任意网页视频录制",
+          "children": []
+        }, {"href": "", "content": "图片", "children": []}, {
           "href": "http://www.pullywood.com/ImageAssistant/",
           "content": "图片助手－图片批量下载👍",
           "children": []
         }, {
-          "href": "https://csser.top/",
-          "content": "Bilibili下载助手－帮你下载B站版权受限（能看不能缓存）的 番剧",
+          "href": "",
+          "content": "网页保存",
           "children": []
-        }]
+        }, {
+          "href": "https://www.gugeapps.net/webstore/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle",
+          "content": "SingleFile－永久网站保存网页（已更新iOS端浏览器扩展）",
+          "children": []
+        }, {"href": "", "content": "AI", "children": []}, {
+          "href": "https://mp.weixin.qq.com/s/rUMHiP5d9bi3wc7tJ2QUmA",
+          "content": "Kimi",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/jT-83rj-NLklGvP4yz-QgQ",
+          "content": "豆包",
+          "children": []
+        }, {
+          "href": "https://chat.baidu.com/page/pluginhome.html",
+          "content": "百度AI助手",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/qGNZ5HvbyPe55WXOBU2m8Q",
+          "content": "无限黑名单",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/6XmbRFbd8-iTGXFg0LEVmw",
+          "content": "扩展配置数据备份教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/qLNIPQWOy7lP3QVTXedGwQ",
+          "content": "自动填写验证码",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/D4je1qGqSScLHPjWaw-G2g",
+          "content": "自动回复帖子／快捷回复帖子",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/0pC4bsuUJY9NXDj-vUfuOA",
+          "content": "书签同步",
+          "children": []
+        }, {"href": "https://mp.weixin.qq.com/s/-Fg4LrT0JltK2kGkAl8_kg", "content": "网页变动监控", "children": []}]
       }, {
         "href": "",
-        "content": "- 502.常用油猴脚本推荐",
+        "content": "02.浏览器脚本推荐",
         "children": [{
           "href": "https://greasyfork.org/zh-CN/scripts/394099",
           "content": "百度系网站去广告",
@@ -2960,12 +2909,20 @@ const navigation = {
         }, {"href": "https://greasyfork.org/zh-CN/scripts/406400", "content": "屏蔽知乎营销号", "children": []}]
       }, {
         "href": "",
-        "content": "- 503.免翻墙Chrome扩展下载站",
+        "content": "03.免翻墙扩展下载站",
         "children": [{
           "href": "https://www.crxsoso.com/",
           "content": "Crx搜搜👍",
           "children": []
-        }, {"href": "https://crxdl.com/", "content": "CrxDL.COM👍", "children": []}, {
+        }, {
+          "href": "https://crxdl.com/",
+          "content": "CrxDL.COM👍",
+          "children": []
+        }, {
+          "href": "https://www.chajianxw.com/",
+          "content": "插件小屋",
+          "children": []
+        }, {
           "href": "https://www.chromefk.com/",
           "content": "Chromefk",
           "children": []
@@ -2985,515 +2942,115 @@ const navigation = {
           "href": "https://chrome.pictureknow.com/",
           "content": "收藏猫插件",
           "children": []
-        }, {
-          "href": "https://www.cxyhub.com/",
-          "content": "程序员Hub",
-          "children": []
         }, {"href": "http://yurl.sinaapp.com/crx2.php", "content": "常用Crx离线安装包下载", "children": []}]
       }, {
         "href": "",
-        "content": "- 504.屏蔽网页广告",
+        "content": "04.屏蔽网页广告",
         "children": [{
           "href": "https://zhuanlan.zhihu.com/p/42949969",
-          "content": "全平台网页去广告规则+使用教程👍",
+          "content": "网页去广告规则+使用教程👍",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "05.自动化",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/L8Mrw4e-yOV95Q3DvwSG9g",
+          "content": "基于Powershell实现批量提问多个AI",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/RE-SEBj9a3sQuTRFQj9nLA",
+          "content": "基于Context Search实现自动化批量搜索／提问多个AI",
           "children": []
         }, {
           "href": "https://flowus.cn/share/eaca0040-42b4-496b-bc73-6931858fb506?code=CZ3ECT",
-          "content": "Microsoft Edge👍",
+          "content": "Microsoft Edge 便携版＋正式版👍",
           "children": []
         }, {
-          "href": "https://txt.fyi/92f8cf01dda6f72a",
-          "content": "360极速浏览器X（无广告／需要兼容Flash时推荐使用）👍",
+          "href": "https://flowus.cn/share/687fd978-7615-4b58-9502-5585c312cacb?code=CZ3ECT",
+          "content": "Google Chrome 便携版＋正式版",
           "children": []
         }, {
-          "href": "https://www.runningcheese.com/firefox",
-          "content": "Firefox（奔跑中的奶酪修改版）",
+          "href": "https://flowus.cn/share/61172d7f-01b2-4db2-b2a3-0557dac478f0?code=CZ3ECT",
+          "content": "Firefox 便携版／正式版",
           "children": []
-        }, {
-          "href": "https://www.runningcheese.com/chrome",
-          "content": "Chrome（奔跑中的奶酪修改版）",
-          "children": []
-        }, {
-          "href": "https://www.google.cn/intl/zh-CN/chrome/",
-          "content": "Chrome（官方版）",
-          "children": []
-        }, {
-          "href": "https://www.mozilla.org/zh-CN/firefox/new/",
-          "content": "Firefox（国际版）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1163360",
+        }, {"href": "#", "content": "360极速浏览器X（需要兼容Flash时推荐使用）👍", "children": []}, {
+          "href": "#",
           "content": "QQ浏览器绿色版（可以使用网页版微信）",
           "children": []
-        }, {"href": "https://txt.fyi/68e4ff200b77424c", "content": "Edge和Chrome增强版", "children": []}]
-      }, {"href": "", "content": "06.下载", "children": []}, {
+        }]
+      }, {"href": "", "content": "04.文档相关", "children": []}, {
         "href": "",
-        "content": "01.短视频等下载",
+        "content": "- 401.Office",
         "children": [{
-          "href": "https://kyon.118pan.com/b1103001",
-          "content": "闪豆多平台视频批量下载器2.5.2.2",
+          "href": "https://store.lizhi.io/site/products/id/65?cid=ds7afku3",
+          "content": "Office 365－拼车仅需￥99／年",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1103000",
-          "content": "happy-crawler 1.0.7－抖音批量下载喜欢视频／快手／西瓜／皮皮虾／B站／Ａcfun／漫画猫",
+          "href": "https://otp.landian.vip/zh-cn/",
+          "content": "Office Tool Plus（一键部署 Office）",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1103002",
-          "content": "小助手1.2.8－抖音／西瓜／快手／皮皮虾／B站／QQ说说／QQ音乐／微信多开",
+          "href": "https://flowus.cn/share/f06968cd-1751-4aec-8c92-c0ea6e88eb73?code=CZ3ECT",
+          "content": "Office完整版／一键安装版合集",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "02.B站视频下载",
+        "content": "- 402.WPS",
         "children": [{
-          "href": "https://mp.weixin.qq.com/s/5z_NxKRtxoGgSAsIuGUnHw",
-          "content": "2023年B站视频下载软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/tFVXoV1ACxiDrF4X-PPReQ",
-          "content": "B站收藏夹视频下载软件推荐",
+          "href": "https://www.axutongxue.top/2025/01/2024wps.html",
+          "content": "2024最新WPS政府版／教育版公开下载地址合集👍",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "03.YouTube视频下载",
+        "content": "- 403.插件",
         "children": [{
-          "href": "https://github.com/oleksis/youtube-dl-gui/releases",
-          "content": "yt-dlg",
+          "href": "https://mp.weixin.qq.com/s/8lYFPLcx9VVckTRPhDvJ3g",
+          "content": "Word／PPT／Excel插件推荐（Office／WPS通用）👍",
           "children": []
         }, {
-          "href": "https://github.com/ErrorFlynn/ytdlp-interface/releases",
-          "content": "ytdlp-interface",
-          "children": []
-        }, {
-          "href": "https://stacher.io/",
-          "content": "Stacher",
-          "children": []
-        }, {
-          "href": "https://github.com/axcore/tartube/releases",
-          "content": "Tartube",
-          "children": []
-        }, {
-          "href": "https://save4k.ru/",
-          "content": "save4k（最高MP4 1080P／webm 4K）👍",
-          "children": []
-        }, {
-          "href": "https://en.loader.to/4/",
-          "content": "Loader（最高4K）",
-          "children": []
-        }, {
-          "href": "https://y2down.cc/en/",
-          "content": "Y2down（最高4K）",
-          "children": []
-        }, {
-          "href": "https://youtubeto.org/en/",
-          "content": "Youtubeto（最高4K）",
-          "children": []
-        }, {
-          "href": "https://notube.net/en/youtube-app-v2",
-          "content": "notube（选择MP4 HD则为获取最高1080P）",
+          "href": "https://www.islide.cc/ai-beta?mtm_campaign=axtx",
+          "content": "iSlide PPT 设计美化插件（现有AI PPT功能）",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "04.网课下载",
+        "content": "- 404.文档修复",
         "children": [{
-          "href": "https://mp.weixin.qq.com/s/f-ZEac96Q3DGnYa89I2ggQ",
-          "content": "无视加密网课100%下载教程👍",
+          "href": "https://www.mediafire.com/file/wv8nhl75mlrwq8w",
+          "content": "Stellar Toolkit for File Repair 破解版（可修复Excel／Word／PPT和PDF）",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1110845",
-          "content": "中国慕课下载器",
+          "href": "https://www.mediafire.com/file/ngycr3xpmhil8gk",
+          "content": "OfficeFIX 破解版（可修复Excel／Word／Access和Outlook）",
           "children": []
         }, {
-          "href": "https://www.xuewuzhi.cn/downloader",
-          "content": "慕课网／网易云课堂／中国大学／爱课程／学堂在线／超星／B站／爱奇艺／优酷／腾讯视频下载",
+          "href": "https://www.mediafire.com/file/wxl6x61yv0a914z",
+          "content": "DataNumen Word Repair 破解版（可修复Word）",
+          "children": []
+        }, {
+          "href": "https://www.mediafire.com/file/fv4e1kzf0somqsp",
+          "content": "PowerPointRecoveryFree（可修复PPT）",
+          "children": []
+        }, {
+          "href": "https://www.mediafire.com/file/sfchs67uju67g2y",
+          "content": "Excel Recovery（可修复Excel）",
+          "children": []
+        }, {
+          "href": "https://my.syncplicity.com/share/n0odcm9069ztsbh/",
+          "content": "DataNumen Excel Repair 破解版（可修复Excel）",
+          "children": []
+        }, {
+          "href": "https://www.mediafire.com/file/b10tsl1w9c8uby1",
+          "content": "Recovery Toolbox For PowerPoint（可修复PPT）",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "05.直播录制",
+        "content": "- 405.PDF",
         "children": [{
-          "href": "https://flowus.cn/share/edc8ce82-4970-4a57-8d1e-c00c75add981?code=CZ3ECT",
-          "content": "bililive-go（多平台直播录制）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/ebe4f1e1-66d0-40f4-bbec-4d70df71d70f?code=CZ3ECT",
-          "content": "LiveAutoRecord（斗鱼／虎牙／抖音／B站）",
-          "children": []
-        }, {
-          "href": "https://www.52pojie.cn/thread-1736399-1-1.html",
-          "content": "抖音直播录制工具",
-          "children": []
-        }, {"href": "https://axu.lanzoue.com/iS2IL0zsynfg", "content": "斗鱼快手直播录制", "children": []}]
-      }, {
-        "href": "",
-        "content": "06.国外／网赚网盘下载",
-        "children": [{
-          "href": "https://flowus.cn/share/efd1522d-4884-41c4-883b-4a79a99bfcc2?code=CZ3ECT",
-          "content": "MiPony P汉化便携版（国外网盘真实链接嗅探下载器）",
-          "children": []
-        }, {
-          "href": "http://www.oceancoder.cn/post/net-disk-download-helper.html",
-          "content": "网赚网盘下载辅助工具（仅帮忙获取正确下载链接／无加速）",
-          "children": []
-        }, {
-          "href": "",
-          "content": "BT种子磁力下载器见第３栏 🈯",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/9c0034df-735b-4e77-81c3-6568377d754b?code=CZ3ECT",
-          "content": "IDM lrepacks破解版",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/BWFrTLv9ajAKnld4UFz0_A",
-          "content": "IDM／FDM／NDM／XDM／XDown／文件蜈蚣－下载速度与资源嗅探功能对比",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/8423ce0d-88c8-4804-b259-ce6d192cc0b4?code=CZ3ECT",
-          "content": "百度云／百度网盘高速下载教程👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/2DpfcWLKS8djzcWjLvAodw",
-          "content": "百度文库／道客巴巴／豆丁网／原创力下载👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/0xmjs9-yQygdW49XlYswmQ",
-          "content": "M3U8文件下载教程",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/Vd8IQmWOLp9sen3T344Ekw",
-          "content": "嗅探下载网页视频、音频资源教程",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/BdtUfB33vUOE1F9PNwwaUg",
-          "content": "QQ空间照片原图批量下载教程",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/L1Mv5tKDHLZ4hOEbm90GWA",
-          "content": "教你下载只能在线观看的PDF",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/mlO19jXieoXqz9dOGaKZaA",
-          "content": "爱奇艺／优酷／腾讯视频／B站等弹幕下载教程",
-          "children": []
-        }]
-      }, {"href": "", "content": "07.视频", "children": []}, {
-        "href": "",
-        "content": "- 701.播放器",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/y9lwrddXNEo9vzSRM-rszg",
-          "content": "视频播放器推荐（时至2024年依然推荐这些播放器）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/-ueYRz90Amwhmb1r7etCHg",
-          "content": "支持长按倍速的播放器推荐",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/4dc25551-ad00-4d81-9421-b3fee98757a9?code=CZ3ECT",
-          "content": "PotPlayer 去广告版👍",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1127831",
-          "content": "MPV（可长按倍速播放）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/f1cbbe86-cca0-40bf-92fb-02a73b80cae6?code=CZ3ECT",
-          "content": "腾讯视频 去广告版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/0a22be27-514c-49e6-8b42-341910121c04?code=CZ3ECT",
-          "content": "优酷视频 去广告版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/18ac6235-2f8b-4a18-a16c-23c0f6a3dfef?code=CZ3ECT",
-          "content": "爱奇艺 去广告版+UWP版",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "- 702.录屏",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/sP-VS7s6EfOymVWXAPhG-w",
-          "content": "录屏／屏幕录制软件推荐",
-          "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/jiqhlX-hlMh8Og5kGtZZSw", "content": "GIF录制软件推荐", "children": []}]
-      }, {
-        "href": "",
-        "content": "- 703.转码／压制",
-        "children": [{
-          "href": "https://txt.fyi/9c5feb7bf994786c",
-          "content": "ShanaEncoder👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/e5760e13-a099-4481-ab60-e9d056ce0c97?code=CZ3ECT",
-          "content": "万兴全能格式转换器+格式工厂",
-          "children": []
-        }, {
-          "href": "https://workdrive.zohopublic.com.cn/file/6a2gtce3a6fb8fe564e4f9c4d26b18c272d0a",
-          "content": "MediaCoder 0.8.60 破解版",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/1bjy-Hvpb3dqWL6sW6NCyA",
-          "content": "视频压缩／压制软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/SbCDTf7WOndSd2EBBwDi2Q",
-          "content": "ts／mkv／flv／f4v转mp4软件推荐",
-          "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/mO9zxx1NqBhSqolFD25UPg", "content": "视频转GIF教程", "children": []}]
-      }, {
-        "href": "",
-        "content": "- 704.剪辑",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/q_eIjesdnn_nYe0KmEhTEA",
-          "content": "剪映的3个白嫖方法（抖音出品）👍",
-          "children": []
-        }, {
-          "href": "http://bcut.drawyoo.com/",
-          "content": "必剪（B站出品）",
-          "children": []
-        }, {
-          "href": "https://kuai.360.cn/home.html",
-          "content": "爱剪辑（360出品）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/GnkfCVxpTm1hS8gFD5fwMw",
-          "content": "视频剪辑软件推荐（软件下载页面较文章内容有更新）",
-          "children": []
-        }, {
-          "href": "https://axu.lanzoue.com/iAwal08a7rcf",
-          "content": "无损分割视频 GiliSoftVideoEditor 8.1汉化免注册单文件版",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/0508x7phkt22xd1",
-          "content": "万兴喵影／喵影工厂／万兴神剪手特别版",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/miQIBbme3YRsfPC4W1Pw2w",
-          "content": "老视频修复／视频画质提升／视频补帧／SVP视频插帧教程",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/exOb3BK9GMhT6Fj-7OmIlw",
-          "content": "一键自动给视频加字幕／视频字幕提取",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/KqBiAO2eo_MS3yV8WtuJpQ",
-          "content": "免费无字幕视频实时翻译",
-          "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/RBA4TCp5zuoWAhfdiybG0g", "content": "视频去水印软件推荐", "children": []}]
-      }, {
-        "href": "",
-        "content": "08.音乐",
-        "children": [{
-          "href": "https://flowus.cn/share/04271ab7-25f6-4c4a-ad2e-845fc2540aa4?code=CZ3ECT",
-          "content": "Foobar2000 最新版／单文件版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/660731b0-a596-41ec-bd21-03214fa6a2dd?code=CZ3ECT",
-          "content": "QQ音乐－UWP版+去广告版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/5985f63a-d80d-4d14-b478-356bb2f6397e?code=CZ3ECT",
-          "content": "网易云音乐－UWP版+便携版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/37bfb402-a4f7-4b98-9fba-cd0c244445ad?code=CZ3ECT",
-          "content": "酷我音乐－破解版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/84b39c91-6fdf-4808-9c71-b49bf8a3530e?code=CZ3ECT",
-          "content": "酷狗音乐－便携去广告版",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008081620-2953d2?p=kyon",
-          "content": "千千静听5.7单文件版（本地播放器）",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "09.音频处理",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/dnp1mSsWhnaZtK3yxwLMsQ",
-          "content": "文字转语音／文本转语音",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/zB1ABNBYc-gSwWPNxqQ2Ig",
-          "content": "伴奏下载／伴奏提取／人声消除教程",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/Jkqg0_yhAZS_7VMpj2OzeQ",
-          "content": "音频／视频格式转换软件推荐",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/04271ab7-25f6-4c4a-ad2e-845fc2540aa4?code=CZ3ECT",
-          "content": "音乐标签（一键修改歌曲信息）",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008081710-ca5947?p=kyon",
-          "content": "艾奇LRC歌词制作编辑器单文件版",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008081620-2953d2?p=kyon",
-          "content": "千千静听 5.7.9 单文件版（提取APE专辑）",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008081644-020f0c?p=kyon",
-          "content": "GoldWave 6.18汉化单文件版（音频编辑）",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1IvvPifpSUYGa0ztYYEpOCw",
-          "content": "音频处理编辑软件Cubase Elements 8 提取码：hlry",
-          "children": []
-        }]
-      }, {"href": "", "content": "10.图片", "children": []}, {
-        "href": "",
-        "content": "- 1001.看图",
-        "children": [{
-          "href": "https://flowus.cn/share/744aa10a-19e2-414e-8f70-5d6e1e9bce1b?code=CZ3ECT",
-          "content": "2345看图王 优化版",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/folder/oykf5wc1920s7",
-          "content": "Honeyview 5.32",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/folder/rhm61h43foxd5",
-          "content": "IrfanView 4.54中文绿色便携全功能版",
-          "children": []
-        }, {
-          "href": "https://www.123pan.com/s/bjcA-52Lw",
-          "content": "ACDSee旗舰版2020 13.0.2.2057 汉化精简激活版",
-          "children": []
-        }, {
-          "href": "https://axu.lanzouj.com/iHCpn01k0ilg",
-          "content": "ACDSee Pro 11.2.0.888 精简中文汉化版",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "- 1002.截图",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/O7t1f9aHblihnQPXbkz0kw",
-          "content": "截图软件介绍＆推荐",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/40573be4-4823-44a3-a5f8-82ce2541c32c?code=CZ3ECT",
-          "content": "FastStone Capture 绿色版👍",
-          "children": []
-        }, {
-          "href": "https://github.com/ShareX/ShareX/releases",
-          "content": "ShareX",
-          "children": []
-        }, {"href": "https://zh.snipaste.com/download.html", "content": "Snipaste", "children": []}]
-      }, {
-        "href": "",
-        "content": "- 1003.OCR图片文字识别",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/Qe9Q655jdtj4tqQSjGUmzQ",
-          "content": "OCR软件新推荐（2021年更）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/yCb1Q_e3_clXIQGlKTULvQ",
-          "content": "OCR图片文字识别软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/CV43mM1xMP2Ja-9YTeAAtw",
-          "content": "OCR图片文字识别工具推荐（2022年更）",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "- 1004.HEIC格式转换",
-        "children": [{
-          "href": "https://tiomg.org/heif",
-          "content": "HEIF或HEVC免费在线转JPG、PNG和GIF",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/aadn5019hqhkd7r",
-          "content": "HeicToJPEG",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-965706658-8cc02f?p=kyon",
-          "content": "迅捷图片格式转换器 1.0.0.1",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-965706862-722a4a?p=kyon",
-          "content": "HEICFileConverter绿色版",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/hSf7XKgDAKhocNoCz6dvug",
-          "content": "图片批量处理（批量加时间水印／批量按拍摄时间重命名等）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/NEN2LR05H-dqwFFXpkqbBg",
-          "content": "图片去重软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/4gE_y3SB-qu4CyvprirIdA",
-          "content": "图片压缩软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/OXnCQvR1bwQ8tCCCkITsFg",
-          "content": "图片拼接软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/BqzGYnMmRm-53B4syRoc2w",
-          "content": "图片放大／图片清晰化工具推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/eyevaRfSwOKcOn3zq_NqcA",
-          "content": "制作动态二维码／二维码美化",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/pFy_dXixrNbX2nbLHjLvqw",
-          "content": "图片校正／图片矫正",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/VuiuqV9PS1_NrnSDxIjVJw",
-          "content": "本地照片管理整理／照片管理",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "11.笔记／思维导图／流程图",
-        "children": [{
-          "href": "https://www.burstcloud.co/share/8651fa16d8b7bdf255b61251a01943de0d8803445c6fabc5f09eb27224e2c359/Evernote%2010.68.3.exe",
-          "content": "Evernote 印象笔记国际版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/fbd9078c-83be-43dd-8700-1ba0281fcdd1?code=CZ3ECT",
-          "content": "有道云笔记 去广告版",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/xuGlwnKY26Wcz2Edy_fO6g",
-          "content": "思维导图软件评测 & 推荐👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/iHFXxOhuPZGr_wN__r_Iug",
-          "content": "流程图／甘特图软件推荐",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/b2d3ef81-f299-4585-9c22-a9cc2a55561e?code=CZ3ECT",
-          "content": "MindMaster Pro 单文件版／直装破解版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/5e18fecb-a658-44f1-b77b-88e95bf3e376?code=CZ3ECT",
-          "content": "XMind 8／XMind ZEN／XMind 2021破解版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/c6400556-2ae5-4fdd-9b5e-5d6dd894c534?code=CZ3ECT",
-          "content": "亿图图示 Edraw Max 破解版",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "12.PDF",
-        "children": [{
-          "href": "",
-          "content": "PDF免费在线转换网站推荐，见９－７栏 🈯",
-          "children": []
-        }, {
           "href": "https://flowus.cn/share/ab4b6b86-34a6-4aa0-a679-b4a221b8e41d?code=CZ3ECT",
           "content": "Adobe Acrobat",
           "children": []
@@ -3506,7 +3063,7 @@ const navigation = {
           "content": "万兴PDF编辑器破解版",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1084948",
+          "href": "#",
           "content": "PDF-XChange Editor（集成OCR组件）",
           "children": []
         }, {
@@ -3545,81 +3102,533 @@ const navigation = {
           "href": "https://mp.weixin.qq.com/s/yIkIBJP3Vk-y54DCdMi7hg",
           "content": "PDF转ZIP（主要针对漫画）",
           "children": []
+        }, {
+          "href": "https://store.lizhi.io/site/products/id/480?cid=ds7afku3",
+          "content": "迅捷PDF编辑＋转换器－正版特惠仅需￥80元永久！",
+          "children": []
         }]
       }, {
         "href": "",
-        "content": "13.输入法",
+        "content": "- 406.笔记软件",
         "children": [{
-          "href": "https://flowus.cn/share/0bddec1b-9e04-4f02-b3e5-7d67fe2d1711?code=CZ3ECT",
-          "content": "百度输入法去升级办法+精简去升级旧版👍",
+          "href": "https://www.burstcloud.co/share/8651fa16d8b7bdf255b61251a01943de0d8803445c6fabc5f09eb27224e2c359/Evernote%2010.68.3.exe",
+          "content": "Evernote 印象笔记国际版",
           "children": []
         }, {
-          "href": "http://urlqh.cn/mZzm5",
-          "content": "手心输入法👍",
+          "href": "https://flowus.cn/share/fbd9078c-83be-43dd-8700-1ba0281fcdd1?code=CZ3ECT",
+          "content": "有道云笔记 去广告版",
           "children": []
-        }, {
-          "href": "https://axu.lanzouw.com/i2Sl31xi6q1g",
-          "content": "搜狗输入法 14.4.0.9307 去广告精简优化版",
-          "children": []
-        }, {
-          "href": "https://srf.xunfei.cn/",
-          "content": "讯飞输入法",
-          "children": []
-        }, {
-          "href": "https://pinyin.thunisoft.com/",
-          "content": "华宇拼音",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008080342-cf815e?p=kyon",
-          "content": "Google拼音2.7.25",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/sm1vukctq9hpw76",
-          "content": "QQ拼音输入法 4.7经典无广告版",
-          "children": []
-        }, {
-          "href": "http://www.freewb.org/",
-          "content": "极点五笔👍",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008080399-d293e6?p=kyon",
-          "content": "小鸭五笔",
-          "children": []
-        }, {
-          "href": "https://rime.im/",
-          "content": "RIME",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008080465-2df5b2?p=kyon",
-          "content": "数字五笔2013",
-          "children": []
-        }, {"href": "http://qq.pinyin.cn/wubi/", "content": "QQ五笔", "children": []}]
+        }]
       }, {
         "href": "",
-        "content": "14.系统优化／系统清理",
+        "content": "- 407.思维导图",
         "children": [{
-          "href": "https://mp.weixin.qq.com/s/KiY8-eX6K9blYf5ZPvaQtQ",
-          "content": "C盘垃圾清理／微信清理／系统设置优化软件推荐",
+          "href": "https://flowus.cn/share/b2d3ef81-f299-4585-9c22-a9cc2a55561e?code=CZ3ECT",
+          "content": "MindMaster Pro 单文件版／直装破解版",
           "children": []
         }, {
+          "href": "https://flowus.cn/share/5e18fecb-a658-44f1-b77b-88e95bf3e376?code=CZ3ECT",
+          "content": "XMind 8／XMind ZEN／XMind 2021破解版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/c6400556-2ae5-4fdd-9b5e-5d6dd894c534?code=CZ3ECT",
+          "content": "亿图图示 Edraw Max 破解版",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 408.流程图",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/iHFXxOhuPZGr_wN__r_Iug",
+          "content": "流程图／甘特图软件推荐",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 409.CAJ转换",
+        "children": [{
+          "href": "https://m.cnki.net/mcnkidown/",
+          "content": "全球学术快报",
+          "children": []
+        }, {
+          "href": "https://www.mediafire.com/file/5umm579uaxymar3",
+          "content": "CAJ转WORD教程",
+          "children": []
+        }, {"href": "https://hub.yzuu.cf/sainnhe/caj2pdf-qt/releases", "content": "CAJ转PDF", "children": []}]
+      }, {"href": "", "content": "05.视频相关", "children": []}, {
+        "href": "",
+        "content": "01.视频播放器",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/y9lwrddXNEo9vzSRM-rszg",
+          "content": "视频播放器推荐（时至2024年依然推荐这些播放器）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/-ueYRz90Amwhmb1r7etCHg",
+          "content": "支持长按倍速的播放器推荐",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/4dc25551-ad00-4d81-9421-b3fee98757a9?code=CZ3ECT",
+          "content": "PotPlayer 去广告版👍",
+          "children": []
+        }, {
+          "href": "https://my.syncplicity.com/share/aunflbkulg0kxnq/",
+          "content": "MPV（可长按倍速播放）",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/f1cbbe86-cca0-40bf-92fb-02a73b80cae6?code=CZ3ECT",
+          "content": "腾讯视频 去广告版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/0a22be27-514c-49e6-8b42-341910121c04?code=CZ3ECT",
+          "content": "优酷视频 去广告版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/18ac6235-2f8b-4a18-a16c-23c0f6a3dfef?code=CZ3ECT",
+          "content": "爱奇艺 去广告版+UWP版",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "02.录屏软件",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/sP-VS7s6EfOymVWXAPhG-w",
+          "content": "录屏／屏幕录制软件推荐",
+          "children": []
+        }, {"href": "https://mp.weixin.qq.com/s/jiqhlX-hlMh8Og5kGtZZSw", "content": "GIF录制软件推荐", "children": []}]
+      }, {
+        "href": "",
+        "content": "03.转码／压制",
+        "children": [{
+          "href": "#",
+          "content": "ShanaEncoder👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/e5760e13-a099-4481-ab60-e9d056ce0c97?code=CZ3ECT",
+          "content": "万兴全能格式转换器+格式工厂",
+          "children": []
+        }, {
+          "href": "https://workdrive.zohopublic.com.cn/file/6a2gtce3a6fb8fe564e4f9c4d26b18c272d0a",
+          "content": "MediaCoder 破解版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/b96b54b1-478d-4219-9c4f-bf21b50341f0?code=CZ3ECT",
+          "content": "视频压缩／压制软件推荐",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/38689e57-d4a0-4d3e-845f-a7dec62c34d2?code=CZ3ECT",
+          "content": "MKV、FLV、F4V秒转MP4／TS合并／TS转MP4",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/01739bfd-fcc3-455e-888f-91d5284176d5?code=CZ3ECT",
+          "content": "视频转GIF",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "04.视频剪辑",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/q_eIjesdnn_nYe0KmEhTEA",
+          "content": "剪映的3个白嫖方法（抖音出品）👍",
+          "children": []
+        }, {
+          "href": "http://bcut.drawyoo.com/",
+          "content": "必剪（B站出品）",
+          "children": []
+        }, {
+          "href": "https://kuai.360.cn/home.html",
+          "content": "爱剪辑（360出品）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/dctV8NCdDFitUIJLXNmhng",
+          "content": "无损剪切合并视频",
+          "children": []
+        }, {
+          "href": "https://www.mediafire.com/file/0508x7phkt22xd1",
+          "content": "万兴喵影／喵影工厂／万兴神剪手特别版",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "06.视频去水印",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/RBA4TCp5zuoWAhfdiybG0g",
+          "content": "视频去水印软件推荐",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/2f1da3be-45a3-457f-9092-710f141308b6?code=CZ3ECT",
+          "content": "Easy Video Logo Remover＋Remove Logo Now＋格式工厂",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/0K5s47yWhXems4-4TBXi9Q",
+          "content": "一键视频转文字／音频转文字／语音识别",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/miQIBbme3YRsfPC4W1Pw2w",
+          "content": "老视频修复／视频画质提升／视频补帧／视频插帧教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/exOb3BK9GMhT6Fj-7OmIlw",
+          "content": "一键自动给视频加字幕／视频字幕提取",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/KqBiAO2eo_MS3yV8WtuJpQ",
+          "content": "免费无字幕视频实时翻译",
+          "children": []
+        }]
+      }, {"href": "", "content": "06.音频相关", "children": []}, {
+        "href": "",
+        "content": "- 601.音乐播放器",
+        "children": [{
+          "href": "https://flowus.cn/share/04271ab7-25f6-4c4a-ad2e-845fc2540aa4?code=CZ3ECT",
+          "content": "Foobar2000－最新版+单文件版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/660731b0-a596-41ec-bd21-03214fa6a2dd?code=CZ3ECT",
+          "content": "QQ音乐－UWP版+去广告版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/5985f63a-d80d-4d14-b478-356bb2f6397e?code=CZ3ECT",
+          "content": "网易云音乐－UWP版+便携版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/37bfb402-a4f7-4b98-9fba-cd0c244445ad?code=CZ3ECT",
+          "content": "酷我音乐－破解版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/84b39c91-6fdf-4808-9c71-b49bf8a3530e?code=CZ3ECT",
+          "content": "酷狗音乐－去广告便携版",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008081620-2953d2?p=kyon",
+          "content": "千千静听5.7单文件版（本地播放器）",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 602.音频编辑",
+        "children": [{
+          "href": "https://flowus.cn/share/04271ab7-25f6-4c4a-ad2e-845fc2540aa4?code=CZ3ECT",
+          "content": "音乐标签（一键修改歌曲信息）",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008081710-ca5947?p=kyon",
+          "content": "艾奇LRC歌词制作编辑器单文件版",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008081620-2953d2?p=kyon",
+          "content": "千千静听 5.7.9 单文件版（提取APE专辑）",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008081644-020f0c?p=kyon",
+          "content": "GoldWave 6.18汉化单文件版（音频编辑）",
+          "children": []
+        }, {
+          "href": "https://pan.baidu.com/s/1IvvPifpSUYGa0ztYYEpOCw",
+          "content": "音频处理编辑 Cubase Elements 8 提取码：hlry",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/dnp1mSsWhnaZtK3yxwLMsQ",
+          "content": "文字转语音／文本转语音",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/zB1ABNBYc-gSwWPNxqQ2Ig",
+          "content": "伴奏下载／伴奏提取／人声消除教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/Jkqg0_yhAZS_7VMpj2OzeQ",
+          "content": "音频／视频格式转换软件推荐",
+          "children": []
+        }]
+      }, {"href": "", "content": "07.图片相关", "children": []}, {
+        "href": "",
+        "content": "01.看图",
+        "children": [{
+          "href": "https://flowus.cn/share/744aa10a-19e2-414e-8f70-5d6e1e9bce1b?code=CZ3ECT",
+          "content": "2345看图王 优化版👍",
+          "children": []
+        }, {
+          "href": "https://www.bandisoft.com/honeyview/dl.php?web",
+          "content": "Honeyview 5.53 最终版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouw.com/iAJgO2etbuuh",
+          "content": "WSP图片 3.0.0.5 最终精简版",
+          "children": []
+        }, {
+          "href": "https://www.mediafire.com/folder/rhm61h43foxd5",
+          "content": "IrfanView 4.54 中文便携版",
+          "children": []
+        }, {
+          "href": "https://my.syncplicity.com/share/e7hz1fdg5uozf9w/",
+          "content": "ACDSee旗舰版2020 13.0.2.2057 汉化精简版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/iHCpn01k0ilg",
+          "content": "ACDSee Pro 11.2.0.888 精简汉化版",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "02.截图",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/O7t1f9aHblihnQPXbkz0kw",
+          "content": "截图软件介绍＆推荐",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/40573be4-4823-44a3-a5f8-82ce2541c32c?code=CZ3ECT",
+          "content": "FastStone Capture 绿色版👍",
+          "children": []
+        }, {
+          "href": "https://github.com/ShareX/ShareX/releases",
+          "content": "ShareX",
+          "children": []
+        }, {
+          "href": "https://zh.snipaste.com/download.html",
+          "content": "Snipaste",
+          "children": []
+        }, {
+          "href": "https://store.lizhi.io/site/products/id/273?cid=ds7afku3",
+          "content": "Snipaste－永久专业版仅需￥89",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "03.拼图",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/OXnCQvR1bwQ8tCCCkITsFg",
+          "content": "图片拼接软件推荐",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/40573be4-4823-44a3-a5f8-82ce2541c32c?code=CZ3ECT",
+          "content": "美图秀秀单文件版",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "04.压缩／放大",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/BqzGYnMmRm-53B4syRoc2w",
+          "content": "图片放大／图片清晰化软件推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/4gE_y3SB-qu4CyvprirIdA",
+          "content": "图片压缩软件推荐",
+          "children": []
+        }, {
+          "href": "",
+          "content": "GIF压缩资源获取：可微信内打开文章，见下篇的置顶留言",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/ouLmXEEOzaHjubX0Lw3nog",
+          "content": "GIF压缩 ㆖",
+          "children": []
+        }, {"href": "https://mp.weixin.qq.com/s/dyBPgP2ZluwHbDDVJUNqXA", "content": "GIF压缩 ㆘", "children": []}]
+      }, {
+        "href": "",
+        "content": "05.格式转换",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/hSf7XKgDAKhocNoCz6dvug",
+          "content": "批量图片格式转换",
+          "children": []
+        }, {
+          "href": "https://www.mediafire.com/file/aadn5019hqhkd7r",
+          "content": "HeicToJPEG",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-965706658-8cc02f?p=kyon",
+          "content": "迅捷图片格式转换器 1.0.0.1",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-965706862-722a4a?p=kyon",
+          "content": "HEICFileConverter绿色版",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "06.图片管理",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/NEN2LR05H-dqwFFXpkqbBg",
+          "content": "图片去重软件推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/VuiuqV9PS1_NrnSDxIjVJw",
+          "content": "本地照片管理整理",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/hSf7XKgDAKhocNoCz6dvug",
+          "content": "图片批量加水印／图片批量按拍摄时间重命名等",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "07.OCR图片文字识别",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/CV43mM1xMP2Ja-9YTeAAtw",
+          "content": "OCR图片文字识别工具推荐（2022年更）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/Qe9Q655jdtj4tqQSjGUmzQ",
+          "content": "OCR图片文字识别工具推荐（2021年更）",
+          "children": []
+        }, {
+          "href": "https://store.lizhi.io/site/products/id/36?cid=ds7afku3",
+          "content": "白描OCR－永久普通会员仅需￥20／永久黄金会员仅需￥30",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "08.动图录制",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/jiqhlX-hlMh8Og5kGtZZSw",
+          "content": "ScreenToGif",
+          "children": []
+        }, {
+          "href": "https://tiomg.org/heif",
+          "content": "在线图片工具箱",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/eyevaRfSwOKcOn3zq_NqcA",
+          "content": "制作动态二维码／二维码美化",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/pFy_dXixrNbX2nbLHjLvqw",
+          "content": "图片校正／图片矫正",
+          "children": []
+        }]
+      }, {"href": "", "content": "08.系统相关", "children": []}, {
+        "href": "",
+        "content": "- 801.系统重装／PE工具",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/dwOGWzpQmxjuVi5XUb4SkA",
+          "content": "电脑系统重装前数据备份教程👍",
+          "children": []
+        }, {
+          "href": "https://www.bilibili.com/video/BV1DJ411D79y",
+          "content": "超详细WIN10系统安装教程－ 硬件茶谈👍",
+          "children": []
+        }, {
+          "href": "https://www.microsoft.com/zh-cn/software-download/windows10",
+          "content": "微软官方一键安装／重装（Win）",
+          "children": []
+        }, {"href": "https://www.upe.net/", "content": "优启通👍", "children": []}, {
+          "href": "http://www.wepe.com.cn/",
+          "content": "微PE👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/203196bb-d0f2-4ab1-857a-fc46516034fb?code=CZ3ECT",
+          "content": "软碟通 UltraISO",
+          "children": []
+        }, {
+          "href": "http://bbs.wuyou.net/forum.php?mod=viewthread&tid=424331",
+          "content": "微PE工具箱增强版＋网络版合盘版",
+          "children": []
+        }, {"href": "https://firpe.cn/", "content": "FirPE", "children": []}, {
+          "href": "http://www.bfgho.com/",
+          "content": "冰封PE",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 802.系统镜像",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/-2_zZ3nrExZ25UdXgG-iFg",
+          "content": "高速下载Windows系统镜像教程",
+          "children": []
+        }, {
+          "href": "https://hellowindows.cn/",
+          "content": "HelloWindows（原版系统）",
+          "children": []
+        }, {
+          "href": "https://next.itellyou.cn/",
+          "content": "MSDN 新站（原版系统）",
+          "children": []
+        }, {
+          "href": "https://msdn.itellyou.cn/",
+          "content": "MSDN（原版系统）",
+          "children": []
+        }, {
+          "href": "https://tb.rg-adguard.net/public.php",
+          "content": "TechBench by WZT（原版系统）",
+          "children": []
+        }, {
+          "href": "https://www.newxitong.com/",
+          "content": "吻妻（精简系统）",
+          "children": []
+        }, {
+          "href": "http://www.sysmini.com/",
+          "content": "极简系统（精简系统）",
+          "children": []
+        }, {"href": "https://www.winos.me/", "content": "WINOS（精简系统）", "children": []}, {
+          "href": "http://y-os.net/",
+          "content": "Y-OS工作室（精简系统）",
+          "children": []
+        }, {"href": "https://windsys.whatk.me/", "content": "Windsys Project（修改版系统）", "children": []}]
+      }, {
+        "href": "",
+        "content": "- 803.系统还原",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/o8esJylxTDR19wrkoanKlA",
+          "content": "系统备份还原方法软件推荐",
+          "children": []
+        }, {
+          "href": "https://my.syncplicity.com/share/1m0bmcnqinhvwzn/",
+          "content": "Horizon Rollback Rx Pro12",
+          "children": []
+        }, {
+          "href": "http://www.mediafire.com/file/rrd3tuixy74oh98",
+          "content": "傲梅轻松备份 6.9.1 技术师增强版",
+          "children": []
+        }, {
+          "href": "https://www.huanyuan.cn/",
+          "content": "重启还原精灵",
+          "children": []
+        }, {
+          "href": "https://my.syncplicity.com/share/5kmqme5yxerzdvc/",
+          "content": "Horizon Reboot Restore Rx Pro12",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 804.虚拟机",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/_q8kQ-lS9sP62FFjfGZFcA",
+          "content": "使用VMware安装Windows虚拟机教程",
+          "children": []
+        }, {
+          "href": "https://www.vmware.com/products/desktop-hypervisor.html",
+          "content": "VMware Workstation Pro 现已免费（官网注册账号后即可免费下载）",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 805.系统清理",
+        "children": [{
           "href": "https://mp.weixin.qq.com/s/qjNtGa53wM9sbMVuj81Pag",
-          "content": "C盘清理手动清理教程",
+          "content": "C盘清理教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/KiY8-eX6K9blYf5ZPvaQtQ",
+          "content": "C盘垃圾清理／微信清理／系统设置优化软件推荐",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/xxrxKP-0uGLyBII2Xo_Lgw",
           "content": "C盘扩容／软件搬家教程",
           "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/-z7w-CW8Of-cr2qqWrzrVw",
-          "content": "卸载流氓软件教程",
+        }, {"href": "https://mp.weixin.qq.com/s/-z7w-CW8Of-cr2qqWrzrVw", "content": "卸载流氓软件教程", "children": []}]
+      }, {
+        "href": "",
+        "content": "- 806.系统优化",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/KiY8-eX6K9blYf5ZPvaQtQ",
+          "content": "一键系统优化软件",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/o1fSKtgUly7qkbTMrkHqYg",
-          "content": "给资源管理器增加标签页（像浏览器那样）",
+          "content": "给资源管理器增加标签页",
           "children": []
         }, {
-          "href": "https://mp.weixin.qq.com/s/w2TW1BrZTCQDabhC5xey2g",
-          "content": "透明任务栏／显示网速／快速清理内存（加速球）／温度监控",
+          "href": "https://flowus.cn/share/26f1dda7-6508-4444-a9da-cad1f93ada51?code=CZ3ECT",
+          "content": "透明任务栏／显示网速／内存清理／温度监控",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/mUvSCKdcbg_jls2lqgV8Pw",
@@ -3634,40 +3643,20 @@ const navigation = {
           "content": "文件拷贝加速／防恢复删除软件推荐",
           "children": []
         }, {
-          "href": "https://mp.weixin.qq.com/s/PKORco2V2PGnewbYI-l4Rg",
-          "content": "数据恢复软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/OAyvsxhytmLGvgDG4BjTDw",
-          "content": "网络修复软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/yCEhQU_wMO_jcPYZ6RbaAA",
-          "content": "驱动管理／驱动下载／驱动修复",
-          "children": []
-        }, {
           "href": "https://mp.weixin.qq.com/s/X1oV7lXcSoqB2e2_oi3Uyg",
           "content": "解除文件占用教程",
           "children": []
         }, {
-          "href": "https://mp.weixin.qq.com/s/E75GSLlTc_SICeBFOCxSoQ",
-          "content": "禁止Window更新教程",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/KikQ8sorSZrtDVD5fm6ZFg",
-          "content": "安装常见运行库来解决各种软件运行报错",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/93bc1c1c-173e-4e4d-a09a-94d88cb90671?code=CZ3ECT",
-          "content": "支付宝 简洁模式－手动设置教程👍",
+          "href": "https://flowus.cn/share/c740d544-1569-4143-b711-270f00b3f8fe?code=CZ3ECT",
+          "content": "一键禁止电脑更新软件",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "15.杀毒／安全",
+        "content": "- 807.杀毒／安全",
         "children": [{
           "href": "https://mp.weixin.qq.com/s/Sbi9D8utZPXB-wtNc4PAYg",
-          "content": "推荐「360极速版」或者「火绒＋卡巴斯基」详情可见这篇文章",
+          "content": "推荐<360极速版>或者<火绒＋卡巴斯基>原因",
           "children": []
         }, {
           "href": "https://www.huorong.cn/",
@@ -3696,1737 +3685,115 @@ const navigation = {
         }]
       }, {
         "href": "",
-        "content": "16.解压缩",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/9A5vtwBQTWoW-IqnVJdAXQ",
-          "content": "压缩包密码破解",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/7GFTTGjwGRt0vQPdK2KtPw",
-          "content": "最大压缩率的压缩参数该怎么设置👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/744aa10a-19e2-414e-8f70-5d6e1e9bce1b?code=CZ3ECT",
-          "content": "好压 纯净版👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/6aed953a-ebd2-496a-97e2-41b3d4c4f5c0?code=CZ3ECT",
-          "content": "Bandizip 无广告旧版+破解版👍",
-          "children": []
-        }, {
-          "href": "https://www.7-zip.org/",
-          "content": "7zip",
-          "children": []
-        }, {"href": "https://hub.yzuu.cf/baulk/baulk7z", "content": "7zip-zstd", "children": []}]
-      }, {"href": "", "content": "17.安卓模拟器", "children": []}, {
-        "href": "",
-        "content": "- 171.BlueStacks",
-        "children": [{
-          "href": "https://axu.lanzouj.com/iU2OU088fbmf",
-          "content": "BlueStacks5 安装器",
-          "children": []
-        }, {"href": "https://tw.msi.com/Landing/appplayer/nb", "content": "MSI App Player", "children": []}]
-      }, {
-        "href": "",
-        "content": "- 172.雷电模拟器",
-        "children": [{
-          "href": "https://www.ldplayer.net/",
-          "content": "雷电模拟器 海外版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/3440f885-951d-48f1-ad0f-2bbc4b6e1b17?code=CZ3ECT",
-          "content": "雷电模拟器 绿色版",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "- 173.网易MUMU",
-        "children": [{
-          "href": "http://mumu.163.com/",
-          "content": "网易mumu",
-          "children": []
-        }, {"href": "https://www.downxia.com/downinfo/308929.html", "content": "网易mumu 绿色版", "children": []}]
-      }, {
-        "href": "",
-        "content": "- 174.逍遥模拟器／联想模拟器",
-        "children": [{
-          "href": "https://tw.memuplay.com/",
-          "content": "逍遥模拟器 国际版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/d9dd93a4-9038-4286-b4a8-98db6921ee56?code=CZ3ECT",
-          "content": "逍遥模拟器 免安装版",
-          "children": []
-        }, {
-          "href": "https://lestore.lenovo.com/detail/L100433",
-          "content": "联想模拟器",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/b10dd805-dd6e-42b4-ad60-3f32a694d378?code=CZ3ECT",
-          "content": "联想模拟器 精简版",
-          "children": []
-        }, {"href": "https://lestore.lenovo.com/", "content": "联想应用融合引擎", "children": []}]
-      }, {
-        "href": "",
-        "content": "- 175.夜神模拟器",
-        "children": [{
-          "href": "https://tw.bignox.com/",
-          "content": "夜神模拟器 国际版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/b947e924-9d3c-4f64-8bd9-39d654277e8c?code=CZ3ECT",
-          "content": "夜神模拟器 绿色版",
-          "children": []
-        }, {"href": "https://syzs.qq.com/", "content": "腾讯手游助手", "children": []}]
-      }, {
-        "href": "",
-        "content": "18.免费游戏加速器",
-        "children": [{
-          "href": "http://axu.xpsup.cn/category/index.html#:~:text=%E6%B8%B8%E6%88%8F%E5%8A%A0%E9%80%9F",
-          "content": "腾讯手游／野豹加速器会员低价购买",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/AhTvT_CBPD_xgflOEo59lg#:~:text=%E6%94%B6%E8%B4%B9%E5%8A%A0%E9%80%9F%E5%99%A8%E4%BB%B7%E6%A0%BC%E5%AF%B9%E6%AF%94",
-          "content": "收费加速器价格详细对比与推荐（见文章第２点）",
-          "children": []
-        }, {
-          "href": "https://urlqh.cn/o2uxj",
-          "content": "雷神加速器（打折白嫖福利多／可暂停）",
-          "children": []
-        }, {
-          "href": "https://urlqh.cn/o2uIB",
-          "content": "Golink（注册送50小时／可暂停）",
-          "children": []
-        }, {
-          "href": "https://jiasu.bohe.com/",
-          "content": "薄荷加速器",
-          "children": []
-        }, {
-          "href": "https://tiaotiao.boshvip.com/",
-          "content": "跳跳加速器（每天可领1小时免费时长）",
-          "children": []
-        }, {
-          "href": "https://www.octopusjsq.top/",
-          "content": "章鱼加速器",
-          "children": []
-        }, {
-          "href": "http://www.speedfox.run/",
-          "content": "极狐加速器",
-          "children": []
-        }, {
-          "href": "https://www.zzjiasuqi.com/",
-          "content": "ZZ加速器（支持主机加速）",
-          "children": []
-        }, {
-          "href": "https://www.chiyanjiasu.com/fissionV2.html?=8IHQEVQ",
-          "content": "炽焰加速器（每天0:00-15:00打开软件可抽时长）",
-          "children": []
-        }, {
-          "href": "https://www.akspeedy.com/",
-          "content": "AK加速器（每天00:00-14:00免费／支持主机加速）",
-          "children": []
-        }, {
-          "href": "https://www.ifengyun.com/index.html",
-          "content": "风云加速器（每天00:00-12:00免费）",
-          "children": []
-        }, {
-          "href": "https://www.zhifool.com/",
-          "content": "知游加速器（看广告每日领时长）",
-          "children": []
-        }, {
-          "href": "http://tuntu.gy-idc.com/views/apph5/invite_registry?ph=158****1921&invite_code=1MsMDJ&channel=yq02",
-          "content": "吞兔加速器（注册+完成任务+签到就可领会员）",
-          "children": []
-        }, {
-          "href": "https://www.biubiu001.com/",
-          "content": "biubiu加速器（看广告每日领时长）",
-          "children": []
-        }, {
-          "href": "https://www.xunyou.mobi/",
-          "content": "迅游手游加速器（做任务升级每月领时长）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/fp3OymarFKA8TI6-AUruQg",
-          "content": "优化知乎网页版体验／保存知乎回答教程（务必在微信客户端内查看文章置顶留言⚠️）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/zC5mitQbM7tR_Is6yvhsIQ",
-          "content": "远程控制软件评测＆推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/MXkO0VsIhJ9Kx_0m_kR9vQ",
-          "content": "2019年末的网盘推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/MZSyOguVVGHsiXQDb5CTlw",
-          "content": "记单词／备考神器推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/troKuwXKvzwI7e0h5E6obg",
-          "content": "文件批量重命名／解压缩／图片查看器软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/a0i4Ubve7PeZgyXG613c0g",
-          "content": "Windows系统激活教程",
-          "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/AnzjRSkB58kmi57TrbBXkA", "content": "电脑壁纸软件推荐", "children": []}]
-      }]
-    }, {
-      "href": "", "content": "07　手机常用", "children": [{
-        "href": "",
-        "content": "01.社交／社区",
-        "children": [{"href": "", "content": "微信朋友圈工具", "children": []}, {
-          "href": "",
-          "content": "小夭塔－微信小程序（微信集赞工具）",
-          "children": []
-        }, {
-          "href": "https://itakeo.com/wx/",
-          "content": "微信朋友圈集赞",
-          "children": []
-        }, {
-          "href": "https://akarin.dev/WechatMomentScreenshot/",
-          "content": "微信朋友圈转发截图生成工具",
-          "children": []
-        }, {
-          "href": "http://pyq.soux2.com/",
-          "content": "微信朋友圈转发截图生成工具",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/a2db96fc-5688-4fba-9d0e-4bfbd20ed5a7?code=CZ3ECT",
-          "content": "知乎－无广告版合集 👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/bb2245cc-784a-43e2-aed9-af220a28fb23?code=CZ3ECT",
-          "content": "微博－无广告版合集👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/cfa807e8-a2a7-4e48-b8f8-f109339753aa?code=CZ3ECT",
-          "content": "小红书－内置红薯猪手版👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/e797ac75-b464-4ea3-8410-4199f79b7e43?code=CZ3ECT",
-          "content": "百度贴吧 Lite版／内置模块版／内部版👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/bd653bb6-ccef-471c-852b-4d9e8f4d1e35?code=CZ3ECT",
-          "content": "虎扑 谷歌版",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/b2CgbtvOF61IwYb4xqgJ5w",
-          "content": "虎扑 7.3.35旧版－安装教程",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/93Jhk8YUsUuE8UHbo8T7Vg",
-          "content": "微信／QQ防撤回方案推荐",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/223e1818-ff8f-4f72-a455-700663f454eb?code=CZ3ECT",
-          "content": "QQ／TIM 内置模块版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1150627",
-          "content": "豆瓣 7.56.0 修改版V3",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/37679ccb-21e1-4bda-b234-77acd59b6e3b?code=CZ3ECT",
-          "content": "豆瓣电影 最后一版",
-          "children": []
-        }, {"href": "", "content": "豆瓣评分－微信小程序", "children": []}]
-      }, {
-        "href": "",
-        "content": "02.购物／支付",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/gFM35XmM6hEGyJpCnDSYZw",
-          "content": "淘宝／京东购物省钱教程 💴🤏",
-          "children": []
-        }, {
-          "href": "http://home.manmanbuy.com/app.aspx",
-          "content": "慢慢买（多平台比价／历史价格查询）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/3728a997-29f9-4f2e-b235-08331eaab35a?code=CZ3ECT",
-          "content": "支付宝 定制版",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/b2CgbtvOF61IwYb4xqgJ5w",
-          "content": "支付宝 10.1.38 旧版－安装教程",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/059ac00d-40a2-4c5b-bd57-4b69ceaa59aa?code=CZ3ECT",
-          "content": "淘宝 Lite版（精简／体积小）👍",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103018",
-          "content": "淘宝 红米K50 定制版 9.21.1.8888（占用极少／无直播／不能评价）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103019",
-          "content": "淘宝国际版 9.20.0.16（几乎无广告）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/b2CgbtvOF61IwYb4xqgJ5w",
-          "content": "淘宝 8.4.0－安装教程（占用小／简洁不少）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/141b5ddc-6921-4e6e-9220-9f5320e2eb17?code=CZ3ECT",
-          "content": "京东 定制版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103017",
-          "content": "京东 9.3.2 谷歌版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/c944470f-0867-46a0-b720-a3f4e005278b",
-          "content": "拼多多内部版 5.84.0",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/a70d598b9be75e86",
-          "content": "美团极简版（不能点外卖／提供的是美团优选、美团电商等功能）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/86W39vOOVcx9xl9emJyiNA#:~:text=2.2-,pwa%E7%A8%8B%E5%BA%8F,-PWA%E5%85%A8%E7%A7%B0%E6%98%AF",
-          "content": "饿了么PWA版（功能全／无广告）具体见本文2.2节👍",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "03.影视／短视频／直播",
-        "children": [{
-          "href": "https://flowus.cn/share/215d6927-9f1c-408d-9b8d-ac48b5da7c13?code=CZ3ECT",
-          "content": "抖音 内置模块版+定制版（功能增强／无广告）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/97c6f946-56d2-4ac4-8557-474aba830d1d?code=CZ3ECT",
-          "content": "快手 概念版+内部版+修改版（精简／无广告）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/0a22be27-514c-49e6-8b42-341910121c04?code=CZ3ECT",
-          "content": "优酷 小爱音箱定制",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/90650e99-6044-4321-aaa3-05811636df95?code=CZ3ECT",
-          "content": "芒果TV 去广告版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/f1cbbe86-cca0-40bf-92fb-02a73b80cae6?code=CZ3ECT",
-          "content": "腾讯视频 去广告版+小爱音箱定制版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/18ac6235-2f8b-4a18-a16c-23c0f6a3dfef?code=CZ3ECT",
-          "content": "爱奇艺 无广告谷歌版+HD版+随刻版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/d6d21952-ff11-4011-88db-40816482b12e?code=CZ3ECT",
-          "content": "哔哩哔哩／bilibili／B站 内置模块版+去广告版+国际版+追番版+第三方TV版",
-          "children": []
-        }, {"href": "", "content": "虎牙直播－微信小程序（无广告）", "children": []}, {
-          "href": "",
-          "content": "斗鱼直播－微信小程序（无广告）",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/f36f2b92548ba64c",
-          "content": "斗鱼直播极速版（精简无广告）",
-          "children": []
-        }, {
-          "href": "https://hub.yzuu.cf/guyijie1211/JustLive-Android/releases",
-          "content": "JustLive（聚合斗鱼／虎牙／B站／企鹅／网易直播）",
-          "children": []
-        }]
-      }, {"href": "", "content": "04.效率／办公／网盘／证照", "children": []}, {
-        "href": "",
-        "content": "- 401.WPS",
-        "children": [{
-          "href": "https://flowus.cn/share/b47fb0b5-77f6-4779-888c-b99766798441?code=CZ3ECT",
-          "content": "WPS 破解版+定制版+激活码",
-          "children": []
-        }, {
-          "href": "",
-          "content": "微信公众号「WPS会员」每日签到可得1天免费会员",
-          "children": []
-        }, {
-          "href": "http://axu.xpsup.cn/goodscate/246/cid/213.html",
-          "content": "WPS会员低价购买（3折起）👍",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "- 402.PDF",
+        "content": "- 808.数据恢复",
         "children": [{
           "href": "",
-          "content": "更多PDF在线转换／处理网站，见８－７栏🈯",
+          "content": "下方文章软件获取：可以微信内打开文章，见置顶留言",
           "children": []
-        }, {
-          "href": "https://flowus.cn/share/5c4da789-8a96-44d4-a059-e9c9b9672a9d",
-          "content": "Adobe Acrobat Reader Pro 21.10 破解版（登录后可编辑PDF）👍",
-          "children": []
-        }, {
-          "href": "https://yxssp.lanzoui.com/b887709",
-          "content": "PDF Extra Pro 解锁高级版（可编辑PDF但无法输入中文）密码：he8p",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/86025ee89306235f",
-          "content": "iLovePDF（＜100M，每天限4次）",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/9211590ad63527a8",
-          "content": "Smallpdf（＜15M，每天限2次）",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/ce92b5519642e350",
-          "content": "Microsoft Office（提供了免费的PDF转Word功能）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/47327df0-d754-4c46-aed9-2d3b7dd575cd?code=CZ3ECT",
-          "content": "Xodo PDF 阅读器解锁版👍",
-          "children": []
-        }, {
-          "href": "https://store.gaaiho.cn/download/central.aspx",
-          "content": "Gaaiho 文电通 PDF阅读器",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103023",
-          "content": "福昕PDF阅读器 9.2已付费企业版",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1103021", "content": "Flexcil PDF阅读器 1.1.0.1高级版", "children": []}]
+        }, {"href": "https://mp.weixin.qq.com/s/PKORco2V2PGnewbYI-l4Rg", "content": "数据恢复软件推荐", "children": []}]
       }, {
         "href": "",
-        "content": "- 403.证件照",
+        "content": "- 809.系统修复",
         "children": [{
-          "href": "https://mp.weixin.qq.com/s/PShdBeHSn8P7Yd-J2Vv9Pg",
-          "content": "11款完全免费的证件照工具推荐👍",
+          "href": "https://flowus.cn/share/f3496c9b-54de-4242-9f07-c18913b71a68?code=CZ3ECT",
+          "content": "360断网急救箱＋Complete Internet Repair",
           "children": []
         }, {
-          "href": "https://mp.weixin.qq.com/s/EXs3n0fhYo4t2b50EUsgcw",
-          "content": "警察叔叔－杭州公安出品（需要实名注册）",
+          "href": "https://flowus.cn/share/f3496c9b-54de-4242-9f07-c18913b71a68?code=CZ3ECT",
+          "content": "DNS优选",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/KikQ8sorSZrtDVD5fm6ZFg",
+          "content": "dll 文件缺失／OCX缺失修复教程",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/2b2f8354-5d15-486e-a677-33e1a027b214?code=CZ3ECT",
+          "content": "运行库修复／DirectX修复",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "- 404.文档扫描",
+        "content": "09.驱动管理",
         "children": [{
-          "href": "https://mp.weixin.qq.com/s/Z0gEfG6Pq9kXfo_eTfxRVA",
-          "content": "免费扫描APP推荐（支持表格识别）",
-          "children": []
-        }, {
-          "href": "https://www.malavida.com/es/soft/office-lens/android/",
-          "content": "Microsoft Lens（原Office Lens）",
-          "children": []
-        }, {
-          "href": "https://www.malavida.com/en/soft/adobe-scan/android/",
-          "content": "Adobe Scan",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/o17254", "content": "扫描全能王 破解版", "children": []}]
-      }, {
-        "href": "",
-        "content": "- 405.邮箱",
-        "children": [{
-          "href": "https://a.app.qq.com/o/simple.jsp?pkgname=com.microsoft.office.outlook",
-          "content": "Outlook",
-          "children": []
-        }, {
-          "href": "https://www.malavida.com/en/soft/microsoft-outlook-lite/android/",
-          "content": "Outlook Lite",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1106307",
-          "content": "网易邮箱大师 7.10.1 去广告去更新版",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/30608585eb8b5e43",
-          "content": "百度网盘内部版 11.16.3（没有任何广告）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1120734",
-          "content": "番茄ToDo 10.2.9.72 会员破解版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103024",
-          "content": "SleepTown（睡眠小镇）3.2.4破解版",
-          "children": []
-        }, {
-          "href": "https://www.123pan.com/s/bjcA-7OLw",
-          "content": "Forest 4.66.1高级版",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/c8ol1trwk1wIs5zwyKyDPQ",
-          "content": "离线本地身份证加水印工具",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/U_G0qq5COO9txXheh4KrOQ",
-          "content": "日历APP推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/yEYkBCb1zORdfkFF9S3I1w",
-          "content": "文件去重／文档对比软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/VDsEwDDmATZ0c-pcBLvqdQ",
-          "content": "计算器APP推荐（下载页面较文章内容有更新）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/qjsVm5tTDdLgsX2gcPlCjQ",
-          "content": "投屏APP推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/dH8FQPHTHZNzcPQUP2Xzvg#:~:text=%E4%B8%89%E3%80%81-,android,-%E7%8E%B0%E5%9C%A8%E5%90%84%E5%A4%A7%E5%9B%BD%E4%BA%A7",
-          "content": "录屏APP推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/MIWtVjcnxw9S_LZcMyoPNQ",
-          "content": "手机远程协助／手机远程控制手机APP推荐（免ROOT）",
-          "children": []
-        }]
-      }, {"href": "", "content": "05.学习／考试／健身", "children": []}, {
-        "href": "",
-        "content": "01.云笔记",
-        "children": [{
-          "href": "https://www.malavida.com/es/soft/onenote/android/",
-          "content": "OneNote谷歌版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/fbd9078c-83be-43dd-8700-1ba0281fcdd1?code=CZ3ECT",
-          "content": "有道云笔记去更新版",
-          "children": []
-        }, {
-          "href": "https://www.123pan.com/s/bjcA-r3vg.html",
-          "content": "印象笔记 10.8.35破解版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/f4f9b7e1-34a2-48d4-ba34-8bf2baa95482?code=CZ3ECT",
-          "content": "为知笔记直装破解版",
+          "href": "https://mp.weixin.qq.com/s/yCEhQU_wMO_jcPYZ6RbaAA",
+          "content": "驱动管理／驱动下载／驱动修复",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "02.英语",
+        "content": "09.窗口工具",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/H9mgLVCikwl5n6m4nmN9XA",
+          "content": "窗口置顶",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "10.防蓝光护眼",
+        "children": [{
+          "href": "https://url67.ctfile.com/f/14869667-625682183-0aff34?p=kyon",
+          "content": "猎豹护眼大师 单文件版👍",
+          "children": []
+        }, {
+          "href": "http://www.xabyb.com/",
+          "content": "追光护眼👍",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-877134681-61d14f?p=kyon",
+          "content": "EyeCareApp",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/85575146-96c8-4fde-99ca-4f132cf7c161?code=CZ3ECT",
+          "content": "CareUEyes 便携破解版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/cad8faa0-0f88-4555-94e3-d14276ed643d?code=CZ3ECT",
+          "content": "Iris 破解版",
+          "children": []
+        }, {"href": "https://justgetflux.com/", "content": "f.lux", "children": []}]
+      }, {
+        "href": "",
+        "content": "11.电源电池管理",
         "children": [{
           "href": "",
-          "content": "每日英语听力没有稳定可用的破解版不要再求了！实在喜欢建议入正",
+          "content": "以下软件并不限制电脑品牌，但能否在你电脑上正常使用，请自行测试⚠️",
           "children": []
         }, {
-          "href": "https://txt.fyi/0c5cbe9279d7bb67",
-          "content": "听歌学英语（不错的扩充词汇方式）",
+          "href": "https://url67.ctfile.com/f/14869667-1008085424-2da75f?p=kyon",
+          "content": "金山笔记本电池医生 独立版",
           "children": []
         }, {
-          "href": "https://txt.fyi/d2127c72b8fd33ed",
-          "content": "词根词缀字典",
+          "href": "https://support.lenovo.com.cn/lenovo/wsi/Modules/DriverDetail.aspx?ID=33812&MachineNameOmini=IdeaPad",
+          "content": "联想电源管理软件－Energy Management",
           "children": []
         }, {
-          "href": "https://txt.fyi/531fa843185f4d56",
-          "content": "Pleco（最好用的汉英词典）",
+          "href": "https://think.lenovo.com.cn/support/driver/detail.aspx?docID=DR1197862934453",
+          "content": "ThinkPad 电源管理软件（WIN10－11）",
           "children": []
         }, {
-          "href": "https://txt.fyi/d63ddb6f6df779a1",
-          "content": "韦氏词典 Merriam-Webster Dictionary（复杂单词必查的英英词典）",
+          "href": "https://think.lenovo.com.cn/support/driver/detail.aspx?docID=DR1197862934453",
+          "content": "ThinkPad 电源管理软件（Vista－WIN7）",
           "children": []
         }, {
-          "href": "https://yxssp.lanzoui.com/b0q6iadi",
-          "content": "多邻国 密码：288g",
+          "href": "https://support.hp.com/cn-zh/document/c01158589",
+          "content": "惠普电源管理软件－HP Battery Check",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1120110",
-          "content": "可可英语 4.7.4",
+          "href": "https://www.dell.com/support/contents/zh-cn/article/product-support/self-support-knowledgebase/software-and-downloads/dell-power-manager",
+          "content": "戴尔电源管理－Dell Power Manager",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1101011",
-          "content": "墨墨背单词 3.8.40 破解版",
+          "href": "https://www.asus.com/tw/support/FAQ/1032726/",
+          "content": "华硕电源管理－ASUS Battery Health Charging",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1103032",
-          "content": "Quizlet 6.2.3 高级版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103034",
-          "content": "知米背单词 4.8.11高级版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103033",
-          "content": "不背单词 4.4.3 仅去广告版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103035",
-          "content": "U-Dictionary 有道词典国际版 5.0.5纯净版",
+          "href": "https://acer-epower-management.updatestar.com/",
+          "content": "宏基电源管理－Acer ePower Management",
           "children": []
         }]
-      }, {
+      }, {"href": "", "content": "09.硬件相关", "children": []}, {
         "href": "",
-        "content": "03.驾照",
-        "children": [{
-          "href": "https://www.123pan.com/s/bjcA-tUTg.html",
-          "content": "驾考精灵 1.7.8.0 高级版",
-          "children": []
-        }, {
-          "href": "https://www.123pan.com/s/bjcA-iUTg.html",
-          "content": "驾考超人 1.0.5高级版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1200908",
-          "content": "车轮驾考通 8.6.8 高级版",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1200909", "content": "懒人驾考 2.12.8会员版", "children": []}]
-      }, {
-        "href": "",
-        "content": "04.健身",
-        "children": [{
-          "href": "http://axu.xpsup.cn/category/index.html#:~:text=%E7%94%9F%E6%B4%BB%E6%9C%8D%E5%8A%A1",
-          "content": "KEEP／每日瑜伽／薄荷健康等APP会员低价购买🔥",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/KuMHCpmBGkb8Q4tl-JAEFw",
-          "content": "立训／哔哩哔哩／豹哥健身／训记",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/6af20c41-5c66-4e4f-a4ed-cdca624c0213?code=CZ3ECT",
-          "content": "华为运动健康旧版＋新版（旧版含火辣健身课程部分视频）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103038",
-          "content": "FitTime 3.3.0.1 会员破解版（注册登录后即VIP）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103039",
-          "content": "Keep TV版 3.1.0 解锁全部课程（手机也可以用但登录麻烦）",
-          "children": []
-        }, {
-          "href": "https://axu.lanzouj.com/iMH8eyhiqqb【待替换】",
-          "content": "Keep TV版 3.1.0 解锁全部课程（手机也可以用但登录麻烦）（安卓）－地2",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/412b723b5b14c3ca",
-          "content": "7分钟运动（完全免费）",
-          "children": []
-        }, {"href": "https://txt.fyi/1b706d04c5b49df5", "content": "好轻（完全免费）", "children": []}]
-      }, {
-        "href": "",
-        "content": "05.普通话",
-        "children": [{
-          "href": "https://kyon.118pan.com/b1161455",
-          "content": "普通话测试 5.9.7 破解版",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1103040", "content": "普通话测试 4.1.3 破解32位版", "children": []}]
-      }, {
-        "href": "",
-        "content": "06.课程表",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/nPbwnYZTO1ZX73Dy3saxJg",
-          "content": "超级课程表去广告教程👍",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id916497066",
-          "content": "课程表（支持Widget）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/QGZcw1btY6GD42mxk0PC1A",
-          "content": "全年龄+各行各业神级视频学习资源库👍👍👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/GFVbvUhwlV5nbOVD04BiAA",
-          "content": "免费试卷还原APP＋错题本APP推荐👍👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/MZSyOguVVGHsiXQDb5CTlw",
-          "content": "通用学习神器推荐（辅助记忆／刷题／错题本等）👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/iOjKiPdW_3RM24TLyjIwFQ",
-          "content": "大学免费一键聚合搜题",
-          "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/Y4hKcbfl_yGA2WTHbNDOjw", "content": "备忘录APP推荐", "children": []}]
-      }, {
-        "href": "",
-        "content": "06.地图",
-        "children": [{
-          "href": "https://flowus.cn/share/082d4c05-82ac-423a-83c9-b0bf61f30ab3?code=CZ3ECT",
-          "content": "高德地图 无广告谷歌版+定制版+修改版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/c6375a82-0935-448f-bdfb-a2f0e480b313?code=CZ3ECT",
-          "content": "百度地图 无广告关怀版+定制版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/027569e5-4e18-4e88-aedd-423db6452b6d?code=CZ3ECT",
-          "content": "腾讯地图 无广告定制版",
-          "children": []
-        }, {"href": "https://bmaps.cn/", "content": "白马地图", "children": []}]
-      }, {"href": "", "content": "07.下载", "children": []}, {
-        "href": "",
-        "content": "- 701.安卓应用市场／谷歌APP下载",
-        "children": [{
-          "href": "https://www.malavida.com/es/android/",
-          "content": "Malavida",
-          "children": []
-        }, {
-          "href": "https://en.softonic.com/",
-          "content": "Softonic",
-          "children": []
-        }, {
-          "href": "https://filehippo.com/android/",
-          "content": "Filehippo",
-          "children": []
-        }, {
-          "href": "https://mydiv.net/",
-          "content": "Mydiv",
-          "children": []
-        }, {
-          "href": "https://workdrive.zohopublic.com.cn/file/6a2gtb3ea678d96ce4fbcbf9696f59a1fb0b3",
-          "content": "F-Droid 1.14",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/abad0f37-61a4-42b1-a774-9e37f9e17aa7?code=CZ3ECT",
-          "content": "3款蓝奏云资源搜索APP",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "- 702.短视频下载",
-        "children": [{
-          "href": "https://url67.ctfile.com/f/14869667-1245656899-5bc255?p=kyon",
-          "content": "万能下载",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1245656812-d39433?p=kyon",
-          "content": "聚能去水印",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1245659168-0bc002?p=kyon",
-          "content": "快抖去水印",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1245657539-2e823a?p=kyon",
-          "content": "侠客短视频解析",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1173725",
-          "content": "下载工具箱",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1173728",
-          "content": "一键去水印助手",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1173731",
-          "content": "青禾去水印",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1173729",
-          "content": "橙子去水印",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103045",
-          "content": "快去水印工具箱 1.0",
-          "children": []
-        }, {
-          "href": "https://www.icloud.com/shortcuts/ea4b9552510947ef8f38054c633a4016",
-          "content": "黑科技全网短视频去水印（快捷指令）",
-          "children": []
-        }, {
-          "href": "https://www.icloud.com/shortcuts/137f39c3b9ff413fb8cfa22364796f70",
-          "content": "短视频去水印保存（快捷指令）",
-          "children": []
-        }, {
-          "href": "https://www.icloud.com/shortcuts/7b2d1a35a42445fa8b5dd029ec801984",
-          "content": "短视频下载器（快捷指令）",
-          "children": []
-        }, {
-          "href": "https://www.icloud.com/shortcuts/056f72ab0eff4ade9ef5af325982e99b",
-          "content": "全网视频去水印（快捷指令）",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "- 703.Instagram下载",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/UKtY0paJweT7W-kIjrjJ2Q",
-          "content": "免翻墙刷instagram的方法（包括下载）👍",
-          "children": []
-        }, {
-          "href": "",
-          "content": "复制ins图片链接，然后在Safari打开，长按图片复制，然后在系统备忘录粘贴，最后就能保存到相册了",
-          "children": []
-        }, {
-          "href": "https://www.icloud.com/shortcuts/c6d233ae55ea45d28c719bb7a88fa808",
-          "content": "下载IG照片及影片（快捷指令）",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id779715397",
-          "content": "instdown",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id1455355839",
-          "content": "Reposter for Instagram",
-          "children": []
-        }, {
-          "href": "",
-          "content": "复制ins图片链接，然后在夸克／百度／QQ浏览器打开，长按图片即可保存",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103042",
-          "content": "Regram 2.2.1破解版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1110857",
-          "content": "FastSave 60.0 破解付费版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1110856",
-          "content": "Downloader for Instagram Video1.88 破解版",
-          "children": []
-        }, {
-          "href": "https://superparse.com/zh",
-          "content": "Twitter视频解析下载",
-          "children": []
-        }, {
-          "href": "https://instagram.iiilab.com/",
-          "content": "Instagram图片视频解析下载",
-          "children": []
-        }, {
-          "href": "https://www.instaloadgram.com/zh/",
-          "content": "InstaLoadGram （支持照片和视频）",
-          "children": []
-        }, {
-          "href": "https://inflact.com/downloader/",
-          "content": "Infalct（Instagram／Facebook／Twitter／Twitch）",
-          "children": []
-        }, {
-          "href": "https://bigbangram.com/content/instagram-downloader/instagram-profile-downloader/",
-          "content": "Bigbangram",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "- 704.YouTube下载",
-        "children": [{
-          "href": "",
-          "content": "你也可以用６－６－３栏的在线解析网站来下载 🈯",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1177112",
-          "content": "Snaptube👍",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1177111",
-          "content": "Nwpipe",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1177110", "content": "TubeMate", "children": []}, {
-          "href": "",
-          "content": "BT磁力下载工具推荐请见３栏 🈯",
-          "children": []
-        }, {
-          "href": "https://yxssp.lanzoui.com/b478866/",
-          "content": "1DM 破解版 密码：cajd",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/ArHr35pyFvXSq63ikvwXHQ",
-          "content": "2023年微信视频号下载教程",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/q-Ff8inxQN2wj5M-UE6J4w",
-          "content": "微信小程序内视频下载教程",
-          "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/b2CgbtvOF61IwYb4xqgJ5w", "content": "iOS旧版APP下载教程", "children": []}]
-      }, {"href": "", "content": "08.图片", "children": []}, {
-        "href": "",
-        "content": "01.抠图",
-        "children": [{
-          "href": "https://axutongxue.com/",
-          "content": "VIVO／鸿蒙／小米／iOS内置抠图功能",
-          "children": []
-        }, {
-          "href": "https://www.wandoujia.com/apps/8129725",
-          "content": "抠图秀",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id1631498311",
-          "content": "一键抠图",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/917ce2b16e9bc8ec",
-          "content": "天天P图",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/adbdf5129fb078f5",
-          "content": "Backgroud Eraser",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1110037",
-          "content": "抠图P图 7.5.4破解版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1110036",
-          "content": "傲软扣图 1.41破解版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1110035",
-          "content": "Knockout Pro 4.7会员版",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1110039", "content": "扣图换背景 2.6.314破解版", "children": []}]
-      }, {
-        "href": "",
-        "content": "02.P图",
-        "children": [{
-          "href": "http://axu.xpsup.cn/category/index.html#:~:text=%E8%85%BE%E8%AE%AF%E7%AE%A1%E5%AE%B6-,%E4%BF%AE%E5%9B%BE%E5%B7%A5%E5%85%B7,-%E7%BE%8E%E5%9B%BE%E7%A7%80",
-          "content": "美图秀秀／美颜相机／黄油相机会员低价购买👍",
-          "children": []
-        }, {
-          "href": "https://www.123pan.com/s/ukeA-WAWI3.html",
-          "content": "美图秀秀 会员版",
-          "children": []
-        }, {
-          "href": "https://yxssp.lanzoui.com/b660746/",
-          "content": "VSCO 解锁版 密码：1nv7",
-          "children": []
-        }, {
-          "href": "https://myqqjd.lanzout.com/b06lyc3tg",
-          "content": "醒图 高级版",
-          "children": []
-        }, {
-          "href": "https://www.malavida.com/es/soft/facetune/android/",
-          "content": "Facetune",
-          "children": []
-        }, {
-          "href": "https://www.malavida.com/es/soft/snapseed/android/",
-          "content": "Snapseed",
-          "children": []
-        }, {
-          "href": "http://bbs1.people.com.cn/img_new/Y0/62/63/57/EB/1646623152107.jpg",
-          "content": "可以拍成动漫的风格照片是哪个软件？",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1143864",
-          "content": "PicsArt 美易 23.7.2高级版",
-          "children": []
-        }, {
-          "href": "https://www.123pan.com/s/bjcA-j2Lw",
-          "content": "B612咔叽 10.3.8 去广告版（兼容华为）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103046",
-          "content": "Adobe Lightroom 9.2.2 高级版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103047",
-          "content": "MIX 滤镜大师 4.9.18会员版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103052",
-          "content": "泼辣修图 6.0.10会员版",
-          "children": []
-        }, {
-          "href": "https://www.wandoujia.com/apps/7701043",
-          "content": "Foodie（美食滤镜／将美食动漫化）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103057",
-          "content": "TouchRetouch 4.3.0高级版（去水印神器）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103050",
-          "content": "马卡龙玩图 4.4.0 去广告／去更新版（可一键扣人像）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103055",
-          "content": "无他相机 3.1.8去广告／解锁滤镜会员版",
-          "children": []
-        }, {
-          "href": "https://www.wandoujia.com/apps/7855593",
-          "content": "一甜相机（有把脸动漫化的滤镜）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103053",
-          "content": "轻颜相机 3.5.2高级解锁版（风格里可以转漫画风）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/XAct29Y_71Fecc3CV200vg",
-          "content": "照片杂物／照片瑕疵去除APP推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/zpn6rp5lArM-BgVIDufgog",
-          "content": "相册备份APP推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/Btg7i_J9DZdSdGOpgockfQ",
-          "content": "那些图片上的龙珠头／小怪兽都是怎么弄的？",
-          "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/Vai0fQZlDNMBb7YhkWMJlw", "content": "图片去水印教程", "children": []}]
-      }, {
-        "href": "",
-        "content": "09.音乐",
-        "children": [{
-          "href": "",
-          "content": "收费音乐免费下载器见２－７栏 🈯",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/660731b0-a596-41ec-bd21-03214fa6a2dd?code=CZ3ECT",
-          "content": "QQ音乐－简洁版+定制版+Play版（无广告）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/5985f63a-d80d-4d14-b478-356bb2f6397e?code=CZ3ECT",
-          "content": "网易云音乐－极速版+去广告版+车机版+iOS旧版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/37bfb402-a4f7-4b98-9fba-cd0c244445ad?code=CZ3ECT",
-          "content": "酷我音乐－高级版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/84b39c91-6fdf-4808-9c71-b49bf8a3530e?code=CZ3ECT",
-          "content": "酷狗音乐－概念版+去广告版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/04271ab7-25f6-4c4a-ad2e-845fc2540aa4?code=CZ3ECT",
-          "content": "Poweramp 破解版",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008079687-22bb0c?p=kyon",
-          "content": "Avee播放器 1.2.73汉化版",
-          "children": []
-        }, {"href": "https://github.com/listen1/listen1_mobile/releases/", "content": "Listen1", "children": []}]
-      }, {
-        "href": "",
-        "content": "10.视频",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/400rolmpV3g0Zr9bZBSEeg",
-          "content": "无需会员百度云倍速播放方法合集",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/y9lwrddXNEo9vzSRM-rszg#wechat_redirect#:~:text=%E9%98%BF%E8%99%9Aandroid%E4%B8%8A%E5%B0%B1%E5%8F%AA%E7%94%A8%E8%BF%87%E4%B8%80%E6%AC%BE%E6%92%AD%E6%94%BE%E5%99%A8",
-          "content": "视频播放器推荐（文章第2点）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/KqBiAO2eo_MS3yV8WtuJpQ",
-          "content": "免费无字幕视频实时翻译",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/GnkfCVxpTm1hS8gFD5fwMw",
-          "content": "视频剪辑软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/-ueYRz90Amwhmb1r7etCHg",
-          "content": "支持长按倍速的播放器推荐",
-          "children": []
-        }, {
-          "href": "https://yxssp.lanzoui.com/b331494/",
-          "content": "Mx player 去广告破解版 密码：ao5m",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id1116905928",
-          "content": "nPlayer（￥30.00）",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id395680819",
-          "content": "Aplayer（￥18.00）",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id650377962",
-          "content": "VLC",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id6443975850",
-          "content": "SenPlayer（支持视频截图）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1135641",
-          "content": "QQ影音 4.3.3（支持视频截图）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1135640",
-          "content": "XPlayer 2.3.6.6 去广告版（支持视频截图）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1127992",
-          "content": "Mx player 1.46.10 内置长按倍速模块版",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "11.阅读器",
-        "children": [{
-          "href": "",
-          "content": "RSS",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/wQh3BdeJnKWab7Q331l54Q",
-          "content": "利用RSS实现纯净阅读（上）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/ON9ESTyMr6oOKnu7Y0Nuyg",
-          "content": "利用RSS实现纯净阅读（下）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/hxDtsF1Hgi4jCQ_7wUHM8A",
-          "content": "利用RSS订阅公众号教程（文章第3点）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/ZYS9bF5O0kPVH5YaF_SgYw",
-          "content": "自制RSS源／自行生成RSS源（文章第2点）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1135652",
-          "content": "FeedMe_3.20.7（TheOldreader／InoReader／BazQux／Feedbin）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103080",
-          "content": "Fluent Reader Lite 1.0.2（TheOldreader／InoReader／BazQux／Feedbin）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103081",
-          "content": "FocusReader_2.9.6.1（TheOldreader／InoReader／BazQux／Feedbin）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1135653",
-          "content": "NewsJet RSS 6.1（TheOldreader／InoReader／BazQux）",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1103082", "content": "Inoreader 7.3.3", "children": []}, {
-          "href": "",
-          "content": "电子书免费网站下载见２－１栏 🈯",
-          "children": []
-        }, {
-          "href": "http://axu.xpsup.cn/category/index.html#:~:text=%E9%9F%B3%E9%A2%91%E8%AF%BB%E4%B9%A6",
-          "content": "QQ阅读／樊登读书／掌阅／书旗／咪咕／十点／起点等APP会员低价购买🔥",
-          "children": []
-        }, {
-          "href": "https://weread.qq.com/",
-          "content": "微信读书（免费云同步／几乎全文件格式支持／非会员每个月仅能导入3本书）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/OdMvY1Mgvz9PLvkcmQxImQ",
-          "content": "解决微信读书每月 3 本导入上限教程",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1120951",
-          "content": "静读天下 8.0.0 专业版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1120952",
-          "content": "iReader 掌阅 10.3.1 高级版",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id1307517930",
-          "content": "山丘阅读器－支持导入txt／epub／pdf／word／excel／ppt／mobi／azw3／压缩包",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "12.浏览器",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/USvQbx7AwyEVkMDTPnzbQA",
-          "content": "网页广告拦截规则+扩展教程👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/ohcOGOGwPczZeJ4fWmSHLg",
-          "content": "不屏蔽网站的投屏浏览器推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/3rmsuSxewu_Lr7E64SXZow",
-          "content": "视频资源嗅探下载浏览器推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/HizWCCouFvYbhPv56j_6MQ",
-          "content": "Safari 安装油猴脚本教程",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id1551893305",
-          "content": "亚瑟浏览器（含内购）投屏+下载最强浏览器👍",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id1491605477",
-          "content": "Foxok浏览器（￥6）支持设置为默认浏览器／油猴脚本",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id1631941898",
-          "content": "Focus浏览器（含内购）支持油猴脚本",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/uOWkUIoUv45Yn3beZ5O8nQ",
-          "content": "Edge Canary（支持扩展／PWA）👍",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/bbad55725e12ca2f",
-          "content": "雨见／可拓／Rains 浏览器（支持扩展）👍",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/cec8ac7308a4fd83",
-          "content": "海阔视界／嗅觉浏览器👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/5c092544-0048-4283-9f8f-b8944d3a42ec?code=CZ3ECT",
-          "content": "Kiwi－谷歌内核（支持扩展／PWA）",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/0b22ce24-1fba-4fc3-b600-b2e29308b968?code=CZ3ECT",
-          "content": "iceraven／Firefox－火狐内核（支持扩展／PWA）",
-          "children": []
-        }, {
-          "href": "https://viayoo.com/zh-cn/",
-          "content": "Via浏览器（支持安装插件）",
-          "children": []
-        }, {
-          "href": "https://www.xbext.com/",
-          "content": "X浏览器（支持安装脚本）",
-          "children": []
-        }, {
-          "href": "https://www.malavida.com/es/soft/samsung-internet-browser/android/",
-          "content": "三星浏览器（支持PWA）",
-          "children": []
-        }, {
-          "href": "https://www.malavida.com/es/soft/opera/android/",
-          "content": "Opera（支持PWA）",
-          "children": []
-        }, {
-          "href": "https://www.malavida.com/es/soft/brave-browser/android/",
-          "content": "Brave（支持PWA）",
-          "children": []
-        }, {
-          "href": "https://www.malavida.com/es/soft/yandex-browser/android/",
-          "content": "Yandex（支持浏览器扩展）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1123520",
-          "content": "夸克 去网站访问限制／去广告／去更新版",
-          "children": []
-        }, {
-          "href": "https://www.123pan.com/s/bjcA-2FTg.html",
-          "content": "狐猴浏览器 2.4.1.001 无会员版",
-          "children": []
-        }, {"href": "https://alookweb.com/", "content": "Alook", "children": []}]
-      }, {
-        "href": "",
-        "content": "13.输入法",
-        "children": [{
-          "href": "https://kyon.118pan.com/b1106282",
-          "content": "百度输入法 10.6.66.48 小米定制版（无广告／支持森林集皮肤／鸿蒙可用）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1106296",
-          "content": "搜狗输入法 8.32.0222 OPPO Find X5 Pro 天玑定制版（无广告）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1106287",
-          "content": "搜狗输入法 1.2.00 小爱老师学习机定制版（功能精简／无广告）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1106294",
-          "content": "讯飞输入法9.1.9466 剪切板上限999／谷歌版",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1106295", "content": "Gboard 12.0.03", "children": []}]
-      }, {
-        "href": "",
-        "content": "14.新闻",
-        "children": [{
-          "href": "https://flowus.cn/share/be61d40a-e76d-4e1a-b496-c75c869f50b5?code=CZ3ECT",
-          "content": "今日头条 华为定制版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/df3e0f4c-f7aa-41bc-9be7-0100076e937b?code=CZ3ECT",
-          "content": "今日头条 谷歌版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/f1cbbe86-cca0-40bf-92fb-02a73b80cae6?code=CZ3ECT",
-          "content": "腾讯新闻 定制版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/eb01d18a-4c30-41e0-81ae-6e38c1e9b4e2?code=CZ3ECT",
-          "content": "网易新闻 乐檬定制版（无广告）",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "15.生活",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/XkgrWL-ADLzI3vYganT0XA",
-          "content": "三大运营商免费骚扰电话拦截开通方式（可屏蔽自定义区号）👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/f-52fRsmfQXt6pY2nuf_Pg",
-          "content": "天气预报APP原理与推荐👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/2qASVRluNRslMRSX3BW_yQ",
-          "content": "解决安卓手机通知管理难题＋实现聊天消息防撤回！",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/Ze5zWxPdr18qgI-o1FG2dw",
-          "content": "微软姓名全拼邮箱注册教程",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/YusBumMNs8bSJ-ELo1kAaQ",
-          "content": "破解WiFi密码／WiFi万能钥匙",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/xGWzVv-60jRvIWLVCIX_Yg",
-          "content": "拼电影台词软件推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/drabpb-ML6iLtvqhU6Mo6Q",
-          "content": "听歌识曲APP推荐",
-          "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/Vx3sjyR7PvfmPygocayGDw", "content": "网页转APP教程", "children": []}]
-      }, {
-        "href": "",
-        "content": "16.游戏",
-        "children": [{
-          "href": "",
-          "content": "手游加速器见５－１８栏 🈯",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/aq7c56G6C3eCrIz9jI5ODw",
-          "content": "安卓汉化版／破解版／免谷歌版手游下载＋IOS还能白嫖付费APP办法",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/PmlBMwvlrOlvP9WK3YKs4g",
-          "content": "模拟器／家机／街机／掌机游戏ROM与模拟器下载",
-          "children": []
-        }, {
-          "href": "https://apps.qoo-app.com/",
-          "content": "Qoo（补充）",
-          "children": []
-        }, {"href": "https://www.ccplay.cc/", "content": "虫虫助手（补充）", "children": []}]
-      }, {
-        "href": "",
-        "content": "17.安全／清理",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/ArG8Jr-oG6ZkFyIHE49PPw",
-          "content": "清理垃圾APP推荐👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/oXJVVdPXmfJgnejDWucDRQ",
-          "content": "相册清理APP推荐",
-          "children": []
-        }, {"href": "https://m.qq.com/", "content": "腾讯手机管家", "children": []}, {
-          "href": "https://shouji.360.cn/",
-          "content": "360手机卫士",
-          "children": []
-        }, {"href": "http://www.3h3.com/az/191391.html", "content": "Avast", "children": []}]
-      }, {
-        "href": "",
-        "content": "18.日记／记账",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/YKegNamJIBACXPcTOYkB3A",
-          "content": "50款记账APP评测与推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/y-paTeFh0MBQ5pK5Kbj81Q",
-          "content": "40款日记APP评测与推荐",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/LxunrZgejoF6JW4B7p7-mg",
-          "content": "家庭财产管理方案推荐",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "19.屏蔽广告／自动跳过广告",
-        "children": [{
-          "href": "https://url67.ctfile.com/f/14869667-1007782240-6cabae?p=kyon",
-          "content": "李跳跳",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1007782258-709b19?p=kyon",
-          "content": "叮小跳",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1007782300-1f1da7?p=kyon",
-          "content": "轻启动",
-          "children": []
-        }, {
-          "href": "https://touchhelper.zfdang.com/",
-          "content": "开屏跳过",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1007785532-471320?p=kyon",
-          "content": "TapClick",
-          "children": []
-        }, {
-          "href": "https://gkd.li/guide/",
-          "content": "GKD",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id1591620171",
-          "content": "Stay（￥38）",
-          "children": []
-        }, {"href": "https://apps.apple.com/cn/app/id6446811843", "content": "Addons（￥28）", "children": []}]
-      }, {
-        "href": "",
-        "content": "20.虚拟定位／刷步",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/dmcJSROZgJFFpiRNWnIikQ",
-          "content": "关于钉钉虚拟定位打卡已经能被识别的说明⚠️",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/KcWoz8pwuvyI872diwknSQ",
-          "content": "微信／支付宝等刷步数教程（部分已失效）",
-          "children": []
-        }, {
-          "href": "http://www.ishuabu.cn/",
-          "content": "爱刷步",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/b9963598-e47d-45d1-996f-5bd787256f89?code=CZ3ECT",
-          "content": "VMOS Pro＋Lataclysm",
-          "children": []
-        }, {
-          "href": "http://fakeloc.cc/app",
-          "content": "Fake Location 最新版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1135648",
-          "content": "摩尼定位 1.6.2",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1135650",
-          "content": "模拟定位 2.1 会员解锁版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1135651",
-          "content": "模拟定位助手 1.0.7 免Root会员解锁版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1135649",
-          "content": "标枪定位 2.11.1 免Root去广告版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1135647",
-          "content": "小鹏定位助手 2.5.5 破解版",
-          "children": []
-        }, {
-          "href": "https://www.i4.cn/news_detail_31175.html",
-          "content": "爱思助手👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/62359d66-e975-4313-8145-8dbcf9509bd1?code=CZ3ECT",
-          "content": "Location-Cleaned",
-          "children": []
-        }, {
-          "href": "https://freel.vip/",
-          "content": "Freel（收费）",
-          "children": []
-        }, {
-          "href": "https://github.com/hongdong/SimulateLocation",
-          "content": "Xcode的Simulate Location功能",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "21.应用多开／手机分身",
-        "children": [{
-          "href": "",
-          "content": "安卓各大手机厂自带的分身功能",
-          "children": []
-        }, {
-          "href": "https://consumer.huawei.com/cn/support/content/zh-cn15768985/",
-          "content": "华为－多用户模式",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/Kk9fkqUkI8j6WBG2B328dQ",
-          "content": "魅族－隐私模式",
-          "children": []
-        }, {
-          "href": "http://www.samsungmembers.cn/thread-623413-6-71.html",
-          "content": "三星－安全文件夹",
-          "children": []
-        }, {
-          "href": "http://hd.mi.com/y/09111p/index.html",
-          "content": "小米－手机分身",
-          "children": []
-        }, {
-          "href": "https://weibo.com/3871046669/HkzZGlypQ",
-          "content": "一加－多用户模式（通知栏里切换）",
-          "children": []
-        }, {
-          "href": "https://www.coloros.com/instruction?id=503&version=ColorOS%207",
-          "content": "OPPO－多用户模式（需要ColorOS 7以上）",
-          "children": []
-        }, {
-          "href": "",
-          "content": "VIVO－Funtouch OS 3.0以下系统有访客模式／Funtouch OS 3.0及以上系统没有访客模式",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/VOy2czRNd0EsLsyBm53_2A",
-          "content": "魅族－隐私模式",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1007781176-0306c1?p=kyon",
-          "content": "伏羲X（原SandVXposed、SlimVXposed）",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1007780948-2bb869?p=kyon",
-          "content": "炼妖壶（原island／同绿色守护作者）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103069",
-          "content": "多开助手谷歌版 1.5.9 解锁高级版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103068",
-          "content": "多开空间 1.5.40.0329解锁高级版",
-          "children": []
-        }, {
-          "href": "https://www.123pan.com/s/bjcA-BWLw",
-          "content": "X8沙箱 0.7.6.2.05 可多开破解版",
-          "children": []
-        }, {
-          "href": "https://www.vmos.cn/",
-          "content": "VMOS（虚拟大师）",
-          "children": []
-        }, {
-          "href": "https://www.lbesec.com/#/home",
-          "content": "LBE平行空间",
-          "children": []
-        }, {
-          "href": "https://fenshen.leeryou.com.cn/",
-          "content": "360分身大师",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/QpTidPxW0qJNZLLo05ddfw",
-          "content": "iPhone手机变相应用双开教程",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "22.文件管理／解压缩",
-        "children": [{
-          "href": "https://kyon.118pan.com/b1140035",
-          "content": "文件管理器+ 3.1.8（支持MB3）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1140034",
-          "content": "NMM文件管理器1.16.0（支持SMB3）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1140033",
-          "content": "CX文件管理器 2.0.2（支持SMB3）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1140030",
-          "content": "FX管理器 Plus 9.0.0.7汉化版（支持SMB2+／全文搜索）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1140031",
-          "content": "Solid Explorer 2.8.35（支持SMB2）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1140032",
-          "content": "X-plore 4.33.05（支持SMB2）",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id1638657012",
-          "content": "猫头鹰文件（支持SMB3）",
-          "children": []
-        }, {
-          "href": "https://apps.apple.com/cn/app/id499470113",
-          "content": "FE文件管理器（支持SMB3）",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1110864",
-          "content": "RE管理器 4.5付费去验证版",
-          "children": []
-        }, {
-          "href": "https://xiaogao.lanzoum.com/iAi790skgy4d",
-          "content": "MT管理器VIP版 2.13.1",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1114007",
-          "content": "ES文件浏览器 4.2.9.13会员版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/dc001d66-d17f-44ec-b63d-48fbe57e448f?code=CZ3ECT",
-          "content": "ES文件浏览器3.2.55",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1110973", "content": "ZArchiver 1.0.5专业版（解压缩软件）", "children": []}]
-      }, {
-        "href": "",
-        "content": "23.音频编辑／变声器",
-        "children": [{
-          "href": "https://kyon.118pan.com/o14802",
-          "content": "多款变声器APP合集",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103075",
-          "content": "Audio Evolution Mobile 4.1.4破解版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103076",
-          "content": "AudioLab 1.1.6专业版",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1103077",
-          "content": "音频编辑器 7.0.6高级版",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1103074", "content": "Audio Editor 1.01.30.0210 破解版", "children": []}]
-      }, {
-        "href": "",
-        "content": "24.免费搜题",
-        "children": [{
-          "href": "https://mp.weixin.qq.com/s/iOjKiPdW_3RM24TLyjIwFQ",
-          "content": "大学免费电脑端一键聚合搜题教程",
-          "children": []
-        }, {
-          "href": "https://www.tutusouti.com/",
-          "content": "考途",
-          "children": []
-        }, {
-          "href": "https://sj.qq.com/appdetail/com.ixyzh.question",
-          "content": "小包搜题",
-          "children": []
-        }, {
-          "href": "https://sj.qq.com/appdetail/com.fenbi.android.solar",
-          "content": "小猿搜题",
-          "children": []
-        }, {
-          "href": "https://www.daxuesoutijiang.com/",
-          "content": "大学搜题酱",
-          "children": []
-        }, {
-          "href": "https://www.ktyyapp.cn/",
-          "content": "火星搜题（理科推荐）",
-          "children": []
-        }, {
-          "href": "https://sj.qq.com/appdetail/com.xuexiaoyi.xxy",
-          "content": "学小易（文科推荐）",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/30922d0c4ba2e04f",
-          "content": "中国大学MOOC（慕课答案）",
-          "children": []
-        }, {
-          "href": "https://sj.qq.com/appdetail/com.pptiku.tdd",
-          "content": "题多多",
-          "children": []
-        }, {"href": "https://sj.qq.com/appdetail/com.zhkj.photomath.computer", "content": "Photomath", "children": []}]
-      }, {"href": "", "content": "25.IPA资源／iOS自签", "children": []}, {
-        "href": "",
-        "content": "- 2501.IPA资源下载站",
-        "children": [{
-          "href": "https://toyou.club/",
-          "content": "凸游CLUB",
-          "children": []
-        }, {"href": "https://ipa.store/", "content": "IPA商店", "children": []}, {
-          "href": "https://www.ipahome.cn/",
-          "content": "IPA之家",
-          "children": []
-        }, {
-          "href": "https://www.88ipa.com/",
-          "content": "iOS IPA",
-          "children": []
-        }, {
-          "href": "https://ipadump.com/#/home",
-          "content": "IPA DUMP",
-          "children": []
-        }, {
-          "href": "https://www.dumpapp.com/",
-          "content": "DumpApp",
-          "children": []
-        }, {
-          "href": "https://www.kdocs.cn/l/cqTmJCxvmGKI",
-          "content": "IPA库",
-          "children": []
-        }, {
-          "href": "https://share.xiaole88.com/IOS",
-          "content": "小乐的网盘",
-          "children": []
-        }, {
-          "href": "https://www.peck.cool/%E5%85%8D%E8%B4%B9%20%E4%B8%93%E5%8C%BA%20%F0%9F%94%93",
-          "content": "鹏客软件免费专区",
-          "children": []
-        }, {"href": "https://pan.ios98.com/", "content": "优创云盘", "children": []}, {
-          "href": "https://pan.xyyh.xyz/",
-          "content": "知云网盘",
-          "children": []
-        }, {
-          "href": "https://pan.ioskuka.com/",
-          "content": "酷卡软件源",
-          "children": []
-        }, {
-          "href": "https://alist.jiejingfan.vip/",
-          "content": "晴天网盘",
-          "children": []
-        }, {
-          "href": "https://pan.lewsky.top/",
-          "content": "乐玩iOS资源站",
-          "children": []
-        }, {"href": "https://pan.iosapp.top/", "content": "Bot资源站", "children": []}, {
-          "href": "https://pan.qlam.cc/",
-          "content": "清烟资源库",
-          "children": []
-        }, {"href": "https://iosku.cn/", "content": "iOS资源分享", "children": []}, {
-          "href": "https://pan.iosi.vip/",
-          "content": "平凡",
-          "children": []
-        }, {
-          "href": "https://app.iosgods.com/store/",
-          "content": "iOSGods",
-          "children": []
-        }, {"href": "https://pdalife.com/", "content": "PDALIFE", "children": []}, {
-          "href": "https://iosvizor.com/",
-          "content": "iOSvizor",
-          "children": []
-        }, {
-          "href": "https://iosninja.io/ipa-library-ios",
-          "content": "IPA Ninja",
-          "children": []
-        }, {
-          "href": "https://pan.dumpapp.com/",
-          "content": "DumpApp",
-          "children": []
-        }, {"href": "https://www.iphonecake.com/", "content": "AppCake", "children": []}]
-      }, {
-        "href": "",
-        "content": "- 2502.证书签名",
-        "children": [{
-          "href": "",
-          "content": "TrollStore 作者已经找到了支持 iOS 17.0的方法，尽量不要升级",
-          "children": []
-        }, {
-          "href": "https://github.com/opa334/TrollStore",
-          "content": "TrollStore 项目官网（永久签）👍",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/D4uGobrkvZAnieELgqtckQ",
-          "content": "TrollStroe 安装教程¹",
-          "children": []
-        }, {
-          "href": "https://www.joia.cn/trollstore/install/",
-          "content": "TrollStore 安装引导²",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/JaqXB3xa8oHzQF5iumbt2w",
-          "content": "TrollInstallerX 教程³",
-          "children": []
-        }, {
-          "href": "https://blog.6ziz.com/trollstore",
-          "content": "TrollStore 安装方法⁴",
-          "children": []
-        }, {
-          "href": "https://altstore.io/",
-          "content": "AltStore（7天一签）",
-          "children": []
-        }, {
-          "href": "https://www.i4.cn/",
-          "content": "爱思助手（7天一签）",
-          "children": []
-        }, {
-          "href": "https://sideloadly.io/",
-          "content": "Sideloadly（7天一签）",
-          "children": []
-        }, {"href": "https://esign.p12zs.cn/", "content": "轻松签", "children": []}, {
-          "href": "https://sign.drnrt8.cn/",
-          "content": "全能签",
-          "children": []
-        }, {
-          "href": "https://sign.wnqapp.com/ios/",
-          "content": "万能签",
-          "children": []
-        }, {"href": "https://www.xsign.co/", "content": "超然签", "children": []}, {
-          "href": "https://www.minclouds.com/",
-          "content": "云小朵",
-          "children": []
-        }, {"href": "https://ios222.com/", "content": "牛蛙助手", "children": []}]
-      }]
-    }, {
-      "href": "",
-      "content": "08　电脑手机其他",
-      "children": [{"href": "", "content": "01.电脑装机＆外设", "children": []}, {
-        "href": "",
-        "content": "- 101.笔记本",
+        "content": "- 901.笔记本",
         "children": [{
           "href": "http://bbs1.people.com.cn/img_new/Y0/92/F9/70/27/1647438295079.png",
           "content": "笔记本电脑选购指南－笔吧评测室（新榜前10科技大号）👍",
@@ -5440,7 +3807,7 @@ const navigation = {
           "content": "2023年笔记本电脑选购指南－知乎@墨鱼",
           "children": []
         }]
-      }, {"href": "", "content": "- 102.台式机核心", "children": []}, {
+      }, {"href": "", "content": "- 902.台式机装机", "children": []}, {
         "href": "",
         "content": "01.综合科普",
         "children": [{
@@ -5633,7 +4000,7 @@ const navigation = {
           "children": []
         }, {
           "href": "https://post.smzdm.com/p/661928/",
-          "content": "大型装机科普文之电源篇－－什么值得买@杨超越真是太好了",
+          "content": "大型装机科普文之电源篇－什么值得买@杨超越真是太好了",
           "children": []
         }, {
           "href": "https://post.smzdm.com/p/alpzw9gg/",
@@ -5704,7 +4071,7 @@ const navigation = {
           "content": "2023年12月笔记本/DIY台式机推荐汇总－知乎@尤娜Yuna",
           "children": []
         }, {
-          "href": "https://mp.weixin.qq.com/s/pIzDvrQY2O49VXt46LEMbA",
+          "href": "https://mp.weixin.qq.com/s/_G3nGI6E7ypV4hbgFNaYQQ",
           "content": "装机走向与推荐－电脑吧评测室",
           "children": []
         }, {
@@ -5714,10 +4081,6 @@ const navigation = {
         }, {
           "href": "https://zhuanlan.zhihu.com/p/664369167",
           "content": "2023年笔记本/DIY台式机推荐汇总－知乎@尤娜Yuna",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/cFCZ1ysSxAPgkS2xpBsF-Q",
-          "content": "装机走向与推荐－电脑吧评测室",
           "children": []
         }]
       }, {
@@ -5745,7 +4108,7 @@ const navigation = {
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/ck0zuDTz7OZcr6glmD3lbA",
-          "content": "硬件检测工具箱推荐",
+          "content": "硬件检测工具箱推荐（Win）",
           "children": []
         }, {"href": "", "content": "本栏部分文章提供的链接带返利推广，介意的话可以自行到淘宝搜索购买", "children": []}]
       }, {
@@ -5895,157 +4258,1979 @@ const navigation = {
           "href": "https://www.dujin.org/11370.html",
           "content": "影响网速之家庭路由器的重要性－缙哥哥",
           "children": []
-        }, {"href": "https://sspai.com/u/op45ora2/posts", "content": "入网指南系列文章－少数派@Yaaan_xu", "children": []}]
-      }, {"href": "", "content": "02.系统相关", "children": []}, {
-        "href": "",
-        "content": "- 201.系统重装／PE工具",
-        "children": [{
-          "href": "https://www.bilibili.com/video/BV1DJ411D79y",
-          "content": "超详细WIN10系统安装教程－ 硬件茶谈👍",
-          "children": []
         }, {
-          "href": "http://renew.360.cn/",
-          "content": "360一键重装大师",
-          "children": []
-        }, {
-          "href": "https://www.microsoft.com/zh-cn/software-download/windows10",
-          "content": "微软官方一键安装／重装",
-          "children": []
-        }, {"href": "https://www.upe.net/", "content": "优启通👍", "children": []}, {
-          "href": "http://www.wepe.com.cn/",
-          "content": "微PE👍",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/203196bb-d0f2-4ab1-857a-fc46516034fb?code=CZ3ECT",
-          "content": "软碟通 UltraISO",
-          "children": []
-        }, {
-          "href": "http://bbs.wuyou.net/forum.php?mod=viewthread&tid=424331",
-          "content": "微PE工具箱增强版及网络版合盘版",
-          "children": []
-        }, {"href": "https://firpe.cn/", "content": "FirPE", "children": []}, {
-          "href": "http://www.bfgho.com/",
-          "content": "冰封PE",
+          "href": "https://sspai.com/u/op45ora2/posts",
+          "content": "入网指南系列文章－少数派@Yaaan_xu",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "- 202.系统镜像",
+        "content": "10.社交聊天",
         "children": [{
-          "href": "https://mp.weixin.qq.com/s/-2_zZ3nrExZ25UdXgG-iFg",
-          "content": "高速下载Windows系统镜像教程",
+          "href": "https://flowus.cn/share/223e1818-ff8f-4f72-a455-700663f454eb?code=CZ3ECT",
+          "content": "腾讯QQ／腾讯TIM 去广告版",
           "children": []
         }, {
-          "href": "https://hellowindows.cn/",
-          "content": "HelloWindows（原版系统）",
+          "href": "https://www.now61.com/s/6pLiR",
+          "content": "微信 3.9.12.17 多开防撤回免安装",
           "children": []
         }, {
-          "href": "https://next.itellyou.cn/",
-          "content": "MSDN 新站（原版系统）",
+          "href": "https://flowus.cn/share/062dd65e-3c5c-46fe-a879-769b0011417c?code=CZ3ECT",
+          "content": "YY语音 绿色／多开／去广告版",
           "children": []
         }, {
-          "href": "https://msdn.itellyou.cn/",
-          "content": "MSDN（原版系统）",
+          "href": "https://flowus.cn/share/91a9c078-3f72-4c23-bd36-ed24a3ba82ae?code=CZ3ECT",
+          "content": "阿里旺旺 精简／去广告版",
           "children": []
         }, {
-          "href": "https://tb.rg-adguard.net/public.php",
-          "content": "TechBench by WZT（原版系统）",
+          "href": "https://github.com/huiyadanli/RevokeMsgPatcher",
+          "content": "微信 防撤回补丁（官方版可用）",
           "children": []
         }, {
-          "href": "https://www.newxitong.com/",
-          "content": "吻妻（精简系统）",
+          "href": "https://github.com/xh321/LiteLoaderQQNT-Anti-Recall",
+          "content": "QQ NT版防撤回补丁（官方版可用）",
           "children": []
-        }, {
-          "href": "http://www.sysmini.com/",
-          "content": "极简系统（精简系统）",
+        }]
+      }, {"href": "", "content": "11.下载相关", "children": []}, {
+        "href": "",
+        "content": "- 1101.短视频等下载",
+        "children": [{
+          "href": "https://axu.lanzouj.com/iqfyR07t4m1e",
+          "content": "闪豆多平台视频批量下载器2.5.2.2",
           "children": []
-        }, {"href": "https://www.winos.me/", "content": "WINOS（精简系统）", "children": []}, {
-          "href": "http://y-os.net/",
-          "content": "Y-OS工作室（精简系统）",
-          "children": []
-        }, {"href": "https://windsys.whatk.me/", "content": "Windsys Project（修改版系统）", "children": []}]
+        }, {"href": "https://wwi.lanzouj.com/i60EY010rwmd", "content": "小助手1.2.8", "children": []}]
       }, {
         "href": "",
-        "content": "- 203.系统还原",
+        "content": "- 1102.B站视频下载",
         "children": [{
-          "href": "https://mp.weixin.qq.com/s/o8esJylxTDR19wrkoanKlA",
-          "content": "系统备份还原方法软件推荐",
+          "href": "https://mp.weixin.qq.com/s/5z_NxKRtxoGgSAsIuGUnHw",
+          "content": "B站视频下载软件推荐",
           "children": []
         }, {
-          "href": "https://my.syncplicity.com/share/1m0bmcnqinhvwzn/",
-          "content": "Horizon Rollback Rx Pro12",
-          "children": []
-        }, {
-          "href": "http://www.mediafire.com/file/rrd3tuixy74oh98",
-          "content": "傲梅轻松备份 6.9.1 技术师增强版",
-          "children": []
-        }, {
-          "href": "https://www.huanyuan.cn/",
-          "content": "重启还原精灵",
-          "children": []
-        }, {
-          "href": "https://my.syncplicity.com/share/5kmqme5yxerzdvc/",
-          "content": "Horizon Reboot Restore Rx Pro12",
+          "href": "https://mp.weixin.qq.com/s/tFVXoV1ACxiDrF4X-PPReQ",
+          "content": "B站收藏夹视频下载软件推荐",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "- 204.虚拟机",
+        "content": "- 1103.YouTube视频下载",
         "children": [{
-          "href": "https://mp.weixin.qq.com/s/_q8kQ-lS9sP62FFjfGZFcA",
-          "content": "使用VMware安装Windows虚拟机教程",
+          "href": "https://github.com/oleksis/youtube-dl-gui/releases",
+          "content": "yt-dlg",
           "children": []
         }, {
-          "href": "https://www.vmware.com/products/desktop-hypervisor.html",
-          "content": "VMware Workstation Pro 现已免费（官网注册账号后即可免费下载）",
+          "href": "https://github.com/ErrorFlynn/ytdlp-interface/releases",
+          "content": "ytdlp-interface",
+          "children": []
+        }, {
+          "href": "https://stacher.io/",
+          "content": "Stacher",
+          "children": []
+        }, {
+          "href": "https://github.com/axcore/tartube/releases",
+          "content": "Tartube",
+          "children": []
+        }, {
+          "href": "https://save4k.ru/",
+          "content": "save4k（最高MP4 1080P／webm 4K）👍",
+          "children": []
+        }, {
+          "href": "https://en.loader.to/4/",
+          "content": "Loader（最高4K）",
+          "children": []
+        }, {
+          "href": "https://y2down.cc/en/",
+          "content": "Y2down（最高4K）",
+          "children": []
+        }, {
+          "href": "https://youtubeto.org/en/",
+          "content": "Youtubeto（最高4K）",
+          "children": []
+        }, {
+          "href": "https://notube.net/en/youtube-app-v2",
+          "content": "notube（选择MP4 HD则为获取最高1080P）",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "03.加密音频／视频格式解码",
+        "content": "- 1104.网课下载",
         "children": [{
-          "href": "https://flowus.cn/share/88917537-7d2c-4e5c-bbd6-7c6640b36a1b?code=CZ3ECT",
-          "content": "ncm／tkm／tm／kwm／kgm／xm／x2m／mflac／mgg等格式音频转码",
+          "href": "https://mp.weixin.qq.com/s/f-ZEac96Q3DGnYa89I2ggQ",
+          "content": "无视加密网课100%下载教程👍",
           "children": []
         }, {
-          "href": "https://flowus.cn/share/021d3ef8-fd0e-4b73-81ff-f4301672d5dc?code=CZ3ECT",
-          "content": "qlv／qsv／kux格式视频转码",
+          "href": "https://axu.lanzoue.com/iwnLanau8ja",
+          "content": "中国慕课下载器",
           "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-625683811-8d3ac0?p=kyon",
-          "content": "VEP视频加密模式筛选器+提取器",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-625683798-701b4e?p=kyon",
-          "content": "ev1转mp4／ev1视频解密",
-          "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/jitzm5bddwr8s6k",
-          "content": "ev4转mp4／ev4视频解密",
-          "children": []
-        }, {"href": "https://spjm.vip/sp/page2/", "content": "EV6／EV8 破解翻录限制", "children": []}]
+        }, {"href": "https://www.xuewuzhi.cn/downloader", "content": "学无止下载器", "children": []}]
       }, {
         "href": "",
-        "content": "04.学习强国／智慧树等刷课",
+        "content": "- 1105.直播录制",
         "children": [{
-          "href": "https://flowus.cn/share/44ca8f85-8258-4dde-aa67-9048006557ea?code=CZ3ECT",
-          "content": "不学习何以强国﹝自动刷分油猴脚本／需手动运行但胜在稳定／手机也可使用！﹞👍",
+          "href": "https://flowus.cn/share/edc8ce82-4970-4a57-8d1e-c00c75add981?code=CZ3ECT",
+          "content": "bililive-go（多平台直播录制）",
           "children": []
         }, {
-          "href": "https://sourcegraph.com/github.com/TechXueXi/TechXueXi",
-          "content": "学习强国（支持每日答题，支持每周答题，支持专项答题）",
+          "href": "https://flowus.cn/share/ebe4f1e1-66d0-40f4-bbec-4d70df71d70f?code=CZ3ECT",
+          "content": "LiveAutoRecord（斗鱼／虎牙／抖音／B站）",
           "children": []
         }, {
-          "href": "https://sourcegraph.com/github.com/fuck-xuexiqiangguo/Fuck-XueXiQiangGuo",
-          "content": "学习强国 懒人刷分工具 自动学习",
+          "href": "https://www.52pojie.cn/thread-1736399-1-1.html",
+          "content": "抖音直播录制工具",
+          "children": []
+        }, {"href": "https://axu.lanzoue.com/iS2IL0zsynfg", "content": "斗鱼快手直播录制", "children": []}]
+      }, {
+        "href": "",
+        "content": "- 1106.国外／网赚网盘下载",
+        "children": [{
+          "href": "https://flowus.cn/share/efd1522d-4884-41c4-883b-4a79a99bfcc2?code=CZ3ECT",
+          "content": "MiPony P汉化便携版（国外网盘真实链接嗅探下载器）",
           "children": []
         }, {
-          "href": "https://axu.lanzoui.com/ibsyBnbaecf",
-          "content": "学强国战答题库4564题",
+          "href": "http://www.oceancoder.cn/post/net-disk-download-helper.html",
+          "content": "网赚网盘下载辅助工具（仅帮忙获取正确下载链接／无加速）",
           "children": []
         }, {
-          "href": "https://sourcegraph.com/github.com/bugstop/univ-mooc-autoplay",
-          "content": "MOOC 挂课脚本",
+          "href": "",
+          "content": "BT种子磁力下载器见第３栏 🈯",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/9c0034df-735b-4e77-81c3-6568377d754b?code=CZ3ECT",
+          "content": "IDM lrepacks破解版",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/BWFrTLv9ajAKnld4UFz0_A",
+          "content": "IDM／FDM／NDM／XDM／XDown／文件蜈蚣－下载速度与资源嗅探功能对比",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/8423ce0d-88c8-4804-b259-ce6d192cc0b4?code=CZ3ECT",
+          "content": "百度云／百度网盘高速下载教程👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/2DpfcWLKS8djzcWjLvAodw",
+          "content": "百度文库／道客巴巴／豆丁网／原创力下载👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/0xmjs9-yQygdW49XlYswmQ",
+          "content": "M3U8文件下载教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/Vd8IQmWOLp9sen3T344Ekw",
+          "content": "嗅探下载网页视频、音频资源教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/BdtUfB33vUOE1F9PNwwaUg",
+          "content": "QQ空间照片原图批量下载教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/L1Mv5tKDHLZ4hOEbm90GWA",
+          "content": "教你下载只能在线观看的PDF",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/mlO19jXieoXqz9dOGaKZaA",
+          "content": "爱奇艺／优酷／腾讯视频／B站等弹幕下载教程",
+          "children": []
+        }, {
+          "href": "https://store.lizhi.io/site/products/id/454?cid=ds7afku3",
+          "content": "VidJuice UniTube（支持1000+平台在线音视频下载工具）－永久授权仅需￥79",
+          "children": []
+        }, {
+          "href": "https://store.lizhi.io/site/products/id/280?cid=ds7afku3",
+          "content": "Downie 4（支持1000+平台在线视频下载）－永久授权仅需￥99",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "12.压缩相关",
+        "children": [{
+          "href": "https://flowus.cn/share/a1e05a42-3038-4e63-a0c6-47aa4e8dd078?code=CZ3ECT",
+          "content": "7zip 增强版👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/744aa10a-19e2-414e-8f70-5d6e1e9bce1b?code=CZ3ECT",
+          "content": "好压 纯净版👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/6aed953a-ebd2-496a-97e2-41b3d4c4f5c0?code=CZ3ECT",
+          "content": "Bandizip 无广告旧版+破解版",
+          "children": []
+        }, {
+          "href": "https://sparanoid.com/lab/7z/",
+          "content": "7zip",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/7GFTTGjwGRt0vQPdK2KtPw",
+          "content": "最大压缩率的压缩参数设置教程👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/9A5vtwBQTWoW-IqnVJdAXQ",
+          "content": "压缩包密码破解",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/ae58dacf-b150-4c73-a7e2-94cd67f216a8?code=CZ3ECT",
+          "content": "单文件版软件制作教程",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "13.输入法",
+        "children": [{
+          "href": "https://flowus.cn/share/0bddec1b-9e04-4f02-b3e5-7d67fe2d1711?code=CZ3ECT",
+          "content": "百度输入法去升级办法+精简去升级旧版👍",
+          "children": []
+        }, {
+          "href": "http://urlqh.cn/mZzm5",
+          "content": "手心输入法",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouw.com/i2Sl31xi6q1g",
+          "content": "搜狗输入法 14.4.0.9307 去广告精简优化版",
+          "children": []
+        }, {
+          "href": "https://srf.xunfei.cn/",
+          "content": "讯飞输入法",
+          "children": []
+        }, {
+          "href": "https://pinyin.thunisoft.com/",
+          "content": "华宇拼音",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008080342-cf815e?p=kyon",
+          "content": "Google拼音2.7.25",
+          "children": []
+        }, {
+          "href": "https://www.mediafire.com/file/sm1vukctq9hpw76",
+          "content": "QQ拼音输入法 4.7经典无广告版",
+          "children": []
+        }, {"href": "https://rime.im/", "content": "RIME👍", "children": []}, {
+          "href": "http://www.freewb.org/",
+          "content": "极点五笔👍",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008080399-d293e6?p=kyon",
+          "content": "小鸭五笔",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008080465-2df5b2?p=kyon",
+          "content": "数字五笔2013",
+          "children": []
+        }, {"href": "http://qq.pinyin.cn/wubi/", "content": "QQ五笔", "children": []}]
+      }, {
+        "href": "",
+        "content": "14.安卓模拟器",
+        "children": [{
+          "href": "https://axu.lanzouj.com/iU2OU088fbmf",
+          "content": "BlueStacks5 安装器",
+          "children": []
+        }, {
+          "href": "https://tw.msi.com/Landing/appplayer/nb",
+          "content": "MSI App Player",
+          "children": []
+        }, {
+          "href": "https://www.ldplayer.net/",
+          "content": "雷电模拟器 海外版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/3440f885-951d-48f1-ad0f-2bbc4b6e1b17?code=CZ3ECT",
+          "content": "雷电模拟器 绿色版",
+          "children": []
+        }, {
+          "href": "http://mumu.163.com/",
+          "content": "网易mumu",
+          "children": []
+        }, {
+          "href": "https://www.downxia.com/downinfo/308929.html",
+          "content": "网易mumu 绿色版",
+          "children": []
+        }, {
+          "href": "https://tw.memuplay.com/",
+          "content": "逍遥模拟器 国际版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/d9dd93a4-9038-4286-b4a8-98db6921ee56?code=CZ3ECT",
+          "content": "逍遥模拟器 免安装版",
+          "children": []
+        }, {
+          "href": "https://lestore.lenovo.com/detail/L100433",
+          "content": "联想模拟器",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/b10dd805-dd6e-42b4-ad60-3f32a694d378?code=CZ3ECT",
+          "content": "联想模拟器 精简版",
+          "children": []
+        }, {
+          "href": "https://lestore.lenovo.com/",
+          "content": "联想应用融合引擎",
+          "children": []
+        }, {
+          "href": "https://tw.bignox.com/",
+          "content": "夜神模拟器 国际版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/b947e924-9d3c-4f64-8bd9-39d654277e8c?code=CZ3ECT",
+          "content": "夜神模拟器 绿色版",
+          "children": []
+        }, {
+          "href": "https://syzs.qq.com/",
+          "content": "腾讯手游助手",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/fp3OymarFKA8TI6-AUruQg",
+          "content": "优化知乎网页版体验／保存知乎回答教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/zC5mitQbM7tR_Is6yvhsIQ",
+          "content": "远程控制软件评测＆推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/MXkO0VsIhJ9Kx_0m_kR9vQ",
+          "content": "2019年末的网盘推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/MZSyOguVVGHsiXQDb5CTlw",
+          "content": "记单词／备考神器推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/troKuwXKvzwI7e0h5E6obg",
+          "content": "文件批量重命名／解压缩／图片查看器软件推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/a0i4Ubve7PeZgyXG613c0g",
+          "content": "Windows系统激活教程",
+          "children": []
+        }, {"href": "https://mp.weixin.qq.com/s/AnzjRSkB58kmi57TrbBXkA", "content": "电脑壁纸软件推荐", "children": []}]
+      }]
+    }, {
+      "href": "", "content": "07　手机常用", "children": [{
+        "href": "",
+        "content": "01.社交／社区",
+        "children": [{
+          "href": "https://flowus.cn/share/a2db96fc-5688-4fba-9d0e-4bfbd20ed5a7?code=CZ3ECT",
+          "content": "知乎－无广告版合集 👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/bb2245cc-784a-43e2-aed9-af220a28fb23?code=CZ3ECT",
+          "content": "微博－无广告版合集👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/cfa807e8-a2a7-4e48-b8f8-f109339753aa?code=CZ3ECT",
+          "content": "小红书－内置红薯猪手版👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/e797ac75-b464-4ea3-8410-4199f79b7e43?code=CZ3ECT",
+          "content": "百度贴吧 Lite版／内置模块版／内部版👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/bd653bb6-ccef-471c-852b-4d9e8f4d1e35?code=CZ3ECT",
+          "content": "虎扑 谷歌版",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/b2CgbtvOF61IwYb4xqgJ5w",
+          "content": "虎扑 7.3.35旧版－安装教程",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/223e1818-ff8f-4f72-a455-700663f454eb?code=CZ3ECT",
+          "content": "QQ／TIM 内置模块版",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Uk3g",
+          "content": "豆瓣 7.56.0 修改版V3",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/37679ccb-21e1-4bda-b234-77acd59b6e3b?code=CZ3ECT",
+          "content": "豆瓣电影 最后一版",
+          "children": []
+        }, {"href": "https://axutongxue.com/", "content": "豆瓣评分", "children": []}]
+      }, {
+        "href": "",
+        "content": "02.购物／支付",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/gFM35XmM6hEGyJpCnDSYZw",
+          "content": "淘宝／京东购物省钱教程 💴🤏",
+          "children": []
+        }, {
+          "href": "http://home.manmanbuy.com/app.aspx",
+          "content": "慢慢买（多平台比价／历史价格查询）",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/93bc1c1c-173e-4e4d-a09a-94d88cb90671?code=CZ3ECT",
+          "content": "支付宝 简洁模式－手动设置教程👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/3728a997-29f9-4f2e-b235-08331eaab35a?code=CZ3ECT",
+          "content": "支付宝 定制版",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/b2CgbtvOF61IwYb4xqgJ5w",
+          "content": "支付宝 10.1.38 旧版安装教程",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/059ac00d-40a2-4c5b-bd57-4b69ceaa59aa?code=CZ3ECT",
+          "content": "淘宝 Lite版（精简／体积小）👍",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Sk3g",
+          "content": "淘宝 红米K50 定制版",
+          "children": []
+        }, {
+          "href": "https://www.burstcloud.co/share/6068372e7fb212ce62306b853b604c0c39b0a76b9758dd4b7a2ebd46ce136d44/%E6%B7%98%E5%AE%9D%E5%9B%BD%E9%99%85%E7%89%88v9.20.0.16.apk",
+          "content": "淘宝 国际版",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/b2CgbtvOF61IwYb4xqgJ5w",
+          "content": "淘宝 8.4.0旧版安装教程",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/141b5ddc-6921-4e6e-9220-9f5320e2eb17?code=CZ3ECT",
+          "content": "京东 定制版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoue.com/iymyonatsaf",
+          "content": "京东 谷歌版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/c944470f-0867-46a0-b720-a3f4e005278b",
+          "content": "拼多多 内部版",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/86W39vOOVcx9xl9emJyiNA#:~:text=2.2-,pwa%E7%A8%8B%E5%BA%8F,-PWA%E5%85%A8%E7%A7%B0%E6%98%AF",
+          "content": "饿了么PWA版👍",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "03.影视／短视频／直播",
+        "children": [{
+          "href": "https://flowus.cn/share/215d6927-9f1c-408d-9b8d-ac48b5da7c13?code=CZ3ECT",
+          "content": "抖音 内置模块版+定制版（功能增强／无广告）",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/97c6f946-56d2-4ac4-8557-474aba830d1d?code=CZ3ECT",
+          "content": "快手 概念版+内部版+修改版（精简／无广告）",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/0a22be27-514c-49e6-8b42-341910121c04?code=CZ3ECT",
+          "content": "优酷 小爱音箱定制",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/90650e99-6044-4321-aaa3-05811636df95?code=CZ3ECT",
+          "content": "芒果TV 去广告版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/f1cbbe86-cca0-40bf-92fb-02a73b80cae6?code=CZ3ECT",
+          "content": "腾讯视频 去广告版+小爱音箱定制版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/18ac6235-2f8b-4a18-a16c-23c0f6a3dfef?code=CZ3ECT",
+          "content": "爱奇艺 去广告版+HD版+随刻版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/d6d21952-ff11-4011-88db-40816482b12e?code=CZ3ECT",
+          "content": "哔哩哔哩／bilibili／B站 内置模块版+去广告版+国际版+追番版+第三方TV版",
+          "children": []
+        }, {
+          "href": "#",
+          "content": "斗鱼直播 极速版",
+          "children": []
+        }, {
+          "href": "https://github.com/guyijie1211/JustLive-Android/releases",
+          "content": "JustLive（聚合直播）",
+          "children": []
+        }]
+      }, {"href": "", "content": "04.效率／办公／网盘／证照", "children": []}, {
+        "href": "",
+        "content": "- 401.WPS",
+        "children": [{
+          "href": "https://flowus.cn/share/b47fb0b5-77f6-4779-888c-b99766798441?code=CZ3ECT",
+          "content": "WPS 破解版+定制版+激活码",
+          "children": []
+        }, {
+          "href": "",
+          "content": "微信公众号<WPS会员>每日签到可得1天免费会员",
+          "children": []
+        }, {
+          "href": "http://axu.xpsup.cn/goodscate/246/cid/213.html",
+          "content": "WPS会员低价购买（3折起）👍",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 402.PDF",
+        "children": [{
+          "href": "",
+          "content": "更多PDF在线转换／处理网站，见８－７栏🈯",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/5c4da789-8a96-44d4-a059-e9c9b9672a9d",
+          "content": "Adobe Acrobat Reader Pro 21.10 破解版（登录后可编辑PDF）👍",
+          "children": []
+        }, {
+          "href": "https://yxssp.lanzoui.com/b887709",
+          "content": "PDF Extra Pro 解锁高级版（可编辑PDF但无法输入中文）密码：he8p",
+          "children": []
+        }, {"href": "#", "content": "iLovePDF（＜100M，每天限4次）", "children": []}, {
+          "href": "#",
+          "content": "Smallpdf（＜15M，每天限2次）",
+          "children": []
+        }, {
+          "href": "#",
+          "content": "Microsoft Office（含免费PDF转Word）",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/47327df0-d754-4c46-aed9-2d3b7dd575cd?code=CZ3ECT",
+          "content": "Xodo PDF 阅读器解锁版👍",
+          "children": []
+        }, {
+          "href": "https://store.gaaiho.cn/download/central.aspx",
+          "content": "Gaaiho 文电通 PDF阅读器",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoue.com/ie4zoqu9xjc",
+          "content": "福昕PDF阅读器 破解版",
+          "children": []
+        }, {"href": "https://axu.lanzoue.com/i5p5Ovurslc", "content": "Flexcil PDF阅读器 破解版", "children": []}]
+      }, {
+        "href": "",
+        "content": "- 403.证件照",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/PShdBeHSn8P7Yd-J2Vv9Pg",
+          "content": "11款完全免费的证件照工具推荐👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/EXs3n0fhYo4t2b50EUsgcw",
+          "content": "警察叔叔－杭州公安出品（需要实名注册）",
+          "children": []
+        }, {
+          "href": "https://store.lizhi.io/site/products/id/36?cid=ds7afku3",
+          "content": "白描证件照－正版特惠仅需￥12元永久",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 404.文档扫描",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/Z0gEfG6Pq9kXfo_eTfxRVA",
+          "content": "免费扫描APP推荐（支持表格识别）",
+          "children": []
+        }, {
+          "href": "https://www.malavida.com/es/soft/office-lens/android/",
+          "content": "Microsoft Lens（原Office Lens）",
+          "children": []
+        }, {
+          "href": "https://www.malavida.com/en/soft/adobe-scan/android/",
+          "content": "Adobe Scan",
+          "children": []
+        }, {"href": "https://www.123pan.com/s/bjcA-y2Lw", "content": "扫描全能王 破解版", "children": []}]
+      }, {
+        "href": "",
+        "content": "- 405.邮箱",
+        "children": [{
+          "href": "https://a.app.qq.com/o/simple.jsp?pkgname=com.microsoft.office.outlook",
+          "content": "Outlook👍",
+          "children": []
+        }, {
+          "href": "https://www.malavida.com/en/soft/microsoft-outlook-lite/android/",
+          "content": "Outlook Lite",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/iZKZU091ensb",
+          "content": "网易邮箱大师 去广告去更新版",
+          "children": []
+        }, {
+          "href": "#",
+          "content": "百度网盘内部版 11.16.3",
+          "children": []
+        }, {
+          "href": "https://zntx.lanzoul.com/iK7pg2e3scch",
+          "content": "滴答清单 TickTick 国际版 7.4.1.1 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoue.com/ioE6V0p3ifbi",
+          "content": "番茄ToDo 10.2.9.72 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoue.com/icb837g",
+          "content": "睡眠小镇 SleepTown 3.2.4破解版",
+          "children": []
+        }, {
+          "href": "https://www.burstcloud.co/share/cd882ea7a34bcdaaa9441a5def8c8c1e7b6a7665112c6e8f083c95412f36b28e/Forest%20%E4%B8%93%E6%B3%A8%E6%A3%AE%E6%9E%97v4.66.1%E9%AB%98%E7%BA%A7%E7%89%88.apk",
+          "content": "Forest 4.66.1 破解版",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/c8ol1trwk1wIs5zwyKyDPQ",
+          "content": "离线本地身份证加水印工具",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/U_G0qq5COO9txXheh4KrOQ",
+          "content": "日历APP推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/yEYkBCb1zORdfkFF9S3I1w",
+          "content": "文件去重／文档对比软件推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/VDsEwDDmATZ0c-pcBLvqdQ",
+          "content": "计算器APP推荐（下载页面较文章内容有更新）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/qjsVm5tTDdLgsX2gcPlCjQ",
+          "content": "投屏APP推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/dH8FQPHTHZNzcPQUP2Xzvg#:~:text=%E4%B8%89%E3%80%81-,android,-%E7%8E%B0%E5%9C%A8%E5%90%84%E5%A4%A7%E5%9B%BD%E4%BA%A7",
+          "content": "录屏APP推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/MIWtVjcnxw9S_LZcMyoPNQ",
+          "content": "手机远程协助／手机远程控制手机APP推荐（免ROOT）",
+          "children": []
+        }]
+      }, {"href": "", "content": "05.学习／考试／健身", "children": []}, {
+        "href": "",
+        "content": "01.云笔记",
+        "children": [{
+          "href": "https://www.malavida.com/es/soft/onenote/android/",
+          "content": "OneNote谷歌版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/fbd9078c-83be-43dd-8700-1ba0281fcdd1?code=CZ3ECT",
+          "content": "有道云笔记 去更新版",
+          "children": []
+        }, {
+          "href": "https://www.burstcloud.co/share/4f787e967fdaa355a25f04178ab1030f18474bbab801792bd8fd08f42718d0b5/%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%2010.8.35%EF%BC%88%E8%A7%A3%E9%94%81%E4%BC%9A%E5%91%98%EF%BC%89.apk",
+          "content": "印象笔记 破解版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/f4f9b7e1-34a2-48d4-ba34-8bf2baa95482?code=CZ3ECT",
+          "content": "为知笔记 直装破解版",
+          "children": []
+        }, {
+          "href": "https://store.lizhi.io/site/products/id/399?cid=ds7afku3",
+          "content": "为知笔记－正版特惠仅需59年／119两年／179三年",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "02.英语",
+        "children": [{
+          "href": "",
+          "content": "每日英语听力没有可用的破解版不要再求了！实在喜欢建议入正",
+          "children": []
+        }, {
+          "href": "#",
+          "content": "听歌学英语（不错的扩充词汇方式）",
+          "children": []
+        }, {
+          "href": "https://www.dicts.cn/dictword20181/download.html",
+          "content": "词根词缀字典",
+          "children": []
+        }, {"href": "#", "content": "Pleco（最好用的汉英词典）", "children": []}, {
+          "href": "#",
+          "content": "韦氏词典 Merriam-Webster Dictionary（复杂单词必查的英英词典）",
+          "children": []
+        }, {
+          "href": "https://yxssp.lanzoui.com/b0q6iadi",
+          "content": "多邻国 密码：288g",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoue.com/idtJj0lzgn5g",
+          "content": "可可英语 4.7.4",
+          "children": []
+        }, {
+          "href": "https://www.123pan.com/s/bjcA-TsLw",
+          "content": "墨墨背单词 3.8.40 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/idLW8v1j5wd",
+          "content": "Quizlet 6.2.3 高级版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/ib6pcze",
+          "content": "知米背单词 4.8.11 高级版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/iuN9zv1i67i",
+          "content": "不背单词 4.4.3 去广告版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/ineeEv1jr9c",
+          "content": "有道词典国际版 U-Dictionary 5.0.5 纯净版",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "03.驾照",
+        "children": [{
+          "href": "https://www.burstcloud.co/share/e65999985ff0e8bda94c3ac14ed0aeaa3f090be1fde2ae63ce45bd841892dd14/%E9%A9%BE%E8%80%83%E7%B2%BE%E7%81%B5%201.7.8.0.apk",
+          "content": "驾考精灵 1.7.8.0 高级版",
+          "children": []
+        }, {
+          "href": "https://www.burstcloud.co/share/f8e126e88b51793a57737f57521e4864002809124c3dbddb2945bfc1fc25f148/%E9%A9%BE%E8%80%83%E8%B6%85%E4%BA%BA%201.0.5.apk",
+          "content": "驾考超人 1.0.5高级版",
+          "children": []
+        }, {
+          "href": "https://www.burstcloud.co/share/a34881ce672a354a01f3af16198722a50449b5259ce159183200f67843e5fad5/%E8%BD%A6%E8%BD%AE%E9%A9%BE%E8%80%83%E9%80%9A%208.6.8%20%E9%AB%98%E7%BA%A7%E7%89%88%EF%BC%88%E4%BB%85%E6%94%AF%E6%8C%81%E9%A2%98%E5%BA%93%EF%BC%89.apk",
+          "content": "车轮驾考通 8.6.8 高级版",
+          "children": []
+        }, {
+          "href": "https://www.burstcloud.co/share/82925806915b4ae2b11809005a7ed4e289e68cf645e13ae0a7a1532d28110333/%E6%87%92%E4%BA%BA%E9%A9%BE%E8%80%83%202.12.8%E4%BC%9A%E5%91%98%E7%89%88.apk",
+          "content": "懒人驾考 2.12.8会员版",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "04.健身",
+        "children": [{
+          "href": "http://axu.xpsup.cn/category/index.html#:~:text=%E7%94%9F%E6%B4%BB%E6%9C%8D%E5%8A%A1",
+          "content": "KEEP／每日瑜伽／薄荷健康等APP会员低价购买🔥",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/KuMHCpmBGkb8Q4tl-JAEFw",
+          "content": "立训／哔哩哔哩／豹哥健身／训记",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/6af20c41-5c66-4e4f-a4ed-cdca624c0213?code=CZ3ECT",
+          "content": "华为运动健康旧版＋新版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/iUqa702ucggh",
+          "content": "FitTime 3.3.0.1 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/iMH8eyhiqqb",
+          "content": "Keep TV版 3.1.0 解锁全部课程",
+          "children": []
+        }, {"href": "#", "content": "好轻（完全免费）", "children": []}]
+      }, {
+        "href": "",
+        "content": "05.普通话",
+        "children": [{
+          "href": "https://www.123865.com/s/bjcA-AKdg",
+          "content": "普通话测试 6.0.1.9 破解版",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-7k3g",
+          "content": "普通话测试 5.8.7 破解版",
+          "children": []
+        }, {"href": "https://www.123865.com/s/bjcA-lk3g", "content": "普通话测试 4.1.3 破解32位版", "children": []}]
+      }, {
+        "href": "",
+        "content": "06.课程表",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/nPbwnYZTO1ZX73Dy3saxJg",
+          "content": "超级课程表去广告教程👍",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id916497066",
+          "content": "课程表（支持Widget）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/QGZcw1btY6GD42mxk0PC1A",
+          "content": "全年龄+各行各业神级视频学习资源库👍👍👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/GFVbvUhwlV5nbOVD04BiAA",
+          "content": "免费试卷还原APP＋错题本APP推荐👍👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/MZSyOguVVGHsiXQDb5CTlw",
+          "content": "通用学习神器推荐（辅助记忆／刷题／错题本等）👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/iOjKiPdW_3RM24TLyjIwFQ",
+          "content": "大学免费一键聚合搜题",
+          "children": []
+        }, {"href": "https://mp.weixin.qq.com/s/Y4hKcbfl_yGA2WTHbNDOjw", "content": "备忘录APP推荐", "children": []}]
+      }, {
+        "href": "",
+        "content": "06.地图",
+        "children": [{
+          "href": "https://flowus.cn/share/082d4c05-82ac-423a-83c9-b0bf61f30ab3?code=CZ3ECT",
+          "content": "高德地图 无广告谷歌版+定制版+修改版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/c6375a82-0935-448f-bdfb-a2f0e480b313?code=CZ3ECT",
+          "content": "百度地图 无广告关怀版+定制版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/027569e5-4e18-4e88-aedd-423db6452b6d?code=CZ3ECT",
+          "content": "腾讯地图 无广告定制版",
+          "children": []
+        }, {"href": "https://bmaps.cn/", "content": "白马地图", "children": []}]
+      }, {"href": "", "content": "07.下载", "children": []}, {
+        "href": "",
+        "content": "- 701.安卓应用市场／谷歌APP下载",
+        "children": [{
+          "href": "https://www.malavida.com/es/android/",
+          "content": "Malavida",
+          "children": []
+        }, {
+          "href": "https://ru.softonic.com/",
+          "content": "Softonic",
+          "children": []
+        }, {
+          "href": "https://filehippo.com/android/",
+          "content": "Filehippo",
+          "children": []
+        }, {
+          "href": "https://mydiv.net/",
+          "content": "Mydiv",
+          "children": []
+        }, {
+          "href": "https://workdrive.zohopublic.com.cn/file/6a2gtb3ea678d96ce4fbcbf9696f59a1fb0b3",
+          "content": "F-Droid 1.14",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/abad0f37-61a4-42b1-a774-9e37f9e17aa7?code=CZ3ECT",
+          "content": "3款蓝奏云资源搜索APP",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 702.短视频下载",
+        "children": [{
+          "href": "https://url67.ctfile.com/f/14869667-1245656899-5bc255?p=kyon",
+          "content": "万能下载",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1245656812-d39433?p=kyon",
+          "content": "聚能去水印",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1245659168-0bc002?p=kyon",
+          "content": "快抖去水印",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1245657539-2e823a?p=kyon",
+          "content": "侠客短视频解析",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Lk3g",
+          "content": "下载工具箱",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-jE3g",
+          "content": "一键去水印助手",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Tk3g",
+          "content": "青禾去水印",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-vk3g",
+          "content": "橙子去水印",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/imkNM07t55mj",
+          "content": "快去水印工具箱 1.0",
+          "children": []
+        }, {
+          "href": "https://www.icloud.com/shortcuts/ea4b9552510947ef8f38054c633a4016",
+          "content": "黑科技全网短视频去水印（快捷指令）",
+          "children": []
+        }, {
+          "href": "https://www.icloud.com/shortcuts/137f39c3b9ff413fb8cfa22364796f70",
+          "content": "短视频去水印保存（快捷指令）",
+          "children": []
+        }, {
+          "href": "https://www.icloud.com/shortcuts/7b2d1a35a42445fa8b5dd029ec801984",
+          "content": "短视频下载器（快捷指令）",
+          "children": []
+        }, {
+          "href": "https://www.icloud.com/shortcuts/056f72ab0eff4ade9ef5af325982e99b",
+          "content": "全网视频去水印（快捷指令）",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 703.Instagram下载",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/UKtY0paJweT7W-kIjrjJ2Q",
+          "content": "免翻墙刷instagram的方法（包括下载）👍",
+          "children": []
+        }, {
+          "href": "",
+          "content": "iOS复制ins图片链接，然后在Safari打开，长按图片复制，然后在系统备忘录粘贴，最后就能保存到相册了",
+          "children": []
+        }, {
+          "href": "https://www.icloud.com/shortcuts/c6d233ae55ea45d28c719bb7a88fa808",
+          "content": "下载IG照片及影片（快捷指令）",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id779715397",
+          "content": "instdown",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id1455355839",
+          "content": "Reposter for Instagram",
+          "children": []
+        }, {
+          "href": "",
+          "content": "安卓复制ins图片链接，然后在夸克／百度／QQ浏览器打开，长按图片即可保存",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouo.com/iFnxox4s5je",
+          "content": "Regram 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouo.com/iExbMx4s2tg",
+          "content": "FastSave 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouo.com/iua4Bx4s54j",
+          "content": "Downloader for Instagram Video 破解版",
+          "children": []
+        }, {
+          "href": "https://superparse.com/zh",
+          "content": "Twitter视频解析下载",
+          "children": []
+        }, {
+          "href": "https://instagram.iiilab.com/",
+          "content": "Instagram图片视频解析下载",
+          "children": []
+        }, {
+          "href": "https://www.instaloadgram.com/zh/",
+          "content": "InstaLoadGram （支持照片和视频）",
+          "children": []
+        }, {
+          "href": "https://inflact.com/downloader/",
+          "content": "Infalct（Instagram／Facebook／Twitter／Twitch）",
+          "children": []
+        }, {
+          "href": "https://bigbangram.com/content/instagram-downloader/instagram-profile-downloader/",
+          "content": "Bigbangram",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 704.YouTube下载",
+        "children": [{
+          "href": "https://www.123865.com/s/bjcA-ik3g",
+          "content": "Snaptube👍",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1433640907-25e653?p=kyon",
+          "content": "Nwpipe",
+          "children": []
+        }, {"href": "https://www.123865.com/s/bjcA-zk3g", "content": "TubeMate", "children": []}, {
+          "href": "",
+          "content": "BT磁力下载工具推荐请见３栏 🈯",
+          "children": []
+        }, {
+          "href": "https://yxssp.lanzoui.com/b478866/",
+          "content": "1DM 破解版 密码：cajd",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/ArHr35pyFvXSq63ikvwXHQ",
+          "content": "2023年微信视频号下载教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/q-Ff8inxQN2wj5M-UE6J4w",
+          "content": "微信小程序内视频下载教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/b2CgbtvOF61IwYb4xqgJ5w",
+          "content": "iOS旧版APP下载教程",
+          "children": []
+        }]
+      }, {"href": "", "content": "08.图片", "children": []}, {
+        "href": "",
+        "content": "01.抠图",
+        "children": [{
+          "href": "https://axutongxue.com/",
+          "content": "VIVO／鸿蒙／小米／iOS内置抠图功能",
+          "children": []
+        }, {
+          "href": "https://www.wandoujia.com/apps/8129725",
+          "content": "抠图秀",
+          "children": []
+        }, {"href": "https://apps.apple.com/cn/app/id1631498311", "content": "一键抠图", "children": []}, {
+          "href": "#",
+          "content": "天天P图",
+          "children": []
+        }, {
+          "href": "#",
+          "content": "Backgroud Eraser",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/isCfY0acz3de",
+          "content": "抠图P图 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/ifLjD0acz1dc",
+          "content": "傲软扣图 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/io9sV0acz0zi",
+          "content": "Knockout Pro 破解版",
+          "children": []
+        }, {"href": "https://axu.lanzouj.com/ipXQs0acz4wj", "content": "扣图换背景 破解版", "children": []}]
+      }, {
+        "href": "",
+        "content": "02.P图",
+        "children": [{
+          "href": "http://axu.xpsup.cn/category/index.html#:~:text=%E5%9B%BE%E5%83%8F%E5%B7%A5%E5%85%B7",
+          "content": "醒图／美图秀秀／美颜相机／黄油相机等会员低价购买",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/ioC_0Iz_m5R7Vc4ze0LzmQ",
+          "content": "醒图白嫖教程👍",
+          "children": []
+        }, {
+          "href": "https://myqqjd.lanzout.com/b06lyc3tg",
+          "content": "醒图 破解版",
+          "children": []
+        }, {
+          "href": "https://www.now61.com/s/ak7Tp",
+          "content": "美图秀秀 破解版",
+          "children": []
+        }, {
+          "href": "https://yxssp.lanzoui.com/b660746/",
+          "content": "VSCO 破解版 密码：1nv7",
+          "children": []
+        }, {
+          "href": "https://www.malavida.com/es/soft/facetune/android/",
+          "content": "Facetune",
+          "children": []
+        }, {
+          "href": "https://www.malavida.com/es/soft/snapseed/android/",
+          "content": "Snapseed",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-dk3g",
+          "content": "PicsArt 美易 破解版",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-3k3g",
+          "content": "Adobe Lightroom 破解版",
+          "children": []
+        }, {
+          "href": "https://www.123pan.com/s/bjcA-j2Lw",
+          "content": "B612咔叽 去广告版（兼容华为）",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/iT5managdda",
+          "content": "MIX 滤镜大师 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/iDXM8enznte",
+          "content": "泼辣修图 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/i8GFPewlatg",
+          "content": "TouchRetouch 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/ik6Lcengd3e",
+          "content": "马卡龙玩图 去广告去更新版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/iukTOengs9a",
+          "content": "无他相机 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/irZtmwaruva",
+          "content": "轻颜相机 破解版",
+          "children": []
+        }, {
+          "href": "https://www.wandoujia.com/apps/7701043",
+          "content": "Foodie",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/XAct29Y_71Fecc3CV200vg",
+          "content": "照片杂物／照片瑕疵去除APP推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/zpn6rp5lArM-BgVIDufgog",
+          "content": "相册备份APP推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/Btg7i_J9DZdSdGOpgockfQ",
+          "content": "那些图片上的龙珠头／小怪兽都是怎么弄的？",
+          "children": []
+        }, {"href": "https://mp.weixin.qq.com/s/Vai0fQZlDNMBb7YhkWMJlw", "content": "图片去水印教程", "children": []}]
+      }, {
+        "href": "",
+        "content": "09.音乐",
+        "children": [{
+          "href": "",
+          "content": "收费音乐免费下载器见２－７栏 🈯",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/660731b0-a596-41ec-bd21-03214fa6a2dd?code=CZ3ECT",
+          "content": "QQ音乐－简洁版+定制版+Play版（无广告）",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/5985f63a-d80d-4d14-b478-356bb2f6397e?code=CZ3ECT",
+          "content": "网易云音乐－极速版+去广告版+车机版+iOS旧版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/37bfb402-a4f7-4b98-9fba-cd0c244445ad?code=CZ3ECT",
+          "content": "酷我音乐－高级版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/84b39c91-6fdf-4808-9c71-b49bf8a3530e?code=CZ3ECT",
+          "content": "酷狗音乐－概念版+去广告版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/04271ab7-25f6-4c4a-ad2e-845fc2540aa4?code=CZ3ECT",
+          "content": "Poweramp 破解版",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "10.视频",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/400rolmpV3g0Zr9bZBSEeg",
+          "content": "无需会员百度云倍速播放方法合集",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/y9lwrddXNEo9vzSRM-rszg#wechat_redirect#:~:text=%E9%98%BF%E8%99%9Aandroid%E4%B8%8A%E5%B0%B1%E5%8F%AA%E7%94%A8%E8%BF%87%E4%B8%80%E6%AC%BE%E6%92%AD%E6%94%BE%E5%99%A8",
+          "content": "视频播放器推荐（文章第2点）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/KqBiAO2eo_MS3yV8WtuJpQ",
+          "content": "免费无字幕视频实时翻译",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/GnkfCVxpTm1hS8gFD5fwMw",
+          "content": "视频剪辑软件推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/-ueYRz90Amwhmb1r7etCHg",
+          "content": "支持长按倍速的播放器推荐",
+          "children": []
+        }, {
+          "href": "https://yxssp.lanzoui.com/b331494/",
+          "content": "Mx player 去广告破解版 密码：ao5m",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id1116905928",
+          "content": "nPlayer（￥30.00）",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id395680819",
+          "content": "Aplayer（￥18.00）",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id650377962",
+          "content": "VLC（iOS）",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id6443975850",
+          "content": "SenPlayer（支持视频截图）",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Hk3g",
+          "content": "QQ影音（支持视频截图）",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-hk3g",
+          "content": "XPlayer 去广告版（支持视频截图）",
+          "children": []
+        }, {"href": "https://www.123865.com/s/bjcA-5k3g", "content": "Mx player 支持长按倍速版", "children": []}]
+      }, {
+        "href": "",
+        "content": "11.阅读器",
+        "children": [{
+          "href": "",
+          "content": "RSS",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/wQh3BdeJnKWab7Q331l54Q",
+          "content": "利用RSS实现纯净阅读（上）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/ON9ESTyMr6oOKnu7Y0Nuyg",
+          "content": "利用RSS实现纯净阅读（下）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/hxDtsF1Hgi4jCQ_7wUHM8A",
+          "content": "利用RSS订阅公众号教程（文章第3点）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/ZYS9bF5O0kPVH5YaF_SgYw",
+          "content": "自制RSS源／自行生成RSS源（文章第2点）",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1433640400-91369b?p=kyon",
+          "content": "FeedMe",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-bk3g",
+          "content": "Fluent Reader Lite",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Zk3g",
+          "content": "FocusReader",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1433640394-334971?p=kyon",
+          "content": "NewsJet RSS",
+          "children": []
+        }, {"href": "https://axu.lanzouj.com/iwqmE07gawmd", "content": "Inoreader", "children": []}, {
+          "href": "",
+          "content": "电子书免费网站下载见２－１栏 🈯",
+          "children": []
+        }, {
+          "href": "http://axu.xpsup.cn/category/index.html#:~:text=%E9%9F%B3%E9%A2%91%E8%AF%BB%E4%B9%A6",
+          "content": "QQ阅读／樊登读书／掌阅／书旗／咪咕／十点／起点等APP会员低价购买🔥",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/2a6c2055-006a-4962-9aa3-941295005715?code=CZ3ECT",
+          "content": "微信读书👍",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoue.com/itu7R0pdsqpi",
+          "content": "静读天下 专业版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoue.com/itt5I0pdsvtc",
+          "content": "iReader 掌阅 高级版",
+          "children": []
+        }, {"href": "https://apps.apple.com/cn/app/id1307517930", "content": "山丘阅读器", "children": []}]
+      }, {
+        "href": "",
+        "content": "12.浏览器",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/USvQbx7AwyEVkMDTPnzbQA",
+          "content": "网页广告拦截规则+扩展教程👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/ohcOGOGwPczZeJ4fWmSHLg",
+          "content": "不屏蔽网站的投屏浏览器推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/3rmsuSxewu_Lr7E64SXZow",
+          "content": "视频资源嗅探下载浏览器推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/HizWCCouFvYbhPv56j_6MQ",
+          "content": "Safari 安装油猴脚本教程",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id1551893305",
+          "content": "亚瑟浏览器（含内购）投屏+下载最强浏览器👍",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id1491605477",
+          "content": "Foxok浏览器（￥6）支持设为默认浏览器／油猴脚本",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id1631941898",
+          "content": "Focus浏览器（含内购）支持油猴脚本",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/uOWkUIoUv45Yn3beZ5O8nQ",
+          "content": "Edge Canary（支持扩展／PWA）👍",
+          "children": []
+        }, {"href": "#", "content": "雨见／可拓／Rains 浏览器（支持扩展）👍", "children": []}, {
+          "href": "#",
+          "content": "海阔视界／嗅觉浏览器👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/5c092544-0048-4283-9f8f-b8944d3a42ec?code=CZ3ECT",
+          "content": "Kiwi－谷歌内核（支持扩展／PWA）",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/0b22ce24-1fba-4fc3-b600-b2e29308b968?code=CZ3ECT",
+          "content": "iceraven／Firefox－火狐内核（支持扩展／PWA）",
+          "children": []
+        }, {
+          "href": "https://viayoo.com/zh-cn/",
+          "content": "Via浏览器（支持安装插件）",
+          "children": []
+        }, {
+          "href": "https://www.xbext.com/",
+          "content": "X浏览器（支持安装脚本）",
+          "children": []
+        }, {
+          "href": "https://www.malavida.com/es/soft/samsung-internet-browser/android/",
+          "content": "三星浏览器（支持PWA）",
+          "children": []
+        }, {
+          "href": "https://www.malavida.com/es/soft/opera/android/",
+          "content": "Opera（支持PWA）",
+          "children": []
+        }, {
+          "href": "https://www.malavida.com/es/soft/brave-browser/android/",
+          "content": "Brave（支持PWA）",
+          "children": []
+        }, {
+          "href": "https://www.malavida.com/es/soft/yandex-browser/android/",
+          "content": "Yandex（支持浏览器扩展）",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-qk3g",
+          "content": "夸克 去网站访问限制／去广告／去更新版",
+          "children": []
+        }, {
+          "href": "https://my.syncplicity.com/share/84nvwywcrzrbhwh/",
+          "content": "狐猴浏览器 无会员版",
+          "children": []
+        }, {"href": "https://alookweb.com/", "content": "Alook", "children": []}]
+      }, {
+        "href": "",
+        "content": "13.输入法",
+        "children": [{
+          "href": "https://axu.lanzouj.com/iBxNG08y33nc",
+          "content": "百度输入法 小米定制版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/iTCd1091depi",
+          "content": "搜狗输入法 OPPO Find X5 Pro 天玑定制版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/iVgAb091bhdc",
+          "content": "搜狗输入法 小爱老师学习机定制版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzouj.com/i3s30091cnmd",
+          "content": "讯飞输入法 谷歌版",
+          "children": []
+        }, {"href": "https://axu.lanzouj.com/igbTJ091d3xa", "content": "Gboard", "children": []}]
+      }, {
+        "href": "",
+        "content": "14.新闻",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/ZYS9bF5O0kPVH5YaF_SgYw",
+          "content": "新闻事实热点APP推荐👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/be61d40a-e76d-4e1a-b496-c75c869f50b5?code=CZ3ECT",
+          "content": "今日头条 华为定制版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/df3e0f4c-f7aa-41bc-9be7-0100076e937b?code=CZ3ECT",
+          "content": "今日头条 谷歌版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/f1cbbe86-cca0-40bf-92fb-02a73b80cae6?code=CZ3ECT",
+          "content": "腾讯新闻 定制版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/eb01d18a-4c30-41e0-81ae-6e38c1e9b4e2?code=CZ3ECT",
+          "content": "网易新闻 乐檬定制版（无广告）",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "15.生活",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/XkgrWL-ADLzI3vYganT0XA",
+          "content": "三大运营商免费骚扰电话拦截开通方式👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/f-52fRsmfQXt6pY2nuf_Pg",
+          "content": "天气预报APP原理与APP推荐👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/2qASVRluNRslMRSX3BW_yQ",
+          "content": "解决安卓手机通知管理难题＋实现聊天消息防撤回！",
+          "children": []
+        }, {
+          "href": "https://store.lizhi.io/site/products/id/316?cid=ds7afku3",
+          "content": "通知滤盒（手机通知管理工具）－正版特惠仅需￥29元永久！",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/Ze5zWxPdr18qgI-o1FG2dw",
+          "content": "微软姓名全拼邮箱注册教程+邮箱客户端推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/YusBumMNs8bSJ-ELo1kAaQ",
+          "content": "破解WiFi密码／WiFi万能钥匙",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/xGWzVv-60jRvIWLVCIX_Yg",
+          "content": "拼电影台词软件推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/drabpb-ML6iLtvqhU6Mo6Q",
+          "content": "听歌识曲APP推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/Vx3sjyR7PvfmPygocayGDw",
+          "content": "网页转APP教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/8OEBLlcHaiYDuEt9Nkm5dQ",
+          "content": "不换号码，改保号套餐教程",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "16.游戏",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/aq7c56G6C3eCrIz9jI5ODw",
+          "content": "安卓汉化版／破解版／免谷歌版手游下载＋IOS还能白嫖付费APP办法",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/PmlBMwvlrOlvP9WK3YKs4g",
+          "content": "模拟器／家机／街机／掌机游戏ROM与模拟器下载",
+          "children": []
+        }, {"href": "https://apps.qoo-app.com/", "content": "Qoo", "children": []}, {
+          "href": "https://www.ccplay.cc/",
+          "content": "虫虫助手",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "17.安全／清理",
+        "children": [{
+          "href": "https://m.qq.com/",
+          "content": "腾讯手机管家﹝骚扰电话短信拦截﹞👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/ArG8Jr-oG6ZkFyIHE49PPw",
+          "content": "清理垃圾APP推荐👍",
+          "children": []
+        }, {"href": "https://mp.weixin.qq.com/s/oXJVVdPXmfJgnejDWucDRQ", "content": "相册清理APP推荐", "children": []}]
+      }, {
+        "href": "",
+        "content": "18.日记／记账",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/LxunrZgejoF6JW4B7p7-mg",
+          "content": "家庭财产管理＋共用亲情账户",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/YKegNamJIBACXPcTOYkB3A",
+          "content": "50款记账APP评测与推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/y-paTeFh0MBQ5pK5Kbj81Q",
+          "content": "40款日记APP评测与推荐",
+          "children": []
+        }, {
+          "href": "https://store.lizhi.io/site/products/id/313?cid=ds7afku3",
+          "content": "白橡日记（原卡片日记）－正版特惠仅需￥5月／终身会员仅需￥45",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/LxunrZgejoF6JW4B7p7-mg",
+          "content": "家庭财产管理方案推荐",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "19.屏蔽广告／自动跳过广告",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/aM_XTs9TSN7FeEE9XhrvqQ",
+          "content": "修改DNS实现全局广告拦截",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1007782240-6cabae?p=kyon",
+          "content": "李跳跳",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1007782258-709b19?p=kyon",
+          "content": "叮小跳",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1007782300-1f1da7?p=kyon",
+          "content": "轻启动",
+          "children": []
+        }, {
+          "href": "https://touchhelper.zfdang.com/",
+          "content": "开屏跳过",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1007785532-471320?p=kyon",
+          "content": "TapClick",
+          "children": []
+        }, {
+          "href": "https://gkd.li/guide/",
+          "content": "GKD",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id1591620171",
+          "content": "Stay（￥38）",
+          "children": []
+        }, {"href": "https://apps.apple.com/cn/app/id6446811843", "content": "Addons（￥28）", "children": []}]
+      }, {
+        "href": "",
+        "content": "20.虚拟定位／刷步",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/dmcJSROZgJFFpiRNWnIikQ",
+          "content": "关于钉钉虚拟定位打卡已经能被识别的说明⚠️",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/KcWoz8pwuvyI872diwknSQ",
+          "content": "微信／支付宝等刷步数教程（部分已失效）",
+          "children": []
+        }, {
+          "href": "http://www.ishuabu.cn/",
+          "content": "爱刷步",
+          "children": []
+        }, {
+          "href": "https://github.com/ZCShou/GoGoGo",
+          "content": "影梭（开源免ROOT）👍",
+          "children": []
+        }, {
+          "href": "https://moni.bangnimang.net/",
+          "content": "摩尼定位",
+          "children": []
+        }, {
+          "href": "http://fakeloc.cc/app",
+          "content": "Fake Location",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/b9963598-e47d-45d1-996f-5bd787256f89?code=CZ3ECT",
+          "content": "VMOS Pro＋Lataclysm",
+          "children": []
+        }, {
+          "href": "https://www.i4.cn/news_detail_31175.html",
+          "content": "爱思助手👍",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/62359d66-e975-4313-8145-8dbcf9509bd1?code=CZ3ECT",
+          "content": "Location-Cleaned",
+          "children": []
+        }, {
+          "href": "https://freel.vip/",
+          "content": "Freel（收费）",
+          "children": []
+        }, {
+          "href": "https://github.com/hongdong/SimulateLocation",
+          "content": "Xcode的Simulate Location功能",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "21.应用多开／手机分身",
+        "children": [{
+          "href": "",
+          "content": "手机厂自带的分身功能",
+          "children": []
+        }, {
+          "href": "https://consumer.huawei.com/cn/support/content/zh-cn15768985/",
+          "content": "华为－多用户模式",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/Kk9fkqUkI8j6WBG2B328dQ",
+          "content": "魅族－隐私模式",
+          "children": []
+        }, {
+          "href": "http://www.samsungmembers.cn/thread-623413-6-71.html",
+          "content": "三星－安全文件夹",
+          "children": []
+        }, {
+          "href": "http://hd.mi.com/y/09111p/index.html",
+          "content": "小米－手机分身",
+          "children": []
+        }, {
+          "href": "https://weibo.com/3871046669/HkzZGlypQ",
+          "content": "一加－多用户模式（通知栏里切换）",
+          "children": []
+        }, {
+          "href": "https://www.coloros.com/instruction?id=503&version=ColorOS%207",
+          "content": "OPPO－多用户模式（需要ColorOS 7以上）",
+          "children": []
+        }, {
+          "href": "",
+          "content": "VIVO－Funtouch OS 3.0以下系统有访客模式／Funtouch OS 3.0及以上系统没有访客模式",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/VOy2czRNd0EsLsyBm53_2A",
+          "content": "魅族－隐私模式",
+          "children": []
+        }, {
+          "href": "https://spatch.die.lu/",
+          "content": "天鉴👍",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1431918985-316cc6?p=kyon",
+          "content": "炼妖壶👍",
+          "children": []
+        }, {
+          "href": "https://www.iofomo.com/docs/mobile/konker/Introduce/",
+          "content": "空壳",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Ak3g",
+          "content": "小X分身",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-9k3g",
+          "content": "猴子分身",
+          "children": []
+        }, {
+          "href": "https://www.vmos.cn/",
+          "content": "VMOS 虚拟大师",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/QpTidPxW0qJNZLLo05ddfw",
+          "content": "iPhone手机变相应用双开教程",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "22.文件管理／解压缩",
+        "children": [{
+          "href": "https://www.123865.com/s/bjcA-Qk3g",
+          "content": "文件管理器+（支持SMB3）",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Ek3g",
+          "content": "NMM文件管理器（支持SMB3）",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-kk3g",
+          "content": "CX文件管理器（支持SMB3）",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-mk3g",
+          "content": "FX管理器 Plus 汉化版（支持SMB2+／全文搜索）",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-4k3g",
+          "content": "Solid Explorer（支持SMB2）",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-1k3g",
+          "content": "X-plore（支持SMB2）",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id1638657012",
+          "content": "猫头鹰文件（支持SMB3）",
+          "children": []
+        }, {
+          "href": "https://apps.apple.com/cn/app/id499470113",
+          "content": "FE文件管理器（支持SMB3）",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1433622844-fd504e?p=kyon",
+          "content": "RE管理器 破解版",
+          "children": []
+        }, {
+          "href": "https://xiaogao.lanzoum.com/iAi790skgy4d",
+          "content": "MT管理器 破解版",
+          "children": []
+        }, {
+          "href": "https://www.123865.com/s/bjcA-Jk3g",
+          "content": "ES文件浏览器 破解版",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/dc001d66-d17f-44ec-b63d-48fbe57e448f?code=CZ3ECT",
+          "content": "ES文件浏览器 原团队最后一版",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1433622826-164b0d?p=kyon",
+          "content": "ZArchiver 破解版（解压缩软件）",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "23.音频编辑／变声器",
+        "children": [{
+          "href": "https://www.123pan.com/s/bjcA-H05w.html",
+          "content": "多款变声器APP合集",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/iIVwUnmnwhc",
+          "content": "Audio Evolution Mobile 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/i92JPnmnwqb",
+          "content": "AudioLab 破解版",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/iPPj1nmnxfg",
+          "content": "音频编辑器 破解版",
+          "children": []
+        }, {"href": "https://axu.lanzouj.com/iMoV500k2pxg", "content": "Audio Editor 破解版", "children": []}]
+      }, {
+        "href": "",
+        "content": "24.免费搜题",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/iOjKiPdW_3RM24TLyjIwFQ",
+          "content": "大学免费电脑端一键聚合搜题教程",
+          "children": []
+        }, {
+          "href": "https://www.tutusouti.com/",
+          "content": "考途",
+          "children": []
+        }, {
+          "href": "https://sj.qq.com/appdetail/com.ixyzh.question",
+          "content": "小包搜题",
+          "children": []
+        }, {
+          "href": "https://sj.qq.com/appdetail/com.fenbi.android.solar",
+          "content": "小猿搜题",
+          "children": []
+        }, {
+          "href": "https://www.daxuesoutijiang.com/",
+          "content": "大学搜题酱",
+          "children": []
+        }, {
+          "href": "https://www.ktyyapp.cn/",
+          "content": "火星搜题（理科推荐）",
+          "children": []
+        }, {
+          "href": "https://sj.qq.com/appdetail/com.xuexiaoyi.xxy",
+          "content": "学小易（文科推荐）",
+          "children": []
+        }, {
+          "href": "https://www.icourse163.org/mobile.htm",
+          "content": "中国大学MOOC（慕课答案）",
+          "children": []
+        }, {
+          "href": "https://sj.qq.com/appdetail/com.pptiku.tdd",
+          "content": "题多多",
+          "children": []
+        }, {"href": "https://sj.qq.com/appdetail/com.zhkj.photomath.computer", "content": "Photomath", "children": []}]
+      }, {"href": "", "content": "25.IPA资源／iOS自签", "children": []}, {
+        "href": "",
+        "content": "- 2501.IPA资源下载站",
+        "children": [{
+          "href": "https://toyou.club/",
+          "content": "凸游CLUB",
+          "children": []
+        }, {"href": "https://ipa.store/", "content": "IPA商店", "children": []}, {
+          "href": "https://www.ipahome.cn/",
+          "content": "IPA之家",
+          "children": []
+        }, {
+          "href": "https://www.88ipa.com/",
+          "content": "iOS IPA",
+          "children": []
+        }, {
+          "href": "https://ipadump.com/#/home",
+          "content": "IPA DUMP",
+          "children": []
+        }, {
+          "href": "https://www.dumpapp.com/",
+          "content": "DumpApp",
+          "children": []
+        }, {
+          "href": "https://kdocs.cn/l/cu9C0Jr8SxZa",
+          "content": "IPA库",
+          "children": []
+        }, {
+          "href": "https://share.xiaole88.com/IOS",
+          "content": "小乐的网盘",
+          "children": []
+        }, {
+          "href": "https://www.peck.cool/%E5%85%8D%E8%B4%B9%20%E4%B8%93%E5%8C%BA%20%F0%9F%94%93",
+          "content": "鹏客软件免费专区",
+          "children": []
+        }, {"href": "https://pan.ios98.com/", "content": "优创云盘", "children": []}, {
+          "href": "https://pan.xyyh.xyz/",
+          "content": "知云网盘",
+          "children": []
+        }, {
+          "href": "https://alist.jiejingfan.vip/",
+          "content": "晴天网盘",
+          "children": []
+        }, {"href": "https://pan.iosapp.top/", "content": "Bot资源站", "children": []}, {
+          "href": "https://pan.qlam.cc/",
+          "content": "清烟资源库",
+          "children": []
+        }, {"href": "https://iosku.cn/", "content": "iOS资源分享", "children": []}, {
+          "href": "https://pan.iosi.vip/",
+          "content": "平凡",
+          "children": []
+        }, {
+          "href": "https://pan.lewsky.top/",
+          "content": "乐玩iOS资源站",
+          "children": []
+        }, {
+          "href": "https://pan.ioskuka.com/",
+          "content": "酷卡软件源",
+          "children": []
+        }, {
+          "href": "https://app.iosgods.com/store/",
+          "content": "iOSGods",
+          "children": []
+        }, {"href": "https://pdalife.com/", "content": "PDALIFE", "children": []}, {
+          "href": "https://iosvizor.com/",
+          "content": "iOSvizor",
+          "children": []
+        }, {
+          "href": "https://iosninja.io/ipa-library-ios",
+          "content": "IPA Ninja",
+          "children": []
+        }, {
+          "href": "https://pan.dumpapp.com/",
+          "content": "DumpApp",
+          "children": []
+        }, {"href": "https://www.iphonecake.com/", "content": "AppCake", "children": []}]
+      }, {
+        "href": "",
+        "content": "- 2502.证书签名",
+        "children": [{
+          "href": "",
+          "content": "TrollStore 作者已经找到了支持 iOS 17.0的方法，尽量不要升级",
+          "children": []
+        }, {
+          "href": "https://github.com/opa334/TrollStore",
+          "content": "TrollStore 项目官网（永久签）👍",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/D4uGobrkvZAnieELgqtckQ",
+          "content": "TrollStroe 安装教程¹",
+          "children": []
+        }, {
+          "href": "https://www.joia.cn/trollstore/install/",
+          "content": "TrollStore 安装引导²",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/JaqXB3xa8oHzQF5iumbt2w",
+          "content": "TrollInstallerX 教程³",
+          "children": []
+        }, {
+          "href": "https://blog.6ziz.com/trollstore",
+          "content": "TrollStore 安装方法⁴",
+          "children": []
+        }, {
+          "href": "https://altstore.io/",
+          "content": "AltStore（7天一签）",
+          "children": []
+        }, {
+          "href": "https://www.i4.cn/",
+          "content": "爱思助手（7天一签）",
+          "children": []
+        }, {
+          "href": "https://sideloadly.io/",
+          "content": "Sideloadly（7天一签）",
+          "children": []
+        }, {"href": "https://esign.p12zs.cn/", "content": "轻松签", "children": []}, {
+          "href": "https://sign.drnrt8.cn/",
+          "content": "全能签",
+          "children": []
+        }, {
+          "href": "https://sign.wnqapp.com/ios/",
+          "content": "万能签",
+          "children": []
+        }, {
+          "href": "https://www.xsign.co/",
+          "content": "超然签",
+          "children": []
+        }, {"href": "https://www.minclouds.com/", "content": "云小朵", "children": []}, {
+          "href": "https://ios222.com/",
+          "content": "牛蛙助手",
+          "children": []
+        }]
+      }]
+    }, {
+      "href": "",
+      "content": "08　电脑手机综合",
+      "children": [{"href": "", "content": "01.微信相关🔥", "children": []}, {
+        "href": "",
+        "content": "- 101.聊天记录",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/ziP-LUdbGxwiyN-lsk6HPg",
+          "content": "微信聊天记录导出教程👍",
+          "children": []
+        }, {
+          "href": "https://memotrace.cn/",
+          "content": "微信留痕",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008274064-41500b?p=kyon",
+          "content": "微备份",
+          "children": []
+        }, {
+          "href": "https://github.com/ZhaoXiangLu0e/WechatBackupNoRoot",
+          "content": "WeChatBackupNoRoot",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008274067-8725cc?p=kyon",
+          "content": "微信留痕",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1316038930-7d7ea1?p=kyon",
+          "content": "微拾",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1008275909-155eb9?p=kyon",
+          "content": "微信语音助手",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 102.公众号文章",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/XLkpvly6fgVfnSa2hgn0ag",
+          "content": "微信公众号文章批量下载保存",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/XRxlENovQ8XV4p8SdoINGA",
+          "content": "微信公众号文章带留言下载（支持付费文章）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/GawzgU0BS3JL0HjfF47cuw#:~:text=4-,%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E9%9F%B3%2F%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD,-%E6%9C%80%E5%90%8E%EF%BC%8C%E9%A1%BA%E4%BE%BF%E5%86%8D",
+          "content": "微信公众号音频、视频下载",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 103.视频号",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/Ro5AJVc2sr-wRGGgOY_wMA",
+          "content": "微信视频号下载 ¹",
+          "children": []
+        }, {"href": "https://mp.weixin.qq.com/s/ArHr35pyFvXSq63ikvwXHQ", "content": "微信视频号下载 ²", "children": []}]
+      }, {
+        "href": "",
+        "content": "- 104.其他内容",
+        "children": [{
+          "href": "https://mp.weixin.qq.com/s/8qoedOM_9PHkuce-t0mIkQ",
+          "content": "微信图片消息／视频号图片消息保存",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/q-Ff8inxQN2wj5M-UE6J4w",
+          "content": "微信小程序视频下载",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/hxDtsF1Hgi4jCQ_7wUHM8A",
+          "content": "微信表情包提取下载",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "- 105.朋友圈",
+        "children": [{
+          "href": "https://mh-studio.cn/wxpyq",
+          "content": "微信朋友圈采集备份工具（收费）",
+          "children": []
+        }, {
+          "href": "https://itakeo.com/wx/",
+          "content": "微信朋友圈集赞",
+          "children": []
+        }, {
+          "href": "https://akarin.dev/WechatMomentScreenshot/",
+          "content": "微信朋友圈转发截图生成工具",
+          "children": []
+        }, {"href": "http://pyq.soux2.com/", "content": "微信朋友圈转发截图生成工具", "children": []}]
+      }, {
+        "href": "",
+        "content": "- 106.好友清理",
+        "children": [{
+          "href": "https://url67.ctfile.com/f/14869667-1422285157-1a73a6?p=kyon",
+          "content": "真实好友",
+          "children": []
+        }, {
+          "href": "https://hamibot.com/marketplace/hGh3v",
+          "content": "Hamibot脚本－微信好友检测（可免费试用）",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/93Jhk8YUsUuE8UHbo8T7Vg",
+          "content": "微信／QQ防撤回方案推荐",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/dNccK4uksBOA3u2RBnZb6g",
+          "content": "微信发送定时消息教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/NteSBzEhQol31wqOCoD4vQ",
+          "content": "微信公众号分组教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/hB0oVmhOvsMJG9qflzQT4g",
+          "content": "微信网页版登录教程",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/RQzL5WjDq2PTRyGjFMld-w",
+          "content": "iOS微信双开",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/daUrBWaqrSgMUlYVTi9KTw",
@@ -6078,7 +6263,119 @@ const navigation = {
         }]
       }, {
         "href": "",
-        "content": "06.文件互传／剪贴板共享",
+        "content": "03.免费游戏加速器",
+        "children": [{
+          "href": "http://axu.xpsup.cn/category/index.html#:~:text=%E6%B8%B8%E6%88%8F%E5%8A%A0%E9%80%9F",
+          "content": "腾讯手游／野豹加速器会员低价购买",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/AhTvT_CBPD_xgflOEo59lg#:~:text=%E6%94%B6%E8%B4%B9%E5%8A%A0%E9%80%9F%E5%99%A8%E4%BB%B7%E6%A0%BC%E5%AF%B9%E6%AF%94",
+          "content": "收费加速器价格详细对比与推荐（见文章第２点）",
+          "children": []
+        }, {
+          "href": "https://urlqh.cn/o2uxj",
+          "content": "雷神加速器（打折白嫖福利多／可暂停）",
+          "children": []
+        }, {
+          "href": "https://urlqh.cn/o2uIB",
+          "content": "Golink（注册送50小时／可暂停）",
+          "children": []
+        }, {
+          "href": "https://jiasu.bohe.com/",
+          "content": "薄荷加速器",
+          "children": []
+        }, {
+          "href": "https://tiaotiao.boshvip.com/",
+          "content": "跳跳加速器（每天可领1小时免费时长）",
+          "children": []
+        }, {
+          "href": "https://www.octopusjsq.top/",
+          "content": "章鱼加速器",
+          "children": []
+        }, {
+          "href": "http://www.speedfox.run/",
+          "content": "极狐加速器",
+          "children": []
+        }, {
+          "href": "https://www.zzjiasuqi.com/",
+          "content": "ZZ加速器（支持主机加速）",
+          "children": []
+        }, {
+          "href": "https://www.chiyanjiasu.com/fissionV2.html?=8IHQEVQ",
+          "content": "炽焰加速器（每天0:00-15:00打开软件可抽时长）",
+          "children": []
+        }, {
+          "href": "https://www.akspeedy.com/",
+          "content": "AK加速器（每天00:00-14:00免费／支持主机加速）",
+          "children": []
+        }, {
+          "href": "https://www.ifengyun.com/index.html",
+          "content": "风云加速器（每天00:00-12:00免费）",
+          "children": []
+        }, {
+          "href": "https://www.zhifool.com/",
+          "content": "知游加速器（看广告每日领时长）",
+          "children": []
+        }, {
+          "href": "http://tuntu.gy-idc.com/views/apph5/invite_registry?ph=158****1921&invite_code=1MsMDJ&channel=yq02",
+          "content": "吞兔加速器（注册+完成任务+签到就可领会员）",
+          "children": []
+        }, {
+          "href": "https://www.biubiu001.com/",
+          "content": "biubiu加速器（看广告每日领时长）",
+          "children": []
+        }, {"href": "https://www.xunyou.mobi/", "content": "迅游手游加速器（做任务升级每月领时长）", "children": []}]
+      }, {
+        "href": "",
+        "content": "04.加密音频／视频解码",
+        "children": [{
+          "href": "https://flowus.cn/share/88917537-7d2c-4e5c-bbd6-7c6640b36a1b?code=CZ3ECT",
+          "content": "ncm／tkm／tm／kwm／kgm／xm／x2m／mflac／mgg等格式音频转码",
+          "children": []
+        }, {
+          "href": "https://flowus.cn/share/021d3ef8-fd0e-4b73-81ff-f4301672d5dc?code=CZ3ECT",
+          "content": "qlv／qsv／kux格式视频转码",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-625683811-8d3ac0?p=kyon",
+          "content": "VEP视频加密模式筛选器+提取器",
+          "children": []
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-625683798-701b4e?p=kyon",
+          "content": "ev1转mp4／ev1视频解密",
+          "children": []
+        }, {
+          "href": "https://www.mediafire.com/file/jitzm5bddwr8s6k",
+          "content": "ev4转mp4／ev4视频解密",
+          "children": []
+        }, {"href": "https://spjm.vip/sp/page2/", "content": "EV6／EV8 破解翻录限制", "children": []}]
+      }, {
+        "href": "",
+        "content": "05.刷课",
+        "children": [{
+          "href": "https://flowus.cn/share/44ca8f85-8258-4dde-aa67-9048006557ea?code=CZ3ECT",
+          "content": "不学习何以强国",
+          "children": []
+        }, {
+          "href": "https://sourcegraph.com/github.com/TechXueXi/TechXueXi",
+          "content": "学习强国（支持每日答题，支持每周答题，支持专项答题）",
+          "children": []
+        }, {
+          "href": "https://sourcegraph.com/github.com/fuck-xuexiqiangguo/Fuck-XueXiQiangGuo",
+          "content": "学习强国 懒人刷分工具 自动学习",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoui.com/ibsyBnbaecf",
+          "content": "学强国战答题库4564题",
+          "children": []
+        }, {
+          "href": "https://sourcegraph.com/github.com/bugstop/univ-mooc-autoplay",
+          "content": "MOOC 挂课脚本",
+          "children": []
+        }]
+      }, {
+        "href": "",
+        "content": "06.数据互传",
         "children": [{
           "href": "https://mp.weixin.qq.com/s/u_Wg-yncUESVmEFsaodBog",
           "content": "手机电脑文件互传（局域网）",
@@ -6092,8 +6389,16 @@ const navigation = {
           "content": "手机电脑文件互传方案推荐（旧文）",
           "children": []
         }, {
+          "href": "https://mp.weixin.qq.com/s/wpTZJoQPa80ZXRTfx_3EXw",
+          "content": "手机电脑共享剪贴板／同步剪贴板 ³",
+          "children": []
+        }, {
+          "href": "https://mp.weixin.qq.com/s/Ohm1mo_9n4sRaWDRxBDVNQ",
+          "content": "手机电脑共享剪贴板／同步剪贴板 ²",
+          "children": []
+        }, {
           "href": "https://mp.weixin.qq.com/s/DUw5pS0_e3kS5u7tvwIv5w",
-          "content": "手机电脑无缝共享剪贴板／同步剪贴板",
+          "content": "手机电脑共享剪贴板／同步剪贴板 ¹",
           "children": []
         }]
       }, {
@@ -6116,6 +6421,10 @@ const navigation = {
         "href": "",
         "content": "08.密码管理／文件加密",
         "children": [{
+          "href": "https://mp.weixin.qq.com/s/QV2VeshHt4t7F6cRvnWtZw",
+          "content": "国外账号建议开启两步验证以防无法登录",
+          "children": []
+        }, {
           "href": "https://mp.weixin.qq.com/s/8uPA0kJ7kmObh0XW8EJz8w",
           "content": "KeePass 使用教程+完整配置版",
           "children": []
@@ -6125,7 +6434,7 @@ const navigation = {
           "children": []
         }, {
           "href": "https://bitwarden.com/",
-          "content": "Bitwarden",
+          "content": "Bitwarden👍",
           "children": []
         }, {
           "href": "https://wework.qpic.cn/wwpic/254914__xpFFV0wT62ZVEt_1699437662",
@@ -6138,103 +6447,7 @@ const navigation = {
         }]
       }, {
         "href": "",
-        "content": "09.微信内容下载导出",
-        "children": [{
-          "href": "",
-          "content": "微信聊天记录导出",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/ziP-LUdbGxwiyN-lsk6HPg",
-          "content": "微信聊天记录导出教程👍",
-          "children": []
-        }, {
-          "href": "https://memotrace.cn/",
-          "content": "微信留痕",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008274064-41500b?p=kyon",
-          "content": "微备份－微信聊天记录导出",
-          "children": []
-        }, {
-          "href": "https://github.com/ZhaoXiangLu0e/WechatBackupNoRoot",
-          "content": "WeChatBackupNoRoot（免ROOT微信聊天数据备份／导出工具）",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008274067-8725cc?p=kyon",
-          "content": "微信留痕 - 聊天记录导出",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008274070-ced68c?p=kyon",
-          "content": "QQ留痕 - 聊天记录导出",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1316038930-7d7ea1?p=kyon",
-          "content": "微拾－微信/QQ/Tim的图片/视频/文档/语音分类浏览 + 清理 + 批量导出（不支持文字聊天导出）",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008275909-155eb9?p=kyon",
-          "content": "微信语音助手－可把连续几个语音合并再导出",
-          "children": []
-        }, {
-          "href": "https://mh-studio.cn/wxpyq",
-          "content": "微信朋友圈采集备份工具（收费）",
-          "children": []
-        }, {
-          "href": "https://gitee.com/lc044/WeChatMsg",
-          "content": "留痕－微信聊天记录导出",
-          "children": []
-        }, {
-          "href": "https://www.coolapk.com/apk/com.pleasure.trace_wechat【待替换】",
-          "content": "微拾－微信/QQ/Tim的图片/视频/文档/语音分类浏览 + 清理 + 批量导出（不支持文字聊天导出）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/XLkpvly6fgVfnSa2hgn0ag",
-          "content": "微信公众号文章批量下载（支持保存留言）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/Q3glQkfG72g7tI9rlx_BhQ",
-          "content": "微信公众号文章批量下载（支持下载付费文章+带留言）",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/Ro5AJVc2sr-wRGGgOY_wMA",
-          "content": "微信视频号下载 ¹",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/ArHr35pyFvXSq63ikvwXHQ",
-          "content": "微信视频号下载 ²",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/GawzgU0BS3JL0HjfF47cuw#:~:text=4-,%E5%85%AC%E4%BC%97%E5%8F%B7%E7%9A%84%E9%9F%B3%2F%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD,-%E6%9C%80%E5%90%8E%EF%BC%8C%E9%A1%BA%E4%BE%BF%E5%86%8D",
-          "content": "微信公众号音频、视频下载",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/q-Ff8inxQN2wj5M-UE6J4w",
-          "content": "微信小程序视频下载",
-          "children": []
-        }, {
-          "href": "https://mp.weixin.qq.com/s/8qoedOM_9PHkuce-t0mIkQ",
-          "content": "微信图片消息／视频号图片消息保存",
-          "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/hxDtsF1Hgi4jCQ_7wUHM8A", "content": "提取微信表情包", "children": []}]
-      }, {
-        "href": "",
-        "content": "10.微信好友清理",
-        "children": [{
-          "href": "https://txt.fyi/7488d2205b90ce68",
-          "content": "真实好友",
-          "children": []
-        }, {
-          "href": "https://axu.lanzouw.com/iLGgW1zm0scj",
-          "content": "免打扰清理微信僵尸好友",
-          "children": []
-        }, {
-          "href": "https://hamibot.com/marketplace/hGh3v",
-          "content": "Hamibot脚本－微信好友检测（可免费试用）",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "11.翻译工具",
+        "content": "09.翻译工具",
         "children": [{
           "href": "https://mp.weixin.qq.com/s/LRlODSOf8uhGTNNFMq6XqQ",
           "content": "免费网页全文翻译",
@@ -6247,30 +6460,38 @@ const navigation = {
           "href": "https://mp.weixin.qq.com/s/GKAWvk3Fh7aYH2ttRhOWaw",
           "content": "免费PDF翻译",
           "children": []
-        }, {"href": "https://mp.weixin.qq.com/s/KqBiAO2eo_MS3yV8WtuJpQ", "content": "无字幕视频实时翻译", "children": []}]
+        }, {
+          "href": "https://mp.weixin.qq.com/s/KqBiAO2eo_MS3yV8WtuJpQ",
+          "content": "无字幕视频实时翻译",
+          "children": []
+        }]
       }, {
         "href": "",
-        "content": "12.K歌／KTV",
+        "content": "10.K歌／KTV",
         "children": [{
           "href": "https://mp.weixin.qq.com/s/ukd6_LBJvuFd_RqHXvDUIw",
           "content": "免费电视K歌办法／零成本家庭KTV",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1151520",
+          "href": "https://www.123865.com/s/bjcA-ak3g",
           "content": "全民K歌TV版 4.1.3.1 VIP版",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/o20702",
+          "href": "https://www.123865.com/s/bjcA-Bk3g",
           "content": "全民K歌TV版 3.2.3.1 修复版",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1150411",
+          "href": "https://url67.ctfile.com/f/14869667-1433623783-1e9453?p=kyon",
           "content": "咪咕爱唱 9.9.012",
           "children": []
-        }, {"href": "https://kyon.118pan.com/b1129118", "content": "家庭KTV 2.1.3", "children": []}]
+        }, {
+          "href": "https://url67.ctfile.com/f/14869667-1433623750-45eda9?p=kyon",
+          "content": "家庭KTV 2.1.3",
+          "children": []
+        }]
       }, {
         "href": "",
-        "content": "13.桌面整理",
+        "content": "11.桌面整理",
         "children": [{
           "href": "https://flowus.cn/share/eac09a75-23d1-473e-a5fd-6b4a01e46464?code=CZ3ECT",
           "content": "Fences",
@@ -6281,14 +6502,10 @@ const navigation = {
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008084218-b7bf87?p=kyon",
-          "content": "DropIt 8.5.1绿色版",
+          "content": "DropIt 绿色版",
           "children": []
-        }, {
-          "href": "http://www.360.cn/desktop",
-          "content": "360桌面助手",
-          "children": []
-        }, {
-          "href": "https://txt.fyi/7dad85da22731b90",
+        }, {"href": "http://www.360.cn/desktop", "content": "360桌面助手", "children": []}, {
+          "href": "#",
           "content": "小智桌面（支持云备份桌面）",
           "children": []
         }, {
@@ -6298,7 +6515,7 @@ const navigation = {
         }, {"href": "https://sspai.com/post/43187", "content": "桌面窗口排列布局／分屏工具合辑", "children": []}]
       }, {
         "href": "",
-        "content": "14.文献管理",
+        "content": "12.文献管理",
         "children": [{
           "href": "https://flowus.cn/share/5a4a505e-2fdc-48ab-8c21-ad039e2496dd?code=CZ3ECT",
           "content": "NoteExpress 批量授权版",
@@ -6307,10 +6524,10 @@ const navigation = {
           "href": "https://flowus.cn/share/403b87d7-2724-47db-b038-c985bc704043?code=CZ3ECT",
           "content": "Endnote 批量授权版",
           "children": []
-        }]
+        }, {"href": "https://zotero-chinese.com/user-guide/quick-start", "content": "Zetero", "children": []}]
       }, {
         "href": "",
-        "content": "15.自动化／鼠标连点器",
+        "content": "13.自动化",
         "children": [{
           "href": "https://mp.weixin.qq.com/s/0BL3G1SI1ooxMkkYfJTrvA",
           "content": "安卓手机自动化APP推荐（自动签到／自动打卡等）",
@@ -6321,15 +6538,15 @@ const navigation = {
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008087434-22e83c?p=kyon",
-          "content": "鼠大侠1.20 单文件版👍",
+          "content": "鼠大侠 单文件版👍",
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008088568-d8e218?p=kyon",
-          "content": "楼月鼠标连点器3.0",
+          "content": "楼月鼠标连点器",
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008088652-658839?p=kyon",
-          "content": "小柒鼠标连点器1.7﹝密码：kyon﹞（Win）",
+          "content": "小柒鼠标连点器",
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008088703-5dcd8f?p=kyon",
@@ -6337,38 +6554,14 @@ const navigation = {
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008088358-8cfc94?p=kyon",
-          "content": "Specher鼠标连点器单文件版",
+          "content": "Specher鼠标连点器",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "16.防蓝光护眼",
+        "content": "14.打字练习",
         "children": [{
-          "href": "https://url67.ctfile.com/f/14869667-625682183-0aff34?p=kyon",
-          "content": "猎豹护眼大师 单文件版👍",
-          "children": []
-        }, {
-          "href": "http://www.xabyb.com/",
-          "content": "追光护眼👍",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-877134681-61d14f?p=kyon",
-          "content": "EyeCareApp 1.0.4",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/85575146-96c8-4fde-99ca-4f132cf7c161?code=CZ3ECT",
-          "content": "CareUEyes 便携破解版",
-          "children": []
-        }, {
-          "href": "https://flowus.cn/share/cad8faa0-0f88-4555-94e3-d14276ed643d?code=CZ3ECT",
-          "content": "Iris 破解版",
-          "children": []
-        }, {"href": "https://justgetflux.com/", "content": "f.lux", "children": []}]
-      }, {
-        "href": "",
-        "content": "17.打字练习",
-        "children": [{
-          "href": "https://kyon.118pan.com/b1145859",
+          "href": "https://axu.lanzouu.com/iER9I1hg7p9g",
           "content": "金山打字通2016+5款游戏",
           "children": []
         }, {
@@ -6377,11 +6570,11 @@ const navigation = {
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008086552-77947d?p=kyon",
-          "content": "打字高手8.3+注册机",
+          "content": "打字高手 破解版",
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008086819-b927cc?p=kyon",
-          "content": "拼音打字练习 2017.3 绿色版",
+          "content": "拼音打字练习 绿色版",
           "children": []
         }, {
           "href": "https://www.hellotyping.com/",
@@ -6426,55 +6619,51 @@ const navigation = {
         }]
       }, {
         "href": "",
-        "content": "18.进销存管理",
+        "content": "15.进销存管理",
         "children": [{
           "href": "http://cyb.grasp.com.cn/",
           "content": "管家婆创业版（针对个人商家小微企业永久免费）👍",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1144361",
-          "content": "赛丽麦进销存软件 0.99",
+          "href": "https://axu.lanzouw.com/it59J2hgqxgb",
+          "content": "赛丽麦进销存",
           "children": []
         }, {
           "href": "https://axu.lanzouu.com/i3NQTol7hti",
-          "content": "通用进销存（金诚软件）",
+          "content": "金诚进销存",
           "children": []
         }, {
           "href": "https://axu.lanzouu.com/igFWR1gjlt9g",
-          "content": "华讯库存管理免费版 3.7.7.3",
+          "content": "华讯库存管理免费版",
           "children": []
         }, {
           "href": "https://axu.lanzouu.com/iGUg1ol7ich",
-          "content": "开博送货单进销存 标准版 3.62",
+          "content": "开博送货单进销存 标准版",
           "children": []
         }, {
           "href": "https://axu.lanzouu.com/if8FDoiy1cj",
-          "content": "百货通进销存7.0（小商超、夫妻店推荐）",
+          "content": "百货通进销存",
           "children": []
-        }, {
-          "href": "https://axu.lanzouu.com/iVgR81gjlpgj",
-          "content": "YC_ERP3企业管理系统单机版 2020.2.0.1",
-          "children": []
-        }]
+        }, {"href": "https://axu.lanzouu.com/iVgR81gjlpgj", "content": "YC ERP3企业管理系统单机版", "children": []}]
       }, {
         "href": "",
-        "content": "19.年会抽奖",
+        "content": "16.抽奖抽签",
         "children": [{
           "href": "https://www.mediafire.com/file/z1fp2iducccl6bs",
-          "content": "Luckdraw 0.0.17（支持百万级别人数抽奖）",
+          "content": "Luckdraw（支持百万级别人数抽奖）",
           "children": []
         }, {
           "href": "https://url67.ctfile.com/f/14869667-1008085334-ac3049?p=kyon",
-          "content": "抽奖精灵 2.1.3",
+          "content": "抽奖精灵",
           "children": []
         }, {
           "href": "https://axu.lanzoue.com/ilg5h1deibyh",
-          "content": "全能抽奖软件 7.0.1.9破解版",
+          "content": "全能抽奖 破解版",
           "children": []
-        }, {"href": "https://axu.lanzoue.com/i9kIF1deiewd", "content": "星韵全能抽奖 3.78特别版", "children": []}]
+        }, {"href": "https://axu.lanzoue.com/i9kIF1deiewd", "content": "星韵全能抽奖 破解版", "children": []}]
       }, {
         "href": "",
-        "content": "20.CAD相关／CASS",
+        "content": "17.CAD相关／CASS",
         "children": [{
           "href": "",
           "content": "CAD2018以后就自带PDF转DWG功能了",
@@ -6505,32 +6694,24 @@ const navigation = {
           "children": []
         }, {
           "href": "https://www.mediafire.com/file/02aw30603hxqwcl",
-          "content": "小懒人速绘CAD工具箱2022.2.12",
+          "content": "小懒人速绘CAD工具箱",
           "children": []
         }, {
           "href": "https://www.mediafire.com/file/sv4151go28co5kt",
-          "content": "CAD最强插件之贱人工具箱5.9免注册版",
+          "content": "贱人工具箱（CAD插件）",
           "children": []
         }, {
           "href": "https://www.mediafire.com/file/angfr68r1pazbvc",
-          "content": "CAD绘图辅助 TSSD 探索者 2016完美破解版",
-          "children": []
-        }, {"href": "https://kyon.118pan.com/b1146995", "content": "CAD看图王 4.19.11 直装解锁版", "children": []}]
-      }, {
-        "href": "",
-        "content": "21.CAJ转换",
-        "children": [{
-          "href": "https://m.cnki.net/mcnkidown/",
-          "content": "全球学术快报（打开CAJ之后可以直接另存为PDF／带书签）",
+          "content": "TSSD 探索者 破解版（CAD绘图辅助）",
           "children": []
         }, {
-          "href": "https://www.mediafire.com/file/5umm579uaxymar3",
-          "content": "CAJ转WORD教程",
+          "href": "https://www.burstcloud.co/share/8a610e2df624264320b6ad891a30edf318c8e935a5d123d2a9bd13b3072ee143/CAD%E7%9C%8B%E5%9B%BE%E7%8E%8Bv4.19.11%20%E7%9B%B4%E8%A3%85VIP%E8%A7%A3%E9%94%81%E7%89%88.apk",
+          "content": "CAD看图王 破解版",
           "children": []
-        }, {"href": "https://hub.yzuu.cf/sainnhe/caj2pdf-qt/releases", "content": "CAJ转PDF", "children": []}]
+        }]
       }, {
         "href": "",
-        "content": "22.财务",
+        "content": "18.财务",
         "children": [{
           "href": "https://mp.weixin.qq.com/s/8lYFPLcx9VVckTRPhDvJ3g#:~:text=excel%20%E6%8F%92%E4%BB%B6%E5%AF%B9%E7%9B%B8%E5%85%B3%E4%BB%8E%E4%B8%9A%E4%BA%BA%E5%91%98%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E7%9A%84%E6%8F%90%E5%8D%87",
           "content": "Excel插件推荐",
@@ -6541,63 +6722,23 @@ const navigation = {
           "children": []
         }, {
           "href": "https://www.mediafire.com/file/6gdgpyitgt2bima",
-          "content": "用友U8 12-13注册机（可自义群号）",
+          "content": "用友U8 12-13注册机",
           "children": []
         }, {
           "href": "https://www.mediafire.com/file/35ccqe18u8yv4ff",
-          "content": "金蝶KIS云专业版 v16.0 永久去限制版",
+          "content": "金蝶KIS云专业版 16 破解版",
           "children": []
         }]
       }, {
         "href": "",
-        "content": "23.电源电池管理",
-        "children": [{
-          "href": "",
-          "content": "以下软件并不限制电脑品牌，但能否在你电脑上正常使用，请自行测试⚠️",
-          "children": []
-        }, {
-          "href": "https://url67.ctfile.com/f/14869667-1008085424-2da75f?p=kyon",
-          "content": "金山笔记本电池医生4.2.1.39独立版",
-          "children": []
-        }, {
-          "href": "https://support.lenovo.com.cn/lenovo/wsi/Modules/DriverDetail.aspx?ID=33812&MachineNameOmini=IdeaPad",
-          "content": "联想电源管理软件－Energy Management",
-          "children": []
-        }, {
-          "href": "https://think.lenovo.com.cn/support/driver/detail.aspx?docID=DR1197862934453",
-          "content": "ThinkPad 电源管理软件（WIN10－11）",
-          "children": []
-        }, {
-          "href": "https://think.lenovo.com.cn/support/driver/detail.aspx?docID=DR1197862934453",
-          "content": "ThinkPad 电源管理软件（Vista－WIN7）",
-          "children": []
-        }, {
-          "href": "https://support.hp.com/cn-zh/document/c01158589",
-          "content": "惠普电源管理软件－HP Battery Check",
-          "children": []
-        }, {
-          "href": "https://www.dell.com/support/contents/zh-cn/article/product-support/self-support-knowledgebase/software-and-downloads/dell-power-manager",
-          "content": "戴尔电源管理－Dell Power Manager",
-          "children": []
-        }, {
-          "href": "https://www.asus.com/tw/support/FAQ/1032726/",
-          "content": "华硕电源管理－ASUS Battery Health Charging",
-          "children": []
-        }, {
-          "href": "https://acer-epower-management.updatestar.com/",
-          "content": "宏基电源管理－Acer ePower Management",
-          "children": []
-        }]
-      }, {
-        "href": "",
-        "content": "24.变声器",
+        "content": "19.变声器",
         "children": [{
           "href": "https://www.mediafire.com/file/ubtaqunouinxwdn",
-          "content": "MorphVOX Pro 4.4.13汉化破解版",
+          "content": "MorphVOX Pro 破解版",
           "children": []
         }, {
           "href": "https://www.mediafire.com/file/vti5k6sufqkft0i",
-          "content": "Voicemod 1.1.3.1破解版",
+          "content": "Voicemod 破解版",
           "children": []
         }, {
           "href": "https://www.bianshengruanjian.com/index.html",
@@ -6609,7 +6750,7 @@ const navigation = {
           "children": []
         }, {
           "href": "https://www.mediafire.com/file/jy8idrbi1h2lzku",
-          "content": "Voxal Voice Changer 6.22 破解版",
+          "content": "Voxal Voice Changer 破解版",
           "children": []
         }, {
           "href": "https://clownfish-translator.com/voicechanger/",
@@ -6617,20 +6758,16 @@ const navigation = {
           "children": []
         }, {
           "href": "https://www.mediafire.com/file/4jeoyjhdmwuaros",
-          "content": "一键变声（美硕音频）",
+          "content": "美硕音频",
           "children": []
         }, {
           "href": "https://my.syncplicity.com/share/xjxtdsrsrvgvyf8/",
-          "content": "AU／SAM／FL Studio变声器插件 - PitchMonster32／64位注册版",
+          "content": "PitchMonster 破解版（AU／SAM／FL Studio变声器插件）",
           "children": []
-        }, {
-          "href": "https://www.mediafire.com/file/lelrjgupmvfqkyw",
-          "content": "VcsCore（变声器）中文破解版 7.0.29",
-          "children": []
-        }]
+        }, {"href": "https://www.mediafire.com/file/lelrjgupmvfqkyw", "content": "VcsCore 破解版", "children": []}]
       }, {
         "href": "",
-        "content": "25.排课系统",
+        "content": "20.排课系统",
         "children": [{
           "href": "https://url67.ctfile.com/f/14869667-1008085211-b216ef?p=kyon",
           "content": "尧佥排课系统",
@@ -6640,12 +6777,84 @@ const navigation = {
           "content": "书生排课系统",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1152260",
+          "href": "https://axu.lanzouw.com/i9xTv2hgr7mh",
           "content": "洪仔排课分班",
           "children": []
+        }, {"href": "https://axu.lanzouw.com/iL1i02hgr5ad", "content": "水晶排课", "children": []}]
+      }, {
+        "href": "",
+        "content": "21.考试系统",
+        "children": [{
+          "href": "",
+          "content": "以下平台都可自定义题库，完全免费或部分免费",
+          "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1152259",
-          "content": "水晶排课11.31",
+          "href": "https://www.examcoo.com/",
+          "content": "考试酷",
+          "children": []
+        }, {
+          "href": "https://www.kuaikaoti.com/price",
+          "content": "快考题",
+          "children": []
+        }, {
+          "href": "https://www.shuatishenqi.com/login?register=1&inviteCode=G5ISRD1D5B",
+          "content": "刷题神器",
+          "children": []
+        }, {
+          "href": "https://motibang.com/",
+          "content": "磨题帮",
+          "children": []
+        }, {
+          "href": "https://www.zaixiankaoshi.com/price/",
+          "content": "考试宝",
+          "children": []
+        }, {
+          "href": "https://a.app.qq.com/o/simple.jsp?pkgname=com.hascity.hui.t",
+          "content": "家长会出题",
+          "children": []
+        }, {
+          "href": "https://www.kaoshiyun.com.cn/price.html",
+          "content": "考试云",
+          "children": []
+        }, {
+          "href": "https://www.youkaoshi.cn/price.html",
+          "content": "优考试",
+          "children": []
+        }, {"href": "https://www.qingsuyun.com/price/", "content": "轻速云", "children": []}]
+      }, {
+        "href": "",
+        "content": "22.权威卫生／医疗／健康",
+        "children": [{
+          "href": "https://h5.baike.qq.com/mobile/home.html",
+          "content": "腾讯医典",
+          "children": []
+        }, {"href": "https://dxy.com/", "content": "丁香医生", "children": []}, {
+          "href": "https://drugs.dxy.cn/pc",
+          "content": "丁香园用药助手",
+          "children": []
+        }, {
+          "href": "https://www.redcross.org.cn/html/FirstAid.html",
+          "content": "急救（红十字会出品）",
+          "children": []
+        }, {
+          "href": "https://m.youlai.cn/huanzhe/download.html",
+          "content": "有来急救百科",
+          "children": []
+        }, {
+          "href": "https://www.medsci.cn/",
+          "content": "梅斯医学MedSci",
+          "children": []
+        }, {
+          "href": "https://www.msdmanuals.cn/",
+          "content": "默沙东诊疗手册",
+          "children": []
+        }, {
+          "href": "https://www.chinacdc.cn/",
+          "content": "中国疾病预防控制中心",
+          "children": []
+        }, {
+          "href": "https://www.mvyxws.com/",
+          "content": "医学微视",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/HhEusJKeSn-qk420CA9_Ww",
@@ -6657,7 +6866,7 @@ const navigation = {
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/shRtoI0YD9GTpatcnbsxBA",
-          "content": "免费离线无限用：语音识别／语音转文字／音频转文字／视频转文字",
+          "content": "（Win／Mac／Linux／安卓／网页／小程序）免费离线无限用：语音识别／语音转文字／音频转文字／视频转文字",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/-Fg4LrT0JltK2kGkAl8_kg",
@@ -6669,7 +6878,7 @@ const navigation = {
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/SNym0YfJmyzy5kP37TVF5w",
-          "content": "全平台聚合直播方案推荐",
+          "content": "聚合观看直播方案",
           "children": []
         }, {
           "href": "https://www.axutongxue.top/2021/03/999.html",
@@ -6701,15 +6910,7 @@ const navigation = {
           "href": "https://news.bqrdh.com/wp",
           "content": "网盘共享中心",
           "children": []
-        }, {
-          "href": "https://qkpanso.com/",
-          "content": "云盘搜索",
-          "children": []
-        }, {
-          "href": "https://www.magicalsearch.top/main",
-          "content": "奇妙搜索",
-          "children": []
-        }, {
+        }, {"href": "https://qkpanso.com/", "content": "云盘搜索", "children": []}, {
           "href": "https://www.cuppaso.com/",
           "content": "咔帕搜索",
           "children": []
@@ -6725,17 +6926,13 @@ const navigation = {
           "href": "https://www.pansearch.me/",
           "content": "PanSearch",
           "children": []
-        }, {"href": "https://www.panothers.com/", "content": "盘他一下", "children": []}, {
-          "href": "https://yapan.io/",
-          "content": "YaPan",
+        }, {
+          "href": "https://panothers.com/",
+          "content": "盘他一下",
           "children": []
-        }, {"href": "https://www.pikaso.top/", "content": "皮卡搜索", "children": []}, {
+        }, {"href": "https://www.pikasoo.top/", "content": "皮卡搜索", "children": []}, {
           "href": "https://yiso.fun/",
           "content": "易搜",
-          "children": []
-        }, {
-          "href": "https://www.yunpz.net/wangpan.html",
-          "content": "云铺子",
           "children": []
         }, {
           "href": "https://www.yunso.net/",
@@ -6775,7 +6972,7 @@ const navigation = {
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/mJNEjzMC-qJ7tdEADNrMPw",
-          "content": "安卓／iOS网盘聚合搜索方案推荐",
+          "content": "安卓／iOS网盘聚合搜索方案推荐（安卓／iOS）",
           "children": []
         }]
       }, {
@@ -6818,20 +7015,8 @@ const navigation = {
           "content": "阿里－学习资源仓📑",
           "children": []
         }, {
-          "href": "https://docs.qq.com/sheet/DVHpJVmRhT3ViV09Q?tab=ppx5bp",
-          "content": "阿里－星火📑",
-          "children": []
-        }, {
-          "href": "https://docs.qq.com/sheet/DVXp5Q2dRTVRXb2VS?tab=oz0lgd",
-          "content": "阿里－土豆📑",
-          "children": []
-        }, {
           "href": "https://ali.gitcafe.ink/",
           "content": "阿里－小纸条📑",
-          "children": []
-        }, {
-          "href": "https://www.kdocs.cn/l/cfzhxRXkaxx3",
-          "content": "阿里－锦技社📑",
           "children": []
         }, {
           "href": "https://docs.qq.com/doc/DYVJKbUhEQXdWbHhC",
@@ -6845,15 +7030,11 @@ const navigation = {
           "href": "https://www.sopandas.cn/",
           "content": "百度－熊猫搜盘",
           "children": []
-        }, {
-          "href": "https://xiongdipan.com/",
-          "content": "百度－兄弟盘",
+        }, {"href": "https://xiongdipan.com/", "content": "百度－兄弟盘", "children": []}, {
+          "href": "https://kkxz.vip/",
+          "content": "夸克－kk小站",
           "children": []
         }, {
-          "href": "https://www.kdocs.cn/l/co5eGmBD22gv",
-          "content": "百度－锦技社📑",
-          "children": []
-        }, {"href": "https://kkxz.vip/", "content": "夸克－kk小站", "children": []}, {
           "href": "https://pan.funletu.com/#/",
           "content": "夸克－趣盘搜",
           "children": []
@@ -6862,18 +7043,18 @@ const navigation = {
           "content": "夸克－资源小海洋📑",
           "children": []
         }, {
-          "href": "https://www.kdocs.cn/l/ct8IY1QL98tO",
+          "href": "https://bcnwac44ngjk.feishu.cn/wiki/WkKmwUmUMifdfEkmOzBcadQ4nSc",
           "content": "夸克－资源合集📑",
           "children": []
         }, {
-          "href": "https://www.kdocs.cn/l/ctCGIZveeWQg",
+          "href": "https://vika.cn/share/shr3LxhngJ1JUeLjlUmy4/fodZ5b444pbKA",
           "content": "夸克－锦技社📑",
           "children": []
-        }, {"href": "https://xunjiso.com/", "content": "迅雷－迅极搜", "children": []}, {
-          "href": "http://www.repanso.com/",
-          "content": "迅雷－热盘网",
+        }, {
+          "href": "https://xunjiso.com/",
+          "content": "迅雷－迅极搜",
           "children": []
-        }, {"href": "https://www.kdocs.cn/l/cc0NiFBkpdE7", "content": "迅雷－锦技社📑", "children": []}]
+        }, {"href": "http://www.repanso.com/", "content": "迅雷－热盘网", "children": []}]
       }, {
         "href": "",
         "content": "03.优质搜索引擎",
@@ -6889,15 +7070,19 @@ const navigation = {
           "href": "https://goog.scottschlangen.com/",
           "content": "Whoogle",
           "children": []
-        }, {"href": "https://bigslime.org/", "content": "Whoogle", "children": []}, {
-          "href": "https://search.bus-hit.me/",
+        }, {
+          "href": "https://bigslime.org/",
+          "content": "Whoogle",
+          "children": []
+        }, {"href": "https://search.bus-hit.me/", "content": "SearX", "children": []}, {
+          "href": "https://searxng.ca/",
           "content": "SearX",
           "children": []
-        }, {"href": "https://searxng.ca/", "content": "SearX", "children": []}, {
-          "href": "https://search.broker/",
+        }, {"href": "https://search.broker/", "content": "SearX", "children": []}, {
+          "href": "https://searxng.site/",
           "content": "SearX",
           "children": []
-        }, {"href": "https://searxng.site/", "content": "SearX", "children": []}, {
+        }, {
           "href": "https://www.nona.de/",
           "content": "Nona",
           "children": []
@@ -6981,7 +7166,11 @@ const navigation = {
       }, {
         "href": "",
         "content": "05.优质软件下载站",
-        "children": [{"href": "", "content": "只提供绿色软件", "children": []}, {
+        "children": [{
+          "href": "",
+          "content": "只提供绿色软件",
+          "children": []
+        }, {
           "href": "https://portableapps.com/zh-cn",
           "content": "portableapps",
           "children": []
@@ -7153,7 +7342,11 @@ const navigation = {
           "href": "https://slidemodel.com/",
           "content": "Slidemode",
           "children": []
-        }, {"href": "https://www.woodo.cn/design/", "content": "吾道", "children": []}, {
+        }, {
+          "href": "https://www.woodo.cn/design/",
+          "content": "吾道",
+          "children": []
+        }, {
           "href": "https://www.docer.com/",
           "content": "稻壳儿（WPS旗下的模板网站）",
           "children": []
@@ -7263,7 +7456,7 @@ const navigation = {
           "children": []
         }, {
           "href": "http://bbs1.people.com.cn/img_new/Y0/62/5D/66/33/1646622762547.jpg",
-          "content": "消协帮你选－微信小程序👍",
+          "content": "消协帮你选",
           "children": []
         }, {
           "href": "https://www.smzdm.com/",
@@ -7353,11 +7546,7 @@ const navigation = {
           "href": "https://www.tmp.link/",
           "content": "TMP.LINK（最大10G）",
           "children": []
-        }, {
-          "href": "https://www.wenshushu.cn/",
-          "content": "文叔叔（最大5G）",
-          "children": []
-        }, {"href": "https://app.tmp.link/", "content": "TMP.LINK（最大10G）", "children": []}]
+        }, {"href": "https://www.wenshushu.cn/", "content": "文叔叔（最大5G）", "children": []}]
       }, {
         "href": "",
         "content": "02.直连互传",
@@ -7521,7 +7710,7 @@ const navigation = {
           "href": "https://www.yikm.net/",
           "content": "千米娱乐－街机／GBA／FC／Flash游戏在线",
           "children": []
-        }, {
+        }, {"href": "https://dos.lol/", "content": "在线DOS游戏", "children": []}, {
           "href": "http://xiataya.top/nes/#/",
           "content": "NES在线小站",
           "children": []
@@ -7530,26 +7719,22 @@ const navigation = {
         "href": "",
         "content": "16.云游戏",
         "children": [{
-          "href": "https://cg.163.com/#/mobile",
+          "href": "https://cg.163.com/",
           "content": "网易云游戏",
           "children": []
         }, {
           "href": "https://cloudgame.ds.163.com/",
-          "content": "网易大神云游戏（可免费玩网易的部分游戏）",
+          "content": "网易大神云游戏",
           "children": []
         }, {
           "href": "https://start.qq.com/",
           "content": "腾讯START云游戏",
           "children": []
         }, {
-          "href": "https://cloudgame.douyu.com/home",
-          "content": "斗鱼云游戏",
-          "children": []
-        }, {
           "href": "https://www.migufun.com/middleh5/",
           "content": "咪咕快游",
           "children": []
-        }, {"href": "https://cg.163.com/", "content": "网易云游戏", "children": []}]
+        }, {"href": "https://cloudgame.douyu.com/home", "content": "斗鱼云游戏", "children": []}]
       }, {
         "href": "",
         "content": "17.壁纸",
@@ -7653,7 +7838,11 @@ const navigation = {
           "href": "https://wallhaven.cc/",
           "content": "WallHave（70W+资源）👍",
           "children": []
-        }, {"href": "https://desk.3gbizhi.com/", "content": "3G壁纸", "children": []}, {
+        }, {
+          "href": "https://desk.3gbizhi.com/",
+          "content": "3G壁纸",
+          "children": []
+        }, {
           "href": "http://pic.netbian.com/",
           "content": "彼岸图网（4K壁纸／一个免费一天只能下载一张／1元可下载7张）",
           "children": []
@@ -7765,11 +7954,19 @@ const navigation = {
           "href": "https://pdan.com.cn/",
           "content": "皮蛋表情包",
           "children": []
-        }, {"href": "https://www.diydoutu.com/", "content": "DIY斗图", "children": []}, {
+        }, {
+          "href": "https://www.diydoutu.com/",
+          "content": "DIY斗图",
+          "children": []
+        }, {
           "href": "https://www.dbbqb.com/",
           "content": "逗比拯救世界",
           "children": []
-        }, {"href": "https://fabiaoqing.com/", "content": "发表情", "children": []}, {
+        }, {
+          "href": "https://fabiaoqing.com/",
+          "content": "发表情",
+          "children": []
+        }, {
           "href": "https://www.doutupk.com/",
           "content": "斗图啦",
           "children": []
@@ -7842,15 +8039,11 @@ const navigation = {
           "content": "SMS-BUS（支持支付宝付款／3$起充）",
           "children": []
         }, {
-          "href": "https://richpva.com/",
-          "content": "richpva（支持微信／支付宝付款）",
-          "children": []
-        }, {
           "href": "https://cloud.luchibb.com/product/phoneVerification/books/%E9%A6%99%E6%B8%AF/index",
           "content": "Luchibb（支持支付宝付款）",
           "children": []
         }, {
-          "href": "https://onlinesim.ru/zh",
+          "href": "https://onlinesim.io/",
           "content": "onlinesim（支持支付宝付款）",
           "children": []
         }, {
@@ -7973,7 +8166,11 @@ const navigation = {
           "href": "https://www.logoly.pro/",
           "content": "P站风格Logo生成器",
           "children": []
-        }, {"href": "https://lmbtfy.cn/", "content": "帮你百度生成器", "children": []}, {
+        }, {
+          "href": "https://lmbtfy.cn/",
+          "content": "帮你百度生成器",
+          "children": []
+        }, {
           "href": "https://oreo.ddiu.io/",
           "content": "奥利奥生成器",
           "children": []
@@ -8113,7 +8310,11 @@ const navigation = {
       }, {
         "href": "",
         "content": "09.行业报告",
-        "children": [{"href": "", "content": "国家机构公开数据", "children": []}, {
+        "children": [{
+          "href": "",
+          "content": "国家机构公开数据",
+          "children": []
+        }, {
           "href": "https://www.cncic.org/?cat=7",
           "content": "中华全国商业信息中心 （包括零食，服饰，奶粉，皮包等各种消费品的月度，年度，全年详细数据和报告）",
           "children": []
@@ -8237,11 +8438,11 @@ const navigation = {
           "href": "http://taicishe.com/graded-movies",
           "content": "英文台词社",
           "children": []
-        }, {"href": "https://33.agilestudio.cn/", "content": "33台词", "children": []}, {
-          "href": "https://zhaotaici.cn/",
-          "content": "找台词",
+        }, {
+          "href": "https://33.agilestudio.cn/",
+          "content": "33台词",
           "children": []
-        }]
+        }, {"href": "https://zhaotaici.cn/", "content": "找台词", "children": []}]
       }, {
         "href": "",
         "content": "11.查密码泄露",
@@ -8309,11 +8510,11 @@ const navigation = {
           "href": "https://www.douchacha.com/workbench",
           "content": "抖查查",
           "children": []
-        }, {"href": "https://www.chanmama.com/", "content": "蝉妈妈", "children": []}, {
-          "href": "https://www.feigua.cn/",
-          "content": "飞瓜数据",
+        }, {
+          "href": "https://www.chanmama.com/",
+          "content": "蝉妈妈",
           "children": []
-        }]
+        }, {"href": "https://www.feigua.cn/", "content": "飞瓜数据", "children": []}]
       }, {
         "href": "",
         "content": "- 1204.苹果APP应用排行榜",
@@ -8390,6 +8591,14 @@ const navigation = {
         "href": "",
         "content": "- 101.免费搜索外文文献",
         "children": [{
+          "href": "https://www.mdpi.com/",
+          "content": "MDPI👍",
+          "children": []
+        }, {
+          "href": "https://libgen.rocks/",
+          "content": "Library Genesis👍",
+          "children": []
+        }, {
           "href": "https://doaj.org/",
           "content": "DOAJ（有免费的全文科技学术期刊）",
           "children": []
@@ -8400,10 +8609,6 @@ const navigation = {
         }, {
           "href": "http://www.freefullpdf.com/",
           "content": "FreeFullPDF（提供7000多种学术期刊的免费全文获取）",
-          "children": []
-        }, {
-          "href": "https://libgen.unblockit.bet/",
-          "content": "Library Genesis",
           "children": []
         }, {
           "href": "http://tool.yovisun.com/scihub/",
@@ -8693,7 +8898,11 @@ const navigation = {
           "href": "https://www.shuashuati.com/",
           "content": "刷刷题",
           "children": []
-        }, {"href": "https://so.tikuol.com/", "content": "题库网", "children": []}, {
+        }, {
+          "href": "https://so.tikuol.com/",
+          "content": "题库网",
+          "children": []
+        }, {
           "href": "https://www.jiandati.com/",
           "content": "简答题",
           "children": []
@@ -8706,8 +8915,8 @@ const navigation = {
           "content": "答疑啦",
           "children": []
         }, {
-          "href": "http://www.daanbar.com/index.html",
-          "content": "答案吧",
+          "href": "http://www.daanbar.com/services.html",
+          "content": "知ING",
           "children": []
         }, {"href": "https://www.asklib.com/", "content": "问答库", "children": []}]
       }, {
@@ -8769,11 +8978,11 @@ const navigation = {
           "href": "https://space.bilibili.com/442129187",
           "content": "高中　乘风老师（B站）（比较适合高考冲刺）",
           "children": []
-        }, {"href": "https://space.bilibili.com/169935605", "content": "高中　董腾语文（B站）", "children": []}, {
-          "href": "",
-          "content": "数学",
-          "children": []
         }, {
+          "href": "https://space.bilibili.com/169935605",
+          "content": "高中　董腾语文（B站）",
+          "children": []
+        }, {"href": "", "content": "数学", "children": []}, {
           "href": "https://pan.baidu.com/s/1BvecrhkvbJZ8MdbMySfS0A",
           "content": "小学　学而思六年级数学（人教版）【35讲 张新刚】－提取码：qnsG",
           "children": []
@@ -8829,11 +9038,11 @@ const navigation = {
           "href": "https://space.bilibili.com/316371543/favlist?fid=949178743",
           "content": "初中　中高考英语曹永老师（B站）",
           "children": []
-        }, {"href": "https://space.bilibili.com/316371543", "content": "高中　曹永英语（B站）", "children": []}, {
-          "href": "",
-          "content": "物理",
-          "children": []
         }, {
+          "href": "https://space.bilibili.com/316371543",
+          "content": "高中　曹永英语（B站）",
+          "children": []
+        }, {"href": "", "content": "物理", "children": []}, {
           "href": "https://pan.baidu.com/s/165eb",
           "content": "初中　学而思－宋泽穹（学霸气息）－初三物理（百度云）",
           "children": []
@@ -8901,11 +9110,11 @@ const navigation = {
           "href": "https://pan.baidu.com/s/1GA0e6fdX_7U_0VI81kS5Uw",
           "content": "高中　刘勖雯文综（百度云）提取码：shen",
           "children": []
-        }, {"href": "https://space.bilibili.com/280683362", "content": "高中　Koi大大（B站）", "children": []}, {
-          "href": "",
-          "content": "历史",
-          "children": []
         }, {
+          "href": "https://space.bilibili.com/280683362",
+          "content": "高中　Koi大大（B站）",
+          "children": []
+        }, {"href": "", "content": "历史", "children": []}, {
           "href": "https://pan.baidu.com/s/1I5g0Khr75DL-yLWtO64xwQ",
           "content": "高中　刘勖雯历史（百度云）提取码：shen",
           "children": []
@@ -9084,43 +9293,7 @@ const navigation = {
         }]
       }, {
         "href": "",
-        "content": "10.可自定义题库在线考试系统",
-        "children": [{
-          "href": "https://www.examcoo.com/",
-          "content": "考试酷（完全免费）",
-          "children": []
-        }, {
-          "href": "https://www.kuaikaoti.com/price",
-          "content": "快考题",
-          "children": []
-        }, {
-          "href": "https://www.shuatishenqi.com/login?register=1&inviteCode=G5ISRD1D5B",
-          "content": "刷题神器",
-          "children": []
-        }, {
-          "href": "https://motibang.com/",
-          "content": "磨题帮",
-          "children": []
-        }, {
-          "href": "https://www.zaixiankaoshi.com/price/",
-          "content": "考试宝",
-          "children": []
-        }, {
-          "href": "https://a.app.qq.com/o/simple.jsp?pkgname=com.hascity.hui.t",
-          "content": "家长会出题",
-          "children": []
-        }, {
-          "href": "https://www.kaoshiyun.com.cn/price.html",
-          "content": "考试云",
-          "children": []
-        }, {
-          "href": "https://www.youkaoshi.cn/price.html",
-          "content": "优考试",
-          "children": []
-        }, {"href": "https://www.qingsuyun.com/price/", "content": "轻速云", "children": []}]
-      }, {
-        "href": "",
-        "content": "11.免费课件／教案",
+        "content": "10.免费课件／教案",
         "children": [{
           "href": "https://cfed.cnki.net/",
           "content": "中国知网－基础教育知识服务平台（学科探究 » 同步教学）",
@@ -9164,7 +9337,7 @@ const navigation = {
         }]
       }, {
         "href": "",
-        "content": "12.学唱歌／学音乐",
+        "content": "11.学唱歌／学音乐",
         "children": [{"href": "", "content": "钢琴谱", "children": []}, {
           "href": "https://cn.imslp.org/wiki/Main_Page",
           "content": "国际乐谱库（找古典音乐的谱子特别好用）",
@@ -9216,7 +9389,7 @@ const navigation = {
         }, {"href": "https://www.autopiano.cn/", "content": "自由钢琴－网页上学钢琴", "children": []}]
       }, {
         "href": "",
-        "content": "13.学舞蹈",
+        "content": "12.学舞蹈",
         "children": [{
           "href": "",
           "content": "爵士舞",
@@ -9308,7 +9481,7 @@ const navigation = {
         }, {"href": "https://www.bilibili.com/", "content": "更多教程可点击此处到 bilibili.com 上搜索", "children": []}]
       }, {
         "href": "",
-        "content": "14.学方言",
+        "content": "13.学方言",
         "children": [{
           "href": "https://mp.weixin.qq.com/s/owxnuT7FBljNQkJ_dcOW4A",
           "content": "利用讯飞开放平台的在线语音合成，可以很方便的模仿学习方言！👍",
@@ -9321,7 +9494,11 @@ const navigation = {
           "href": "https://yyzn.cnu.edu.cn/lbjhszzy/tswx/index.htm",
           "content": "老北京话数字资源",
           "children": []
-        }, {"href": "https://www.wugniu.com/", "content": "吴语学堂", "children": []}, {
+        }, {
+          "href": "https://www.wugniu.com/",
+          "content": "吴语学堂",
+          "children": []
+        }, {
           "href": "http://cn.voicedic.com/",
           "content": "汉语方言发音字典",
           "children": []
@@ -9364,7 +9541,7 @@ const navigation = {
         }, {"href": "https://zhongguoyuyan.cn/", "content": "中国语言资源保护工程采录展示平台", "children": []}]
       }, {
         "href": "",
-        "content": "15.学做菜",
+        "content": "14.学做菜",
         "children": [{
           "href": "https://www.zhihu.com/question/265698569",
           "content": "学做菜的公众号／APP推荐",
@@ -9376,7 +9553,7 @@ const navigation = {
         }, {"href": "https://www.meishij.net/", "content": "美食杰", "children": []}]
       }, {
         "href": "",
-        "content": "16.学编程",
+        "content": "15.学编程",
         "children": [{
           "href": "https://ife.baidu.com/",
           "content": "百度前端技术学院－HTML／CSS／Javascript相关教程",
@@ -9386,7 +9563,7 @@ const navigation = {
           "content": "廖雪峰－Python新手教程",
           "children": []
         }, {
-          "href": "http://bbs1.people.com.cn/img_new/Y0/62/64/13/96/1646623200150.jpg",
+          "href": "http://cbu01.alicdn.com/i2/2793632751/O1CN013njQ5u1WC0bbj03cg_!!2793632751-2-cbucrm.png",
           "content": "学习强国APP上提供了大量「Python」相关优秀课程﹝点击查看截图﹞👍",
           "children": []
         }, {
@@ -9420,7 +9597,7 @@ const navigation = {
         }]
       }, {
         "href": "",
-        "content": "17.学软件",
+        "content": "16.学软件",
         "children": [{
           "href": "http://doyoudo.com/free",
           "content": "doyoudo免费课程",
@@ -9442,50 +9619,6 @@ const navigation = {
           "content": "我要自学网",
           "children": []
         }]
-      }, {
-        "href": "",
-        "content": "18.权威卫生／医疗／健康网站",
-        "children": [{
-          "href": "https://www.chinacdc.cn/",
-          "content": "中国疾病预防控制中心",
-          "children": []
-        }, {
-          "href": "https://kj.cnki.net/#/product/detail?id=8ad0c03874a02c77017548f061fc000e",
-          "content": "临床诊疗知识库（知网旗下）",
-          "children": []
-        }, {"href": "https://baike.qq.com/", "content": "腾讯医典", "children": []}, {
-          "href": "https://dxy.com/",
-          "content": "丁香医生",
-          "children": []
-        }, {
-          "href": "http://drugs.dxy.cn/",
-          "content": "丁香园用药助手",
-          "children": []
-        }, {
-          "href": "https://www.mvyxws.com/",
-          "content": "医学微视",
-          "children": []
-        }, {
-          "href": "https://www.redcross.org.cn/html/FirstAid.html",
-          "content": "急救（红十字会出品）",
-          "children": []
-        }, {
-          "href": "https://m.youlai.cn/huanzhe/download.html",
-          "content": "有来急救百科",
-          "children": []
-        }, {
-          "href": "https://www.medsci.cn/",
-          "content": "梅斯医学MedSci",
-          "children": []
-        }, {
-          "href": "https://www.baikemy.com/",
-          "content": "百科名医（有微信小程序）",
-          "children": []
-        }, {
-          "href": "https://www.msdmanuals.cn/",
-          "content": "默沙东诊疗手册",
-          "children": []
-        }, {"href": "https://teachmeanatomy.info/", "content": "人体解剖学知识平台", "children": []}]
       }, {
         "href": "",
         "content": "19.古诗词／文言文",
@@ -9527,10 +9660,6 @@ const navigation = {
           "children": []
         }, {
           "href": "https://space.bilibili.com/290704043/favlist",
-          "content": "Crash Course中文字幕组－视频百科／专业课",
-          "children": []
-        }, {
-          "href": "https://crashcourse.club/category/",
           "content": "Crash Course中文字幕组－视频百科／专业课",
           "children": []
         }]
@@ -9589,7 +9718,11 @@ const navigation = {
           "href": "https://site.sciping.com/",
           "content": "科塔学术导航",
           "children": []
-        }, {"href": "https://www.xiaolvji.com/u/ljyandlwl", "content": "效率集（来自山大文学院威龙师弟）", "children": []}]
+        }, {
+          "href": "https://www.xiaolvji.com/u/ljyandlwl",
+          "content": "效率集（来自山大文学院威龙师弟）",
+          "children": []
+        }]
       }, {
         "href": "",
         "content": "04.大数据",
@@ -9610,16 +9743,8 @@ const navigation = {
           "content": "塘主总监文案创作系统工作站",
           "children": []
         }, {
-          "href": "https://heeee.com/",
-          "content": "资源网（资源爱好者的网上家园）👍",
-          "children": []
-        }, {
           "href": "https://tuostudy.upnb.top/",
           "content": "图欧学习资源导航",
-          "children": []
-        }, {
-          "href": "https://shu.ziyuandi.cn/",
-          "content": "资源帝电子书（电子书搜索导航站）",
           "children": []
         }, {"href": "https://qinggongju.com/", "content": "轻工具", "children": []}, {
           "href": "https://xueqiu.com/dh",
@@ -9763,7 +9888,11 @@ const navigation = {
           "href": "https://www.lanrentuku.com/psd/",
           "content": "懒人图库",
           "children": []
-        }, {"href": "https://sc.chinaz.com/psd/", "content": "站长素材", "children": []}, {
+        }, {
+          "href": "https://sc.chinaz.com/psd/",
+          "content": "站长素材",
+          "children": []
+        }, {
           "href": "https://psdboom.com/",
           "content": "PSDBoom",
           "children": []
@@ -9847,11 +9976,11 @@ const navigation = {
           "href": "https://magdeleine.co/browse/",
           "content": "Magdeleine",
           "children": []
-        }, {"href": "https://www.hippopx.com/", "content": "Hippopx", "children": []}, {
-          "href": "https://visualhunt.com/",
-          "content": "visualhunt",
+        }, {
+          "href": "https://www.hippopx.com/",
+          "content": "Hippopx",
           "children": []
-        }]
+        }, {"href": "https://visualhunt.com/", "content": "visualhunt", "children": []}]
       }, {
         "href": "",
         "content": "05.免费可商用图标",
@@ -9972,58 +10101,50 @@ const navigation = {
         "href": "",
         "content": "08.免费可商用视频素材",
         "children": [{
-          "href": "https://www.monzoom.com/",
-          "content": "Monzoom－免费下载，商用无需注明出处",
-          "children": []
-        }, {
-          "href": "https://www.motionelements.com/free/stock-footage",
-          "content": "Motion Elements－免费下载，商用无需注明出处",
-          "children": []
-        }, {
-          "href": "https://www.ignitemotion.com/",
-          "content": "Free Motion Backgrounds－免费下载，商用无需注明出处",
-          "children": []
-        }, {
-          "href": "https://panzoid.com/",
-          "content": "Panzoid－免费视频片段网站，素材适合做片头片尾（可利用网页自带的编辑器改变素材内的文字）",
-          "children": []
-        }, {
-          "href": "https://sucai.zhiyu.art/video",
-          "content": "知鱼素材－注意使用许可",
-          "children": []
-        }, {
-          "href": "https://www.videvo.net/",
-          "content": "Videvo－注意使用许可",
-          "children": []
-        }, {
           "href": "https://pixabay.com/zh/videos/search/?order=ec",
-          "content": "Pixabay－免费下载，商用无需注明出处",
+          "content": "Pixabay",
           "children": []
         }, {
           "href": "https://www.pexels.com/zh-cn/videos/",
-          "content": "Pexels－免费下载，商用无需注明出处",
+          "content": "Pexels",
           "children": []
         }, {
+          "href": "https://stock.tuchong.com/activity?platform=video",
+          "content": "图虫创意（限免专区）",
+          "children": []
+        }, {
+          "href": "https://www.motionelements.com/zh-hans/free/stock-footage",
+          "content": "8000视频素材",
+          "children": []
+        }, {
+          "href": "https://sucai.zhiyu.art/video",
+          "content": "知鱼素材",
+          "children": []
+        }, {
+          "href": "https://www.aigei.com/video/video/",
+          "content": "爱给网",
+          "children": []
+        }, {
+          "href": "https://mazwai.com/stock-video-footage",
+          "content": "Mazwai",
+          "children": []
+        }, {
+          "href": "https://www.monzoom.com/",
+          "content": "Monzoom",
+          "children": []
+        }, {
+          "href": "https://www.ignitemotion.com/",
+          "content": "Free Motion Backgrounds",
+          "children": []
+        }, {"href": "https://www.videvo.net/", "content": "Videvo", "children": []}, {
           "href": "https://mixkit.co/",
-          "content": "mixkit－注意使用许可",
+          "content": "mixkit",
           "children": []
-        }, {
-          "href": "https://wedistill.io/",
-          "content": "Distill－免费下载，商用无需注明出处",
-          "children": []
-        }, {
-          "href": "https://mazwai.com/",
-          "content": "Mazwai－遵守CC-BY-3.0许可",
-          "children": []
-        }, {
+        }, {"href": "https://wedistill.io/", "content": "Distill", "children": []}, {
           "href": "https://www.videezy.com/",
-          "content": "Videezy－一般免费下载的可以商用但需要注明出处，付费则无需注明",
+          "content": "Videezy",
           "children": []
-        }, {
-          "href": "http://vidlery.com/",
-          "content": "Vidlery－免费动画视频素材",
-          "children": []
-        }, {"href": "https://www.vidsplay.com/", "content": "Vidsplay－免费下载，商用无需注明出处", "children": []}]
+        }]
       }, {
         "href": "",
         "content": "09.免费可商用背景音乐（BGM）",
@@ -10216,10 +10337,6 @@ const navigation = {
           "content": "片刻抠图（抠图质量不错／可调整抠图结果）",
           "children": []
         }, {
-          "href": "https://mp.weixin.qq.com/s/miQIBbme3YRsfPC4W1Pw2w",
-          "content": "老视频修复／视频画质提升／视频补帧／SVP视频插帧教程",
-          "children": []
-        }, {
           "href": "https://mp.weixin.qq.com/s/poUbqIMcNdLaSX0HzNPERw",
           "content": "国外高清名画下载网站推荐",
           "children": []
@@ -10345,59 +10462,11 @@ const navigation = {
           "href": "https://pan.baidu.com/s/1gJkONbvXANvDi-vJs2NyyA",
           "content": "2020公考面试-结构化技巧课（7大模块）提取码：wen3",
           "children": []
-        }, {
-          "href": "http://gongkao66688.edudisk.cn/",
-          "content": "公务员资料大全（访问密码：8527）👍",
-          "children": []
-        }, {
-          "href": "https://www.kotan.cn/posts/e742576d/",
-          "content": "考公资料丨资源搬运工（含2024年资源）",
-          "children": []
-        }, {
-          "href": "https://sourcegraph.com/github.com/coder2gwy/coder2gwy",
-          "content": "程序员考公指南（Github高赞项目）",
-          "children": []
-        }, {
-          "href": "https://pan.quark.cn/s/d55e30168dfe",
-          "content": "2024国考980系统班（主课）",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/17MOFER9lTCi2lOInK_gc9w",
-          "content": "2023江苏省考电子版做题题库提取密码：xr1u",
-          "children": []
-        }, {
-          "href": "https://kyon.118pan.com/b1115874",
-          "content": "公务员资料分析速算练习软件",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/14d_EDpLzy5rwVU9ctlYIgw",
-          "content": "2023国考备考必刷真题 提取码：bsgk",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1747Y58ku07mDo8Ljs9dOKQ?pwd=r9k4",
-          "content": "2022粉笔联考省考笔试系统班 提取码：r9k4",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1cgJCK0vw56eLLb9lROn32Q",
-          "content": "2023年国考粉笔980系统班 提取码: 2ynt",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1IOtbzs2GqAGfCzO7ia5IQQ",
-          "content": "2023国考粉笔980系统班申论李梦圆 提取码：ew1s",
-          "children": []
-        }, {
-          "href": "http://qq351605872.ysepan.com/",
-          "content": "记忆力博客网盘－1个含公务员事业单位招聘考试培训视频及讲义的永硕Ｅ盘",
-          "children": []
-        }, {
-          "href": "https://cbu01.alicdn.com/img/ibank/O1CN01eeVPHf1Bs2f6n9UY4_!!0-0-cib.jpg",
-          "content": "学习强国APP上有大量免费优质的「公务员」笔试面试相关视频课程👍",
-          "children": []
-        }, {
-          "href": "https://pan.quark.cn/s/83aafca47b7e",
-          "content": "2025粉笔公考持续更新",
-          "children": []
-        }, {
+        }]
+      }, {
+        "href": "",
+        "content": "- 104.三支一扶",
+        "children": [{
           "href": "https://pan.quark.cn/s/42125c75a71b#/list/share/1a4b03db213d494e89321eea3932b00e",
           "content": "河北三支一扶",
           "children": []
@@ -10411,7 +10480,7 @@ const navigation = {
           "children": []
         }, {
           "href": "https://pan.baidu.com/s/1bD6oUYzb1AgSJKZrZ9drdw?pwd=k6an",
-          "content": "2023全国三扶一支 提取码：k6an",
+          "content": "2023全国三支一扶 提取码：k6an",
           "children": []
         }, {
           "href": "https://pan.baidu.com/s/1HIq_UEG5uwLg-HkDtOTxsw?pwd=6666",
@@ -10433,6 +10502,58 @@ const navigation = {
           "href": "https://pan.baidu.com/s/1DN_bmn8wOU4pED890TPSaw",
           "content": "河北三支一扶 提取码：8auf",
           "children": []
+        }, {
+          "href": "https://pan.baidu.com/s/1AwA9A7aMGSid_8Aeoi4zHQ?pwd=2zko",
+          "content": "2025年公务员（含学习框架+视频课程+超全笔记）",
+          "children": []
+        }, {
+          "href": "https://axu.lanzoue.com/i0yBg0fh1tcf",
+          "content": "公务员资料分析速算练习软件",
+          "children": []
+        }, {
+          "href": "http://gongkao66688.edudisk.cn/",
+          "content": "公务员资料大全（访问密码：8527）👍",
+          "children": []
+        }, {
+          "href": "https://pan.quark.cn/s/0d7438822a28",
+          "content": "2025粉笔国考",
+          "children": []
+        }, {
+          "href": "https://pan.quark.cn/s/83aafca47b7e",
+          "content": "2025粉笔公考持续更新",
+          "children": []
+        }, {
+          "href": "https://pan.quark.cn/s/dd9058dd58cf",
+          "content": "2024 公务员冲刺押题",
+          "children": []
+        }, {
+          "href": "https://pan.quark.cn/s/eb54efc491eb",
+          "content": "2024 公务员省考国考公考资料（合集）",
+          "children": []
+        }, {
+          "href": "https://www.kotan.cn/posts/e742576d/",
+          "content": "考公资料丨资源搬运工（含2024年资源）",
+          "children": []
+        }, {
+          "href": "https://sourcegraph.com/github.com/coder2gwy/coder2gwy",
+          "content": "程序员考公指南（Github高赞项目）",
+          "children": []
+        }, {
+          "href": "https://pan.quark.cn/s/d55e30168dfe",
+          "content": "2024国考980系统班（主课）",
+          "children": []
+        }, {
+          "href": "https://pan.baidu.com/s/17MOFER9lTCi2lOInK_gc9w",
+          "content": "2023江苏省考电子版做题题库提取密码：xr1u",
+          "children": []
+        }, {
+          "href": "http://qq351605872.ysepan.com/",
+          "content": "记忆力博客网盘－1个含公务员事业单位招聘考试培训视频及讲义的永硕Ｅ盘",
+          "children": []
+        }, {
+          "href": "https://cbu01.alicdn.com/img/ibank/O1CN01eeVPHf1Bs2f6n9UY4_!!0-0-cib.jpg",
+          "content": "学习强国APP上有大量免费优质的「公务员」笔试面试相关视频课程👍（安卓／iOS）",
+          "children": []
         }]
       }, {"href": "", "content": "02.工程师", "children": []}, {
         "href": "",
@@ -10442,16 +10563,20 @@ const navigation = {
           "content": "一建",
           "children": []
         }, {
-          "href": "https://pan.baidu.com/s/14khmRm5ZnKpK8TiwPFvsqg?pwd=0cnt",
-          "content": "2023年一建共享资料【法规】提取码：0cnt",
+          "href": "https://pan.baidu.com/s/1D_9KMJS7a3x-gV3rlyQ0ew",
+          "content": "2024年一级建造师2024冲刺班 提取码：jgxr",
           "children": []
         }, {
-          "href": "https://pan.baidu.com/s/1dY8GZgutm3vx4GjDI4aSdA?pwd=8888",
-          "content": "2023一级建造师VIP 提取码：8888",
+          "href": "https://pan.baidu.com/s/1X96Sar_mx2i0XWrVv_8Chg",
+          "content": "2024年一级建造师－机电－模考试卷 提取码：py7x",
           "children": []
         }, {
-          "href": "https://pan.baidu.com/s/170riIsqNmwViWeDzAnIhqg",
-          "content": "2022一建全科 精讲 提取码：2022",
+          "href": "https://pan.baidu.com/s/1rntn5Z9CoTdRxUOA_qigwA",
+          "content": "2024年一建【机电】提取码：0917",
+          "children": []
+        }, {
+          "href": "https://pan.baidu.com/s/1rk52nAlZjZTq35OmZLC4gQ",
+          "content": "2024年一级建造师－各大机构 提取码：6666",
           "children": []
         }, {
           "href": "https://pan.baidu.com/s/1M7r5h8KJV6T9GPbdxnxT7A",
@@ -10466,44 +10591,16 @@ const navigation = {
           "content": "2023年二建【全科目】提取码：6666",
           "children": []
         }, {
-          "href": "https://pan.baidu.com/s/1-U3fIUMPfW4wi-uHQDqWSw#uwgw",
-          "content": "2023年二建共享资料-水利 提取码：uwgw",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1fLNBpl52W6eOHWORtAu3XQ#kumb",
-          "content": "2023年二建共享资料-市政 提取码：kumb",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1idID8KGZVkceTt4nHvEObQ#3sjz",
-          "content": "2023年二建共享资料-建筑 提取码：3sjz",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1XnMCotAIUTTrun8vmzGxLA#acsa",
-          "content": "2023年二建共享资料-机电 提取码：acsa",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1MqoxEoXQHqYd-g1jv6CNnQ#5uw9",
-          "content": "2023年二建共享资料-管理 提取码：5uw9",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/106BXjqoyA1whTl2YIevcLw#6whg",
-          "content": "2023年二建共享资料-公路 提取码：6whg",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1JgJn_gyyPTDJw3gh4mumZg?pwd=d36u#d36u",
-          "content": "2023年二建共享资料-法规 提取码：d36u",
-          "children": []
-        }, {
-          "href": "https://www.aliyundrive.com/s/mWKRfukDoym",
-          "content": "2022二建资料合集（持续更新）",
-          "children": []
-        }, {
           "href": "https://www.aliyundrive.com/s/EVBjtqXZHhx",
           "content": "2022二级注册建筑师",
           "children": []
         }, {
           "href": "https://www.aliyundrive.com/s/8f94At2mRUM",
           "content": "2021二级注册建筑师",
+          "children": []
+        }, {
+          "href": "https://pan.quark.cn/s/215f59b69378",
+          "content": "2025一建、二建等课程👍",
           "children": []
         }, {
           "href": "https://pan.baidu.com/s/1O7GY1PrdjHy-aspnV-BvYQ",
@@ -10582,6 +10679,10 @@ const navigation = {
         "href": "",
         "content": "04.安全工程师",
         "children": [{
+          "href": "https://pan.baidu.com/s/1iD_WjhaUmJddPqkZivNfdA",
+          "content": "2024注册安全工程师 提取码：1688",
+          "children": []
+        }, {
           "href": "https://pan.quark.cn/s/5447ab857ce9",
           "content": "2024注册安全工程师",
           "children": []
@@ -10602,6 +10703,10 @@ const navigation = {
         "href": "",
         "content": "06.电气工程师",
         "children": [{
+          "href": "https://pan.baidu.com/s/1GPevFGppMNF6u0kuJrNDUA?pwd=yrot",
+          "content": "2024注册电气工程师 提取码：yrot",
+          "children": []
+        }, {
           "href": "https://pan.baidu.com/s/1vdGR4DszhqXCfHNKSBKRRg",
           "content": "2020 注册电气工程师基础 提取码: i8ad",
           "children": []
@@ -10626,6 +10731,10 @@ const navigation = {
         "href": "",
         "content": "07.监理工程师",
         "children": [{
+          "href": "https://pan.quark.cn/s/212333649d9e",
+          "content": "2021－2024监理工程师",
+          "children": []
+        }, {
           "href": "https://pan.baidu.com/s/15_yepdF1Khh_jKA0y9sE7g",
           "content": "2024监理 提取码：gn9z",
           "children": []
@@ -10730,6 +10839,18 @@ const navigation = {
         "href": "",
         "content": "03.会计师／经济师／税务师",
         "children": [{
+          "href": "https://pan.baidu.com/s/1RKZC59FSIxuenqqThn0xsw",
+          "content": "2024注册会计 提取码：1111",
+          "children": []
+        }, {
+          "href": "https://pan.baidu.com/s/1asaqUzZtNtec4-fXoa-eIA",
+          "content": "2024注会计 提取码：7nAe",
+          "children": []
+        }, {
+          "href": "https://pan.quark.cn/s/188235ebb775",
+          "content": "2024中级会计",
+          "children": []
+        }, {
           "href": "https://pan.quark.cn/s/642fd2f4c0c9",
           "content": "2023、2024 1T 中级经济师",
           "children": []
@@ -11058,6 +11179,18 @@ const navigation = {
         "href": "",
         "content": "08.计算机",
         "children": [{
+          "href": "https://pan.quark.cn/s/7c086564cad0",
+          "content": "2025软考高级信息系统项目管理师",
+          "children": []
+        }, {
+          "href": "https://pan.xunlei.com/s/VOCuE77WIyIiA526ocXexo8YA1?pwd=9igd#",
+          "content": "2025年5月马军软考【高项】",
+          "children": []
+        }, {
+          "href": "https://pan.quark.cn/s/6d69bf3bb26f",
+          "content": "2025年5月野人软考【高项】",
+          "children": []
+        }, {
           "href": "https://pan.baidu.com/s/1o-9TrpaXXsSg53-7D06kBQ",
           "content": "2024软考中级VIP班 提取码：8888",
           "children": []
@@ -11066,28 +11199,8 @@ const navigation = {
           "content": "马军老师.202305.软考中级系统集成项目管理工程师",
           "children": []
         }, {
-          "href": "https://www.aliyundrive.com/s/NzPqfDANgJv",
-          "content": "江山.202205.软考高级信息系统项目管理师",
-          "children": []
-        }, {
-          "href": "https://www.aliyundrive.com/s/WYWaJ6g5cep",
-          "content": "江山.202205.软考中级系统集成项目管理工程师",
-          "children": []
-        }, {
           "href": "https://www.aliyundrive.com/s/DHwYLmGQhU9",
           "content": "2022年信息系统项目管理师 提取码：01dw",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1eBO7twpzVB5UkC0yU0x4MA",
-          "content": "2021软考高级（信息系统项目管理师）提取码：qq7c",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1aTaoTubdNj_NVfBbNAJcCQ",
-          "content": "2020信息系统项目管理师 提取码：dvm8",
-          "children": []
-        }, {
-          "href": "https://www.aliyundrive.com/s/dGPzozhLyq2%20%E2%96%81f",
-          "content": "2021希赛熊十安-软考中级系统集成项目管理工程师",
           "children": []
         }, {
           "href": "https://www.aliyundrive.com/s/XUpdhZBK8sW",
@@ -11100,14 +11213,6 @@ const navigation = {
         }, {
           "href": "https://www.aliyundrive.com/s/dGPzozhLyq2",
           "content": "2021软考中级系统集成项目管理工程师",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1Kw7XV3aF9uXGnhr3HwCfrw",
-          "content": "2020软考信息安全工程师教材 提取码: 96y4",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1n4w0YuGTlZR6rw1dgMxiug",
-          "content": "2020希赛软考中级高级网络工程师视频教程直通车",
           "children": []
         }]
       }, {
@@ -11154,6 +11259,10 @@ const navigation = {
         "href": "",
         "content": "10.军队文职",
         "children": [{
+          "href": "https://pan.quark.cn/s/790cbd8650ba",
+          "content": "2025军队文职",
+          "children": []
+        }, {
           "href": "https://pan.quark.cn/s/f5436d6b5144",
           "content": "2024军队文职",
           "children": []
@@ -11172,14 +11281,6 @@ const navigation = {
         }, {
           "href": "https://pan.baidu.com/s/1fuzwp2hb2GRmWAU8gxTMhA",
           "content": "2023军队文职 提取码：jmgu",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1vqCmAu2eb7u9Se9a1ITSDA",
-          "content": "2020年军队文职笔试专业课-新闻学 提取码：jb8p",
-          "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1nCU_IDHckpP9WwvVWpSjxQ",
-          "content": "2020年军队文职笔试专业课-理工学类-数学1 提取码：nqe0",
           "children": []
         }]
       }, {
@@ -11381,11 +11482,7 @@ const navigation = {
           "href": "https://pan.baidu.com/s/17mVBkv6KIjKdCK58DzPBJw?pwd=ehzb",
           "content": "2020主管护师",
           "children": []
-        }, {
-          "href": "https://pan.baidu.com/s/1gw6u3d-nbCgDUVmchoPnZA",
-          "content": "2024城乡规划师 提取码：2024",
-          "children": []
-        }]
+        }, {"href": "https://pan.quark.cn/s/940ea875de86", "content": "2024主管药师等", "children": []}]
       }, {
         "href": "",
         "content": "13.PPT模板",
@@ -11406,10 +11503,10 @@ const navigation = {
           "content": "新海诚电影全集",
           "children": []
         }, {
-          "href": "https://pan.quark.cn/s/c81763ee2a43",
+          "href": "https://pan.quark.cn/s/07da5638eb39",
           "content": "宫崎骏电影全集",
           "children": []
-        }, {"href": "https://www.aliyundrive.com/s/Lcx7itHjeoZ", "content": "漫威电影全集", "children": []}]
+        }, {"href": "https://www.aliyundrive.com/s/uHd4FJqU4vZ", "content": "漫威电影全集", "children": []}]
       }, {
         "href": "",
         "content": "15.音乐专辑",
@@ -11450,7 +11547,7 @@ const navigation = {
           "content": "田英章－硬笔行书／楷书专用教程",
           "children": []
         }, {
-          "href": "https://kyon.118pan.com/b1145477",
+          "href": "https://www.123865.com/s/bjcA-pk3g",
           "content": "吴玉生－硬笔行楷技法",
           "children": []
         }, {
@@ -11466,10 +11563,14 @@ const navigation = {
         "href": "",
         "content": "17.电子书",
         "children": [{
-          "href": "https://kyon.118pan.com/b1110866",
+          "href": "https://axu.lanzouj.com/iVpDd08fps1i",
           "content": "入门级英文原著（mobi／epub格式）",
           "children": []
-        }, {"href": "https://axu.lanzouw.com/iMZ1Dr5mukj", "content": "东野圭吾91部作品集（epub格式）", "children": []}]
+        }, {
+          "href": "https://axu.lanzouw.com/iKyMX2hgsyve",
+          "content": "东野圭吾91部作品集（mobi／epub／azw3格式）",
+          "children": []
+        }]
       }, {
         "href": "",
         "content": "18.其他",
@@ -11482,8 +11583,8 @@ const navigation = {
           "content": "中学教师资格证Anki记忆库",
           "children": []
         }, {
-          "href": "https://mp.weixin.qq.com/s/pTuPOZMuPWKSsGJPnFK6-w",
-          "content": "50G高清材质贴图素材（资源储物间右上角自取）",
+          "href": "https://flowus.cn/share/3bc85302-62e5-4c32-ba0a-0a83733cf455?code=CZ3ECT",
+          "content": "50G高清材质贴图素材",
           "children": []
         }, {
           "href": "https://mp.weixin.qq.com/s/5f6GvyUQsByG65WvDzr3PA",
