@@ -28,7 +28,6 @@ const newsStore = useNewsStore();
 const snackbarStore = useSnackbarStore();
 
 const characters = promptsZh.map(it => it.act);
-console.log(characters)
 
 const props = defineProps({
   // 1表示chatgpt，4表示Chatgpt4，100表示讯飞星火，200表示百度，300表示llama
