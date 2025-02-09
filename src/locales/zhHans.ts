@@ -2,7 +2,7 @@ export default {
   jiucai: {
     news: "情报",
     navigation: "黑悟空导航",
-    chatgpt: "ChatGpt",
+    chatgpt: "AI ++",
     llama: "Llama 2",
     chatgpt4: "ChatGpt 4",
     spark: "星火认知",
@@ -15,8 +15,7 @@ export default {
     billing: "充电打赏",
     team: "用韭菜发电",
     ask: "如何割韭菜",
-    frontendGithub: "前端开源地址",
-    backendGithub: "后端开源地址",
+    backendGithub: "开源地址",
     login: "登录",
     profile: "我的主页",
     tutorial: "教程",

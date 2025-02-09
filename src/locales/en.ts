@@ -15,7 +15,6 @@ export default {
     billing: "reward",
     team: "cutting leek team",
     ask: "how to cut leeks",
-    frontendGithub: "frontend source",
     backendGithub: "backend source",
     tutorial: "Tutorial",
     nav: {

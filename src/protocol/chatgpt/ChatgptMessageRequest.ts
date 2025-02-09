@@ -8,6 +8,8 @@ class ChatgptMessageRequest {
     ai: number = 0;
     mobile: boolean = false;
     messages: Array<ChatgptMessage> = [];
+    // 角色扮演
+    characters: Map<number, string> = new Map();
     // 不需要哪些AI
     ignoreAIs: Set<number> = new Set();
     // google联网搜索
@@ -34,6 +36,7 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
         buffer.writeInt(packet.ai);
         buffer.writeBool(packet.bilibiliSearch);
         buffer.writeBool(packet.bingSearch);
+        buffer.writeIntStringMap(packet.characters);
         buffer.writeBool(packet.googleSearch);
         buffer.writeIntSet(packet.ignoreAIs);
         buffer.writePacketList(packet.messages, 504);
@@ -55,18 +58,20 @@ export class ChatgptMessageRequestRegistration implements IProtocolRegistration<
         packet.bilibiliSearch = result1;
         const result2 = buffer.readBool(); 
         packet.bingSearch = result2;
-        const result3 = buffer.readBool(); 
-        packet.googleSearch = result3;
-        const set4 = buffer.readIntSet();
-        packet.ignoreAIs = set4;
-        const list5 = buffer.readPacketList(504);
-        packet.messages = list5;
-        const result6 = buffer.readBool(); 
-        packet.mobile = result6;
-        const result7 = buffer.readLong();
-        packet.requestId = result7;
-        const result8 = buffer.readBool(); 
-        packet.weixinSearch = result8;
+        const map3 = buffer.readIntStringMap();
+        packet.characters = map3;
+        const result4 = buffer.readBool(); 
+        packet.googleSearch = result4;
+        const set5 = buffer.readIntSet();
+        packet.ignoreAIs = set5;
+        const list6 = buffer.readPacketList(504);
+        packet.messages = list6;
+        const result7 = buffer.readBool(); 
+        packet.mobile = result7;
+        const result8 = buffer.readLong();
+        packet.requestId = result8;
+        const result9 = buffer.readBool(); 
+        packet.weixinSearch = result9;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

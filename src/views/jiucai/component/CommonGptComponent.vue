@@ -17,6 +17,7 @@ import ChatgptMessage from "@/protocol/chatgpt/ChatgptMessage";
 import {useNewsStore} from "@/stores/newsStore";
 import {useDisplay} from "vuetify";
 import {useMyStore} from "@/stores/myStore";
+import promptsZh from "./prompts-zh.json";
 import IframeResizer from "@iframe-resizer/vue/iframe-resizer.vue";
 import _ from "lodash";
 
@@ -25,6 +26,9 @@ const myStore = useMyStore();
 const {mobile} = useDisplay();
 const newsStore = useNewsStore();
 const snackbarStore = useSnackbarStore();
+
+const characters = promptsZh.map(it => it.act);
+console.log(characters)
 
 const props = defineProps({
   // 1表示chatgpt，4表示Chatgpt4，100表示讯飞星火，200表示百度，300表示llama
@@ -144,13 +148,6 @@ const requestMessages = computed(() => {
       }
       first = true;
     }
-  }
-
-  if (!_.isEmpty(myStore.propmpt)) {
-    const chatgptMessage = new ChatgptMessage();
-    chatgptMessage.role = "system";
-    chatgptMessage.content = myStore.propmpt;
-    myMessages.push(chatgptMessage);
   }
 
   return myMessages.reverse();
@@ -306,8 +303,8 @@ const dialogRef = ref(false);
   <v-container v-if="messages.length <= 0">
     <v-row justify="center" align="center">
       <v-col cols="12">
-        <AnimationAI1 v-if="props.ai == 1" :size="props.size"/>
-        <AnimationAI2 v-else-if="props.ai == 2" :size="props.size"/>
+        <AnimationAI2 v-if="props.ai == 1" :size="props.size"/>
+        <AnimationAI1 v-else-if="props.ai == 2" :size="props.size"/>
         <AnimationAI4 v-else-if="props.ai == 4" :size="props.size"/>
         <AnimationAILlama v-else-if="props.ai == 6" :size="props.size"/>
       </v-col>
@@ -485,9 +482,9 @@ const dialogRef = ref(false);
     </v-container>
   </v-footer>
 
-  <v-dialog v-model="dialogRef" width="600">
+  <v-dialog v-model="dialogRef" width="800">
     <v-card>
-      <v-card-title class="font-weight-bold pa-5">{{ $t("chatgpt.config.title") }}</v-card-title>
+      <v-card-title class="font-weight-bold pa-5">AI++ 设置</v-card-title>
       <v-divider/>
       <v-card-text>
         <v-container>
@@ -497,8 +494,11 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/xunfei.png"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
-              <v-switch v-model="myStore.xunfei" label="讯飞星火大模型" hide-details color="teal" inset></v-switch>
+            <v-col class="py-0 my-1" cols="3">
+              <v-switch v-model="myStore.xunfei" label="讯飞星火" hide-details color="teal" inset></v-switch>
+            </v-col>
+            <v-col class="py-0 my-1">
+              <v-select v-model="myStore.xunfeiCharacter" :items="characters" clearable density="compact"></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -507,8 +507,11 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/baidu.png"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
+            <v-col class="py-0 my-1" cols="3">
               <v-switch v-model="myStore.baidu" label="文心一言" hide-details color="teal" inset></v-switch>
+            </v-col>
+            <v-col class="py-0 my-1">
+              <v-select v-model="myStore.baiduCharacter" :items="characters" clearable density="compact"></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -517,8 +520,11 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/tencent.png"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
+            <v-col class="py-0 my-1" cols="3">
               <v-switch v-model="myStore.tencent" label="腾讯混元" hide-details color="teal" inset></v-switch>
+            </v-col>
+            <v-col class="py-0 my-1">
+              <v-select v-model="myStore.tencentCharacter" :items="characters" clearable density="compact"></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -527,8 +533,11 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/qianwen.aliyun.com.png"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
+            <v-col class="py-0 my-1" cols="3">
               <v-switch v-model="myStore.alibaba" label="通义千问" hide-details color="teal" inset></v-switch>
+            </v-col>
+            <v-col class="py-0 my-1">
+              <v-select v-model="myStore.alibabaCharacter" :items="characters" clearable density="compact"></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -537,18 +546,11 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/llama.jpg"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
+            <v-col class="py-0 my-1" cols="3">
               <v-switch v-model="myStore.llama" label="meta llama" hide-details color="teal" inset></v-switch>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="1">
-              <v-avatar rounded="0">
-                <v-img src="aa/map/deepseek.png"/>
-              </v-avatar>
-            </v-col>
-            <v-col class="py-0 my-1" offset="1">
-              <v-switch v-model="myStore.deepseek" label="deepseek" hide-details color="teal" inset></v-switch>
+            <v-col class="py-0 my-1">
+              <v-select v-model="myStore.llamaCharacter" :items="characters" clearable density="compact"></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -557,8 +559,37 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/gemini.google.com.png"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
+            <v-col class="py-0 my-1" cols="3">
               <v-switch v-model="myStore.google" label="google gemini" hide-details color="teal" inset></v-switch>
+            </v-col>
+            <v-col class="py-0 my-1">
+              <v-select v-model="myStore.googleCharacter" :items="characters" clearable density="compact"></v-select>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar rounded="0">
+                <v-img src="aa/map/deepseek.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" cols="3">
+              <v-switch v-model="myStore.deepseek" label="deepseek" hide-details color="teal" inset></v-switch>
+            </v-col>
+            <v-col class="py-0 my-1">
+              <v-select v-model="myStore.deepseekCharacter" :items="characters" clearable density="compact"></v-select>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-avatar rounded="0">
+                <v-img src="aa/map/chat.openai.com.png"/>
+              </v-avatar>
+            </v-col>
+            <v-col class="py-0 my-1" cols="3">
+              <v-switch v-model="myStore.chatgpt" label="chatgpt" hide-details color="teal" inset></v-switch>
+            </v-col>
+            <v-col class="py-0 my-1">
+              <v-select v-model="myStore.chatgptCharacter" :items="characters" clearable density="compact"></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -567,7 +598,7 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/google.png"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
+            <v-col class="py-0 my-1" cols="3">
               <v-switch v-model="myStore.googleSearch" label="Google 联网搜索" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
@@ -577,7 +608,7 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/bing.com.png"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
+            <v-col class="py-0 my-1" cols="3">
               <v-switch v-model="myStore.bingSearch" label="bing 联网搜索" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
@@ -587,7 +618,7 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/weixin.png"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
+            <v-col class="py-0 my-1" cols="3">
               <v-switch v-model="myStore.weixinSearch" label="微信联网搜索" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
@@ -597,25 +628,12 @@ const dialogRef = ref(false);
                 <v-img src="aa/map/bilibili.png"/>
               </v-avatar>
             </v-col>
-            <v-col class="py-0 my-1" offset="1">
+            <v-col class="py-0 my-1" cols="3">
               <v-switch v-model="myStore.bilibiliSearch" label="bilibili 联网搜索" hide-details color="teal" inset></v-switch>
             </v-col>
           </v-row>
         </v-container>
-
-        <v-label class="font-weight-medium mb-2 ml-2 mt-5">角色扮演</v-label>
-
-        <v-textarea
-          v-model="myStore.propmpt"
-          placeholder="如：我要让你来充当英语翻译，你的目标是把任何语言翻译成英文，请翻译时不要带翻译腔，而是要翻译得自然、流畅和地道，使用优美和高雅的表达方式。"
-          auto-grow
-        ></v-textarea>
       </v-card-text>
-
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn variant="flat" color="primary" @click="dialogRef = false">OK</v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>

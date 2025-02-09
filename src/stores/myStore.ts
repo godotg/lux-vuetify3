@@ -26,7 +26,7 @@ export const useMyStore = defineStore("myStore", {
       login: 0,
       cost: 0
     },
-    propmpt: "",
+
     baidu: true,
     xunfei: true,
     tencent: true,
@@ -34,6 +34,17 @@ export const useMyStore = defineStore("myStore", {
     llama: true,
     deepseek: true,
     google: true,
+    chatgpt: true,
+
+    xunfeiCharacter: '充当人生教练',
+    baiduCharacter: '充当小说家',
+    tencentCharacter: '担任法律顾问',
+    alibabaCharacter: '担任销售员',
+    llamaCharacter: '充当说唱歌手',
+    deepseekCharacter: '担任作曲家',
+    googleCharacter: '充当诗人',
+    chatgptCharacter: '充当哲学家',
+
     googleSearch: false,
     bingSearch: true,
     weixinSearch: false,
@@ -42,8 +53,10 @@ export const useMyStore = defineStore("myStore", {
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["announce", "token", "user", "lastForceShow", "propmpt", "baidu", "xunfei"
-        , "llama", "tencent", "deepseek", "alibaba", "google", "googleSearch", "bingSearch", "weixinSearch", "bilibiliSearch"]}],
+    strategies: [{storage: localStorage, paths: ["announce", "token", "user", "lastForceShow",
+        "baidu", "xunfei", "llama", "tencent", "deepseek", "alibaba", "google", "chatgpt",
+        "baiduCharacter", "xunfeiCharacter", "llamaCharacter", "tencentCharacter", "deepseekCharacter", "alibabaCharacter", "googleCharacter", "chatgptCharacter",
+        "googleSearch", "bingSearch", "weixinSearch", "bilibiliSearch"]}],
   },
 
   getters: {},

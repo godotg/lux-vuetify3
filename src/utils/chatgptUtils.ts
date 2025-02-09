@@ -26,6 +26,9 @@ export function sendChatgpt(messages: Array<ChatgptMessage>, ai) {
   }
 
   const ignoreAIs = new Set<number>();
+  if (!myStore.chatgpt) {
+    ignoreAIs.add(1);
+  }
   if (!myStore.xunfei) {
     ignoreAIs.add(1000);
   }
@@ -48,11 +51,38 @@ export function sendChatgpt(messages: Array<ChatgptMessage>, ai) {
     ignoreAIs.add(15000);
   }
 
+  const characters: Map<number, string> = new Map();
+  if (!_.isEmpty(myStore.chatgptCharacter)) {
+    characters.set(1, myStore.chatgptCharacter)
+  }
+  if (!_.isEmpty(myStore.xunfeiCharacter)) {
+    characters.set(1000, myStore.xunfeiCharacter)
+  }
+  if (!_.isEmpty(myStore.baiduCharacter)) {
+    characters.set(2000, myStore.baiduCharacter)
+  }
+  if (!_.isEmpty(myStore.tencentCharacter)) {
+    characters.set(3000, myStore.tencentCharacter)
+  }
+  if (!_.isEmpty(myStore.alibabaCharacter)) {
+    characters.set(4000, myStore.alibabaCharacter)
+  }
+  if (!_.isEmpty(myStore.deepseekCharacter)) {
+    characters.set(5000, myStore.deepseekCharacter)
+  }
+  if (!_.isEmpty(myStore.llamaCharacter)) {
+    characters.set(14000, myStore.llamaCharacter)
+  }
+  if (!_.isEmpty(myStore.googleCharacter)) {
+    characters.set(15000, myStore.googleCharacter)
+  }
+
   const request = new ChatgptMessageRequest();
   request.mobile = isMobile();
   request.requestId = ++requestId;
   request.ai = ai;
   request.messages = messages;
+  request.characters = characters;
   request.ignoreAIs = ignoreAIs;
   request.googleSearch = myStore.googleSearch;
   request.bingSearch = myStore.bingSearch;
