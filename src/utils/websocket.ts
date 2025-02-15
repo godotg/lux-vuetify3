@@ -13,6 +13,7 @@ import GroupChatNotice from '@/protocol/chat/GroupChatNotice';
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
 import {useMyStore} from "@/stores/myStore";
+import {newNotify, closeNotify} from "@/utils/notifyUtils";
 import _ from "lodash";
 
 
@@ -247,11 +248,23 @@ export function registerPacketReceiver(protocol: any, fun: any) {
   receiverMap.set(protocol, fun);
 }
 
+
+// 判断网页是否被激活
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'visible') {
+    console.log('网页被激活');
+    closeNotify();
+  } else {
+    console.log('网页被隐藏');
+  }
+});
+
 function route(packet: any) {
   const receiver = receiverMap.get(packet.constructor);
   if (packet.constructor == GroupChatNotice) {
     const newsStore = useNewsStore();
     newsStore.chatMessageIdDiff = _.first(packet.messages).id - newsStore.chatMessageId;
+    newNotify("新消息");
     console.log(newsStore.chatMessageIdDiff);
   }
   if (receiver == null) {
