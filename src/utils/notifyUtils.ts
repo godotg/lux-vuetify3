@@ -77,15 +77,18 @@ function initNotify() {
   });
 }
 
-export async function newNotify(desktopTitle: string) {
+export async function newNotify(desktopTitle: string, desktopBody: string) {
   ++count;
   initNotify();
   console.log("推送消息");
   const joke = jokes[_.random(0, jokes.length - 1)];
+  if (_.isEmpty(desktopBody)) {
+    desktopBody = joke;
+  }
   // 浏览器左下角弹窗推送
   notify.notify({
     title: desktopTitle,
-    body: joke,
+    body: desktopBody,
     openurl: "https://jiucai.fun",
     onclick: function () {
       console.log("on click");
@@ -94,12 +97,8 @@ export async function newNotify(desktopTitle: string) {
       console.log("on show");
     },
   });
-  if (document.visibilityState === 'visible') {
-    closeNotify();
-  } else {
-    notify.setTitle(joke); // Flashing new title
-    notify.setFavicon(count);
-  }
+  notify.setTitle(joke); // Flashing new title
+  notify.setFavicon(count);
   // 播放声音
   notify.player();
 }

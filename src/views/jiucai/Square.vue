@@ -278,7 +278,7 @@ const goTo = (url: string) => {
         variant="solo"
         ref="input"
         v-model="userMessage"
-        placeholder="Send Message"
+        placeholder="发送消息（支持MarkDown语法，支持嵌入gif网页代码）"
         hide-details
         @keydown="handleKeydown"
         rows="1"
@@ -334,7 +334,7 @@ const goTo = (url: string) => {
             variant="solo"
             ref="input"
             v-model="userMessage"
-            placeholder="Send Message"
+            placeholder="发送消息（支持MarkDown语法，支持嵌入gif网页代码）"
             hide-details
             @keydown="handleKeydown"
             rows="1"

@@ -22,6 +22,7 @@ import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore, levelMap} from "@/stores/newsStore";
 import {getFormatDate, getFormatMonth} from "@/utils/timeUtils";
 import Chart from 'chart.js/auto';
+import {newNotify} from "@/utils/notifyUtils";
 
 const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
@@ -94,6 +95,7 @@ async function doInitNews() {
   startId = _.last(response.news).id;
   endId = response.endId;
   snackbarStore.showSuccessMessage("情报初始化成功");
+  response.news.filter(it => it.level == "S" || it.level == "A").filter(it => newsStore.isNew(it.id)).forEach(it => newNotify(`${it.level}级情报`, it.content));
 }
 
 async function requestNews() {
@@ -108,6 +110,7 @@ async function requestNews() {
   if (response.endId == endId) {
     return;
   }
+  response.news.filter(it => it.level == "S" || it.level == "A").filter(it => newsStore.isNew(it.id)).forEach(it => newNotify(`${it.level}级情报`, it.content));
   const newNews = _.concat(response.news, newsRef.value);
   newsRef.value = newNews;
   endId = response.endId;
