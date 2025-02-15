@@ -1,6 +1,6 @@
 import Notify from "@wcjiang/notify";
 import _ from "lodash";
-import { useCustomizeThemeStore } from "@/stores/customizeTheme";
+import {useCustomizeThemeStore} from "@/stores/customizeTheme";
 
 let notify: Notify = null;
 
@@ -36,7 +36,7 @@ const jokes = [
 let count = 0;
 
 function initNotify() {
-  if (count <= 0 || notify != null) {
+  if (notify != null) {
     return;
   }
   const customizeTheme = useCustomizeThemeStore();
@@ -94,15 +94,18 @@ export async function newNotify(desktopTitle: string) {
       console.log("on show");
     },
   });
-  notify.setTitle(joke); // Flashing new title
-  notify.setFavicon(count);
+  if (document.visibilityState === 'visible') {
+    closeNotify();
+  } else {
+    notify.setTitle(joke); // Flashing new title
+    notify.setFavicon(count);
+  }
   // 播放声音
   notify.player();
 }
 
 
 export async function closeNotify() {
-  initNotify();
   if (notify == null) {
     return;
   }
@@ -110,4 +113,10 @@ export async function closeNotify() {
   notify.faviconClear();
   notify.setTitle(); // Clear Blinking Show original title
   notify.close();
+}
+
+
+export async function hasPermissionNotify() {
+  initNotify();
+  return notify.isPermission();
 }

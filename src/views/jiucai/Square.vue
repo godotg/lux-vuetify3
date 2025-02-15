@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useChatStore} from "@/views/app/chat/chatStore";
+import {useMyStore} from "@/stores/myStore";
 import {Icon} from "@iconify/vue";
 import { MdPreview } from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
@@ -17,10 +18,12 @@ import {parseTime} from "@/utils/timeUtils";
 import {useDisplay} from "vuetify";
 import _ from "lodash";
 import {isBlank} from "@/utils/stringUtils";
+import {hasPermissionNotify} from "@/utils/notifyUtils";
 import axios from "axios";
 
 const snackbarStore = useSnackbarStore();
 const chatStore = useChatStore();
+const myStore = useMyStore();
 const route = useRoute();
 
 const {mobile, height, width} = useDisplay();
@@ -82,6 +85,9 @@ const atGroupChatNotice = (packet: GroupChatNotice) => {
   isLoading.value = false;
   updateMessage(packet.messages);
   scrollToBottom();
+  if (!hasPermissionNotify()) {
+    myStore.browserNotifyDialog = true;
+  }
   if (_.isEqual(route.path, "/square")) {
     refreshMessageNotification();
     return;
@@ -208,6 +214,12 @@ const handleKeydown = (e) => {
     sendMessage();
   }
 };
+
+const goTo = (url: string) => {
+  // hello::dsf sdfsfd 说的话覅 // 第三方
+  window.open(url, '_blank');
+}
+
 </script>
 
 <template>
@@ -296,6 +308,26 @@ const handleKeydown = (e) => {
     <v-container v-else>
       <v-row>
         <v-col cols="8" offset="2">
+          <template v-if="!mobile">
+            <v-chip color="teal" prepend-icon="mdi-file-gif-box" class="mb-3" @click="goTo('https://giphy.com')">
+              giphy
+            </v-chip>
+            <v-chip color="blue" prepend-icon="mdi-file-jpg-box" class="ml-6 mb-3" @click="goTo('https://gifburg.com')">
+              gifburg
+            </v-chip>
+            <v-chip color="blue-grey" prepend-icon="mdi-file-image-outline" class="ml-6 mb-3" @click="goTo('https://tenor.com')">
+              tenor
+            </v-chip>
+            <v-chip color="indigo" prepend-icon="mdi-message-alert-outline" class="ml-6 mb-3" @click="myStore.browserNotifyDialog = true">
+              打开消息通知权限
+            </v-chip>
+<!--            <v-chip prepend-icon="mdi-music-note" class="ml-6 mb-3" @click="goTo('https://www.douyin.com/search/')">-->
+<!--              抖音-->
+<!--            </v-chip>-->
+<!--            <v-chip color="red-lighten-2" prepend-icon="mdi-book-open-variant" class="ml-6 mb-3" @click="goTo('https://www.xiaohongshu.com/search_result?keyword=')">-->
+<!--              生活小红书-->
+<!--            </v-chip>-->
+          </template>
           <v-textarea
             color="primary"
             type="text"

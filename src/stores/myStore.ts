@@ -5,6 +5,7 @@ import _ from "lodash";
 export const useMyStore = defineStore("myStore", {
   state: () => ({
     rewardTipDialog: false,
+    browserNotifyDialog: false,
     lastForceShow: 0,
     announce: {
       version: "",

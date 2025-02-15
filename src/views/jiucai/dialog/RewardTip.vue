@@ -64,10 +64,7 @@ function complete() {
           请站长喝杯咖啡
         </template>
         <v-card-text>
-          <img
-            src="../../../assets/my/caffe.jpg"
-            alt="alt"
-          />
+          <v-img src="aa/image/caffe.jpg"/>
         </v-card-text>
         <v-card-actions>
           <v-btn variant="outlined" @click="complete()">
