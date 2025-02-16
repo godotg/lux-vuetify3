@@ -71,7 +71,6 @@ let count = 0;
 
 export async function newNotify(desktopTitle: string, desktopBody: string) {
   ++count;
-  initNotify();
   console.log("推送消息");
   const customizeTheme = useCustomizeThemeStore();
   const joke = jokes[_.random(0, jokes.length - 1)];
@@ -99,9 +98,6 @@ export async function newNotify(desktopTitle: string, desktopBody: string) {
 
 
 export async function closeNotify() {
-  if (notify == null) {
-    return;
-  }
   count = 0;
   notify.faviconClear();
   notify.setTitle(); // Clear Blinking Show original title
@@ -110,6 +106,5 @@ export async function closeNotify() {
 
 
 export async function hasPermissionNotify() {
-  initNotify();
   return notify.isPermission();
 }
