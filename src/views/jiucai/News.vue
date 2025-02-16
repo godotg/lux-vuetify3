@@ -501,10 +501,10 @@ function copyNews(news: News, event: Event) {
                 排名
               </th>
               <th>
-                纳斯达克|道琼斯
+                美股人气榜 | 纳斯达克
               </th>
               <th>
-                A股风云
+                A股人气榜
               </th>
             </tr>
             </thead>
@@ -613,10 +613,10 @@ function copyNews(news: News, event: Event) {
           <span>Rank</span>
         </template>
         <v-card>
-          <v-card-title v-ripple class="cursor-pointer" v-tooltip:start="跳转人气排行" @click="goToRank()">
+          <v-card-title v-ripple class="cursor-pointer" @click="goToRank()">
             <v-icon icon="mdi-chili-hot" size="x-large"></v-icon>
             &nbsp;
-            Top排行
+            Top排行（点击跳转总人气排行）
             &nbsp;
           </v-card-title>
           <v-card-text>
@@ -627,13 +627,13 @@ function copyNews(news: News, event: Event) {
                   排名
                 </th>
                 <th>
-                  美股|纳斯达克|道琼斯
+                  美股人气榜 | 纳斯达克
                 </th>
                 <th>
                   升降
                 </th>
                 <th>
-                  A股排名
+                  A股人气榜
                 </th>
                 <th>
                   升降

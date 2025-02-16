@@ -2,7 +2,41 @@ import Notify from "@wcjiang/notify";
 import _ from "lodash";
 import {useCustomizeThemeStore} from "@/stores/customizeTheme";
 
-let notify: Notify = null;
+const notify = new Notify({
+  message: "There is message.", // page title.
+  effect: "flash", // flash | scroll, Flashing or scrolling
+  openurl: "https://github.com/jaywcjlove/iNotify", // Click on the pop-up window to open the connection address
+  onclick: () => {
+    // Click on the pop-up window trip event
+    // Programmatically closes a notification.
+    // notify.close();
+    console.log("---");
+  },
+  // Optional playback sound
+  audio: {
+    // You can use arrays to pass sound files in multiple formats.
+    file: "aa/music/msg.mp3",
+    // The following is also work.
+    // file: 'msg.mp4'
+  },
+  // Title flashing, or scrolling speed
+  interval: 1000,
+  disableFavicon: false, // Optional, default false, if true, No longer overwrites the original favicon
+  // Optional, default green background white text. Favicon
+  updateFavicon: {
+    // favicon font color
+    textColor: "#fff",
+    // Background color, set the background color to be transparent, set the value to "transparent"
+    backgroundColor: "#2F9A00",
+  },
+  // Optional chrome browser notifications，
+  // The default is not to fill in the following content
+  notification: {
+    title: "Notification!", // Set notification title
+    icon: "", // Set notification icon, The default is Favicon
+    body: "You have a new message!", // Set message content
+  },
+});
 
 // https://emoji6.com/emojiall/
 const jokes = [
@@ -35,52 +69,11 @@ const jokes = [
 
 let count = 0;
 
-function initNotify() {
-  if (notify != null) {
-    return;
-  }
-  const customizeTheme = useCustomizeThemeStore();
-  notify = new Notify({
-    message: "There is message.", // page title.
-    effect: "flash", // flash | scroll, Flashing or scrolling
-    openurl: "https://github.com/jaywcjlove/iNotify", // Click on the pop-up window to open the connection address
-    onclick: () => {
-      // Click on the pop-up window trip event
-      // Programmatically closes a notification.
-      // notify.close();
-      console.log("---");
-    },
-    // Optional playback sound
-    audio: {
-      // You can use arrays to pass sound files in multiple formats.
-      file: "aa/music/msg.mp3",
-      // The following is also work.
-      // file: 'msg.mp4'
-    },
-    // Title flashing, or scrolling speed
-    interval: 1000,
-    disableFavicon: false, // Optional, default false, if true, No longer overwrites the original favicon
-    // Optional, default green background white text. Favicon
-    updateFavicon: {
-      // favicon font color
-      textColor: "#fff",
-      // Background color, set the background color to be transparent, set the value to "transparent"
-      backgroundColor: customizeTheme.primaryColor.colorValue,
-    },
-    // Optional chrome browser notifications，
-    // The default is not to fill in the following content
-    notification: {
-      title: "Notification!", // Set notification title
-      icon: "", // Set notification icon, The default is Favicon
-      body: "You have a new message!", // Set message content
-    },
-  });
-}
-
 export async function newNotify(desktopTitle: string, desktopBody: string) {
   ++count;
   initNotify();
   console.log("推送消息");
+  const customizeTheme = useCustomizeThemeStore();
   const joke = jokes[_.random(0, jokes.length - 1)];
   if (_.isEmpty(desktopBody)) {
     desktopBody = joke;
@@ -99,6 +92,7 @@ export async function newNotify(desktopTitle: string, desktopBody: string) {
   });
   notify.setTitle(joke); // Flashing new title
   notify.setFavicon(count);
+  notify.setFaviconBackgroundColor(customizeTheme.primaryColor.colorValue);
   // 播放声音
   notify.player();
 }
