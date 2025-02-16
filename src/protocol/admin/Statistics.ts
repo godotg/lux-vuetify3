@@ -7,6 +7,7 @@ class Statistics {
     time: number = 0;
     ips: number = 0;
     active: number = 0;
+    pcActive: number = 0;
     newsRequest: number = 0;
     newsSearchRequest: number = 0;
     chatgptRequest: number = 0;
@@ -44,6 +45,7 @@ export class StatisticsRegistration implements IProtocolRegistration<Statistics>
         buffer.writeInt(packet.newsRequest);
         buffer.writeInt(packet.newsSearchRequest);
         buffer.writePacket(packet.newsStat, 10051);
+        buffer.writeInt(packet.pcActive);
         buffer.writeInt(packet.sdSimulateRequest);
         buffer.writeLong(packet.time);
         buffer.writeInt(packet.weixinSearch);
@@ -81,11 +83,13 @@ export class StatisticsRegistration implements IProtocolRegistration<Statistics>
         const result11 = buffer.readPacket(10051);
         packet.newsStat = result11;
         const result12 = buffer.readInt();
-        packet.sdSimulateRequest = result12;
-        const result13 = buffer.readLong();
-        packet.time = result13;
-        const result14 = buffer.readInt();
-        packet.weixinSearch = result14;
+        packet.pcActive = result12;
+        const result13 = buffer.readInt();
+        packet.sdSimulateRequest = result13;
+        const result14 = buffer.readLong();
+        packet.time = result14;
+        const result15 = buffer.readInt();
+        packet.weixinSearch = result15;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

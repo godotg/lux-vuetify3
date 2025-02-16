@@ -74,7 +74,7 @@ async function deleteBroadcast(id: number) {
 
 </script>
 <template>
-  <v-dialog transition="dialog-top-transition" max-width="80%" v-model="myStore.adminDialog">
+  <v-dialog transition="dialog-top-transition" max-width="90%" v-model="myStore.adminDialog">
     <template v-slot:default="{ isActive }">
       <v-card prepend-icon="mdi-skull-crossbones-outline">
         <template v-slot:title>
@@ -121,6 +121,9 @@ async function deleteBroadcast(id: number) {
               </th>
               <th>
                 tcp active
+              </th>
+              <th>
+                pc active
               </th>
               <th>
                 chatgpt
@@ -177,6 +180,7 @@ async function deleteBroadcast(id: number) {
               <td>{{ getFormatDate(stat.time) }}</td>
               <td>{{ stat.ips }}</td>
               <td>{{ stat.active }}</td>
+              <td>{{ stat.pcActive }}</td>
               <td>{{ stat.chatgptRequest }}</td>
               <td>{{ stat.googleSearch }}</td>
               <td>{{ stat.bingSearch }}</td>

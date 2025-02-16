@@ -8,6 +8,7 @@ class TransferChatgptAsk {
     requestId: number = 0;
     chatAI: number = 0;
     messages: Array<ChatgptMessage> = [];
+    characters: Map<number, string> = new Map();
     ignoreAIs: Set<number> = new Set();
 }
 
@@ -22,6 +23,7 @@ export class TransferChatgptAskRegistration implements IProtocolRegistration<Tra
             return;
         }
         buffer.writeInt(-1);
+        buffer.writeIntStringMap(packet.characters);
         buffer.writeInt(packet.chatAI);
         buffer.writeIntSet(packet.ignoreAIs);
         buffer.writePacketList(packet.messages, 504);
@@ -36,16 +38,18 @@ export class TransferChatgptAskRegistration implements IProtocolRegistration<Tra
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new TransferChatgptAsk();
-        const result0 = buffer.readInt();
-        packet.chatAI = result0;
-        const set1 = buffer.readIntSet();
-        packet.ignoreAIs = set1;
-        const list2 = buffer.readPacketList(504);
-        packet.messages = list2;
-        const result3 = buffer.readLong();
-        packet.requestId = result3;
+        const map0 = buffer.readIntStringMap();
+        packet.characters = map0;
+        const result1 = buffer.readInt();
+        packet.chatAI = result1;
+        const set2 = buffer.readIntSet();
+        packet.ignoreAIs = set2;
+        const list3 = buffer.readPacketList(504);
+        packet.messages = list3;
         const result4 = buffer.readLong();
-        packet.requestSid = result4;
+        packet.requestId = result4;
+        const result5 = buffer.readLong();
+        packet.requestSid = result5;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

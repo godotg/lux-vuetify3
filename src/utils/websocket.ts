@@ -7,6 +7,7 @@ import Ping from '@/protocol/common/Ping';
 import Pong from '@/protocol/common/Pong';
 import LoginRequest from '@/protocol/auth/LoginRequest';
 import LoginResponse from '@/protocol/auth/LoginResponse';
+import ClientInfoRequest from '@/protocol/admin/ClientInfoRequest';
 import GroupChatNotice from '@/protocol/chat/GroupChatNotice';
 
 
@@ -14,6 +15,7 @@ import {useSnackbarStore} from "@/stores/snackbarStore";
 import {useNewsStore} from "@/stores/newsStore";
 import {useMyStore} from "@/stores/myStore";
 import {newNotify, closeNotify} from "@/utils/notifyUtils";
+import {isMobile} from "@/utils/common";
 import _ from "lodash";
 
 
@@ -60,6 +62,9 @@ function connect(desc): WebSocket {
 
     // websocket连接成功过后，先发送ping同步服务器时间，再发送登录请求
     send(new Ping());
+    const clientInfoRequest = new ClientInfoRequest();
+    clientInfoRequest.platform = isMobile() ? "mobile" : "pc";
+    send(clientInfoRequest);
 
     pingTime = new Date().getTime();
     snackbarStore.showSuccessMessage("连接服务器成功");

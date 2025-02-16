@@ -226,6 +226,8 @@ import NewsStat from './admin/NewsStat';
 import { NewsStatRegistration } from './admin/NewsStat';
 import StatisticsRequest from './admin/StatisticsRequest';
 import { StatisticsRequestRegistration } from './admin/StatisticsRequest';
+import ClientInfoRequest from './admin/ClientInfoRequest';
+import { ClientInfoRequestRegistration } from './admin/ClientInfoRequest';
 import IByteBuffer from "./IByteBuffer";
 import IProtocolRegistration from "./IProtocolRegistration";
 
@@ -461,6 +463,8 @@ protocols.set(10051, new NewsStatRegistration());
 protocolIdMap.set(NewsStat, 10051);
 protocols.set(10060, new StatisticsRequestRegistration());
 protocolIdMap.set(StatisticsRequest, 10060);
+protocols.set(10070, new ClientInfoRequestRegistration());
+protocolIdMap.set(ClientInfoRequest, 10070);
 
 class ProtocolManager {
     static getProtocolId(clazz: any): number {
