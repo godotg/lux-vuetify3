@@ -7,6 +7,7 @@ class EastMoneyRank {
     name: string = '';
     rankChange: number = 0;
     primary: boolean = false;
+    info: string = '';
 }
 
 export class EastMoneyRankRegistration implements IProtocolRegistration<EastMoneyRank> {
@@ -21,6 +22,7 @@ export class EastMoneyRankRegistration implements IProtocolRegistration<EastMone
         }
         buffer.writeInt(-1);
         buffer.writeInt(packet.code);
+        buffer.writeString(packet.info);
         buffer.writeString(packet.name);
         buffer.writeBool(packet.primary);
         buffer.writeInt(packet.rankChange);
@@ -36,11 +38,13 @@ export class EastMoneyRankRegistration implements IProtocolRegistration<EastMone
         const result0 = buffer.readInt();
         packet.code = result0;
         const result1 = buffer.readString();
-        packet.name = result1;
-        const result2 = buffer.readBool(); 
-        packet.primary = result2;
-        const result3 = buffer.readInt();
-        packet.rankChange = result3;
+        packet.info = result1;
+        const result2 = buffer.readString();
+        packet.name = result2;
+        const result3 = buffer.readBool(); 
+        packet.primary = result3;
+        const result4 = buffer.readInt();
+        packet.rankChange = result4;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

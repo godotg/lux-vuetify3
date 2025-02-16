@@ -8,7 +8,7 @@ class RankRequest {
 
 export class RankRequestRegistration implements IProtocolRegistration<RankRequest> {
     protocolId(): number {
-        return 402;
+        return 410;
     }
 
     write(buffer: IByteBuffer, packet: RankRequest | null) {

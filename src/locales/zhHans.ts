@@ -10,7 +10,7 @@ export default {
     realistic: "写实 AI",
     animation: "Animation",
     // square: "广场",
-    square: "匿名聊天室",
+    square: "匿名聊天广场",
     midjourney: "Midjourney",
     profileDetails: "白嫖指数",
     billing: "充电打赏",

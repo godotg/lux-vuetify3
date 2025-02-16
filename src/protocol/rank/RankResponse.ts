@@ -1,18 +1,18 @@
 import IByteBuffer from '../IByteBuffer';
 import IProtocolRegistration from '../IProtocolRegistration';
 import EastMoneyRank from './EastMoneyRank';
-import ThsRank from './ThsRank';
+import EastMoneyUSRank from './EastMoneyUSRank';
 
 
 class RankResponse {
-    eastMoneyRanks: Array<EastMoneyRank> = [];
-    thsRanks: Array<ThsRank> = [];
+    ranks: Array<EastMoneyRank> = [];
+    usRanks: Array<EastMoneyUSRank> = [];
     core: string = '';
 }
 
 export class RankResponseRegistration implements IProtocolRegistration<RankResponse> {
     protocolId(): number {
-        return 403;
+        return 411;
     }
 
     write(buffer: IByteBuffer, packet: RankResponse | null) {
@@ -22,8 +22,8 @@ export class RankResponseRegistration implements IProtocolRegistration<RankRespo
         }
         buffer.writeInt(-1);
         buffer.writeString(packet.core);
-        buffer.writePacketList(packet.eastMoneyRanks, 400);
-        buffer.writePacketList(packet.thsRanks, 401);
+        buffer.writePacketList(packet.ranks, 400);
+        buffer.writePacketList(packet.usRanks, 401);
     }
 
     read(buffer: IByteBuffer): RankResponse | null {
@@ -36,9 +36,9 @@ export class RankResponseRegistration implements IProtocolRegistration<RankRespo
         const result0 = buffer.readString();
         packet.core = result0;
         const list1 = buffer.readPacketList(400);
-        packet.eastMoneyRanks = list1;
+        packet.ranks = list1;
         const list2 = buffer.readPacketList(401);
-        packet.thsRanks = list2;
+        packet.usRanks = list2;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

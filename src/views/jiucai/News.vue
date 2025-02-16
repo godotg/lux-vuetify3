@@ -9,7 +9,7 @@ import NewsLoadMoreResponse from "@/protocol/news/NewsLoadMoreResponse";
 import Concept from "@/protocol/concept/Concept";
 import ConceptRequest from "@/protocol/concept/ConceptRequest";
 import ConceptResponse from "@/protocol/concept/ConceptResponse";
-import ThsRank from "@/protocol/rank/ThsRank";
+import EastMoneyUSRank from "@/protocol/rank/EastMoneyUSRank";
 import EastMoneyRank from "@/protocol/rank/EastMoneyRank";
 import RankRequest from "@/protocol/rank/RankRequest";
 import RankResponse from "@/protocol/rank/RankResponse";
@@ -31,7 +31,7 @@ const {mobile, width, height} = useDisplay();
 
 const newsRef = ref<News[]>([]);
 const conceptsRef = ref<Concept[]>([]);
-const thsRanksRef = ref<ThsRank[]>([]);
+const eastMoneyUSRanksRef = ref<EastMoneyUSRank[]>([]);
 const eastMoneyRanksRef = ref<EastMoneyRank[]>([]);
 const conceptCoreRef = ref<string>('');
 const rankCoreCoreRef = ref<string>('');
@@ -152,8 +152,8 @@ async function requestRanks(num: number) {
   const request = new RankRequest();
   request.num = num;
   const response: RankResponse = await asyncAsk(request)
-  thsRanksRef.value = response.thsRanks;
-  eastMoneyRanksRef.value = response.eastMoneyRanks;
+  eastMoneyUSRanksRef.value = response.usRanks;
+  eastMoneyRanksRef.value = response.ranks;
   rankCoreCoreRef.value = response.core;
   snackbarStore.showSuccessMessage("股票热度排名");
 }
@@ -379,7 +379,7 @@ function formatCode(code: number) {
   return stockCode;
 }
 
-async function gotToEastMoney(code: number) {
+async function goToEastMoney(code: number) {
   const stockCode = formatCode(code);
   if (stockCode.startsWith("8")) {
     window.open(`https://quote.eastmoney.com/bj/${stockCode}.html`, '_blank');
@@ -394,9 +394,12 @@ async function gotToEastMoney(code: number) {
   }
 }
 
-async function gotToThs(code: number) {
-  const stockCode = formatCode(code);
-  window.open(`https://stockpage.10jqka.com.cn/${stockCode}/`, '_blank');
+async function goToUS(usRank: EastMoneyUSRank) {
+  window.open(`https://quote.eastmoney.com/us/${usRank.code}.html`, '_blank');
+}
+
+async function goToRank() {
+  window.open("https://guba.eastmoney.com/rank/", '_blank');
 }
 
 function hotRankChange(rankChange: number) {
@@ -484,7 +487,7 @@ function copyNews(news: News, event: Event) {
         </v-card-item>
       </v-card>
       <v-card v-if="!_.isEmpty(eastMoneyRanksRef)" class="mt-3">
-        <v-card-title v-ripple>
+        <v-card-title v-ripple @click="goToRank()">
           <v-icon icon="mdi-chili-hot" size="x-large"></v-icon>
           &nbsp;
           Top排行
@@ -498,25 +501,21 @@ function copyNews(news: News, event: Event) {
                 排名
               </th>
               <th>
-                东方财富
+                纳斯达克|道琼斯
               </th>
               <th>
-                升降
-              </th>
-              <th>
-                同花顺
+                A股风云
               </th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
               <td>{{ i + 1 }}</td>
-              <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
-                {{ rank.name }}
+              <td :class="eastMoneyUSRanksRef[i].primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="goToUS(eastMoneyUSRanksRef[i])">
+                {{ eastMoneyUSRanksRef[i].code }} | {{ eastMoneyUSRanksRef[i].chineseName }}
               </td>
-              <td>{{ hotRankChange(rank.rankChange) }}</td>
-              <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(thsRanksRef[i].code)">
-                {{ thsRanksRef[i].name }}
+              <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="goToEastMoney(rank.code)">
+                {{ rank.name }}
               </td>
             </tr>
             </tbody>
@@ -614,7 +613,7 @@ function copyNews(news: News, event: Event) {
           <span>Rank</span>
         </template>
         <v-card>
-          <v-card-title v-tooltip:start="'红色为最近两周新出现在前100的股票'">
+          <v-card-title v-ripple class="cursor-pointer" v-tooltip:start="跳转人气排行" @click="goToRank()">
             <v-icon icon="mdi-chili-hot" size="x-large"></v-icon>
             &nbsp;
             Top排行
@@ -628,35 +627,35 @@ function copyNews(news: News, event: Event) {
                   排名
                 </th>
                 <th>
-                  东方财富
+                  美股|纳斯达克|道琼斯
                 </th>
                 <th>
                   升降
                 </th>
                 <th>
-                  同花顺列
+                  A股排名
                 </th>
                 <th>
-                  热度
+                  升降
                 </th>
                 <th>
-                  AI解析
+                  AI解析(红色字体的股票为最近3天新出现在前100的人气个股)
                 </th>
               </tr>
               </thead>
               <tbody>
               <tr v-for="(rank, i) in eastMoneyRanksRef" :key="i">
                 <td>{{ i + 1 }}</td>
-                <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="gotToEastMoney(rank.code)">
+                <td :class="eastMoneyUSRanksRef[i].primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="goToUS(eastMoneyUSRanksRef[i])">
+                  {{ eastMoneyUSRanksRef[i].code }} | {{ eastMoneyUSRanksRef[i].chineseName }}
+                </td>
+                <td>{{ hotRankChange(eastMoneyUSRanksRef[i].rankChange) }}</td>
+
+                <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转东方财富'" v-ripple @click="goToEastMoney(rank.code)">
                   {{ rank.name }}
                 </td>
                 <td>{{ hotRankChange(rank.rankChange) }}</td>
-                <td :class="rank.primary ? 'cursor-pointer font-weight-black text-red' : 'cursor-pointer'" v-tooltip:end="'跳转同花顺'" v-ripple @click="gotToThs(thsRanksRef[i].code)">
-                  {{ thsRanksRef[i].name }}
-                </td>
-                <td>{{ hotRankChange(thsRanksRef[i].rankChange) }}</td>
-                <td>{{ _.ceil(thsRanksRef[i].rate / 1000) }}</td>
-                <td>{{ thsRanksRef[i].analyse }}</td>
+                <td v-html="rank.info"></td>
               </tr>
               </tbody>
             </v-table>
