@@ -71,12 +71,13 @@ let count = 0;
 
 export async function newNotify(desktopTitle: string, desktopBody: string) {
   ++count;
-  console.log("推送消息");
+  console.log("notifyUtils newNotify 推送消息");
   const customizeTheme = useCustomizeThemeStore();
   const joke = jokes[_.random(0, jokes.length - 1)];
   if (_.isEmpty(desktopBody)) {
     desktopBody = joke;
   }
+
   // 浏览器左下角弹窗推送
   notify.notify({
     title: desktopTitle,
@@ -89,11 +90,17 @@ export async function newNotify(desktopTitle: string, desktopBody: string) {
       console.log("on show");
     },
   });
-  notify.setTitle(joke); // Flashing new title
-  notify.setFavicon(count);
-  notify.setFaviconBackgroundColor(customizeTheme.primaryColor.colorValue);
+
+  // 如果当前页面可以被看见，则不闪烁标题
+  if (document.visibilityState !== 'visible') {
+    notify.setTitle(joke); // Flashing new title
+    notify.setFavicon(count);
+    notify.setFaviconBackgroundColor(customizeTheme.primaryColor.colorValue);
+    console.log(document.visibilityState)
+  }
+
   // 播放声音
-  notify.player();
+  // notify.player();
 }
 
 

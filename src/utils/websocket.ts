@@ -270,7 +270,6 @@ function route(packet: any) {
     const newsStore = useNewsStore();
     newsStore.chatMessageIdDiff = _.first(packet.messages).id - newsStore.chatMessageId;
     newNotify("新消息");
-    console.log(newsStore.chatMessageIdDiff);
   }
   if (receiver == null) {
     console.log("router not exist ", packet);
