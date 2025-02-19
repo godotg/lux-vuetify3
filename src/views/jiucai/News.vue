@@ -50,7 +50,7 @@ const jokes = [
 onMounted(() => {
   console.log("news on mounted-----------------------------------------");
   init();
-  setInterval(() => requestNews(), 15000);
+  setInterval(() => requestNews(), 15 * 1000);
   setInterval(() => requestRanks(100), 10 * 60 * 1000);
   setInterval(() => requestConcepts(27), 30 * 60 * 1000);
 });
@@ -95,8 +95,7 @@ async function doInitNews() {
   startId = _.last(response.news).id;
   endId = response.endId;
   snackbarStore.showSuccessMessage("情报初始化成功");
-  response.news.filter(it => it.level == "S" || it.level == "A").filter(it => newsStore.isNew(it.id))
-    .forEach(it => newNotify(`${it.level}级情报`, _.isEmpty(it.title) ? it.title : it.content));
+  notifyNews(response.news);
 }
 
 async function requestNews() {
@@ -111,11 +110,22 @@ async function requestNews() {
   if (response.endId == endId) {
     return;
   }
-  response.news.filter(it => it.level == "S" || it.level == "A").filter(it => newsStore.isNew(it.id))
-    .forEach(it => newNotify(`${it.level}级情报`, _.isEmpty(it.title) ? it.title : it.content));
+  notifyNews(response.news);
   const newNews = _.concat(response.news, newsRef.value);
   newsRef.value = newNews;
   endId = response.endId;
+}
+
+let notifyTime = new Date().getTime();
+function notifyNews(news: Array<News>) {
+  const currentTime = new Date().getTime();
+  // 1分钟只通知一次
+  if (currentTime - notifyTime < 60 * 1000) {
+    return;
+  }
+  news.filter(it => it.level == "S" || it.level == "A").filter(it => newsStore.isNew(it.id))
+    .forEach(it => newNotify(`${it.level}级情报`, _.isEmpty(it.title) ? it.title : it.content));
+  notifyTime = currentTime;
 }
 
 async function loadMoreNews() {
