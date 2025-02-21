@@ -123,8 +123,11 @@ function notifyNews(news: Array<News>) {
   if (currentTime - notifyTime < 60 * 1000) {
     return;
   }
-  news.filter(it => it.level == "S" || it.level == "A").filter(it => newsStore.isNew(it.id))
-    .forEach(it => newNotify(`${it.level}级情报`, _.isEmpty(it.title) ? it.title : it.content));
+  const first = _.first(news.filter(it => it.level == "S" || it.level == "A").filter(it => newsStore.isNew(it.id)));
+  if (_.isEmpty(first)) {
+    return;
+  }
+  newNotify(`${first.level}级情报`, _.isEmpty(first.title) ? first.title : first.content)
   notifyTime = currentTime;
 }
 
