@@ -28,6 +28,8 @@ const snackbarStore = useSnackbarStore();
 const newsStore = useNewsStore();
 const {mobile, width, height} = useDisplay();
 
+const NEW_CONCEPT_TIME = 33 * 24 * 60 * 60 * 1000;
+
 
 const newsRef = ref<News[]>([]);
 const conceptsRef = ref<Concept[]>([]);
@@ -159,7 +161,6 @@ async function requestConcepts(num: number, notice: boolean = false) {
   const response: ConceptResponse = await asyncAsk(request)
   conceptsRef.value = response.concepts;
   conceptCoreRef.value = response.core;
-  conceptsRef.value.forEach(it => newsStore.updateConcept(it.id));
   if (notice) {
     snackbarStore.showSuccessMessage("加载了更多的新概念");
   }
@@ -498,7 +499,7 @@ function copyNews(news: News, event: Event) {
               <a :href="concept.url" class="text-blue-lighten-2 font-weight-black" target="_blank">
                 {{ concept.content }}
               </a>
-              <v-icon v-if="newsStore.isNewConcept(concept.id)" color="red" icon="mdi-alert-octagram-outline" size="small"></v-icon>
+              <v-icon v-if="new Date().getTime() - concept.time < NEW_CONCEPT_TIME" color="red" icon="mdi-alert-octagram-outline" size="small"></v-icon>
             </v-col>
           </v-row>
         </v-card-item>
@@ -619,7 +620,7 @@ function copyNews(news: News, event: Event) {
                   {{ concept.content }}
                 </a>
                 {{ concept.title }}
-                <v-icon v-if="newsStore.isNewConcept(concept.id)" color="red" icon="mdi-alert-octagram-outline"></v-icon>
+                <v-icon v-if="new Date().getTime() - concept.time < NEW_CONCEPT_TIME" color="red" icon="mdi-alert-octagram-outline"></v-icon>
               </v-col>
             </v-row>
           </v-card-item>

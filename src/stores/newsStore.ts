@@ -1,7 +1,6 @@
 import {defineStore} from "pinia";
 import _ from "lodash";
 
-const newConceptTimeout = 3 * 24 * 60 * 60 * 1000;
 const newNewsTimeout = 3 * 60 * 1000;
 const myAvatarDefault = avatarAutoUrl(1);
 const aiAvatarDefault = avatarAutoUrl(2);
@@ -49,7 +48,6 @@ export function avatarAutoUrl(id: number): string {
 
 export const useNewsStore = defineStore("newsStore", {
   state: () => ({
-    concepts: [],
     newsInfos: [],
     newsLevelFilter: "D",
     newsLevelFilterValue: 5,
@@ -67,41 +65,12 @@ export const useNewsStore = defineStore("newsStore", {
 
   persist: {
     enabled: true,
-    strategies: [{storage: localStorage, paths: ["newsInfos", "concepts", "newsLevelFilter", "newsLevelFilterValue", "chatMessageId"]}],
+    strategies: [{storage: localStorage, paths: ["newsInfos", "newsLevelFilter", "newsLevelFilterValue", "chatMessageId"]}],
   },
 
   getters: {},
 
   actions: {
-    isNewConcept(id: number): boolean {
-      const index = _.findIndex(this.concepts, it => it.id == id);
-      if (index >= 0) {
-        const concept = this.concepts[index];
-        if (new Date().getTime() - concept.time < newConceptTimeout) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-      return true;
-    },
-
-    updateConcept(id: number) {
-      const index = _.findIndex(this.concepts, it => it.id == id);
-      if (index >= 0) {
-        return;
-      }
-
-      if (this.concepts.length >= 50) {
-        this.concepts = _.drop(this.concepts, 10);
-      }
-
-      this.concepts.push({
-        id: id,
-        time: new Date().getTime()
-      });
-    },
-
     isNew(id: number): boolean {
       const index = _.findIndex(this.newsInfos, it => it.id == id);
       if (index >= 0) {
