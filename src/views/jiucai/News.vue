@@ -81,7 +81,9 @@ function init() {
   doInitNews();
   requestConcepts(27);
   requestRanks(100);
-  requestMarkets();
+  if (!mobile) {
+    requestMarkets();
+  }
 }
 
 async function doInitNews() {
@@ -537,7 +539,7 @@ function copyNews(news: News, event: Event) {
           </v-table>
         </v-card-text>
       </v-card>
-      <v-card class="mt-3">
+      <v-card v-if="!mobile" class="mt-3">
         <v-card-text>
           <canvas id="indexChart"></canvas>
         </v-card-text>
@@ -545,7 +547,7 @@ function copyNews(news: News, event: Event) {
           上海主板的核心参照物是累加了上海主板所有股票的流通市值（去除了银行）
         </v-card-subtitle>
       </v-card>
-      <v-card class="mt-3">
+      <v-card v-if="!mobile" class="mt-3">
         <v-card-text>
           <canvas id="exchangeChart"></canvas>
         </v-card-text>
