@@ -570,6 +570,136 @@ function copyNews(news: News, event: Event) {
           </v-table>
         </v-card-text>
       </v-card>
+      <v-card v-if="!_.isEmpty(xueqiuTrendingRef)" class="mt-3">
+        <v-card-title>
+          <v-icon icon="mdi-snowflake"></v-icon>
+          &nbsp;
+          雪球
+          &nbsp;
+        </v-card-title>
+        <v-card-text>
+          <v-table density="compact">
+            <thead>
+            <tr>
+              <th>
+                雪球话题
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(trending, i) in xueqiuTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+              <td :class="trendingClass(trending)">
+                {{ i + 1 }}.{{ trending.title }}
+              </td>
+            </tr>
+            </tbody>
+          </v-table>
+        </v-card-text>
+      </v-card>
+      <v-card v-if="!_.isEmpty(dfcf1TrendingRef)" class="mt-3">
+        <v-card-title>
+          <v-icon icon="mdi-parachute-outline"></v-icon>
+          &nbsp;
+          东方财富
+          &nbsp;
+        </v-card-title>
+        <v-card-text>
+          <v-table density="compact">
+            <thead>
+            <tr>
+              <th>
+                板块聚焦
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(trending, i) in dfcf1TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+              <td :class="trendingClass(trending)">
+                {{ i + 1 }}.{{ trending.title }}
+              </td>
+            </tr>
+            </tbody>
+          </v-table>
+        </v-card-text>
+      </v-card>
+      <v-card v-if="!_.isEmpty(bloomBergTrendingRef)" class="mt-3">
+        <v-card-title>
+          <v-icon icon="mdi-chart-bell-curve"></v-icon>
+          &nbsp;
+          彭博社
+          &nbsp;
+        </v-card-title>
+        <v-card-text>
+          <v-table density="compact">
+            <thead>
+            <tr>
+              <th>
+                彭博社头条新闻
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(trending, i) in bloomBergTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+              <td :class="trendingClass(trending)">
+                {{ i + 1 }}.{{ trending.title }} - {{ trending.subTitle }}
+              </td>
+            </tr>
+            </tbody>
+          </v-table>
+        </v-card-text>
+      </v-card>
+      <v-card v-if="!_.isEmpty(douyinTrendingRef)" class="mt-3">
+        <v-card-title>
+          <v-icon icon="mdi-music-circle"></v-icon>
+          &nbsp;
+          抖音
+          &nbsp;
+        </v-card-title>
+        <v-card-text>
+          <v-table density="compact">
+            <thead>
+            <tr>
+              <th>
+                抖音热搜榜
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(trending, i) in douyinTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+              <td :class="trendingClass(trending)">
+                {{ i + 1 }}.{{ trending.title }}
+              </td>
+            </tr>
+            </tbody>
+          </v-table>
+        </v-card-text>
+      </v-card>
+      <v-card v-if="!_.isEmpty(weiboTrendingRef)" class="mt-3">
+        <v-card-title>
+          <v-icon icon="mdi-sina-weibo"></v-icon>
+          &nbsp;
+          微博
+          &nbsp;
+        </v-card-title>
+        <v-card-text>
+          <v-table density="compact">
+            <thead>
+            <tr>
+              <th>
+                微博热搜
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(trending, i) in weiboTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+              <td :class="trendingClass(trending)">
+                {{ i + 1 }}.{{ trending.title }}
+              </td>
+            </tr>
+            </tbody>
+          </v-table>
+        </v-card-text>
+      </v-card>
       <template v-for="newsEle in newsRef">
         <v-card class="mt-3">
           <v-card-title v-ripple @click="copyNews(newsEle, $event)">
@@ -610,175 +740,6 @@ function copyNews(news: News, event: Event) {
       </template>
     </template>
     <v-timeline v-else density="compact" side="end">
-      <v-timeline-item v-if="!_.isEmpty(douyinTrendingRef)" fill-dot dot-color="grey" size="x-large">
-        <template v-slot:icon>
-          <span>Hot</span>
-        </template>
-        <v-container>
-          <v-row>
-            <v-col>
-              <v-card>
-                <v-card-title>
-                  <v-icon icon="mdi-music-circle"></v-icon>
-                  &nbsp;
-                  抖音
-                  &nbsp;
-                </v-card-title>
-                <v-card-text>
-                  <v-table density="compact">
-                    <thead>
-                    <tr>
-                      <th>
-                        抖音热搜榜
-                      </th>
-                      <th>
-                        热度
-                      </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(trending, i) in douyinTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
-                      <td :class="trendingClass(trending)">
-                        {{ i + 1 }}.{{ trending.title }}
-                      </td>
-                      <td>{{ trending.subTitle }}</td>
-                    </tr>
-                    </tbody>
-                  </v-table>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col>
-              <v-card>
-                <v-card-title>
-                  <v-icon icon="mdi-sina-weibo"></v-icon>
-                  &nbsp;
-                  微博
-                  &nbsp;
-                </v-card-title>
-                <v-card-text>
-                  <v-table density="compact">
-                    <thead>
-                    <tr>
-                      <th>
-                        微博热搜
-                      </th>
-                      <th>
-                        分类&热度
-                      </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(trending, i) in weiboTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
-                      <td :class="trendingClass(trending)">
-                        {{ i + 1 }}.{{ trending.title }}
-                      </td>
-                      <td>{{ trending.subTitle }}</td>
-                    </tr>
-                    </tbody>
-                  </v-table>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col>
-              <v-card>
-                <v-card-title>
-                  <v-icon icon="mdi-snowflake"></v-icon>
-                  &nbsp;
-                  雪球
-                  &nbsp;
-                </v-card-title>
-                <v-card-text>
-                  <v-table density="compact">
-                    <thead>
-                    <tr>
-                      <th>
-                        雪球话题
-                      </th>
-<!--                      <th>-->
-<!--                        创作者-->
-<!--                      </th>-->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(trending, i) in xueqiuTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
-                      <td :class="trendingClass(trending)">
-                        {{ i + 1 }}.{{ trending.title }}
-                      </td>
-<!--                      <td>{{ trending.subTitle }}</td>-->
-                    </tr>
-                    </tbody>
-                  </v-table>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col>
-              <v-card>
-                <v-card-title>
-                  <v-icon icon="mdi-parachute-outline"></v-icon>
-                  &nbsp;
-                  东方财富
-                  &nbsp;
-                </v-card-title>
-                <v-card-text>
-                  <v-table density="compact">
-                    <thead>
-                    <tr>
-                      <th>
-                        板块聚焦
-                      </th>
-                      <th>
-                        媒体
-                      </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(trending, i) in dfcf1TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
-                      <td :class="trendingClass(trending)">
-                        {{ i + 1 }}.{{ trending.title }}
-                      </td>
-                      <td>{{ trending.subTitle }}</td>
-                    </tr>
-                    </tbody>
-                  </v-table>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col>
-              <v-card>
-                <v-card-title>
-                  <v-icon icon="mdi-party-popper"></v-icon>
-                  &nbsp;
-                  研报
-                  &nbsp;
-                </v-card-title>
-                <v-card-text>
-                  <v-table density="compact">
-                    <thead>
-                    <tr>
-                      <th>
-                        策略报告
-                      </th>
-                      <th>
-                        媒体
-                      </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(trending, i) in dfcf2TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
-                      <td :class="trendingClass(trending)">
-                        {{ i + 1 }}.{{ trending.title }}
-                      </td>
-                      <td>{{ trending.subTitle }}</td>
-                    </tr>
-                    </tbody>
-                  </v-table>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-timeline-item>
       <v-timeline-item v-if="!_.isEmpty(conceptsRef)" fill-dot dot-color="grey" size="x-large">
         <template v-slot:icon>
           <span>SSR</span>
@@ -888,6 +849,205 @@ function copyNews(news: News, event: Event) {
             <canvas id="exchangeChart"></canvas>
           </v-card-text>
         </v-card>
+      </v-timeline-item>
+      <v-timeline-item v-if="!_.isEmpty(douyinTrendingRef) || !_.isEmpty(xueqiuTrendingRef)" fill-dot dot-color="grey" size="x-large">
+        <template v-slot:icon>
+          <span>Hot</span>
+        </template>
+        <v-container>
+          <v-row>
+            <v-col cols="3">
+              <v-card>
+                <v-card-title>
+                  <v-icon icon="mdi-snowflake"></v-icon>
+                  &nbsp;
+                  雪球
+                  &nbsp;
+                </v-card-title>
+                <v-card-text>
+                  <v-table density="compact">
+                    <thead>
+                    <tr>
+                      <th>
+                        雪球话题
+                      </th>
+                      <!--                      <th>-->
+                      <!--                        创作者-->
+                      <!--                      </th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(trending, i) in xueqiuTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                      <td :class="trendingClass(trending)">
+                        {{ i + 1 }}.{{ trending.title }}
+                      </td>
+                      <!--                      <td>{{ trending.subTitle }}</td>-->
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="4">
+              <v-card>
+                <v-card-title>
+                  <v-icon icon="mdi-parachute-outline"></v-icon>
+                  &nbsp;
+                  东方财富
+                  &nbsp;
+                </v-card-title>
+                <v-card-text>
+                  <v-table density="compact">
+                    <thead>
+                    <tr>
+                      <th>
+                        板块聚焦
+                      </th>
+                      <th>
+                        媒体
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(trending, i) in dfcf1TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                      <td :class="trendingClass(trending)">
+                        {{ i + 1 }}.{{ trending.title }}
+                      </td>
+                      <td>{{ trending.subTitle }}</td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="5">
+              <v-card>
+                <v-card-title>
+                  <v-icon icon="mdi-chart-bell-curve"></v-icon>
+                  &nbsp;
+                  彭博社
+                  &nbsp;
+                </v-card-title>
+                <v-card-text>
+                  <v-table density="compact">
+                    <thead>
+                    <tr>
+                      <th>
+                        彭博社头条新闻
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(trending, i) in bloomBergTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                      <td :class="trendingClass(trending)">
+                        {{ i + 1 }}.{{ trending.title }} - {{ trending.subTitle }}
+                      </td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="3">
+              <v-card>
+                <v-card-title>
+                  <v-icon icon="mdi-music-circle"></v-icon>
+                  &nbsp;
+                  抖音
+                  &nbsp;
+                </v-card-title>
+                <v-card-text>
+                  <v-table density="compact">
+                    <thead>
+                    <tr>
+                      <th>
+                        抖音热搜榜
+                      </th>
+                      <th>
+                        热度
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(trending, i) in douyinTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                      <td :class="trendingClass(trending)">
+                        {{ i + 1 }}.{{ trending.title }}
+                      </td>
+                      <td>{{ trending.subTitle }}</td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="4">
+              <v-card>
+                <v-card-title>
+                  <v-icon icon="mdi-sina-weibo"></v-icon>
+                  &nbsp;
+                  微博
+                  &nbsp;
+                </v-card-title>
+                <v-card-text>
+                  <v-table density="compact">
+                    <thead>
+                    <tr>
+                      <th>
+                        微博热搜
+                      </th>
+                      <th>
+                        分类&热度
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(trending, i) in weiboTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                      <td :class="trendingClass(trending)">
+                        {{ i + 1 }}.{{ trending.title }}
+                      </td>
+                      <td>{{ trending.subTitle }}</td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="5">
+              <v-card>
+                <v-card-title>
+                  <v-icon icon="mdi-party-popper"></v-icon>
+                  &nbsp;
+                  研报
+                  &nbsp;
+                </v-card-title>
+                <v-card-text>
+                  <v-table density="compact">
+                    <thead>
+                    <tr>
+                      <th>
+                        策略报告
+                      </th>
+                      <th>
+                        媒体
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(trending, i) in dfcf2TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                      <td :class="trendingClass(trending)">
+                        {{ i + 1 }}.{{ trending.title }}
+                      </td>
+                      <td>{{ trending.subTitle }}</td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-timeline-item>
       <v-timeline-item v-for="newsEle in newsRef" fill-dot :dot-color="levelMap[newsEle.level].color" :size="levelMap[newsEle.level].size">
         <template v-slot:icon>
