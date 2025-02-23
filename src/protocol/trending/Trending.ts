@@ -3,9 +3,10 @@ import IProtocolRegistration from '../IProtocolRegistration';
 
 
 class Trending {
-    href: string = '';
+    url: string = '';
     title: string = '';
-    hot: string = '';
+    subTitle: string = '';
+    ctime: number = 0;
 }
 
 export class TrendingRegistration implements IProtocolRegistration<Trending> {
@@ -19,9 +20,10 @@ export class TrendingRegistration implements IProtocolRegistration<Trending> {
             return;
         }
         buffer.writeInt(-1);
-        buffer.writeString(packet.hot);
-        buffer.writeString(packet.href);
+        buffer.writeLong(packet.ctime);
+        buffer.writeString(packet.subTitle);
         buffer.writeString(packet.title);
+        buffer.writeString(packet.url);
     }
 
     read(buffer: IByteBuffer): Trending | null {
@@ -31,12 +33,14 @@ export class TrendingRegistration implements IProtocolRegistration<Trending> {
         }
         const beforeReadIndex = buffer.getReadOffset();
         const packet = new Trending();
-        const result0 = buffer.readString();
-        packet.hot = result0;
+        const result0 = buffer.readLong();
+        packet.ctime = result0;
         const result1 = buffer.readString();
-        packet.href = result1;
+        packet.subTitle = result1;
         const result2 = buffer.readString();
         packet.title = result2;
+        const result3 = buffer.readString();
+        packet.url = result3;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }

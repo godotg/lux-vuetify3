@@ -5,6 +5,7 @@ import Trending from './Trending';
 
 class TrendingResponse {
     douyin: Array<Trending> = [];
+    weibo: Array<Trending> = [];
     xueqiu: Array<Trending> = [];
     dfcf1: Array<Trending> = [];
     dfcf2: Array<Trending> = [];
@@ -26,6 +27,7 @@ export class TrendingResponseRegistration implements IProtocolRegistration<Trend
         buffer.writePacketList(packet.dfcf1, 427);
         buffer.writePacketList(packet.dfcf2, 427);
         buffer.writePacketList(packet.douyin, 427);
+        buffer.writePacketList(packet.weibo, 427);
         buffer.writePacketList(packet.xueqiu, 427);
     }
 
@@ -45,7 +47,9 @@ export class TrendingResponseRegistration implements IProtocolRegistration<Trend
         const list3 = buffer.readPacketList(427);
         packet.douyin = list3;
         const list4 = buffer.readPacketList(427);
-        packet.xueqiu = list4;
+        packet.weibo = list4;
+        const list5 = buffer.readPacketList(427);
+        packet.xueqiu = list5;
         if (length > 0) {
             buffer.setReadOffset(beforeReadIndex + length);
         }
