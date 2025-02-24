@@ -92,11 +92,12 @@ export async function newNotify(desktopTitle: string, desktopBody: string) {
   });
 
   // 如果当前页面可以被看见，则不闪烁标题
-  if (document.visibilityState !== 'visible') {
+  if (document.visibilityState === 'visible') {
+    count = 0;
+  } else {
     notify.setTitle(joke); // Flashing new title
     notify.setFavicon(count);
     notify.setFaviconBackgroundColor(customizeTheme.primaryColor.colorValue);
-    console.log(document.visibilityState)
   }
 
   // 播放声音
