@@ -48,6 +48,7 @@ const dfcf1TrendingRef = ref<Trending[]>([]);
 const dfcf2TrendingRef = ref<Trending[]>([]);
 const bloomBergTrendingRef = ref<Trending[]>([]);
 const loadingRef = ref(true);
+const floatingButtonRef = ref(false);
 let endId = -1;
 let startId = -1;
 
@@ -442,8 +443,25 @@ async function goToRank() {
   window.open("https://guba.eastmoney.com/rank/", '_blank');
 }
 
-async function goToUrl(url: string) {
-  window.open(url, '_blank');
+async function goToUrl(trending: Trending, event: Event) {
+  let str = trending.title + "\n\n";
+  str = str + trending.subTitle + "\n\n";
+  str = str + jokes[_.random(0, jokes.length - 1)];
+  clipboard(str, event);
+  snackbarStore.showSuccessMessage(concept.content + "复制成功");
+  setTimeout(() => {
+    window.open(url, '_blank');
+  }, 1000);
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function scrollToMiddle() {
+  window.scrollTo({ top: document.documentElement.scrollHeight / 1.8, behavior: "smooth" });
+}
+function scrollToBottom() {
+  window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" });
 }
 
 function trendingClass(trending: Trending) {
@@ -587,7 +605,7 @@ function copyNews(news: News, event: Event) {
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(trending, i) in xueqiuTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+            <tr v-for="(trending, i) in xueqiuTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
               <td :class="trendingClass(trending)">
                 {{ i + 1 }}.{{ trending.title }}
               </td>
@@ -613,7 +631,7 @@ function copyNews(news: News, event: Event) {
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(trending, i) in dfcf1TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+            <tr v-for="(trending, i) in dfcf1TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
               <td :class="trendingClass(trending)">
                 {{ i + 1 }}.{{ trending.title }}
               </td>
@@ -639,7 +657,7 @@ function copyNews(news: News, event: Event) {
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(trending, i) in bloomBergTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+            <tr v-for="(trending, i) in bloomBergTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
               <td :class="trendingClass(trending)">
                 {{ i + 1 }}.{{ trending.title }} - {{ trending.subTitle }}
               </td>
@@ -666,7 +684,7 @@ function copyNews(news: News, event: Event) {
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(trending, i) in weiboTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+            <tr v-for="(trending, i) in weiboTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
               <td :class="trendingClass(trending)">
                 {{ i + 1 }}.{{ trending.title }}
               </td>
@@ -849,7 +867,7 @@ function copyNews(news: News, event: Event) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in bloomBergTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in bloomBergTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
                       <td :class="trendingClass(trending)">
                         {{ i + 1 }}.{{ trending.title }} - {{ trending.subTitle }}
                       </td>
@@ -880,7 +898,7 @@ function copyNews(news: News, event: Event) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in dfcf1TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in dfcf1TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
                       <td :class="trendingClass(trending)">
                         {{ i + 1 }}.{{ trending.title }}
                       </td>
@@ -912,7 +930,7 @@ function copyNews(news: News, event: Event) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in xueqiuTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in xueqiuTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
                       <td :class="trendingClass(trending)">
                         {{ i + 1 }}.{{ trending.title }}
                       </td>
@@ -946,7 +964,7 @@ function copyNews(news: News, event: Event) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in dfcf2TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in dfcf2TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
                       <td :class="trendingClass(trending)">
                         {{ i + 1 }}.{{ trending.title }}
                       </td>
@@ -978,7 +996,7 @@ function copyNews(news: News, event: Event) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in weiboTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in weiboTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
                       <td :class="trendingClass(trending)">
                         {{ i + 1 }}.{{ trending.title }}
                       </td>
@@ -1010,7 +1028,7 @@ function copyNews(news: News, event: Event) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in douyinTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in douyinTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending, $event)">
                       <td :class="trendingClass(trending)">
                         {{ i + 1 }}.{{ trending.title }}
                       </td>
@@ -1070,6 +1088,22 @@ function copyNews(news: News, event: Event) {
     <v-footer v-else v-ripple class="d-flex flex-column" color="primary" @click="loadMoreNews">
       更多
     </v-footer>
+    <v-fab icon color="primary" app>
+      <v-icon>{{ floatingButtonRef ? 'mdi-rocket' : 'mdi-rocket-launch-outline' }}</v-icon>
+      <v-speed-dial v-model="floatingButtonRef" activator="parent">
+        <v-btn key="3" color="success" icon @click="scrollToBottom">
+          <v-icon>mdi-arrow-down-bold-outline</v-icon>
+        </v-btn>
+
+        <v-btn key="2" color="warning" icon @click="scrollToMiddle">
+          <v-icon>mdi-format-align-middle</v-icon>
+        </v-btn>
+
+        <v-btn key="1" color="info" icon @click="scrollToTop">
+          <v-icon>mdi-arrow-up-bold-outline</v-icon>
+        </v-btn>
+      </v-speed-dial>
+    </v-fab>
   </v-container>
 
   <AnimationLeek1 v-if="_.isEmpty(newsRef)" :size="width"/>
