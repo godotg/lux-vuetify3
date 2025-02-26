@@ -450,7 +450,7 @@ async function goToUrl(trending: Trending, event: Event) {
   clipboard(str, event);
   snackbarStore.showSuccessMessage("复制成功");
   setTimeout(() => {
-    window.open(url, '_blank');
+    window.open(trending.url, '_blank');
   }, 1000);
 }
 
