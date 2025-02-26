@@ -32,7 +32,7 @@ const newsStore = useNewsStore();
 const {mobile, width, height} = useDisplay();
 
 const NEW_CONCEPT_TIME = 33 * 24 * 60 * 60 * 1000;
-const NEW_TRENDING_TIME = 2 * 24 * 60 * 60 * 1000;
+const NEW_TRENDING_TIME = 1 * 24 * 60 * 60 * 1000;
 
 
 const newsRef = ref<News[]>([]);
@@ -95,9 +95,11 @@ function init() {
   requestConcepts(27);
   requestRanks(100);
   requestTrending();
-  if (!mobile) {
-    requestMarkets();
-  }
+  setTimeout(() => {
+    if (!mobile) {
+      requestMarkets();
+    }
+  }, 3000);
 }
 
 async function doInitNews() {
@@ -648,32 +650,7 @@ function copyNews(news: News, event: Event) {
           </v-table>
         </v-card-text>
       </v-card>
-      <v-card v-if="!_.isEmpty(douyinTrendingRef)" class="mt-3">
-        <v-card-title>
-          <v-icon icon="mdi-music-circle"></v-icon>
-          &nbsp;
-          抖音
-          &nbsp;
-        </v-card-title>
-        <v-card-text>
-          <v-table density="compact">
-            <thead>
-            <tr>
-              <th>
-                抖音热搜榜
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(trending, i) in douyinTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
-              <td :class="trendingClass(trending)">
-                {{ i + 1 }}.{{ trending.title }}
-              </td>
-            </tr>
-            </tbody>
-          </v-table>
-        </v-card-text>
-      </v-card>
+
       <v-card v-if="!_.isEmpty(weiboTrendingRef)" class="mt-3">
         <v-card-title>
           <v-icon icon="mdi-sina-weibo"></v-icon>
@@ -856,12 +833,12 @@ function copyNews(news: News, event: Event) {
         </template>
         <v-container>
           <v-row>
-            <v-col cols="3">
+            <v-col cols="5">
               <v-card>
                 <v-card-title>
-                  <v-icon icon="mdi-snowflake"></v-icon>
+                  <v-icon icon="mdi-chart-bell-curve"></v-icon>
                   &nbsp;
-                  雪球
+                  彭博社
                   &nbsp;
                 </v-card-title>
                 <v-card-text>
@@ -869,19 +846,15 @@ function copyNews(news: News, event: Event) {
                     <thead>
                     <tr>
                       <th>
-                        雪球话题
+                        彭博社头条新闻
                       </th>
-                      <!--                      <th>-->
-                      <!--                        创作者-->
-                      <!--                      </th>-->
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in xueqiuTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in bloomBergTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
                       <td :class="trendingClass(trending)">
-                        {{ i + 1 }}.{{ trending.title }}
+                        {{ i + 1 }}.{{ trending.title }} - {{ trending.subTitle }}
                       </td>
-                      <!--                      <td>{{ trending.subTitle }}</td>-->
                     </tr>
                     </tbody>
                   </v-table>
@@ -920,12 +893,12 @@ function copyNews(news: News, event: Event) {
                 </v-card-text>
               </v-card>
             </v-col>
-            <v-col cols="5">
+            <v-col cols="3">
               <v-card>
                 <v-card-title>
-                  <v-icon icon="mdi-chart-bell-curve"></v-icon>
+                  <v-icon icon="mdi-snowflake"></v-icon>
                   &nbsp;
-                  彭博社
+                  雪球
                   &nbsp;
                 </v-card-title>
                 <v-card-text>
@@ -933,15 +906,19 @@ function copyNews(news: News, event: Event) {
                     <thead>
                     <tr>
                       <th>
-                        彭博社头条新闻
+                        雪球话题
                       </th>
+                      <!--                      <th>-->
+                      <!--                        创作者-->
+                      <!--                      </th>-->
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in bloomBergTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in xueqiuTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
                       <td :class="trendingClass(trending)">
-                        {{ i + 1 }}.{{ trending.title }} - {{ trending.subTitle }}
+                        {{ i + 1 }}.{{ trending.title }}
                       </td>
+                      <!--                      <td>{{ trending.subTitle }}</td>-->
                     </tr>
                     </tbody>
                   </v-table>
@@ -950,12 +927,12 @@ function copyNews(news: News, event: Event) {
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="3">
+            <v-col cols="5">
               <v-card>
                 <v-card-title>
-                  <v-icon icon="mdi-music-circle"></v-icon>
+                  <v-icon icon="mdi-party-popper"></v-icon>
                   &nbsp;
-                  抖音
+                  研报
                   &nbsp;
                 </v-card-title>
                 <v-card-text>
@@ -963,15 +940,15 @@ function copyNews(news: News, event: Event) {
                     <thead>
                     <tr>
                       <th>
-                        抖音热搜榜
+                        策略报告
                       </th>
                       <th>
-                        热度
+                        媒体
                       </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in douyinTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in dfcf2TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
                       <td :class="trendingClass(trending)">
                         {{ i + 1 }}.{{ trending.title }}
                       </td>
@@ -1014,12 +991,12 @@ function copyNews(news: News, event: Event) {
                 </v-card-text>
               </v-card>
             </v-col>
-            <v-col cols="5">
+            <v-col cols="3">
               <v-card>
                 <v-card-title>
-                  <v-icon icon="mdi-party-popper"></v-icon>
+                  <v-icon icon="mdi-music-circle"></v-icon>
                   &nbsp;
-                  研报
+                  抖音
                   &nbsp;
                 </v-card-title>
                 <v-card-text>
@@ -1027,15 +1004,15 @@ function copyNews(news: News, event: Event) {
                     <thead>
                     <tr>
                       <th>
-                        策略报告
+                        抖音热搜榜
                       </th>
                       <th>
-                        媒体
+                        热度
                       </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(trending, i) in dfcf2TrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
+                    <tr v-for="(trending, i) in douyinTrendingRef" :key="i" class="cursor-pointer" v-ripple @click="goToUrl(trending.url)">
                       <td :class="trendingClass(trending)">
                         {{ i + 1 }}.{{ trending.title }}
                       </td>

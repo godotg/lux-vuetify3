@@ -1,5 +1,5 @@
 {
-  "version": "3.5.3",
-  "name": "抖音热点",
+  "version": "3.5.4",
+  "name": "彭博社最新消息",
   "board": "/config/board.md"
 }
