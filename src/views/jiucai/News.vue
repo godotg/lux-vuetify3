@@ -448,7 +448,7 @@ async function goToUrl(trending: Trending, event: Event) {
   str = str + trending.subTitle + "\n\n";
   str = str + jokes[_.random(0, jokes.length - 1)];
   clipboard(str, event);
-  snackbarStore.showSuccessMessage(concept.content + "复制成功");
+  snackbarStore.showSuccessMessage("复制成功");
   setTimeout(() => {
     window.open(url, '_blank');
   }, 1000);
