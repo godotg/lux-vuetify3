@@ -95,11 +95,9 @@ function init() {
   requestConcepts(27);
   requestRanks(100);
   requestTrending();
-  setTimeout(() => {
-    if (!mobile) {
-      requestMarkets();
-    }
-  }, 3000);
+  if (!mobile.value) {
+    requestMarkets();
+  }
 }
 
 async function doInitNews() {
